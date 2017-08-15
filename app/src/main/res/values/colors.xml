@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/green</color>
+    <color name="colorPrimaryDark">@color/green_dark</color>
+    <color name="colorAccent">@color/purple</color>
+
+    <color name="text">#000</color>
+
+    <color name="green">#99BB14</color>
+    <color name="green_dark">#829f0f</color>
+    <color name="green_light">#D6E4A1</color>
+    <color name="purple">#5A366C</color>
+    <color name="purple_light">#B7A0BF</color>
+
+</resources>

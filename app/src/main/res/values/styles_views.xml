@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SeparatorVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#000</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="SeparatorHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#CACACA</item>
+    </style>
+
+    <style name="SeparatorHorizontal.Grey">
+        <item name="android:background">#ccc</item>
+    </style>
+
+    <style name="XpansorHoriz">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">0.1</item>
+    </style>
+
+    <style name="XpansorVert">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.1</item>
+    </style>
+</resources>

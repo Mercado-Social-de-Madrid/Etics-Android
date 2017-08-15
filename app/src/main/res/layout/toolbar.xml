@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:orientation="vertical"
+        app:elevation="0dp"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:theme="@style/AppTheme.PopupOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" >
+
+                <TextView
+                    android:id="@+id/tv_title_toolbar"
+                    style="@style/TextBase.White"
+                    android:textSize="18sp" />
+
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_invitations_indicator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="18dp"-->
+                <!--android:minWidth="18dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:background="@drawable/bg_invitations_indicator"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:includeFontPadding="false"-->
+                <!--android:padding="4dp"-->
+                <!--android:textSize="14sp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="0"-->
+                <!--fontPath="fonts/Vaud-SemiBold.otf"-->
+                <!--tools:ignore="MissingPrefix"-->
+                <!--android:visibility="invisible"/>-->
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            android:layout_marginTop="-10dp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+</merge>
