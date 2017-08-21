@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_entity_name"
+        style="@style/TextBase"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <ImageView
+                android:id="@+id/img_entity"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="15dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/img_star_selectable"
+                android:layout_gravity="right"/>
+
+            <TextView
+                style="@style/TextBase"
+                android:layout_marginTop="10dp"
+                android:text="Bonificación por compra: 10%\nPago máximo en {Boniatos}: 100%"/>
+
+
+            <TextView
+                android:id="@+id/tv_entity_description"
+                style="@style/TextBase"
+                android:layout_marginTop="15dp"/>
+
+
+            <TextView
+                style="@style/TextBase"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/offers"
+                android:textAllCaps="true"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_new_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_coins"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            app:fabSize="normal"
+            android:layout_margin="15dp"
+            app:backgroundTint="@color/green"/>
+
+    </RelativeLayout>
+</LinearLayout>

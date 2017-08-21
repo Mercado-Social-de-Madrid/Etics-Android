@@ -3,4 +3,12 @@
     <string name="entities">Entidades</string>
     <string name="wallet">Monedero</string>
     <string name="profile">Perfil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favourite">Favorito</string>
+    <string name="offers">Ofertas</string>
+    <string name="receiver">Destinataria</string>
+    <string name="calculate_bonification">Calcular bonificación</string>
+    <string name="send_payment">Realizar pago</string>
 </resources>

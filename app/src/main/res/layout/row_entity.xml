@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/cardBackgroundEvent" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+
+            <ImageView
+                android:id="@+id/img_entity"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:background="@color/purple_light"
+                android:layout_centerVertical="true"
+                android:alpha="1"/>
+
+            <TextView
+                android:id="@+id/tv_entity_name"
+                style="@style/TextBase"
+                android:textColor="#000"
+                android:layout_toRightOf="@+id/img_entity"
+                android:layout_toLeftOf="@+id/img_starred"
+                android:textSize="22sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_entity_category"
+                style="@style/TextBase"
+                android:layout_alignLeft="@+id/tv_entity_name"
+                android:layout_alignRight="@+id/tv_entity_name"
+                android:layout_below="@+id/tv_entity_name"
+                android:lines="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:ellipsize="end"
+                android:text="Jazz"
+                android:singleLine="true"/>
+
+            <ImageView
+                android:id="@+id/img_starred"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_star_selectable"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:tint="@color/purple"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/TextBase"
+                android:layout_alignLeft="@+id/tv_entity_name"
+                android:layout_below="@+id/tv_entity_category"
+                android:layout_toLeftOf="@+id/tv_event_time"
+                android:lines="2"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:text="Pza Palacio"/>
+
+        </RelativeLayout>
+
+
+</RelativeLayout>

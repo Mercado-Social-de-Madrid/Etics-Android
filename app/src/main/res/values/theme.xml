@@ -40,7 +40,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!--<item name="android:background">@color/background_general</item>-->
-        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorPrimary">@color/purple</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
         <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>

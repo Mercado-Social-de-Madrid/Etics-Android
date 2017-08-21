@@ -26,7 +26,8 @@
 
                 <TextView
                     android:id="@+id/tv_title_toolbar"
-                    style="@style/TextBase.White"
+                    style="@style/TextBase"
+                    android:textColor="@color/purple"
                     android:textSize="18sp" />
 
 
