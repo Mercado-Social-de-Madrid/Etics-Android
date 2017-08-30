@@ -29,7 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private String[] dataEntitiesSubscribed;
     private ProgressBar progressBar;
     private TextView tvTitleToolbar;
-    private Toolbar toolbar;
+    public Toolbar toolbar;
 
     // I need another result code custom
     public static final int REQ_CODE_EDIT = 1;

@@ -11,4 +11,6 @@
     <string name="receiver">Destinataria</string>
     <string name="calculate_bonification">Calcular bonificación</string>
     <string name="send_payment">Realizar pago</string>
+    <string name="news">Noticias</string>
+    <string name="open">Abrir</string>
 </resources>
