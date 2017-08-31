@@ -1,0 +1,66 @@
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_intro_gradient"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@mipmap/img_mes_header"
+            android:tint="@android:color/white"
+            android:alpha="0.5"/>
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_centerHorizontal="true"
+            android:text="Más personalización"
+            android:textSize="24sp"
+            app:layout_parallaxFactor="0.6" />
+
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_marginTop="50dp"
+            android:text="Si necesitáramos un diseño especial para estas pantallas tambien se puede personalizar completamente el contenido (menos los botones de navegación de abajo)"
+            android:textSize="18sp"
+            app:layout_parallaxFactor="0.3" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_parallaxFactor="-2"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_coins"
+            android:tint="@color/purple_dark" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

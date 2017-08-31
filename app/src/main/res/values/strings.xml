@@ -1,11 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos">]>
+
 <resources>
     <string name="app_name">MonedaMES</string>
+
+    <string name="currency_name">&currency_name;</string>
+    <string name="currency_name_plural">&currency_name_plural;</string>
+
+
     <string name="entities">Entidades</string>
     <string name="wallet">Monedero</string>
     <string name="profile">Perfil</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favourite">Favorito</string>
     <string name="offers">Ofertas</string>
     <string name="receiver">Destinataria</string>
@@ -13,4 +18,16 @@
     <string name="send_payment">Realizar pago</string>
     <string name="news">Noticias</string>
     <string name="open">Abrir</string>
+    <string name="start_session">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="enter">Entrar</string>
+    <string name="about_mes">Sobre el Mercado Social</string>
+    <string name="about_boniatos">Qué son los &currency_name_plural;</string>
+    <string name="map">Mapa</string>
+    <string name="map_list">Mapa - Lista</string>
+    <string name="the_social_market">El Mercado Social</string>
+    <string name="the_boniato">El &currency_name;</string>
+    <string name="how_it_works">Cómo funciona</string>
+    <string name="get_boniatos">Obtener &currency_name_plural;</string>
+
 </resources>

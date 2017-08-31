@@ -12,5 +12,6 @@
     <color name="purple">#5A366C</color>
     <color name="purple_light">#B7A0BF</color>
     <color name="purple_dark">#432850</color>
+    <color name="black">#000</color>
 
 </resources>

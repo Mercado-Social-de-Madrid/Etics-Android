@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':LoginView2'
+project(':LoginView2').projectDir = new File('LoginView')

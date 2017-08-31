@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -73,8 +74,11 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
 
         autocompleteReceiver.setAdapter(autocompletetextAdapter);
 
-        switchCalcBonification.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            viewCalcBonification.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        switchCalcBonification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                viewCalcBonification.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            }
         });
 
     }

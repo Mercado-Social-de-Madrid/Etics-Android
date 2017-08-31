@@ -1,35 +1,71 @@
 package net.mercadosocial.moneda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.triskelapps.loginview.LoginDialog;
 
 import net.mercadosocial.moneda.base.BaseActivity;
+import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
+import net.mercadosocial.moneda.ui.entities.EntitiesMapFragment;
+import net.mercadosocial.moneda.ui.intro.IntroActivity;
+import net.mercadosocial.moneda.ui.news.NewsFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
 
     private DrawerLayout drawerLayout;
+    private MenuItem menuItemMapList;
+    private boolean showingMap;
+    private TextView btnLogin;
+    private TextView btnSignup;
+
+    private void findViews() {
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
+        navigation.setOnNavigationItemSelectedListener(this);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        btnLogin = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
+        btnSignup = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_singup);
+
+        btnLogin.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViews();
         configureToolbar();
         configureDrawerLayout();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
+
+        if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
+            startActivity(new Intent(this, IntroActivity.class));
+        }
     }
+
 
     private void configureDrawerLayout() {
 
@@ -38,6 +74,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        menuItemMapList = menu.findItem(R.id.menuItem_map_list);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -50,17 +93,82 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_entities:
-                getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
+                showSection(new EntitiesFragment());
+                showingMap = false;
+                refreshMapListIcon();
+                menuItemMapList.setVisible(true);
                 return true;
             case R.id.navigation_wallet:
-                getFragmentManager().beginTransaction().replace(R.id.content, new WalletFragment()).commit();
+                showSection(new WalletFragment());
+                menuItemMapList.setVisible(false);
                 return true;
             case R.id.navigation_profile:
-                toast("perfil");
+                showSection(new NewsFragment());
+                menuItemMapList.setVisible(false);
+                return true;
+
+            case R.id.menuItem_the_social_market:
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                startActivity(new Intent(this, IntroActivity.class));
                 return true;
         }
+
+        toast("Pulsado: " + item.getTitle());
+        drawerLayout.closeDrawer(Gravity.LEFT);
         return false;
     }
 
+    private void showSection(BaseFragment fragment) {
 
+        getFragmentManager().beginTransaction().setCustomAnimations(
+                R.animator.fade_in, R.animator.fade_out)
+                .replace(R.id.content, fragment)
+                .commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuItem_map_list:
+
+                showingMap = !showingMap;
+                refreshMapListIcon();
+
+                getFragmentManager().beginTransaction().replace(R.id.content,
+                        showingMap ? new EntitiesMapFragment() : new EntitiesFragment())
+                        .commit();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshMapListIcon() {
+
+        menuItemMapList.setIcon(showingMap ? R.mipmap.ic_list : R.mipmap.ic_map);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_login:
+
+                LoginDialog loginDialog = LoginDialog.newInstance();
+                loginDialog.configure(getString(R.string.enter), new LoginDialog.LoginDialogListener() {
+                    @Override
+                    public void onAccept(String username, String password) {
+                        toast("Entrando con: " + username + "...");
+                    }
+                });
+
+                loginDialog.setAvoidDismiss(true);
+                loginDialog.show(getSupportFragmentManager(), null);
+
+                break;
+
+            case R.id.btn_singup:
+                toast("Iríamos a pantalla de registro");
+                break;
+        }
+    }
 }

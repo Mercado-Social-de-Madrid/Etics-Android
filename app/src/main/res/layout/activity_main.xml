@@ -30,7 +30,7 @@
             </FrameLayout>
 
             <android.support.design.widget.BottomNavigationView
-                android:id="@+id/navigation"
+                android:id="@+id/navigation_bottom_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -42,11 +42,13 @@
 
 
         <android.support.design.widget.NavigationView
-            android:id="@+id/navigation_left"
+            android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:menu="@menu/navigation_drawer"
-            android:layout_gravity="start" />
+            android:layout_gravity="start"
+            app:headerLayout="@layout/view_header_menu"/>
+
     </android.support.v4.widget.DrawerLayout>
 
 

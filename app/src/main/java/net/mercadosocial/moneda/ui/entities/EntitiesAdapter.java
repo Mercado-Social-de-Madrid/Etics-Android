@@ -44,7 +44,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position2) {
+    public void onBindViewHolder(final ViewHolder holder, final int position2) {
 
         final int safePosition = holder.getAdapterPosition();
 
@@ -68,12 +68,20 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 //        holder.tvEventName.setTextColor(color);
 //        holder.tvEventGenre.setTextColor(color);
 
-        holder.rootView.setOnClickListener(v -> itemClickListener.onEntityClicked(entity.getId()));
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onEntityClicked(entity.getId());
+            }
+        });
 
-        holder.imgStarred.setOnClickListener(v -> {
+        holder.imgStarred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            holder.imgStarred.setSelected(!holder.imgStarred.isSelected());
-            itemClickListener.onEventFavouriteClicked(entity.getId());
+                holder.imgStarred.setSelected(!holder.imgStarred.isSelected());
+                itemClickListener.onEventFavouriteClicked(entity.getId());
+            }
         });
 
     }

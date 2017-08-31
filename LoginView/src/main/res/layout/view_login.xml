@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <EditText
+            android:id="@+id/edit_username"
+            style="@style/EditBase.Username"
+            android:hint="@string/username"
+            android:imeOptions="actionNext"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/edit_password"
+            style="@style/EditBase.Password"
+            android:layout_marginTop="10dp"
+            android:hint="@string/password"
+            android:imeOptions="actionDone" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/ButtonLoginBlue"
+            android:layout_marginTop="10dp"
+            android:text="@string/login" />
+
+
+    </LinearLayout>
+</LinearLayout>

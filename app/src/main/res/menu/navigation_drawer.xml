@@ -2,18 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_entities"
+        android:id="@+id/menuItem_the_social_market"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/entities" />
+        android:title="@string/the_social_market" />
 
-    <item
-        android:id="@+id/navigation_wallet"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/wallet" />
 
-    <item
-        android:id="@+id/navigation_profile"
-        android:icon="@mipmap/ic_news"
-        android:title="@string/news" />
+    <item android:title="@string/the_boniato" >
+
+        <menu>
+            <item
+                android:id="@+id/menuItem_how_boniato_works"
+                android:icon="@mipmap/ic_news"
+                android:title="@string/how_it_works" />
+
+            <item
+                android:id="@+id/menuItem_get_boniatos"
+                android:icon="@mipmap/ic_news"
+                android:title="@string/get_boniatos" />
+        </menu>
+    </item>
+
 
 </menu>

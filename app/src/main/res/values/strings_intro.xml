@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="intro_message_1">Bienvenida/o a la app del Mercado Social de Madrid (MES), una red que promueve el consumo ético</string>
+
+    <string name="intro_message_2">Aquí podrás encontrar las entidades y ofertas del MES</string>
+
+    <string name="intro_message_3">También las últimas novedades y convocatorias</string>
+
+    <string name="intro_message_4">Podrás realizar pagos en Boniatos, la moneda del MES…</string>
+
+    <string name="intro_message_5">… y por cada compra que realices, recibirás una bonificación en Boniatos!</string>
+</resources>

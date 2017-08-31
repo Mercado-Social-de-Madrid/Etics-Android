@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/green_light"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_avatar"
+            android:adjustViewBounds="true"/>
+
+        <TextView
+            android:id="@+id/btn_login"
+            android:text="@string/enter"
+            android:layout_marginLeft="10dp"
+            style="@style/ButtonMes" />
+
+        <TextView
+            android:id="@+id/btn_singup"
+            style="@style/ButtonMes"
+            android:text="@string/register"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

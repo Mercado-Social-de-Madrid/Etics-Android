@@ -22,6 +22,7 @@ public class App extends Application {
 
     public static final String SHARED_FIRST_TIME = PREFIX + "first_time_7";
     private static final String DEBUG_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3ZWIifQ.RR_ekblK831invbbLkIofHrgBXwIU5JVqnhcs_K_bqqcz2zA-wIVzXmWZPOfrSIVZNw4YWRUqXA8tymXKLj1bg";
+    public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen";
 
 
     @Override
