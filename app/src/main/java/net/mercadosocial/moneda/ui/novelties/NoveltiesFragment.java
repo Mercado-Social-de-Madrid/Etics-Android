@@ -1,8 +1,9 @@
-package net.mercadosocial.moneda.ui.news;
+package net.mercadosocial.moneda.ui.novelties;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,22 +14,27 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entities.EntitiesAdapter;
+import net.mercadosocial.moneda.model.Novelty;
 import net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import static net.mercadosocial.moneda.model.News.newsMock;
+import static net.mercadosocial.moneda.model.Offer.offersMock;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener {
+public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.OnItemClickListener {
 
 
-    private RecyclerView recyclerEntities;
-    private EntitiesAdapter adapter;
+    private RecyclerView recyclerNovelties;
+    private NoveltiesAdapter adapter;
 
     public static List<Entity> entitiesMock = new ArrayList<>();
+
     static {
         entitiesMock.add(new Entity(1, "Fabricantes de sueños", "Librería alternativa", "https://madrid.mercadosocial.net/moneda/thumbnail?id=106", "Calle X", "Librería"));
         entitiesMock.add(new Entity(2, "El Salmón Contracorriente", "Medio sobre economía alternativa", "http://www.elsalmoncontracorriente.es/IMG/rubon1.png", "Calle X", "Medio digital"));
@@ -45,7 +51,7 @@ public class NewsFragment extends BaseFragment implements EntitiesAdapter.OnItem
         throw new IllegalArgumentException("idEntity not valid: " + idEntity);
     }
 
-    public NewsFragment() {
+    public NoveltiesFragment() {
         // Required empty public constructor
     }
 
@@ -55,36 +61,55 @@ public class NewsFragment extends BaseFragment implements EntitiesAdapter.OnItem
     }
 
     private void findViews(View layout) {
-        recyclerEntities = (RecyclerView) layout.findViewById(R.id.recycler_entities);
+        recyclerNovelties = (RecyclerView) layout.findViewById(R.id.recycler_novelties);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View layout = inflater.inflate(R.layout.fragment_news, container, false);
+        View layout = inflater.inflate(R.layout.fragment_novelties, container, false);
         findViews(layout);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerEntities.setLayoutManager(linearLayoutManager);
+        recyclerNovelties.setLayoutManager(linearLayoutManager);
 
-        showEntities(entitiesMock);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+                linearLayoutManager.getOrientation());
+        recyclerNovelties.addItemDecoration(dividerItemDecoration);
+
+        List<Novelty> novelties = generateMockNovelties();
+        showNovelties(novelties);
 
         return layout;
     }
 
+    private List<Novelty> generateMockNovelties() {
 
-    public void showEntities(List<Entity> entities) {
+        List<Novelty> novelties = new ArrayList<>();
+
+        novelties.addAll(newsMock);
+
+        novelties.addAll(offersMock);
+
+        Collections.sort(novelties);
+
+        return novelties;
+
+    }
+
+
+    public void showNovelties(List<Novelty> novelties) {
 
         if (adapter == null) {
 
-            adapter = new EntitiesAdapter(getActivity(), entities);
+            adapter = new NoveltiesAdapter(getActivity(), novelties);
             adapter.setOnItemClickListener(this);
 
-            recyclerEntities.setAdapter(adapter);
+            recyclerNovelties.setAdapter(adapter);
 
         } else {
-            adapter.updateData(entities);
+            adapter.updateData(novelties);
         }
     }
 

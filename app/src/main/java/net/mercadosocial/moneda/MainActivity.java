@@ -13,15 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.triskelapps.loginview.LoginDialog;
-
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
+import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesMapFragment;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
-import net.mercadosocial.moneda.ui.news.NewsFragment;
+import net.mercadosocial.moneda.ui.novelties.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -32,12 +32,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private boolean showingMap;
     private TextView btnLogin;
     private TextView btnSignup;
+    private BottomNavigationView bottomNavView;
 
     private void findViews() {
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
-        navigation.setOnNavigationItemSelectedListener(this);
+        bottomNavView = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
+        bottomNavView.setOnNavigationItemSelectedListener(this);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -57,6 +58,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         findViews();
         configureToolbar();
         configureDrawerLayout();
+
+        if (DebugHelper.SHORTCUT_ACTIVITY != null) {
+            startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
+        }
 
 
         getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
@@ -78,7 +83,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_main, menu);
         menuItemMapList = menu.findItem(R.id.menuItem_map_list);
         return super.onCreateOptionsMenu(menu);
     }
@@ -91,6 +96,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        if (bottomNavView.getSelectedItemId() == item.getItemId()) {
+            return false;
+        }
+
         switch (item.getItemId()) {
             case R.id.navigation_entities:
                 showSection(new EntitiesFragment());
@@ -103,7 +113,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 menuItemMapList.setVisible(false);
                 return true;
             case R.id.navigation_profile:
-                showSection(new NewsFragment());
+                showSection(new NoveltiesFragment());
                 menuItemMapList.setVisible(false);
                 return true;
 
@@ -153,22 +163,33 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (v.getId()) {
             case R.id.btn_login:
 
-                LoginDialog loginDialog = LoginDialog.newInstance();
-                loginDialog.configure(getString(R.string.enter), new LoginDialog.LoginDialogListener() {
-                    @Override
-                    public void onAccept(String username, String password) {
-                        toast("Entrando con: " + username + "...");
-                    }
-                });
+//                LoginDialog loginDialog = LoginDialog.newInstance();
+//                loginDialog.configure(getString(R.string.enter), new LoginDialog.LoginDialogListener() {
+//                    @Override
+//                    public void onAccept(String username, String password) {
+//                        toast("Entrando con: " + username + "...");
+//                    }
+//                });
+//
+//                loginDialog.setAvoidDismiss(true);
+//                loginDialog.show(getSupportFragmentManager(), null);
 
-                loginDialog.setAvoidDismiss(true);
-                loginDialog.show(getSupportFragmentManager(), null);
+                startActivity(new Intent(this, LoginActivity.class));
 
                 break;
 
             case R.id.btn_singup:
-                toast("Iríamos a pantalla de registro");
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        } else {
+            super.onBackPressed();
         }
     }
 }

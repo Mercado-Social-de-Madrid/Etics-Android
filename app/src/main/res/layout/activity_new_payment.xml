@@ -7,12 +7,6 @@
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="{ Selección de perfil (por si tuviera personal y entidad) }" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,20 +18,149 @@
             android:padding="10dp">
 
 
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="SALDO: 17 Boniatos"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_frame_black"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/recipient_two_dots" />
+
+
+                    <TextView
+                        android:id="@+id/tv_recipient_name"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp"
+                        android:hint="@string/select_with_following_buttons"
+                        android:lineSpacingMultiplier="0.7"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_fav"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_star_selected"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/favourite_fem"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="17dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_list"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/list"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_qr_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_scan_qr"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/qr_code"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <android.support.v7.widget.AppCompatAutoCompleteTextView
-                    android:id="@+id/autocomplete_receiver"
+                    android:id="@+id/autocomplete_recipient"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/receiver"
-                    android:completionThreshold="1"/>
+                    android:completionThreshold="1"
+                    android:hint="@string/recipient" />
 
                 <ImageView
                     android:id="@+id/img_scan_qr"
@@ -50,67 +173,100 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/switch_calc_bonification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp"
-                android:text="@string/calculate_bonification"
-                app:switchPadding="15dp" />
-
-            <LinearLayout
-                android:id="@+id/view_calc_bonification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:gravity="bottom"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:visibility="gone">
-
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/edit_euro_calc_bonification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="4"
-                    android:inputType="number|phone"
-                    android:gravity="right"/>
-
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginLeft="10dp"
-                    android:text="EUR" />
-
-            </LinearLayout>
-
-            <View
-                style="@style/SeparatorHorizontal.Grey"
-                android:layout_marginTop="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="bottom|center_horizontal"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_frame_black"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="20dp">
 
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/edit_mes_amount"
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/amount_two_dots" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edit_mes_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:gravity="center_horizontal"
+                            android:inputType="number|phone"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="B's"
+                            android:textSize="22sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="4"
-                    android:inputType="number|phone"
-                    android:textSize="22sp"
-                    android:gravity="center_horizontal"/>
+                    android:orientation="vertical">
 
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginLeft="10dp"
-                    android:text="MES"
-                    android:textSize="22sp" />
 
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_calc_bonification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:text="@string/calculate_bonification_two_lines"
+                        app:switchPadding="15dp" />
+
+                    <LinearLayout
+                        android:id="@+id/view_calc_bonification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="bottom"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:visibility="gone">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edit_euro_calc_bonification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="4"
+                            android:gravity="right"
+                            android:inputType="number|phone" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="EUR" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/btn_send_payment"

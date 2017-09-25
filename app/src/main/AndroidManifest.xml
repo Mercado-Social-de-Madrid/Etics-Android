@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -24,17 +24,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.entity_info.EntityInfoActivity"></activity>
+        <activity android:name=".ui.entity_info.EntityInfoActivity" />
 
-        <activity android:name=".ui.payment.NewPaymentActivity"
+        <activity
+            android:name=".ui.payment.NewPaymentActivity"
             android:label="@string/send_payment"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".ui.intro.IntroActivity"
             android:theme="@style/Theme.Intro" />
 
+        <activity
+            android:name=".ui.recipient_select.RecipientSelectActivity"
+            android:label="@string/select_recipient"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
+        <activity android:name=".ui.auth.login.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity android:name=".ui.auth.register.RegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

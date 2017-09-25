@@ -1,6 +1,7 @@
-package net.mercadosocial.moneda.ui.news;
+package net.mercadosocial.moneda.ui.novelties;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,32 +12,32 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.Novelty;
 
 import java.util.List;
 
 /**
  * Created by julio on 7/07/16.
  */
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
+public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.ViewHolder> {
 
 
-    private List<Entity> entities;
+    private List<Novelty> novelties;
     private Context context;
     private OnItemClickListener itemClickListener;
 
     private Integer selectedNumber = -1;
 
 
-    public NewsAdapter(Context context, List<Entity> entities) {
+    public NoveltiesAdapter(Context context, List<Novelty> novelties) {
         this.context = context;
-        this.entities = entities;
+        this.novelties = novelties;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View contactView = LayoutInflater.from(context).inflate(R.layout.row_entity, parent, false);
+        View contactView = LayoutInflater.from(context).inflate(R.layout.row_novelty, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -48,39 +49,27 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         final int safePosition = holder.getAdapterPosition();
 
-        final Entity entity = getItemAtPosition(safePosition);
+        final Novelty novelty = getItemAtPosition(safePosition);
 
-        holder.tvEntityName.setText(entity.getName());
-        holder.tvEntityCategory.setText(entity.getCategory());
+        holder.tvNoveltyTitle.setText(novelty.getTitleNovelty());
+        holder.tvNoveltyTextShort.setText(novelty.getDescriptionShortNovelty());
 
         Picasso.with(context)
-                .load(entity.getLogo_url())
+                .load(novelty.getImageNoveltyUrl())
 //                .placeholder(R.mipmap.img_default_grid)
                 .error(R.mipmap.ic_mes_v2_144)
                 .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(holder.imgEntity);
+                .into(holder.imgNovelty);
 
-        holder.tvAddress.setText(entity.getAddress());
+        holder.tvNoveltyDate.setText(novelty.getDate());
 
-//        holder.imgStarred.setSelected(entity.isStarred());
-
-//        int color = ContextCompat.getColor(context, entity.getImageLogoUrlFull() != null ? android.R.color.white : android.R.color.black);
-//        holder.tvEventName.setTextColor(color);
-//        holder.tvEventGenre.setTextColor(color);
+        int backgroundColorResId = novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.color.green_light : android.R.color.transparent;
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, backgroundColorResId));
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onEntityClicked(entity.getId());
-            }
-        });
-
-        holder.imgStarred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                holder.imgStarred.setSelected(!holder.imgStarred.isSelected());
-                itemClickListener.onEventFavouriteClicked(entity.getId());
+//                itemClickListener.onEntityClicked(novelty.getId());
             }
         });
 
@@ -101,37 +90,35 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return entities.size();
+        return novelties.size();
     }
 
-    public Entity getItemAtPosition(int position) {
-        return entities.get(position);
+    public Novelty getItemAtPosition(int position) {
+        return novelties.get(position);
     }
 
-    public void updateData(List<Entity> entities) {
-        this.entities = entities;
+    public void updateData(List<Novelty> novelties) {
+        this.novelties = novelties;
         notifyDataSetChanged();
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView imgEntity;
-        private TextView tvEntityName;
-        private TextView tvEntityCategory;
-        private ImageView imgStarred;
-        private TextView tvAddress;
-        public View rootView;
+        
+        private final View rootView;
+        private ImageView imgNovelty;
+        private TextView tvNoveltyTitle;
+        private TextView tvNoveltyTextShort;
+        private TextView tvNoveltyDate;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            imgEntity = (ImageView) itemView.findViewById(R.id.img_entity);
-            tvEntityName = (TextView) itemView.findViewById(R.id.tv_entity_name);
-            tvEntityCategory = (TextView) itemView.findViewById(R.id.tv_entity_category);
-            imgStarred = (ImageView) itemView.findViewById(R.id.img_starred);
-            tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
+            imgNovelty = (ImageView)itemView.findViewById( R.id.img_novelty );
+            tvNoveltyTitle = (TextView)itemView.findViewById( R.id.tv_novelty_title );
+            tvNoveltyTextShort = (TextView)itemView.findViewById( R.id.tv_novelty_text_short );
+            tvNoveltyDate = (TextView)itemView.findViewById( R.id.tv_novelty_date );
 
             rootView = itemView;
         }

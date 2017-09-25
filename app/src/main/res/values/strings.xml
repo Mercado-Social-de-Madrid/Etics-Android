@@ -13,7 +13,7 @@
 
     <string name="favourite">Favorito</string>
     <string name="offers">Ofertas</string>
-    <string name="receiver">Destinataria</string>
+    <string name="recipient">Destinataria</string>
     <string name="calculate_bonification">Calcular bonificación</string>
     <string name="send_payment">Realizar pago</string>
     <string name="news">Noticias</string>
@@ -29,5 +29,20 @@
     <string name="the_boniato">El &currency_name;</string>
     <string name="how_it_works">Cómo funciona</string>
     <string name="get_boniatos">Obtener &currency_name_plural;</string>
+    <string name="search">Buscar</string>
+    <string name="select_with_following_buttons">Seleccionar con los siguientes botones</string>
+    <string name="recipient_two_dots">Destinataria:</string>
+    <string name="favourite_fem">Favorita</string>
+    <string name="list">Lista</string>
+    <string name="qr_code">Código QR</string>
+    <string name="amount_two_dots">Importe:</string>
+    <string name="calculate_bonification_two_lines">Calcular\nbonificación</string>
+    <string name="focus_qr_code_entity">Enfoca al código QR de la entidad</string>
+    <string name="select_recipient">Seleccionar destinataria</string>
+    <string name="persons">Personas</string>
+    <string name="remember_password">Recordar contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+    <string name="person">Persona</string>
+    <string name="entity">Entidad</string>
 
 </resources>

@@ -4,6 +4,6 @@
         android:width="1dp"
         android:color="@android:color/black"/>
     <solid 
-        android:color="@android:color/white"/>
+        android:color="@android:color/transparent"/>
 
 </shape>
