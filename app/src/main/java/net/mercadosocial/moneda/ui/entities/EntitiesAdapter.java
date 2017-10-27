@@ -51,10 +51,10 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         final Entity entity = getItemAtPosition(safePosition);
 
         holder.tvEntityName.setText(entity.getName());
-        holder.tvEntityCategory.setText(entity.getCategory());
+        holder.tvEntityCategory.setText(entity.getCategoriesString());
 
         Picasso.with(context)
-                .load(entity.getLogo_url())
+                .load(entity.getLogo())
 //                .placeholder(R.mipmap.img_default_grid)
                 .error(R.mipmap.ic_mes_v2_144)
                 .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
@@ -71,7 +71,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onEntityClicked(entity.getId());
+                itemClickListener.onEntityClicked(entity.getId(), safePosition);
             }
         });
 
@@ -80,7 +80,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
             public void onClick(View v) {
 
                 holder.imgStarred.setSelected(!holder.imgStarred.isSelected());
-                itemClickListener.onEventFavouriteClicked(entity.getId());
+                itemClickListener.onEntityFavouriteClicked(entity.getId(), safePosition);
             }
         });
 
@@ -143,9 +143,9 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     }
 
     public interface OnItemClickListener {
-        void onEntityClicked(int idEntity);
+        void onEntityClicked(String id, int position);
 
-        void onEventFavouriteClicked(int idEvent);
+        void onEntityFavouriteClicked(String id, int position);
 
     }
 }

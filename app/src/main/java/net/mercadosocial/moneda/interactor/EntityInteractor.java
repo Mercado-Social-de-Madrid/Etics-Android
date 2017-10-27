@@ -6,6 +6,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.EntitiesApi;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
+import net.mercadosocial.moneda.model.EntitiesResponse;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.util.Util;
 
@@ -18,7 +19,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by julio on 14/02/16.
  */
-public class LoginInteractor extends BaseInteractor {
+public class EntityInteractor extends BaseInteractor {
 
 
     public interface Callback {
@@ -28,14 +29,14 @@ public class LoginInteractor extends BaseInteractor {
         void onError(String error);
     }
 
-    public LoginInteractor(Context context, BaseView baseView) {
+    public EntityInteractor(Context context, BaseView baseView) {
         this.baseView = baseView;
         this.context = context;
 
     }
 
 
-    public void checkActivePhone(final Callback callback) {
+    public void getEntities(final Callback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
@@ -46,7 +47,7 @@ public class LoginInteractor extends BaseInteractor {
 
         getApi().getEntities()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<List<Entity>>() {
+                .subscribe(new Observer<EntitiesResponse>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -54,15 +55,15 @@ public class LoginInteractor extends BaseInteractor {
                     @Override
                     public void onError(Throwable e) {
 
-//                        callback.onError(handleError(e));
+                        callback.onError(e.getMessage());
                     }
 
                     @Override
-                    public void onNext(List<Entity> entities) {
+                    public void onNext(EntitiesResponse entitiesResponse) {
 
                         baseView.setRefresing(false);
 
-                        callback.onResponse(entities);
+                        callback.onResponse(entitiesResponse.getEntities());
 
 
                     }
@@ -70,7 +71,6 @@ public class LoginInteractor extends BaseInteractor {
 
 
     }
-
 
 
     private EntitiesApi getApi() {

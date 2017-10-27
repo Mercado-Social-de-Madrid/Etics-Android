@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="7dp">
 
 
             <TextView
@@ -32,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_frame_black"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
 
@@ -68,7 +68,6 @@
                         android:id="@+id/btn_select_fav"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_button_purple"
                         android:gravity="center"
@@ -93,8 +92,8 @@
                         android:id="@+id/btn_select_list"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_button_purple"
                         android:gravity="center"
@@ -106,12 +105,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="3dp"
                             android:adjustViewBounds="true"
-                            android:src="@mipmap/ic_list"
+                            android:src="@mipmap/ic_search"
                             android:tint="@color/green" />
 
                         <TextView
                             style="@style/TextBase"
-                            android:text="@string/list"
+                            android:text="@string/search"
                             android:textColor="@color/green" />
 
                     </LinearLayout>
@@ -120,8 +119,7 @@
                         android:id="@+id/btn_select_qr_code"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
+                        android:layout_weight="1.1"
                         android:background="@drawable/bg_button_purple"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -136,40 +134,13 @@
 
                         <TextView
                             style="@style/TextBase"
-                            android:text="@string/qr_code"
+                            android:text="@string/scan_qr"
                             android:textColor="@color/green" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
-                    android:id="@+id/autocomplete_recipient"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:completionThreshold="1"
-                    android:hint="@string/recipient" />
-
-                <ImageView
-                    android:id="@+id/img_scan_qr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:adjustViewBounds="true"
-                    android:clickable="true"
-                    android:src="@mipmap/ic_scan_qr" />
 
             </LinearLayout>
 
@@ -183,7 +154,7 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
 
                 <LinearLayout
@@ -195,20 +166,20 @@
 
                     <TextView
                         style="@style/TextBase"
-                        android:text="@string/amount_two_dots" />
+                        android:text="@string/total_amount_purchase" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="bottom|center_horizontal"
                         android:orientation="horizontal">
 
                         <android.support.v7.widget.AppCompatEditText
-                            android:id="@+id/edit_mes_amount"
+                            android:id="@+id/edit_total_amount_eur"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="2"
+                            android:ems="3"
                             android:gravity="center_horizontal"
                             android:inputType="number|phone"
                             android:textSize="22sp" />
@@ -216,7 +187,7 @@
                         <TextView
                             style="@style/TextBase"
                             android:layout_marginLeft="10dp"
-                            android:text="B's"
+                            android:text="Eur"
                             android:textSize="22sp" />
 
                     </LinearLayout>
@@ -224,48 +195,62 @@
                 </LinearLayout>
 
 
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_frame_black"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp">
+
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/switch_calc_bonification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        android:text="@string/calculate_bonification_two_lines"
-                        app:switchPadding="15dp" />
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/boniatos_payment" />
 
                     <LinearLayout
-                        android:id="@+id/view_calc_bonification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:gravity="bottom"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
-                        android:visibility="gone">
+                        android:layout_marginTop="5dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="horizontal">
 
                         <android.support.v7.widget.AppCompatEditText
-                            android:id="@+id/edit_euro_calc_bonification"
+                            android:id="@+id/edit_boniatos_amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="4"
-                            android:gravity="right"
-                            android:inputType="number|phone" />
+                            android:ems="3"
+                            android:gravity="center_horizontal"
+                            android:inputType="number|phone"
+                            android:textSize="22sp" />
 
                         <TextView
                             style="@style/TextBase"
                             android:layout_marginLeft="10dp"
-                            android:text="EUR" />
+                            android:text="@string/currency_name_abrev"
+                            android:textSize="22sp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
+
             </LinearLayout>
+
 
 
             <LinearLayout
@@ -276,10 +261,10 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/bg_button_purple"
                 android:gravity="center"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="40dp"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/ic_coins"
@@ -290,7 +275,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/send_payment"
                     android:textColor="@color/green"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

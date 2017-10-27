@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TextBase"
+        android:text="@string/summary_confirm_payment"
+        android:textSize="22sp" />
+    <View
+        android:id="@+id/view_separator_title"
+        android:layout_below="@+id/tv_title"
+        style="@style/SeparatorHorizontal.Grey"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view_separator_title"
+        android:layout_above="@+id/view_buttons">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+
+            <TextView
+                style="@style/TextBase"
+                android:background="#CCC"
+                android:padding="10dp"
+                android:text="Destinataria: xxx (puede aparecer tambien su logo en pequeño)\n\n
+Importe total de la compra: 30 Eur\n\n
+Pago en Boniatos: 10 Bts\n\n
+Bonificación: 3 Bts" />
+
+            <View
+                style="@style/SeparatorHorizontal.Grey"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/security_pin_code" />
+
+            <com.alimuzaffar.lib.pin.PinEntryEditText
+                android:id="@+id/edit_pin_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:cursorVisible="false"
+                android:digits="1234567890"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                app:pinAnimationType="popIn"
+                app:pinBackgroundIsSquare="true"
+                app:pinCharacterMask="*"
+                app:pinLineStroke="2dp"
+                app:pinLineStrokeSelected="4dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/view_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/btn_return"
+            style="@style/TextBase"
+            android:layout_marginRight="50dp"
+            android:padding="10dp"
+            android:text="@string/return_back" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/confirm" />
+
+    </LinearLayout>
+
+</RelativeLayout>

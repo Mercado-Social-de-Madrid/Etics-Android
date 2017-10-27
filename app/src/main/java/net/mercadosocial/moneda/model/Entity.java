@@ -1,71 +1,44 @@
+
 package net.mercadosocial.moneda.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by julio on 21/08/17.
- */
+public class Entity implements Serializable {
 
-public class Entity {
-
-    private int id;
-    private String name;
-    private String description;
-    private String logo_url;
     private String address;
-    private String category;
+    private Integer bonificationPercent;
+    private List<String> categories = null;
+    private String cif;
+    private String description;
+    private String email;
+    private String facebookLink;
+    private String id;
+    private String instagramLink;
+    private Double latitude;
+    private Double longitude;
+    private String legalForm;
+    private String logo;
+    private Float maxPercentPayment;
+    private String name;
+    private Integer numWorkers;
+    private List<Offer> offers = null;
+    private String phoneNumber;
+    private String registered;
+    private String shortDescription;
+    private String telegramLink;
+    private String twitterLink;
+    private String webpageLink;
 
 
-    public static List<Entity> entitiesMock = new ArrayList<>();
-    static {
-        entitiesMock.add(new Entity(1, "Fabricantes de sueños", "Librería alternativa", "https://madrid.mercadosocial.net/moneda/thumbnail?id=106", "Calle X", "Librería"));
-        entitiesMock.add(new Entity(2, "El Salmón Contracorriente", "Medio sobre economía alternativa", "http://www.elsalmoncontracorriente.es/IMG/rubon1.png", "Calle X", "Medio digital"));
-        entitiesMock.add(new Entity(3, "Green life", "Cultiva plantas de la paz", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cannabis_sativa_leaf.jpg/240px-Cannabis_sativa_leaf.jpg", "Calle X", "Grow shop"));
-    }
+    public String getCategoriesString() {
 
-    public Entity() {
+        String categoriesStr = "";
+        for (int i = 0; i < categories.size(); i++) {
+            categoriesStr += categories.get(i) + (i < categories.size() - 1 ? "," : "");
+        }
 
-    }
-    public Entity(int id, String name, String description, String logo_url, String address, String category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.logo_url = logo_url;
-        this.address = address;
-        this.category = category;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLogo_url() {
-        return logo_url;
-    }
-
-    public void setLogo_url(String logo_url) {
-        this.logo_url = logo_url;
+        return categoriesStr;
     }
 
     public String getAddress() {
@@ -76,11 +49,180 @@ public class Entity {
         this.address = address;
     }
 
-    public String getCategory() {
-        return category;
+    public Integer getBonificationPercent() {
+        return bonificationPercent;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setBonificationPercent(Integer bonificationPercent) {
+        this.bonificationPercent = bonificationPercent;
     }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebookLink() {
+        return facebookLink;
+    }
+
+    public void setFacebookLink(String facebookLink) {
+        this.facebookLink = facebookLink;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getInstagramLink() {
+        return instagramLink;
+    }
+
+    public void setInstagramLink(String instagramLink) {
+        this.instagramLink = instagramLink;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLegalForm() {
+        return legalForm;
+    }
+
+    public void setLegalForm(String legalForm) {
+        this.legalForm = legalForm;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getMaxPercentPayment() {
+        return maxPercentPayment;
+    }
+
+    public void setMaxPercentPayment(Float maxPercentPayment) {
+        this.maxPercentPayment = maxPercentPayment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getNumWorkers() {
+        return numWorkers;
+    }
+
+    public void setNumWorkers(Integer numWorkers) {
+        this.numWorkers = numWorkers;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(String registered) {
+        this.registered = registered;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getTelegramLink() {
+        return telegramLink;
+    }
+
+    public void setTelegramLink(String telegramLink) {
+        this.telegramLink = telegramLink;
+    }
+
+    public String getTwitterLink() {
+        return twitterLink;
+    }
+
+    public void setTwitterLink(String twitterLink) {
+        this.twitterLink = twitterLink;
+    }
+
+    public String getWebpageLink() {
+        return webpageLink;
+    }
+
+    public void setWebpageLink(String webpageLink) {
+        this.webpageLink = webpageLink;
+    }
+
 }

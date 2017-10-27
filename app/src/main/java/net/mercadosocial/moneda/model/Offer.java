@@ -1,91 +1,110 @@
+
 package net.mercadosocial.moneda.model;
 
-import android.support.annotation.NonNull;
+import java.io.Serializable;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+public class Offer implements Serializable {
 
-/**
- * Created by julio on 18/09/17.
- */
-
-public class Offer implements Novelty {
-
-
+    private Boolean active;
+    private String bannerImage;
+    private String bannerThumbnail;
+    private String beginDate;
+    private String description;
+    private Integer discountPercent;
+    private Integer discountedPrice;
+    private String endDate;
+    private String entity;
+    private String id;
+    private String publishedDate;
     private String title;
-    private String textShort;
-    private String textFull;
-    private String imageUrl;
-    private String date;
 
-
-//    offersMock.add(new Offer("Titulo oferta " + i, "Texto corto de la oferta " + i, "Descripción completa de la oferta " + i, null));
-
-
-    public static List<Offer> offersMock = new ArrayList<>();
-    static {
-        for (int i = 1; i < 6; i++) {
-            offersMock.add(new Offer("Oferta " + i, "Texto corto de la oferta " + i, "Descripción completa de la oferta " + i, null, getRandomDate(i)));
-        }
+    public Boolean getActive() {
+        return active;
     }
 
-    private static String getRandomDate(int i) {
-        Random random = new Random();
-        int dayRandom = random.nextInt(30) + 1;
-        return "2017-09-" + new DecimalFormat("00").format(i);
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public Offer() {
+    public String getBannerImage() {
+        return bannerImage;
     }
 
-    public Offer(String title, String textShort, String textFull, String imageUrl, String date) {
-        this.title = title;
-        this.textShort = textShort;
-        this.textFull = textFull;
-        this.imageUrl = imageUrl;
-        this.date = date;
+    public void setBannerImage(String bannerImage) {
+        this.bannerImage = bannerImage;
     }
 
-    @Override
-    public String getTitleNovelty() {
-        return title;
+    public String getBannerThumbnail() {
+        return bannerThumbnail;
     }
 
-    @Override
-    public String getDescriptionShortNovelty() {
-        return textShort;
+    public void setBannerThumbnail(String bannerThumbnail) {
+        this.bannerThumbnail = bannerThumbnail;
     }
 
-    @Override
-    public String getImageNoveltyUrl() {
-        return imageUrl;
+    public String getBeginDate() {
+        return beginDate;
     }
 
-    @Override
-    public String getDate() {
-        return date;
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
     }
 
-    @Override
-    public int getNoveltyType() {
-        return TYPE_OFFER;
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public int compareTo(@NonNull Object o) {
-        Novelty novelty2 = (Novelty) o;
-        try {
-            boolean isDateBeforeDate2 = Novelty.formatDatetime.parse(this.getDate()).before(Novelty.formatDatetime.parse(novelty2.getDate()));
-            return isDateBeforeDate2 ? 1 : -1;
-        } catch (ParseException e) {
-        }
-        return 0;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    // -----------------------
+    public Integer getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(Integer discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public Integer getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(Integer discountedPrice) {
+        this.discountedPrice = discountedPrice;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
 
     public String getTitle() {
         return title;
@@ -95,27 +114,4 @@ public class Offer implements Novelty {
         this.title = title;
     }
 
-    public String getTextShort() {
-        return textShort;
-    }
-
-    public void setTextShort(String textShort) {
-        this.textShort = textShort;
-    }
-
-    public String getTextFull() {
-        return textFull;
-    }
-
-    public void setTextFull(String textFull) {
-        this.textFull = textFull;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

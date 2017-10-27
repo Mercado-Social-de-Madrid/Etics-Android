@@ -16,31 +16,19 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity;
 
 import java.util.List;
-
-import static net.mercadosocial.moneda.model.Entity.entitiesMock;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener {
+public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesView {
 
 
     private RecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
+    private EntitiesPresenter presenter;
 
-
-    public static Entity getEntityById(int idEntity) {
-        for (int i = 0; i < entitiesMock.size(); i++) {
-            if (entitiesMock.get(i).getId() == idEntity) {
-                return entitiesMock.get(i);
-            }
-        }
-
-        throw new IllegalArgumentException("idEntity not valid: " + idEntity);
-    }
 
     public EntitiesFragment() {
         // Required empty public constructor
@@ -58,16 +46,18 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        presenter = EntitiesPresenter.newInstance(this, getActivity());
+
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerEntities.setLayoutManager(linearLayoutManager);
 
-        showEntities(entitiesMock);
-
         setHasOptionsMenu(true);
+
+        presenter.onCreate();
 
         return layout;
     }
@@ -91,6 +81,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
         return super.onOptionsItemSelected(item);
     }
 
+
+    // Presenter Callbacks
+    @Override
     public void showEntities(List<Entity> entities) {
 
         if (adapter == null) {
@@ -106,14 +99,14 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
     }
 
     @Override
-    public void onEntityClicked(int idEntity) {
-        startActivity(EntityInfoActivity.newEntityInfoActivity(getActivity(), idEntity));
+    public void onEntityClicked(String id, int position) {
+        presenter.onEntityClicked(position);
 
     }
 
     @Override
-    public void onEventFavouriteClicked(int idEvent) {
-
+    public void onEntityFavouriteClicked(String id, int position) {
+        presenter.onEntityFavouriteClicked(position);
     }
 
 }

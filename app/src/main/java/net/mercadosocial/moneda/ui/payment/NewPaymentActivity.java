@@ -1,16 +1,14 @@
 package net.mercadosocial.moneda.ui.payment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.os.Handler;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
@@ -33,26 +31,18 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
 
     private static final int REQ_CODE_SELECT_RECIPIENT = 1001;
 
-
-    private AppCompatAutoCompleteTextView autocompleteReceiver;
-    private ImageView imgScanQr;
-    private SwitchCompat switchCalcBonification;
-    private LinearLayout viewCalcBonification;
-    private AppCompatEditText editEuroCalcBonification;
-    private AppCompatEditText editMesAmount;
+    private AppCompatEditText editTotalAmountEur;
     private View btnSendPayment;
     private View btnSelectQRCode;
     private View btnSelectFavourite;
     private View btnSelectFromList;
     private TextView tvRecipientName;
+    private AppCompatEditText editBoniatosAmount;
+    private PaymentSummaryFragment paymentSummary;
 
     public void findViews() {
-        autocompleteReceiver = (AppCompatAutoCompleteTextView) findViewById(R.id.autocomplete_recipient);
-        imgScanQr = (ImageView) findViewById(R.id.img_scan_qr);
-        switchCalcBonification = (SwitchCompat) findViewById(R.id.switch_calc_bonification);
-        viewCalcBonification = (LinearLayout) findViewById(R.id.view_calc_bonification);
-        editEuroCalcBonification = (AppCompatEditText) findViewById(R.id.edit_euro_calc_bonification);
-        editMesAmount = (AppCompatEditText) findViewById(R.id.edit_mes_amount);
+        editTotalAmountEur = (AppCompatEditText) findViewById(R.id.edit_total_amount_eur);
+        editBoniatosAmount = (AppCompatEditText) findViewById(R.id.edit_boniatos_amount);
         btnSendPayment = findViewById(R.id.btn_send_payment);
 
         tvRecipientName = (TextView) findViewById(R.id.tv_recipient_name);
@@ -62,7 +52,6 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
         btnSelectFromList = findViewById(R.id.btn_select_list);
 
         btnSendPayment.setOnClickListener(this);
-        imgScanQr.setOnClickListener(this);
         btnSelectQRCode.setOnClickListener(this);
         btnSelectFavourite.setOnClickListener(this);
         btnSelectFromList.setOnClickListener(this);
@@ -88,27 +77,25 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
         configureSecondLevelActivity();
         findViews();
 
-        String[] recipients = getResources().getStringArray(R.array.recipients);
-        ArrayAdapter<String> autocompletetextAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_dropdown_item_1line, recipients);
-
-        autocompleteReceiver.setAdapter(autocompletetextAdapter);
-
-        switchCalcBonification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                viewCalcBonification.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            }
-        });
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_send_payment:
-                toast("Enviaríamos el pago");
+                paymentSummary = new PaymentSummaryFragment();
+                paymentSummary.setCallback(new PaymentSummaryFragment.PaymentSummaryCallback() {
+                    @Override
+                    public void onConfirm(String pinCode) {
+                        sendPayment();
+                    }
+
+                    @Override
+                    public void onDismiss() {
+                        paymentSummary.dismiss();
+                    }
+                });
+                paymentSummary.show(getSupportFragmentManager(), null);
                 break;
 
             case R.id.btn_select_qr_code:
@@ -132,6 +119,43 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
+
+
+    private void sendPayment() {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, null, getString(R.string.sending_payment));
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+                paymentSummary.dismiss();
+                showAlertPaymentSuccess();
+            }
+        }, 3000);
+    }
+
+    private void showAlertPaymentSuccess() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("Pago enviado correc tamente");
+        ab.setMessage("La entidad debe confirmarlo para completar la transacción y obtener tu bonificación");
+        ab.setPositiveButton(getString(R.string.return_back), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showPaymentConfirmationDialog();
+            }
+        });
+        ab.show();
+    }
+
+    private void showPaymentConfirmationDialog() {
+
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("¡Pago confirmado!");
+        ab.setMessage("Acabas de obtener una bonificación de 3 Bts");
+        ab.setPositiveButton(getString(R.string.close), null);
+        ab.show();
+    }
+
 
     private void startScan() {
 

@@ -9,7 +9,7 @@ public class DebugHelper {
     // Trues in production apk (automatic)
     private static final boolean ACRA_ENABLED = true;
     private static final boolean FINAL_TTF = true;
-    private static final boolean PROD_ENVIRONMENT = true;
+    private static final boolean PROD_ENVIRONMENT = false;
 
 
     // Falses

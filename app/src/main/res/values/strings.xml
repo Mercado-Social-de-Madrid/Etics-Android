@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos">]>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos"><!ENTITY currency_name_abrev "Bts">]>
 
 <resources>
     <string name="app_name">MonedaMES</string>
 
     <string name="currency_name">&currency_name;</string>
     <string name="currency_name_plural">&currency_name_plural;</string>
+    <string name="currency_name_abrev">&currency_name_abrev;</string>
 
 
     <string name="entities">Entidades</string>
@@ -15,7 +17,7 @@
     <string name="offers">Ofertas</string>
     <string name="recipient">Destinataria</string>
     <string name="calculate_bonification">Calcular bonificación</string>
-    <string name="send_payment">Realizar pago</string>
+    <string name="send_payment">Enviar pago</string>
     <string name="news">Noticias</string>
     <string name="open">Abrir</string>
     <string name="start_session">Iniciar sesión</string>
@@ -44,5 +46,13 @@
     <string name="repeat_password">Repetir contraseña</string>
     <string name="person">Persona</string>
     <string name="entity">Entidad</string>
+    <string name="scan_qr">Escanear QR</string>
+    <string name="total_amount_purchase">Importe total de la compra</string>
+    <string name="boniatos_payment">Pago en &currency_name_plural;</string>
+    <string name="summary_confirm_payment">Resumen / confirmación del pago</string>
+    <string name="security_pin_code">Código PIN de seguridad</string>
+    <string name="confirm">Confirmar</string>
+    <string name="return_back">Volver</string>
+    <string name="sending_payment">Enviando pago...</string>
 
 </resources>

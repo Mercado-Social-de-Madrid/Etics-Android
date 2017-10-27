@@ -13,12 +13,12 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.payment.NewPaymentActivity;
 
 public class EntityInfoActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String EXTRA_ID_ENTITY = "extra_id_entity";
+    private static final String EXTRA_ENTITY = "extra_entity";
 
     private TextView tvEntityName;
     private ImageView imgEntity;
@@ -30,9 +30,9 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         return null;
     }
 
-    public static Intent newEntityInfoActivity(Context context, int idEntity) {
+    public static Intent newEntityInfoActivity(Context context, Entity entity) {
         Intent intent = new Intent(context, EntityInfoActivity.class);
-        intent.putExtra(EXTRA_ID_ENTITY, idEntity);
+        intent.putExtra(EXTRA_ENTITY, entity);
         return intent;
     }
 
@@ -53,14 +53,13 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         findViews();
         configureSecondLevelActivity();
 
-        int idEntity = getIntent().getIntExtra(EXTRA_ID_ENTITY, -1);
-        Entity entity = EntitiesFragment.getEntityById(idEntity);
+        Entity entity = (Entity) getIntent().getSerializableExtra(EXTRA_ENTITY);
 
         tvEntityName.setText(entity.getName());
         tvEntityDescription.setText(entity.getDescription());
 
         Picasso.with(this)
-                .load(entity.getLogo_url())
+                .load(entity.getLogo())
 //                .placeholder(R.mipmap.img_default_grid)
                 .error(R.mipmap.img_mes_header)
                 .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)

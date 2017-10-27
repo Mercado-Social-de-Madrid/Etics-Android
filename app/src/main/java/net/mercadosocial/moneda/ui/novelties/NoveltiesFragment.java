@@ -13,16 +13,11 @@ import android.view.ViewGroup;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
-import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Novelty;
-import net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static net.mercadosocial.moneda.model.News.newsMock;
-import static net.mercadosocial.moneda.model.Offer.offersMock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,24 +27,6 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 
     private RecyclerView recyclerNovelties;
     private NoveltiesAdapter adapter;
-
-    public static List<Entity> entitiesMock = new ArrayList<>();
-
-    static {
-        entitiesMock.add(new Entity(1, "Fabricantes de sueños", "Librería alternativa", "https://madrid.mercadosocial.net/moneda/thumbnail?id=106", "Calle X", "Librería"));
-        entitiesMock.add(new Entity(2, "El Salmón Contracorriente", "Medio sobre economía alternativa", "http://www.elsalmoncontracorriente.es/IMG/rubon1.png", "Calle X", "Medio digital"));
-        entitiesMock.add(new Entity(3, "Green life", "Cultiva plantas de la paz", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cannabis_sativa_leaf.jpg/240px-Cannabis_sativa_leaf.jpg", "Calle X", "Grow shop"));
-    }
-
-    public static Entity getEntityById(int idEntity) {
-        for (int i = 0; i < entitiesMock.size(); i++) {
-            if (entitiesMock.get(i).getId() == idEntity) {
-                return entitiesMock.get(i);
-            }
-        }
-
-        throw new IllegalArgumentException("idEntity not valid: " + idEntity);
-    }
 
     public NoveltiesFragment() {
         // Required empty public constructor
@@ -88,9 +65,9 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 
         List<Novelty> novelties = new ArrayList<>();
 
-        novelties.addAll(newsMock);
-
-        novelties.addAll(offersMock);
+//        novelties.addAll(newsMock);
+//
+//        novelties.addAll(offersMock);
 
         Collections.sort(novelties);
 
@@ -115,7 +92,7 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 
     @Override
     public void onEntityClicked(int idEntity) {
-        startActivity(EntityInfoActivity.newEntityInfoActivity(getActivity(), idEntity));
+//        startActivity(EntityInfoActivity.newEntityInfoActivity(getActivity(), idEntity));
 
     }
 
