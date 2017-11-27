@@ -55,6 +55,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerEntities.setLayoutManager(linearLayoutManager);
 
+//        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+//        recyclerEntities.addItemDecoration(divider);
+
         setHasOptionsMenu(true);
 
         presenter.onCreate();
