@@ -18,6 +18,10 @@
         <item name="android:background">#ccc</item>
     </style>
 
+    <style name="SeparatorVertical.Grey">
+        <item name="android:background">#ccc</item>
+    </style>
+
     <style name="XpansorHoriz">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">1dp</item>

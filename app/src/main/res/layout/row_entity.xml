@@ -13,7 +13,8 @@
         android:adjustViewBounds="true"
         android:alpha="1"
         android:background="@color/white"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@mipmap/img_entitiy_example"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +42,7 @@
             android:layout_below="@+id/tv_entity_name"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Jazz" />
+            android:text="Librería" />
 
         <ImageView
             android:id="@+id/img_starred"

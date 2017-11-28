@@ -5,7 +5,7 @@ import android.content.Context;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.EntityInteractor;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity;
+import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ import java.util.List;
 
     public void onEntityClicked(int position) {
         Entity entity = entities.get(position);
-        context.startActivity(EntityInfoActivity.newEntityInfoActivity(context, entity));
+        EntityInfoPresenter.startEntityInfoActivity(context, entity);
     }
 
     public void onEntityFavouriteClicked(int position) {

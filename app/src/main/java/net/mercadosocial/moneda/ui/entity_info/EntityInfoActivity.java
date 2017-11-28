@@ -1,13 +1,11 @@
 package net.mercadosocial.moneda.ui.entity_info;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -15,55 +13,54 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.payment.NewPaymentActivity;
 
-public class EntityInfoActivity extends BaseActivity implements View.OnClickListener {
+public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
-    private static final String EXTRA_ID_ENTITY = "extra_id_entity";
-    private static final String EXTRA_ENTITY = "extra_entity";
-
-    private TextView tvEntityName;
     private ImageView imgEntity;
+    private ImageView imgHeart;
+    private TextView tvAcceptBoniatos;
+    private TextView tvBonusBoniatos;
+    private TextView btnNewPayment;
     private TextView tvEntityDescription;
-    private View btnNewPayment;
+    private RecyclerView recyclerOffers;
+    private TextView tvEntityName;
+    private EntityInfoPresenter presenter;
+    private EntitiyOffersAdapter adapter;
+
 
     @Override
     public BasePresenter getPresenter() {
-        return null;
+        return presenter;
     }
 
-    public static Intent newEntityInfoActivity(Context context, Entity entity) {
-        Intent intent = new Intent(context, EntityInfoActivity.class);
-        intent.putExtra(EXTRA_ENTITY, entity);
-        return intent;
-    }
 
     private void findViews() {
-        tvEntityName = (TextView) findViewById(R.id.tv_entity_name);
-        imgEntity = (ImageView) findViewById(R.id.img_entity);
-        tvEntityDescription = (TextView) findViewById(R.id.tv_entity_description);
-        btnNewPayment = findViewById(R.id.btn_new_payment);
+        imgEntity = (ImageView)findViewById( R.id.img_entity );
+        imgHeart = (ImageView)findViewById( R.id.img_heart );
+        tvAcceptBoniatos = (TextView)findViewById( R.id.tv_accept_boniatos );
+        tvBonusBoniatos = (TextView)findViewById( R.id.tv_bonus_boniatos );
+        btnNewPayment = (TextView)findViewById( R.id.btn_new_payment );
+        tvEntityDescription = (TextView)findViewById( R.id.tv_entity_description );
+        recyclerOffers = (RecyclerView)findViewById( R.id.recycler_offers );
+        tvEntityName = (TextView)findViewById( R.id.tv_entity_name );
 
         btnNewPayment.setOnClickListener(this);
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        presenter = EntityInfoPresenter.newInstance(this, this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_info);
 
         findViews();
         configureSecondLevelActivity();
 
-        Entity entity = (Entity) getIntent().getSerializableExtra(EXTRA_ENTITY);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerOffers.setLayoutManager(layoutManager);
 
-        tvEntityName.setText(entity.getName());
-        tvEntityDescription.setText(entity.getDescription());
+        presenter.onCreate(getIntent());
 
-        Picasso.with(this)
-                .load(entity.getLogo())
-//                .placeholder(R.mipmap.img_default_grid)
-                .error(R.mipmap.img_mes_header)
-                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(imgEntity);
     }
 
 
@@ -75,4 +72,33 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
+
+    @Override
+    public void showEntityInfo(Entity entity) {
+
+        tvEntityName.setText(entity.getName());
+        tvEntityDescription.setText(entity.getDescription());
+
+//        Picasso.with(this)
+//                .load(entity.getLogo())
+////                .placeholder(R.mipmap.img_default_grid)
+//                .error(R.mipmap.img_mes_header)
+//                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+//                .into(imgEntity);
+
+        if (adapter == null) {
+            adapter = new EntitiyOffersAdapter(this, entity.getOffers());
+            adapter.setOnItemClickListener(this);
+            recyclerOffers.setAdapter(adapter);
+        } else {
+            adapter.updateData(entity.getOffers());
+        }
+    }
+
+    @Override
+    public void onOfferClicked(String id, int position) {
+
+        presenter.onOfferClicked(position);
+    }
+
 }

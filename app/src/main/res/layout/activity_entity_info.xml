@@ -9,76 +9,149 @@
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/tv_entity_name"
-        style="@style/TextBase"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/img_entity"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="true"
-                android:layout_marginTop="15dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/img_star_selectable"
-                android:layout_gravity="right"/>
-
-            <TextView
-                style="@style/TextBase"
-                android:layout_marginTop="10dp"
-                android:text="Bonificación por compra: 10%\nPago máximo en {Boniatos}: 100%"/>
+                android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/tv_entity_description"
-                style="@style/TextBase"
-                android:layout_marginTop="15dp"/>
+                <ImageView
+                    android:id="@+id/img_entity"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="15dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/img_entitiy_example" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/img_heart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_heart_empty" />
+
+                    <View style="@style/SeparatorVertical.Grey" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/accepts"
+                            android:textColor="@color/purple" />
+
+                        <TextView
+                            android:id="@+id/tv_accept_boniatos"
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="100%" />
+
+                    </LinearLayout>
+
+                    <View style="@style/SeparatorVertical.Grey" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/bonus_return"
+                            android:textColor="@color/purple" />
+
+                        <TextView
+                            android:id="@+id/tv_bonus_boniatos"
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="10%" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/SeparatorHorizontal.Grey" />
 
 
-            <TextView
-                style="@style/TextBase"
-                android:textSize="20dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/offers"
-                android:textAllCaps="true"
-                android:layout_marginTop="15dp"/>
+                <TextView
+                    android:id="@+id/btn_new_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/bg_green_shadow"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingTop="7dp"
+                    android:text="@string/send_payment_next" />
 
-        </LinearLayout>
-    </ScrollView>
+                <View style="@style/SeparatorHorizontal.Grey" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btn_new_payment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_coins"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            app:fabSize="normal"
-            android:layout_margin="15dp"
-            app:backgroundTint="@color/green"/>
+                <TextView
+                    android:id="@+id/tv_entity_description"
+                    style="@style/TextBase"
+                    android:layout_marginTop="15dp"
+                    android:padding="10dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@color/purple">
+
+                    <TextView
+                        style="@style/TextBase.White"
+                        android:text="@string/entity_offers"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="20dp"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_offers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_entity_name"
+            style="@style/TextBase.White"
+            android:layout_width="match_parent"
+            android:background="@color/transblack_entities"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 </LinearLayout>
