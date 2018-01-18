@@ -17,6 +17,9 @@
     <style name="SeparatorHorizontal.Grey">
         <item name="android:background">#ccc</item>
     </style>
+    <style name="SeparatorHorizontal.White">
+        <item name="android:background">#fff</item>
+    </style>
 
     <style name="SeparatorVertical.Grey">
         <item name="android:background">#ccc</item>

@@ -3,7 +3,6 @@ package net.mercadosocial.moneda.ui.wallet;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,9 @@ import net.mercadosocial.moneda.ui.payment.NewPaymentActivity;
 public class WalletFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView tvBalance;
-    private AppCompatButton btnNewPayment;
-    private AppCompatButton btnGetBoniatos;
-    private AppCompatButton btnTransactions;
+    private View btnNewPayment;
+    private View btnGetBoniatos;
+    private View btnMovements;
 
     @Override
     public BasePresenter getPresenter() {
@@ -31,13 +30,13 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     
     private void findViews(View layout) {
         tvBalance = (TextView)layout.findViewById( R.id.tv_balance );
-        btnNewPayment = (AppCompatButton)layout.findViewById( R.id.btn_new_payment );
-        btnGetBoniatos = (AppCompatButton)layout.findViewById( R.id.btn_get_boniatos );
-        btnTransactions = (AppCompatButton)layout.findViewById( R.id.btn_transactions );
+        btnNewPayment = layout.findViewById( R.id.btn_new_payment );
+        btnGetBoniatos = layout.findViewById( R.id.btn_get_boniatos );
+        btnMovements = layout.findViewById( R.id.btn_movements );
 
         btnNewPayment.setOnClickListener( this );
         btnGetBoniatos.setOnClickListener( this );
-        btnTransactions.setOnClickListener( this );
+        btnMovements.setOnClickListener( this );
     }
 
     public WalletFragment() {
@@ -54,6 +53,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         View layout = inflater.inflate(R.layout.fragment_wallet, container, false);
         findViews(layout);
 
+        setHasOptionsMenu(false);
+
         return layout;
     }
 
@@ -63,8 +64,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             startActivity(NewPaymentActivity.newNewPaymentActivity(getActivity(), -1));
         } else if ( v == btnGetBoniatos ) {
             // Handle clicks for btnGetBoniatos
-        } else if ( v == btnTransactions ) {
-            // Handle clicks for btnTransactions
+        } else if ( v == btnMovements) {
+            // Handle clicks for btnMovements
         }
     }
     

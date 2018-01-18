@@ -5,9 +5,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -65,6 +67,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    protected SharedPreferences getPrefs() {
+        return PreferenceManager.getDefaultSharedPreferences(this);
+    }
     public abstract BasePresenter getPresenter();
 
     public App getApp() {

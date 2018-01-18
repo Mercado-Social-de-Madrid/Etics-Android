@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_intro_0">¡Hola!</string>
+    <string name="text_intro_0">Bienvenido, bienvenida a la app del Mercado Social</string>
+
+    <string name="title_intro_1">Somos</string>
+    <string name="text_intro_1">una red que promueve la economía social y solidaria</string>
+
+    <string name="title_intro_2">Aquí podrás</string>
+    <string name="text_intro_2">encontrar las entidades del MES y sus ofertas</string>
+
+    <string name="title_intro_3">Accederás</string>
+    <string name="text_intro_3">a las últimas novedades y convocatorias del MES</string>
+
+    <string name="title_intro_4">Podrás</string>
+    <string name="text_intro_4">realizar pagos en moneda social y recargar tu monedero</string>
+
+    <string name="title_intro_5">Y por cada compra</string>
+    <string name="text_intro_5">que realices recibirás una bonificación en moneda social</string>
+</resources>

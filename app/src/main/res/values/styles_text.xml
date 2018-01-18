@@ -14,4 +14,8 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="TextBase.Purple">
+        <item name="android:textColor">@color/purple</item>
+    </style>
+
 </resources>

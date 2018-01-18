@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="net.mercadosocial.moneda.ui.intro.IntroLastItemFragment"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp">
+
+    <TextView
+        style="@style/TextBase.Purple"
+        android:text="@string/start"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/btn_intro_enter"
+        style="@style/ButtonMes"
+        android:text="@string/go_to_entities_list"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        style="@style/TextBase"
+        android:text="@string/intro_member_info"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/btn_members_info"
+        style="@style/TextBase.Purple"
+        android:text="@string/discover_how"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"/>
+</LinearLayout>

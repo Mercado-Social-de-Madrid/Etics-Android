@@ -1,4 +1,4 @@
-package net.mercadosocial.moneda;
+package net.mercadosocial.moneda.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.DebugHelper;
+import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
@@ -68,8 +71,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
             startActivity(new Intent(this, IntroActivity.class));
+            getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
         }
     }
+
 
 
     private void configureDrawerLayout() {

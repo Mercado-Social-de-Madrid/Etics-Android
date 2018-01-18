@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos"><!ENTITY currency_name_abrev "Bts">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos"><!ENTITY currency_name_abrev "Bts">]>
 
 <resources>
     <string name="app_name">MonedaMES</string>
@@ -58,5 +57,18 @@
     <string name="accepts">Acepta:</string>
     <string name="bonus_return">Bonifica:</string>
     <string name="entity_offers">Ofertas de la entidad</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">¿Comenzamos?</string>
+    <string name="go_to_entities_list">Ir al listado de entidades</string>
+    <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna socia te invite.</string>
+    <string name="discover_how">Descubre cómo \></string>
+    <string name="your_balance_is">Tienes un saldo de:</string>
+    <string name="pending_payments_warning">Tienes nuevos pagos por confirmar</string>
+    <string name="consult_statistics">Consulta tus estadísticas de consumo y bonificaciones</string>
+    <string name="graphics">Gráficas</string>
+    <string name="movements">Movimientos</string>
+    <string name="operations">Operaciones</string>
 
 </resources>

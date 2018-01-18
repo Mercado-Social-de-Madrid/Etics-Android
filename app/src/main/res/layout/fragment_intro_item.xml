@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/view_white_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_oval_white"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_intro_title"
+                style="@style/TextBase"
+                android:text="Más personalización"
+                android:textSize="22sp"
+                android:textColor="@color/purple"
+                android:gravity="center_horizontal"/>
+
+
+            <TextView
+                android:id="@+id/tv_intro_text"
+                style="@style/TextBase"
+                android:layout_marginTop="30dp"
+                android:text="Si necesitáramos un diseño especial para estas pantallas tambien se puede personalizar completamente el contenido (menos los botones de navegación de abajo)"
+                android:textSize="18sp"
+                android:gravity="center_horizontal" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_coins"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/view_white_bg"
+            android:layout_marginTop="-40dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

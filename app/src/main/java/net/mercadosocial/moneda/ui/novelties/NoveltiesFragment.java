@@ -58,6 +58,8 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         List<Novelty> novelties = generateMockNovelties();
         showNovelties(novelties);
 
+        setHasOptionsMenu(false);
+
         return layout;
     }
 

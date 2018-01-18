@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/green_gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.wallet.WalletFragment">
@@ -13,50 +14,136 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp">
 
 
             <TextView
-                android:id="@+id/tv_balance"
+                android:id="@+id/tv_name"
+                style="@style/TextBase.Purple"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:text="¡Hola Traficantes de Sueños!"
+                android:textSize="24sp" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="SALDO: 17 Boniatos"
-                android:textSize="28sp" />
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-            <ImageView
+                <TextView
+                    style="@style/TextBase.Purple"
+                    android:text="@string/your_balance_is" />
+
+                <TextView
+                    android:id="@+id/tv_balance"
+                    style="@style/TextBase"
+                    android:layout_marginLeft="10dp"
+                    android:text="20 B" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_pending_payments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/img_mock_chart" />
+                android:layout_marginTop="15dp"
+                android:background="@color/green_gradient_light"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    style="@style/TextBase"
+                    android:text="@string/pending_payments_warning"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold" />
 
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_new_payment"
-                android:layout_width="250dp"
+            </LinearLayout>
+
+            <View style="@style/SeparatorHorizontal.White"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/consult_statistics"
+                android:textColor="@color/grey"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="PAGAR"
-                android:textSize="22sp" />
+                android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatButton
+                <View style="@style/XpansorHoriz" />
+
+                <LinearLayout
+                    android:id="@+id/btn_graphics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="15dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/graphics" />
+                </LinearLayout>
+
+                <View style="@style/XpansorHoriz" />
+
+                <LinearLayout
+                    android:id="@+id/btn_movements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="15dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/movements" />
+                </LinearLayout>
+
+                <View style="@style/XpansorHoriz" />
+            </LinearLayout>
+
+            <View style="@style/SeparatorHorizontal.White"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/operations"
+                android:textColor="@color/grey"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
                 android:id="@+id/btn_get_boniatos"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:padding="20dp"
-                android:text="Obtener boniatos"
-                android:textSize="22sp" />
+                style="@style/ButtonMes"
+                android:text="@string/get_boniatos"
+                android:layout_marginTop="15dp"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_transactions"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="Movimientos"
-                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/btn_new_payment"
+                style="@style/ButtonMes"
+                android:text="@string/send_payment"
+                android:backgroundTint="@color/green"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"/>
+
 
         </LinearLayout>
     </ScrollView>
