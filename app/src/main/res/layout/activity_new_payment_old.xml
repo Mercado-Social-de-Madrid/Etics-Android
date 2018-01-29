@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="SALDO: 17 Boniatos"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_frame_black"
+                android:orientation="vertical"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/recipient_two_dots" />
+
+
+                    <TextView
+                        android:id="@+id/tv_recipient_name"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp"
+                        android:hint="@string/select_with_following_buttons"
+                        android:lineSpacingMultiplier="0.7"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_fav"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_star_selected"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/favourite_fem"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="17dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_search"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/search"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_select_qr_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.1"
+                        android:background="@drawable/bg_button_purple"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/ic_scan_qr"
+                            android:tint="@color/green" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:text="@string/scan_qr"
+                            android:textColor="@color/green" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_frame_black"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/total_amount_purchase" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edit_total_amount_eur"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:gravity="center_horizontal"
+                            android:inputType="number|phone"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="Eur"
+                            android:textSize="22sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_frame_black"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/boniatos_payment" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/edit_boniatos_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:gravity="center_horizontal"
+                            android:inputType="number|phone"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/currency_name_abrev"
+                            android:textSize="22sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/btn_send_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_button_purple"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_coins"
+                    android:tint="@color/green" />
+
+                <TextView
+                    style="@style/TextBase"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/send_payment"
+                    android:textColor="@color/green"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

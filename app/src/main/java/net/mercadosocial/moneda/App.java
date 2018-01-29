@@ -38,6 +38,8 @@ public class App extends Application {
         Picasso.setSingletonInstance(built);
 
 
+//        Log.i(TAG, "token:" + FirebaseInstanceId.getInstance().getToken());
+
     }
 
     public static SharedPreferences getPrefs(Context context) {

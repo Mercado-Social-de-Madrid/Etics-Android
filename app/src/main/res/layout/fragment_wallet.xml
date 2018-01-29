@@ -138,11 +138,9 @@
 
             <TextView
                 android:id="@+id/btn_new_payment"
-                style="@style/ButtonMes"
+                style="@style/ButtonMes.Green"
                 android:text="@string/send_payment"
-                android:backgroundTint="@color/green"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/black"/>
+                android:layout_marginTop="15dp"/>
 
 
         </LinearLayout>

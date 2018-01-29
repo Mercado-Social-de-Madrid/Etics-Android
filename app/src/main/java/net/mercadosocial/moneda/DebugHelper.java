@@ -1,8 +1,10 @@
 package net.mercadosocial.moneda;
 
+import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
+
 public class DebugHelper {
 
-    public static Class SHORTCUT_ACTIVITY = null;
+    public static Class SHORTCUT_ACTIVITY = NewPaymentActivity.class;
 
     // === SWITCHES DEBUG ===
 

@@ -14,4 +14,18 @@
         <item name="android:textSize">16sp</item>
         <item name="android:minWidth">200dp</item>
     </style>
+
+    <style name="ButtonMes.Green">
+        <item name="backgroundTint">@color/green</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ViewProgressPayment">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_progress_payment</item>
+        <item name="android:textColor">@color/text_progress_payment</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

@@ -70,5 +70,6 @@
     <string name="graphics">Gráficas</string>
     <string name="movements">Movimientos</string>
     <string name="operations">Operaciones</string>
+    <string name="continue_arrow">Continuar \></string>
 
 </resources>

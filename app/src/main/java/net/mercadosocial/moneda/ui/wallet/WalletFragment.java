@@ -11,7 +11,7 @@ import android.widget.TextView;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.base.BasePresenter;
-import net.mercadosocial.moneda.ui.payment.NewPaymentActivity;
+import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +61,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if ( v == btnNewPayment ) {
-            startActivity(NewPaymentActivity.newNewPaymentActivity(getActivity(), -1));
+            startActivity(NewPaymentPresenter.newNewPaymentActivity(getActivity(), -1));
         } else if ( v == btnGetBoniatos ) {
             // Handle clicks for btnGetBoniatos
         } else if ( v == btnMovements) {

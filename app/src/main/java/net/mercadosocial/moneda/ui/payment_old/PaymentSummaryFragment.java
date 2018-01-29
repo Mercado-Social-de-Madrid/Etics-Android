@@ -1,4 +1,4 @@
-package net.mercadosocial.moneda.ui.payment;
+package net.mercadosocial.moneda.ui.payment_old;
 
 import android.app.Dialog;
 import android.os.Bundle;

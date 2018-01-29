@@ -1,4 +1,4 @@
-package net.mercadosocial.moneda.ui.payment;
+package net.mercadosocial.moneda.ui.payment_old;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -11,10 +11,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
 
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
-import com.google.android.gms.vision.barcode.Barcode;
-
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BasePresenter;
@@ -25,7 +21,7 @@ import net.mercadosocial.moneda.ui.recipient_select.RecipientSelectActivity;
  * Created by julio on 21/08/17.
  */
 
-public class NewPaymentActivity extends BaseActivity implements View.OnClickListener {
+public class NewPaymentActivity_Old extends BaseActivity implements View.OnClickListener {
 
     private static final String EXTRA_ID_WALLET = "extra_id_wallet";
 
@@ -64,7 +60,7 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
     }
 
     public static Intent newNewPaymentActivity(Context context, int idWallet) {
-        Intent intent = new Intent(context, NewPaymentActivity.class);
+        Intent intent = new Intent(context, NewPaymentActivity_Old.class);
         intent.putExtra(EXTRA_ID_WALLET, idWallet);
         return intent;
     }
@@ -72,7 +68,7 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_payment);
+        setContentView(R.layout.activity_new_payment_old);
 
         configureSecondLevelActivity();
         findViews();
@@ -159,23 +155,23 @@ public class NewPaymentActivity extends BaseActivity implements View.OnClickList
 
     private void startScan() {
 
-        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
-                .withActivity(this)
-                .withEnableAutoFocus(true)
-                .withBleepEnabled(true)
-                .withBackfacingCamera()
-                .withText(getString(R.string.focus_qr_code_entity))
-                .withOnlyQRCodeScanning()
-//                .withCenterTracker()
-                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
-                    @Override
-                    public void onResult(Barcode barcode) {
-                        toast(barcode.rawValue);
-                        tvRecipientName.setText(barcode.rawValue);
-                    }
-                })
-                .build();
-        materialBarcodeScanner.startScan();
+//        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
+//                .withActivity(this)
+//                .withEnableAutoFocus(true)
+//                .withBleepEnabled(true)
+//                .withBackfacingCamera()
+//                .withText(getString(R.string.focus_qr_code_entity))
+//                .withOnlyQRCodeScanning()
+////                .withCenterTracker()
+//                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
+//                    @Override
+//                    public void onResult(Barcode barcode) {
+//                        toast(barcode.rawValue);
+//                        tvRecipientName.setText(barcode.rawValue);
+//                    }
+//                })
+//                .build();
+//        materialBarcodeScanner.startScan();
     }
 
     @Override

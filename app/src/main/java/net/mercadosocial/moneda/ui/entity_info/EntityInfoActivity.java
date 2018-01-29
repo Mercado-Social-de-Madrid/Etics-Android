@@ -11,7 +11,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.payment.NewPaymentActivity;
+import net.mercadosocial.moneda.ui.payment_old.NewPaymentActivity_Old;
 
 public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
@@ -68,7 +68,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_new_payment:
-                startActivity(NewPaymentActivity.newNewPaymentActivity(this, -1));
+                startActivity(NewPaymentActivity_Old.newNewPaymentActivity(this, -1));
                 break;
         }
     }
