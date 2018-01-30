@@ -1,0 +1,29 @@
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
+
+
+    <TextView
+        style="@style/TextBase.Purple"
+        android:textSize="18sp"
+        android:layout_margin="15dp"
+        android:text="@string/select_recipient"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_recipients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/btn_continue"
+        style="@style/ButtonMes.Green"
+        android:text="@string/continue_arrow"
+        android:layout_margin="15dp"/>
+
+</android.support.v7.widget.LinearLayoutCompat>

@@ -11,6 +11,10 @@ import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
 
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.android.gms.vision.barcode.Barcode;
+
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BasePresenter;
@@ -155,23 +159,23 @@ public class NewPaymentActivity_Old extends BaseActivity implements View.OnClick
 
     private void startScan() {
 
-//        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
-//                .withActivity(this)
-//                .withEnableAutoFocus(true)
-//                .withBleepEnabled(true)
-//                .withBackfacingCamera()
-//                .withText(getString(R.string.focus_qr_code_entity))
-//                .withOnlyQRCodeScanning()
-////                .withCenterTracker()
-//                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
-//                    @Override
-//                    public void onResult(Barcode barcode) {
-//                        toast(barcode.rawValue);
-//                        tvRecipientName.setText(barcode.rawValue);
-//                    }
-//                })
-//                .build();
-//        materialBarcodeScanner.startScan();
+        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
+                .withActivity(this)
+                .withEnableAutoFocus(true)
+                .withBleepEnabled(true)
+                .withBackfacingCamera()
+                .withText(getString(R.string.focus_qr_code_entity))
+                .withOnlyQRCodeScanning()
+//                .withCenterTracker()
+                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
+                    @Override
+                    public void onResult(Barcode barcode) {
+                        toast(barcode.rawValue);
+                        tvRecipientName.setText(barcode.rawValue);
+                    }
+                })
+                .build();
+        materialBarcodeScanner.startScan();
     }
 
     @Override

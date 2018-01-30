@@ -40,7 +40,7 @@
     <string name="amount_two_dots">Importe:</string>
     <string name="calculate_bonification_two_lines">Calcular\nbonificación</string>
     <string name="focus_qr_code_entity">Enfoca al código QR de la entidad</string>
-    <string name="select_recipient">Seleccionar destinataria</string>
+    <string name="select_recipient">Elige destinataria</string>
     <string name="persons">Personas</string>
     <string name="remember_password">Recordar contraseña</string>
     <string name="repeat_password">Repetir contraseña</string>
@@ -71,5 +71,11 @@
     <string name="movements">Movimientos</string>
     <string name="operations">Operaciones</string>
     <string name="continue_arrow">Continuar \></string>
+    <string name="permission_denied">Permiso denegado</string>
+    <string name="need_access_camera">Se necesita acceder a la cámara de tu móvil para escanear el código</string>
+    <string name="qr_code_scan">Escanear código QR</string>
+    <string name="go_ahead">Adelante</string>
+    <string name="new_payment">Nuevo pago</string>
+    <string name="select_amount">Indica la cantidad</string>
 
 </resources>

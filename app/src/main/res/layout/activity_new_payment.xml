@@ -37,21 +37,9 @@
             style="@style/ViewProgressPayment" />
     </LinearLayout>
 
-    <include
-        android:id="@+id/view_new_payment_step1"
-        layout="@layout/view_new_payment_step1" />
+    <FrameLayout
+        android:id="@+id/frame_payment_section"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <!--<include-->
-        <!--android:id="@+id/view_new_payment_step2"-->
-        <!--layout="@layout/view_new_payment_step2" />-->
-
-    <!--<include-->
-        <!--android:id="@+id/view_new_payment_step3"-->
-        <!--layout="@layout/view_new_payment_step3" />-->
-
-    <TextView
-        android:id="@+id/btn_continue"
-        style="@style/ButtonMes.Green"
-        android:text="@string/continue_arrow"
-        android:layout_margin="15dp"/>
 </LinearLayout>
