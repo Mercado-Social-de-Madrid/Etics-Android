@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,11 +42,6 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
         findViews(layout);
 
         return layout;
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
     @Override

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,11 +37,6 @@ public class IntroItemFragment extends BaseFragment {
 
     public IntroItemFragment() {
         // Required empty public constructor
-    }
-    
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
     
 

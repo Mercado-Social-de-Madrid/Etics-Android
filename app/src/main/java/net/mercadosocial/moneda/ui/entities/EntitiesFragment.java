@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
 
 import java.util.List;
@@ -32,11 +31,6 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
 
     public EntitiesFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
     private void findViews(View layout) {

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.payment_old.NewPaymentActivity_Old;
 
@@ -25,12 +24,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private TextView tvEntityName;
     private EntityInfoPresenter presenter;
     private EntitiyOffersAdapter adapter;
-
-
-    @Override
-    public BasePresenter getPresenter() {
-        return presenter;
-    }
 
 
     private void findViews() {
@@ -50,6 +43,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         presenter = EntityInfoPresenter.newInstance(this, this);
+        setPresenter(presenter);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_info);
 

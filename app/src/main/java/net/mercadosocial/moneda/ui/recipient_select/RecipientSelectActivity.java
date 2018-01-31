@@ -10,7 +10,6 @@ import android.widget.GridView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +21,6 @@ public class RecipientSelectActivity extends BaseActivity implements TabLayout.O
     private List<String> names = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
     private void findViews() {
         tabsRecipients = (TabLayout)findViewById( R.id.tabs_recipients );
         recyclerRecipients = (GridView)findViewById( R.id.recycler_recipients );

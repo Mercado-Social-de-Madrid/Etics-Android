@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
@@ -29,12 +28,6 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
     private MapView mapView;
 
     private final GeoPoint pointCenterMadrid = new GeoPoint(40.4378693,-3.8199624);
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
-
 
     public EntitiesMapFragment() {
         // Required empty public constructor

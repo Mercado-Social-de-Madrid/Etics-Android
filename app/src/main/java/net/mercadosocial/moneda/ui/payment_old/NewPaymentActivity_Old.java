@@ -17,7 +17,6 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.ui.recipient_select.FavRecipientSelectFragment;
 import net.mercadosocial.moneda.ui.recipient_select.RecipientSelectActivity;
 
@@ -55,12 +54,6 @@ public class NewPaymentActivity_Old extends BaseActivity implements View.OnClick
         btnSelectQRCode.setOnClickListener(this);
         btnSelectFavourite.setOnClickListener(this);
         btnSelectFromList.setOnClickListener(this);
-    }
-
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
     public static Intent newNewPaymentActivity(Context context, int idWallet) {

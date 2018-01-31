@@ -2,28 +2,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
 
 
     <TextView
         style="@style/TextBase.Purple"
-        android:textSize="18sp"
-        android:layout_margin="15dp"
-        android:text="@string/select_amount"/>
+        android:layout_marginTop="15dp"
+        android:text="@string/select_amount"
+        android:textSize="22sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_recipients"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/total_amount_label" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/edit_total_amount_eur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="4"
+                    android:background="@color/bg_edittext"
+                    android:padding="5dp"
+                    android:inputType="number|phone"
+                    android:gravity="right"/>
+
+                <TextView
+                    style="@style/TextBase"
+                    android:text="@string/euros"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextBase"
+                android:layout_marginTop="30dp"
+                android:text="@string/boniatos_amount_label" />
+
+            <TextView
+                android:id="@+id/tv_max_accepted_entity"
+                style="@style/TextBase.Purple"
+                android:layout_marginTop="5dp"
+                android:text="@string/max_boniatos_accepted_by_entity" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/edit_boniatos_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="4"
+                    android:background="@color/bg_edittext"
+                    android:padding="5dp"
+                    android:inputType="number|phone"
+                    android:gravity="right"/>
+
+                <TextView
+                    style="@style/TextBase"
+                    android:text="@string/currency_name_plural"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/btn_continue"
         style="@style/ButtonMes.Green"
-        android:text="@string/continue_arrow"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:text="@string/continue_arrow" />
 
 </android.support.v7.widget.LinearLayoutCompat>

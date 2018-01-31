@@ -37,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public static final int REQ_CODE_EDIT = 1;
     public static final int RESULT_DELETED = 1234;
     private AppBarLayout appBarLayout;
+    private BasePresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected SharedPreferences getPrefs() {
         return PreferenceManager.getDefaultSharedPreferences(this);
     }
-    public abstract BasePresenter getPresenter();
+
+    public void setPresenter(BasePresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    public BasePresenter getPresenter(){
+        return presenter;
+    }
 
     public App getApp() {
         return (App) getApplicationContext();

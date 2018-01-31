@@ -18,7 +18,6 @@ import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
@@ -91,11 +90,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         getMenuInflater().inflate(R.menu.activity_main, menu);
         menuItemMapList = menu.findItem(R.id.menuItem_map_list);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
 

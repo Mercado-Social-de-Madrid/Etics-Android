@@ -28,4 +28,5 @@
         <item name="android:textColor">@color/text_progress_payment</item>
         <item name="android:gravity">center</item>
     </style>
+
 </resources>

@@ -58,8 +58,6 @@
     <string name="bonus_return">Bonifica:</string>
     <string name="entity_offers">Ofertas de la entidad</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start">¿Comenzamos?</string>
     <string name="go_to_entities_list">Ir al listado de entidades</string>
     <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna socia te invite.</string>
@@ -77,5 +75,16 @@
     <string name="go_ahead">Adelante</string>
     <string name="new_payment">Nuevo pago</string>
     <string name="select_amount">Indica la cantidad</string>
+    <string name="favourites">Favoritos</string>
+    <string name="total_amount_label">Introduce el importe total de tu compra en Euros para calcular tu bonificación</string>
+    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar</string>
+    <string name="check_payment_data">Revisa los datos</string>
+    <string name="payment_amount_label">Vas a pagar:</string>
+    <string name="payment_recipient_label">a:</string>
+    <string name="payment_bonification_is_label">Tu bonificación es:</string>
+    <string name="enter_pin_code">Introduce tu código PIN</string>
+    <string name="confirm_payment">Confirmar pago</string>
+    <string name="euros">Euros</string>
+    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s</string>
 
 </resources>

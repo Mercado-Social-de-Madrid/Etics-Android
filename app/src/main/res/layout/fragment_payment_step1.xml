@@ -2,28 +2,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:padding="5dp"
     tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
 
 
     <TextView
         style="@style/TextBase.Purple"
-        android:textSize="18sp"
         android:layout_margin="15dp"
-        android:text="@string/select_recipient"/>
+        android:text="@string/select_recipient"
+        android:textSize="22sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_recipients"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:gravity="center"
+            android:text="@string/favourites" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@color/tab_selected"
+            android:gravity="center"
+            android:text="@string/entities" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab"
+            android:gravity="center"
+            android:text="@string/persons" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_recipients"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tab_selected" />
+
+        <ProgressBar
+            android:id="@+id/progress_recipients"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/btn_continue"
         style="@style/ButtonMes.Green"
-        android:text="@string/continue_arrow"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:text="@string/continue_arrow" />
 
 </android.support.v7.widget.LinearLayoutCompat>

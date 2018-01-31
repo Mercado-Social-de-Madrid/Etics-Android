@@ -25,7 +25,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -95,11 +94,6 @@ public class BarcodeActivity extends BaseActivity {
                 mCodeScanner.startPreview();
             }
         });
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
     @Override

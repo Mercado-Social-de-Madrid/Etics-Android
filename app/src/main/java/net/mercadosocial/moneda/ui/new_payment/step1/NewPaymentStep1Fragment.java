@@ -3,12 +3,15 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
@@ -16,14 +19,21 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.model.Entity;
+
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewPaymentStep1Fragment extends BaseFragment {
+public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentStep1View, View.OnClickListener {
+
+    private RecyclerView recyclerRecipients;
+    private TextView btnContinue;
+    private NewPaymentStep1Presenter presenter;
+    private ProgressBar progressRecipients;
 
 
     public NewPaymentStep1Fragment() {
@@ -32,6 +42,11 @@ public class NewPaymentStep1Fragment extends BaseFragment {
 
     private void findViews(View layout) {
 
+        recyclerRecipients = (RecyclerView)layout.findViewById( R.id.recycler_recipients );
+        progressRecipients = (ProgressBar) layout.findViewById(R.id.progress_recipients);
+        btnContinue = (TextView)layout.findViewById( R.id.btn_continue );
+
+        btnContinue.setOnClickListener(this);
 
     }
 
@@ -39,10 +54,15 @@ public class NewPaymentStep1Fragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        presenter = NewPaymentStep1Presenter.newInstance(this, getActivity());
+        setPresenter(presenter);
+
         View layout = inflater.inflate(R.layout.fragment_payment_step1, container, false);
         findViews(layout);
 
         setHasOptionsMenu(true);
+
+        presenter.onCreate();
 
         return layout;
     }
@@ -85,8 +105,26 @@ public class NewPaymentStep1Fragment extends BaseFragment {
         materialBarcodeScanner.startScan();
     }
 
+
     @Override
-    public BasePresenter getPresenter() {
-        return null;
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_continue:
+                presenter.onContinueClick();
+                break;
+        }
+    }
+
+
+    // PRESENTER CALLBACKS
+    @Override
+    public void enableContinueButton(boolean enable) {
+        btnContinue.setEnabled(enable);
+    }
+
+    @Override
+    public void showEntities(List<Entity> entities) {
+        progressRecipients.setVisibility(View.GONE);
+        toast("entidades: " + entities.size());
     }
 }

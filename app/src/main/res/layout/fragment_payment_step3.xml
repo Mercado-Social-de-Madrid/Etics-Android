@@ -1,23 +1,127 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
 
+    <TextView
+        style="@style/TextBase.Purple"
+        android:layout_marginTop="15dp"
+        android:text="@string/check_payment_data"
+        android:textSize="22sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_recipients"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btn_continue" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/bg_edittext"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/payment_amount_label" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_amount"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/bg_edittext"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/payment_recipient_label" />
+
+                    <TextView
+                        android:id="@+id/tv_payment_recipient"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/bg_edittext"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/payment_bonification_is_label" />
+
+                    <TextView
+                        android:id="@+id/tv_bonification_amount"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextBase.White"
+                android:layout_width="match_parent"
+                android:background="@color/purple"
+                android:padding="10dp"
+                android:text="@string/enter_pin_code"
+                android:layout_marginTop="30dp"/>
+
+            <com.alimuzaffar.lib.pin.PinEntryEditText
+                android:id="@+id/edit_pin_entry"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:layout_marginTop="20dp"
+                android:digits="1234567890"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                app:pinAnimationType="popIn"
+                app:pinBackgroundIsSquare="true"
+                app:pinCharacterMask="*"
+                app:pinLineStroke="2dp"
+                app:pinLineStrokeSelected="4dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
-        android:id="@+id/btn_continue"
-        style="@style/ButtonMes.Green"
-        android:text="@string/continue_arrow"
+        android:id="@+id/btn_confirm_payment"
+        style="@style/ButtonMes"
         android:layout_margin="15dp"
-        android:layout_alignParentBottom="true"/>
+        android:text="@string/confirm_payment" />
 
-</RelativeLayout>
+</android.support.v7.widget.LinearLayoutCompat>

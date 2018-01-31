@@ -21,4 +21,9 @@
     <color name="orange">#e78f00</color>
     <color name="grey">#807f7f</color>
 
+    <color name="tab_selected">#F8FCE1</color>
+    <color name="tab_unselected">#E7F498</color>
+
+    <color name="bg_edittext">#F8FCE1</color>
+
 </resources>

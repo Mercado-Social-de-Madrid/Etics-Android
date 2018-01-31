@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment;
 import net.mercadosocial.moneda.ui.new_payment.step2.NewPaymentStep2Fragment;
 import net.mercadosocial.moneda.ui.new_payment.step3.NewPaymentStep3Fragment;
+import net.mercadosocial.moneda.util.WindowUtils;
 
 public class NewPaymentActivity extends BaseActivity implements NewPaymentView, View.OnClickListener {
 
@@ -25,11 +25,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
     private NewPaymentStep1Fragment fragmentStep1;
     private NewPaymentStep2Fragment fragmentStep2;
     private NewPaymentStep3Fragment fragmentStep3;
-
-    @Override
-    public BasePresenter getPresenter() {
-        return presenter;
-    }
+    private View[] stepsViews;
 
 
     private void findViews() {
@@ -38,6 +34,8 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         tvStep2 = (TextView)findViewById( R.id.tv_step_2 );
         tvStep3 = (TextView)findViewById( R.id.tv_step_3 );
         framePaymentSection = (FrameLayout)findViewById( R.id.frame_payment_section );
+
+        stepsViews = new View[]{tvStep1, tvStep2, tvStep3};
 
         tvStep1.setOnClickListener(this);
         tvStep2.setOnClickListener(this);
@@ -49,6 +47,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         presenter = NewPaymentPresenter.newInstance(this, this);
+        setPresenter(presenter);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_payment);
         findViews();
@@ -64,6 +63,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         ft.add(R.id.frame_payment_section, fragmentStep2);
         ft.add(R.id.frame_payment_section, fragmentStep3);
 
+        ft.hide(fragmentStep1);
         ft.hide(fragmentStep2);
         ft.hide(fragmentStep3);
 
@@ -72,10 +72,15 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
 
         presenter.onCreate(getIntent());
 
+        showSection(1);
+
     }
 
 
+    @Override
     public void showSection(int step) {
+
+        WindowUtils.hideSoftKeyboard(this);
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         switch (step) {
@@ -99,6 +104,15 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         }
 
         ft.commit();
+
+        selectIndicator(step);
+    }
+
+    private void selectIndicator(int step) {
+        for (int i = 0; i < stepsViews.length; i++) {
+            View stepsView = stepsViews[i];
+            stepsView.setSelected(i < step);
+        }
     }
 
 

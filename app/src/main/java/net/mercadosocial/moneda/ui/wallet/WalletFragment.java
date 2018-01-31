@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 /**
@@ -23,10 +22,6 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     private View btnGetBoniatos;
     private View btnMovements;
 
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
     
     private void findViews(View layout) {
         tvBalance = (TextView)layout.findViewById( R.id.tv_balance );

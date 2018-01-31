@@ -72,4 +72,8 @@ import java.util.List;
 
      }
 
- }
+    public void onRecipientSelected(Entity entity) {
+
+        view.showSection(2);
+    }
+}

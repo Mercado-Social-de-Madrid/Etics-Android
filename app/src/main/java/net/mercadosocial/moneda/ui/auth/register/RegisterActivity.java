@@ -5,17 +5,11 @@ import android.view.View;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private View btnRegisterEntity;
     private View btnRegisterPerson;
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
 
 
     @Override

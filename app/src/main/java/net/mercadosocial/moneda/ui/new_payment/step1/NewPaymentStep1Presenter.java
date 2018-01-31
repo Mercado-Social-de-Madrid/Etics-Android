@@ -3,8 +3,12 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 import android.content.Context;
 
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.EntityInteractor;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
+
+import java.util.List;
 
 /**
  * Created by julio on 30/01/18.
@@ -14,8 +18,11 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
  public class NewPaymentStep1Presenter extends BasePresenter {
 
      private final NewPaymentStep1View view;
+    private final EntityInteractor entityInteractor;
+    public List<Entity> entities;
+    private Entity entitySelected;
 
-     public static NewPaymentStep1Presenter newInstance(NewPaymentStep1View view, Context context) {
+    public static NewPaymentStep1Presenter newInstance(NewPaymentStep1View view, Context context) {
 
          return new NewPaymentStep1Presenter(view, context);
 
@@ -25,21 +32,49 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
          super(context, view);
 
          this.view = view;
+         entityInteractor = new EntityInteractor(context, view);
 
      }
 
      public void onCreate() {
 
+         refreshData();
+
+         // todo uncomment this
+//         view.enableContinueButton(false);
      }
 
      public void onResume() {
 
-         refreshData();
      }
 
      public void refreshData() {
 
+        entityInteractor.getEntities(new EntityInteractor.Callback() {
 
+            @Override
+            public void onResponse(List<Entity> entitiesReceived) {
+                entities = entitiesReceived;
+                view.showEntities(entities);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
+     }
+
+    public void onEntityItemClick(int position) {
+        this.entitySelected = entities.get(position);
+        view.enableContinueButton(true);
+    }
+
+
+
+     public void onContinueClick() {
+         getNewPaymentPresenter().onRecipientSelected(entitySelected);
      }
 
 

@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 /**
  * Created by julio on 31/08/17.
@@ -20,11 +19,6 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
     private IntroPagerAdapter adapter;
     private ViewPager viewPager;
     private ImageView btnIntroNext;
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
 
     private void findViews() {
         viewPager = (ViewPager) findViewById(R.id.viewpager_intro);

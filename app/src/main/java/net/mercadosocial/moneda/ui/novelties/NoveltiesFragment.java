@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Novelty;
 
 import java.util.ArrayList;
@@ -30,11 +29,6 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 
     public NoveltiesFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
     }
 
     private void findViews(View layout) {

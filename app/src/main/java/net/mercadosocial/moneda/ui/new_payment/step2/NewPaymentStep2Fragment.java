@@ -6,16 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.base.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NewPaymentStep2Fragment extends BaseFragment {
 
+    private EditText editTotalAmountEur;
+    private EditText editBoniatosAmount;
+    private TextView btnContinue;
 
     public NewPaymentStep2Fragment() {
         // Required empty public constructor
@@ -23,6 +27,9 @@ public class NewPaymentStep2Fragment extends BaseFragment {
 
     private void findViews(View layout) {
 
+        editTotalAmountEur = (EditText)layout.findViewById( R.id.edit_total_amount_eur );
+        editBoniatosAmount = (EditText)layout.findViewById( R.id.edit_boniatos_amount );
+        btnContinue = (TextView)layout.findViewById( R.id.btn_continue );
 
     }
 
@@ -38,9 +45,4 @@ public class NewPaymentStep2Fragment extends BaseFragment {
         return layout;
     }
 
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
 }
