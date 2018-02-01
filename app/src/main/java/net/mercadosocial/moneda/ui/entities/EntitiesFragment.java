@@ -42,6 +42,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
                              Bundle savedInstanceState) {
 
         presenter = EntitiesPresenter.newInstance(this, getActivity());
+        setBasePresenter(presenter);
 
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);

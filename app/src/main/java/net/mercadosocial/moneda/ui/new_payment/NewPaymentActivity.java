@@ -12,6 +12,7 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment;
 import net.mercadosocial.moneda.ui.new_payment.step2.NewPaymentStep2Fragment;
 import net.mercadosocial.moneda.ui.new_payment.step3.NewPaymentStep3Fragment;
+import net.mercadosocial.moneda.ui.new_payment.step3.NewPaymentStep3Presenter;
 import net.mercadosocial.moneda.util.WindowUtils;
 
 public class NewPaymentActivity extends BaseActivity implements NewPaymentView, View.OnClickListener {
@@ -47,7 +48,8 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         presenter = NewPaymentPresenter.newInstance(this, this);
-        setPresenter(presenter);
+        setBasePresenter(presenter);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_payment);
         findViews();
@@ -71,8 +73,6 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
 
 
         presenter.onCreate(getIntent());
-
-        showSection(1);
 
     }
 
@@ -100,6 +100,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
                 ft.hide(fragmentStep1);
                 ft.hide(fragmentStep2);
                 ft.show(fragmentStep3);
+                ((NewPaymentStep3Presenter)fragmentStep3.getBasePresenter()).refreshData();
                 break;
         }
 
@@ -121,15 +122,9 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         switch (v.getId()) {
 
             case R.id.tv_step_1:
-                showSection(1);
-                break;
-
             case R.id.tv_step_2:
-                showSection(2);
-                break;
-
             case R.id.tv_step_3:
-                showSection(3);
+                presenter.onIndicatorSectionClick(Integer.parseInt(v.getTag().toString()));
                 break;
         }
     }

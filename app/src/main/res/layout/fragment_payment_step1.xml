@@ -55,7 +55,8 @@
             android:id="@+id/recycler_recipients"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/tab_selected" />
+            android:background="@color/tab_selected"
+            android:padding="5dp"/>
 
         <ProgressBar
             android:id="@+id/progress_recipients"

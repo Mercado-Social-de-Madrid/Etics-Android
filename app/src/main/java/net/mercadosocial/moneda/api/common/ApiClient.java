@@ -10,12 +10,9 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+
 import net.mercadosocial.moneda.DebugHelper;
+import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.util.DateUtils;
 
 import java.io.IOException;
@@ -24,6 +21,7 @@ import java.lang.reflect.Type;
 import java.security.cert.CertificateException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -32,6 +30,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -43,11 +42,13 @@ public class ApiClient {
     // Tutorial Retrofit 2.0
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
-    public static final String BASE_URL_PRODUCTION = "---";
-    public static final String BASE_URL_DEBUG = "http://ec2-52-212-36-198.eu-west-1.compute.amazonaws.com/api/v1/";
+    public static final String BASE_URL_PRODUCTION = "http://ec2-52-212-36-198.eu-west-1.compute.amazonaws.com";
+    public static final String BASE_URL_DEBUG = "http://192.168.1.68:8000";
 
-    public static final String BASE_URL =
-            DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
+    public static final String API_PATH = "/api/v1/";
+
+    public static final String BASE_API_URL =
+            (DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG) + API_PATH;
 
     private static Retrofit sharedInstance;
 
@@ -76,9 +77,9 @@ public class ApiClient {
 
 
             sharedInstance = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_API_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
-//                    .client(getUnsafeOkHttpClient())
+                    .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
 
@@ -87,78 +88,102 @@ public class ApiClient {
         return sharedInstance;
     }
 
+    private static okhttp3.OkHttpClient getOkHttpClient() {
 
-    private static OkHttpClient getUnsafeOkHttpClient() {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            final TrustManager[] trustAllCerts = new TrustManager[]{
-                    new X509TrustManager() {
-                        @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-                        @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
+        okhttp3.Interceptor headersInterceptor = new okhttp3.Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
 
-                        @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return null;
-                        }
-                    }
-            };
+                okhttp3.Request original = chain.request();
 
-            // Install the all-trusting trust manager
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            // Create an ssl socket factory with our all-trusting manager
-            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+                okhttp3.Request.Builder requestBuilder = original.newBuilder();
+                requestBuilder.header("Content-Type", "application/json");
 
-            OkHttpClient okHttpClient = new OkHttpClient();
-            okHttpClient.setSslSocketFactory(sslSocketFactory);
-            okHttpClient.setHostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
+                if (AuthLogin.API_KEY != null) {
+                    requestBuilder.header("Authorization", AuthLogin.API_KEY);
                 }
-            });
-
-            okHttpClient.interceptors().add(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-
-
-                    Request original = chain.request();
-
-                    Request.Builder requestBuilder = original.newBuilder();
-                    requestBuilder.header("Content-Type", "application/vnd.api+json");
-
-                    requestBuilder.method(original.method(), original.body());
-                    Request request = requestBuilder.build();
-
-
-                    try {
-                        return chain.proceed(request);
-                    } catch (IOException e) {
-                        Log.e(TAG, "intercept: error api", e);
-                        throw new IOException("Network error");
-                    }
 //
-//                    return null;
+//                if (Auth.token != null) {
+//                    requestBuilder.header("nonce", Auth.token);
+//                }
+
+                requestBuilder.method(original.method(), original.body());
+                okhttp3.Request request = requestBuilder.build();
+
+
+                okhttp3.Response response = chain.proceed(request);
+
+                int tryCount = 0;
+                while (!response.isSuccessful() && tryCount < 3) {
+
+                    Log.d("intercept", "Request is not successful - " + tryCount);
+
+                    tryCount++;
+
+                    // retry the request
+                    response = chain.proceed(request);
                 }
-            });
 
-            // LOGGIN INTERCEPTOR
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-// set your desired log level
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            okHttpClient.interceptors().add(logging);
+                // otherwise just pass the original response on
+                return response;
+            }
+        };
 
 
-            return okHttpClient;
+        // Create a trust manager that does not validate certificate chains
+        final TrustManager[] trustAllCerts = new TrustManager[] {
+                new X509TrustManager() {
+                    @Override
+                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                    }
+
+
+                    @Override
+                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                    }
+
+                    @Override
+                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                        return new java.security.cert.X509Certificate[]{};
+                    }
+                }
+        };
+
+        // Install the all-trusting trust manager
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+        // Create an ssl socket factory with our all-trusting manager
+        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+
+
+        okhttp3.OkHttpClient client = new okhttp3.OkHttpClient().newBuilder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(headersInterceptor)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
+                .hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+//                        return hostname.equals("triskelapps.com");
+                    }
+                })
+                .build();
+
+        return client;
+
     }
 
 //    private static OkHttpClient getSSLClient(Context context) {

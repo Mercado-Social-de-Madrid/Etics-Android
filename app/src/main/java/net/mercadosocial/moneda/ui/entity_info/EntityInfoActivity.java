@@ -43,7 +43,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         presenter = EntityInfoPresenter.newInstance(this, this);
-        setPresenter(presenter);
+        setBasePresenter(presenter);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entity_info);

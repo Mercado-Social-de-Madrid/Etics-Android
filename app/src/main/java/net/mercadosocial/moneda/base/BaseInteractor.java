@@ -6,6 +6,8 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.util.Util;
 
+import java.util.List;
+
 import rx.functions.Action0;
 
 /**
@@ -22,6 +24,23 @@ public class BaseInteractor {
         return ApiClient.getInstance().create(service);
     }
 
+    public interface BaseApiCallback {
+        void onSuccess();
+
+        void onError(String message);
+    }
+
+    public interface BaseApiPOSTCallback {
+        void onSuccess(Integer id);
+
+        void onError(String message);
+    }
+
+    public interface BaseApiGETListCallback<T> {
+        void onSuccess(List<T> list);
+
+        void onError(String message);
+    }
 
     public Action0 actionTerminate = new Action0() {
         @Override

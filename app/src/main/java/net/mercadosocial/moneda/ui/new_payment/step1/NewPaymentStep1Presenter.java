@@ -8,6 +8,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
 
      private final NewPaymentStep1View view;
     private final EntityInteractor entityInteractor;
-    public List<Entity> entities;
+    public List<Entity> entities = new ArrayList<>();
     private Entity entitySelected;
 
     public static NewPaymentStep1Presenter newInstance(NewPaymentStep1View view, Context context) {
@@ -41,7 +42,7 @@ import java.util.List;
          refreshData();
 
          // todo uncomment this
-//         view.enableContinueButton(false);
+         view.enableContinueButton(false);
      }
 
      public void onResume() {
@@ -54,7 +55,8 @@ import java.util.List;
 
             @Override
             public void onResponse(List<Entity> entitiesReceived) {
-                entities = entitiesReceived;
+                entities.clear();
+                entities.addAll(entitiesReceived);
                 view.showEntities(entities);
             }
 
@@ -79,7 +81,7 @@ import java.util.List;
 
 
      private NewPaymentPresenter getNewPaymentPresenter() {
-         return (NewPaymentPresenter) ((NewPaymentActivity) context).getPresenter();
+         return (NewPaymentPresenter) ((NewPaymentActivity) context).getBasePresenter();
      }
 
  }

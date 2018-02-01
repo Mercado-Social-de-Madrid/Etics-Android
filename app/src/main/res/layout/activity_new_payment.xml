@@ -20,21 +20,24 @@
         <TextView
             android:id="@+id/tv_step_1"
             android:text="1"
-            style="@style/ViewProgressPayment" />
+            style="@style/ViewProgressPayment"
+            android:tag="1"/>
 
         <View style="@style/SeparatorVertical" />
 
         <TextView
             android:id="@+id/tv_step_2"
             android:text="2"
-            style="@style/ViewProgressPayment" />
+            style="@style/ViewProgressPayment"
+            android:tag="2" />
 
         <View style="@style/SeparatorVertical" />
 
         <TextView
             android:id="@+id/tv_step_3"
             android:text="3"
-            style="@style/ViewProgressPayment" />
+            style="@style/ViewProgressPayment"
+            android:tag="3" />
     </LinearLayout>
 
     <FrameLayout

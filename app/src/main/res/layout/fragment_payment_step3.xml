@@ -79,10 +79,10 @@
 
                     <TextView
                         style="@style/TextBase.Purple"
-                        android:text="@string/payment_bonification_is_label" />
+                        android:text="@string/payment_bonus_is_label" />
 
                     <TextView
-                        android:id="@+id/tv_bonification_amount"
+                        android:id="@+id/tv_bonus_amount"
                         style="@style/TextBase"
                         android:layout_marginLeft="10dp" />
 

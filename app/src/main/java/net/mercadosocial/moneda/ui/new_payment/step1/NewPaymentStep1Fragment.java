@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,12 +29,13 @@ import es.dmoral.toasty.Toasty;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentStep1View, View.OnClickListener {
+public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentStep1View, View.OnClickListener, EntitiesPaymentAdapter.OnItemClickListener {
 
     private RecyclerView recyclerRecipients;
     private TextView btnContinue;
     private NewPaymentStep1Presenter presenter;
     private ProgressBar progressRecipients;
+    private EntitiesPaymentAdapter adapter;
 
 
     public NewPaymentStep1Fragment() {
@@ -55,10 +57,13 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
                              Bundle savedInstanceState) {
 
         presenter = NewPaymentStep1Presenter.newInstance(this, getActivity());
-        setPresenter(presenter);
+        setBasePresenter(presenter);
 
         View layout = inflater.inflate(R.layout.fragment_payment_step1, container, false);
         findViews(layout);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerRecipients.setLayoutManager(layoutManager);
 
         setHasOptionsMenu(true);
 
@@ -116,6 +121,11 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     }
 
 
+    @Override
+    public void onItemClick(View view, int position) {
+        presenter.onEntityItemClick(position);
+    }
+
     // PRESENTER CALLBACKS
     @Override
     public void enableContinueButton(boolean enable) {
@@ -125,6 +135,14 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     @Override
     public void showEntities(List<Entity> entities) {
         progressRecipients.setVisibility(View.GONE);
-        toast("entidades: " + entities.size());
+
+        if (adapter == null) {
+            adapter = new EntitiesPaymentAdapter(getActivity(), entities);
+            adapter.setOnItemClickListener(this);
+            recyclerRecipients.setAdapter(adapter);
+        } else {
+            adapter.updateData(entities);
+        }
     }
+
 }

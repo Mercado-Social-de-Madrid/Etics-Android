@@ -26,4 +26,7 @@
 
     <color name="bg_edittext">#F8FCE1</color>
 
+    <color name="grey_disabled">#ababab</color>
+
+
 </resources>

@@ -15,7 +15,7 @@
     <string name="favourite">Favorito</string>
     <string name="offers">Ofertas</string>
     <string name="recipient">Destinataria</string>
-    <string name="calculate_bonification">Calcular bonificación</string>
+    <string name="calculate_bonus">Calcular bonificación</string>
     <string name="send_payment">Enviar pago</string>
     <string name="send_payment_next">Enviar pago ></string>
     <string name="news">Noticias</string>
@@ -38,7 +38,7 @@
     <string name="list">Lista</string>
     <string name="qr_code">Código QR</string>
     <string name="amount_two_dots">Importe:</string>
-    <string name="calculate_bonification_two_lines">Calcular\nbonificación</string>
+    <string name="calculate_bonus_two_lines">Calcular\nbonificación</string>
     <string name="focus_qr_code_entity">Enfoca al código QR de la entidad</string>
     <string name="select_recipient">Elige destinataria</string>
     <string name="persons">Personas</string>
@@ -81,10 +81,15 @@
     <string name="check_payment_data">Revisa los datos</string>
     <string name="payment_amount_label">Vas a pagar:</string>
     <string name="payment_recipient_label">a:</string>
-    <string name="payment_bonification_is_label">Tu bonificación es:</string>
+    <string name="payment_bonus_is_label">Tu bonificación es:</string>
     <string name="enter_pin_code">Introduce tu código PIN</string>
     <string name="confirm_payment">Confirmar pago</string>
     <string name="euros">Euros</string>
-    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s</string>
+    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s &currency_name_plural;</string>
+    <string name="invalid_number">El número no es válido</string>
+    <string name="boniatos_amount_exceed_accepted_payment">Esta entidad acepta un máximo de %s &currency_name_plural; para esta compra</string>
+    <string name="click_continue">Pulsa continuar</string>
+    <string name="invalid_pin_code">Código PIN inválido</string>
+    <string name="welcome">¡Bienvenid@!</string>
 
 </resources>

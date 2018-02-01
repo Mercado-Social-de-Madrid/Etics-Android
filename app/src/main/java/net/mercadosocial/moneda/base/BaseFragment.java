@@ -14,7 +14,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     public final String TAG = this.getClass().getSimpleName();
     protected BaseActivity baseActivity;
-    private BasePresenter presenter;
+    private BasePresenter basePresenter;
 
     @Override
     public void onAttach(Context context) {
@@ -29,12 +29,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     }
 
-    private BasePresenter getPresenter(){
-        return presenter;
+    public BasePresenter getBasePresenter(){
+        return basePresenter;
     }
 
-    public void setPresenter(BasePresenter presenter) {
-        this.presenter = presenter;
+    public void setBasePresenter(BasePresenter presenter) {
+        this.basePresenter = presenter;
     }
 
     protected SharedPreferences getPrefs() {

@@ -1,45 +1,84 @@
 
 package net.mercadosocial.moneda.model;
 
+import net.mercadosocial.moneda.api.common.ApiClient;
+
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class Entity implements Serializable {
 
-    private String address;
-    private Integer bonificationPercent;
-    private List<String> categories = null;
-    private String cif;
-    private String description;
-    private String email;
-    private String facebookLink;
-    private String id;
-    private String instagramLink;
-    private Double latitude;
-    private Double longitude;
-    private String legalForm;
+
+    private String logo_thumbnail;
     private String logo;
-    private Float maxPercentPayment;
-    private String name;
-    private Integer numWorkers;
-    private List<Offer> offers = null;
-    private String phoneNumber;
+    private String instagram_link;
+    private String phone_number;
+    private Integer bonification_percent;
+    private String webpage_link;
+    private List<Offer> offers;
+    private String twitter_link;
+    private String facebook_link;
+    private String telegram_link;
+    private Integer num_workers;
+    private String id;
+    private String short_description;
+    private String cif;
+    private String legal_form;
+    private String address;
+    private String email;
     private String registered;
-    private String shortDescription;
-    private String telegramLink;
-    private String twitterLink;
-    private String webpageLink;
+    private String description;
+    private String name;
+    private Float max_percent_payment;
+    private Double longitude;
+    private List<String> categories;
+    private Double latitude;
 
 
     public String getCategoriesString() {
 
         String categoriesStr = "";
-        for (int i = 0; i < categories.size(); i++) {
-            categoriesStr += categories.get(i) + (i < categories.size() - 1 ? "," : "");
-        }
+
+        // todo get names by map
+//        for (int i = 0; i < categories.size(); i++) {
+//            categoriesStr += categories.get(i);
+//            if (i < categories.size() - 1) {
+//                categoriesStr += ",";
+//            }
+//        }
 
         return categoriesStr;
     }
+
+    public String getLogoThumbnailFullUrl() {
+        return ApiClient.BASE_URL_DEBUG + getLogo_thumbnail();
+    }
+
+
+    public float getMaxAcceptedBoniatosAmount(Float totalAmountFloat) {
+        return getMax_percent_payment() * totalAmountFloat / 100f;
+    }
+
+    public String getMaxAcceptedBoniatosAmountFormatted(Float totalAmountFloat) {
+        NumberFormat numberFormat = new DecimalFormat("0.##");
+        String amountFormatted = numberFormat.format(getMaxAcceptedBoniatosAmount(totalAmountFloat));
+        return amountFormatted;
+    }
+
+    public Float getBonus(Float totalAmount) {
+        return (float) getBonification_percent() * totalAmount / 100f;
+    }
+
+    public String getBonusFormatted(Float totalAmount) {
+        NumberFormat numberFormat = new DecimalFormat("0.##");
+        String amountFormatted = numberFormat.format(getBonus(totalAmount));
+        return amountFormatted;
+    }
+
+
+    // ------------------------------
 
     public String getAddress() {
         return address;
@@ -49,12 +88,15 @@ public class Entity implements Serializable {
         this.address = address;
     }
 
-    public Integer getBonificationPercent() {
-        return bonificationPercent;
+    public Integer getBonification_percent() {
+        if (bonification_percent == null) {
+            return 0;
+        }
+        return bonification_percent;
     }
 
-    public void setBonificationPercent(Integer bonificationPercent) {
-        this.bonificationPercent = bonificationPercent;
+    public void setBonification_percent(Integer bonification_percent) {
+        this.bonification_percent = bonification_percent;
     }
 
     public List<String> getCategories() {
@@ -89,13 +131,6 @@ public class Entity implements Serializable {
         this.email = email;
     }
 
-    public String getFacebookLink() {
-        return facebookLink;
-    }
-
-    public void setFacebookLink(String facebookLink) {
-        this.facebookLink = facebookLink;
-    }
 
     public String getId() {
         return id;
@@ -105,13 +140,6 @@ public class Entity implements Serializable {
         this.id = id;
     }
 
-    public String getInstagramLink() {
-        return instagramLink;
-    }
-
-    public void setInstagramLink(String instagramLink) {
-        this.instagramLink = instagramLink;
-    }
 
     public Double getLatitude() {
         return latitude;
@@ -121,13 +149,6 @@ public class Entity implements Serializable {
         this.latitude = latitude;
     }
 
-    public String getLegalForm() {
-        return legalForm;
-    }
-
-    public void setLegalForm(String legalForm) {
-        this.legalForm = legalForm;
-    }
 
     public String getLogo() {
         return logo;
@@ -145,12 +166,16 @@ public class Entity implements Serializable {
         this.longitude = longitude;
     }
 
-    public Float getMaxPercentPayment() {
-        return maxPercentPayment;
+    public Float getMax_percent_payment() {
+        if (max_percent_payment == null) {
+            return 100f;
+        }
+
+        return max_percent_payment;
     }
 
-    public void setMaxPercentPayment(Float maxPercentPayment) {
-        this.maxPercentPayment = maxPercentPayment;
+    public void setMax_percent_payment(Float max_percent_payment) {
+        this.max_percent_payment = max_percent_payment;
     }
 
     public String getName() {
@@ -161,13 +186,6 @@ public class Entity implements Serializable {
         this.name = name;
     }
 
-    public Integer getNumWorkers() {
-        return numWorkers;
-    }
-
-    public void setNumWorkers(Integer numWorkers) {
-        this.numWorkers = numWorkers;
-    }
 
     public List<Offer> getOffers() {
         return offers;
@@ -177,13 +195,6 @@ public class Entity implements Serializable {
         this.offers = offers;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getRegistered() {
         return registered;
@@ -193,36 +204,83 @@ public class Entity implements Serializable {
         this.registered = registered;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
+    public String getLogo_thumbnail() {
+        return logo_thumbnail;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
+    public void setLogo_thumbnail(String logo_thumbnail) {
+        this.logo_thumbnail = logo_thumbnail;
     }
 
-    public String getTelegramLink() {
-        return telegramLink;
+    public String getInstagram_link() {
+        return instagram_link;
     }
 
-    public void setTelegramLink(String telegramLink) {
-        this.telegramLink = telegramLink;
+    public void setInstagram_link(String instagram_link) {
+        this.instagram_link = instagram_link;
     }
 
-    public String getTwitterLink() {
-        return twitterLink;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setTwitterLink(String twitterLink) {
-        this.twitterLink = twitterLink;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
-    public String getWebpageLink() {
-        return webpageLink;
+    public String getWebpage_link() {
+        return webpage_link;
     }
 
-    public void setWebpageLink(String webpageLink) {
-        this.webpageLink = webpageLink;
+    public void setWebpage_link(String webpage_link) {
+        this.webpage_link = webpage_link;
     }
 
+    public String getTwitter_link() {
+        return twitter_link;
+    }
+
+    public void setTwitter_link(String twitter_link) {
+        this.twitter_link = twitter_link;
+    }
+
+    public String getFacebook_link() {
+        return facebook_link;
+    }
+
+    public void setFacebook_link(String facebook_link) {
+        this.facebook_link = facebook_link;
+    }
+
+    public String getTelegram_link() {
+        return telegram_link;
+    }
+
+    public void setTelegram_link(String telegram_link) {
+        this.telegram_link = telegram_link;
+    }
+
+    public Integer getNum_workers() {
+        return num_workers;
+    }
+
+    public void setNum_workers(Integer num_workers) {
+        this.num_workers = num_workers;
+    }
+
+    public String getShort_description() {
+        return short_description;
+    }
+
+    public void setShort_description(String short_description) {
+        this.short_description = short_description;
+    }
+
+    public String getLegal_form() {
+        return legal_form;
+    }
+
+    public void setLegal_form(String legal_form) {
+        this.legal_form = legal_form;
+    }
 }

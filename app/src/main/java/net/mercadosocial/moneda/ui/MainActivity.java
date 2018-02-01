@@ -173,6 +173,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                loginDialog.setAvoidDismiss(true);
 //                loginDialog.show(getSupportFragmentManager(), null);
 
+                drawerLayout.closeDrawer(Gravity.LEFT);
                 startActivity(new Intent(this, LoginActivity.class));
 
                 break;

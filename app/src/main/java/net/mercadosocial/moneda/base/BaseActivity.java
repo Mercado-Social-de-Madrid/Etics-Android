@@ -37,15 +37,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public static final int REQ_CODE_EDIT = 1;
     public static final int RESULT_DELETED = 1234;
     private AppBarLayout appBarLayout;
-    private BasePresenter presenter;
+    private BasePresenter basePresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if (getPresenter() != null) {
-            getPresenter().setBaseView(this);
+        if (getBasePresenter() != null) {
+            getBasePresenter().setBaseView(this);
         }
 
     }
@@ -72,12 +72,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return PreferenceManager.getDefaultSharedPreferences(this);
     }
 
-    public void setPresenter(BasePresenter presenter) {
-        this.presenter = presenter;
+    public void setBasePresenter(BasePresenter basePresenter) {
+        this.basePresenter = basePresenter;
     }
 
-    public BasePresenter getPresenter(){
-        return presenter;
+    public BasePresenter getBasePresenter(){
+        return basePresenter;
     }
 
     public App getApp() {
