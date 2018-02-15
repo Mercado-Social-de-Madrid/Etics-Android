@@ -53,7 +53,11 @@ public class Entity implements Serializable {
     }
 
     public String getLogoThumbnailFullUrl() {
-        return ApiClient.BASE_URL_DEBUG + getLogo_thumbnail();
+        return ApiClient.BASE_URL + getLogo_thumbnail();
+    }
+
+    public String getLogoFullUrl() {
+        return ApiClient.BASE_URL + getLogo();
     }
 
 

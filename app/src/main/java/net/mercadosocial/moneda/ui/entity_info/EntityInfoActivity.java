@@ -3,9 +3,12 @@ package net.mercadosocial.moneda.ui.entity_info;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -72,14 +75,14 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     public void showEntityInfo(Entity entity) {
 
         tvEntityName.setText(entity.getName());
-        tvEntityDescription.setText(entity.getDescription());
+        tvEntityDescription.setText(Html.fromHtml(entity.getDescription()));
 
-//        Picasso.with(this)
-//                .load(entity.getLogo())
-////                .placeholder(R.mipmap.img_default_grid)
-//                .error(R.mipmap.img_mes_header)
+        Picasso.with(this)
+                .load(entity.getLogoFullUrl())
+//                .placeholder(R.mipmap.img_default_grid)
+                .error(R.mipmap.img_mes_header)
 //                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-//                .into(imgEntity);
+                .into(imgEntity);
 
         if (adapter == null) {
             adapter = new EntitiyOffersAdapter(this, entity.getOffers());

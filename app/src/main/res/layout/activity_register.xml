@@ -26,6 +26,25 @@
                 android:adjustViewBounds="true"
                 android:src="@mipmap/img_mes_header" />
 
+            <EditText
+                style="@style/EditTextAuth"
+                android:layout_marginTop="20dp"
+                android:hint="@string/username"
+                android:inputType="textAutoComplete" />
+
+
+            <EditText
+                style="@style/EditTextAuth"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <EditText
+                style="@style/EditTextAuth"
+                android:layout_width="match_parent"
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,38 +105,11 @@
 
             </LinearLayout>
 
-            <EditText
-                style="@style/TextBase"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:hint="@string/username"
-                android:inputType="textAutoComplete" />
-
-
-            <EditText
-                style="@style/TextBase"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-
-            <EditText
-                style="@style/TextBase"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:hint="@string/repeat_password"
-                android:inputType="textPassword" />
-
             <Button
-                style="@style/TextBase"
-                android:layout_width="match_parent"
+                android:id="@+id/btn_register"
+                style="@style/ButtonMes"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button_purple"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/register"
-                android:textColor="@color/green"
-                android:textSize="20sp" />
+                android:text="@string/register" />
 
 
         </LinearLayout>

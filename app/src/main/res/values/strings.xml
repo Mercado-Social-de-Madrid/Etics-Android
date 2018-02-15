@@ -91,5 +91,11 @@
     <string name="click_continue">Pulsa continuar</string>
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
+    <string name="register_to_use_wallet_text">Para usar tu monedero tienes que ser usuari@ registrado en el Mercado Social.\n\nEntra en tu cuenta y si todavía no tienes regístrate ;)</string>
+    <string name="welcome_name_wallet">¡Bienvenid@ %s!</string>
+    <string name="entity_info">Información de entidad</string>
+    <string name="payment_fail">Algo ha fallado en el pago</string>
+    <string name="payment_done">Pago realizado</string>
+    <string name="payment_done_message">El pago a %s se ha realizado correctamente.\nEn cuanto confirme la entidad ¡recibirás tu bonificación de %s &currency_name_plural;!</string>
 
 </resources>

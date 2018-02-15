@@ -72,6 +72,6 @@ import java.util.List;
     public void onEntityFavouriteClicked(int position) {
 
         Entity entity = entities.get(position);
-        view.toast("Entity Fav: " + entity.getName());
+//        view.toast("Entity Fav: " + entity.getName());
     }
 }

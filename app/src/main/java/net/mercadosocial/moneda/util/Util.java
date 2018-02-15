@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Normalizer;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -146,5 +147,10 @@ public final class Util {
 
         return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+    }
+
+    public static String getDecimalFormatted(Float decimal, boolean forzeDecimals) {
+        NumberFormat numberFormat = new DecimalFormat(forzeDecimals ? "0.00" : "0.##");
+        return numberFormat.format(decimal);
     }
 }

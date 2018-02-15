@@ -1,17 +1,15 @@
 package net.mercadosocial.moneda;
 
-import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
-
 public class DebugHelper {
 
-    public static Class SHORTCUT_ACTIVITY = NewPaymentActivity.class;
+    public static Class SHORTCUT_ACTIVITY = null;
 
     // === SWITCHES DEBUG ===
 
     // Trues in production apk (automatic)
     private static final boolean ACRA_ENABLED = true;
     private static final boolean FINAL_TTF = true;
-    private static final boolean PROD_ENVIRONMENT = false;
+    private static final boolean PROD_ENVIRONMENT = true;
 
 
     // Falses

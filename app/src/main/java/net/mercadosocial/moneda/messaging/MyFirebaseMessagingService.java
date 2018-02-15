@@ -19,8 +19,9 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.ui.MainActivity;
+import net.mercadosocial.moneda.ui.main.MainActivity;
 
 import java.util.Map;
 
@@ -92,8 +93,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             bundle.putString(entry.getKey(), entry.getValue());
         }
 
-        sendNotification(title, message, bundle);
+//        sendNotification(title, message, bundle);
 
+        Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
+        intent.putExtras(bundle);
+        sendBroadcast(intent);
+//        openDialog(title, message, bundle);
+
+    }
+
+    private void openDialog(String title, String message, Bundle bundle) {
+
+//        App.openBonificationDialog(this, title, message );
     }
 
     private void sendNotification(String title, String text, Bundle extras) {

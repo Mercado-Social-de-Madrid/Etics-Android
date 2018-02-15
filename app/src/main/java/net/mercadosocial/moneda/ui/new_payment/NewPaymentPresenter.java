@@ -1,7 +1,10 @@
 package net.mercadosocial.moneda.ui.new_payment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import net.mercadosocial.moneda.R;
@@ -100,14 +103,31 @@ public class NewPaymentPresenter extends BasePresenter {
         paymentInteractor.sendPayment(payment, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
-                view.toast("bien");
+
+                showPaymentSuccessDialog();
+
             }
 
             @Override
             public void onError(String message) {
 
-                view.toast("mal");
+                Toasty.error(context, context.getString(R.string.payment_fail)).show();
+
             }
         });
+    }
+
+    private void showPaymentSuccessDialog() {
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.payment_done)
+                .setMessage(String.format(context.getString(R.string.payment_done_message),
+                        selectedEntity.getName(), selectedEntity.getBonusFormatted(payment.getTotal_amount())))
+                .setNeutralButton(R.string.back, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((Activity)context).finish();
+                    }
+                })
+                .show();
     }
 }

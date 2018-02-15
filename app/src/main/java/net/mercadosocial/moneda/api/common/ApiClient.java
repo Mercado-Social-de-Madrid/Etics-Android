@@ -18,17 +18,12 @@ import net.mercadosocial.moneda.util.DateUtils;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.security.cert.CertificateException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -43,12 +38,12 @@ public class ApiClient {
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
     public static final String BASE_URL_PRODUCTION = "http://ec2-52-212-36-198.eu-west-1.compute.amazonaws.com";
-    public static final String BASE_URL_DEBUG = "http://192.168.1.68:8000";
+    public static String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
+    public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
     public static final String API_PATH = "/api/v1/";
 
-    public static final String BASE_API_URL =
-            (DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG) + API_PATH;
+    public static String BASE_API_URL = BASE_URL + API_PATH;
 
     private static Retrofit sharedInstance;
 
@@ -134,35 +129,35 @@ public class ApiClient {
 
 
         // Create a trust manager that does not validate certificate chains
-        final TrustManager[] trustAllCerts = new TrustManager[] {
-                new X509TrustManager() {
-                    @Override
-                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                    }
-
-
-                    @Override
-                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                    }
-
-                    @Override
-                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                        return new java.security.cert.X509Certificate[]{};
-                    }
-                }
-        };
-
-        // Install the all-trusting trust manager
-        SSLContext sslContext = null;
-        try {
-            sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Create an ssl socket factory with our all-trusting manager
-        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+//        final TrustManager[] trustAllCerts = new TrustManager[] {
+//                new X509TrustManager() {
+//                    @Override
+//                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+//                    }
+//
+//
+//                    @Override
+//                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+//                    }
+//
+//                    @Override
+//                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+//                        return new java.security.cert.X509Certificate[]{};
+//                    }
+//                }
+//        };
+//
+//        // Install the all-trusting trust manager
+//        SSLContext sslContext = null;
+//        try {
+//            sslContext = SSLContext.getInstance("SSL");
+//            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Create an ssl socket factory with our all-trusting manager
+//        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
 
 
@@ -172,7 +167,7 @@ public class ApiClient {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
-                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
+//                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
                 .hostnameVerifier(new HostnameVerifier() {
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
@@ -184,6 +179,10 @@ public class ApiClient {
 
         return client;
 
+    }
+
+    public static void clearInstance() {
+        sharedInstance = null;
     }
 
 //    private static OkHttpClient getSSLClient(Context context) {

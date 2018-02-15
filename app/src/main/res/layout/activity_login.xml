@@ -25,18 +25,14 @@
 
         <EditText
             android:id="@+id/edit_username"
-            style="@style/TextBase"
-            android:layout_width="match_parent"
+            style="@style/EditTextAuth"
             android:hint="@string/username"
-            android:inputType="textAutoComplete"
-            android:layout_marginTop="20dp"/>
+            android:inputType="textAutoComplete"/>
 
 
         <EditText
             android:id="@+id/edit_password"
-            style="@style/TextBase"
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
+            style="@style/EditTextAuth"
             android:hint="@string/password"
             android:inputType="textPassword" />
 
