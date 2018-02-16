@@ -13,28 +13,39 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="40dp"
-        tools:context="net.mercadosocial.moneda.ui.auth.login.LoginActivity">
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@mipmap/img_mes_header"/>
+            android:src="@mipmap/img_mes_header" />
 
-        <EditText
-            android:id="@+id/edit_username"
-            style="@style/EditTextAuth"
-            android:hint="@string/username"
-            android:inputType="textAutoComplete"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_white_corners"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/edit_username"
+                style="@style/EditTextAuth"
+                android:hint="@string/username"
+                android:inputType="textAutoComplete" />
 
 
-        <EditText
-            android:id="@+id/edit_password"
-            style="@style/EditTextAuth"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/edit_password"
+                style="@style/EditTextAuth"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_login"
@@ -47,8 +58,7 @@
             style="@style/TextBase"
             android:layout_gravity="right"
             android:layout_marginTop="30dp"
-            android:text="@string/remember_password"
-            android:padding="8dp"/>
-
+            android:padding="8dp"
+            android:text="@string/remember_password" />
     </LinearLayout>
 </RelativeLayout>

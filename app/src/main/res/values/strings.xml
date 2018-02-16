@@ -97,5 +97,6 @@
     <string name="payment_fail">Algo ha fallado en el pago</string>
     <string name="payment_done">Pago realizado</string>
     <string name="payment_done_message">El pago a %s se ha realizado correctamente.\nEn cuanto confirme la entidad ¡recibirás tu bonificación de %s &currency_name_plural;!</string>
+    <string name="email">Email</string>
 
 </resources>
