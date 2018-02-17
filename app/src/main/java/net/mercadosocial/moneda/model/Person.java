@@ -8,7 +8,7 @@ public class Person {
 
     private String uuid;
     private String uuid_user;
-    private String DNI;
+    private String NIF;
     private String name;
     private String surnames;
     private String avatar;
@@ -29,12 +29,12 @@ public class Person {
         this.uuid_user = uuid_user;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getNIF() {
+        return NIF;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setNIF(String NIF) {
+        this.NIF = NIF;
     }
 
     public String getName() {

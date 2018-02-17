@@ -9,6 +9,7 @@ public class User {
     private String uuid;
     private String email;
     private String password;
+    private transient String repeatPassword;
     private String type;
     private String user_status;
     private Person person;
@@ -77,5 +78,13 @@ public class User {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }

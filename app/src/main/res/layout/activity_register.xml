@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btn_register_continue"
         android:fillViewport="true">
 
         <LinearLayout
@@ -25,105 +26,42 @@
                 android:adjustViewBounds="true"
                 android:src="@mipmap/img_mes_header" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_white_corners"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="20dp">
 
-                <EditText
-                    style="@style/EditTextAuth"
-                    android:hint="@string/email"
-                    android:inputType="textAutoComplete" />
+                <include
+                    android:id="@+id/view_register_user"
+                    layout="@layout/view_register_user" />
 
+                <include
+                    android:id="@+id/view_register_person"
+                    layout="@layout/view_register_person"
+                    android:visibility="gone" />
 
-                <EditText
-                    style="@style/EditTextAuth"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
+                <include
+                    android:id="@+id/view_register_entity"
+                    layout="@layout/view_register_entity"
+                    android:visibility="gone" />
 
-                <EditText
-                    style="@style/EditTextAuth"
-                    android:layout_width="match_parent"
-                    android:hint="@string/repeat_password"
-                    android:inputType="textPassword"
-                    android:layout_marginBottom="10dp"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/btn_register_person"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/bg_button_green_selectable"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@mipmap/ic_persons"
-                        android:tint="@color/purple" />
-
-                    <TextView
-                        style="@style/TextBase"
-                        android:text="@string/person"
-                        android:textColor="@color/purple"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btn_register_entity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/bg_button_green_selectable"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@mipmap/ic_entities"
-                        android:tint="@color/purple" />
-
-                    <TextView
-                        style="@style/TextBase"
-                        android:text="@string/entity"
-                        android:textColor="@color/purple"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_register"
-                style="@style/ButtonMes"
-                android:layout_marginTop="10dp"
-                android:text="@string/continue_arrow"
-                android:enabled="false"/>
-
+            </RelativeLayout>
 
         </LinearLayout>
+
+
     </ScrollView>
+
+    <Button
+        android:id="@+id/btn_register_continue"
+        style="@style/ButtonMes"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:enabled="false"
+        android:text="@string/continue_arrow"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

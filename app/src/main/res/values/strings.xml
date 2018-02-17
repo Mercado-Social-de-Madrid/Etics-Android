@@ -98,5 +98,17 @@
     <string name="payment_done">Pago realizado</string>
     <string name="payment_done_message">El pago a %s se ha realizado correctamente.\nEn cuanto confirme la entidad ¡recibirás tu bonificación de %s &currency_name_plural;!</string>
     <string name="email">Email</string>
+    <string name="nif">NIF</string>
+    <string name="name">Nombre</string>
+    <string name="cif">CIF</string>
+    <string name="address">Dirección</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="paswords_does_not_match">Las contraseñas no coinciden</string>
+    <string name="select_person_or_entity">Selecciona persona o entidad</string>
+    <string name="password_empty">La contraseña no puede estar vacía</string>
+    <string name="exit_register">Salir del registro</string>
+    <string name="exit_register_message">Si sales ahora del registro se perderán los datos introducidos hasta ahora</string>
+    <string name="exit">Salir</string>
+    <string name="remain">Quedarse</string>
 
 </resources>
