@@ -31,6 +31,7 @@ public class App extends Application {
     private static final String DEBUG_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3ZWIifQ.RR_ekblK831invbbLkIofHrgBXwIU5JVqnhcs_K_bqqcz2zA-wIVzXmWZPOfrSIVZNw4YWRUqXA8tymXKLj1bg";
     public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen";
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
+    public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
 
 
@@ -87,7 +88,10 @@ public class App extends Application {
     }
 
     public static void removeUserData(Context context) {
-        getPrefs(context).edit().remove(SHARED_USER_DATA).commit();
+        getPrefs(context).edit()
+                .remove(SHARED_USER_DATA)
+                .remove(SHARED_TOKEN_FIREBASE_SENT)
+                .commit();
     }
 
     public static void openBonificationDialog(Context context, String amount) {

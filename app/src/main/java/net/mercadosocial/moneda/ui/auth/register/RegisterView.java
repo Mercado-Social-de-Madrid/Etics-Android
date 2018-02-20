@@ -17,9 +17,9 @@ public interface RegisterView extends BaseView {
 
     void setContinueRegisterEnable(boolean enable);
 
-    void fillUserData(User user);
+    void fillUserAuthData(User user);
 
     void fillPersonData(Person person);
 
-    void fillEntityData(Entity entity);
+    boolean fillEntityData(Entity entity);
 }

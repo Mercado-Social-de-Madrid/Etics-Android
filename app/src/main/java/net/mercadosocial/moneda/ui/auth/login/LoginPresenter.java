@@ -1,21 +1,16 @@
 package net.mercadosocial.moneda.ui.auth.login;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
-import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.AuthInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
-import net.mercadosocial.moneda.model.Device;
+import net.mercadosocial.moneda.ui.main.MainPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -75,36 +70,17 @@ import es.dmoral.toasty.Toasty;
             @Override
             public void onResponse(Data data) {
                 App.saveUserData(context, data);
-
-                sendDevice();
+                Toasty.success(context, context.getString(R.string.welcome)).show();
+                context.startActivity(MainPresenter.newMainActivity(context));
             }
 
             @Override
             public void onError(String error) {
-
-                view.hideProgressDialog();
                 Toasty.error(context, error).show();
             }
         });
     }
 
-    private void sendDevice() {
-
-        String model = Build.MANUFACTURER + " " + Build.MODEL;
-        Device device = new Device(model, FirebaseInstanceId.getInstance().getToken());
-        deviceInteractor.sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
-                Toasty.success(context, context.getString(R.string.welcome)).show();
-                ((Activity)context).finish();
-            }
-
-            @Override
-            public void onError(String message) {
-                Toasty.error(context, message).show();
-            }
-        });
-    }
 
     public void onRememberPasswordClick(String username2) {
         //todo

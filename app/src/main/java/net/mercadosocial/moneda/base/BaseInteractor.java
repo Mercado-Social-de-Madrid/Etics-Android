@@ -24,8 +24,8 @@ public class BaseInteractor {
         return ApiClient.getInstance().create(service);
     }
 
-    public interface BaseApiCallback {
-        void onSuccess();
+    public interface BaseApiCallback<T> {
+        void onResponse(T responseBody);
 
         void onError(String message);
     }

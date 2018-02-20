@@ -2,10 +2,18 @@ package net.mercadosocial.moneda.ui.auth.register;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -27,11 +35,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText editNif;
     private EditText editNameEntity;
     private EditText editCif;
-    private EditText editAddress;
     private View viewRegisterUser;
     private View viewRegisterPerson;
     private View viewRegisterEntity;
-
+    private EditText editBonusPercent;
+    private EditText editMaxAcceptPercent;
 
 
     private void findViews() {
@@ -53,7 +61,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         editNameEntity = (EditText)findViewById( R.id.edit_name_entity );
         editCif = (EditText)findViewById( R.id.edit_cif );
-        editAddress = (EditText)findViewById( R.id.edit_address );
+        editMaxAcceptPercent = (EditText)findViewById( R.id.edit_max_accept_percent );
+        editBonusPercent = (EditText)findViewById( R.id.edit_bonus_percent );
 
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
@@ -74,6 +83,38 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         findViews();
         presenter.onCreate();
+
+        final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setHint(getString(R.string.address));
+
+        AutocompleteFilter countryFilter = new AutocompleteFilter.Builder()
+                .setCountry("ES")
+                .build();
+
+        autocompleteFragment.setFilter(countryFilter);
+
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(final Place place) {
+                Log.i(TAG, "Place: " + place.getName());
+                presenter.onPlaceSelected(place);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        autocompleteFragment.setText(place.getAddress());
+                    }
+                }, 50);
+            }
+
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "An error occurred: " + status);
+                //todo error report
+            }
+        });
+
 
     }
 
@@ -138,7 +179,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void fillUserData(User user) {
+    public void fillUserAuthData(User user) {
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
         String repeatPassword = editRepeatPassword.getText().toString();
@@ -158,13 +199,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void fillEntityData(Entity entity) {
-        String entityName = editNameEntity.getText().toString();
-        String cif = editCif.getText().toString();
-        String address = editAddress.getText().toString();
+    public boolean fillEntityData(Entity entity) {
 
-        entity.setName(entityName);
-        entity.setCif(cif);
-        entity.setAddress(address);
+        entity.setName(editNameEntity.getText().toString());
+        entity.setCif(editCif.getText().toString());
+
+        try {
+            entity.setMax_percent_payment(Float.parseFloat(editMaxAcceptPercent.getText().toString()));
+        } catch (NumberFormatException e) {
+            editMaxAcceptPercent.setError(getString(R.string.invalid_number));
+            return false;
+        }
+
+        try {
+            entity.setBonification_percent(Integer.parseInt(editBonusPercent.getText().toString()));
+        } catch (NumberFormatException e) {
+            editBonusPercent.setError(getString(R.string.invalid_number));
+            return false;
+        }
+
+        return true;
+
     }
 }

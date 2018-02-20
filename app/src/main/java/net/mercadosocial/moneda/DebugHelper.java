@@ -1,10 +1,8 @@
 package net.mercadosocial.moneda;
 
-import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
-
 public class DebugHelper {
 
-    public static Class SHORTCUT_ACTIVITY = RegisterActivity.class;
+    public static Class SHORTCUT_ACTIVITY = null;
 
     // === SWITCHES DEBUG ===
 

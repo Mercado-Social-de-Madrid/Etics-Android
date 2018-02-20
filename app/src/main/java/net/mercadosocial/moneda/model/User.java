@@ -8,6 +8,7 @@ public class User {
 
     private String uuid;
     private String email;
+    private String username;
     private String password;
     private transient String repeatPassword;
     private String type;
@@ -29,6 +30,7 @@ public class User {
     }
 
     public void setEmail(String email) {
+        this.username = email;
         this.email = email;
     }
 

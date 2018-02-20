@@ -58,7 +58,7 @@ public class Data {
     }
 
     public String getUsername() {
-        return username;
+        return person != null ? person.getName() : entity.getName();
     }
 
     public void setUsername(String username) {

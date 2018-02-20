@@ -2,10 +2,16 @@ package net.mercadosocial.moneda.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.model.Device;
 
 /**
  * Created by julio on 2/02/18.
@@ -19,7 +25,7 @@ import net.mercadosocial.moneda.base.BasePresenter;
      public static Intent newMainActivity(Context context) {
 
          Intent intent = new Intent(context, MainActivity.class);
-
+         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
          return intent;
      }
 
@@ -42,6 +48,8 @@ import net.mercadosocial.moneda.base.BasePresenter;
              String amount = intent.getStringExtra("amount");
              App.openBonificationDialog(context, amount);
          }
+
+         checkTokenFirebaseSent();
 //         :
 //         {
 //             'amount': transaction.amount,
@@ -52,7 +60,8 @@ import net.mercadosocial.moneda.base.BasePresenter;
 
      }
 
-     public void onResume() {
+
+    public void onResume() {
 
          refreshData();
      }
@@ -67,5 +76,29 @@ import net.mercadosocial.moneda.base.BasePresenter;
     public void onLogoutClick() {
         App.removeUserData(context);
         view.showUserData(null);
+    }
+
+    private void checkTokenFirebaseSent() {
+        if (!getPrefs().getBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false)) {
+            sendDevice();
+        }
+
+
+    }
+
+    private void sendDevice() {
+
+        String model = Build.MANUFACTURER + " " + Build.MODEL;
+        Device device = new Device(model, FirebaseInstanceId.getInstance().getToken());
+        new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
+            @Override
+            public void onSuccess(Integer id) {
+                getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
+            }
+
+            @Override
+            public void onError(String message) {
+            }
+        });
     }
 }

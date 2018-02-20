@@ -55,6 +55,8 @@ dependencies {
 
     compile 'com.google.firebase:firebase-messaging:11.6.2'
 
+    compile 'com.google.android.gms:play-services-places:11.6.2'
+
     compile project(path: ':materialbarcodescanner')
 }
 

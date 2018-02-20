@@ -110,5 +110,12 @@
     <string name="exit_register_message">Si sales ahora del registro se perderán los datos introducidos hasta ahora</string>
     <string name="exit">Salir</string>
     <string name="remain">Quedarse</string>
+    <string name="password_at_least_5_chars">La contraseña debe tener al menos 5 caracteres</string>
+    <string name="phone_number">Número de teléfono</string>
+    <string name="social_currency">Moneda social</string>
+    <string name="how_much_boniatos_accept_max">Cuánto aceptas en &currency_name_plural;</string>
+    <string name="bonus_percent">Porcentaje de bonificación</string>
+    <string name="description_entity">Descripción de tu entidad</string>
+    <string name="label_fill_info_later">Puedes completar esta información con calma más tarde. Te enviaremos un correo una vez completado el registro.</string>
 
 </resources>

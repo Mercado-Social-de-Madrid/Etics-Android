@@ -20,7 +20,6 @@ import android.widget.TextView;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -87,6 +86,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
         }
 
+//        if (App.getUserData(this) == null) {
+//            startActivity(new Intent(this, LoginActivity.class));
+//            finish();
+//            return;
+//        }
 
         getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
 
@@ -94,6 +98,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             startActivity(new Intent(this, IntroActivity.class));
             getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
         }
+
 
         presenter.onCreate(getIntent());
     }

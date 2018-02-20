@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
 
     <EditText
@@ -18,10 +19,104 @@
         android:hint="@string/cif"
         android:inputType="textCapCharacters" />
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_frame_grey">
+
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
     <EditText
-        android:id="@+id/edit_address"
+        android:id="@+id/edit_phone_number"
         style="@style/EditTextAuth"
-        android:hint="@string/address"
-        android:inputType="textPostalAddress" />
+        android:hint="@string/phone_number"
+        android:inputType="number|phone" />
+
+    <TextView
+        style="@style/TextBase"
+        android:layout_marginTop="10dp"
+        android:text="@string/social_currency"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            style="@style/TextBase"
+            android:text="@string/how_much_boniatos_accept_max" />
+
+        <View style="@style/XpansorHoriz" />
+
+        <EditText
+            android:id="@+id/edit_max_accept_percent"
+            style="@style/EditTextAuth"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:ems="3"
+            android:inputType="number|phone"
+            android:gravity="right"/>
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_marginLeft="5dp"
+            android:text="%"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            style="@style/TextBase"
+            android:text="@string/bonus_percent" />
+
+        <View style="@style/XpansorHoriz" />
+
+        <EditText
+            android:id="@+id/edit_bonus_percent"
+            style="@style/EditTextAuth"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:ems="3"
+            android:inputType="number|phone"
+            android:gravity="right"/>
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_marginLeft="5dp"
+            android:text="%"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/edit_description"
+        style="@style/EditTextAuth"
+        android:layout_marginTop="10dp"
+        android:lines="3"
+        android:gravity="top|left"
+        android:inputType="textCapSentences|textMultiLine"
+        android:hint="@string/description_entity"/>
+
+    <TextView
+        style="@style/TextBase"
+        android:text="@string/label_fill_info_later"
+        android:layout_marginTop="10dp" />
+
 
 </LinearLayout>

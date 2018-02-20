@@ -4,9 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Patterns;
 
+import com.google.android.gms.location.places.Place;
+
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.AuthInteractor;
+import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.model.User;
+import net.mercadosocial.moneda.ui.main.MainPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -20,7 +30,11 @@ public class RegisterPresenter extends BasePresenter {
     private final RegisterView view;
     public final String TYPE_ENTITY = "entity";
     public final String TYPE_PERSON = "person";
+    private final AuthInteractor authInteractor;
+    private final DeviceInteractor deviceInteractor;
     private User user;
+    private int registerScreen = 1;
+    private Place place;
 
     public static Intent newRegisterActivity(Context context) {
 
@@ -39,6 +53,8 @@ public class RegisterPresenter extends BasePresenter {
         super(context, view);
 
         this.view = view;
+        authInteractor = new AuthInteractor(context, view);
+        deviceInteractor = new DeviceInteractor(context, view);
 
     }
 
@@ -46,6 +62,11 @@ public class RegisterPresenter extends BasePresenter {
 
         user = new User();
         view.setContinueRegisterEnable(true);
+
+        view.showRegisterEntity();
+        registerScreen = 2;
+        user.setType(TYPE_PERSON);
+
     }
 
     public void onResume() {
@@ -73,8 +94,8 @@ public class RegisterPresenter extends BasePresenter {
             return false;
         }
 
-        if (user.getPassword().isEmpty()) {
-            Toasty.error(context, context.getString(R.string.password_empty)).show();
+        if (user.getPassword().length() < 5) {
+            Toasty.error(context, context.getString(R.string.password_at_least_5_chars)).show();
             return false;
         }
 
@@ -94,7 +115,20 @@ public class RegisterPresenter extends BasePresenter {
 
     public void onContinueRegisterButtonClick() {
 
-        view.fillUserData(user);
+        if (registerScreen == 1) {
+            processUserAuthData();
+        } else if (registerScreen == 2) {
+            if (processUserInfoData()) {
+                performRegisterApi();
+            }
+        }
+
+    }
+
+
+    private void processUserAuthData() {
+
+        view.fillUserAuthData(user);
 
         if (!checkValidData(user)) {
             return;
@@ -105,5 +139,59 @@ public class RegisterPresenter extends BasePresenter {
         } else {
             view.showRegisterEntity();
         }
+
+        registerScreen = 2;
+    }
+
+
+    private boolean processUserInfoData() {
+        switch (user.getType()) {
+            case TYPE_PERSON:
+                Person person = new Person();
+                view.fillPersonData(person);
+                user.setPerson(person);
+                break;
+
+            case TYPE_ENTITY:
+                Entity entity = new Entity();
+                if (!view.fillEntityData(entity)) {
+                    return false;
+                }
+
+                if (place != null) {
+                    entity.setAddress(place.getAddress().toString());
+                    entity.setLatitude(place.getLatLng().latitude);
+                    entity.setLongitude(place.getLatLng().longitude);
+                }
+                user.setEntity(entity);
+                break;
+        }
+
+        return true;
+    }
+
+    private void performRegisterApi() {
+
+        view.showProgressDialog(context.getString(R.string.loading));
+
+        authInteractor.register(user, new BaseInteractor.BaseApiCallback<Data>() {
+
+            @Override
+            public void onResponse(Data data) {
+                App.saveUserData(context, data);
+                Toasty.success(context, context.getString(R.string.welcome)).show();
+                context.startActivity(MainPresenter.newMainActivity(context));
+            }
+
+            @Override
+            public void onError(String error) {
+                Toasty.error(context, error).show();
+            }
+        });
+    }
+
+
+    public void onPlaceSelected(Place place) {
+        this.place = place;
     }
 }

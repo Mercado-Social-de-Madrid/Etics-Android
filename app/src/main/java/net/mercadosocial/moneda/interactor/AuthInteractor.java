@@ -9,6 +9,7 @@ import net.mercadosocial.moneda.api.response.LoginResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.AuthLogin;
+import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
 import retrofit2.Response;
@@ -47,6 +48,7 @@ public class AuthInteractor extends BaseInteractor {
 
         getApi().login(login)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<LoginResponse>>() {
                     @Override
                     public void onCompleted() {
@@ -69,6 +71,40 @@ public class AuthInteractor extends BaseInteractor {
                         }
 
 
+                    }
+                });
+
+
+    }
+
+    public void register(final User user, final BaseApiCallback<Data> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        baseView.setRefresing(true);
+
+        getApi().register(user)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Data>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Data> response) {
+
+                        baseView.setRefresing(false);
+                        callback.onResponse(response.body());
 
                     }
                 });
