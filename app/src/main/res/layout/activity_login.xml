@@ -41,9 +41,9 @@
             <EditText
                 android:id="@+id/edit_password"
                 style="@style/EditTextAuth"
+                android:layout_marginBottom="10dp"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                android:layout_marginBottom="10dp"/>
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
@@ -53,12 +53,34 @@
             android:layout_marginTop="20dp"
             android:text="@string/enter" />
 
-        <TextView
-            android:id="@+id/btn_remember_password"
-            style="@style/TextBase"
-            android:layout_gravity="right"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:padding="8dp"
-            android:text="@string/remember_password" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_remember_password"
+                style="@style/TextBase"
+                android:background="@drawable/background_pressed_common"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="@string/remember_password" />
+
+            <View
+                style="@style/XpansorHoriz"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/btn_register"
+                style="@style/TextBase"
+                android:background="@drawable/background_pressed_common"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="@string/not_account_yet_register" />
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

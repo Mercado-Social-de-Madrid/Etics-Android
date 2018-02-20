@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:background="@drawable/bg_button_green_selectable"
             android:gravity="center"
             android:orientation="vertical"
@@ -85,4 +85,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/btn_login"
+        style="@style/TextBase"
+        android:padding="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/already_account_login"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/background_pressed_common" />
 </LinearLayout>

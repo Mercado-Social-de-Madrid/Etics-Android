@@ -1,4 +1,4 @@
-package net.mercadosocial.moneda.model;
+package net.mercadosocial.moneda.api.response;
 
 /**
  * Created by julio on 11/10/17.

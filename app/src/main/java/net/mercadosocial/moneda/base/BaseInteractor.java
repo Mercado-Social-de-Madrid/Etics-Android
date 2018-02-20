@@ -37,7 +37,7 @@ public class BaseInteractor {
     }
 
     public interface BaseApiGETListCallback<T> {
-        void onSuccess(List<T> list);
+        void onResponse(List<T> list);
 
         void onError(String message);
     }

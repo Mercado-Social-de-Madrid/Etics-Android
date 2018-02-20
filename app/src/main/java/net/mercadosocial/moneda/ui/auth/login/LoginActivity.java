@@ -1,11 +1,13 @@
 package net.mercadosocial.moneda.ui.auth.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
+import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginView {
 
@@ -14,16 +16,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private View btnLogin;
     private LoginPresenter presenter;
     private View btnRememberPassword;
+    private View btnRegister;
 
     private void findViews() {
         editUsername = (EditText)findViewById( R.id.edit_username );
         editPassword = (EditText)findViewById( R.id.edit_password );
         btnRememberPassword = findViewById(R.id.btn_remember_password);
         btnLogin = findViewById(R.id.btn_login);
+        btnRegister = findViewById(R.id.btn_register);
 
 
         btnLogin.setOnClickListener(this);
         btnRememberPassword.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
     }
 
 
@@ -40,8 +45,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         editUsername.setText("juliotest");
         editPassword.setText("boniatos");
 
-        // todo
-        btnRememberPassword.setVisibility(View.GONE);
     }
 
     @Override
@@ -56,10 +59,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 break;
 
             case R.id.btn_remember_password:
-
                 String username2 = editUsername.getText().toString();
                 presenter.onRememberPasswordClick(username2);
                 break;
+
+            case R.id.btn_register:
+                startActivity(new Intent(this, RegisterActivity.class));
+                finish();
+                overridePendingTransition(0, 0);
+                break;
+
         }
     }
 

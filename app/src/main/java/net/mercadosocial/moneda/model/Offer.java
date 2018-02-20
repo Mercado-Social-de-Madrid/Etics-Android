@@ -1,9 +1,14 @@
 
 package net.mercadosocial.moneda.model;
 
-import java.io.Serializable;
+import android.support.annotation.NonNull;
 
-public class Offer implements Serializable {
+import net.mercadosocial.moneda.api.common.ApiClient;
+
+import java.io.Serializable;
+import java.text.ParseException;
+
+public class Offer implements Serializable, Novelty {
 
     private Boolean active;
     private String bannerImage;
@@ -27,7 +32,7 @@ public class Offer implements Serializable {
     }
 
     public String getBannerImage() {
-        return bannerImage;
+        return ApiClient.BASE_URL + bannerImage;
     }
 
     public void setBannerImage(String bannerImage) {
@@ -35,7 +40,7 @@ public class Offer implements Serializable {
     }
 
     public String getBannerThumbnail() {
-        return bannerThumbnail;
+        return ApiClient.BASE_URL + bannerThumbnail;
     }
 
     public void setBannerThumbnail(String bannerThumbnail) {
@@ -114,4 +119,42 @@ public class Offer implements Serializable {
         this.title = title;
     }
 
+
+
+
+    @Override
+    public String getTitleNovelty() {
+        return getTitle();
+    }
+
+    @Override
+    public String getDescriptionShortNovelty() {
+        return getDescription();
+    }
+
+    @Override
+    public String getImageNoveltyUrl() {
+        return getBannerImage();
+    }
+
+    @Override
+    public String getDate() {
+        return getBeginDate();
+    }
+
+    @Override
+    public int getNoveltyType() {
+        return TYPE_OFFER;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        Novelty novelty2 = (Novelty) o;
+        try {
+            boolean isDateBeforeDate2 = Novelty.formatDatetime.parse(this.getDate()).before(Novelty.formatDatetime.parse(novelty2.getDate()));
+            return isDateBeforeDate2 ? 1 : -1;
+        } catch (ParseException e) {
+        }
+        return 0;
+    }
 }

@@ -3,11 +3,12 @@ package net.mercadosocial.moneda.interactor;
 import android.content.Context;
 
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.api.EntitiesApi;
+import net.mercadosocial.moneda.api.OffersApi;
+import net.mercadosocial.moneda.api.response.OffersResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
-import net.mercadosocial.moneda.api.response.EntitiesResponse;
-import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.Offer;
+import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -19,24 +20,17 @@ import rx.schedulers.Schedulers;
 /**
  * Created by julio on 14/02/16.
  */
-public class EntityInteractor extends BaseInteractor {
+public class OfferInteractor extends BaseInteractor {
+    
 
-
-    public interface Callback {
-
-        void onResponse(List<Entity> entities);
-
-        void onError(String error);
-    }
-
-    public EntityInteractor(Context context, BaseView baseView) {
+    public OfferInteractor(Context context, BaseView baseView) {
         this.baseView = baseView;
         this.context = context;
 
     }
 
 
-    public void getEntities(final Callback callback) {
+    public void getOffers(final BaseApiGETListCallback<Offer> callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
@@ -45,9 +39,9 @@ public class EntityInteractor extends BaseInteractor {
 
         baseView.setRefresing(true);
 
-        getApi().getEntities()
+        getApi().getOffers()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<EntitiesResponse>() {
+                .subscribe(new Observer<OffersResponse>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -59,11 +53,11 @@ public class EntityInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(EntitiesResponse entitiesResponse) {
+                    public void onNext(OffersResponse offersResponse) {
 
                         baseView.setRefresing(false);
 
-                        callback.onResponse(entitiesResponse.getEntities());
+                        callback.onResponse(offersResponse.getOffers());
 
 
                     }
@@ -73,8 +67,8 @@ public class EntityInteractor extends BaseInteractor {
     }
 
 
-    private EntitiesApi getApi() {
-        return getApi(EntitiesApi.class);
+    private OffersApi getApi() {
+        return getApi(OffersApi.class);
     }
 
 

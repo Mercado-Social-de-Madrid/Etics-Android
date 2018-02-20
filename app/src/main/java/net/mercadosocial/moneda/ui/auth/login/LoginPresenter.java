@@ -82,7 +82,7 @@ import es.dmoral.toasty.Toasty;
     }
 
 
-    public void onRememberPasswordClick(String username2) {
+    public void onRememberPasswordClick(String username) {
         //todo
     }
 }

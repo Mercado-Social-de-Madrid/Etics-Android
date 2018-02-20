@@ -38,7 +38,7 @@ public class ApiClient {
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
     public static final String BASE_URL_PRODUCTION = "http://ec2-52-212-36-198.eu-west-1.compute.amazonaws.com";
-    public static String BASE_URL_DEBUG = "http://192.168.43.42:8000";
+    public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
     public static final String API_PATH = "/api/v1/";

@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.auth.register;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,7 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.model.User;
+import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.util.WindowUtils;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener, RegisterView {
@@ -40,6 +42,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private View viewRegisterEntity;
     private EditText editBonusPercent;
     private EditText editMaxAcceptPercent;
+    private View btnLogin;
 
 
     private void findViews() {
@@ -64,9 +67,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         editMaxAcceptPercent = (EditText)findViewById( R.id.edit_max_accept_percent );
         editBonusPercent = (EditText)findViewById( R.id.edit_bonus_percent );
 
+        btnLogin = findViewById(R.id.btn_login);
+
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
         btnRegisterContinue.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
 
@@ -135,6 +141,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_register_continue:
                 WindowUtils.hideSoftKeyboard(this);
                 presenter.onContinueRegisterButtonClick();
+                break;
+
+            case R.id.btn_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                overridePendingTransition(0, 0);
                 break;
         }
     }

@@ -1,4 +1,6 @@
-package net.mercadosocial.moneda.model;
+package net.mercadosocial.moneda.api.response;
+
+import net.mercadosocial.moneda.model.Entity;
 
 import java.util.List;
 

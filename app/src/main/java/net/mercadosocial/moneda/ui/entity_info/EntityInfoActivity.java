@@ -15,6 +15,8 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.payment_old.NewPaymentActivity_Old;
 
+import es.dmoral.toasty.Toasty;
+
 public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
     private ImageView imgEntity;
@@ -40,6 +42,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         tvEntityName = (TextView)findViewById( R.id.tv_entity_name );
 
         btnNewPayment.setOnClickListener(this);
+        imgHeart.setOnClickListener(this);
+
     }
 
 
@@ -68,6 +72,10 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.btn_new_payment:
                 startActivity(NewPaymentActivity_Old.newNewPaymentActivity(this, -1));
                 break;
+
+            case R.id.img_heart:
+                Toasty.info(this, getString(R.string.social_balance_info_soon)).show();
+                break;
         }
     }
 
@@ -75,7 +83,12 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     public void showEntityInfo(Entity entity) {
 
         tvEntityName.setText(entity.getName());
-        tvEntityDescription.setText(Html.fromHtml(entity.getDescription()));
+        if (entity.getDescription() != null) {
+            tvEntityDescription.setText(Html.fromHtml(entity.getDescription()));
+        }
+
+        tvAcceptBoniatos.setText(entity.getMax_percent_payment() + "%");
+        tvBonusBoniatos.setText(entity.getBonus_percent() + "%");
 
         Picasso.with(this)
                 .load(entity.getLogoFullUrl())

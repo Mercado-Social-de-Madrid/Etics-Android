@@ -21,11 +21,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.OnItemClickListener {
+public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.OnItemClickListener, NoveltiesView {
 
 
     private RecyclerView recyclerNovelties;
     private NoveltiesAdapter adapter;
+    private NoveltiesPresenter presenter;
 
     public NoveltiesFragment() {
         // Required empty public constructor
@@ -38,7 +39,8 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        presenter = NoveltiesPresenter.newInstance(this, getActivity());
+        setBasePresenter(presenter);
         View layout = inflater.inflate(R.layout.fragment_novelties, container, false);
         findViews(layout);
 
@@ -53,6 +55,8 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         showNovelties(novelties);
 
         setHasOptionsMenu(false);
+
+        presenter.onCreate();
 
         return layout;
     }
@@ -72,6 +76,7 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
     }
 
 
+    @Override
     public void showNovelties(List<Novelty> novelties) {
 
         if (adapter == null) {

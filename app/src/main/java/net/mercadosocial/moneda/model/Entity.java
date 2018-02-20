@@ -72,7 +72,7 @@ public class Entity implements Serializable {
     }
 
     public Float getBonus(Float totalAmount) {
-        return (float) getBonification_percent() * totalAmount / 100f;
+        return (float) getBonus_percent() * totalAmount / 100f;
     }
 
     public String getBonusFormatted(Float totalAmount) {
@@ -92,7 +92,7 @@ public class Entity implements Serializable {
         this.address = address;
     }
 
-    public Integer getBonification_percent() {
+    public Integer getBonus_percent() {
         if (bonification_percent == null) {
             return 0;
         }
