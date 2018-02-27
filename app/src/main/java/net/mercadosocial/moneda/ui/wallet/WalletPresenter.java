@@ -4,9 +4,14 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.interactor.WalletInteractor;
+import net.mercadosocial.moneda.model.Payment;
 import net.mercadosocial.moneda.model.Wallet;
+
+import java.util.List;
 
 /**
  * Created by julio on 2/02/18.
@@ -50,7 +55,24 @@ public class WalletPresenter extends BasePresenter {
         }
 
         refreshWalletData();
+        refreshPendingPayments();
 
+    }
+
+    private void refreshPendingPayments() {
+        new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
+            @Override
+            public void onResponse(List<Payment> list) {
+                if (list != null && !list.isEmpty()) {
+                    view.showPendingPaymentsNumber(list.size());
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void refreshWalletData() {

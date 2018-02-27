@@ -6,7 +6,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "net.mercadosocial.moneda"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -40,7 +40,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.7'
     compile 'com.android.support:support-v4:26.0.2'
-    compile 'org.osmdroid:osmdroid-android:5.6.5'
+    compile 'org.osmdroid:osmdroid-android:6.0.1'
     compile 'com.github.MKergall:osmbonuspack:6.3'
     compile 'agency.tango.android:material-intro-screen:0.0.5'
 //    compile 'com.edwardvanraak:MaterialBarcodeScanner:0.0.6-ALPHA'
@@ -56,6 +56,9 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.6.2'
 
     compile 'com.google.android.gms:play-services-places:11.6.2'
+
+//    implementation 'me.aflak.libraries:filter-annotation:1.2'
+//    annotationProcessor 'me.aflak.libraries:filter-processor:1.2'
 
     compile project(path: ':materialbarcodescanner')
 }

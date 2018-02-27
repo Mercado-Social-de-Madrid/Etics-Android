@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -26,17 +25,17 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
-import net.mercadosocial.moneda.ui.entities.EntitiesMapFragment;
+import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
-import net.mercadosocial.moneda.ui.novelties.NoveltiesFragment;
+import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
+
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
 
     private DrawerLayout drawerLayout;
-    private MenuItem menuItemMapList;
-    private boolean showingMap;
     private TextView btnLogin;
     private TextView btnSignup;
     private BottomNavigationView bottomNavView;
@@ -117,15 +116,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
+//        toolbar.setNavigationIcon(null);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        menuItemMapList = menu.findItem(R.id.menuItem_map_list);
-        return super.onCreateOptionsMenu(menu);
-    }
-
+//    public void toggleDrawerRight() {
+//        if (drawerLayout.isDrawerOpen(Gravity.END)) {
+//            drawerLayout.closeDrawer(Gravity.END);
+//        } else {
+//            drawerLayout.openDrawer(Gravity.END);
+//        }
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -137,30 +139,31 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (item.getItemId()) {
             case R.id.navigation_entities:
                 showSection(new EntitiesFragment());
-                showingMap = false;
-                refreshMapListIcon();
-                menuItemMapList.setVisible(true);
                 return true;
             case R.id.navigation_wallet:
                 showSection(new WalletFragment());
-                menuItemMapList.setVisible(false);
                 return true;
             case R.id.navigation_profile:
                 showSection(new NoveltiesFragment());
-                menuItemMapList.setVisible(false);
                 return true;
 
             case R.id.menuItem_the_social_market:
-                drawerLayout.closeDrawer(Gravity.LEFT);
-                startActivity(new Intent(this, IntroActivity.class));
+//                startActivity(new Intent(this, IntroActivity.class));
+                String url = "https://madrid.mercadosocial.net/";
+                WebViewActivity.start(this, url);
                 return true;
 
             case R.id.menuItem_how_boniato_works:
-                openIPDialog();
+                String url2 = "https://madrid.mercadosocial.net/reboniato/";
+                WebViewActivity.start(this, url2);
+                break;
+
+            case R.id.menuItem_get_boniatos:
+                Toasty.info(this, "En breve disponible...").show();
                 break;
         }
 
-        toast("Pulsado: " + item.getTitle());
+//        toast("Pulsado: " + item.getTitle());
         drawerLayout.closeDrawer(Gravity.LEFT);
         return false;
     }
@@ -187,27 +190,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 .commit();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuItem_map_list:
-
-                showingMap = !showingMap;
-                refreshMapListIcon();
-
-                getFragmentManager().beginTransaction().replace(R.id.content,
-                        showingMap ? new EntitiesMapFragment() : new EntitiesFragment())
-                        .commit();
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void refreshMapListIcon() {
-
-        menuItemMapList.setIcon(showingMap ? R.mipmap.ic_list : R.mipmap.ic_map);
-    }
 
     @Override
     public void onClick(View v) {

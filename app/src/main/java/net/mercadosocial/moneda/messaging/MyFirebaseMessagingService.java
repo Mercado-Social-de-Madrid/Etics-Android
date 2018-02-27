@@ -93,12 +93,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             bundle.putString(entry.getKey(), entry.getValue());
         }
 
-//        sendNotification(title, message, bundle);
+//        switch (bundle.getString("type")) {
+//            case "payment":
+//            case "transaction":
+                Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
+                intent.putExtras(bundle);
+                sendBroadcast(intent);
+//                break;
+//
+//            case "news":
+//                sendNotification(title, message, bundle);
+//                break;
+//        }
 
-        Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
-        intent.putExtras(bundle);
-        sendBroadcast(intent);
-//        openDialog(title, message, bundle);
+
+
 
     }
 

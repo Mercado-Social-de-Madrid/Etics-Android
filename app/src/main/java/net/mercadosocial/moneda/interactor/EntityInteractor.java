@@ -72,6 +72,42 @@ public class EntityInteractor extends BaseInteractor {
 
     }
 
+    public void getEntitiesFiltered(String query, final Callback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        baseView.setRefresing(true);
+
+        getApi().getEntitiesFiltered(query)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<EntitiesResponse>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(EntitiesResponse entitiesResponse) {
+
+                        baseView.setRefresing(false);
+
+                        callback.onResponse(entitiesResponse.getEntities());
+
+
+                    }
+                });
+
+
+    }
+
 
     private EntitiesApi getApi() {
         return getApi(EntitiesApi.class);

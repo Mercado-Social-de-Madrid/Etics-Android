@@ -18,15 +18,17 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.entity_info.EntityInfoActivity"
-            android:label="@string/entity_info"/>
+        <activity
+            android:name=".ui.entity_info.EntityInfoActivity"
+            android:label="@string/entity_info" />
         <activity
             android:name=".ui.payment_old.NewPaymentActivity_Old"
             android:label="@string/send_payment"
@@ -44,11 +46,16 @@
         <activity
             android:name=".ui.auth.register.RegisterActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.new_payment.NewPaymentActivity"
-            android:label="@string/new_payment"/>
+        <activity
+            android:name=".ui.new_payment.NewPaymentActivity"
+            android:label="@string/new_payment"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".ui.barcode.BarcodeActivity"
             android:label="@string/qr_code_scan" />
+
+        <activity android:name=".ui.novelties.detail.NoveltyDetailActivity" />
+        <activity android:name=".ui.info.WebViewActivity" />
 
         <!-- [START firebase_service] -->
         <service android:name=".messaging.MyFirebaseMessagingService">
@@ -66,8 +73,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCmb9WAN4IbBbjPQdFtZEUvubMcP-tDa7g"/>
-
+            android:value="AIzaSyCmb9WAN4IbBbjPQdFtZEUvubMcP-tDa7g" />
 
     </application>
 

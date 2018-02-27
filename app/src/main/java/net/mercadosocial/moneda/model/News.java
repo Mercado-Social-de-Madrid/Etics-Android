@@ -2,6 +2,9 @@ package net.mercadosocial.moneda.model;
 
 import android.support.annotation.NonNull;
 
+import net.mercadosocial.moneda.api.common.ApiClient;
+
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -12,18 +15,28 @@ import java.util.Random;
  * Created by julio on 18/09/17.
  */
 
-public class News implements Novelty {
+public class News implements Serializable, Novelty {
 
 
+    private String id;
     private String title;
-    private String textShort;
-    private String textFull;
-    private String imageUrl;
-    private String date;
+    private String short_description;
+    private String description;
+    private String banner_image;
+    private String more_info_text;
+    private String more_info_url;
+    private String published_date;
 
 
 //    offersMock.add(new Offer("Titulo oferta " + i, "Texto corto de la oferta " + i, "Descripción completa de la oferta " + i, null));
 
+    private String getDateFormatted() {
+        try {
+            return formatDatetimeUser.format(formatDatetimeApi.parse(published_date));
+        } catch (ParseException e) {
+            return published_date;
+        }
+    }
 
     public static List<News> newsMock = new ArrayList<>();
     static {
@@ -42,12 +55,12 @@ public class News implements Novelty {
     public News() {
     }
 
-    public News(String title, String textShort, String textFull, String imageUrl, String date) {
+    public News(String title, String short_description, String description, String banner_image, String published_date) {
         this.title = title;
-        this.textShort = textShort;
-        this.textFull = textFull;
-        this.imageUrl = imageUrl;
-        this.date = date;
+        this.short_description = short_description;
+        this.description = description;
+        this.banner_image = banner_image;
+        this.published_date = published_date;
     }
 
     @Override
@@ -56,18 +69,33 @@ public class News implements Novelty {
     }
 
     @Override
+    public String getSubtitleNovelty() {
+        return getDate();
+    }
+
+    @Override
     public String getDescriptionShortNovelty() {
-        return textShort;
+        return short_description;
+    }
+
+    @Override
+    public String getDescriptionFullNovelty() {
+        return getDescription();
     }
 
     @Override
     public String getImageNoveltyUrl() {
-        return imageUrl;
+        return getBanner_image();
     }
 
     @Override
     public String getDate() {
-        return date;
+        return getDateFormatted();
+    }
+
+    @Override
+    public String getDatePublished() {
+        return getPublished_date();
     }
 
     @Override
@@ -79,8 +107,9 @@ public class News implements Novelty {
     public int compareTo(@NonNull Object o) {
         Novelty novelty2 = (Novelty) o;
         try {
-            boolean isDateBeforeDate2 = Novelty.formatDatetime.parse(this.getDate()).before(Novelty.formatDatetime.parse(novelty2.getDate()));
-            return isDateBeforeDate2 ? 1 : -1;
+            boolean isDateAfterDate2 = Novelty.formatDatetimeApi.parse(this.getDatePublished())
+                    .before(Novelty.formatDatetimeApi.parse(novelty2.getDatePublished()));
+            return isDateAfterDate2 ? 1 : -1;
         } catch (ParseException e) {
         }
         return 0;
@@ -97,28 +126,59 @@ public class News implements Novelty {
         this.title = title;
     }
 
-    public String getTextShort() {
-        return textShort;
+    public String getShort_description() {
+        return short_description;
     }
 
-    public void setTextShort(String textShort) {
-        this.textShort = textShort;
+    public void setShort_description(String short_description) {
+        this.short_description = short_description;
     }
 
-    public String getTextFull() {
-        return textFull;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTextFull(String textFull) {
-        this.textFull = textFull;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getBanner_image() {
+        return ApiClient.BASE_URL + banner_image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setBanner_image(String banner_image) {
+        this.banner_image = banner_image;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMore_info_text() {
+        return more_info_text;
+    }
+
+    public void setMore_info_text(String more_info_text) {
+        this.more_info_text = more_info_text;
+    }
+
+    public String getMore_info_url() {
+        return more_info_url;
+    }
+
+    public void setMore_info_url(String more_info_url) {
+        this.more_info_url = more_info_url;
+    }
+
+    public String getPublished_date() {
+        return published_date;
+    }
+
+    public void setPublished_date(String published_date) {
+        this.published_date = published_date;
+    }
 }

@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:padding="5dp"
+    android:background="@drawable/bg_row_novelty">
 
         <!--<View-->
             <!--android:layout_width="match_parent"-->
@@ -13,8 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:layout_height="wrap_content">
 
 
             <ImageView
@@ -37,6 +39,7 @@
                 android:textSize="22sp"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:text="Título"
                 android:layout_marginRight="5dp"/>
 
             <TextView
@@ -45,7 +48,7 @@
                 android:layout_alignLeft="@+id/tv_novelty_title"
                 android:layout_below="@+id/tv_novelty_title"
                 android:lines="2"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/grey"
                 android:ellipsize="end"
                 android:text="Jazz"/>
 
@@ -58,8 +61,9 @@
                 android:layout_alignParentRight="true"
                 android:lines="1"
                 android:ellipsize="end"
-                android:gravity="bottom"
-                android:text="Pza Palacio"/>
+                android:gravity="bottom|right"
+                android:layout_marginTop="5dp"
+                android:text="20/02/2020"/>
 
         </RelativeLayout>
 

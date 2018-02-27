@@ -63,7 +63,7 @@
     <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna socia te invite.</string>
     <string name="discover_how">Descubre cómo \></string>
     <string name="your_balance_is">Tienes un saldo de:</string>
-    <string name="pending_payments_warning">Tienes nuevos pagos por confirmar</string>
+    <string name="pending_payments_warning">Tienes %d nuevos pagos por confirmar</string>
     <string name="consult_statistics">Consulta tus estadísticas de consumo y bonificaciones</string>
     <string name="graphics">Gráficas</string>
     <string name="movements">Movimientos</string>
@@ -87,7 +87,8 @@
     <string name="euros">Euros</string>
     <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s &currency_name_plural;</string>
     <string name="invalid_number">El número no es válido</string>
-    <string name="boniatos_amount_exceed_accepted_payment">Esta entidad acepta un máximo de %s &currency_name_plural; para esta compra</string>
+    <string name="boniatos_amount_exceed_accepted_payment">Esta entidad acepta un máximo de %s &currency_name_plural;
+        para esta compra</string>
     <string name="click_continue">Pulsa continuar</string>
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
@@ -120,5 +121,15 @@
     <string name="not_account_yet_register">¿Todavía no tienes cuenta?\n¡Regístrate!</string>
     <string name="already_account_login">Si ya tienes tu cuenta, entra pulsando aquí</string>
     <string name="social_balance_info_soon">En breve verás la información del balance social ;)</string>
+    <string name="offer">Oferta</string>
+    <string name="news_mes">Noticia del MES</string>
+    <string name="cancel_payment">Cancelar pago</string>
+    <string name="cancel_payment_message">Si sales se perderán los datos del pago actual. Confirma para salir</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_entities">Buscar entidades</string>
+    <string name="payment_enter_user_before">Para enviar un pago debes registrar tu usuario primero</string>
+    <string name="end_date_offer">Hasta: %s</string>
 
 </resources>

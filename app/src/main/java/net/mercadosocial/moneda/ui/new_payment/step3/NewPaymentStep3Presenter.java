@@ -46,9 +46,12 @@ import es.dmoral.toasty.Toasty;
          Entity entity = getNewPaymentPresenter().getSelectedEntity();
          Payment payment = getNewPaymentPresenter().getPayment();
          view.showPaymentSummaryInfo(
-                 payment.getBoniatosAmountFormatted() + " " + context.getString(R.string.currency_name_plural),
-                 payment.getEurosAmountFormatted(),
-                 entity.getName(), entity.getBonusFormatted(payment.getTotal_amount()));
+                 payment.getBoniatosAmountFormatted() + " " +
+                         context.getString(R.string.currency_name_plural),
+                 payment.getEurosAmountFormatted() + " " + context.getString(R.string.euros),
+                 entity.getName(),
+                 entity.getBonusFormatted(payment.getTotal_amount()) + " " +
+                         context.getString(R.string.currency_name_plural));
 
      }
 

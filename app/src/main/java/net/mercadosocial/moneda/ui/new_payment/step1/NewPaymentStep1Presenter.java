@@ -39,13 +39,16 @@ import java.util.List;
 
      public void onCreate() {
 
-         refreshData();
+//         if (getNewPaymentPresenter().getPreselectedEntity() != null) {
+//             showPreselectedEntity(getNewPaymentPresenter().getPreselectedEntity());
+//         }
 
-         // todo uncomment this
+         refreshData();
          view.enableContinueButton(false);
      }
 
-     public void onResume() {
+
+    public void onResume() {
 
      }
 

@@ -3,14 +3,17 @@ package net.mercadosocial.moneda.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 
 /**
@@ -44,9 +47,8 @@ import net.mercadosocial.moneda.model.Device;
 
      public void onCreate(Intent intent) {
 
-         if (intent.hasExtra("amount")) {
-             String amount = intent.getStringExtra("amount");
-             App.openBonificationDialog(context, amount);
+         if (intent.hasExtra("type")) {
+             ((BaseActivity)context).processNotification(intent);
          }
 
          checkTokenFirebaseSent();
@@ -79,11 +81,10 @@ import net.mercadosocial.moneda.model.Device;
     }
 
     private void checkTokenFirebaseSent() {
-        if (!getPrefs().getBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false)) {
+        if (!getPrefs().getBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false)
+                && AuthLogin.API_KEY != null) {
             sendDevice();
         }
-
-
     }
 
     private void sendDevice() {
@@ -98,6 +99,7 @@ import net.mercadosocial.moneda.model.Device;
 
             @Override
             public void onError(String message) {
+                Log.e(TAG, "onError: error sending device token");
             }
         });
     }

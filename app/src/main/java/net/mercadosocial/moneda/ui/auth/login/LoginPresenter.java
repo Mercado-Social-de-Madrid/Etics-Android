@@ -61,7 +61,7 @@ import es.dmoral.toasty.Toasty;
 
      }
 
-    public void onLoginClick(String username, String password) {
+    public void onLoginClick(final String username, String password) {
 
         view.showProgressDialog(context.getString(R.string.loading));
 
@@ -69,6 +69,7 @@ import es.dmoral.toasty.Toasty;
         authInteractor.login(authLogin, new AuthInteractor.LoginCallback() {
             @Override
             public void onResponse(Data data) {
+                data.setUsername(username);
                 App.saveUserData(context, data);
                 Toasty.success(context, context.getString(R.string.welcome)).show();
                 context.startActivity(MainPresenter.newMainActivity(context));

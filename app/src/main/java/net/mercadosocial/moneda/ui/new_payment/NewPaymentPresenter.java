@@ -23,19 +23,21 @@ import es.dmoral.toasty.Toasty;
 
 public class NewPaymentPresenter extends BasePresenter {
 
-    private static final String EXTRA_ID_ENTITY = "extra_id_entity";
+    private static final String EXTRA_ENTITY = "extra_id_entity";
 
     private final NewPaymentView view;
     private final PaymentInteractor paymentInteractor;
     private Entity selectedEntity;
     private Payment payment;
     private Integer currentSection;
+    private Entity entityPreselected;
 
-    public static Intent newNewPaymentActivity(Context context, int idEntity) {
+    public static Intent newNewPaymentActivity(Context context, Entity entity) {
 
         Intent intent = new Intent(context, NewPaymentActivity.class);
-        intent.putExtra(EXTRA_ID_ENTITY, idEntity);
-
+        if (entity != null) {
+            intent.putExtra(EXTRA_ENTITY, entity);
+        }
         return intent;
     }
 
@@ -56,7 +58,13 @@ public class NewPaymentPresenter extends BasePresenter {
     public void onCreate(Intent intent) {
 
         payment = new Payment();
-        showSection(1);
+
+        if (intent.hasExtra(EXTRA_ENTITY)) {
+            entityPreselected = (Entity) intent.getSerializableExtra(EXTRA_ENTITY);
+            onRecipientSelected(entityPreselected);
+        } else {
+            showSection(1);
+        }
     }
 
     public void onResume() {
@@ -65,6 +73,10 @@ public class NewPaymentPresenter extends BasePresenter {
 
     public Entity getSelectedEntity() {
         return selectedEntity;
+    }
+
+    public Entity getPreselectedEntity() {
+        return entityPreselected;
     }
 
     public Payment getPayment() {
@@ -128,6 +140,29 @@ public class NewPaymentPresenter extends BasePresenter {
                         ((Activity)context).finish();
                     }
                 })
+                .show();
+    }
+
+    public void onBackPressed() {
+        if (currentSection > 1) {
+            currentSection--;
+            view.showSection(currentSection);
+        } else {
+            showConfirmExitDialog();
+        }
+    }
+
+    private void showConfirmExitDialog() {
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.cancel_payment)
+                .setMessage(R.string.cancel_payment_message)
+                .setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((Activity) context).finish();
+                    }
+                })
+                .setNeutralButton(R.string.remain, null)
                 .show();
     }
 }

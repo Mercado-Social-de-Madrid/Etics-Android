@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Entity implements Serializable {
 
-
     private String logo_thumbnail;
     private String logo;
     private String instagram_link;
@@ -72,7 +71,7 @@ public class Entity implements Serializable {
     }
 
     public Float getBonus(Float totalAmount) {
-        return (float) getBonus_percent() * totalAmount / 100f;
+        return (float) getBonification_percent() * totalAmount / 100f;
     }
 
     public String getBonusFormatted(Float totalAmount) {
@@ -92,7 +91,7 @@ public class Entity implements Serializable {
         this.address = address;
     }
 
-    public Integer getBonus_percent() {
+    public Integer getBonification_percent() {
         if (bonification_percent == null) {
             return 0;
         }
@@ -287,4 +286,5 @@ public class Entity implements Serializable {
     public void setLegal_form(String legal_form) {
         this.legal_form = legal_form;
     }
+
 }

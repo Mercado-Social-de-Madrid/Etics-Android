@@ -178,6 +178,7 @@ public class RegisterPresenter extends BasePresenter {
 
             @Override
             public void onResponse(Data data) {
+                data.setUsername(user.getUsername());
                 App.saveUserData(context, data);
                 Toasty.success(context, context.getString(R.string.welcome)).show();
                 context.startActivity(MainPresenter.newMainActivity(context));

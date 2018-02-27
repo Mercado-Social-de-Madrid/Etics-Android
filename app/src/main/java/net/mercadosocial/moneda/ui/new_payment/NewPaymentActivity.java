@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -38,9 +39,9 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
 
         stepsViews = new View[]{tvStep1, tvStep2, tvStep3};
 
-        tvStep1.setOnClickListener(this);
-        tvStep2.setOnClickListener(this);
-        tvStep3.setOnClickListener(this);
+//        tvStep1.setOnClickListener(this);
+//        tvStep2.setOnClickListener(this);
+//        tvStep3.setOnClickListener(this);
     }
 
 
@@ -76,6 +77,15 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            presenter.onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void showSection(int step) {
@@ -116,6 +126,10 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
 
     @Override
     public void onClick(View v) {

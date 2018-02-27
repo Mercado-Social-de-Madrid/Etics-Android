@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment.step2;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,14 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
         setHasOptionsMenu(false);
 
         presenter.onCreate();
+
+        // Dont know why second edittext gets focus when coming from entity info. fixed with this
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editTotalAmountEur.requestFocus();
+            }
+        }, 20);
 
         return layout;
     }

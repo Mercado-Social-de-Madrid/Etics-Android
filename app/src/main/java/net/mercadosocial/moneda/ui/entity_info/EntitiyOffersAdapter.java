@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Offer;
 
@@ -49,14 +51,15 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
         final Offer offer = getItemAtPosition(safePosition);
 
         holder.tvOfferName.setText(offer.getTitle());
-//        holder.tvOfferCategory.setText(offer.getCategoriesString());
+        holder.tvOfferDate.setText(String.format(context.getString(R.string.end_date_offer), offer.getEndDateFormatted()));
 //
-//        Picasso.with(context)
-//                .load(offer.getBannerImage())
-////                .placeholder(R.mipmap.img_default_grid)
-//                .error(R.mipmap.ic_mes_v2_144)
-//                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-//                .into(holder.imgOffer);
+        String image = offer.getImageNoveltyUrl();
+        Picasso.with(context)
+                .load(image)
+//                .placeholder(R.mipmap.img_default_grid)
+                .error(R.mipmap.ic_mes_v2_144)
+                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+                .into(holder.imgOffer);
 
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +104,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
 
         private ImageView imgOffer;
         private TextView tvOfferName;
+        private TextView tvOfferDate;
         public View rootView;
 
         public ViewHolder(View itemView) {
@@ -109,6 +113,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
 
             imgOffer = (ImageView) itemView.findViewById(R.id.img_offer);
             tvOfferName = (TextView) itemView.findViewById(R.id.tv_offer_name);
+            tvOfferDate = (TextView) itemView.findViewById(R.id.tv_offer_date);
 
             rootView = itemView;
         }

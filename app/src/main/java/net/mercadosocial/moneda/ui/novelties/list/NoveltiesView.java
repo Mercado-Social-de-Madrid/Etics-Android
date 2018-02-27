@@ -1,4 +1,4 @@
-package net.mercadosocial.moneda.ui.novelties;
+package net.mercadosocial.moneda.ui.novelties.list;
 
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Novelty;

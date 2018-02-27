@@ -3,9 +3,16 @@ package net.mercadosocial.moneda.ui.entity_info;
 import android.content.Context;
 import android.content.Intent;
 
+import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Offer;
+import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
+import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by julio on 28/11/17.
@@ -57,6 +64,16 @@ import net.mercadosocial.moneda.model.Offer;
 
     public void onOfferClicked(int position) {
         Offer offer = entity.getOffers().get(position);
-        view.toast("Oferta click: " + offer.getTitle());
+        context.startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(context, offer));
+    }
+
+    public void onNewPaymentClick() {
+
+        Data data = App.getUserData(context);
+        if (data != null) {
+            context.startActivity(NewPaymentPresenter.newNewPaymentActivity(context, entity));
+        } else {
+            Toasty.info(context, context.getString(R.string.payment_enter_user_before)).show();
+        }
     }
 }

@@ -10,49 +10,65 @@ import java.text.ParseException;
 
 public class Offer implements Serializable, Novelty {
 
-    private Boolean active;
-    private String bannerImage;
-    private String bannerThumbnail;
-    private String beginDate;
-    private String description;
-    private Integer discountPercent;
-    private Integer discountedPrice;
-    private String endDate;
-    private String entity;
     private String id;
-    private String publishedDate;
+    private Boolean active;
+    private String banner_image;
+    private String banner_thumbnail;
+    private String begin_date;
+    private String description;
+    private Integer discount_percent;
+    private Integer discounted_price;
+    private String end_date;
+    private Entity entity;
+    private String published_date;
     private String title;
 
-    public Boolean getActive() {
-        return active;
+    public String getBeginDateFormatted() {
+        try {
+            return formatDatetimeUser.format(formatDatetimeApi2.parse(getBegin_date()));
+        } catch (ParseException e) {
+            return getBegin_date();
+        }
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public String getEndDateFormatted() {
+        try {
+            return formatDatetimeUser.format(formatDatetimeApi2.parse(getEnd_date()));
+        } catch (ParseException e) {
+            return getEnd_date();
+        }
     }
 
-    public String getBannerImage() {
-        return ApiClient.BASE_URL + bannerImage;
+    public String getPublishedDateFormatted() {
+        try {
+            return formatDatetimeUser.format(formatDatetimeApi.parse(getPublished_date()));
+        } catch (ParseException e) {
+            return getEnd_date();
+        }
     }
 
-    public void setBannerImage(String bannerImage) {
-        this.bannerImage = bannerImage;
+    public String getBanner_image() {
+        return ApiClient.BASE_URL + banner_image;
     }
 
-    public String getBannerThumbnail() {
-        return ApiClient.BASE_URL + bannerThumbnail;
+    public void setBanner_image(String banner_image) {
+        this.banner_image = banner_image;
     }
 
-    public void setBannerThumbnail(String bannerThumbnail) {
-        this.bannerThumbnail = bannerThumbnail;
+    public String getBanner_thumbnail() {
+        return ApiClient.BASE_URL + banner_thumbnail;
     }
 
-    public String getBeginDate() {
-        return beginDate;
+    public void setBanner_thumbnail(String banner_thumbnail) {
+        this.banner_thumbnail = banner_thumbnail;
     }
 
-    public void setBeginDate(String beginDate) {
-        this.beginDate = beginDate;
+    public String getBegin_date() {
+        return begin_date;
+    }
+
+    public void setBegin_date(String begin_date) {
+        this.begin_date = begin_date;
     }
 
     public String getDescription() {
@@ -63,35 +79,35 @@ public class Offer implements Serializable, Novelty {
         this.description = description;
     }
 
-    public Integer getDiscountPercent() {
-        return discountPercent;
+    public Integer getDiscount_percent() {
+        return discount_percent;
     }
 
-    public void setDiscountPercent(Integer discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setDiscount_percent(Integer discount_percent) {
+        this.discount_percent = discount_percent;
     }
 
-    public Integer getDiscountedPrice() {
-        return discountedPrice;
+    public Integer getDiscounted_price() {
+        return discounted_price;
     }
 
-    public void setDiscountedPrice(Integer discountedPrice) {
-        this.discountedPrice = discountedPrice;
+    public void setDiscounted_price(Integer discounted_price) {
+        this.discounted_price = discounted_price;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getEnd_date() {
+        return end_date;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
-    public String getEntity() {
+    public Entity getEntity() {
         return entity;
     }
 
-    public void setEntity(String entity) {
+    public void setEntity(Entity entity) {
         this.entity = entity;
     }
 
@@ -103,12 +119,12 @@ public class Offer implements Serializable, Novelty {
         this.id = id;
     }
 
-    public String getPublishedDate() {
-        return publishedDate;
+    public String getPublished_date() {
+        return published_date;
     }
 
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
+    public void setPublished_date(String published_date) {
+        this.published_date = published_date;
     }
 
     public String getTitle() {
@@ -119,7 +135,13 @@ public class Offer implements Serializable, Novelty {
         this.title = title;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
 
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
 
     @Override
@@ -128,18 +150,33 @@ public class Offer implements Serializable, Novelty {
     }
 
     @Override
+    public String getSubtitleNovelty() {
+        return (getEntity() != null ? getEntity().getName() + " - " : "") + getBeginDateFormatted();
+    }
+
+    @Override
     public String getDescriptionShortNovelty() {
         return getDescription();
     }
 
     @Override
+    public String getDescriptionFullNovelty() {
+        return getDescription();
+    }
+
+    @Override
     public String getImageNoveltyUrl() {
-        return getBannerImage();
+        return getBanner_image();
     }
 
     @Override
     public String getDate() {
-        return getBeginDate();
+        return getPublishedDateFormatted();
+    }
+
+    @Override
+    public String getDatePublished() {
+        return getPublished_date();
     }
 
     @Override
@@ -149,10 +186,11 @@ public class Offer implements Serializable, Novelty {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        Novelty novelty2 = (Novelty) o;
+        Novelty novelty2 = (Offer) o;
         try {
-            boolean isDateBeforeDate2 = Novelty.formatDatetime.parse(this.getDate()).before(Novelty.formatDatetime.parse(novelty2.getDate()));
-            return isDateBeforeDate2 ? 1 : -1;
+            boolean isDateAfterDate2 = Novelty.formatDatetimeApi.parse(this.getDatePublished())
+                    .before(Novelty.formatDatetimeApi.parse(novelty2.getDatePublished()));
+            return isDateAfterDate2 ? 1 : -1;
         } catch (ParseException e) {
         }
         return 0;

@@ -25,8 +25,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:padding="10dp">
 
             <TextView
                 style="@style/TextBase"
@@ -81,6 +80,7 @@
                     android:padding="5dp"
                     android:inputType="number|phone"
                     android:gravity="right"/>
+
 
                 <TextView
                     style="@style/TextBase"

@@ -8,10 +8,7 @@ import net.mercadosocial.moneda.api.response.OffersResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Offer;
-import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
-
-import java.util.List;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,7 +37,8 @@ public class OfferInteractor extends BaseInteractor {
         baseView.setRefresing(true);
 
         getApi().getOffers()
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+//                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<OffersResponse>() {
                     @Override
                     public void onCompleted() {

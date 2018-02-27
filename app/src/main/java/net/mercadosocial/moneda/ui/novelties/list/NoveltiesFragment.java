@@ -1,9 +1,8 @@
-package net.mercadosocial.moneda.ui.novelties;
+package net.mercadosocial.moneda.ui.novelties.list;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,9 +46,9 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerNovelties.setLayoutManager(linearLayoutManager);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-                linearLayoutManager.getOrientation());
-        recyclerNovelties.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+//                linearLayoutManager.getOrientation());
+//        recyclerNovelties.addItemDecoration(dividerItemDecoration);
 
         List<Novelty> novelties = generateMockNovelties();
         showNovelties(novelties);
@@ -92,14 +91,9 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
     }
 
     @Override
-    public void onEntityClicked(int idEntity) {
-//        startActivity(EntityInfoActivity.newEntityInfoActivity(getActivity(), idEntity));
-
+    public void onItemClick(int position) {
+        presenter.onNoveltyClick(position);
     }
 
-    @Override
-    public void onEventFavouriteClicked(int idEvent) {
-
-    }
 
 }

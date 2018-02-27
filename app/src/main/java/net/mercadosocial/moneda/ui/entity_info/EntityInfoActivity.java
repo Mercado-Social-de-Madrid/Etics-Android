@@ -1,9 +1,9 @@
 package net.mercadosocial.moneda.ui.entity_info;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.payment_old.NewPaymentActivity_Old;
+import net.mercadosocial.moneda.util.Util;
 
 import es.dmoral.toasty.Toasty;
 
@@ -61,6 +61,9 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerOffers.setLayoutManager(layoutManager);
 
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerOffers.addItemDecoration(itemDecoration);
+
         presenter.onCreate(getIntent());
 
     }
@@ -70,7 +73,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_new_payment:
-                startActivity(NewPaymentActivity_Old.newNewPaymentActivity(this, -1));
+                presenter.onNewPaymentClick();
                 break;
 
             case R.id.img_heart:
@@ -84,11 +87,11 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
 
         tvEntityName.setText(entity.getName());
         if (entity.getDescription() != null) {
-            tvEntityDescription.setText(Html.fromHtml(entity.getDescription()));
+            Util.setHtmlLinkableText(tvEntityDescription, entity.getDescription());
         }
 
         tvAcceptBoniatos.setText(entity.getMax_percent_payment() + "%");
-        tvBonusBoniatos.setText(entity.getBonus_percent() + "%");
+        tvBonusBoniatos.setText(entity.getBonification_percent() + "%");
 
         Picasso.with(this)
                 .load(entity.getLogoFullUrl())

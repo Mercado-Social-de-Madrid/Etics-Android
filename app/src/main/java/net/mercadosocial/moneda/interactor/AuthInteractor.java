@@ -104,7 +104,11 @@ public class AuthInteractor extends BaseInteractor {
                     public void onNext(Response<Data> response) {
 
                         baseView.setRefresing(false);
-                        callback.onResponse(response.body());
+                        if (response.body() == null) {
+                            callback.onError("Error");
+                        } else {
+                            callback.onResponse(response.body());
+                        }
 
                     }
                 });

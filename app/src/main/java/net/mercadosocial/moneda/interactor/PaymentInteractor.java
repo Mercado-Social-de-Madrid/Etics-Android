@@ -4,6 +4,7 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.PaymentApi;
+import net.mercadosocial.moneda.api.response.PaymentsResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Entity;
@@ -73,6 +74,41 @@ public class PaymentInteractor extends BaseInteractor {
 
     }
 
+    public void getPendingPayments(final BaseApiGETListCallback<Payment> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        baseView.setRefresing(true);
+
+        getApi().getPendingPayments()
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<PaymentsResponse>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(PaymentsResponse response) {
+
+                        baseView.setRefresing(false);
+
+                        callback.onResponse(response.getPayments());
+
+
+                    }
+                });
+
+
+    }
 
     private PaymentApi getApi() {
         return getApi(PaymentApi.class);

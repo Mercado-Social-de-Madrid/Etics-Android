@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.model.Notification;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -56,12 +57,31 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (intent.hasExtra("amount")) {
-                String amount = intent.getStringExtra("amount");
-                App.openBonificationDialog(context, amount);
-            }
+            processNotification(intent);
         }
     };
+
+    public void processNotification(Intent intent) {
+
+        Notification notification = Notification.parseNotification(intent.getExtras());
+
+        if (intent.hasExtra(Notification.FIELD_TYPE)) {
+            switch (intent.getStringExtra(Notification.FIELD_TYPE)) {
+                case Notification.TYPE_PAYMENT:
+
+                    break;
+
+                case Notification.TYPE_TRANSACTION:
+
+                    String amount = intent.getStringExtra("amount");
+                    App.openBonificationDialog(this, amount);
+                    break;
+
+                case Notification.TYPE_NEWS:
+                    break;
+            }
+        }
+    }
 
     @Override
     protected void onResume() {

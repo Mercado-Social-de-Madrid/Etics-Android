@@ -11,9 +11,11 @@ import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
-import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
+import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
+import net.mercadosocial.moneda.model.Device;
 
 /**
  * Created by julio on 17/06/16.
@@ -48,11 +50,6 @@ public class App extends Application {
 //        built.setIndicatorsEnabled(true);
         built.setLoggingEnabled(true);
         Picasso.setSingletonInstance(built);
-
-
-        ApiClient.clearInstance();
-        ApiClient.BASE_URL_DEBUG = getPrefs(this).getString("baseUrl", null);
-
 
 //        Log.i(TAG, "token:" + FirebaseInstanceId.getInstance().getToken());
 
@@ -92,6 +89,22 @@ public class App extends Application {
                 .remove(SHARED_USER_DATA)
                 .remove(SHARED_TOKEN_FIREBASE_SENT)
                 .commit();
+
+        new DeviceInteractor(context, null).sendDevice(new Device(), new BaseInteractor.BaseApiPOSTCallback() {
+            @Override
+            public void onSuccess(Integer id) {
+                AuthLogin.API_KEY = null;
+            }
+
+            @Override
+            public void onError(String message) {
+                // not good at all
+                AuthLogin.API_KEY = null;
+            }
+        });
+
+
+
     }
 
     public static void openBonificationDialog(Context context, String amount) {

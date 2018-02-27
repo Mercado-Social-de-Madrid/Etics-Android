@@ -57,12 +57,12 @@ public class Data {
         this.type = type;
     }
 
+
     public String getUsername() {
-        return person != null ? person.getName() : entity.getName();
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
-
 }

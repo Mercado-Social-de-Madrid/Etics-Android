@@ -3,39 +3,51 @@ package net.mercadosocial.moneda.ui.entities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.util.WindowUtils;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesView {
-
-
-    private RecyclerView recyclerEntities;
-    private EntitiesAdapter adapter;
+public class EntitiesFragment extends BaseFragment implements EntitiesView, EntitiesPagerAdapter.EntityListener, ViewPager.OnPageChangeListener, View.OnClickListener {
+    
+    private LinearLayout viewSearchEntities;
+    private EditText editSearchEntities;
+    private ViewPager viewpagerEntities;
     private EntitiesPresenter presenter;
+    private EntitiesPagerAdapter pagerAdapter;
+    private MenuItem menuItemMapList;
+    private View btnSearchEntities;
+
+    private void findViews(View layout) {
+        viewSearchEntities = (LinearLayout)layout.findViewById( R.id.view_search_entities );
+        editSearchEntities = (EditText)layout.findViewById( R.id.edit_search_entities );
+        viewpagerEntities = (ViewPager)layout.findViewById( R.id.viewpager_entities );
+        btnSearchEntities = layout.findViewById(R.id.btn_search_entities);
+
+        btnSearchEntities.setOnClickListener(this);
+    }
+
 
 
     public EntitiesFragment() {
         // Required empty public constructor
     }
 
-    private void findViews(View layout) {
-        recyclerEntities = (RecyclerView) layout.findViewById(R.id.recycler_entities);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,22 +59,21 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerEntities.setLayoutManager(linearLayoutManager);
-
-//        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-//        recyclerEntities.addItemDecoration(divider);
-
-        setHasOptionsMenu(true);
+        pagerAdapter = new EntitiesPagerAdapter(getChildFragmentManager(), this);
+        viewpagerEntities.setAdapter(pagerAdapter);
+        viewpagerEntities.addOnPageChangeListener(this);
 
         presenter.onCreate();
+
+        setHasOptionsMenu(true);
 
         return layout;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_entities_main, menu);
+        inflater.inflate(R.menu.fragment_entities, menu);
+        menuItemMapList = menu.findItem(R.id.menuItem_show_map_list);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -72,7 +83,15 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
 
         switch (item.getItemId()) {
             case R.id.menuItem_search:
+                viewSearchEntities.setVisibility(viewSearchEntities.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                if (viewSearchEntities.getVisibility() == View.GONE) {
+                    WindowUtils.hideSoftKeyboard(getActivity());
+                }
 
+                break;
+
+            case R.id.menuItem_show_map_list:
+                viewpagerEntities.setCurrentItem(viewpagerEntities.getCurrentItem() == 0 ? 1 : 0, true);
                 break;
         }
 
@@ -80,31 +99,50 @@ public class EntitiesFragment extends BaseFragment implements EntitiesAdapter.On
     }
 
 
-    // Presenter Callbacks
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_search_entities:
+                presenter.onSearch(editSearchEntities.getText().toString());
+                break;
+        }
+
+    }
+
+
+    // PRESENTER CALLBACKS
     @Override
     public void showEntities(List<Entity> entities) {
+        pagerAdapter.updateData(entities);
+    }
 
-        if (adapter == null) {
-
-            adapter = new EntitiesAdapter(getActivity(), entities);
-            adapter.setOnItemClickListener(this);
-
-            recyclerEntities.setAdapter(adapter);
-
-        } else {
-            adapter.updateData(entities);
-        }
+    // CHILD ENTITIES CALLBACKS
+    @Override
+    public void onEntityClick(int position, String id) {
+        presenter.onEntityClicked(position, id);
     }
 
     @Override
-    public void onEntityClicked(String id, int position) {
-        presenter.onEntityClicked(position);
+    public void onEntityFavouriteClick(int position, String id) {
+        presenter.onEntityFavouriteClicked(position, id);
+    }
+
+
+    // VIEW PAGER CALLBACKS
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
 
     @Override
-    public void onEntityFavouriteClicked(String id, int position) {
-        presenter.onEntityFavouriteClicked(position);
+    public void onPageSelected(int position) {
+        menuItemMapList.setIcon(position == 0 ? R.mipmap.ic_map : R.mipmap.ic_list);
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
 }

@@ -88,13 +88,10 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
 
     @Override
     public void showPaymentSummaryInfo(String boniatosAmount, String eurosAmount, String entityName, String bonus) {
-        tvPaymentAmount.setText(boniatosAmount);
+        tvPaymentAmount.setText(boniatosAmount + "\n" + eurosAmount);
         tvPaymentRecipient.setText(entityName);
         tvBonusAmount.setText(bonus);
 
     }
 
-    public void refreshData() {
-
-    }
 }

@@ -19,6 +19,10 @@ public class Device {
         this.active = true;
     }
 
+    public Device() {
+
+    }
+
     public String getUuid() {
         return uuid;
     }

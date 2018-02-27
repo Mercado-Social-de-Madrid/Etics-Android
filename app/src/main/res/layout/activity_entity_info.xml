@@ -101,15 +101,9 @@
 
                 <TextView
                     android:id="@+id/btn_new_payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    style="@style/ButtonMes.Green"
                     android:layout_margin="15dp"
-                    android:background="@drawable/bg_green_shadow"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="45dp"
-                    android:paddingRight="45dp"
-                    android:paddingTop="7dp"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/send_payment_next" />
 
                 <View style="@style/SeparatorHorizontal.Grey" />

@@ -1,7 +1,6 @@
-package net.mercadosocial.moneda.ui.novelties;
+package net.mercadosocial.moneda.ui.novelties.list;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -55,8 +54,9 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
         holder.tvNoveltyTitle.setText(novelty.getTitleNovelty());
         holder.tvNoveltyTextShort.setText(Html.fromHtml(novelty.getDescriptionShortNovelty()));
 
+        String image = novelty.getImageNoveltyUrl();
         Picasso.with(context)
-                .load(novelty.getImageNoveltyUrl())
+                .load(image)
 //                .placeholder(R.mipmap.img_default_grid)
                 .error(R.mipmap.ic_mes_v2_144)
                 .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
@@ -64,13 +64,14 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
 
         holder.tvNoveltyDate.setText(novelty.getDate());
 
-        int backgroundColorResId = novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.color.green_light : android.R.color.transparent;
-        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, backgroundColorResId));
+        holder.itemView.setSelected(novelty.getNoveltyType() == Novelty.TYPE_NEWS);
+//        int backgroundColorResId = novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.color.green_light : android.R.color.transparent;
+//        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, backgroundColorResId));
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                itemClickListener.onEntityClicked(novelty.getId());
+                itemClickListener.onItemClick(safePosition);
             }
         });
 
@@ -131,9 +132,7 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
     }
 
     public interface OnItemClickListener {
-        void onEntityClicked(int idEntity);
-
-        void onEventFavouriteClicked(int idEvent);
+        void onItemClick(int position);
 
     }
 }

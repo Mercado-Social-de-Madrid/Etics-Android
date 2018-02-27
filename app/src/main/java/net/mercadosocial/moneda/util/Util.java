@@ -9,10 +9,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -152,5 +156,17 @@ public final class Util {
     public static String getDecimalFormatted(Float decimal, boolean forzeDecimals) {
         NumberFormat numberFormat = new DecimalFormat(forzeDecimals ? "0.00" : "0.##");
         return numberFormat.format(decimal);
+    }
+
+    public static void setHtmlLinkableText(TextView textView, String htmlText) {
+
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(htmlText);
+        }
+        textView.setText(result);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
