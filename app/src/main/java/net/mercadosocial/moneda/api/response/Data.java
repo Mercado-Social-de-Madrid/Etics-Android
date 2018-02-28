@@ -23,7 +23,9 @@ public class Data {
         return "ApiKey " + getUsername() + ":" + getApi_key();
     }
 
-
+    public boolean isEntity() {
+        return type.equals("entity");
+    }
 
     public String getApi_key() {
         return api_key;

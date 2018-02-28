@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
@@ -84,6 +86,15 @@ public class NewPaymentPresenter extends BasePresenter {
     }
 
     public void onRecipientSelected(Entity entity) {
+
+        Data data = App.getUserData(context);
+        if (data != null && data.isEntity()) {
+            if (entity.getId().equals(data.getEntity().getId())) {
+                Toasty.warning(context, context.getString(R.string.cannot_pay_yourself)).show();
+                return;
+            }
+        }
+
         this.selectedEntity = entity;
         payment.setReceiver(entity.getId());
         showSection(2);
@@ -133,11 +144,13 @@ public class NewPaymentPresenter extends BasePresenter {
         new AlertDialog.Builder(context)
                 .setTitle(R.string.payment_done)
                 .setMessage(String.format(context.getString(R.string.payment_done_message),
-                        selectedEntity.getName(), selectedEntity.getBonusFormatted(payment.getTotal_amount())))
+                        selectedEntity.getName(), selectedEntity.getBonusFormatted(context, payment.getTotal_amount())))
                 .setNeutralButton(R.string.back, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((Activity)context).finish();
+
+                        //todo active this!!
+//                        ((Activity)context).finish();
                     }
                 })
                 .show();

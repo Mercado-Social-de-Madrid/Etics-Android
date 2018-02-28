@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,6 +26,11 @@ import android.widget.Toast;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Notification;
+import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
+import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.views.NewPaymentDialog;
+
+import es.dmoral.toasty.Toasty;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -61,26 +68,58 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     };
 
+
     public void processNotification(Intent intent) {
 
         Notification notification = Notification.parseNotification(intent.getExtras());
-
-        if (intent.hasExtra(Notification.FIELD_TYPE)) {
-            switch (intent.getStringExtra(Notification.FIELD_TYPE)) {
-                case Notification.TYPE_PAYMENT:
-
-                    break;
-
-                case Notification.TYPE_TRANSACTION:
-
-                    String amount = intent.getStringExtra("amount");
-                    App.openBonificationDialog(this, amount);
-                    break;
-
-                case Notification.TYPE_NEWS:
-                    break;
-            }
+        if (notification == null) {
+            // todo crash report
+            return;
         }
+
+
+
+        switch (notification.getType()) {
+            case Notification.TYPE_PAYMENT:
+                NewPaymentDialog.newInstance(notification)
+                .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
+                    @Override
+                    public void onClose() {
+                        refreshData();
+                    }
+                }).show(getFragmentManager(), null);
+                break;
+
+            case Notification.TYPE_TRANSACTION:
+                String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), true);
+                if (notification.getIs_bonification()) {
+                    App.openBonificationDialog(this, amountFormatted);
+                } else {
+                    Toasty.info(this, String.format(getString(R.string.income_received), amountFormatted)).show();
+                }
+                break;
+
+            case Notification.TYPE_NEWS:
+                showNewsDialog(notification);
+                break;
+        }
+
+    }
+
+
+    private void showNewsDialog(final Notification notification) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.mes_news)
+                .setMessage(Html.fromHtml(String.format(getString(R.string.mes_news_message_format),
+                        notification.getTitle(), notification.getMessage())))
+                .setPositiveButton(R.string.see_full_news, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(BaseActivity.this, notification.getId()));
+                    }
+                })
+                .setNeutralButton(R.string.close, null)
+                .show();
     }
 
     @Override
@@ -121,7 +160,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         this.basePresenter = basePresenter;
     }
 
-    public BasePresenter getBasePresenter(){
+    public BasePresenter getBasePresenter() {
         return basePresenter;
     }
 
@@ -131,6 +170,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     // ------------ UI NOTIFICATIONS -----------
 
+    public void refreshData() {
+    }
 
     @Override
     public void onInvalidToken() {

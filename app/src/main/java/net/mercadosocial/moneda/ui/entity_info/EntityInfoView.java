@@ -10,4 +10,6 @@ import net.mercadosocial.moneda.model.Entity;
 public interface EntityInfoView extends BaseView{
 
     void showEntityInfo(Entity entity);
+
+    void hidePaymentButton();
 }

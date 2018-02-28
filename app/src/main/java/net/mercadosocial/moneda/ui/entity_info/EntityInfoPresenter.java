@@ -50,6 +50,13 @@ import es.dmoral.toasty.Toasty;
 
          entity = (Entity) intent.getSerializableExtra(EXTRA_ENTITY);
          view.showEntityInfo(entity);
+
+         Data data = App.getUserData(context);
+         if (data != null && data.isEntity()) {
+             if (entity.getId().equals(data.getEntity().getId())) {
+                 view.hidePaymentButton(); // Cannot pay myself
+             }
+         }
      }
 
      public void onResume() {

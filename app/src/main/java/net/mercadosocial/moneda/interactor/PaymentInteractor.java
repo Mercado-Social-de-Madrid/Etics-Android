@@ -110,6 +110,70 @@ public class PaymentInteractor extends BaseInteractor {
 
     }
 
+    public void acceptPayment(String id, final BaseApiPOSTCallback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().acceptPayment(id)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Void> response) {
+
+                        callback.onSuccess(null);
+
+
+                    }
+                });
+
+
+    }
+
+    public void cancelPayment(String id, final BaseApiPOSTCallback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().cancelPayment(id)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Void> response) {
+
+                        callback.onSuccess(null);
+
+
+                    }
+                });
+
+
+    }
+
     private PaymentApi getApi() {
         return getApi(PaymentApi.class);
     }

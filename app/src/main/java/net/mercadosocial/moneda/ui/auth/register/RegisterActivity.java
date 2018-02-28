@@ -43,6 +43,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText editBonusPercent;
     private EditText editMaxAcceptPercent;
     private View btnLogin;
+    private EditText editBonusPercentEntities;
 
 
     private void findViews() {
@@ -66,6 +67,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         editCif = (EditText)findViewById( R.id.edit_cif );
         editMaxAcceptPercent = (EditText)findViewById( R.id.edit_max_accept_percent );
         editBonusPercent = (EditText)findViewById( R.id.edit_bonus_percent );
+        editBonusPercentEntities = (EditText)findViewById( R.id.edit_bonus_percent_entities );
 
         btnLogin = findViewById(R.id.btn_login);
 
@@ -224,9 +226,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
 
         try {
-            entity.setBonification_percent(Integer.parseInt(editBonusPercent.getText().toString()));
+            entity.setBonus_percent_general(Float.parseFloat(editBonusPercent.getText().toString()));
         } catch (NumberFormatException e) {
             editBonusPercent.setError(getString(R.string.invalid_number));
+            return false;
+        }
+
+        try {
+            entity.setBonus_percent_entity(Float.parseFloat(editBonusPercentEntities.getText().toString()));
+        } catch (NumberFormatException e) {
+            editBonusPercentEntities.setError(getString(R.string.invalid_number));
             return false;
         }
 

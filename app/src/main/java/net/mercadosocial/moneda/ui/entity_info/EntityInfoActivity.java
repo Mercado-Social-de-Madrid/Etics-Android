@@ -91,7 +91,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         }
 
         tvAcceptBoniatos.setText(entity.getMax_percent_payment() + "%");
-        tvBonusBoniatos.setText(entity.getBonification_percent() + "%");
+        tvBonusBoniatos.setText(entity.getBonusPercent(this) + "%");
 
         Picasso.with(this)
                 .load(entity.getLogoFullUrl())
@@ -107,6 +107,11 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         } else {
             adapter.updateData(entity.getOffers());
         }
+    }
+
+    @Override
+    public void hidePaymentButton() {
+        btnNewPayment.setVisibility(View.GONE);
     }
 
     @Override

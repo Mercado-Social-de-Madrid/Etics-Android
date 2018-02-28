@@ -49,13 +49,16 @@
         <activity
             android:name=".ui.new_payment.NewPaymentActivity"
             android:label="@string/new_payment"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.barcode.BarcodeActivity"
             android:label="@string/qr_code_scan" />
-
         <activity android:name=".ui.novelties.detail.NoveltyDetailActivity" />
         <activity android:name=".ui.info.WebViewActivity" />
+
+        <activity android:name=".ui.payments.PaymentsActivity"
+            android:label="@string/pending_payments" />
+
 
         <!-- [START firebase_service] -->
         <service android:name=".messaging.MyFirebaseMessagingService">

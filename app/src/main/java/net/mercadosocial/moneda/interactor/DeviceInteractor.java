@@ -44,8 +44,6 @@ public class DeviceInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().sendDevice(device)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Void>>() {
@@ -61,8 +59,6 @@ public class DeviceInteractor extends BaseInteractor {
 
                     @Override
                     public void onNext(Response<Void> response) {
-
-                        baseView.setRefresing(false);
 
                         callback.onSuccess(null);
 

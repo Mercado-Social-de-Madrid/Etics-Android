@@ -25,6 +25,8 @@ import net.mercadosocial.moneda.ui.main.MainActivity;
 
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -83,15 +85,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     private void handleNow(RemoteMessage remoteMessage) {
 
-        String title = remoteMessage.getNotification().getTitle();
-        String message = remoteMessage.getNotification().getBody();
+        if (remoteMessage == null) {
+            // todo report error
+            Toasty.error(getApplicationContext(), "remoteMessage null").show();
+            return;
+        }
 
         Map<String, String> extras = remoteMessage.getData();
+
+        String title;
+        String message;
+        if (remoteMessage.getNotification() != null) {
+            title = remoteMessage.getNotification().getTitle();
+            message = remoteMessage.getNotification().getBody();
+        } else {
+            title = extras.get("title");
+            message = extras.get("message");
+        }
+
 
         Bundle bundle = new Bundle();
         for (Map.Entry<String, String> entry : extras.entrySet()) {
             bundle.putString(entry.getKey(), entry.getValue());
         }
+
+        bundle.putString("title", title);
+        bundle.putString("message", message);
 
 //        switch (bundle.getString("type")) {
 //            case "payment":

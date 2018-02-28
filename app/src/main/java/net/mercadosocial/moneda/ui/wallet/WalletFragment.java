@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.zxing.common.StringUtils;
-
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Wallet;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
+import net.mercadosocial.moneda.ui.payments.PaymentsPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -118,6 +117,10 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             case R.id.btn_movements:
                 Toasty.info(getActivity(), "En breve disponible...").show();
                 break;
+
+            case R.id.btn_pending_payments:
+                startActivity(PaymentsPresenter.newPaymentsActivity(getActivity()));
+                break;
         }
     }
 
@@ -146,8 +149,13 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void showPendingPaymentsNumber(int numberPendingPayments) {
+
+        if (numberPendingPayments == 0) {
+            btnPendingPayments.setVisibility(View.GONE);
+            return;
+        }
+
         btnPendingPayments.setVisibility(View.VISIBLE);
         tvNumberPendingPayments.setText(String.format(getString(R.string.pending_payments_warning), numberPendingPayments));
-//        String.format("%d", numberPendingPayments);
     }
 }

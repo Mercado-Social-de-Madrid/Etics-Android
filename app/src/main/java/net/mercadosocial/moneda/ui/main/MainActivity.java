@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.ui.main;
 
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
+import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -129,6 +131,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        }
 //    }
 
+
+    @Override
+    public void refreshData() {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
+        if (fragment instanceof WalletFragment) {
+            ((WalletPresenter)((WalletFragment)fragment).getBasePresenter()).refreshData();
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -159,6 +170,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.menuItem_get_boniatos:
+
+//                Bundle bundle = new Bundle();
+//                bundle.putString("title", "Noticia de prueba");
+//                bundle.putString("message", "Texto de noticia");
+//
+//                bundle.putString("type", Notification.TYPE_NEWS);
+//                bundle.putString("id", "87938556-10e1-41fb-bd1c-0fb854df72b1");
+//
+//                Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
+//                intent.putExtras(bundle);
+//                sendBroadcast(intent);
+
                 Toasty.info(this, "En breve disponible...").show();
                 break;
         }

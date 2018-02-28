@@ -9,8 +9,6 @@ import net.mercadosocial.moneda.model.Payment;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
-import es.dmoral.toasty.Toasty;
-
 /**
  * Created by julio on 1/02/18.
  */
@@ -50,17 +48,18 @@ import es.dmoral.toasty.Toasty;
                          context.getString(R.string.currency_name_plural),
                  payment.getEurosAmountFormatted() + " " + context.getString(R.string.euros),
                  entity.getName(),
-                 entity.getBonusFormatted(payment.getTotal_amount()) + " " +
+                 entity.getBonusFormatted(context, payment.getTotal_amount()) + " " +
                          context.getString(R.string.currency_name_plural));
 
      }
 
     public void onConfirmPaymentClick(String pin) {
-        if (pin.isEmpty()) {
-            Toasty.warning(context, context.getString(R.string.invalid_pin_code)).show();
-        } else {
+        //todo check pin
+//        if (pin.isEmpty()) {
+//            Toasty.warning(context, context.getString(R.string.invalid_pin_code)).show();
+//        } else {
             getNewPaymentPresenter().onConfirmPayment(pin);
-        }
+//        }
     }
 
 

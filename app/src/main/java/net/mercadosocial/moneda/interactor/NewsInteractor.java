@@ -50,11 +50,11 @@ public class NewsInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(NewsResponse offersResponse) {
+                    public void onNext(NewsResponse response) {
 
                         baseView.setRefresing(false);
 
-                        callback.onResponse(offersResponse.getNews());
+                        callback.onResponse(response.getNews());
 
 
                     }
@@ -63,6 +63,41 @@ public class NewsInteractor extends BaseInteractor {
 
     }
 
+    public void getNewsById(String id, final BaseApiCallback<News> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        baseView.setRefresing(true);
+
+        getApi().getNewsById(id)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<News>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(News news) {
+
+                        baseView.setRefresing(false);
+
+                        callback.onResponse(news);
+
+
+                    }
+                });
+
+
+    }
 
     private NewsApi getApi() {
         return getApi(NewsApi.class);

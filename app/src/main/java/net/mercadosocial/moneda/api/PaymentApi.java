@@ -8,6 +8,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public interface PaymentApi {
@@ -17,5 +18,12 @@ public interface PaymentApi {
 
     @GET("payment/")
     Observable<PaymentsResponse> getPendingPayments();
+
+    @POST("payment/{id}/accept/")
+    Observable<Response<Void>> acceptPayment(@Path("id") String id);
+
+    @POST("payment/{id}/cancel/")
+    Observable<Response<Void>> cancelPayment(@Path("id") String id);
+
 
 }

@@ -123,6 +123,7 @@
                     android:id="@+id/tv_number_pending_payments"
                     style="@style/TextBase"
                     android:text="@string/pending_payments_warning"
+                    android:gravity="center"
                     android:textColor="@color/orange"
                     android:textSize="17sp"
                     android:textStyle="bold"/>

@@ -63,7 +63,7 @@ public class WalletPresenter extends BasePresenter {
         new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
             @Override
             public void onResponse(List<Payment> list) {
-                if (list != null && !list.isEmpty()) {
+                if (list != null) {
                     view.showPendingPaymentsNumber(list.size());
                 }
             }

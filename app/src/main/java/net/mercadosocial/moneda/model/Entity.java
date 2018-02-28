@@ -1,6 +1,9 @@
 
 package net.mercadosocial.moneda.model;
 
+import android.content.Context;
+
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.common.ApiClient;
 
 import java.io.Serializable;
@@ -14,7 +17,8 @@ public class Entity implements Serializable {
     private String logo;
     private String instagram_link;
     private String phone_number;
-    private Integer bonification_percent;
+    private Float bonus_percent_entity;
+    private Float bonus_percent_general;
     private String webpage_link;
     private List<Offer> offers;
     private String twitter_link;
@@ -70,16 +74,35 @@ public class Entity implements Serializable {
         return amountFormatted;
     }
 
-    public Float getBonus(Float totalAmount) {
-        return (float) getBonification_percent() * totalAmount / 100f;
+    public Float getBonusGeneral(Float totalAmount) {
+        return (float) getBonus_percent_general() * totalAmount / 100f;
     }
 
-    public String getBonusFormatted(Float totalAmount) {
+    public Float getBonusEntity(Float totalAmount) {
+        return (float) getBonus_percent_entity() * totalAmount / 100f;
+    }
+
+    public String getBonusFormatted(Context context, Float totalAmount) {
         NumberFormat numberFormat = new DecimalFormat("0.##");
-        String amountFormatted = numberFormat.format(getBonus(totalAmount));
+        String amountFormatted = numberFormat.format(getBonus(context, totalAmount));
         return amountFormatted;
     }
 
+    public Float getBonus(Context context, Float totalAmount) {
+        if (App.getUserData(context).isEntity()) {
+            return getBonusEntity(totalAmount);
+        } else {
+            return getBonusGeneral(totalAmount);
+        }
+    }
+
+    public Float getBonusPercent(Context context) {
+        if (App.getUserData(context).isEntity()) {
+            return getBonus_percent_entity();
+        } else {
+            return getBonus_percent_general();
+        }
+    }
 
     // ------------------------------
 
@@ -91,15 +114,26 @@ public class Entity implements Serializable {
         this.address = address;
     }
 
-    public Integer getBonification_percent() {
-        if (bonification_percent == null) {
-            return 0;
+    public Float getBonus_percent_entity() {
+        if (bonus_percent_entity == null) {
+            return 0f;
         }
-        return bonification_percent;
+        return bonus_percent_entity;
     }
 
-    public void setBonification_percent(Integer bonification_percent) {
-        this.bonification_percent = bonification_percent;
+    public void setBonus_percent_entity(Float bonus_percent_entity) {
+        this.bonus_percent_entity = bonus_percent_entity;
+    }
+
+    public Float getBonus_percent_general() {
+        if (bonus_percent_general == null) {
+        return 0f;
+    }
+        return bonus_percent_general;
+    }
+
+    public void setBonus_percent_general(Float bonus_percent_general) {
+        this.bonus_percent_general = bonus_percent_general;
     }
 
     public List<String> getCategories() {

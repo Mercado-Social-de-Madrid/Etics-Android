@@ -131,5 +131,21 @@
     <string name="search_entities">Buscar entidades</string>
     <string name="payment_enter_user_before">Para enviar un pago debes registrar tu usuario primero</string>
     <string name="end_date_offer">Hasta: %s</string>
+    <string name="mes_news">Noticia del MES</string>
+    <string name="mes_news_message_format"><![CDATA[
+            <b>%s</b><p>
+            %s
+    ]]></string>
+    <string name="see_full_news">Ver noticia completa</string>
+    <string name="invalid_link">El enlace no es válido</string>
+    <string name="reject">Rechazar</string>
+    <string name="decide_later">Decidir más tarde</string>
+    <string name="processing">Procesando</string>
+    <string name="pending_payments">Pagos pendientes</string>
+    <string name="has_pending_payments_to_confirm">Tienes nuevos pagos a tu entidad pendientes de confirmar</string>
+    <string name="income_received">Ingreso recibido: %s &currency_name_plural;</string>
+    <string name="bonus_percent_entities">Bonificación para entidades</string>
+    <string name="cannot_pay_yourself">¿Seguro que te quieres pagar a ti misma? ;)</string>
+    <string name="no_more_pending_payments">No hay más pagos pendientes</string>
 
 </resources>

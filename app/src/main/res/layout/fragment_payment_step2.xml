@@ -10,7 +10,8 @@
 
     <TextView
         style="@style/TextBase.Purple"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/select_amount"
         android:textSize="22sp" />
 
@@ -93,7 +94,7 @@
     <TextView
         android:id="@+id/btn_continue"
         style="@style/ButtonMes.Green"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:text="@string/continue_arrow" />
 
 </android.support.v7.widget.LinearLayoutCompat>

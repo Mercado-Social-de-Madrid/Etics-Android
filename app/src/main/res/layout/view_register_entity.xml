@@ -112,6 +112,40 @@
             android:textSize="26sp" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            style="@style/TextBase"
+            android:text="@string/bonus_percent_entities"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/edit_bonus_percent_entities"/>
+
+
+        <EditText
+            android:id="@+id/edit_bonus_percent_entities"
+            style="@style/EditTextAuth"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:ems="2"
+            android:inputType="number|phone"
+            android:gravity="right"
+            android:layout_toLeftOf="@+id/tv_percent_bonus_entities"/>
+
+        <TextView
+            android:id="@+id/tv_percent_bonus_entities"
+            style="@style/TextBase"
+            android:layout_marginLeft="5dp"
+            android:text="%"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="26sp" />
+    </RelativeLayout>
+
 
     <EditText
         android:id="@+id/edit_description"

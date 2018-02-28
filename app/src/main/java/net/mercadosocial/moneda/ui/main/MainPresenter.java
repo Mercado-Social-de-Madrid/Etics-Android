@@ -51,7 +51,6 @@ import net.mercadosocial.moneda.model.Device;
              ((BaseActivity)context).processNotification(intent);
          }
 
-         checkTokenFirebaseSent();
 //         :
 //         {
 //             'amount': transaction.amount,
@@ -66,6 +65,7 @@ import net.mercadosocial.moneda.model.Device;
     public void onResume() {
 
          refreshData();
+        checkTokenFirebaseSent();
      }
 
      public void refreshData() {

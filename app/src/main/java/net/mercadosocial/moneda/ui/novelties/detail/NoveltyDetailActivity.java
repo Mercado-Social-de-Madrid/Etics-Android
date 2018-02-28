@@ -17,6 +17,8 @@ import net.mercadosocial.moneda.model.Novelty;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
 
+import es.dmoral.toasty.Toasty;
+
 public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetailView {
 
     private NoveltyDetailPresenter presenter;
@@ -74,6 +76,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
                     try {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(news.getMore_info_url())));
                     } catch (ActivityNotFoundException e) {
+                        Toasty.warning(NoveltyDetailActivity.this, getString(R.string.invalid_link)).show();
                     }
                 }
             });

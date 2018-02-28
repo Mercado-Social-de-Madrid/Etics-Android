@@ -2,11 +2,13 @@ package net.mercadosocial.moneda.model;
 
 import android.os.Bundle;
 
+import java.io.Serializable;
+
 /**
  * Created by julio on 27/02/18.
  */
 
-public class Notification {
+public class Notification implements Serializable {
 
     public static final String FIELD_TYPE = "type";
 
@@ -21,6 +23,9 @@ public class Notification {
     private Boolean is_euro_purchase;
     private String concept;
     private String sender;
+
+    private String title;
+    private String message;
 
         /*
          'type': 'payment',
@@ -39,9 +44,36 @@ public class Notification {
           */
 
     public static Notification parseNotification(Bundle extras) {
+
         if (extras.containsKey(FIELD_TYPE)) {
+
             Notification notification = new Notification();
-            notification.setAmount(extras.getFloat("amount"));
+
+            notification.setType(extras.getString("type"));
+            notification.setTitle(extras.getString("title"));
+            notification.setMessage(extras.getString("message"));
+
+            switch (extras.getString(Notification.FIELD_TYPE)) {
+                case Notification.TYPE_PAYMENT:
+                    notification.setAmount(Float.parseFloat(extras.getString("amount")));
+                    notification.setId(extras.getString("id"));
+                    notification.setSender(extras.getString("sender"));
+                    break;
+
+                case Notification.TYPE_TRANSACTION:
+                    notification.setAmount(Float.parseFloat(extras.getString("amount")));
+                    notification.setConcept(extras.getString("concept"));
+                    notification.setIs_bonification(Boolean.parseBoolean(extras.getString("is_bonification")));
+                    notification.setIs_euro_purchase(Boolean.parseBoolean(extras.getString("is_euro_purchase")));
+                    break;
+
+                case Notification.TYPE_NEWS:
+                    notification.setId(extras.getString("id"));
+                    break;
+            }
+
+            return notification;
+
         }
         return null;
     }
@@ -102,4 +134,19 @@ public class Notification {
         this.sender = sender;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

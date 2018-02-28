@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_new_payment_info"
+        style="@style/TextBase"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_payment_cancel"
+            style="@style/TextBase.White"
+            android:backgroundTint="@color/red"
+            android:text="@string/reject"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_payment_accept"
+            style="@style/TextBase.White"
+            android:backgroundTint="@color/green_dark"
+            android:text="@string/accept"
+            android:layout_marginLeft="60dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/btn_decide_later"
+        style="@style/TextBase"
+        android:text="@string/decide_later"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"/>
+
+</LinearLayout>
