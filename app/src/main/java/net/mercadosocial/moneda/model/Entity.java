@@ -126,6 +126,11 @@ public class Entity implements Serializable {
                 images.add(photo.getImage());
             }
         }
+
+        if (images.isEmpty()) {
+            images.add(getLogo());
+        }
+
         return images;
     }
 

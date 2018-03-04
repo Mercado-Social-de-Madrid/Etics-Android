@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
     android:padding="10dp"
@@ -28,13 +29,13 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_cancel"
             style="@style/TextBase.White"
-            android:backgroundTint="@color/red"
+            app:backgroundTint="@color/red"
             android:text="@string/reject"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
             style="@style/TextBase.White"
-            android:backgroundTint="@color/green_dark"
+            app:backgroundTint="@color/green_dark"
             android:text="@string/accept"
             android:layout_marginLeft="60dp"/>
     </LinearLayout>

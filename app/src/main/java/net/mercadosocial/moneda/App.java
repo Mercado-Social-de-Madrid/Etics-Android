@@ -1,11 +1,12 @@
 package net.mercadosocial.moneda;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
@@ -23,7 +24,7 @@ import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
  * Created by julio on 17/06/16.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private static final String TAG = "App";
 
@@ -59,6 +60,12 @@ public class App extends Application {
 
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        MultiDex.install(this);
+    }
 
     public static SharedPreferences getPrefs(Context context) {
 //        return new SecurePreferences(context);

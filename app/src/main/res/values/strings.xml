@@ -179,5 +179,6 @@
     <string name="pin_codes_does_not_match">Los códigos PIN no coinciden</string>
     <string name="back_with_arrow"><![CDATA[< Atrás]]></string>
     <string name="invalid_field">Campo no válido</string>
+    <string name="new_payment_received">Nuevo pago recibido</string>
 
 </resources>

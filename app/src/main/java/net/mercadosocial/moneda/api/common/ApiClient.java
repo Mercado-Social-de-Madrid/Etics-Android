@@ -164,7 +164,7 @@ public class ApiClient {
         okhttp3.OkHttpClient client = new okhttp3.OkHttpClient().newBuilder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(headersInterceptor)
-                .connectTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
 //                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])

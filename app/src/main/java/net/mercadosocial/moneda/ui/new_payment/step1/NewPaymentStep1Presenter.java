@@ -95,7 +95,7 @@ import es.dmoral.toasty.Toasty;
 
     public void onIdScanned(String id) {
 
-        view.showProgressDialog(context.getString(R.string.loading));
+        view.setRefresing(true);
 
         entityInteractor.getEntityById(id, new BaseInteractor.BaseApiCallback<Entity>() {
             @Override

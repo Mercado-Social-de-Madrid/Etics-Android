@@ -61,6 +61,7 @@ dependencies {
     }
     compile 'com.google.firebase:firebase-core:11.8.0'
 
+    compile 'com.android.support:multidex:1.0.1'
 
     implementation 'com.budiyev.android:code-scanner:1.7.5'
     compile 'com.github.kenglxn.QRGen:android:2.4.0'

@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.views;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,7 @@ public class ProgressDialogMES extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.MyDialogTheme);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.MyDialogTheme);
     }
 
     @Nullable
@@ -46,6 +47,13 @@ public class ProgressDialogMES extends DialogFragment {
 
         return layout;
 
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        return dialog;
     }
 
     @Override

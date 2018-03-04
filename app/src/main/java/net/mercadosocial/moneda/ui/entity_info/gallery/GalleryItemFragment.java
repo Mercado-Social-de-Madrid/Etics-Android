@@ -38,6 +38,7 @@ public class GalleryItemFragment extends Fragment {
 
         Picasso.with(getActivity())
                 .load(imageUrl)
+                .error(R.mipmap.img_logo_mes)
                 .into(imageView);
 
         imageView.setOnClickListener(onClickListener);

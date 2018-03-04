@@ -32,7 +32,7 @@ public class Data {
     }
 
     public boolean isEntity() {
-        return type.equals("entity");
+        return type != null && type.equals("entity");
     }
 
     public String getApi_key() {
