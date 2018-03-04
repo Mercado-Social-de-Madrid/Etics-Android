@@ -1,7 +1,11 @@
 package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 
+import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.EntityInteractor;
 import net.mercadosocial.moneda.model.Entity;
@@ -10,6 +14,8 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by julio on 30/01/18.
@@ -87,4 +93,35 @@ import java.util.List;
          return (NewPaymentPresenter) ((NewPaymentActivity) context).getBasePresenter();
      }
 
- }
+    public void onIdScanned(String id) {
+
+        view.showProgressDialog(context.getString(R.string.loading));
+
+        entityInteractor.getEntityById(id, new BaseInteractor.BaseApiCallback<Entity>() {
+            @Override
+            public void onResponse(Entity entity) {
+                showConfirDialog(entity);
+            }
+
+            @Override
+            public void onError(String message) {
+                Toasty.error(context, context.getString(R.string.user_not_recognized)).show();
+            }
+        });
+    }
+
+    private void showConfirDialog(final Entity entity) {
+        new AlertDialog.Builder(context)
+                .setTitle(entity.getName())
+                .setMessage(String.format(context.getString(R.string.entity_recognized_message), entity.getName()))
+                .setPositiveButton(R.string.continue_str, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        entitySelected = entity;
+                        getNewPaymentPresenter().onRecipientSelected(entitySelected);
+                    }
+                })
+                .setNeutralButton(R.string.back, null)
+                .show();
+    }
+}

@@ -69,7 +69,7 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
         View layout = inflater.inflate(R.layout.view_dialog_new_payment, null);
         findViews(layout);
 
-        tvNewPaymentInfo.setText(notification.getSender() + " te ha enviado un pago de " + notification.getAmount() + " Boniatos");
+//        tvNewPaymentInfo.setText(notification.getSender() + " te ha enviado un pago de " + notification.getAmount() + " Boniatos");
 
         return layout;
     }

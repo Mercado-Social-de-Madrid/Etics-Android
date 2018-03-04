@@ -12,6 +12,8 @@ import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
+import java.io.IOException;
+
 import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -43,8 +45,6 @@ public class AuthInteractor extends BaseInteractor {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        baseView.setRefresing(true);
 
         getApi().login(login)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
@@ -84,8 +84,6 @@ public class AuthInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().register(user)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate(actionTerminate)
@@ -105,7 +103,11 @@ public class AuthInteractor extends BaseInteractor {
 
                         baseView.setRefresing(false);
                         if (response.body() == null) {
-                            callback.onError("Error");
+                            try {
+                                callback.onError("Error: " + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         } else {
                             callback.onResponse(response.body());
                         }

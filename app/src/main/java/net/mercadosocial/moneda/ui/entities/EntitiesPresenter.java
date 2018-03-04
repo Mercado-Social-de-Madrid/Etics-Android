@@ -17,58 +17,60 @@ import java.util.List;
  */
 
 
- public class EntitiesPresenter extends BasePresenter {
+public class EntitiesPresenter extends BasePresenter {
 
-     private final EntitiesView view;
+    private final EntitiesView view;
     private final EntityInteractor entityInteractor;
     private List<Entity> entities = new ArrayList<>();
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
 
-         return new EntitiesPresenter(view, context);
+        return new EntitiesPresenter(view, context);
 
-     }
+    }
 
-     private EntitiesPresenter(EntitiesView view, Context context) {
-         super(context, view);
+    private EntitiesPresenter(EntitiesView view, Context context) {
+        super(context, view);
 
-         this.view = view;
+        this.view = view;
 
-         entityInteractor = new EntityInteractor(context, view);
+        entityInteractor = new EntityInteractor(context, view);
 
-     }
+    }
 
-     public void onCreate() {
-         refreshData();
-     }
+    public void onCreate() {
+        refreshData();
+    }
 
-     public void onResume() {
+    public void onResume() {
 
 //         List<Entity> users = getUserList();
 //         List<Entity> result = EntityFilter.builder()
 //                 .name().contains("")
 //                 .on(entities);
-     }
+    }
 
-     public void refreshData() {
+    public void refreshData() {
 
-         entityInteractor.getEntities(new EntityInteractor.Callback() {
+        view.setRefresing(true);
 
-             @Override
-             public void onResponse(List<Entity> entitiesApi) {
-                 entities.clear();
-                 entities.addAll(entitiesApi);
+        entityInteractor.getEntities(new EntityInteractor.Callback() {
 
-                 view.showEntities(entities);
-             }
+            @Override
+            public void onResponse(List<Entity> entitiesApi) {
+                entities.clear();
+                entities.addAll(entitiesApi);
 
-             @Override
-             public void onError(String error) {
+                view.showEntities(entities);
+            }
+
+            @Override
+            public void onError(String error) {
                 view.toast(error);
-             }
-         });
+            }
+        });
 
-     }
+    }
 
     public void onSearch(String query) {
 

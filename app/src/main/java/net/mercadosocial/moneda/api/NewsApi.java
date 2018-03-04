@@ -10,7 +10,7 @@ import rx.Observable;
 
 public interface NewsApi {
 
-    @GET("news/")
+    @GET("news/?limit=100")
     Observable<NewsResponse> getNews();
 
     @GET("news/{id}")

@@ -22,4 +22,6 @@ public interface RegisterView extends BaseView {
     void fillPersonData(Person person);
 
     boolean fillEntityData(Entity entity);
+
+    void showRegisterUserCommonData();
 }

@@ -93,15 +93,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Map<String, String> extras = remoteMessage.getData();
 
-        String title;
-        String message;
-        if (remoteMessage.getNotification() != null) {
-            title = remoteMessage.getNotification().getTitle();
-            message = remoteMessage.getNotification().getBody();
-        } else {
-            title = extras.get("title");
-            message = extras.get("message");
-        }
+//        String title;
+//        String message;
+//        if (remoteMessage.getNotification() != null) {
+//            title = remoteMessage.getNotification().getTitle();
+//            message = remoteMessage.getNotification().getBody();
+//        } else {
+//            title = extras.get("title");
+//            message = extras.get("message");
+//
+////            title = "getNotification da null";
+//        }
 
 
         Bundle bundle = new Bundle();
@@ -109,8 +111,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             bundle.putString(entry.getKey(), entry.getValue());
         }
 
-        bundle.putString("title", title);
-        bundle.putString("message", message);
+//        bundle.putString("title", title);
+//        bundle.putString("message", message);
 
 //        switch (bundle.getString("type")) {
 //            case "payment":

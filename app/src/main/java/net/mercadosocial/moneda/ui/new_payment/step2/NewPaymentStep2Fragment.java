@@ -66,6 +66,7 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
         return layout;
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -97,8 +98,8 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
     // PRESENTER CALLBACKS
 
     @Override
-    public void showMaxAcceptedByEntity(String amount) {
-        tvMaxAcceptedByEntity.setText(String.format(getString(R.string.max_boniatos_accepted_by_entity), amount));
+    public void showBoniatosRestrictions(String maxAcceptedByEntity, String balance) {
+        tvMaxAcceptedByEntity.setText(String.format(getString(R.string.max_boniatos_accepted_by_entity), maxAcceptedByEntity, balance));
     }
 
     @Override
@@ -114,6 +115,12 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
     @Override
     public void enableContinueButton(boolean enable) {
         btnContinue.setEnabled(enable);
+    }
+
+    @Override
+    public void showPresetBoniatosAmount(String amount) {
+        editBoniatosAmount.setText(amount);
+        editBoniatosAmount.selectAll();
     }
 
 }

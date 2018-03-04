@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_register_continue"
+        android:layout_above="@+id/view_register_buttons"
         android:fillViewport="true">
 
         <LinearLayout
@@ -56,12 +56,30 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_register_continue"
-        style="@style/ButtonMes"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:enabled="false"
-        android:text="@string/continue_arrow"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:id="@+id/view_register_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/btn_register_back"
+            style="@style/TextBase"
+            android:padding="10dp"
+            android:text="@string/back_with_arrow"
+            android:layout_centerVertical="true"
+            android:background="@drawable/background_pressed_common"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_register_continue"
+            style="@style/ButtonMes"
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:padding="10dp"
+            android:minWidth="150dp"
+            android:layout_centerInParent="true"
+            android:text="@string/continue_arrow"/>
+
+    </RelativeLayout>
 </RelativeLayout>

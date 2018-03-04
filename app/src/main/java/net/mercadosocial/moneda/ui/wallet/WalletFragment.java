@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,8 +17,10 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Wallet;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
+import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.payments.PaymentsPresenter;
+import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -81,7 +86,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         View layout = inflater.inflate(R.layout.fragment_wallet, container, false);
         findViews(layout);
 
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
 
         presenter.onCreate();
 
@@ -92,6 +97,25 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
         presenter.onResume();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.wallet, menu);
+        menu.findItem(R.id.menuItem_show_qr).setVisible(presenter.isQRGeneratorVisible());
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItem_show_qr:
+                presenter.onShowQRClick();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -110,12 +134,15 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case R.id.btn_get_boniatos:
-                Toasty.info(getActivity(), "Trabajando en ello...").show();
+                startActivity(GetBoniatosPresenter.newGetBoniatosActivity(getActivity()));
                 break;
 
             case R.id.btn_graphics:
-            case R.id.btn_movements:
                 Toasty.info(getActivity(), "En breve disponible...").show();
+                break;
+
+            case R.id.btn_movements:
+                startActivity(TransactionsPresenter.newTransactionsActivity(getActivity()));
                 break;
 
             case R.id.btn_pending_payments:

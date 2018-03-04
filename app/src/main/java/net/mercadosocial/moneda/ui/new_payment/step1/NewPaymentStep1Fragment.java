@@ -24,8 +24,6 @@ import net.mercadosocial.moneda.model.Entity;
 
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -103,7 +101,7 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
                 .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
                     @Override
                     public void onResult(Barcode barcode) {
-                        Toasty.info(getActivity(), barcode.rawValue).show();
+                        presenter.onIdScanned(barcode.rawValue);
                     }
                 })
                 .build();

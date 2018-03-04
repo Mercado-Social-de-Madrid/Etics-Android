@@ -24,6 +24,8 @@ import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.util.WindowUtils;
 
+import es.dmoral.toasty.Toasty;
+
 public class RegisterActivity extends BaseActivity implements View.OnClickListener, RegisterView {
 
     private View btnRegisterEntity;
@@ -42,8 +44,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private View viewRegisterEntity;
     private EditText editBonusPercent;
     private EditText editMaxAcceptPercent;
-    private View btnLogin;
+    private View btnGoToLogin;
     private EditText editBonusPercentEntities;
+    private EditText editPinCodePerson, editPinCodeRepeatPerson;
+    private EditText editPinCodeEntity, editPinCodeRepeatEntity;
+    private TextView btnRegisterBack;
 
 
     private void findViews() {
@@ -58,23 +63,30 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         btnRegisterPerson = findViewById(R.id.btn_register_person);
         btnRegisterEntity = findViewById(R.id.btn_register_entity);
+
+        btnRegisterBack = (TextView) findViewById(R.id.btn_register_back);
         btnRegisterContinue = (TextView) findViewById(R.id.btn_register_continue);
 
         editNamePerson = (EditText)findViewById( R.id.edit_name_person );
         editNif = (EditText)findViewById( R.id.edit_nif );
+        editPinCodePerson = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code);
+        editPinCodeRepeatPerson = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code_repeat);
 
         editNameEntity = (EditText)findViewById( R.id.edit_name_entity );
         editCif = (EditText)findViewById( R.id.edit_cif );
         editMaxAcceptPercent = (EditText)findViewById( R.id.edit_max_accept_percent );
         editBonusPercent = (EditText)findViewById( R.id.edit_bonus_percent );
         editBonusPercentEntities = (EditText)findViewById( R.id.edit_bonus_percent_entities );
+        editPinCodeEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code);
+        editPinCodeRepeatEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code_repeat);
 
-        btnLogin = findViewById(R.id.btn_login);
+        btnGoToLogin = findViewById(R.id.btn_go_to_login);
 
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
         btnRegisterContinue.setOnClickListener(this);
-        btnLogin.setOnClickListener(this);
+        btnRegisterBack.setOnClickListener(this);
+        btnGoToLogin.setOnClickListener(this);
     }
 
 
@@ -145,7 +157,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 presenter.onContinueRegisterButtonClick();
                 break;
 
-            case R.id.btn_login:
+            case R.id.btn_register_back:
+                WindowUtils.hideSoftKeyboard(this);
+                presenter.onBackRegisterButtonClick();
+                break;
+
+            case R.id.btn_go_to_login:
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 overridePendingTransition(0, 0);
@@ -178,6 +195,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         viewRegisterUser.setVisibility(View.GONE);
         viewRegisterPerson.setVisibility(View.VISIBLE);
         btnRegisterContinue.setText(R.string.register);
+        btnRegisterBack.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -185,6 +203,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         viewRegisterUser.setVisibility(View.GONE);
         viewRegisterEntity.setVisibility(View.VISIBLE);
         btnRegisterContinue.setText(R.string.register);
+        btnRegisterBack.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showRegisterUserCommonData() {
+        btnRegisterContinue.setText(R.string.continue_arrow);
+        viewRegisterUser.setVisibility(View.VISIBLE);
+        viewRegisterPerson.setVisibility(View.GONE);
+        viewRegisterEntity.setVisibility(View.GONE);
+        btnRegisterBack.setVisibility(View.GONE);
     }
 
     @Override
@@ -205,11 +233,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void fillPersonData(Person person) {
-        String personName = editNamePerson.getText().toString();
-        String nif = editNif.getText().toString();
-
-        person.setName(personName);
-        person.setNIF(nif);
+        person.setName(editNamePerson.getText().toString());
+        person.setNIF(editNif.getText().toString());
+        person.setPin_code(editPinCodePerson.getText().toString());
+        person.setPin_codeRepeat(editPinCodeRepeatPerson.getText().toString());
     }
 
     @Override
@@ -217,11 +244,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         entity.setName(editNameEntity.getText().toString());
         entity.setCif(editCif.getText().toString());
+        entity.setPin_code(editPinCodeEntity.getText().toString());
+        entity.setPin_codeRepeat(editPinCodeRepeatEntity.getText().toString());
 
         try {
             entity.setMax_percent_payment(Float.parseFloat(editMaxAcceptPercent.getText().toString()));
         } catch (NumberFormatException e) {
             editMaxAcceptPercent.setError(getString(R.string.invalid_number));
+            Toasty.error(this, getString(R.string.invalid_field)).show();
             return false;
         }
 
@@ -229,6 +259,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             entity.setBonus_percent_general(Float.parseFloat(editBonusPercent.getText().toString()));
         } catch (NumberFormatException e) {
             editBonusPercent.setError(getString(R.string.invalid_number));
+            Toasty.error(this, getString(R.string.invalid_field)).show();
             return false;
         }
 
@@ -236,6 +267,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             entity.setBonus_percent_entity(Float.parseFloat(editBonusPercentEntities.getText().toString()));
         } catch (NumberFormatException e) {
             editBonusPercentEntities.setError(getString(R.string.invalid_number));
+            Toasty.error(this, getString(R.string.invalid_field)).show();
             return false;
         }
 

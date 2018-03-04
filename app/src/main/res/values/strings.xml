@@ -66,7 +66,7 @@
     <string name="pending_payments_warning">Tienes %d nuevos pagos por confirmar</string>
     <string name="consult_statistics">Consulta tus estadísticas de consumo y bonificaciones</string>
     <string name="graphics">Gráficas</string>
-    <string name="movements">Movimientos</string>
+    <string name="transactions">Movimientos</string>
     <string name="operations">Operaciones</string>
     <string name="continue_arrow">Continuar \></string>
     <string name="permission_denied">Permiso denegado</string>
@@ -85,7 +85,7 @@
     <string name="enter_pin_code">Introduce tu código PIN</string>
     <string name="confirm_payment">Confirmar pago</string>
     <string name="euros">Euros</string>
-    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s &currency_name_plural;</string>
+    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s &currency_name_abrev;\nTu saldo: %s &currency_name_abrev;</string>
     <string name="invalid_number">El número no es válido</string>
     <string name="boniatos_amount_exceed_accepted_payment">Esta entidad acepta un máximo de %s &currency_name_plural;
         para esta compra</string>
@@ -147,5 +147,37 @@
     <string name="bonus_percent_entities">Bonificación para entidades</string>
     <string name="cannot_pay_yourself">¿Seguro que te quieres pagar a ti misma? ;)</string>
     <string name="no_more_pending_payments">No hay más pagos pendientes</string>
+    <string name="bonus">Bonificación</string>
+    <string name="balance">Saldo</string>
+    <string name="date_and_time">Fecha y hora</string>
+    <string name="account">Cuenta</string>
+    <string name="amount">Cantidad</string>
+    <string name="no_offers_right_now">Ahora mismo esta entidad no tiene ofertas activas</string>
+    <string name="go_to_transactions">Ver movimientos</string>
+    <string name="entity_qr">QR de tu entidad</string>
+    <string name="user_not_recognized">Entidad no reconocida</string>
+    <string name="entity_recognized_message">Se ha escaneado el código de la entidad %s.\n\nSi es correcto pulsa \'Continuar\' para seguir con el pago</string>
+    <string name="purchase">Compra</string>
+    <string name="yout_balance_is">Tu saldo es de %s &currency_name_abrev;</string>
+    <string name="get_boniatos_under_construction_message">
+        Esta sección estará en breve disponible.\n
+        Aquí se podrán comprar Boniatos automáticamente mediante pago por tarjeta de débito o crédito.\n
+        El pago y los datos de la tarjeta son totalmente seguros al implementarse a través de la pasarela Stripe\n
+        De momento para la beta vamos a simular esa compra de Boniatos, simplemente escribe la cantidad que quieres recargar:
+    </string>
+    <string name="recharge">Recargar</string>
+    <string name="amount_must_be_positive">La cantidad debe ser mayor que 0</string>
+    <string name="amount_cant_be_negative">La cantidad no puede ser negativa</string>
+    <string name="pin_repeat">Repite PIN</string>
+    <string name="pin">PIN</string>
+    <string name="pin_code">Código PIN</string>
+    <string name="pin_code_register_explanation">Por seguridad en cada transacción se te pedirá el código PIN que especifiques aquí.</string>
+    <string name="name_cannot_be_empty">El nombre no puede estar vacío</string>
+    <string name="nif_cannot_be_empty">El NIF no puede estar vacío</string>
+    <string name="pin_code_4_lenght">El código PIN debe tener 4 dígitos</string>
+    <string name="invalid_pin_number">PIN no válido. Sólo números del 0 al 9</string>
+    <string name="pin_codes_does_not_match">Los códigos PIN no coinciden</string>
+    <string name="back_with_arrow"><![CDATA[< Atrás]]></string>
+    <string name="invalid_field">Campo no válido</string>
 
 </resources>

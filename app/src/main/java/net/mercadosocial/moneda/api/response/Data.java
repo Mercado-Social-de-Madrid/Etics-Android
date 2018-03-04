@@ -18,6 +18,14 @@ public class Data {
     // ---
     private String username;
 
+    public String getName() {
+        if (entity != null) {
+            return entity.getName();
+        } else {
+            return person.getName();
+        }
+    }
+
 
     public String getApiKeyFull() {
         return "ApiKey " + getUsername() + ":" + getApi_key();

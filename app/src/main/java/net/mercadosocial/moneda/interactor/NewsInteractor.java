@@ -34,8 +34,6 @@ public class NewsInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().getNews()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<NewsResponse>() {
@@ -69,8 +67,6 @@ public class NewsInteractor extends BaseInteractor {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        baseView.setRefresing(true);
 
         getApi().getNewsById(id)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)

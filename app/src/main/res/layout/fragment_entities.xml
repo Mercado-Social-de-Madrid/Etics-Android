@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple"
-            android:textColor="@color/green"
-            android:text="@string/search"/>
+            android:text="@string/search"
+            android:textColor="@color/green" />
     </LinearLayout>
 
     <net.mercadosocial.moneda.views.NonSwipeableViewPager

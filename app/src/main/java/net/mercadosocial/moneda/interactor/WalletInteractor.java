@@ -41,8 +41,6 @@ public class WalletInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().getWallet()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Wallet>>() {

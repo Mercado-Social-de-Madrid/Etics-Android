@@ -13,7 +13,7 @@ public class Wallet {
     private Float balance;
     private String id;
     private String last_transaction;
-    private List<TransactionLog> transaction_logs;
+    private List<Transaction> transaction_logs;
 
 
     public String getBalanceFormatted() {
@@ -44,11 +44,11 @@ public class Wallet {
         this.last_transaction = last_transaction;
     }
 
-    public List<TransactionLog> getTransaction_logs() {
+    public List<Transaction> getTransaction_logs() {
         return transaction_logs;
     }
 
-    public void setTransaction_logs(List<TransactionLog> transaction_logs) {
+    public void setTransaction_logs(List<Transaction> transaction_logs) {
         this.transaction_logs = transaction_logs;
     }
 

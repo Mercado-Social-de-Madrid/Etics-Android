@@ -15,6 +15,7 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
+import net.mercadosocial.moneda.model.Notification;
 
 /**
  * Created by julio on 2/02/18.
@@ -48,6 +49,7 @@ import net.mercadosocial.moneda.model.Device;
      public void onCreate(Intent intent) {
 
          if (intent.hasExtra("type")) {
+             intent.putExtra(Notification.FIELD_FROM_OUTSIDE, true);
              ((BaseActivity)context).processNotification(intent);
          }
 

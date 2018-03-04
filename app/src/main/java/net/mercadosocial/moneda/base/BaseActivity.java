@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.NewPaymentDialog;
+import net.mercadosocial.moneda.views.ProgressDialogMES;
 
 import es.dmoral.toasty.Toasty;
 
@@ -48,6 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public static final int RESULT_DELETED = 1234;
     private AppBarLayout appBarLayout;
     private BasePresenter basePresenter;
+    private Handler handlerDialog;
+    private ProgressDialogMES refreshingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,16 +82,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
 
 
-
         switch (notification.getType()) {
             case Notification.TYPE_PAYMENT:
                 NewPaymentDialog.newInstance(notification)
-                .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
-                    @Override
-                    public void onClose() {
-                        refreshData();
-                    }
-                }).show(getFragmentManager(), null);
+                        .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
+                            @Override
+                            public void onClose() {
+                                refreshData();
+                            }
+                        }).show(getFragmentManager(), null);
                 break;
 
             case Notification.TYPE_TRANSACTION:
@@ -100,7 +103,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 break;
 
             case Notification.TYPE_NEWS:
-                showNewsDialog(notification);
+                if (notification.isFromOutside()) {
+                    startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(this, notification.getId()));
+                } else {
+                    showNewsDialog(notification);
+                }
                 break;
         }
 
@@ -220,6 +227,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showProgressDialog(String message) {
 
+        if (true) {
+            return;
+        }
+
         try {
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage(message);
@@ -241,10 +252,43 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void setRefresing(boolean refresing) {
 
-        if (progressBar != null) {
-            progressBar.setVisibility(refresing ? View.VISIBLE : View.INVISIBLE);
-//            progressBar.setIndeterminate(refresing);
+
+        try {
+
+            if (refresing) {
+                if (handlerDialog == null) {
+                    handlerDialog = new Handler();
+                    handlerDialog.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (refreshingDialog == null) {
+                                refreshingDialog = ProgressDialogMES.newInstance();
+                                refreshingDialog.show(getFragmentManager(), null);
+                            }
+                        }
+                    }, 500);
+                }
+            } else {
+                if (handlerDialog != null) {
+                    handlerDialog.removeCallbacksAndMessages(null);
+                    handlerDialog = null;
+                }
+                if (refreshingDialog != null) {
+                    refreshingDialog.dismissTimeSafe();
+                    refreshingDialog = null;
+                }
+            }
+        } catch (Exception e) {
+            handlerDialog = null;
+            refreshingDialog = null;
         }
+
+
+//        if (progressBar != null) {
+//            progressBar.setVisibility(refresing ? View.VISIBLE : View.INVISIBLE);
+////            progressBar.setIndeterminate(refresing);
+//        }
     }
 
     public AppBarLayout getAppBarLayout() {

@@ -1,7 +1,9 @@
 package net.mercadosocial.moneda.model;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * Created by julio on 1/02/18.
@@ -24,7 +26,7 @@ public class Payment {
     private Float total_amount;
     private Float currency_amount;
 
-
+    DateFormat timestampFormat = Novelty.formatDatetimeApi;
 
 
     public String getBoniatosAmountFormatted() {
@@ -45,6 +47,14 @@ public class Payment {
         return amountFormatted;
     }
 
+    public String getTimestampFormatted() {
+        try {
+            return Novelty.formatDatetimeUser.format(timestampFormat.parse(getTimestamp()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return getTimestamp();
+    }
 
     public String getReceiver() {
         return receiver;
@@ -117,4 +127,5 @@ public class Payment {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
 }

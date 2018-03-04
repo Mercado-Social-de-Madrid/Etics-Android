@@ -56,7 +56,7 @@ public class NoveltiesPresenter extends BasePresenter {
     public void refreshData() {
 
         novelties.clear();
-        view.showProgressDialog("Cargando...");
+        view.setRefresing(true);
 
         getOffersThenNews();
 

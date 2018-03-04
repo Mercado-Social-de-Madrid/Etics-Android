@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
@@ -26,13 +28,12 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
+import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
-
-import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
@@ -182,7 +183,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                intent.putExtras(bundle);
 //                sendBroadcast(intent);
 
-                Toasty.info(this, "En breve disponible...").show();
+                startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
+
                 break;
         }
 
@@ -264,9 +266,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         viewUserInfo.setVisibility(userData == null ? View.GONE : View.VISIBLE);
 
         if (userData != null) {
-            tvUserName.setText(userData.getUsername());
-//            Picasso.with(this)
-//                    .load(userData.)
+            tvUserName.setText(userData.getName());
+            if (userData.getEntity() != null) {
+                String logoUrl = userData.getEntity().getLogoThumbnail();
+                Picasso.with(this)
+                        .load(logoUrl)
+                        .placeholder(R.mipmap.ic_avatar)
+                        .error(R.mipmap.ic_mes_v2_144)
+                        .into(imgAvatar);
+            }
         }
     }
 }

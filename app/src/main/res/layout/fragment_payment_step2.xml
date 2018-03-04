@@ -7,14 +7,6 @@
     android:padding="10dp"
     tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
 
-
-    <TextView
-        style="@style/TextBase.Purple"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/select_amount"
-        android:textSize="22sp" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,69 +16,86 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                style="@style/TextBase"
-                android:text="@string/total_amount_label" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="bottom"
-                android:layout_marginTop="15dp">
-
-                <EditText
-                    android:id="@+id/edit_total_amount_eur"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="4"
-                    android:background="@color/bg_edittext"
-                    android:padding="5dp"
-                    android:inputType="number|phone"
-                    android:gravity="right"/>
-
-                <TextView
-                    style="@style/TextBase"
-                    android:text="@string/euros"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
-
-            <TextView
-                style="@style/TextBase"
-                android:layout_marginTop="30dp"
-                android:text="@string/boniatos_amount_label" />
-
-            <TextView
-                android:id="@+id/tv_max_accepted_entity"
                 style="@style/TextBase.Purple"
-                android:layout_marginTop="5dp" />
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/select_amount"
+                android:textSize="22sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="bottom"
-                android:layout_marginTop="15dp">
-
-                <EditText
-                    android:id="@+id/edit_boniatos_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="4"
-                    android:background="@color/bg_edittext"
-                    android:padding="5dp"
-                    android:inputType="number|phone"
-                    android:gravity="right"/>
-
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     style="@style/TextBase"
-                    android:text="@string/currency_name_plural"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="@string/total_amount_label" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_total_amount_eur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_edittext"
+                        android:ems="4"
+                        android:gravity="right"
+                        android:inputType="number|phone"
+                        android:selectAllOnFocus="true"
+                        android:padding="3dp"
+                        android:drawablePadding="5dp" />
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/euros" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextBase"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/boniatos_amount_label" />
+
+                <TextView
+                    android:id="@+id/tv_max_accepted_entity"
+                    style="@style/TextBase.Purple"
+                    android:layout_marginTop="5dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_boniatos_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_edittext"
+                        android:ems="4"
+                        android:gravity="right"
+                        android:inputType="number|phone"
+                        android:selectAllOnFocus="true"
+                        android:padding="5dp"
+                        android:drawablePadding="3dp"/>
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/currency_name_plural" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

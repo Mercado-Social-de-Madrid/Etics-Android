@@ -45,8 +45,6 @@ public class PaymentInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().sendPayment(payment)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Void>>() {
@@ -80,8 +78,6 @@ public class PaymentInteractor extends BaseInteractor {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        baseView.setRefresing(true);
 
         getApi().getPendingPayments()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)

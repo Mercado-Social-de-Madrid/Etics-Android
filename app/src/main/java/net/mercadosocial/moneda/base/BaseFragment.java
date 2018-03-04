@@ -4,7 +4,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+
+import net.mercadosocial.moneda.views.ProgressDialogMES;
 
 /**
  * Created by julio on 27/01/16.
@@ -15,6 +18,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public final String TAG = this.getClass().getSimpleName();
     protected BaseActivity baseActivity;
     private BasePresenter basePresenter;
+    private ProgressDialogMES refreshingDialog;
+    private Handler handlerDialog;
 
     @Override
     public void onAttach(Context context) {
@@ -29,7 +34,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     }
 
-    public BasePresenter getBasePresenter(){
+    public BasePresenter getBasePresenter() {
         return basePresenter;
     }
 
@@ -63,6 +68,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void setRefresing(boolean refresing) {
 
+        ((BaseActivity) getActivity()).setRefresing(refresing);
     }
 
 

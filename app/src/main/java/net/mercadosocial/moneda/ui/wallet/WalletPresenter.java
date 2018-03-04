@@ -1,8 +1,13 @@
 package net.mercadosocial.moneda.ui.wallet;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v7.app.AlertDialog;
+import android.widget.ImageView;
 
+import net.glxn.qrgen.android.QRCode;
 import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
@@ -59,6 +64,10 @@ public class WalletPresenter extends BasePresenter {
 
     }
 
+    public boolean isQRGeneratorVisible() {
+        return App.isEntity(context);
+    }
+
     private void refreshPendingPayments() {
         new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
             @Override
@@ -92,4 +101,19 @@ public class WalletPresenter extends BasePresenter {
         });
     }
 
+    public void onShowQRClick() {
+
+        String id = App.getUserData(context).getEntity().getId();
+        int sizeQR = context.getResources().getDimensionPixelSize(R.dimen.size_qr);
+
+        Bitmap qrBitmap = QRCode.from(id).withSize(sizeQR, sizeQR).bitmap();
+        ImageView imageView = new ImageView(context);
+        imageView.setImageBitmap(qrBitmap);
+
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.entity_qr)
+                .setView(imageView)
+                .setNegativeButton(R.string.back, null)
+                .show();
+    }
 }

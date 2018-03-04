@@ -5,27 +5,25 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.common.ApiClient;
+import net.mercadosocial.moneda.model.gallery_entity.Gallery;
+import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Entity implements Serializable {
 
+    private String id;
     private String logo_thumbnail;
     private String logo;
-    private String instagram_link;
     private String phone_number;
     private Float bonus_percent_entity;
     private Float bonus_percent_general;
-    private String webpage_link;
     private List<Offer> offers;
-    private String twitter_link;
-    private String facebook_link;
-    private String telegram_link;
     private Integer num_workers;
-    private String id;
     private String short_description;
     private String cif;
     private String legal_form;
@@ -38,7 +36,16 @@ public class Entity implements Serializable {
     private Double longitude;
     private List<String> categories;
     private Double latitude;
+    private Gallery gallery;
 
+    private String webpage_link;
+    private String twitter_link;
+    private String facebook_link;
+    private String telegram_link;
+    private String instagram_link;
+
+    private String pin_code;
+    private transient String pin_codeRepeat;
 
     public String getCategoriesString() {
 
@@ -55,12 +62,20 @@ public class Entity implements Serializable {
         return categoriesStr;
     }
 
-    public String getLogoThumbnailFullUrl() {
-        return ApiClient.BASE_URL + getLogo_thumbnail();
+    public String getImageCover() {
+        if (gallery != null && gallery.getPhotos() != null && !gallery.getPhotos().isEmpty()) {
+            return gallery.getPhotos().get(0).getImage();
+        } else {
+            return getLogo();
+        }
     }
 
-    public String getLogoFullUrl() {
-        return ApiClient.BASE_URL + getLogo();
+    public String getLogoThumbnail() {
+        return ApiClient.BASE_URL + logo_thumbnail;
+    }
+
+    public String getLogo() {
+        return ApiClient.BASE_URL + logo;
     }
 
 
@@ -89,7 +104,7 @@ public class Entity implements Serializable {
     }
 
     public Float getBonus(Context context, Float totalAmount) {
-        if (App.getUserData(context).isEntity()) {
+        if (App.isEntity(context)) {
             return getBonusEntity(totalAmount);
         } else {
             return getBonusGeneral(totalAmount);
@@ -97,11 +112,21 @@ public class Entity implements Serializable {
     }
 
     public Float getBonusPercent(Context context) {
-        if (App.getUserData(context).isEntity()) {
+        if (App.isEntity(context)) {
             return getBonus_percent_entity();
         } else {
             return getBonus_percent_general();
         }
+    }
+
+    public List<String> getGalleryImages() {
+        List<String> images = new ArrayList<>();
+        if (gallery != null && gallery.getPhotos() != null) {
+            for (Photo photo : gallery.getPhotos()) {
+                images.add(photo.getImage());
+            }
+        }
+        return images;
     }
 
     // ------------------------------
@@ -187,10 +212,6 @@ public class Entity implements Serializable {
     }
 
 
-    public String getLogo() {
-        return logo;
-    }
-
     public void setLogo(String logo) {
         this.logo = logo;
     }
@@ -239,10 +260,6 @@ public class Entity implements Serializable {
 
     public void setRegistered(String registered) {
         this.registered = registered;
-    }
-
-    public String getLogo_thumbnail() {
-        return logo_thumbnail;
     }
 
     public void setLogo_thumbnail(String logo_thumbnail) {
@@ -321,4 +338,27 @@ public class Entity implements Serializable {
         this.legal_form = legal_form;
     }
 
+    public Gallery getGallery() {
+        return gallery;
+    }
+
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
+    }
+
+    public String getPin_code() {
+        return pin_code;
+    }
+
+    public void setPin_code(String pin_code) {
+        this.pin_code = pin_code;
+    }
+
+    public String getPin_codeRepeat() {
+        return pin_codeRepeat;
+    }
+
+    public void setPin_codeRepeat(String pin_codeRepeat) {
+        this.pin_codeRepeat = pin_codeRepeat;
+    }
 }

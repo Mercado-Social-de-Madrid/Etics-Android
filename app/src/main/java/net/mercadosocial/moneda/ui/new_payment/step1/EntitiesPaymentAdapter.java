@@ -55,7 +55,7 @@ public class EntitiesPaymentAdapter extends RecyclerView.Adapter<EntitiesPayment
         holder.tvEntityName.setText(entity.getName());
         holder.tvEntityCategory.setText(entity.getCategoriesString());
 
-        String logoUrl = entity.getLogoThumbnailFullUrl();
+        String logoUrl = entity.getLogoThumbnail();
 
         Picasso.with(context)
                 .load(logoUrl)

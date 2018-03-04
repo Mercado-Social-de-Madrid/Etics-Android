@@ -13,6 +13,9 @@ public class Person {
     private String surnames;
     private String avatar;
 
+    private String pin_code;
+    private transient String pin_codeRepeat;
+
     public String getUuid() {
         return uuid;
     }
@@ -59,5 +62,21 @@ public class Person {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getPin_code() {
+        return pin_code;
+    }
+
+    public void setPin_code(String pin_code) {
+        this.pin_code = pin_code;
+    }
+
+    public String getPin_codeRepeat() {
+        return pin_codeRepeat;
+    }
+
+    public void setPin_codeRepeat(String pin_codeRepeat) {
+        this.pin_codeRepeat = pin_codeRepeat;
     }
 }

@@ -34,8 +34,6 @@ public class OfferInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().getOffers()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)

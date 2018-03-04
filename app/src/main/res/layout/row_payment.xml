@@ -9,8 +9,14 @@
     android:layout_marginBottom="5dp">
 
     <TextView
+        android:id="@+id/tv_new_payment_datetime"
+        style="@style/TextBase"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
         android:id="@+id/tv_new_payment_info"
-        style="@style/TextBase"/>
+        style="@style/TextBase"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,9 +4,12 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.Wallet;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
+import net.mercadosocial.moneda.util.Util;
 
 /**
  * Created by julio on 31/01/18.
@@ -16,6 +19,7 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
  public class NewPaymentStep2Presenter extends BasePresenter {
 
      private final NewPaymentStep2View view;
+    private Wallet wallet;
 
     public static NewPaymentStep2Presenter newInstance(NewPaymentStep2View view, Context context) {
 
@@ -32,18 +36,26 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
      public void onCreate() {
 
-
-         // todo uncomment this
-//         view.enableContinueButton(false);
+         refreshData();
      }
 
      public void onResume() {
 
-         refreshData();
      }
 
      public void refreshData() {
 
+         new WalletInteractor(context, view).getWallet(new WalletInteractor.Callback() {
+             @Override
+             public void onResponse(Wallet walletReceived) {
+                 wallet = walletReceived;
+             }
+
+             @Override
+             public void onError(String error) {
+
+             }
+         });
 
      }
 
@@ -53,9 +65,18 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
             return;
         }
 
+        if (boniatosAmount.isEmpty()) {
+            boniatosAmount = "0";
+        }
+
         Float boniatosAmountFloat = convertAmount(boniatosAmount);
         if (boniatosAmountFloat == null) {
             view.showBoniatosAmountInputError(context.getString(R.string.invalid_number));
+            return;
+        }
+
+        if (boniatosAmountFloat < 0) {
+            view.showBoniatosAmountInputError(context.getString(R.string.amount_cant_be_negative));
             return;
         }
 
@@ -67,6 +88,14 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
             return;
         }
 
+        if (wallet != null) {
+            if (boniatosAmountFloat > wallet.getBalance()) {
+                view.showBoniatosAmountInputError(String.format(context.getString(R.string.yout_balance_is),
+                        wallet.getBalanceFormatted()));
+                return;
+            }
+        }
+
         getNewPaymentPresenter().onAmountsConfirmed(totalAmountFloat, boniatosAmountFloat);
         view.enableContinueButton(true);
     }
@@ -75,7 +104,7 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
     private Float convertAmount(String amount) {
 
         try {
-            Float amountFloat = Float.parseFloat(amount);
+            Float amountFloat = Float.parseFloat(amount.replace(",", "."));
             return amountFloat;
         } catch (NumberFormatException e) {
             return null;
@@ -87,8 +116,19 @@ import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
         Float totalAmountFloat = convertAmount(totalAmount);
         if (totalAmountFloat != null) {
+
+            if (totalAmountFloat <= 0) {
+                view.showTotalAmountInputError(context.getString(R.string.amount_must_be_positive));
+                return false;
+            }
+
             String amountFormatted = getSelectedEntity().getMaxAcceptedBoniatosAmountFormatted(totalAmountFloat);
-            view.showMaxAcceptedByEntity(amountFormatted);
+            view.showBoniatosRestrictions(amountFormatted, wallet != null ? wallet.getBalanceFormatted() : "?");
+
+            if (wallet != null) {
+                Float minAmount = Math.min(getSelectedEntity().getMaxAcceptedBoniatosAmount(totalAmountFloat), wallet.getBalance());
+                view.showPresetBoniatosAmount(Util.getDecimalFormatted(minAmount, false));
+            }
             return true;
         } else {
             view.showTotalAmountInputError(context.getString(R.string.invalid_number));

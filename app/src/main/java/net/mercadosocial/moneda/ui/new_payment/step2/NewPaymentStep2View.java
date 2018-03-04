@@ -8,11 +8,13 @@ import net.mercadosocial.moneda.base.BaseView;
 
 public interface NewPaymentStep2View extends BaseView {
 
-    void showMaxAcceptedByEntity(String amount);
+    void showBoniatosRestrictions(String maxAcceptedByEntity, String balance);
 
     void showTotalAmountInputError(String error);
 
     void showBoniatosAmountInputError(String error);
 
     void enableContinueButton(boolean enable);
+
+    void showPresetBoniatosAmount(String amount);
 }

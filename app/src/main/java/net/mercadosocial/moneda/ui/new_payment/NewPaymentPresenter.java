@@ -122,7 +122,8 @@ public class NewPaymentPresenter extends BasePresenter {
     public void onConfirmPayment(String pin) {
 
 //        Toasty.info(context, context.getString(R.string.sending_payment)).show();
-        view.showProgressDialog(context.getString(R.string.sending_payment));
+//        view.showProgressDialog(context.getString(R.string.sending_payment));
+        view.setRefresing(true);
         paymentInteractor.sendPayment(payment, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
@@ -145,12 +146,17 @@ public class NewPaymentPresenter extends BasePresenter {
                 .setTitle(R.string.payment_done)
                 .setMessage(String.format(context.getString(R.string.payment_done_message),
                         selectedEntity.getName(), selectedEntity.getBonusFormatted(context, payment.getTotal_amount())))
-                .setNeutralButton(R.string.back, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.back, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        //todo active this!!
-//                        ((Activity)context).finish();
+                    public void onDismiss(DialogInterface dialog) {
+                        ((Activity)context).finish();
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        ((Activity)context).finish();
                     }
                 })
                 .show();

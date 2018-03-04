@@ -88,7 +88,7 @@
 
 
     <TextView
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_go_to_login"
         style="@style/TextBase"
         android:padding="8dp"
         android:gravity="center_horizontal"

@@ -14,6 +14,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Patterns;
 import android.util.TypedValue;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -168,5 +169,9 @@ public final class Util {
         }
         textView.setText(result);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public static boolean isValidLink(String link) {
+        return link != null && Patterns.WEB_URL.matcher(link).matches();
     }
 }

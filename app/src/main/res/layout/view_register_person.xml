@@ -18,4 +18,8 @@
         android:hint="@string/nif"
         android:inputType="textCapCharacters" />
 
+    <include
+        android:id="@+id/view_pin_codes_person"
+        layout="@layout/view_register_pin_code"/>
+
 </LinearLayout>

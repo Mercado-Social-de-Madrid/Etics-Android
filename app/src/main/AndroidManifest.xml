@@ -55,10 +55,19 @@
             android:label="@string/qr_code_scan" />
         <activity android:name=".ui.novelties.detail.NoveltyDetailActivity" />
         <activity android:name=".ui.info.WebViewActivity" />
-
-        <activity android:name=".ui.payments.PaymentsActivity"
+        <activity
+            android:name=".ui.payments.PaymentsActivity"
             android:label="@string/pending_payments" />
-
+        <activity
+            android:name=".ui.transactions.TransactionsActivity"
+            android:label="@string/transactions" />
+        <activity
+            android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity android:name=".ui.get_boniatos.GetBoniatosActivity"
+            android:label="@string/get_boniatos"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <!-- [START firebase_service] -->
         <service android:name=".messaging.MyFirebaseMessagingService">
@@ -76,7 +85,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCmb9WAN4IbBbjPQdFtZEUvubMcP-tDa7g" />
+            android:value="AIzaSyBzx7rH3fchO0K9rRxjxdDdhrAeJP7hbM8" />
 
     </application>
 

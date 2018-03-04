@@ -12,7 +12,6 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.AuthInteractor;
-import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.model.User;
@@ -31,7 +30,6 @@ public class RegisterPresenter extends BasePresenter {
     public final String TYPE_ENTITY = "entity";
     public final String TYPE_PERSON = "person";
     private final AuthInteractor authInteractor;
-    private final DeviceInteractor deviceInteractor;
     private User user;
     private int registerScreen = 1;
     private Place place;
@@ -54,7 +52,6 @@ public class RegisterPresenter extends BasePresenter {
 
         this.view = view;
         authInteractor = new AuthInteractor(context, view);
-        deviceInteractor = new DeviceInteractor(context, view);
 
     }
 
@@ -63,9 +60,9 @@ public class RegisterPresenter extends BasePresenter {
         user = new User();
         view.setContinueRegisterEnable(true);
 
-//        view.showRegisterEntity();
 //        registerScreen = 2;
 //        user.setType(TYPE_PERSON);
+//        view.showRegisterEntity();
 
     }
 
@@ -125,6 +122,10 @@ public class RegisterPresenter extends BasePresenter {
 
     }
 
+    public void onBackRegisterButtonClick() {
+        registerScreen = 1;
+        view.showRegisterUserCommonData();
+    }
 
     private void processUserAuthData() {
 
@@ -149,12 +150,19 @@ public class RegisterPresenter extends BasePresenter {
             case TYPE_PERSON:
                 Person person = new Person();
                 view.fillPersonData(person);
+                if (!checkValidData(person)) {
+                    return false;
+                }
                 user.setPerson(person);
                 break;
 
             case TYPE_ENTITY:
                 Entity entity = new Entity();
                 if (!view.fillEntityData(entity)) {
+                    return false;
+                }
+
+                if (!checkValidData(entity)) {
                     return false;
                 }
 
@@ -170,9 +178,50 @@ public class RegisterPresenter extends BasePresenter {
         return true;
     }
 
+    private boolean checkValidData(Entity entity) {
+
+        return checkValidPinCode(entity.getPin_code(), entity.getPin_codeRepeat());
+    }
+
+    private boolean checkValidData(Person person) {
+        if (person.getName().isEmpty()) {
+            Toasty.error(context, context.getString(R.string.name_cannot_be_empty)).show();
+            return false;
+        }
+
+        if (person.getNIF().isEmpty()) {
+            Toasty.error(context, context.getString(R.string.nif_cannot_be_empty)).show();
+            return false;
+        }
+
+        return checkValidPinCode(person.getPin_code(), person.getPin_codeRepeat());
+    }
+
+    private boolean checkValidPinCode(String pinCode, String pinCodeRepeat) {
+
+        if (pinCode.length() < 4) {
+            Toasty.error(context, context.getString(R.string.pin_code_4_lenght)).show();
+            return false;
+        }
+
+        try {
+            Integer.parseInt(pinCode);
+        } catch (NumberFormatException e) {
+            Toasty.error(context, context.getString(R.string.invalid_pin_number)).show();
+            return false;
+        }
+
+        if (!pinCode.equals(pinCodeRepeat)) {
+            Toasty.error(context, context.getString(R.string.pin_codes_does_not_match)).show();
+            return false;
+        }
+
+        return true;
+    }
+
     private void performRegisterApi() {
 
-        view.showProgressDialog(context.getString(R.string.loading));
+        view.setRefresing(true);
 
         authInteractor.register(user, new BaseInteractor.BaseApiCallback<Data>() {
 
@@ -195,4 +244,5 @@ public class RegisterPresenter extends BasePresenter {
     public void onPlaceSelected(Place place) {
         this.place = place;
     }
+
 }

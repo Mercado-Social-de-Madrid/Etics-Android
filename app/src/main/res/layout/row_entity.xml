@@ -18,9 +18,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="wrap_content"
         android:background="@color/transblack_entities"
         android:padding="15dp"
+        android:minHeight="78dp"
         android:layout_alignParentBottom="true">
 
         <TextView
@@ -30,9 +31,11 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/img_starred"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="18sp"
-            android:text="Fabricantes de sueños"/>
+            android:maxLines="2"
+            android:textSize="20sp"
+            android:text="Fabricantes de sueños"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="0.8"/>
 
         <TextView
             android:id="@+id/tv_entity_category"

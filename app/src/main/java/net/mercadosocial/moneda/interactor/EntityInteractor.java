@@ -12,6 +12,7 @@ import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -20,6 +21,7 @@ import rx.schedulers.Schedulers;
  * Created by julio on 14/02/16.
  */
 public class EntityInteractor extends BaseInteractor {
+
 
 
     public interface Callback {
@@ -43,8 +45,6 @@ public class EntityInteractor extends BaseInteractor {
             return;
         }
 
-        baseView.setRefresing(true);
-
         getApi().getEntities()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<EntitiesResponse>() {
@@ -56,6 +56,7 @@ public class EntityInteractor extends BaseInteractor {
                     public void onError(Throwable e) {
 
                         callback.onError(e.getMessage());
+                        e.printStackTrace();
                     }
 
                     @Override
@@ -78,8 +79,6 @@ public class EntityInteractor extends BaseInteractor {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        baseView.setRefresing(true);
 
         getApi().getEntitiesFiltered(query)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
@@ -108,6 +107,37 @@ public class EntityInteractor extends BaseInteractor {
 
     }
 
+    public void getEntityById(String id, final BaseApiCallback<Entity> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().getEntityById(id)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Entity>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Entity> entityResponse) {
+
+                        baseView.setRefresing(false);
+
+                        callback.onResponse(entityResponse.body());
+
+
+                    }
+                });
+    }
 
     private EntitiesApi getApi() {
         return getApi(EntitiesApi.class);

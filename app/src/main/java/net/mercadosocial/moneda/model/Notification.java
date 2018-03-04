@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Notification implements Serializable {
 
     public static final String FIELD_TYPE = "type";
+    public static final String FIELD_FROM_OUTSIDE = "from_outside";
 
     public static final String TYPE_PAYMENT = "payment";
     public static final String TYPE_TRANSACTION = "transaction";
@@ -26,6 +27,8 @@ public class Notification implements Serializable {
 
     private String title;
     private String message;
+
+    private boolean fromOutside;
 
         /*
          'type': 'payment',
@@ -50,8 +53,7 @@ public class Notification implements Serializable {
             Notification notification = new Notification();
 
             notification.setType(extras.getString("type"));
-            notification.setTitle(extras.getString("title"));
-            notification.setMessage(extras.getString("message"));
+            notification.setFromOutside(extras.getBoolean(FIELD_FROM_OUTSIDE, false));
 
             switch (extras.getString(Notification.FIELD_TYPE)) {
                 case Notification.TYPE_PAYMENT:
@@ -69,6 +71,8 @@ public class Notification implements Serializable {
 
                 case Notification.TYPE_NEWS:
                     notification.setId(extras.getString("id"));
+                    notification.setTitle(extras.getString("title"));
+                    notification.setMessage(extras.getString("short_description"));
                     break;
             }
 
@@ -148,5 +152,13 @@ public class Notification implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isFromOutside() {
+        return fromOutside;
+    }
+
+    public void setFromOutside(boolean fromOutside) {
+        this.fromOutside = fromOutside;
     }
 }

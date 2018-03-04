@@ -29,4 +29,21 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="BtnRRSS">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/bg_rrss_icons</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <item name="progress_mes" type="id"/>
+    <style name="ProgressMES">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:src">@mipmap/img_logo_mes_circle_arrow</item>
+        <item name="android:id">@id/progress_mes</item>
+    </style>
+
 </resources>

@@ -8,7 +8,7 @@ import rx.Observable;
 
 public interface OffersApi {
 
-    @GET("offers/")
+    @GET("offers/?limit=100")
     Observable<OffersResponse> getOffers();
 
 }

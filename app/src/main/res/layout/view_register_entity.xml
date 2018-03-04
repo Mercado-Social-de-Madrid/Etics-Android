@@ -159,7 +159,12 @@
     <TextView
         style="@style/TextBase"
         android:text="@string/label_fill_info_later"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp"/>
 
+    <include
+        android:id="@+id/view_pin_codes_entity"
+        layout="@layout/view_register_pin_code"/>
 
 </LinearLayout>
