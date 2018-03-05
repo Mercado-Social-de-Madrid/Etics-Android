@@ -5,7 +5,7 @@
     <item android:state_pressed="true"
         android:state_selected="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/green_light" />
+            <solid android:color="@color/purple_light" />
             <!--<solid android:color="@android:color/transparent" />-->
             <corners android:radius="5dp" />
         </shape>
@@ -24,7 +24,7 @@
 
     <item android:state_selected="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/green_extra_light" />
+            <solid android:color="@color/purple_extra_light" />
             <corners android:radius="5dp" />
         </shape>
 

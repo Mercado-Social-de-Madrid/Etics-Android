@@ -55,15 +55,20 @@ public class EntitiesPaymentAdapter extends RecyclerView.Adapter<EntitiesPayment
         holder.tvEntityName.setText(entity.getName());
         holder.tvEntityCategory.setText(entity.getCategoriesString());
 
-        String logoUrl = entity.getLogoThumbnail();
+        String logoUrl = entity.getLogoThumbnailOrCover();
 
-        Picasso.with(context)
-                .load(logoUrl)
+        if (logoUrl != null) {
+
+            Picasso.with(context)
+                    .load(logoUrl)
 //              .placeholder(R.mipmap.img_default_grid)
-                .noPlaceholder()
-                .error(R.mipmap.ic_mes_v2_144)
-                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(holder.imgEntity);
+                    .placeholder(R.mipmap.ic_mes_v2_144_semitransp)
+                    .error(R.mipmap.ic_mes_v2_144)
+                    .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+                    .into(holder.imgEntity);
+        } else {
+            holder.imgEntity.setImageResource(R.mipmap.ic_mes_v2_144);
+        }
 
         holder.rootView.setSelected(safePosition == selectedPosition);
 

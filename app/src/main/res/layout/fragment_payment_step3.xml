@@ -7,12 +7,6 @@
     android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.new_payment.step1.NewPaymentStep1Fragment">
 
-    <TextView
-        style="@style/TextBase.Purple"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/check_payment_data"
-        android:textSize="22sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,11 +20,20 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/TextBase.Purple"
+                android:layout_marginTop="5dp"
+                android:text="@string/check_payment_data"
+                android:textSize="22sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,14 +99,14 @@
                 android:background="@color/purple"
                 android:padding="10dp"
                 android:text="@string/enter_pin_code"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="20dp"/>
 
             <com.alimuzaffar.lib.pin.PinEntryEditText
                 android:id="@+id/edit_pin_entry"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:digits="1234567890"
                 android:imeOptions="actionDone"
                 android:inputType="number"

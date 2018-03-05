@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Novelty;
+import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
 
@@ -55,12 +56,17 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
         holder.tvNoveltyTextShort.setText(Html.fromHtml(novelty.getDescriptionShortNovelty()));
 
         String image = novelty.getImageNoveltyUrl();
-        Picasso.with(context)
-                .load(image)
-//                .placeholder(R.mipmap.img_default_grid)
-                .error(R.mipmap.ic_mes_v2_144)
-                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(holder.imgNovelty);
+
+        if (Util.isValidLink(image)) {
+            Picasso.with(context)
+                    .load(image)
+                    .placeholder(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.ic_mes_v2_144_semitransp : R.mipmap.ic_offer_semitransp)
+                    .error(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.ic_mes_v2_144 : R.mipmap.ic_offer_solid)
+                    .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+                    .into(holder.imgNovelty);
+        } else {
+            holder.imgNovelty.setImageResource(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.ic_mes_v2_144 : R.mipmap.ic_offer_solid);
+        }
 
         holder.tvNoveltyDate.setText(novelty.getDate());
 

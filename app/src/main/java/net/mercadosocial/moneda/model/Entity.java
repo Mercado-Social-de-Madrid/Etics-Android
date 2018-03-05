@@ -78,6 +78,17 @@ public class Entity implements Serializable {
         return ApiClient.BASE_URL + logo;
     }
 
+    public String getLogoThumbnailOrCover() {
+
+        if (logo_thumbnail != null) {
+            return getLogoThumbnail();
+        } else if (gallery != null && gallery.getPhotos() != null && !gallery.getPhotos().isEmpty()) {
+            return gallery.getPhotos().get(0).getImage();
+        } else {
+            return null;
+        }
+
+    }
 
     public float getMaxAcceptedBoniatosAmount(Float totalAmountFloat) {
         return getMax_percent_payment() * totalAmountFloat / 100f;
@@ -366,4 +377,5 @@ public class Entity implements Serializable {
     public void setPin_codeRepeat(String pin_codeRepeat) {
         this.pin_codeRepeat = pin_codeRepeat;
     }
+
 }

@@ -88,12 +88,17 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
         tvNoveltySubtitle.setText(novelty.getSubtitleNovelty());
 
         String image = novelty.getImageNoveltyUrl();
-        Picasso.with(this)
-                .load(image)
-//                .placeholder(R.mipmap.img_default_grid)
-                .error(R.mipmap.ic_mes_v2_144)
-                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(imgNovelty);
+
+        if (Util.isValidLink(image)) {
+            imgNovelty.setVisibility(View.VISIBLE);
+            Picasso.with(this)
+                    .load(image)
+                    .placeholder(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.img_mes_header : R.mipmap.ic_offer_semitransp)
+                    .resizeDimen(R.dimen.width_image_standard, R.dimen.height_image_small)
+                    .into(imgNovelty);
+        } else {
+            imgNovelty.setVisibility(View.GONE);
+        }
 
         Util.setHtmlLinkableText(tvNoveltyDescription, novelty.getDescriptionFullNovelty());
 

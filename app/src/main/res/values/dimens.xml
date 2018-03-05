@@ -5,4 +5,5 @@
     <dimen name="width_image_small">100dp</dimen>
     <dimen name="height_image_small">0dp</dimen>
     <dimen name="size_qr">350dp</dimen>
+    <dimen name="width_image_standard">300dp</dimen>
 </resources>

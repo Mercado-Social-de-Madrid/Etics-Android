@@ -8,10 +8,11 @@ public class Person {
 
     private String uuid;
     private String uuid_user;
-    private String NIF;
+    private String nif;
     private String name;
-    private String surnames;
+    private String surname;
     private String avatar;
+    private String address;
 
     private String pin_code;
     private transient String pin_codeRepeat;
@@ -32,12 +33,12 @@ public class Person {
         this.uuid_user = uuid_user;
     }
 
-    public String getNIF() {
-        return NIF;
+    public String getNif() {
+        return nif;
     }
 
-    public void setNIF(String NIF) {
-        this.NIF = NIF;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getName() {
@@ -48,12 +49,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getSurnames() {
-        return surnames;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurnames(String surnames) {
-        this.surnames = surnames;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getAvatar() {
@@ -78,5 +79,13 @@ public class Person {
 
     public void setPin_codeRepeat(String pin_codeRepeat) {
         this.pin_codeRepeat = pin_codeRepeat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

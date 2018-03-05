@@ -37,7 +37,6 @@
                 android:hint="@string/username"
                 android:inputType="textAutoComplete" />
 
-
             <EditText
                 android:id="@+id/edit_password"
                 style="@style/EditTextAuth"

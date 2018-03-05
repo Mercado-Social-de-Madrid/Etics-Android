@@ -24,6 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Notification;
@@ -77,7 +79,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         Notification notification = Notification.parseNotification(intent.getExtras());
         if (notification == null) {
-            // todo crash report
+            Crashlytics.logException(new IllegalArgumentException(
+                    "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(intent.getExtras())));
             return;
         }
 
@@ -267,7 +270,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                                 refreshingDialog.show(getFragmentManager(), null);
                             }
                         }
-                    }, 500);
+                    }, ProgressDialogMES.TIME_START_THRESHOLD);
                 }
             } else {
                 if (handlerDialog != null) {

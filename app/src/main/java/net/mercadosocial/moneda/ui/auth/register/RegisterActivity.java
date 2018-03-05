@@ -49,17 +49,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText editPinCodePerson, editPinCodeRepeatPerson;
     private EditText editPinCodeEntity, editPinCodeRepeatEntity;
     private TextView btnRegisterBack;
+    private EditText editEmail;
+    private EditText editSurnamesPerson;
 
 
     private void findViews() {
 
-        viewRegisterUser = findViewById( R.id.view_register_user );
-        viewRegisterPerson = findViewById( R.id.view_register_person );
-        viewRegisterEntity = findViewById( R.id.view_register_entity );
-        
-        editUsername = (EditText)findViewById( R.id.edit_username );
-        editPassword = (EditText)findViewById( R.id.edit_password );
-        editRepeatPassword = (EditText)findViewById( R.id.edit_repeat_password );
+        viewRegisterUser = findViewById(R.id.view_register_user);
+        viewRegisterPerson = findViewById(R.id.view_register_person);
+        viewRegisterEntity = findViewById(R.id.view_register_entity);
+
+        editUsername = (EditText) findViewById(R.id.edit_username);
+        editEmail = (EditText) findViewById(R.id.edit_email);
+        editPassword = (EditText) findViewById(R.id.edit_password);
+        editRepeatPassword = (EditText) findViewById(R.id.edit_repeat_password);
 
         btnRegisterPerson = findViewById(R.id.btn_register_person);
         btnRegisterEntity = findViewById(R.id.btn_register_entity);
@@ -67,16 +70,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         btnRegisterBack = (TextView) findViewById(R.id.btn_register_back);
         btnRegisterContinue = (TextView) findViewById(R.id.btn_register_continue);
 
-        editNamePerson = (EditText)findViewById( R.id.edit_name_person );
-        editNif = (EditText)findViewById( R.id.edit_nif );
+        editNamePerson = (EditText) findViewById(R.id.edit_name_person);
+        editSurnamesPerson = (EditText) findViewById(R.id.edit_surnames_person);
+        editNif = (EditText) findViewById(R.id.edit_nif);
         editPinCodePerson = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code);
         editPinCodeRepeatPerson = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code_repeat);
 
-        editNameEntity = (EditText)findViewById( R.id.edit_name_entity );
-        editCif = (EditText)findViewById( R.id.edit_cif );
-        editMaxAcceptPercent = (EditText)findViewById( R.id.edit_max_accept_percent );
-        editBonusPercent = (EditText)findViewById( R.id.edit_bonus_percent );
-        editBonusPercentEntities = (EditText)findViewById( R.id.edit_bonus_percent_entities );
+        editNameEntity = (EditText) findViewById(R.id.edit_name_entity);
+        editCif = (EditText) findViewById(R.id.edit_cif);
+        editMaxAcceptPercent = (EditText) findViewById(R.id.edit_max_accept_percent);
+        editBonusPercent = (EditText) findViewById(R.id.edit_bonus_percent);
+        editBonusPercentEntities = (EditText) findViewById(R.id.edit_bonus_percent_entities);
         editPinCodeEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code);
         editPinCodeRepeatEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code_repeat);
 
@@ -88,8 +92,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         btnRegisterBack.setOnClickListener(this);
         btnGoToLogin.setOnClickListener(this);
     }
-
-
 
 
     @Override
@@ -223,10 +225,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void fillUserAuthData(User user) {
         String username = editUsername.getText().toString();
+        String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
         String repeatPassword = editRepeatPassword.getText().toString();
 
-        user.setEmail(username);
+        user.setEmail(email);
+        user.setUsername(username);
         user.setPassword(password);
         user.setRepeatPassword(repeatPassword);
     }
@@ -234,7 +238,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void fillPersonData(Person person) {
         person.setName(editNamePerson.getText().toString());
-        person.setNIF(editNif.getText().toString());
+        person.setSurname(editSurnamesPerson.getText().toString());
+        person.setNif(editNif.getText().toString());
         person.setPin_code(editPinCodePerson.getText().toString());
         person.setPin_codeRepeat(editPinCodeRepeatPerson.getText().toString());
     }

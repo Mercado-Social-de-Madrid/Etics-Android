@@ -7,9 +7,14 @@
     <EditText
         android:id="@+id/edit_username"
         style="@style/EditTextAuth"
+        android:hint="@string/username"
+        android:inputType="textAutoComplete" />
+
+    <EditText
+        android:id="@+id/edit_email"
+        style="@style/EditTextAuth"
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
-
 
     <EditText
         android:id="@+id/edit_password"

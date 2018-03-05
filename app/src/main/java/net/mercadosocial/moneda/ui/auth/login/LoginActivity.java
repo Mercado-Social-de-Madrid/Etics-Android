@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
@@ -42,8 +43,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_login);
         findViews();
 
-        editUsername.setText("juliotest");
-        editPassword.setText("boniatos");
+        if (DebugHelper.MOCK_DATA) {
+            editUsername.setText("juliotest");
+            editPassword.setText("boniatos");
+        }
 
     }
 

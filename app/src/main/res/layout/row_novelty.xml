@@ -26,7 +26,6 @@
                 android:scaleType="centerCrop"
                 android:layout_marginRight="8dp"
                 android:adjustViewBounds="true"
-                android:background="@color/purple_light"
                 android:layout_centerVertical="true"
                 android:alpha="1"/>
 
@@ -36,7 +35,9 @@
                 android:textColor="#000"
                 android:layout_toRightOf="@+id/img_novelty"
                 android:layout_toLeftOf="@+id/img_starred"
-                android:textSize="22sp"
+                android:layout_alignTop="@id/img_novelty"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:text="Título"

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.model.Notification;
+import net.mercadosocial.moneda.util.Util;
 
 import es.dmoral.toasty.Toasty;
 
@@ -69,7 +71,9 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
         View layout = inflater.inflate(R.layout.view_dialog_new_payment, null);
         findViews(layout);
 
-//        tvNewPaymentInfo.setText(notification.getSender() + " te ha enviado un pago de " + notification.getAmount() + " Boniatos");
+        tvNewPaymentInfo.setText(Html.fromHtml(String.format(getString(R.string.payment_received_message),
+                notification.getSender(), Util.getDecimalFormatted(notification.getAmount(), false)
+                        + " " + getString(R.string.currency_name_plural))));
 
         return layout;
     }

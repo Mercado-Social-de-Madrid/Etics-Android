@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.Spanned;
@@ -27,7 +28,9 @@ import java.text.Normalizer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Set;
 
 public final class Util {
 
@@ -173,5 +176,18 @@ public final class Util {
 
     public static boolean isValidLink(String link) {
         return link != null && Patterns.WEB_URL.matcher(link).matches();
+    }
+
+    public static String dumpIntentExtras(Bundle bundle) {
+        String extrasString = "";
+        if (bundle != null) {
+            Set<String> keys = bundle.keySet();
+            Iterator<String> it = keys.iterator();
+            while (it.hasNext()) {
+                String key = it.next();
+                extrasString += "[" + key + "=" + bundle.get(key) + "]\n";
+            }
+        }
+        return extrasString;
     }
 }

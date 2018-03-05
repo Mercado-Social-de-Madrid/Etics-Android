@@ -189,7 +189,7 @@ public class RegisterPresenter extends BasePresenter {
             return false;
         }
 
-        if (person.getNIF().isEmpty()) {
+        if (person.getNif().isEmpty()) {
             Toasty.error(context, context.getString(R.string.nif_cannot_be_empty)).show();
             return false;
         }

@@ -30,7 +30,6 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.username = email;
         this.email = email;
     }
 

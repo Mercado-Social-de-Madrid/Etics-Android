@@ -185,6 +185,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
                 startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
 
+
+//                Notification notification = new Notification();
+//                notification.setId("");
+//                notification.setSender("Alguien");
+//                notification.setAmount(15.3f);
+//                NewPaymentDialog.newInstance(notification)
+//                        .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
+//                            @Override
+//                            public void onClose() {
+//                                refreshData();
+//                            }
+//                        }).show(getFragmentManager(), null);
+
                 break;
         }
 
@@ -275,6 +288,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         .error(R.mipmap.ic_mes_v2_144)
                         .into(imgAvatar);
             }
+        } else {
+            imgAvatar.setImageResource(R.mipmap.ic_avatar);
         }
     }
 }

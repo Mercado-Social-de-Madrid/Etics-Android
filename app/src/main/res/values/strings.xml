@@ -173,12 +173,15 @@
     <string name="pin_code">Código PIN</string>
     <string name="pin_code_register_explanation">Por seguridad en cada transacción se te pedirá el código PIN que especifiques aquí.</string>
     <string name="name_cannot_be_empty">El nombre no puede estar vacío</string>
-    <string name="nif_cannot_be_empty">El NIF no puede estar vacío</string>
+    <string name="nif_cannot_be_empty">El nif no puede estar vacío</string>
     <string name="pin_code_4_lenght">El código PIN debe tener 4 dígitos</string>
     <string name="invalid_pin_number">PIN no válido. Sólo números del 0 al 9</string>
     <string name="pin_codes_does_not_match">Los códigos PIN no coinciden</string>
     <string name="back_with_arrow"><![CDATA[< Atrás]]></string>
     <string name="invalid_field">Campo no válido</string>
     <string name="new_payment_received">Nuevo pago recibido</string>
+    <string name="username_or_email">Usuari@ o Email</string>
+    <string name="surname">Apellidos</string>
+    <string name="payment_received_message"><![CDATA[<b>%s</b> te ha enviado un pago de<br><b>%s </b>]]></string>
 
 </resources>
