@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.payments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -95,10 +96,7 @@ public class PaymentsPresenter extends BasePresenter {
         paymentInteractor.acceptPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
-                Toasty.success(context, "OK").show();
-
-                payments.remove(position);
-                view.onItemRemoved(position);
+                removeAndCheckFinish(position);
             }
 
             @Override
@@ -118,15 +116,7 @@ public class PaymentsPresenter extends BasePresenter {
         paymentInteractor.cancelPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
-
-                payments.remove(position);
-                view.onItemRemoved(position);
-                if (payments.isEmpty()) {
-                    Toasty.success(context, context.getString(R.string.finish_pending_payments)).show();
-                    finish();
-                } else {
-                    Toasty.success(context, "OK").show();
-                }
+                removeAndCheckFinish(position);
             }
 
             @Override
@@ -134,6 +124,23 @@ public class PaymentsPresenter extends BasePresenter {
                 Toasty.error(context, message).show();
             }
         });
+    }
+
+    private void removeAndCheckFinish(int position) {
+
+        payments.remove(position);
+        view.onItemRemoved(position);
+        if (payments.isEmpty()) {
+            Toasty.success(context, context.getString(R.string.finish_pending_payments)).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 300);
+        } else {
+            Toasty.success(context, "OK").show();
+        }
     }
 
 }

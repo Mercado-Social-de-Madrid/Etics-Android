@@ -56,7 +56,7 @@ public class WalletPresenter extends BasePresenter {
 
         Data data = App.getUserData(context);
         if (data != null) {
-            view.showUserInfo(data.getUsername());
+            view.showUserInfo(data.getName());
         }
 
         refreshWalletData();

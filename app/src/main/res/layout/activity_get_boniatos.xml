@@ -42,7 +42,7 @@
                     android:background="@color/bg_edittext"
                     android:ems="4"
                     android:gravity="right"
-                    android:inputType="number|phone"
+                    android:inputType="textVisiblePassword"
                     android:padding="5dp" />
 
                 <TextView

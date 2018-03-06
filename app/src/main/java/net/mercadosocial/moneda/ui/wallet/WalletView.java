@@ -9,7 +9,7 @@ import net.mercadosocial.moneda.model.Wallet;
 
 public interface WalletView extends BaseView {
 
-    void showUserInfo(String username);
+    void showUserInfo(String name);
 
     void showWalletData(boolean showLoading, Wallet wallet);
 

@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private View viewUserInfo;
     private MainPresenter presenter;
     private ImageView imgAvatar;
+    private TextView tvPendingPaymentsBadge;
 
     private void findViews() {
 
@@ -83,9 +86,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         findViews();
         configureToolbar();
         configureDrawerLayout();
+        configureBottomNavView();
+
 
         if (DebugHelper.SHORTCUT_ACTIVITY != null) {
             startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
+            return;
         }
 
 //        if (App.getUserData(this) == null) {
@@ -109,7 +115,26 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onResume() {
         super.onResume();
+        if (DebugHelper.SHORTCUT_ACTIVITY != null) {
+            DebugHelper.SHORTCUT_ACTIVITY = null;
+            return;
+        }
         presenter.onResume();
+    }
+
+
+    private void configureBottomNavView() {
+
+        View v = bottomNavView.findViewById(R.id.navigation_wallet);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
+        View view = LayoutInflater.from(this)
+                .inflate(R.layout.view_pending_payments_badge, bottomNavView, false);
+
+        tvPendingPaymentsBadge = (TextView) view.findViewById(R.id.tv_number_pending_payments_main);
+        itemView.addView(view);
+
+//        showNewNewsMessage();
     }
 
     private void configureDrawerLayout() {
@@ -139,6 +164,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (fragment instanceof WalletFragment) {
             ((WalletPresenter)((WalletFragment)fragment).getBasePresenter()).refreshData();
         }
+
+        presenter.refreshData();
     }
 
     @Override
@@ -188,7 +215,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
 //                Notification notification = new Notification();
 //                notification.setId("");
-//                notification.setSender("Alguien");
+//                notification.setSender("Pepa");
 //                notification.setAmount(15.3f);
 //                NewPaymentDialog.newInstance(notification)
 //                        .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
@@ -291,5 +318,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar);
         }
+    }
+
+    @Override
+    public void showPendingPaymentsNumber(int numberPendingPayments) {
+        tvPendingPaymentsBadge.setText(String.valueOf(numberPendingPayments));
+        tvPendingPaymentsBadge.setVisibility(numberPendingPayments > 0 ? View.VISIBLE : View.GONE);
     }
 }

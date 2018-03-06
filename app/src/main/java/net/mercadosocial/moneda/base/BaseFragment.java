@@ -55,13 +55,17 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void showProgressDialog(String message) {
 
-        ((BaseActivity) getActivity()).showProgressDialog(message);
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).showProgressDialog(message);
+        }
     }
 
     @Override
     public void hideProgressDialog() {
 
-        ((BaseActivity) getActivity()).hideProgressDialog();
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).hideProgressDialog();
+        }
     }
 
 
@@ -76,22 +80,33 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void toast(int stringResId) {
-        ((BaseActivity) getActivity()).toast(stringResId);
+
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).toast(stringResId);
+        }
     }
 
     @Override
     public void toast(String mensaje) {
-        ((BaseActivity) getActivity()).toast(mensaje);
+
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).toast(mensaje);
+        }
     }
 
     @Override
     public void alert(String title, String message) {
-        ((BaseActivity) getActivity()).alert(title, message);
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).alert(title, message);
+        }
     }
 
     @Override
     public void alert(String message) {
-        ((BaseActivity) getActivity()).alert(message);
+
+        if (getActivity() != null) {
+            ((BaseActivity) getActivity()).alert(message);
+        }
     }
 
     @Override

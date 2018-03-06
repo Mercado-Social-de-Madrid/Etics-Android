@@ -66,6 +66,14 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
         return layout;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (editTotalAmountEur != null) {
+            editTotalAmountEur.setError(null);
+            editTotalAmountEur.requestFocus();
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -89,7 +97,7 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
         if (v == editTotalAmountEur) {
             if (!hasFocus) {
                 String totalAmount = editTotalAmountEur.getText().toString();
-                presenter.checkMaxAcceptedByEntity(totalAmount);
+                presenter.checkMaxAcceptedByEntity(totalAmount, true);
             }
         }
     }

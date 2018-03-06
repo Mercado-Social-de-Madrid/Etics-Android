@@ -13,9 +13,13 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.Notification;
+import net.mercadosocial.moneda.model.Payment;
+
+import java.util.List;
 
 /**
  * Created by julio on 2/02/18.
@@ -75,7 +79,26 @@ import net.mercadosocial.moneda.model.Notification;
          Data data = App.getUserData(context);
          view.showUserData(data);
 
+         refreshPendingPayments();
      }
+
+
+
+    private void refreshPendingPayments() {
+        new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
+            @Override
+            public void onResponse(List<Payment> list) {
+                if (list != null) {
+                    view.showPendingPaymentsNumber(list.size());
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
 
     public void onLogoutClick() {
         App.removeUserData(context);

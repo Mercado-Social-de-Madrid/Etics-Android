@@ -61,7 +61,7 @@ import net.mercadosocial.moneda.util.Util;
 
     public void onContinueButtonClick(String totalAmount, String boniatosAmount) {
         Float totalAmountFloat = convertAmount(totalAmount);
-        if (!checkMaxAcceptedByEntity(totalAmount)) {
+        if (!checkMaxAcceptedByEntity(totalAmount, false)) {
             return;
         }
 
@@ -112,7 +112,7 @@ import net.mercadosocial.moneda.util.Util;
     }
 
 
-    public boolean checkMaxAcceptedByEntity(String totalAmount) {
+    public boolean checkMaxAcceptedByEntity(String totalAmount, boolean updateSuggestedBoniatosAmount) {
 
         Float totalAmountFloat = convertAmount(totalAmount);
         if (totalAmountFloat != null) {
@@ -125,7 +125,7 @@ import net.mercadosocial.moneda.util.Util;
             String amountFormatted = getSelectedEntity().getMaxAcceptedBoniatosAmountFormatted(totalAmountFloat);
             view.showBoniatosRestrictions(amountFormatted, wallet != null ? wallet.getBalanceFormatted() : "?");
 
-            if (wallet != null) {
+            if (updateSuggestedBoniatosAmount && wallet != null) {
                 Float minAmount = Math.min(getSelectedEntity().getMaxAcceptedBoniatosAmount(totalAmountFloat), wallet.getBalance());
                 view.showPresetBoniatosAmount(Util.getDecimalFormatted(minAmount, false));
             }

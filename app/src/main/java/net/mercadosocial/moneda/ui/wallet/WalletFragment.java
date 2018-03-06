@@ -18,6 +18,7 @@ import net.mercadosocial.moneda.model.Wallet;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
+import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.payments.PaymentsPresenter;
 import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
@@ -153,11 +154,11 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
 
     @Override
-    public void showUserInfo(String username) {
+    public void showUserInfo(String name) {
         viewNoWallet.setVisibility(View.GONE);
         viewWallet.setVisibility(View.VISIBLE);
 
-        tvName.setText(String.format(getString(R.string.welcome_name_wallet), username));
+        tvName.setText(String.format(getString(R.string.welcome_name_wallet), name));
 
     }
 
@@ -184,5 +185,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         btnPendingPayments.setVisibility(View.VISIBLE);
         tvNumberPendingPayments.setText(String.format(getString(R.string.pending_payments_warning), numberPendingPayments));
+
+        ((MainActivity)getActivity()).showPendingPaymentsNumber(numberPendingPayments);
     }
 }
