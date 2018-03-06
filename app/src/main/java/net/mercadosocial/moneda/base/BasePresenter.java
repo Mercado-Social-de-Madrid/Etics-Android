@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -57,6 +58,9 @@ public class BasePresenter {
     }
 
 
+    public void finish() {
+        ((Activity) context).finish();
+    }
 
 
     // ------- COMMON METHODS --------------

@@ -183,5 +183,6 @@
     <string name="username_or_email">Usuari@ o Email</string>
     <string name="surname">Apellidos</string>
     <string name="payment_received_message"><![CDATA[<b>%s</b> te ha enviado un pago de<br><b>%s </b>]]></string>
+    <string name="finish_pending_payments">¡Terminaste!</string>
 
 </resources>

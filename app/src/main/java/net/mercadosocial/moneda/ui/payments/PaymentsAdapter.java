@@ -45,9 +45,7 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position2) {
 
-        final int safePosition = holder.getAdapterPosition();
-
-        final Payment payment = getItemAtPosition(safePosition);
+        final Payment payment = getItemAtPosition(holder.getAdapterPosition());
 
 
         holder.tvNewPaymentInfo.setText(payment.getSender() + " te ha enviado un pago de " +
@@ -59,14 +57,14 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
         holder.btnPaymentAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onAcceptPaymentClick(v, safePosition);
+                itemClickListener.onAcceptPaymentClick(v, holder.getAdapterPosition());
             }
         });
 
         holder.btnPaymentCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onCancelClick(v, safePosition);
+                itemClickListener.onCancelClick(v, holder.getAdapterPosition());
             }
         });
 
@@ -98,9 +96,17 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
         return payments.get(position);
     }
 
-    public void updateData(List<Payment> payments) {
-        this.payments = payments;
-        notifyDataSetChanged();
+    public void updateData(List<Payment> payments, boolean notify) {
+//        this.payments.clear();
+//        this.payments.addAll(payments);
+        if (notify) {
+            notifyDataSetChanged();
+        }
+    }
+
+    public void onItemRemoved(int position) {
+        notifyItemRemoved(position);
+
     }
 
 

@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,6 +31,7 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
+import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.NewPaymentDialog;
 import net.mercadosocial.moneda.views.ProgressDialogMES;
@@ -99,7 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             case Notification.TYPE_TRANSACTION:
                 String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), true);
                 if (notification.getIs_bonification()) {
-                    App.openBonificationDialog(this, amountFormatted);
+                    showBonificationDialog(amountFormatted);
                 } else {
                     Toasty.info(this, String.format(getString(R.string.income_received), amountFormatted)).show();
                 }
@@ -114,6 +116,33 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 break;
         }
 
+    }
+
+    private void showBonificationDialog(String amountFormatted) {
+
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("¡Enhorabuena!");
+        ab.setMessage("Has recibido la bonificación por tu compra en el Mercado Social. \n\n" + amountFormatted + " Boniatos");
+        ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(TransactionsPresenter.newTransactionsActivity(BaseActivity.this));
+            }
+        });
+        ab.setNeutralButton(R.string.close, null);
+        Dialog dialog = ab.show();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                refreshData();
+            }
+        });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                refreshData();
+            }
+        });
     }
 
 

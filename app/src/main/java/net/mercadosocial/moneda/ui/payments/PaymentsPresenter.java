@@ -10,6 +10,8 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.model.Payment;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -23,7 +25,7 @@ public class PaymentsPresenter extends BasePresenter {
 
     private final PaymentsView view;
     private final PaymentInteractor paymentInteractor;
-    private List<Payment> payments;
+    private List<Payment> payments = new ArrayList<>();
 
     public static Intent newPaymentsActivity(Context context) {
 
@@ -68,7 +70,9 @@ public class PaymentsPresenter extends BasePresenter {
                     return;
                 }
 
-                payments = list;
+                payments.clear();
+                payments.addAll(list);
+                Collections.sort(payments);
                 view.showPendingPayments(payments);
             }
 
@@ -80,14 +84,16 @@ public class PaymentsPresenter extends BasePresenter {
 
     }
 
-    public void onAcceptPaymentClick(int position) {
-        Payment payment = payments.get(position);
+    public void onAcceptPaymentClick(final int position) {
+        final Payment payment = payments.get(position);
         view.showProgressDialog(context.getString(R.string.processing));
         paymentInteractor.acceptPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
                 Toasty.success(context, "OK").show();
-                refreshData();
+
+                payments.remove(position);
+                view.onItemRemoved(position);
             }
 
             @Override
@@ -97,14 +103,21 @@ public class PaymentsPresenter extends BasePresenter {
         });
     }
 
-    public void onCancelPaymentClick(int position) {
+    public void onCancelPaymentClick(final int position) {
         Payment payment = payments.get(position);
         view.showProgressDialog(context.getString(R.string.processing));
         paymentInteractor.cancelPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
-                Toasty.success(context, "OK").show();
-                refreshData();
+
+                payments.remove(position);
+                view.onItemRemoved(position);
+                if (payments.isEmpty()) {
+                    Toasty.success(context, context.getString(R.string.finish_pending_payments)).show();
+                    finish();
+                } else {
+                    Toasty.success(context, "OK").show();
+                }
             }
 
             @Override
@@ -113,4 +126,5 @@ public class PaymentsPresenter extends BasePresenter {
             }
         });
     }
+
 }

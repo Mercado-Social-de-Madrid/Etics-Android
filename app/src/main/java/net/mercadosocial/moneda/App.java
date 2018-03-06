@@ -1,8 +1,6 @@
 package net.mercadosocial.moneda;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
@@ -18,7 +16,6 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
-import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 
 /**
  * Created by julio on 17/06/16.
@@ -118,20 +115,6 @@ public class App extends MultiDexApplication {
 
     }
 
-    public static void openBonificationDialog(final Context context, String amount) {
-
-        AlertDialog.Builder ab = new AlertDialog.Builder(context);
-        ab.setTitle("¡Enhorabuena!");
-        ab.setMessage("Has recibido la bonificación por tu compra en el Mercado Social. \n\n" + amount + " Boniatos");
-        ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                context.startActivity(TransactionsPresenter.newTransactionsActivity(context));
-            }
-        });
-        ab.setNeutralButton(R.string.close, null);
-        ab.show();
-    }
 
     public static boolean isEntity(Context context) {
         Data data = getUserData(context);

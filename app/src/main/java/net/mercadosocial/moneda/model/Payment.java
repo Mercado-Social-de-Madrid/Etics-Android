@@ -1,5 +1,7 @@
 package net.mercadosocial.moneda.model;
 
+import android.support.annotation.NonNull;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -9,7 +11,7 @@ import java.text.ParseException;
  * Created by julio on 1/02/18.
  */
 
-public class Payment {
+public class Payment implements Comparable<Payment> {
 
     //when receiving pending
     private String id;
@@ -128,4 +130,14 @@ public class Payment {
         this.timestamp = timestamp;
     }
 
+    @Override
+    public int compareTo(@NonNull Payment payment2) {
+        try {
+            boolean isDateAfterDate2 = timestampFormat.parse(getTimestamp())
+                    .before(timestampFormat.parse(payment2.getTimestamp()));
+            return isDateAfterDate2 ? 1 : -1;
+        } catch (ParseException e) {
+        }
+        return 0;
+    }
 }

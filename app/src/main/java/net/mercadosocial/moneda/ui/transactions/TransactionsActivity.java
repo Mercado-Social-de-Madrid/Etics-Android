@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.transactions;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +36,8 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerTransactions.setLayoutManager(layoutManager);
 
-        RecyclerView.ItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider_horizontal));
         recyclerTransactions.addItemDecoration(divider);
 
         presenter.onCreate();
@@ -46,6 +48,12 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+    }
+
+    @Override
+    public void refreshData() {
+        super.refreshData();
+        presenter.refreshData();
     }
 
     @Override

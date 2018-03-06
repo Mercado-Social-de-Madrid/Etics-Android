@@ -13,6 +13,10 @@ import net.mercadosocial.moneda.model.Payment;
 
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.OvershootInRightAnimator;
+import jp.wasabeef.recyclerview.animators.ScaleInRightAnimator;
+
 public class PaymentsActivity extends BaseActivity implements PaymentsView, PaymentsAdapter.OnItemClickListener {
 
     private PaymentsPresenter presenter;
@@ -42,6 +46,7 @@ public class PaymentsActivity extends BaseActivity implements PaymentsView, Paym
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerPayments.setLayoutManager(layoutManager);
+        recyclerPayments.setItemAnimator(new OvershootInRightAnimator());
 
         presenter.onCreate();
 
@@ -65,18 +70,25 @@ public class PaymentsActivity extends BaseActivity implements PaymentsView, Paym
             adapter.setOnItemClickListener(this);
             recyclerPayments.setAdapter(adapter);
         } else {
-            adapter.updateData(payments);
+            adapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void onAcceptPaymentClick(View view, int position) {
+        recyclerPayments.setItemAnimator(new ScaleInRightAnimator());
         presenter.onAcceptPaymentClick(position);
     }
 
     @Override
     public void onCancelClick(View view, int position) {
+        recyclerPayments.setItemAnimator(new OvershootInLeftAnimator());
         presenter.onCancelPaymentClick(position);
 
+    }
+
+    @Override
+    public void onItemRemoved(int position) {
+        adapter.onItemRemoved(position);
     }
 }

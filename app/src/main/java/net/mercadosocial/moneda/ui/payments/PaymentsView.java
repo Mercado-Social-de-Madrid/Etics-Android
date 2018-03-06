@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface PaymentsView extends BaseView {
     void showPendingPayments(List<Payment> payments);
+
+    void onItemRemoved(int position);
 }
