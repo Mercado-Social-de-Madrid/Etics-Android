@@ -30,6 +30,7 @@
 
     <color name="grey_disabled">#ababab</color>
     <color name="red">#F00</color>
+    <color name="red_dark">#d10000</color>
     <color name="black_semitransp_pressed">#34000000</color>
     <color name="black_semitransp">#60000000</color>
 

@@ -57,11 +57,11 @@ public class PaymentsActivity extends BaseActivity implements PaymentsView, Paym
         presenter.refreshData();
     }
 
-    @Override
-    public void setRefresing(boolean refresing) {
-        viewPayments.setVisibility(refresing ? View.GONE : View.VISIBLE);
-        progressPayments.setVisibility(refresing ? View.VISIBLE : View.GONE);
-    }
+//    @Override
+//    public void setRefresing(boolean refresing) {
+//        viewPayments.setVisibility(refresing ? View.GONE : View.VISIBLE);
+//        progressPayments.setVisibility(refresing ? View.VISIBLE : View.GONE);
+//    }
 
     @Override
     public void showPendingPayments(List<Payment> payments) {

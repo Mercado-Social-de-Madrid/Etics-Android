@@ -85,8 +85,13 @@ public class PaymentsPresenter extends BasePresenter {
     }
 
     public void onAcceptPaymentClick(final int position) {
+
+        payments.get(position).setBlockButtons(true);
+        view.showPendingPayments(payments);
+
+
         final Payment payment = payments.get(position);
-        view.showProgressDialog(context.getString(R.string.processing));
+        view.setRefresing(true);
         paymentInteractor.acceptPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
@@ -104,8 +109,12 @@ public class PaymentsPresenter extends BasePresenter {
     }
 
     public void onCancelPaymentClick(final int position) {
+
+        payments.get(position).setBlockButtons(true);
+        view.showPendingPayments(payments);
+
         Payment payment = payments.get(position);
-        view.showProgressDialog(context.getString(R.string.processing));
+        view.setRefresing(true);
         paymentInteractor.cancelPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {

@@ -16,7 +16,7 @@
     </style>
 
     <style name="ButtonMes.Green">
-        <item name="android:background">@drawable/bg_button_green</item>
+        <item name="android:background">@drawable/bg_button_green_rounded</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

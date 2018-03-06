@@ -28,6 +28,8 @@ public class Payment implements Comparable<Payment> {
     private Float total_amount;
     private Float currency_amount;
 
+    private transient boolean blockButtons;
+
     DateFormat timestampFormat = Novelty.formatDatetimeApi;
 
 
@@ -139,5 +141,13 @@ public class Payment implements Comparable<Payment> {
         } catch (ParseException e) {
         }
         return 0;
+    }
+
+    public boolean isBlockButtons() {
+        return blockButtons;
+    }
+
+    public void setBlockButtons(boolean blockButtons) {
+        this.blockButtons = blockButtons;
     }
 }

@@ -150,13 +150,13 @@ public class NewPaymentPresenter extends BasePresenter {
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        ((Activity)context).finish();
+//                        finish();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        ((Activity)context).finish();
+//                        finish();
                     }
                 })
                 .show();

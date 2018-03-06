@@ -68,6 +68,8 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
             }
         });
 
+        holder.btnPaymentAccept.setEnabled(!payment.isBlockButtons());
+        holder.btnPaymentCancel.setEnabled(!payment.isBlockButtons());
 
 //         addClickListener(holder.rootView, safePosition);
 
