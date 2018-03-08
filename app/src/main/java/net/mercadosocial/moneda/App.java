@@ -55,6 +55,7 @@ public class App extends MultiDexApplication {
 
 //        Log.i(TAG, "token:" + FirebaseInstanceId.getInstance().getToken());
 
+
     }
 
     @Override

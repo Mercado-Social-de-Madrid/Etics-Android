@@ -6,7 +6,7 @@ package net.mercadosocial.moneda.model;
 
 public class Person {
 
-    private String uuid;
+    private String id;
     private String uuid_user;
     private String nif;
     private String name;
@@ -17,12 +17,12 @@ public class Person {
     private String pin_code;
     private transient String pin_codeRepeat;
 
-    public String getUuid() {
-        return uuid;
+    public String getIid() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUuid_user() {

@@ -12,16 +12,16 @@ public class Offer implements Serializable, Novelty {
 
     private String id;
     private Boolean active;
+    private String title;
+    private String description;
     private String banner_image;
     private String banner_thumbnail;
-    private String begin_date;
-    private String description;
     private Integer discount_percent;
     private Integer discounted_price;
+    private String begin_date;
     private String end_date;
     private Entity entity;
     private String published_date;
-    private String title;
 
     public String getBeginDateFormatted() {
         try {

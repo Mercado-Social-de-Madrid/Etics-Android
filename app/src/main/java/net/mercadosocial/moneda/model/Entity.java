@@ -17,25 +17,29 @@ import java.util.List;
 public class Entity implements Serializable {
 
     private String id;
-    private String logo_thumbnail;
+    private String name;
+    private String email;
+    private String cif;
+    private String description;
+    private String short_description;
     private String logo;
+    private String logo_thumbnail;
+
     private String phone_number;
+
     private Float bonus_percent_entity;
     private Float bonus_percent_general;
+    private Float max_percent_payment;
+
     private List<Offer> offers;
     private Integer num_workers;
-    private String short_description;
-    private String cif;
     private String legal_form;
     private String address;
-    private String email;
     private String registered;
-    private String description;
-    private String name;
-    private Float max_percent_payment;
-    private Double longitude;
-    private List<String> categories;
+    private transient List<Category> categories;
     private Double latitude;
+    private Double longitude;
+
     private Gallery gallery;
 
     private String webpage_link;
@@ -177,11 +181,11 @@ public class Entity implements Serializable {
         this.bonus_percent_general = bonus_percent_general;
     }
 
-    public List<String> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 

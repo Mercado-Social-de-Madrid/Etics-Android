@@ -10,12 +10,12 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private transient String repeatPassword;
     private String type;
     private String user_status;
     private Person person;
     private Entity entity;
-    private String pushId;
+
+    private transient String repeatPassword;
 
     public String getUuid() {
         return uuid;
@@ -71,14 +71,6 @@ public class User {
 
     public void setEntity(Entity entity) {
         this.entity = entity;
-    }
-
-    public String getPushId() {
-        return pushId;
-    }
-
-    public void setPushId(String pushId) {
-        this.pushId = pushId;
     }
 
     public String getRepeatPassword() {

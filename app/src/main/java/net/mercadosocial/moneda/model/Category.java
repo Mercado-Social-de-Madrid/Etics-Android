@@ -9,6 +9,11 @@ import java.util.Map;
 
 public class Category {
 
+    private String id;
+    private String name;
+    private String description;
+    private String color;
+
     public static Map<String, String> categoriyNames = new HashMap<>();
 
     static {
