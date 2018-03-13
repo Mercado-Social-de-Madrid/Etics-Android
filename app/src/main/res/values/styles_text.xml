@@ -5,14 +5,25 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:lineSpacingExtra">5dp</item>
-        <!--<item name="fontPath">fonts/Vaud.otf</item>  NOT NECESSARY-->
+        <item name="android:fontFamily">@font/sinkinsans</item>
     </style>
 
     <style name="TextBase.White">
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="TextTitleComfortaa" parent="TextBase">
+        <item name="android:textSize">@dimen/text_title_comfortaa</item>
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+
+    <style name="TextTitleComfortaa.Purple">
+        <item name="android:textColor">@color/purple</item>
+    </style>
+
+
 
     <style name="TextBase.Purple">
         <item name="android:textColor">@color/purple</item>

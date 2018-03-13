@@ -121,8 +121,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private void showBonificationDialog(String amountFormatted) {
 
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle("¡Enhorabuena!");
-        ab.setMessage("Has recibido la bonificación por tu compra en el Mercado Social. \n\n" + amountFormatted + " Boniatos");
+        ab.setTitle(R.string.congratulations);
+        ab.setIcon(R.mipmap.img_happy_face);
+        ab.setMessage(Html.fromHtml(String.format(getString(R.string.bonification_received_message),
+                amountFormatted, getString(R.string.currency_name_plural))));
         ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -178,6 +180,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onStop() {
         super.onStop();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setRefresing(false);
     }
 
     @Override
@@ -341,12 +349,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         tvTitleToolbar = (TextView) findViewById(R.id.tv_title_toolbar);
-        tvTitleToolbar.setVisibility(View.GONE);
+        tvTitleToolbar.setVisibility(View.VISIBLE);
 
         tvTitleToolbar.setText(getSupportActionBar().getTitle());
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);

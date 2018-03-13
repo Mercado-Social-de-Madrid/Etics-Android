@@ -44,19 +44,20 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     private View btnGraphics;
     private TextView tvNumberPendingPayments;
     private View btnPendingPayments;
+    private MenuItem menuItemQR;
 
 
     private void findViews(View layout) {
-        tvBalance = (TextView)layout.findViewById( R.id.tv_balance );
-        tvName = (TextView)layout.findViewById( R.id.tv_name );
-        btnNewPayment = layout.findViewById( R.id.btn_new_payment );
-        btnGetBoniatos = layout.findViewById( R.id.btn_get_boniatos );
-        btnGraphics = layout.findViewById( R.id.btn_graphics );
-        btnMovements = layout.findViewById( R.id.btn_movements );
+        tvBalance = (TextView) layout.findViewById(R.id.tv_balance);
+        tvName = (TextView) layout.findViewById(R.id.tv_name);
+        btnNewPayment = layout.findViewById(R.id.btn_new_payment);
+        btnGetBoniatos = layout.findViewById(R.id.btn_get_boniatos);
+        btnGraphics = layout.findViewById(R.id.btn_graphics);
+        btnMovements = layout.findViewById(R.id.btn_movements);
         progressBalance = layout.findViewById(R.id.progress_balance);
 
         btnPendingPayments = layout.findViewById(R.id.btn_pending_payments);
-        tvNumberPendingPayments = (TextView)layout.findViewById(R.id.tv_number_pending_payments);
+        tvNumberPendingPayments = (TextView) layout.findViewById(R.id.tv_number_pending_payments);
 
         viewWallet = layout.findViewById(R.id.view_wallet);
         viewNoWallet = layout.findViewById(R.id.view_no_wallet);
@@ -64,13 +65,13 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         btnLogin = layout.findViewById(R.id.btn_login);
         btnSignup = layout.findViewById(R.id.btn_singup);
 
-        btnNewPayment.setOnClickListener( this );
-        btnGetBoniatos.setOnClickListener( this );
-        btnMovements.setOnClickListener( this );
-        btnGraphics.setOnClickListener( this );
-        btnLogin.setOnClickListener( this );
-        btnSignup.setOnClickListener( this );
-        btnPendingPayments.setOnClickListener( this );
+        btnNewPayment.setOnClickListener(this);
+        btnGetBoniatos.setOnClickListener(this);
+        btnMovements.setOnClickListener(this);
+        btnGraphics.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
+        btnPendingPayments.setOnClickListener(this);
     }
 
     public WalletFragment() {
@@ -103,7 +104,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.wallet, menu);
-        menu.findItem(R.id.menuItem_show_qr).setVisible(presenter.isQRGeneratorVisible());
+        menuItemQR = menu.findItem(R.id.menuItem_show_qr);
+        menuItemQR.setVisible(presenter.isQRGeneratorVisible());
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -163,6 +165,15 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void showLoggedOutView() {
+        viewNoWallet.setVisibility(View.VISIBLE);
+        viewWallet.setVisibility(View.GONE);
+        if (menuItemQR != null) {
+            menuItemQR.setVisible(false);
+        }
+    }
+
+    @Override
     public void showWalletData(boolean showLoading, Wallet wallet) {
 
         progressBalance.setVisibility(showLoading ? View.VISIBLE : View.INVISIBLE);
@@ -186,6 +197,6 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         btnPendingPayments.setVisibility(View.VISIBLE);
         tvNumberPendingPayments.setText(String.format(getString(R.string.pending_payments_warning), numberPendingPayments));
 
-        ((MainActivity)getActivity()).showPendingPaymentsNumber(numberPendingPayments);
+        ((MainActivity) getActivity()).showPendingPaymentsNumber(numberPendingPayments);
     }
 }

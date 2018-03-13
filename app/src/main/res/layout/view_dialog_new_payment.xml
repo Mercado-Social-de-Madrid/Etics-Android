@@ -33,12 +33,13 @@
             app:backgroundTint="@color/red"
             android:text="@string/reject"/>
 
+        <View style="@style/XpansorHoriz" />
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
             style="@style/TextBase.White"
             app:backgroundTint="@color/green_dark"
-            android:text="@string/accept"
-            android:layout_marginLeft="60dp"/>
+            android:text="@string/accept"/>
     </LinearLayout>
 
 

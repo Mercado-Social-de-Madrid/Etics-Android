@@ -6,4 +6,13 @@
     <dimen name="height_image_small">0dp</dimen>
     <dimen name="size_qr">350dp</dimen>
     <dimen name="width_image_standard">300dp</dimen>
+
+
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">15sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_extra_large">22sp</dimen>
+
+    <dimen name="text_title_comfortaa">21sp</dimen>
+
 </resources>

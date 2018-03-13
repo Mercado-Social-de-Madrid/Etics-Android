@@ -61,7 +61,7 @@ public class RegisterPresenter extends BasePresenter {
         view.setContinueRegisterEnable(true);
 
 //        registerScreen = 2;
-//        user.setType(TYPE_PERSON);
+//        user.setType(TYPE_ENTITY);
 //        view.showRegisterEntity();
 
     }

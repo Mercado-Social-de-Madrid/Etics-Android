@@ -57,15 +57,18 @@ public class WalletPresenter extends BasePresenter {
         Data data = App.getUserData(context);
         if (data != null) {
             view.showUserInfo(data.getName());
+            refreshWalletData();
+            refreshPendingPayments();
+        } else {
+            view.showLoggedOutView();
         }
 
-        refreshWalletData();
-        refreshPendingPayments();
 
     }
 
     public boolean isQRGeneratorVisible() {
-        return App.isEntity(context);
+//        return App.isEntity(context);
+        return App.getUserData(context) != null;
     }
 
     private void refreshPendingPayments() {

@@ -95,12 +95,16 @@ public class ProgressDialogMES extends DialogFragment {
     public void dismissTimeSafe() {
         long millisShowing = System.currentTimeMillis() - timeStart;
         if (millisShowing > TIME_DURATION_SHOWING_MINIMUM) {
-            dismiss();
+            if (getActivity() != null) {
+                dismiss();
+            }
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    dismiss();
+                    if (getActivity() != null) {
+                        dismiss();
+                    }
                 }
             }, TIME_DURATION_SHOWING_MINIMUM - millisShowing);
         }

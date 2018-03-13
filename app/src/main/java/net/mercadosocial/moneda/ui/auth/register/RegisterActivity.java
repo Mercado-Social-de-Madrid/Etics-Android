@@ -81,8 +81,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         editMaxAcceptPercent = (EditText) findViewById(R.id.edit_max_accept_percent);
         editBonusPercent = (EditText) findViewById(R.id.edit_bonus_percent);
         editBonusPercentEntities = (EditText) findViewById(R.id.edit_bonus_percent_entities);
-        editPinCodeEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code);
-        editPinCodeRepeatEntity = (EditText) findViewById(R.id.view_pin_codes_person).findViewById(R.id.edit_pin_code_repeat);
+        editPinCodeEntity = (EditText) findViewById(R.id.view_pin_codes_entity).findViewById(R.id.edit_pin_code);
+        editPinCodeRepeatEntity = (EditText) findViewById(R.id.view_pin_codes_entity).findViewById(R.id.edit_pin_code_repeat);
 
         btnGoToLogin = findViewById(R.id.btn_go_to_login);
 
@@ -136,7 +136,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 //todo error report
             }
         });
-
 
     }
 

@@ -4,42 +4,49 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.util.Util;
 
 
 public class WebViewActivity extends BaseActivity {
 
-    public static final int TYPE_ALCALA_HALLOWEEN = 0;
-    public static final int TYPE_7MZ = 1;
     private static final String EXTRA_URL = "extra_url";
+    private static final String EXTRA_FILENAME = "extra_filename";
+    private static final String EXTRA_TITLE = "extra_title";
 
-    private final String FILENAME_ALCALA_HALLOWEEN_HTML = "info_mock.html";
-    private final String FILENAME_MARCHA_ZOMBIE_HTML = "info_marcha_zombie.html";
+    public static final String FILENAME_QUE_ES_MES = "que_es_mes.html";
+    public static final String FILENAME_COMO_FUNCIONA_BONIATO = "como_funciona_boniato.html";
 
     private WebView webView;
+    private ProgressBar progressWebview;
 
 
-    public static void start(Context context, String url) {
+    public static void startRemoteUrl(Context context, String title, String url) {
         Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(EXTRA_TITLE, title);
         intent.putExtra(EXTRA_URL, url);
         context.startActivity(intent);
     }
 
-    public static void start(Context context, int typeInfo) {
+    public static void startLocalHtml(Context context, String title, String filename) {
         Intent intent = new Intent(context, WebViewActivity.class);
-        intent.putExtra(Util.EXTRA_INT, typeInfo);
+        intent.putExtra(EXTRA_TITLE, title);
+        intent.putExtra(EXTRA_FILENAME, filename);
         context.startActivity(intent);
     }
 
     private void findViews() {
         webView = (WebView) findViewById(R.id.webview);
+        progressWebview = (ProgressBar) findViewById(R.id.progress_webview);
     }
 
     @Override
@@ -53,32 +60,23 @@ public class WebViewActivity extends BaseActivity {
         configureSecondLevelActivity();
         configWebView();
 
-        if (true) {
-            String url = getIntent().getStringExtra(EXTRA_URL);
-            webView.loadUrl(url);
-            return;
+        String title = getIntent().getStringExtra(EXTRA_TITLE);
+        if (title != null) {
+            setToolbarTitle(title);
         }
 
-//        int typeScreen = getIntent().getIntExtra(Util.EXTRA_INT, -1);
-//
-//        switch (typeScreen) {
-//
-//            case TYPE_ALCALA_HALLOWEEN:
-//                setToolbarTitle(R.string.alcala_halloween);
-//                loadHtml(FILENAME_ALCALA_HALLOWEEN_HTML);
-//
-//                break;
-//
-//            case TYPE_7MZ:
-//                setToolbarTitle(R.string.marcha_zombie);
-//                    loadHtml(FILENAME_MARCHA_ZOMBIE_HTML);
-//                break;
-//
-//            default:
-//                throw new IllegalArgumentException(
-//                        "Not passed parameter typeScreen");
-//
-//        }
+        if (getIntent().hasExtra(EXTRA_URL)) {
+            String url = getIntent().getStringExtra(EXTRA_URL);
+            webView.loadUrl(url);
+
+        } else if (getIntent().hasExtra(EXTRA_FILENAME)) {
+            String filename = getIntent().getStringExtra(EXTRA_FILENAME);
+            loadHtml(filename);
+
+        } else {
+            throw new IllegalArgumentException(
+                    "Not passed url or filename extra parameter");
+        }
 
     }
 
@@ -99,31 +97,58 @@ public class WebViewActivity extends BaseActivity {
         webviewSettings.setJavaScriptEnabled(true);
         webviewSettings.setPluginState(PluginState.ON);
 
-        webView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-                view.loadUrl(url);
-
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-            }
-
-        });
+        webView.setWebViewClient(new CustomWebViewClient());
+        webView.setWebChromeClient(new CustomWebChromeClient());
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private class CustomWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            progressWebview.setProgress(newProgress);
+            super.onProgressChanged(view, newProgress);
+        }
+    }
+
+    private class CustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            progressWebview.setVisibility(View.GONE);
+            progressWebview.setProgress(100);
+            super.onPageFinished(view, url);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            progressWebview.setVisibility(View.VISIBLE);
+            progressWebview.setProgress(0);
+            super.onPageStarted(view, url, favicon);
+        }
+    }
 
 }

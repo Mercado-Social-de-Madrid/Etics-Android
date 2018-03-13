@@ -79,7 +79,9 @@ import java.util.List;
          Data data = App.getUserData(context);
          view.showUserData(data);
 
-         refreshPendingPayments();
+         if (data != null) {
+             refreshPendingPayments();
+         }
      }
 
 
@@ -103,6 +105,7 @@ import java.util.List;
     public void onLogoutClick() {
         App.removeUserData(context);
         view.showUserData(null);
+        view.showPendingPaymentsNumber(0);
     }
 
     private void checkTokenFirebaseSent() {

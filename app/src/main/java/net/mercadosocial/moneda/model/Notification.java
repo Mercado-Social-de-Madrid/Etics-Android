@@ -20,6 +20,7 @@ public class Notification implements Serializable {
     private String type;
     private String id; // for payment and news
     private Float amount; // for payment and transaction
+    private Float total_amount;
     private Boolean is_bonification;
     private Boolean is_euro_purchase;
     private String concept;
@@ -60,6 +61,7 @@ public class Notification implements Serializable {
                     notification.setAmount(Float.parseFloat(extras.getString("amount")));
                     notification.setId(extras.getString("id"));
                     notification.setSender(extras.getString("sender"));
+                    notification.setTotal_amount(Float.parseFloat(extras.getString("total_amount")));
                     break;
 
                 case Notification.TYPE_TRANSACTION:
@@ -160,5 +162,13 @@ public class Notification implements Serializable {
 
     public void setFromOutside(boolean fromOutside) {
         this.fromOutside = fromOutside;
+    }
+
+    public Float getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(Float total_amount) {
+        this.total_amount = total_amount;
     }
 }

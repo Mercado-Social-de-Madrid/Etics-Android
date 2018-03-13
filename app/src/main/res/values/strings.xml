@@ -77,7 +77,7 @@
     <string name="select_amount">Indica la cantidad</string>
     <string name="favourites">Favoritos</string>
     <string name="total_amount_label">Introduce el importe total de tu compra en Euros para calcular tu bonificación</string>
-    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar</string>
+    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar. (1&currency_name_abrev; = 1€)</string>
     <string name="check_payment_data">Revisa los datos</string>
     <string name="payment_amount_label">Vas a pagar:</string>
     <string name="payment_recipient_label">a:</string>
@@ -93,7 +93,7 @@
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
     <string name="register_to_use_wallet_text">Para usar tu monedero tienes que ser usuari@ registrado en el Mercado Social.\n\nEntra en tu cuenta y si todavía no tienes regístrate ;)</string>
-    <string name="welcome_name_wallet">¡Bienvenid@ %s!</string>
+    <string name="welcome_name_wallet">¡Hola %s!</string>
     <string name="entity_info">Información de entidad</string>
     <string name="payment_fail">Algo ha fallado en el pago</string>
     <string name="payment_done">Pago realizado</string>
@@ -182,7 +182,15 @@
     <string name="new_payment_received">Nuevo pago recibido</string>
     <string name="username_or_email">Usuari@ o Email</string>
     <string name="surname">Apellidos</string>
-    <string name="payment_received_message"><![CDATA[<b>%s</b> te ha enviado un pago de<br><b>%s </b>]]></string>
+    <string name="payment_received_message"><![CDATA[<b>%s</b> te ha enviado un pago de<br><b>%s </b><br>La cantidad total es de <b>%s</b>]]></string>
     <string name="finish_pending_payments">¡Terminaste!</string>
+    <string name="contact">Contacto</string>
+    <string name="web">Página web</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="youtube">Youtube</string>
+    <string name="email_contact_subject">Contacto desde la app Android</string>
+    <string name="congratulations">¡Enhorabuena!</string>
+    <string name="bonification_received_message"><![CDATA[Has recibido la bonificación por tu compra en el Mercado Social.<p><b>%s %s</b>]]></string>
 
 </resources>

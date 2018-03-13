@@ -11,8 +11,8 @@
         android:id="@+id/view_no_wallet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="visible">
 
         <ImageView
@@ -68,10 +68,9 @@
 
             <TextView
                 android:id="@+id/tv_name"
-                style="@style/TextBase.Purple"
+                style="@style/TextTitleComfortaa.Purple"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:textSize="24sp" />
+                android:gravity="center_horizontal" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -94,17 +93,17 @@
                         android:id="@+id/progress_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/tv_balance"
                         android:layout_alignBottom="@+id/tv_balance"
+                        android:layout_alignTop="@+id/tv_balance"
                         android:indeterminate="true"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_balance"
                         style="@style/TextBase"
                         android:layout_marginLeft="10dp"
-                        android:text="20.00 B"
-                        android:padding="3dp"/>
+                        android:padding="3dp"
+                        android:text="20.00 B" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -119,14 +118,21 @@
                 android:padding="15dp"
                 android:visibility="gone">
 
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_campana" />
+
                 <TextView
                     android:id="@+id/tv_number_pending_payments"
                     style="@style/TextBase"
-                    android:text="@string/pending_payments_warning"
                     android:gravity="center"
+                    android:text="@string/pending_payments_warning"
                     android:textColor="@color/orange"
                     android:textSize="17sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -189,13 +195,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@mipmap/img_graphs"/>
+                        android:src="@mipmap/img_graphs" />
+
                     <TextView
                         style="@style/TextBase.Purple"
-                        android:text="@string/graphics"
-                        android:hint="@string/transactions"
                         android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"/>
+                        android:gravity="center_horizontal"
+                        android:hint="@string/transactions"
+                        android:text="@string/graphics" />
                 </LinearLayout>
 
                 <View style="@style/XpansorHoriz" />
@@ -213,7 +220,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@mipmap/ic_transactions"/>
+                        android:src="@mipmap/ic_transactions" />
+
                     <TextView
                         style="@style/TextBase.Purple"
                         android:layout_marginTop="10dp"

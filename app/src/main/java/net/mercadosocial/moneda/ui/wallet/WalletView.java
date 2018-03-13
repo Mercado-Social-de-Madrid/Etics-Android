@@ -14,4 +14,6 @@ public interface WalletView extends BaseView {
     void showWalletData(boolean showLoading, Wallet wallet);
 
     void showPendingPaymentsNumber(int numberPendingPayments);
+
+    void showLoggedOutView();
 }

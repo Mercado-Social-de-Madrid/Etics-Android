@@ -75,10 +75,10 @@ import net.mercadosocial.moneda.util.Util;
             return;
         }
 
-        if (boniatosAmountFloat < 0) {
-            view.showBoniatosAmountInputError(context.getString(R.string.amount_cant_be_negative));
-            return;
-        }
+//        if (boniatosAmountFloat < 0) {
+//            view.showBoniatosAmountInputError(context.getString(R.string.amount_cant_be_negative));
+//            return;
+//        }
 
         float maxAcceptedAmount = getSelectedEntity().getMaxAcceptedBoniatosAmount(totalAmountFloat);
         if (boniatosAmountFloat > maxAcceptedAmount) {
@@ -88,13 +88,13 @@ import net.mercadosocial.moneda.util.Util;
             return;
         }
 
-        if (wallet != null) {
-            if (boniatosAmountFloat > wallet.getBalance()) {
-                view.showBoniatosAmountInputError(String.format(context.getString(R.string.yout_balance_is),
-                        wallet.getBalanceFormatted()));
-                return;
-            }
-        }
+//        if (wallet != null) {
+//            if (boniatosAmountFloat > wallet.getBalance()) {
+//                view.showBoniatosAmountInputError(String.format(context.getString(R.string.yout_balance_is),
+//                        wallet.getBalanceFormatted()));
+//                return;
+//            }
+//        }
 
         getNewPaymentPresenter().onAmountsConfirmed(totalAmountFloat, boniatosAmountFloat);
         view.enableContinueButton(true);

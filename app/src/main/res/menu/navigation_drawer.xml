@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menuItem_the_social_market"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@mipmap/ic_drawer_bulb"
         android:title="@string/the_social_market" />
 
 
@@ -12,15 +12,46 @@
         <menu>
             <item
                 android:id="@+id/menuItem_how_boniato_works"
-                android:icon="@mipmap/ic_news"
+                android:icon="@mipmap/ic_drawer_tick"
                 android:title="@string/how_it_works" />
 
             <item
                 android:id="@+id/menuItem_get_boniatos"
-                android:icon="@mipmap/ic_news"
+                android:icon="@mipmap/ic_drawer_touch"
                 android:title="@string/get_boniatos" />
         </menu>
     </item>
+
+    <item android:title="@string/contact">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_email"
+                android:icon="@mipmap/ic_nav_email"
+                android:title="@string/email" />
+
+            <item
+                android:id="@+id/nav_contact_web"
+                android:icon="@mipmap/ic_nav_web"
+                android:title="@string/web" />
+
+            <item
+                android:id="@+id/nav_contact_facebook"
+                android:icon="@mipmap/ic_nav_facebook"
+                android:title="@string/facebook" />
+
+            <item
+                android:id="@+id/nav_contact_twitter"
+                android:icon="@mipmap/ic_nav_twitter"
+                android:title="@string/twitter" />
+
+            <item
+                android:id="@+id/nav_contact_youtube"
+                android:icon="@mipmap/ic_nav_youtube"
+                android:title="@string/youtube" />
+
+        </menu>
+    </item>
+
 
 
 </menu>

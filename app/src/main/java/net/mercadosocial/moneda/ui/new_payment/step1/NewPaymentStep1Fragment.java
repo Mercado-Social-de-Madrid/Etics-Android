@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,6 +63,9 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerRecipients.setLayoutManager(layoutManager);
+
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerRecipients.addItemDecoration(divider);
 
         setHasOptionsMenu(true);
 

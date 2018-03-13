@@ -28,7 +28,8 @@
                     android:id="@+id/tv_title_toolbar"
                     style="@style/TextBase"
                     android:textColor="@color/purple"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="@font/comfortaa_bold"/>
 
 
             </android.support.v7.widget.Toolbar>

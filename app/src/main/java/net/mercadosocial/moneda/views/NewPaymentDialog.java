@@ -71,9 +71,10 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
         View layout = inflater.inflate(R.layout.view_dialog_new_payment, null);
         findViews(layout);
 
-        tvNewPaymentInfo.setText(Html.fromHtml(String.format(getString(R.string.payment_received_message),
+        tvNewPaymentInfo.setText(Html.fromHtml(
+                String.format(getString(R.string.payment_received_message),
                 notification.getSender(), Util.getDecimalFormatted(notification.getAmount(), false)
-                        + " " + getString(R.string.currency_name_plural))));
+                        + " " + getString(R.string.currency_name_plural), Util.getDecimalFormatted(notification.getTotal_amount(), false) + " €")));
 
         return layout;
     }

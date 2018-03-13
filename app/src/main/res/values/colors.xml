@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/green</color>
-    <color name="colorPrimaryDark">@color/green_dark</color>
+    <color name="colorPrimaryDark">#333333</color>
     <color name="colorAccent">@color/purple</color>
 
     <color name="text">#000</color>
@@ -11,6 +11,7 @@
     <color name="green_light">#C6E504</color>
     <color name="green_extra_light">#f7ffc7</color>
     <color name="purple">#912991</color>
+    <color name="purple_light_design">#af64ac</color>
     <color name="purple_light">#B7A0BF</color>
     <color name="purple_extra_light">#e4dce6</color>
     <color name="purple_dark">#432850</color>
@@ -20,6 +21,7 @@
     <color name="green_gradient_light">#EBF49D</color>
     <color name="transblack_entities">#9000</color>
     <color name="white">#FFF</color>
+    <color name="white_90">#e6ffffff</color>
     <color name="orange">#e78f00</color>
     <color name="grey">#807f7f</color>
 
@@ -28,7 +30,7 @@
 
     <color name="bg_edittext">#F8FCE1</color>
 
-    <color name="grey_disabled">#ababab</color>
+    <color name="grey_disabled">#7dababab</color>
     <color name="red">#F00</color>
     <color name="red_dark">#d10000</color>
     <color name="black_semitransp_pressed">#34000000</color>

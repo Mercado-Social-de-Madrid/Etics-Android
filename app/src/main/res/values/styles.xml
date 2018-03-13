@@ -17,7 +17,7 @@
 
     <style name="ButtonMes.Green">
         <item name="android:background">@drawable/bg_button_green_rounded</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/black_disabled_enabled</item>
     </style>
 
     <style name="ViewProgressPayment">

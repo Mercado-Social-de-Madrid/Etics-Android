@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:maxWidth="80dp"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_avatar" />
+            android:src="@mipmap/ic_drawer_user" />
 
         <RelativeLayout
             android:layout_width="match_parent"

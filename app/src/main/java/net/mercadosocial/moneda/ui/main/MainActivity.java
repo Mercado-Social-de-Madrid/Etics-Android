@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.main;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -177,24 +178,25 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         switch (item.getItemId()) {
             case R.id.navigation_entities:
+                setToolbarTitle(R.string.entities);
                 showSection(new EntitiesFragment());
                 return true;
             case R.id.navigation_wallet:
+                setToolbarTitle(R.string.wallet);
                 showSection(new WalletFragment());
                 return true;
             case R.id.navigation_profile:
+                setToolbarTitle(R.string.news);
                 showSection(new NoveltiesFragment());
                 return true;
 
             case R.id.menuItem_the_social_market:
-//                startActivity(new Intent(this, IntroActivity.class));
-                String url = "https://madrid.mercadosocial.net/";
-                WebViewActivity.start(this, url);
+                WebViewActivity.startLocalHtml(this, getString(R.string.the_social_market), WebViewActivity.FILENAME_QUE_ES_MES);
                 return true;
 
             case R.id.menuItem_how_boniato_works:
                 String url2 = "https://madrid.mercadosocial.net/reboniato/";
-                WebViewActivity.start(this, url2);
+                WebViewActivity.startRemoteUrl(this, getString(R.string.how_it_works), url2);
                 break;
 
             case R.id.menuItem_get_boniatos:
@@ -225,6 +227,36 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                            }
 //                        }).show(getFragmentManager(), null);
 
+                break;
+
+            case R.id.nav_contact_email:
+                String emailMES = "madrid@mercadosocial.net";
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",emailMES, null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_contact_subject));
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                startActivity(emailIntent);
+                break;
+
+            case R.id.nav_contact_web:
+                String urlWeb = "https://madrid.mercadosocial.net/";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlWeb)));
+                break;
+
+            case R.id.nav_contact_facebook:
+                String urlFacebook = "https://www.facebook.com/MercadoSocialMadrid";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlFacebook)));
+                break;
+
+            case R.id.nav_contact_twitter:
+                String urlTwitter = "https://twitter.com/MES_Madrid";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlTwitter)));
+                break;
+
+            case R.id.nav_contact_youtube:
+                String urlYoutube = "https://www.youtube.com/channel/UCWfYyNJGH-ruUqrsWbYa4Jw";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlYoutube)));
                 break;
         }
 
@@ -317,6 +349,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             }
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar);
+
+            Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
+            if (fragment instanceof WalletFragment) {
+                ((WalletPresenter)((WalletFragment)fragment).getBasePresenter()).refreshData();
+            }
         }
     }
 
