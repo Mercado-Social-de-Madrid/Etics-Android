@@ -57,7 +57,7 @@ public class WalletInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Wallet> response) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(response.body());
 

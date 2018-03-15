@@ -12,8 +12,11 @@ public class User {
     private String password;
     private String type;
     private String user_status;
+
     private Person person;
     private Entity entity;
+
+    private String pin_code;
 
     private transient String repeatPassword;
 
@@ -88,4 +91,13 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getPin_code() {
+        return pin_code;
+    }
+
+    public void setPin_code(String pin_code) {
+        this.pin_code = pin_code;
+    }
+
 }

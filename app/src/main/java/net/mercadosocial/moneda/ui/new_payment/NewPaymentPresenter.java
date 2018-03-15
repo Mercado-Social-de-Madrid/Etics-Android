@@ -123,7 +123,8 @@ public class NewPaymentPresenter extends BasePresenter {
 
 //        Toasty.info(context, context.getString(R.string.sending_payment)).show();
 //        view.showProgressDialog(context.getString(R.string.sending_payment));
-        view.setRefresing(true);
+        view.setRefreshing(true);
+        payment.setPin_code(pin);
         paymentInteractor.sendPayment(payment, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
@@ -135,7 +136,8 @@ public class NewPaymentPresenter extends BasePresenter {
             @Override
             public void onError(String message) {
 
-                Toasty.error(context, context.getString(R.string.payment_fail)).show();
+//                Toasty.error(context, context.getString(R.string.payment_fail)).show();
+                Toasty.error(context, message).show();
 
             }
         });

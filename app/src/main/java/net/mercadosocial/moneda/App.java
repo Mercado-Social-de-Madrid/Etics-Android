@@ -86,6 +86,7 @@ public class App extends MultiDexApplication {
         return data;
     }
 
+
     private static void loadApiKey(Context context) {
         Data data = getUserData(context);
         if (data != null) {

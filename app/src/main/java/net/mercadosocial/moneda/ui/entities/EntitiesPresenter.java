@@ -52,7 +52,7 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void refreshData() {
 
-        view.setRefresing(true);
+        view.setRefreshing(true);
 
         entityInteractor.getEntities(new EntityInteractor.Callback() {
 

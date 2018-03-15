@@ -51,7 +51,7 @@ public class OfferInteractor extends BaseInteractor {
                     @Override
                     public void onNext(OffersResponse offersResponse) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(offersResponse.getOffers());
 

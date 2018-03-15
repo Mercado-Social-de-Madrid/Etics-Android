@@ -51,7 +51,7 @@ public class TransactionInteractor extends BaseInteractor {
                     @Override
                     public void onNext(TransactionResponse transactionsResponse) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(transactionsResponse.getTransactions());
 

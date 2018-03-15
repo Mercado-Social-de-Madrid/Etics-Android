@@ -14,7 +14,7 @@ public class Person {
     private String avatar;
     private String address;
 
-    private String pin_code;
+    private transient String pin_code;
     private transient String pin_codeRepeat;
 
     public String getIid() {

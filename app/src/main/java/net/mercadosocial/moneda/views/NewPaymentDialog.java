@@ -86,34 +86,14 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_payment_accept:
                 baseActivity.showProgressDialog(getString(R.string.processing));
-                paymentInteractor.acceptPayment(notification.getId(), new BaseInteractor.BaseApiPOSTCallback() {
-                    @Override
-                    public void onSuccess(Integer id) {
-                        Toasty.success(getActivity(), "OK").show();
-                        dismiss();
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toasty.error(getActivity(), message).show();
-                    }
-                });
+                enableButtons(false);
+                paymentInteractor.acceptPayment(notification.getId(), acceptCancelCallback);
                 break;
 
             case R.id.btn_payment_cancel:
                 baseActivity.showProgressDialog(getString(R.string.processing));
-                paymentInteractor.cancelPayment(notification.getId(), new BaseInteractor.BaseApiPOSTCallback() {
-                    @Override
-                    public void onSuccess(Integer id) {
-                        Toasty.success(getActivity(), "OK").show();
-                        dismiss();
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toasty.error(getActivity(), message).show();
-                    }
-                });
+                enableButtons(false);
+                paymentInteractor.cancelPayment(notification.getId(), acceptCancelCallback);
                 break;
 
             case R.id.btn_decide_later:
@@ -121,6 +101,25 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
                 break;
         }
     }
+
+    private void enableButtons(boolean enable) {
+        btnPaymentAccept.setEnabled(enable);
+        btnPaymentCancel.setEnabled(enable);
+    }
+
+    private BaseInteractor.BaseApiPOSTCallback acceptCancelCallback =  new BaseInteractor.BaseApiPOSTCallback() {
+        @Override
+        public void onSuccess(Integer id) {
+            Toasty.success(getActivity(), "OK").show();
+            dismiss();
+        }
+
+        @Override
+        public void onError(String message) {
+            Toasty.error(getActivity(), message).show();
+            enableButtons(true);
+        }
+    };
 
     @Override
     public void onDismiss(DialogInterface dialog) {

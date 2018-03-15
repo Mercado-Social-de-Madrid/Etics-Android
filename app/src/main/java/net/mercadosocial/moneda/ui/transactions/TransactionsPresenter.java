@@ -52,7 +52,7 @@ import es.dmoral.toasty.Toasty;
 
      public void refreshData() {
 
-         view.setRefresing(true);
+         view.setRefreshing(true);
 
          new TransactionInteractor(context, view).getTransactions(new BaseInteractor.BaseApiGETListCallback<Transaction>() {
              @Override

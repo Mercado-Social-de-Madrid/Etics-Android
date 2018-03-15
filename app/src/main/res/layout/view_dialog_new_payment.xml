@@ -30,7 +30,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_cancel"
             style="@style/TextBase.White"
-            app:backgroundTint="@color/red"
+            app:backgroundTint="@color/bg_button_red"
             android:text="@string/reject"/>
 
         <View style="@style/XpansorHoriz" />
@@ -38,7 +38,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
             style="@style/TextBase.White"
-            app:backgroundTint="@color/green_dark"
+            app:backgroundTint="@color/bg_button_green"
             android:text="@string/accept"/>
     </LinearLayout>
 

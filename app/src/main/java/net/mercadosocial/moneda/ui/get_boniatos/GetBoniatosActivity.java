@@ -47,11 +47,11 @@ public class GetBoniatosActivity extends BaseActivity implements GetBoniatosView
 
     private void launchDialog() {
 
-        setRefresing(true);
+        setRefreshing(true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                setRefresing(false);
+                setRefreshing(false);
             }
         }, 3000);
     }

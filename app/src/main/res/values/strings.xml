@@ -92,7 +92,7 @@
     <string name="click_continue">Pulsa continuar</string>
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
-    <string name="register_to_use_wallet_text">Para usar tu monedero tienes que ser usuari@ registrado en el Mercado Social.\n\nEntra en tu cuenta y si todavía no tienes regístrate ;)</string>
+    <string name="register_to_use_wallet_text">Para usar tu monedero tienes que ser usuari@ registrado en el Mercado Social.</string>
     <string name="welcome_name_wallet">¡Hola %s!</string>
     <string name="entity_info">Información de entidad</string>
     <string name="payment_fail">Algo ha fallado en el pago</string>
@@ -192,5 +192,7 @@
     <string name="email_contact_subject">Contacto desde la app Android</string>
     <string name="congratulations">¡Enhorabuena!</string>
     <string name="bonification_received_message"><![CDATA[Has recibido la bonificación por tu compra en el Mercado Social.<p><b>%s %s</b>]]></string>
+    <string name="already_have_account">Ya tengo cuenta</string>
+    <string name="dont_have_account">No tengo cuenta</string>
 
 </resources>

@@ -22,7 +22,7 @@ public class Payment implements Comparable<Payment> {
 
     // when sending new
     private String receiver;
-    private String pin;
+    private String pin_code;
 
     // common
     private Float total_amount;
@@ -84,13 +84,6 @@ public class Payment implements Comparable<Payment> {
         this.currency_amount = currency_amount;
     }
 
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
 
     public String getId() {
         return id;
@@ -149,5 +142,13 @@ public class Payment implements Comparable<Payment> {
 
     public void setBlockButtons(boolean blockButtons) {
         this.blockButtons = blockButtons;
+    }
+
+    public String getPin_code() {
+        return pin_code;
+    }
+
+    public void setPin_code(String pin_code) {
+        this.pin_code = pin_code;
     }
 }

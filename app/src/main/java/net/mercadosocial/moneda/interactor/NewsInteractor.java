@@ -50,7 +50,7 @@ public class NewsInteractor extends BaseInteractor {
                     @Override
                     public void onNext(NewsResponse response) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(response.getNews());
 
@@ -84,7 +84,7 @@ public class NewsInteractor extends BaseInteractor {
                     @Override
                     public void onNext(News news) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(news);
 

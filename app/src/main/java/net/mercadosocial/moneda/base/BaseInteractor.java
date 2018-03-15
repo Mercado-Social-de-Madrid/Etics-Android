@@ -47,7 +47,7 @@ public class BaseInteractor {
         public void call() {
 
             if (baseView != null) {
-                baseView.setRefresing(false);
+                baseView.setRefreshing(false);
                 baseView.hideProgressDialog();
             }
 

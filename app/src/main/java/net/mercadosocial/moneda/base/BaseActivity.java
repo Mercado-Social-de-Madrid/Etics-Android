@@ -19,6 +19,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -185,7 +186,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        setRefresing(false);
+        setRefreshing(false);
     }
 
     @Override
@@ -290,19 +291,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void setRefresing(boolean refresing) {
+    public void setRefreshing(boolean refresing) {
 
+        Log.i(TAG, "setRefreshing: refreshing = " + refresing);
 
         try {
 
             if (refresing) {
                 if (handlerDialog == null) {
                     handlerDialog = new Handler();
+                    Log.i(TAG, "setRefreshing: newHandler()");
                     handlerDialog.postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
+                            Log.i(TAG, "setRefreshing: enter handler post");
                             if (refreshingDialog == null) {
+                                Log.i(TAG, "setRefreshing: showing dialog");
                                 refreshingDialog = ProgressDialogMES.newInstance();
                                 refreshingDialog.show(getFragmentManager(), null);
                             }
@@ -311,15 +316,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 }
             } else {
                 if (handlerDialog != null) {
+                    Log.i(TAG, "setRefreshing: removing Callbackds handler");
                     handlerDialog.removeCallbacksAndMessages(null);
                     handlerDialog = null;
                 }
                 if (refreshingDialog != null) {
+                    Log.i(TAG, "setRefreshing: dismissTimeSafe");
                     refreshingDialog.dismissTimeSafe();
                     refreshingDialog = null;
                 }
             }
         } catch (Exception e) {
+            Log.i(TAG, "setRefreshing: exception", e);
             handlerDialog = null;
             refreshingDialog = null;
         }

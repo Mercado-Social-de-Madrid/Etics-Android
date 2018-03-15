@@ -60,7 +60,7 @@ public class PaymentsPresenter extends BasePresenter {
 
     public void refreshData() {
 
-        view.setRefresing(true);
+        view.setRefreshing(true);
         paymentInteractor.getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
             @Override
             public void onResponse(List<Payment> list) {
@@ -92,7 +92,7 @@ public class PaymentsPresenter extends BasePresenter {
 
 
         final Payment payment = payments.get(position);
-        view.setRefresing(true);
+        view.setRefreshing(true);
         paymentInteractor.acceptPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
@@ -112,7 +112,7 @@ public class PaymentsPresenter extends BasePresenter {
         view.showPendingPayments(payments);
 
         Payment payment = payments.get(position);
-        view.setRefresing(true);
+        view.setRefreshing(true);
         paymentInteractor.cancelPayment(payment.getId(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {

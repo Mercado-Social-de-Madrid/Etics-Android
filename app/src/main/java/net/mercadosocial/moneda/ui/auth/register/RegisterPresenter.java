@@ -154,6 +154,7 @@ public class RegisterPresenter extends BasePresenter {
                     return false;
                 }
                 user.setPerson(person);
+                user.setPin_code(person.getPin_code());
                 break;
 
             case TYPE_ENTITY:
@@ -172,6 +173,7 @@ public class RegisterPresenter extends BasePresenter {
                     entity.setLongitude(place.getLatLng().longitude);
                 }
                 user.setEntity(entity);
+                user.setPin_code(entity.getPin_code());
                 break;
         }
 
@@ -221,7 +223,7 @@ public class RegisterPresenter extends BasePresenter {
 
     private void performRegisterApi() {
 
-        view.setRefresing(true);
+        view.setRefreshing(true);
 
         authInteractor.register(user, new BaseInteractor.BaseApiCallback<Data>() {
 

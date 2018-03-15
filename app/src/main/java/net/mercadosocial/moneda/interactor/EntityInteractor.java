@@ -62,7 +62,7 @@ public class EntityInteractor extends BaseInteractor {
                     @Override
                     public void onNext(EntitiesResponse entitiesResponse) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(entitiesResponse.getEntities());
 
@@ -96,7 +96,7 @@ public class EntityInteractor extends BaseInteractor {
                     @Override
                     public void onNext(EntitiesResponse entitiesResponse) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(entitiesResponse.getEntities());
 
@@ -130,7 +130,7 @@ public class EntityInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Entity> entityResponse) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(entityResponse.body());
 

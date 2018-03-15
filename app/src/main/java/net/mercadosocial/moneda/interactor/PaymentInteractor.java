@@ -4,6 +4,7 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.PaymentApi;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.PaymentsResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
@@ -61,7 +62,13 @@ public class PaymentInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Void> response) {
 
-                        baseView.setRefresing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        baseView.setRefreshing(false);
 
                         callback.onSuccess(null);
 
@@ -95,7 +102,7 @@ public class PaymentInteractor extends BaseInteractor {
                     @Override
                     public void onNext(PaymentsResponse response) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
 
                         callback.onResponse(response.getPayments());
 

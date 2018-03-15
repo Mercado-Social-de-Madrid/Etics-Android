@@ -70,10 +70,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
 
     @Override
-    public void setRefresing(boolean refresing) {
+    public void setRefreshing(boolean refresing) {
 
         if (getActivity() != null) {
-            ((BaseActivity) getActivity()).setRefresing(refresing);
+            ((BaseActivity) getActivity()).setRefreshing(refresing);
         }
     }
 

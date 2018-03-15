@@ -48,7 +48,7 @@ public class Entity implements Serializable {
     private String telegram_link;
     private String instagram_link;
 
-    private String pin_code;
+    private transient String pin_code;
     private transient String pin_codeRepeat;
 
     public String getCategoriesString() {

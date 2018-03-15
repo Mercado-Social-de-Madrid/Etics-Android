@@ -63,7 +63,7 @@ public class AuthInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<LoginResponse> response) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
                         if (response.body().isSuccess()) {
                             Data data = response.body().getData();
                             data.setUsername(login.getUsername());
@@ -101,7 +101,7 @@ public class AuthInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Data> response) {
 
-                        baseView.setRefresing(false);
+                        baseView.setRefreshing(false);
                         if (response.body() == null) {
                             try {
                                 callback.onError("Error: " + response.errorBody().string());

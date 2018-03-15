@@ -32,22 +32,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/btn_login"
-                style="@style/ButtonMes"
-                android:minWidth="0dp"
-                android:padding="10dp"
-                android:text="@string/enter" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/btn_singup"
-                style="@style/ButtonMes"
-                android:layout_marginLeft="15dp"
-                android:minWidth="0dp"
-                android:padding="10dp"
-                android:text="@string/register" />
+                <TextView
+                    style="@style/TextBase"
+                    android:text="@string/already_have_account"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/btn_login"
+                    style="@style/ButtonMes"
+                    android:minWidth="0dp"
+                    android:padding="10dp"
+                    android:text="@string/enter" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="40dp">
+
+                <TextView
+                    style="@style/TextBase"
+                    android:text="@string/dont_have_account"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/btn_singup"
+                    style="@style/ButtonMes"
+                    android:minWidth="0dp"
+                    android:padding="10dp"
+                    android:text="@string/register" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -131,7 +156,7 @@
                     android:gravity="center"
                     android:text="@string/pending_payments_warning"
                     android:textColor="@color/orange"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
 
 
@@ -139,7 +164,7 @@
 
             <View
                 style="@style/SeparatorHorizontal.White"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="25dp"
                 android:layout_marginTop="15dp" />
 
             <TextView
@@ -148,12 +173,12 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:text="@string/operations"
-                android:textColor="@color/grey" />
+                android:textColor="@color/grey"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/btn_get_boniatos"
                 style="@style/ButtonMes"
-                android:layout_marginTop="15dp"
                 android:text="@string/get_boniatos" />
 
             <TextView
@@ -165,12 +190,12 @@
             <View
                 style="@style/SeparatorHorizontal.White"
                 android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="25dp" />
 
             <TextView
                 style="@style/TextBase"
                 android:layout_gravity="left"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:text="@string/consult_statistics"
                 android:textColor="@color/grey" />
