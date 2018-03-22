@@ -20,8 +20,8 @@ import net.mercadosocial.moneda.R;
 public class ProgressDialogMES extends DialogFragment {
 
 
-    public static final long MIN_DELAY = 300;
-    private static final long MIN_SHOW_TIME = 1000;
+    public static final long MIN_DELAY = 400;
+    private static final long MIN_SHOW_TIME = 800;
 
     private static final String TAG = "ProgressDialogMES";
     private static ProgressDialogMES progressInstance;

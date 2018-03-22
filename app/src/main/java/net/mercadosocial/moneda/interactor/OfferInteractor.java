@@ -47,6 +47,7 @@ public class OfferInteractor extends BaseInteractor {
                     @Override
                     public void onError(Throwable e) {
 
+                        baseView.setRefreshing(false);
                         callback.onError(e.getMessage());
                     }
 
