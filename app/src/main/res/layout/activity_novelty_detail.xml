@@ -25,13 +25,15 @@
                 android:id="@+id/tv_novelty_title"
                 style="@style/TextBase"
                 android:textSize="24sp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:gravity="center_horizontal"
                 android:textStyle="bold"
                 android:padding="5dp"/>
 
             <TextView
                 android:id="@+id/tv_novelty_subtitle"
                 style="@style/TextBase"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_medium"
                 android:gravity="center_horizontal"
                 android:padding="5dp"/>
 
@@ -48,7 +50,8 @@
                 android:id="@+id/tv_novelty_description"
                 style="@style/TextBase"
                 android:layout_width="match_parent"
-                android:textSize="17sp"
+                android:textSize="@dimen/text_medium"
+                android:layout_marginTop="10dp"
                 android:padding="5dp"/>
 
             <android.support.v7.widget.AppCompatButton

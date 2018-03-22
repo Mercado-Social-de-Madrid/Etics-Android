@@ -17,7 +17,7 @@ public interface PaymentApi {
     Observable<Response<Void>> sendPayment(@Body Payment payment);
 
     @GET("payment/?limit=100")
-    Observable<PaymentsResponse> getPendingPayments();
+    Observable<Response<PaymentsResponse>> getPendingPayments();
 
     @POST("payment/{id}/accept/")
     Observable<Response<Void>> acceptPayment(@Path("id") String id);

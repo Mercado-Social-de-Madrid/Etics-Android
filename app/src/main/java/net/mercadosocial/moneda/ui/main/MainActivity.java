@@ -37,6 +37,7 @@ import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
+import net.mercadosocial.moneda.views.CircleTransform;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
@@ -192,11 +193,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             case R.id.menuItem_the_social_market:
                 WebViewActivity.startLocalHtml(this, getString(R.string.the_social_market), WebViewActivity.FILENAME_QUE_ES_MES);
-                return true;
+                break;
 
             case R.id.menuItem_how_boniato_works:
-                String url2 = "https://madrid.mercadosocial.net/reboniato/";
-                WebViewActivity.startRemoteUrl(this, getString(R.string.how_it_works), url2);
+                WebViewActivity.startLocalHtml(this, getString(R.string.how_it_works), WebViewActivity.FILENAME_COMO_FUNCIONA_BONIATO);
+//                String url2 = "https://madrid.mercadosocial.net/reboniato/";
+//                WebViewActivity.startRemoteUrl(this, getString(R.string.how_it_works), url2);
                 break;
 
             case R.id.menuItem_get_boniatos:
@@ -344,6 +346,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 Picasso.with(this)
                         .load(logoUrl)
                         .placeholder(R.mipmap.ic_avatar)
+                        .transform(new CircleTransform())
                         .error(R.mipmap.ic_mes_v2_144)
                         .into(imgAvatar);
             }

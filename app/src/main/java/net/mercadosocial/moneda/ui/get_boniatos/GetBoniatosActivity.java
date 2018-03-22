@@ -34,6 +34,7 @@ public class GetBoniatosActivity extends BaseActivity implements GetBoniatosView
         findViews();
         configureSecondLevelActivity();
 
+//        launchDialog();
 
     }
 
@@ -41,7 +42,8 @@ public class GetBoniatosActivity extends BaseActivity implements GetBoniatosView
     public void onClick(View v) {
         if ( v == btnRecharge ) {
 
-            launchDialog();
+            String amountStr = editGetBoniatosAmount.getText().toString();
+            presenter.onPurchaseClick(amountStr);
         }
     }
 
@@ -53,7 +55,7 @@ public class GetBoniatosActivity extends BaseActivity implements GetBoniatosView
             public void run() {
                 setRefreshing(false);
             }
-        }, 3000);
+        }, 300);
     }
 
 

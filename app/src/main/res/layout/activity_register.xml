@@ -37,7 +37,8 @@
 
                 <include
                     android:id="@+id/view_register_user"
-                    layout="@layout/view_register_user" />
+                    layout="@layout/view_register_user"
+                    android:visibility="gone"/>
 
                 <include
                     android:id="@+id/view_register_person"
@@ -47,7 +48,7 @@
                 <include
                     android:id="@+id/view_register_entity"
                     layout="@layout/view_register_entity"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
             </RelativeLayout>
 

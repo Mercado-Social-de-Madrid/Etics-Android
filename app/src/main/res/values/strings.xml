@@ -194,5 +194,13 @@
     <string name="bonification_received_message"><![CDATA[Has recibido la bonificación por tu compra en el Mercado Social.<p><b>%s %s</b>]]></string>
     <string name="already_have_account">Ya tengo cuenta</string>
     <string name="dont_have_account">No tengo cuenta</string>
+    <string name="purchase_success_message">Se ha realizado con éxito tu compra de %s &currency_name_plural;</string>
+    <string name="purchase_verb">Comprar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="register_complete">Regitro completado</string>
+    <string name="register_email">Email de registro</string>
+    <string name="send_to_email">Enviar al correo</string>
+    <string name="remember_password_success_message">Hemos enviado las instrucciones para resetear tu contraseña a tu correo electrónico.</string>
+    <string name="go_to_email">Ir al correo</string>
 
 </resources>

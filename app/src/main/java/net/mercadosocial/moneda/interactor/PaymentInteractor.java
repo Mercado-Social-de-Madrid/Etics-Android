@@ -68,8 +68,6 @@ public class PaymentInteractor extends BaseInteractor {
                             return;
                         }
 
-                        baseView.setRefreshing(false);
-
                         callback.onSuccess(null);
 
 
@@ -88,7 +86,7 @@ public class PaymentInteractor extends BaseInteractor {
 
         getApi().getPendingPayments()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<PaymentsResponse>() {
+                .subscribe(new Observer<Response<PaymentsResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -100,11 +98,15 @@ public class PaymentInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(PaymentsResponse response) {
+                    public void onNext(Response<PaymentsResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(response.getPayments());
+                        callback.onResponse(response.body().getPayments());
 
 
                     }
@@ -135,6 +137,12 @@ public class PaymentInteractor extends BaseInteractor {
 
                     @Override
                     public void onNext(Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
                         callback.onSuccess(null);
 
@@ -167,6 +175,12 @@ public class PaymentInteractor extends BaseInteractor {
 
                     @Override
                     public void onNext(Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
                         callback.onSuccess(null);
 

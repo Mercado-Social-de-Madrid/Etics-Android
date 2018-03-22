@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.api;
 
 
+import net.mercadosocial.moneda.api.model.ResetPassword;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.api.response.LoginResponse;
 import net.mercadosocial.moneda.model.AuthLogin;
@@ -18,5 +19,10 @@ public interface AuthApi {
 
     @POST("register/")
     Observable<Response<Data>> register(@Body User user);
+
+    @POST("reset_password/")
+    Observable<Response<Data>> resetPassword(@Body ResetPassword resetPassword);
+
+
 
 }

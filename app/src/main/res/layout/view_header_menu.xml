@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/green_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/purple"
     android:orientation="vertical"
     android:paddingBottom="15dp"
     android:paddingTop="15dp">
@@ -16,9 +17,9 @@
 
         <ImageView
             android:id="@+id/img_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:maxWidth="100dp"
             android:adjustViewBounds="true"
             android:src="@mipmap/ic_drawer_user" />
 
@@ -27,53 +28,70 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/view_user_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/tv_user_name"
-                    style="@style/TextBase.Purple"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/btn_logout"
-                    android:textSize="18sp"
-                    android:text="adsfasdfasdfasfd"/>
+                    style="@style/TextBase.White"
+                    android:text="@string/account" />
 
-                <ImageView
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    style="@style/TextBase"
+                    android:layout_centerVertical="true"
+                    android:text="adsfasdfasdfasfd"
+                    android:textColor="@color/green"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/text_large" />
+
+                <TextView
                     android:id="@+id/btn_logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/TextBase.White"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/background_pressed_common"
-                    android:src="@mipmap/ic_logout"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:padding="5dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_gravity="right"
+                    android:text="@string/logout"
+                    android:drawableTint="@color/white"
+                    android:gravity="center_vertical"
+                    android:drawableRight="@mipmap/ic_logout" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/view_enter_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextBase.White"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/already_have_account" />
 
                 <TextView
                     android:id="@+id/btn_login"
-                    style="@style/ButtonMes"
-                    android:minWidth="0dp"
+                    style="@style/ButtonMes.Green"
                     android:padding="10dp"
                     android:text="@string/enter" />
 
                 <TextView
+                    style="@style/TextBase.White"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/dont_have_account" />
+
+                <TextView
                     android:id="@+id/btn_singup"
-                    style="@style/ButtonMes"
-                    android:layout_marginLeft="15dp"
-                    android:minWidth="0dp"
+                    style="@style/ButtonMes.Green"
                     android:padding="10dp"
                     android:text="@string/register" />
             </LinearLayout>

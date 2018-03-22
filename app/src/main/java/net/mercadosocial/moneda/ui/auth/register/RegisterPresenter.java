@@ -242,6 +242,15 @@ public class RegisterPresenter extends BasePresenter {
         });
     }
 
+//    private void showEmailSentEntityDialog() {
+//        new AlertDialog.Builder(context)
+//                .setTitle(R.string.register_complete)
+//                .setMessage(R.string.register_complete_message)
+//    }
+
+    private void enter() {
+    }
+
 
     public void onPlaceSelected(Place place) {
         this.place = place;

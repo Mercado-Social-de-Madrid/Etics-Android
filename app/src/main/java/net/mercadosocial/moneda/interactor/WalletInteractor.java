@@ -4,6 +4,8 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.WalletApi;
+import net.mercadosocial.moneda.api.model.Purchase;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Wallet;
@@ -57,7 +59,11 @@ public class WalletInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Wallet> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
                         callback.onResponse(response.body());
 
@@ -68,6 +74,44 @@ public class WalletInteractor extends BaseInteractor {
 
     }
 
+    public void purchaseCurrency(Float amount, final BaseApiPOSTCallback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        Purchase purchase = new Purchase(amount);
+
+        getApi().purchaseCurrency(purchase)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onSuccess(null);
+
+                    }
+                });
+
+
+    }
 
     private WalletApi getApi() {
         return getApi(WalletApi.class);

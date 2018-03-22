@@ -4,12 +4,14 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.OffersApi;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.OffersResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
 
+import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -37,7 +39,7 @@ public class OfferInteractor extends BaseInteractor {
         getApi().getOffers()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
-                .subscribe(new Observer<OffersResponse>() {
+                .subscribe(new Observer<Response<OffersResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -49,11 +51,16 @@ public class OfferInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(OffersResponse offersResponse) {
+                    public void onNext(Response<OffersResponse> response) {
 
-                        baseView.setRefreshing(false);
 
-                        callback.onResponse(offersResponse.getOffers());
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body().getOffers());
 
 
                     }

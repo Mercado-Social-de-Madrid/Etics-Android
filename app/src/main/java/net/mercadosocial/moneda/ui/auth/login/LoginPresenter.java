@@ -1,11 +1,16 @@
 package net.mercadosocial.moneda.ui.auth.login;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.widget.EditText;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.AuthInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
@@ -84,6 +89,69 @@ import es.dmoral.toasty.Toasty;
 
 
     public void onRememberPasswordClick(String username) {
-        //todo
+
+        if (true) {
+            openEmailApp();
+            return;
+        }
+
+        final EditText editText = new EditText(context);
+        editText.setHint(R.string.register_email);
+
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.remember_password)
+                .setView(editText)
+                .setPositiveButton(R.string.send_to_email, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String email = editText.getText().toString();
+                        resetPassword(email);
+
+                    }
+                })
+                .setNeutralButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void resetPassword(String email) {
+        authInteractor.resetPassword(email, new BaseInteractor.BaseApiCallback<Data>() {
+            @Override
+            public void onResponse(Data responseBody) {
+                showResetPasswordSuccessDialog();
+            }
+
+            @Override
+            public void onError(String message) {
+                Toasty.error(context, message).show();
+            }
+        });
+    }
+
+    private void showResetPasswordSuccessDialog() {
+
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.remember_password)
+                .setMessage(R.string.remember_password_success_message)
+                .setPositiveButton(R.string.go_to_email, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        openEmailApp();
+
+                    }
+                })
+                .setNeutralButton(R.string.back, null)
+                .show();
+    }
+
+    private void openEmailApp() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

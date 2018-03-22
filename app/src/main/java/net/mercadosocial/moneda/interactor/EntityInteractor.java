@@ -4,9 +4,10 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.EntitiesApi;
+import net.mercadosocial.moneda.api.response.ApiError;
+import net.mercadosocial.moneda.api.response.EntitiesResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
-import net.mercadosocial.moneda.api.response.EntitiesResponse;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.util.Util;
 
@@ -47,7 +48,7 @@ public class EntityInteractor extends BaseInteractor {
 
         getApi().getEntities()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<EntitiesResponse>() {
+                .subscribe(new Observer<Response<EntitiesResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -60,11 +61,15 @@ public class EntityInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(EntitiesResponse entitiesResponse) {
+                    public void onNext(Response<EntitiesResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(entitiesResponse.getEntities());
+                        callback.onResponse(response.body().getEntities());
 
 
                     }
@@ -82,7 +87,7 @@ public class EntityInteractor extends BaseInteractor {
 
         getApi().getEntitiesFiltered(query)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<EntitiesResponse>() {
+                .subscribe(new Observer<Response<EntitiesResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -94,11 +99,15 @@ public class EntityInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(EntitiesResponse entitiesResponse) {
+                    public void onNext(Response<EntitiesResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(entitiesResponse.getEntities());
+                        callback.onResponse(response.body().getEntities());
 
 
                     }
@@ -128,11 +137,15 @@ public class EntityInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<Entity> entityResponse) {
+                    public void onNext(Response<Entity> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(entityResponse.body());
+                        callback.onResponse(response.body());
 
 
                     }

@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.model;
 
 import android.support.annotation.NonNull;
+import android.support.v4.widget.ContentLoadingProgressBar;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -30,10 +31,11 @@ public class Payment implements Comparable<Payment> {
 
     private transient boolean blockButtons;
 
-    DateFormat timestampFormat = Novelty.formatDatetimeApi;
+    public transient DateFormat timestampFormat = Novelty.formatDatetimeApi;
 
 
     public String getBoniatosAmountFormatted() {
+
         NumberFormat numberFormat = new DecimalFormat("0.##");
         String amountFormatted = numberFormat.format(getCurrency_amount());
         return amountFormatted;

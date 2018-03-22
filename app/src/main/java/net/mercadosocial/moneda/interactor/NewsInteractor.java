@@ -4,12 +4,14 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.NewsApi;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.NewsResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.News;
 import net.mercadosocial.moneda.util.Util;
 
+import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -36,7 +38,7 @@ public class NewsInteractor extends BaseInteractor {
 
         getApi().getNews()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<NewsResponse>() {
+                .subscribe(new Observer<Response<NewsResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -48,11 +50,15 @@ public class NewsInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(NewsResponse response) {
+                    public void onNext(Response<NewsResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(response.getNews());
+                        callback.onResponse(response.body().getNews());
 
 
                     }
@@ -70,7 +76,7 @@ public class NewsInteractor extends BaseInteractor {
 
         getApi().getNewsById(id)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<News>() {
+                .subscribe(new Observer<Response<News>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -82,11 +88,15 @@ public class NewsInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(News news) {
+                    public void onNext(Response<News> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(news);
+                        callback.onResponse(response.body());
 
 
                     }

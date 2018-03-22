@@ -13,6 +13,7 @@ import retrofit2.Response;
 public class ApiError {
 
     private String message;
+    private String reason;
     private String error;
 
 
@@ -33,18 +34,18 @@ public class ApiError {
     }
 
     public String getMessage() {
-        return message;
+        return message != null ? message : reason != null ? reason : error != null ? error : "Error";
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
+//    public String getError() {
+//        return error;
+//    }
+//
+//    public void setError(String error) {
+//        this.error = error;
+//    }
 }

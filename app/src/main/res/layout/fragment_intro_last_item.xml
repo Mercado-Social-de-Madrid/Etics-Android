@@ -11,7 +11,7 @@
     <TextView
         style="@style/TextBase.Purple"
         android:text="@string/start"
-        android:textSize="22sp"/>
+        android:textSize="@dimen/text_large"/>
 
     <TextView
         android:id="@+id/btn_intro_enter"
@@ -22,13 +22,13 @@
     <TextView
         style="@style/TextBase"
         android:text="@string/intro_member_info"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_medium"
         android:layout_marginTop="30dp"/>
 
     <TextView
         android:id="@+id/btn_members_info"
         style="@style/TextBase.Purple"
         android:text="@string/discover_how"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_medium"
         android:layout_marginTop="30dp"/>
 </LinearLayout>

@@ -67,8 +67,8 @@ public class WalletPresenter extends BasePresenter {
     }
 
     public boolean isQRGeneratorVisible() {
-//        return App.isEntity(context);
-        return App.getUserData(context) != null;
+        return App.isEntity(context);
+//        return App.getUserData(context) != null;
     }
 
     private void refreshPendingPayments() {

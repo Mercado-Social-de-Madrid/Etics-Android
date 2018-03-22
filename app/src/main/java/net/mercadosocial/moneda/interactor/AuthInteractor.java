@@ -4,6 +4,8 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.AuthApi;
+import net.mercadosocial.moneda.api.model.ResetPassword;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.api.response.LoginResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -63,7 +65,12 @@ public class AuthInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<LoginResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
                         if (response.body().isSuccess()) {
                             Data data = response.body().getData();
                             data.setUsername(login.getUsername());
@@ -101,7 +108,13 @@ public class AuthInteractor extends BaseInteractor {
                     @Override
                     public void onNext(Response<Data> response) {
 
-                        baseView.setRefreshing(false);
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
                         if (response.body() == null) {
                             try {
                                 callback.onError("Error: " + response.errorBody().string());
@@ -118,6 +131,55 @@ public class AuthInteractor extends BaseInteractor {
 
     }
 
+    public void resetPassword(final String email, final BaseApiCallback<Data> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        ResetPassword resetPassword = new ResetPassword();
+        resetPassword.setEmail(email);
+
+        getApi().resetPassword(resetPassword)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Data>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Data> response) {
+
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        if (response.body() == null) {
+                            try {
+                                callback.onError("Error: " + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            callback.onResponse(response.body());
+                        }
+
+                    }
+                });
+
+
+    }
 
     private AuthApi getApi() {
         return getApi(AuthApi.class);

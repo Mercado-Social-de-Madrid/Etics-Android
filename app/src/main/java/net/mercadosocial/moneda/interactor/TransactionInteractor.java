@@ -4,12 +4,14 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.TransactionApi;
+import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.TransactionResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Transaction;
 import net.mercadosocial.moneda.util.Util;
 
+import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -37,7 +39,7 @@ public class TransactionInteractor extends BaseInteractor {
         getApi().getTransactions()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate(actionTerminate)
-                .subscribe(new Observer<TransactionResponse>() {
+                .subscribe(new Observer<Response<TransactionResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -49,11 +51,15 @@ public class TransactionInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(TransactionResponse transactionsResponse) {
+                    public void onNext(Response<TransactionResponse> response) {
 
-                        baseView.setRefreshing(false);
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
 
-                        callback.onResponse(transactionsResponse.getTransactions());
+                        callback.onResponse(response.body().getTransactions());
 
 
                     }

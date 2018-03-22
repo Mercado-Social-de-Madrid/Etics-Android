@@ -36,6 +36,7 @@ import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.NewPaymentDialog;
 import net.mercadosocial.moneda.views.ProgressDialogMES;
+import net.mercadosocial.moneda.views.ProgressDialogMESOLD;
 
 import es.dmoral.toasty.Toasty;
 
@@ -56,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private AppBarLayout appBarLayout;
     private BasePresenter basePresenter;
     private Handler handlerDialog;
-    private ProgressDialogMES refreshingDialog;
+    private ProgressDialogMESOLD refreshingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -295,42 +296,48 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         Log.i(TAG, "setRefreshing: refreshing = " + refresing);
 
-        try {
-
-            if (refresing) {
-                if (handlerDialog == null) {
-                    handlerDialog = new Handler();
-                    Log.i(TAG, "setRefreshing: newHandler()");
-                    handlerDialog.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Log.i(TAG, "setRefreshing: enter handler post");
-                            if (refreshingDialog == null) {
-                                Log.i(TAG, "setRefreshing: showing dialog");
-                                refreshingDialog = ProgressDialogMES.newInstance();
-                                refreshingDialog.show(getFragmentManager(), null);
-                            }
-                        }
-                    }, ProgressDialogMES.TIME_START_THRESHOLD);
-                }
-            } else {
-                if (handlerDialog != null) {
-                    Log.i(TAG, "setRefreshing: removing Callbackds handler");
-                    handlerDialog.removeCallbacksAndMessages(null);
-                    handlerDialog = null;
-                }
-                if (refreshingDialog != null) {
-                    Log.i(TAG, "setRefreshing: dismissTimeSafe");
-                    refreshingDialog.dismissTimeSafe();
-                    refreshingDialog = null;
-                }
-            }
-        } catch (Exception e) {
-            Log.i(TAG, "setRefreshing: exception", e);
-            handlerDialog = null;
-            refreshingDialog = null;
+        if (refresing) {
+            ProgressDialogMES.getInstance(getFragmentManager()).show();
+        } else {
+            ProgressDialogMES.getInstance(getFragmentManager()).hide();
         }
+
+//        try {
+//
+//            if (refresing) {
+//                if (handlerDialog == null) {
+//                    handlerDialog = new Handler();
+//                    Log.i(TAG, "setRefreshing: newHandler()");
+//                    handlerDialog.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Log.i(TAG, "setRefreshing: enter handler post");
+//                            if (refreshingDialog == null) {
+//                                Log.i(TAG, "setRefreshing: showing dialog");
+//                                refreshingDialog = ProgressDialogMESOLD.newInstance();
+//                                refreshingDialog.show(getFragmentManager(), null);
+//                            }
+//                        }
+//                    }, ProgressDialogMES.MIN_DELAY);
+//                }
+//            } else {
+//                if (handlerDialog != null) {
+//                    Log.i(TAG, "setRefreshing: removing Callbackds handler");
+//                    handlerDialog.removeCallbacksAndMessages(null);
+//                    handlerDialog = null;
+//                }
+//                if (refreshingDialog != null) {
+//                    Log.i(TAG, "setRefreshing: dismissTimeSafe");
+//                    refreshingDialog.dismissTimeSafe();
+//                    refreshingDialog = null;
+//                }
+//            }
+//        } catch (Exception e) {
+//            Log.i(TAG, "setRefreshing: exception", e);
+//            handlerDialog = null;
+//            refreshingDialog = null;
+//        }
 
 
 //        if (progressBar != null) {

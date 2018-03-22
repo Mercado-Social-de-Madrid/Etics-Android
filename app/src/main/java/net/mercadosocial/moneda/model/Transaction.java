@@ -20,8 +20,8 @@ public class Transaction {
     private Boolean made_byadmin;
     private String timestamp;
 
-    private DateFormat dateFormatApi = Novelty.formatDatetimeApi;
-    private DateFormat dateFormatDateTimeUser = new SimpleDateFormat("dd/MM/yy'\n'HH:mm");
+    private transient DateFormat dateFormatApi = Novelty.formatDatetimeApi;
+    private transient DateFormat dateFormatDateTimeUser = new SimpleDateFormat("dd/MM/yy'\n'HH:mm");
 
     public String getDateTimeFormatted() {
         try {

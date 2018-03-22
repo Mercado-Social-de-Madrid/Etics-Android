@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.widget.ContentLoadingProgressBar;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
@@ -42,6 +43,8 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         loadApiKey(this);
+
+        ContentLoadingProgressBar progressBar = new ContentLoadingProgressBar(this);
 
 //        CrashlyticsCore.getInstance().crash();
 

@@ -13,10 +13,10 @@ import rx.Observable;
 public interface EntitiesApi {
 
     @GET("entities/?limit=100")
-    Observable<EntitiesResponse> getEntities();
+    Observable<Response<EntitiesResponse>> getEntities();
 
     @GET("entities/?limit=100")
-    Observable<EntitiesResponse> getEntitiesFiltered(@Query("q") String query);
+    Observable<Response<EntitiesResponse>> getEntitiesFiltered(@Query("q") String query);
 
     @GET("entities/{id}")
     Observable<Response<Entity>> getEntityById(@Path("id") String id);

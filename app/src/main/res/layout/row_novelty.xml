@@ -36,7 +36,7 @@
                 android:layout_toRightOf="@+id/img_novelty"
                 android:layout_toLeftOf="@+id/img_starred"
                 android:layout_alignTop="@id/img_novelty"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_medium"
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"

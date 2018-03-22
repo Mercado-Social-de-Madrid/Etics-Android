@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menuItem_the_social_market"
-        android:icon="@mipmap/ic_drawer_bulb"
+        android:icon="@mipmap/ic_drawer_user"
         android:title="@string/the_social_market" />
 
 
@@ -12,7 +12,7 @@
         <menu>
             <item
                 android:id="@+id/menuItem_how_boniato_works"
-                android:icon="@mipmap/ic_drawer_tick"
+                android:icon="@mipmap/ic_drawer_bulb"
                 android:title="@string/how_it_works" />
 
             <item
