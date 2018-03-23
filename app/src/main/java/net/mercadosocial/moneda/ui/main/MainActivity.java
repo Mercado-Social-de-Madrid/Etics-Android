@@ -28,6 +28,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
+import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
@@ -38,6 +39,9 @@ import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
 import net.mercadosocial.moneda.views.CircleTransform;
+import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
+
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
@@ -111,6 +115,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
 
         presenter.onCreate(getIntent());
+
+//        showMockNotificationDialog();
+    }
+
+    private void showMockNotificationDialog() {
+
+        Notification notification = new Notification();
+        notification.setAmount(10f);
+        notification.setSender("Pepa");
+        notification.setTotal_amount(20f);
+//        BonusDialog bonusDialog = BonusDialog.newInstance(notification);
+//        bonusDialog.show(getSupportFragmentManager(), null);
+
+        NewPaymentDialog.newInstance(notification).show(getFragmentManager(), null);
     }
 
 
@@ -214,7 +232,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                intent.putExtras(bundle);
 //                sendBroadcast(intent);
 
-                startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
+                if (App.getUserData(this) != null) {
+                    startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
+                } else {
+                    Toasty.info(this, getString(R.string.enter_with_your_account)).show();
+                    bottomNavView.findViewById(R.id.navigation_wallet).performClick();
+                }
 
 
 //                Notification notification = new Notification();

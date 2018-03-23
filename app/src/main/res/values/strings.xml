@@ -139,7 +139,7 @@
     <string name="see_full_news">Ver noticia completa</string>
     <string name="invalid_link">El enlace no es válido</string>
     <string name="reject">Rechazar</string>
-    <string name="decide_later">Decidir más tarde</string>
+    <string name="decide_later"><![CDATA[Decidir más tarde >]]></string>
     <string name="processing">Procesando</string>
     <string name="pending_payments">Pagos pendientes</string>
     <string name="has_pending_payments_to_confirm">Tienes nuevos pagos a tu entidad pendientes de confirmar</string>
@@ -182,7 +182,10 @@
     <string name="new_payment_received">Nuevo pago recibido</string>
     <string name="username_or_email">Usuari@ o Email</string>
     <string name="surname">Apellidos</string>
-    <string name="payment_received_message"><![CDATA[<b>%s</b> te ha enviado un pago de<br><b>%s </b><br>La cantidad total es de <b>%s</b>]]></string>
+    <string name="payment_received_message"><![CDATA[
+    <font color="#af64ac"><b>%s</b></font> te ha enviado un pago de<br>
+    <font color="#af64ac"><b>%s </b></font><p>La cantidad total es de <font color="#af64ac"><b>%s</b></font>
+    ]]></string>
     <string name="finish_pending_payments">¡Terminaste!</string>
     <string name="contact">Contacto</string>
     <string name="web">Página web</string>
@@ -191,7 +194,8 @@
     <string name="youtube">Youtube</string>
     <string name="email_contact_subject">Contacto desde la app Android</string>
     <string name="congratulations">¡Enhorabuena!</string>
-    <string name="bonification_received_message"><![CDATA[Has recibido la bonificación por tu compra en el Mercado Social.<p><b>%s %s</b>]]></string>
+    <string name="bonification_received_message"><![CDATA[
+        Has recibido <font color="#af64ac"><b>%s %s</b></font> de bonificación por tu compra en el Mercado Social.]]></string>
     <string name="already_have_account">Ya tengo cuenta</string>
     <string name="dont_have_account">No tengo cuenta</string>
     <string name="purchase_success_message">Se ha realizado con éxito tu compra de %s &currency_name_plural;</string>
@@ -202,5 +206,7 @@
     <string name="send_to_email">Enviar al correo</string>
     <string name="remember_password_success_message">Hemos enviado las instrucciones para resetear tu contraseña a tu correo electrónico.</string>
     <string name="go_to_email">Ir al correo</string>
+    <string name="close_arrow"><![CDATA[Cerrar >]]></string>
+    <string name="enter_with_your_account">Entra con tu cuenta</string>
 
 </resources>

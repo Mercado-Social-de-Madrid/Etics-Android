@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_custom_dialog"
     android:gravity="center_horizontal"
-    android:padding="10dp">
+    android:orientation="vertical"
+    android:padding="20dp">
+
 
     <TextView
-        style="@style/TextBase"
-        android:text="@string/new_payment_received"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"/>
+        style="@style/TextTitleComfortaa.Purple"
+        android:text="@string/new_payment_received" />
+
 
     <TextView
         android:id="@+id/tv_new_payment_info"
         style="@style/TextBase"
-        android:gravity="center_horizontal"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_cancel"
-            style="@style/TextBase.White"
-            app:backgroundTint="@color/bg_button_red"
-            android:text="@string/reject"/>
-
-        <View style="@style/XpansorHoriz" />
+            style="@style/ButtonMes.Green"
+            android:minWidth="70dp"
+            android:text="@string/reject"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="normal"
+            app:backgroundTint="@color/red_orange" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
-            style="@style/TextBase.White"
-            app:backgroundTint="@color/bg_button_green"
-            android:text="@string/accept"/>
+            style="@style/ButtonMes.Green"
+            android:layout_marginLeft="50dp"
+            android:minWidth="70dp"
+            android:text="@string/accept"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="normal" />
     </LinearLayout>
 
 
     <TextView
         android:id="@+id/btn_decide_later"
         style="@style/TextBase"
-        android:text="@string/decide_later"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_pressed_common"
+        android:padding="10dp"
+        android:text="@string/decide_later" />
+
 
 </LinearLayout>

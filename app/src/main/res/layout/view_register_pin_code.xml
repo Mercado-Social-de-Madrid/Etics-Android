@@ -16,6 +16,7 @@
     <TextView
         style="@style/TextBase"
         android:textSize="12sp"
+        android:layout_marginTop="5dp"
         android:text="@string/pin_code_register_explanation"/>
 
     <LinearLayout

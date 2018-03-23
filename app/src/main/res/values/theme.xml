@@ -48,7 +48,7 @@
     </style>
 
 
-    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="DialogProgressMES" parent="Theme.AppCompat.Light.Dialog.Alert">
 
         <!--<item name="android:backgroundDimAmount">0.0</item>-->
         <!--<item name="android:backgroundDimEnabled">false</item>-->
@@ -72,5 +72,17 @@
         <item name="android:windowContentOverlay">@null</item>
         <!-- remove the shadow from under the title bar -->
     </style>
+
+
+    <!--<style name="DialogBonus" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+        <!--<item name="android:background">@drawable/bg_custom_dialog</item>-->
+        <!--&lt;!&ndash;<item name="app:colorAccent">@color/white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="app:buttonBarNegativeButtonStyle">@style/ButtonDialog</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColorPrimary">@color/yellow</item>&ndash;&gt;-->
+    <!--</style>-->
+    <!--<style name="ButtonDialog">-->
+        <!--<item name="android:textColor">@color/white</item>-->
+        <!--<item name="android:background">@android:color/transparent</item>-->
+    <!--</style>-->
 
 </resources>

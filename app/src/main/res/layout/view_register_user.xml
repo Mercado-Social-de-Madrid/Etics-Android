@@ -59,7 +59,8 @@
                 style="@style/TextBase"
                 android:text="@string/person"
                 android:textColor="@color/purple"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_medium"
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 
@@ -85,7 +86,8 @@
                 style="@style/TextBase"
                 android:text="@string/entity"
                 android:textColor="@color/purple"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_medium"
+                android:layout_marginTop="5dp" />
 
         </LinearLayout>
 
@@ -100,5 +102,6 @@
         android:text="@string/already_account_login"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
+        android:textSize="@dimen/text_small_2"
         android:background="@drawable/background_pressed_common" />
 </LinearLayout>

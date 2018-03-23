@@ -37,7 +37,7 @@ public class ProgressDialogMESOLD extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.MyDialogTheme);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogProgressMES);
     }
 
     @Nullable

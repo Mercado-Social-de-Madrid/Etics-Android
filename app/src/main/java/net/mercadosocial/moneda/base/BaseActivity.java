@@ -34,9 +34,11 @@ import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.util.Util;
-import net.mercadosocial.moneda.views.NewPaymentDialog;
-import net.mercadosocial.moneda.views.ProgressDialogMES;
 import net.mercadosocial.moneda.views.ProgressDialogMESOLD;
+import net.mercadosocial.moneda.views.custom_dialog.BonusDialog;
+import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
+import net.mercadosocial.moneda.views.custom_dialog.OnCloseListener;
+import net.mercadosocial.moneda.views.custom_dialog.ProgressDialogMES;
 
 import es.dmoral.toasty.Toasty;
 
@@ -92,7 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         switch (notification.getType()) {
             case Notification.TYPE_PAYMENT:
                 NewPaymentDialog.newInstance(notification)
-                        .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
+                        .setOnCloseListener(new OnCloseListener() {
                             @Override
                             public void onClose() {
                                 refreshData();
@@ -103,7 +105,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             case Notification.TYPE_TRANSACTION:
                 String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), true);
                 if (notification.getIs_bonification()) {
-                    showBonificationDialog(amountFormatted);
+                    BonusDialog bonusDialog = BonusDialog.newInstance(notification);
+                    bonusDialog.setOnDismissOrCancelListener(new OnCloseListener() {
+                        @Override
+                        public void onClose() {
+                            refreshData();
+                        }
+                    });
+                    bonusDialog.show(getSupportFragmentManager(), null);
+//                    showBonificationDialog(amountFormatted);
                 } else {
                     Toasty.info(this, String.format(getString(R.string.income_received), amountFormatted)).show();
                 }
@@ -121,6 +131,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     private void showBonificationDialog(String amountFormatted) {
+
+        View layout = getLayoutInflater().inflate(R.layout.view_dialog_bonus, null);
 
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(R.string.congratulations);

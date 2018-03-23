@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 
-import net.mercadosocial.moneda.views.ProgressDialogMES;
+import net.mercadosocial.moneda.views.custom_dialog.ProgressDialogMES;
 
 /**
  * Created by julio on 27/01/16.

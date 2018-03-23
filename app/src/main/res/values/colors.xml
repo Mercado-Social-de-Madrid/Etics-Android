@@ -33,6 +33,7 @@
     <color name="grey_disabled">#7dababab</color>
     <color name="red">#F00</color>
     <color name="red_dark">#d10000</color>
+    <color name="red_orange">#F7722F</color>
     <color name="black_semitransp_pressed">#34000000</color>
     <color name="black_semitransp">#60000000</color>
 
