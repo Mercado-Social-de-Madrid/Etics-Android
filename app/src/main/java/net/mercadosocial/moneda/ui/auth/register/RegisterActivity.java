@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
@@ -133,7 +134,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onError(Status status) {
                 Log.i(TAG, "An error occurred: " + status);
-                //todo error report
+                String message = "message: " + status.getStatusMessage() + "\n" +
+                        "code: " + status.getStatusCode();
+                alert(message);
+                Crashlytics.logException(new Exception("PlaceAutocompleteFragment fails. Status message: " + status.getStatusMessage()));
             }
         });
 

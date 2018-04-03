@@ -101,6 +101,9 @@ public class PaymentsPresenter extends BasePresenter {
 
             @Override
             public void onError(String message) {
+
+                payments.get(position).setBlockButtons(false);
+                view.showPendingPayments(payments);
                 Toasty.error(context, message).show();
             }
         });
@@ -121,6 +124,8 @@ public class PaymentsPresenter extends BasePresenter {
 
             @Override
             public void onError(String message) {
+                payments.get(position).setBlockButtons(false);
+                view.showPendingPayments(payments);
                 Toasty.error(context, message).show();
             }
         });

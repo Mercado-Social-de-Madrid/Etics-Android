@@ -2,8 +2,11 @@ package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
+
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.AuthApi;
+import net.mercadosocial.moneda.api.CustomApiException;
 import net.mercadosocial.moneda.api.model.ResetPassword;
 import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.Data;
@@ -103,6 +106,7 @@ public class AuthInteractor extends BaseInteractor {
                     public void onError(Throwable e) {
 
                         callback.onError(e.getMessage());
+                        Crashlytics.logException(new CustomApiException("onError", e));
                     }
 
                     @Override
@@ -112,6 +116,11 @@ public class AuthInteractor extends BaseInteractor {
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
                             callback.onError(apiError.getMessage());
+                            try {
+                                Crashlytics.logException(new CustomApiException(response.errorBody().string()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             return;
                         }
 

@@ -55,6 +55,7 @@ import java.util.List;
          if (intent.hasExtra("type")) {
              intent.putExtra(Notification.FIELD_FROM_OUTSIDE, true);
              ((BaseActivity)context).processNotification(intent);
+             intent.getExtras().clear();
          }
 
 //         :

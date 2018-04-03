@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.widget.ContentLoadingProgressBar;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttpDownloader;
@@ -17,6 +18,8 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by julio on 17/06/16.
@@ -46,7 +49,16 @@ public class App extends MultiDexApplication {
 
         ContentLoadingProgressBar progressBar = new ContentLoadingProgressBar(this);
 
+
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)           // Enables Crashlytics debugger
+                .build();
+        Fabric.with(fabric);
+
+
 //        CrashlyticsCore.getInstance().crash();
+
 
         Picasso.Builder builder = new Picasso.Builder(this);
         builder.downloader(new OkHttpDownloader(this, Integer.MAX_VALUE))
