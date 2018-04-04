@@ -10,8 +10,8 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 177
-        versionName "1.77"
+        versionCode 178
+        versionName "1.78"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true //important
@@ -59,6 +59,7 @@ dependencies {
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32'
     compile 'com.github.GrenderG:Toasty:1.2.8'
     compile 'jp.wasabeef:recyclerview-animators:2.3.0'
+    compile 'com.github.scottyab:showhidepasswordedittext:0.8'
 
     compile 'com.google.firebase:firebase-messaging:11.8.0'
     compile 'com.google.android.gms:play-services-places:11.8.0'

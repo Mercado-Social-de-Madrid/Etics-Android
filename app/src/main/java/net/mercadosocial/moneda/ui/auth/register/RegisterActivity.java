@@ -52,6 +52,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private TextView btnRegisterBack;
     private EditText editEmail;
     private EditText editSurnamesPerson;
+    private View btnInfoUsername;
 
 
     private void findViews() {
@@ -87,11 +88,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         btnGoToLogin = findViewById(R.id.btn_go_to_login);
 
+        btnInfoUsername = findViewById(R.id.btn_info_username);
+
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
         btnRegisterContinue.setOnClickListener(this);
         btnRegisterBack.setOnClickListener(this);
         btnGoToLogin.setOnClickListener(this);
+        btnInfoUsername.setOnClickListener(this);
     }
 
 
@@ -172,7 +176,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 overridePendingTransition(0, 0);
                 break;
+
+            case R.id.btn_info_username:
+                showInfoUsernameDialog();
+                break;
         }
+    }
+
+    private void showInfoUsernameDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.info)
+                .setIcon(R.mipmap.ic_info)
+                .setMessage(R.string.username_info)
+                .setNegativeButton(R.string.back, null)
+                .show();
     }
 
     @Override

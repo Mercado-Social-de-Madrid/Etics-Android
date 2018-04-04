@@ -1,10 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="accept">Aceptar</string>
-    <string name="at_least_x_characters">Minimo %d caracteres</string>
-    <string name="cancel">Cancelar</string>
-    <string name="password">Contraseña</string>
-    <string name="check">Comprobar</string>
-    <string name="login">Acceder</string>
-    <string name="username">Usuari@</string>
 </resources>

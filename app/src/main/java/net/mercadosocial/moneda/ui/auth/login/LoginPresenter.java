@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 
 import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -82,6 +83,9 @@ import es.dmoral.toasty.Toasty;
 
             @Override
             public void onError(String error) {
+                if (error.equals("incorrect")) {
+                    error = context.getString(R.string.access_data_incorrect);
+                }
                 Toasty.error(context, error).show();
             }
         });
@@ -90,13 +94,13 @@ import es.dmoral.toasty.Toasty;
 
     public void onRememberPasswordClick(String username) {
 
-        if (true) {
+        if (DebugHelper.SWITCH_TEST_FUNCTION) {
             openEmailApp();
             return;
         }
 
         final EditText editText = new EditText(context);
-        editText.setHint(R.string.register_email);
+        editText.setHint(R.string.username);
 
         new AlertDialog.Builder(context)
                 .setTitle(R.string.remember_password)

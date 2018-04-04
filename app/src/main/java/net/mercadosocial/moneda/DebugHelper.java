@@ -15,6 +15,12 @@ public class DebugHelper {
     // Falses
     private static final boolean SKIP_SPLASH = false;
     private static final boolean COMPLETE_EDIT_TEXTS = true;
+
+
+    private static final boolean TEST_FUNCTION = false;
+
+
+
     public static final boolean DEBUG_MESSAGES = false;
     private static final boolean DEBUG_TOKEN = false;
 
@@ -55,4 +61,8 @@ public class DebugHelper {
 
     public static final boolean SWITCH_DEBUG_TOKEN = BuildConfig.DEBUG
             || FORZE_BETA_ENV_APK ? DEBUG_TOKEN : false;
+
+    public static final boolean SWITCH_TEST_FUNCTION = BuildConfig.DEBUG
+            || FORZE_BETA_ENV_APK ? TEST_FUNCTION : false;
+
 }

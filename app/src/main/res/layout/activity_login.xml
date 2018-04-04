@@ -37,12 +37,12 @@
                 android:hint="@string/username"
                 android:inputType="textAutoComplete" />
 
-            <EditText
+            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                 android:id="@+id/edit_password"
                 style="@style/EditTextAuth"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"/>
 
         </LinearLayout>
 

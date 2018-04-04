@@ -9,6 +9,7 @@ import net.mercadosocial.moneda.api.AuthApi;
 import net.mercadosocial.moneda.api.CustomApiException;
 import net.mercadosocial.moneda.api.model.ResetPassword;
 import net.mercadosocial.moneda.api.response.ApiError;
+import net.mercadosocial.moneda.api.response.ApiFormError;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.api.response.LoginResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -18,6 +19,9 @@ import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import retrofit2.Response;
 import rx.Observer;
@@ -114,6 +118,13 @@ public class AuthInteractor extends BaseInteractor {
 
 
                         if (!response.isSuccessful()) {
+
+                            if (response.code() == 400) {
+                                ApiFormError apiFormError = ApiFormError.parse(response);
+                                callback.onError(apiFormError.getFormErrorMessage(context));
+                                return;
+                            }
+
                             ApiError apiError = ApiError.parse(response);
                             callback.onError(apiError.getMessage());
                             try {
@@ -139,6 +150,7 @@ public class AuthInteractor extends BaseInteractor {
 
 
     }
+
 
     public void resetPassword(final String email, final BaseApiCallback<Data> callback) {
 

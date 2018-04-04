@@ -132,7 +132,9 @@ public class ProgressDialogMES extends DialogFragment {
     }
 
     private void removeCallback(Runnable runnable) {
-        handler.removeCallbacks(runnable);
+        if (handler != null) {
+            handler.removeCallbacks(runnable);
+        }
     }
 
     /**

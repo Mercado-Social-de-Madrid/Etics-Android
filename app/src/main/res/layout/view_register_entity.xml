@@ -64,7 +64,7 @@
             style="@style/EditTextAuth"
             android:layout_width="wrap_content"
             android:layout_marginTop="0dp"
-            android:ems="2"
+            android:ems="3"
             android:inputType="number|phone"
             android:layout_toLeftOf="@+id/tv_percent_max_accept"
             android:gravity="right"/>
@@ -99,7 +99,7 @@
             style="@style/EditTextAuth"
             android:layout_width="wrap_content"
             android:layout_marginTop="0dp"
-            android:ems="2"
+            android:ems="3"
             android:inputType="number|phone"
             android:gravity="right"
             android:layout_toLeftOf="@+id/tv_percent_bonus"/>
@@ -134,7 +134,7 @@
             style="@style/EditTextAuth"
             android:layout_width="wrap_content"
             android:layout_marginTop="0dp"
-            android:ems="2"
+            android:ems="3"
             android:inputType="number|phone"
             android:gravity="right"
             android:layout_toLeftOf="@+id/tv_percent_bonus_entities"/>

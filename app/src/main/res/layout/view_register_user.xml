@@ -4,11 +4,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_username"
-        style="@style/EditTextAuth"
-        android:hint="@string/username"
-        android:inputType="textAutoComplete" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_username"
+            style="@style/EditTextAuth"
+            android:hint="@string/username"
+            android:inputType="textAutoComplete"/>
+
+        <ImageView
+            android:id="@+id/btn_info_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_info"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/edit_username"
+            android:layout_alignBottom="@+id/edit_username"
+            android:padding="8dp"
+            android:background="@drawable/background_pressed_common"/>
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/edit_email"
@@ -16,13 +33,13 @@
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
-    <EditText
+    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
         android:id="@+id/edit_password"
         style="@style/EditTextAuth"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
-    <EditText
+    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
         android:id="@+id/edit_repeat_password"
         style="@style/EditTextAuth"
         android:layout_width="match_parent"

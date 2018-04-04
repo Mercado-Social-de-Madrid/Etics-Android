@@ -181,6 +181,13 @@
     <string name="invalid_field">Campo no válido</string>
     <string name="new_payment_received">Nuevo pago recibido</string>
     <string name="username_or_email">Usuari@ o Email</string>
+
+    <string name="at_least_x_characters">Minimo %d caracteres</string>
+    <string name="password">Contraseña</string>
+    <string name="check">Comprobar</string>
+    <string name="login">Acceder</string>
+    <string name="username">Nombre de usuari@</string>
+
     <string name="surname">Apellidos</string>
     <string name="payment_received_message"><![CDATA[
     <font color="#af64ac"><b>%s</b></font> te ha enviado un pago de<br>
@@ -208,5 +215,11 @@
     <string name="go_to_email">Ir al correo</string>
     <string name="close_arrow"><![CDATA[Cerrar >]]></string>
     <string name="enter_with_your_account">Entra con tu cuenta</string>
+    <string name="error_in">Error en %s:</string>
+    <string name="access_data_incorrect">Datos de acceso incorrectos</string>
+    <string name="info">Información</string>
+    <string name="username_info">El nombre de usuari@ es único. Escríbelo sin espacios, sólo letras sin acentos y números.\nTambién se aceptan los siguientes símbolos: @ - _ + .</string>
+    <string name="bonus_cannot_be_zero">El porcentaje de bonificación tiene que ser mayor que 0</string>
+    <string name="max_percent_payment_cannot_be_zero">Todas las entidades deben aceptar un porcentaje mayor que 0 en sus pagos</string>
 
 </resources>

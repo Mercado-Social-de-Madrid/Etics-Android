@@ -182,6 +182,16 @@ public class RegisterPresenter extends BasePresenter {
 
     private boolean checkValidData(Entity entity) {
 
+        if (entity.getBonus_percent_general() == 0 || entity.getBonus_percent_entity() == 0) {
+            Toasty.error(context, context.getString(R.string.bonus_cannot_be_zero)).show();
+            return false;
+        }
+
+        if (entity.getMax_percent_payment() == 0) {
+            Toasty.error(context, context.getString(R.string.max_percent_payment_cannot_be_zero)).show();
+            return false;
+        }
+
         return checkValidPinCode(entity.getPin_code(), entity.getPin_codeRepeat());
     }
 
@@ -237,7 +247,8 @@ public class RegisterPresenter extends BasePresenter {
 
             @Override
             public void onError(String error) {
-                Toasty.error(context, error).show();
+                view.alert(error);
+//                Toasty.error(context, error).show();
             }
         });
     }
