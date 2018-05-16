@@ -2,11 +2,13 @@ package net.mercadosocial.moneda.ui.transactions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.TransactionInteractor;
 import net.mercadosocial.moneda.model.Transaction;
+import net.mercadosocial.moneda.views.custom_dialog.TransactionInfoDialog;
 
 import java.util.List;
 
@@ -20,8 +22,9 @@ import es.dmoral.toasty.Toasty;
  public class TransactionsPresenter extends BasePresenter {
 
      private final TransactionsView view;
+    private List<Transaction> transactions;
 
-     public static Intent newTransactionsActivity(Context context) {
+    public static Intent newTransactionsActivity(Context context) {
 
          Intent intent = new Intent(context, TransactionsActivity.class);
 
@@ -57,7 +60,8 @@ import es.dmoral.toasty.Toasty;
          new TransactionInteractor(context, view).getTransactions(new BaseInteractor.BaseApiGETListCallback<Transaction>() {
              @Override
              public void onResponse(List<Transaction> list) {
-                 view.showTransactions(list);
+                 transactions = list;
+                 view.showTransactions(transactions);
              }
 
              @Override
@@ -68,4 +72,8 @@ import es.dmoral.toasty.Toasty;
 
      }
 
- }
+    public void onItemClick(int position) {
+        Transaction transaction = transactions.get(position);
+        TransactionInfoDialog.newInstance(transaction).show(((AppCompatActivity)context).getSupportFragmentManager(), null);
+    }
+}

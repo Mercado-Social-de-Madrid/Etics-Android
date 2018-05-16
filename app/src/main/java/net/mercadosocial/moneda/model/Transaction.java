@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.model;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +10,7 @@ import java.util.Date;
  * Created by julio on 2/02/18.
  */
 
-public class Transaction {
+public class Transaction implements Serializable {
 
     private Float amount;
     private String concept;

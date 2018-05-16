@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_custom_dialog">
+
+
+    <TextView
+        style="@style/TextTitleComfortaa.Purple"
+        android:text="@string/transaction_detail"/>
+
+
+    <TextView
+        android:id="@+id/tv_message"
+        style="@style/TextBase"
+        android:layout_marginTop="25dp"/>
+
+
+    <TextView
+        android:id="@+id/btn_close"
+        style="@style/TextBase"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="@string/close_arrow"
+        android:background="@drawable/background_pressed_common"/>
+
+</LinearLayout>

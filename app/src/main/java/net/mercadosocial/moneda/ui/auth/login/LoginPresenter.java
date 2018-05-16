@@ -100,7 +100,7 @@ import es.dmoral.toasty.Toasty;
         }
 
         final EditText editText = new EditText(context);
-        editText.setHint(R.string.username);
+        editText.setHint(R.string.email);
 
         new AlertDialog.Builder(context)
                 .setTitle(R.string.remember_password)
@@ -119,6 +119,7 @@ import es.dmoral.toasty.Toasty;
     }
 
     private void resetPassword(String email) {
+        view.setRefreshing(true);
         authInteractor.resetPassword(email, new BaseInteractor.BaseApiCallback<Data>() {
             @Override
             public void onResponse(Data responseBody) {

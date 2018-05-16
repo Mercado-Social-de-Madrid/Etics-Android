@@ -19,9 +19,6 @@ import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import retrofit2.Response;
 import rx.Observer;

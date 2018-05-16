@@ -7,7 +7,7 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/text_small_2</item>
         <item name="android:lineSpacingExtra">5dp</item>
-        <item name="android:fontFamily">@font/sinkinsans</item>
+        <item name="fontFamily">@font/sinkinsans</item>
     </style>
 
     <style name="TextBase.White">

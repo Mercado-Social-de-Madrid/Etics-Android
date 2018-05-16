@@ -1,7 +1,6 @@
 package net.mercadosocial.moneda.model;
 
 import android.support.annotation.NonNull;
-import android.support.v4.widget.ContentLoadingProgressBar;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -18,8 +17,10 @@ public class Payment implements Comparable<Payment> {
     private String id;
     private String sender;
     private String status;
+    private String concept;
     private String processed;
     private String timestamp;
+    private String user_type;
 
     // when sending new
     private String receiver;
@@ -61,6 +62,7 @@ public class Payment implements Comparable<Payment> {
         }
         return getTimestamp();
     }
+
 
     public String getReceiver() {
         return receiver;
@@ -152,5 +154,21 @@ public class Payment implements Comparable<Payment> {
 
     public void setPin_code(String pin_code) {
         this.pin_code = pin_code;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 }

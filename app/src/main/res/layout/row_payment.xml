@@ -10,9 +10,19 @@
     android:layout_marginBottom="5dp">
 
     <TextView
+        android:id="@+id/tv_new_payment_account"
+        style="@style/TextBase"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_new_payment_concept"
+        style="@style/TextBase"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
         android:id="@+id/tv_new_payment_datetime"
         style="@style/TextBase"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tv_new_payment_info"
@@ -24,19 +34,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_cancel"
-            style="@style/TextBase.White"
-            app:backgroundTint="@color/bg_button_red"
+            style="@style/ButtonMes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:minWidth="0dp"
+            android:background="@null"
+            android:textColor="@color/black"
             android:text="@string/reject"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
-            style="@style/TextBase.White"
-            app:backgroundTint="@color/bg_button_green"
+            style="@style/ButtonMes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:minWidth="0dp"
             android:text="@string/accept"
-            android:layout_marginLeft="60dp"/>
+            android:layout_marginLeft="15dp"/>
     </LinearLayout>
 </LinearLayout>

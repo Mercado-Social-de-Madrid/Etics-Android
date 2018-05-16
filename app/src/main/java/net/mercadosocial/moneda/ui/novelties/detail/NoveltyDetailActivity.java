@@ -56,7 +56,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
     // PRESENTER CALLBACKS
     @Override
     public void showOffer(Offer offer) {
-        setTitle(R.string.offer);
+        setToolbarTitle(R.string.offer);
         showNovelty(offer);
 
     }
@@ -64,7 +64,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
 
     @Override
     public void showNews(final News news) {
-        setTitle(R.string.news_mes);
+        setToolbarTitle(R.string.news_mes);
         showNovelty(news);
 
         if (news.getMore_info_text() != null) {

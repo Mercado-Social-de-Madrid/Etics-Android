@@ -207,8 +207,8 @@
             android:layout_width="match_parent"
             android:background="@color/transblack_entities"
             android:gravity="center"
-            android:padding="15dp"
-            android:textSize="24sp"
+            android:padding="10dp"
+            android:textSize="22sp"
             android:fontFamily="@font/comfortaa_bold"/>
 
     </RelativeLayout>

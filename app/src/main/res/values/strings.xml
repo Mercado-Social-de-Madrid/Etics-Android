@@ -142,7 +142,7 @@
     <string name="decide_later"><![CDATA[Decidir más tarde >]]></string>
     <string name="processing">Procesando</string>
     <string name="pending_payments">Pagos pendientes</string>
-    <string name="has_pending_payments_to_confirm">Tienes nuevos pagos a tu entidad pendientes de confirmar</string>
+    <string name="has_pending_payments_to_confirm">Tu entidad tiene pagos pendientes de confirmar</string>
     <string name="income_received">Ingreso recibido: %s &currency_name_plural;</string>
     <string name="bonus_percent_entities">Bonificación para entidades</string>
     <string name="cannot_pay_yourself">¿Seguro que te quieres pagar a ti misma? ;)</string>
@@ -191,7 +191,8 @@
     <string name="surname">Apellidos</string>
     <string name="payment_received_message"><![CDATA[
     <font color="#af64ac"><b>%s</b></font> te ha enviado un pago de<br>
-    <font color="#af64ac"><b>%s </b></font><p>La cantidad total es de <font color="#af64ac"><b>%s</b></font>
+    <font color="#af64ac"><b>%s </b></font><p>La cantidad total es de <font color="#af64ac"><b>%s</b></font><br>
+    La bonificaci&oacute;n a enviar es de <font color="#af64ac"><b>%s</b></font>
     ]]></string>
     <string name="finish_pending_payments">¡Terminaste!</string>
     <string name="contact">Contacto</string>
@@ -221,5 +222,35 @@
     <string name="username_info">El nombre de usuari@ es único. Escríbelo sin espacios, sólo letras sin acentos y números.\nTambién se aceptan los siguientes símbolos: @ - _ + .</string>
     <string name="bonus_cannot_be_zero">El porcentaje de bonificación tiene que ser mayor que 0</string>
     <string name="max_percent_payment_cannot_be_zero">Todas las entidades deben aceptar un porcentaje mayor que 0 en sus pagos</string>
+    <string name="ok">OK</string>
+    <string name="novelties">Novedades</string>
+    <string name="concept_optional">Concepto (opcional)</string>
+    <string name="concept">Concepto</string>
+    <string name="transaction_detail">Detalle del movimiento</string>
+
+    <string name="transaction_detail_message">
+        <![CDATA[
+        Fecha y hora: <font color="#af64ac"><b>%s</b></font><p>
+        %s: <font color="#af64ac"><b>%s</b></font><p>
+        Cantidad: <font color="#af64ac"><b>%s</b></font><p>
+        Concepto: <font color="#af64ac"><b>%s</b></font><p>
+        Saldo final: <font color="#af64ac"><b>%s</b></font>
+        ]]>
+    </string>
+    <string name="payment_sent_to">Pago enviado a</string>
+    <string name="payment_received_from">Pago recibido de</string>
+    <string name="bonus_received_from">Bonificación recibida de</string>
+    <string name="bonus_sent_to">Bonificación enviada a</string>
+    <string name="currency_purchase">Compra de boniatos</string>
+
+    <string name="payment_info_format">
+        <![CDATA[
+        Importe total: <font color="#af64ac"><b>%s</b></font><br>
+        Importe en boniatos: <font color="#af64ac"><b>%s</b></font><br>
+        Bonificación a enviar: <font color="#af64ac"><b>%s</b></font>
+        ]]>
+    </string>
+
+
 
 </resources>

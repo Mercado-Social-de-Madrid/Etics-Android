@@ -18,6 +18,7 @@ public class Notification implements Serializable {
     public static final String TYPE_NEWS = "news";
 
     private String type;
+    private String user_type; // for payment
     private String id; // for payment and news
     private Float amount; // for payment and transaction
     private Float total_amount;
@@ -170,5 +171,13 @@ public class Notification implements Serializable {
 
     public void setTotal_amount(Float total_amount) {
         this.total_amount = total_amount;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 }

@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.model.Payment;
+import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
 
@@ -47,12 +51,30 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
 
         final Payment payment = getItemAtPosition(holder.getAdapterPosition());
 
-
-        holder.tvNewPaymentInfo.setText(payment.getSender() + " te ha enviado un pago de " +
-                payment.getBoniatosAmountFormatted() + " Boniatos\n" +
-                "La compra total es de: " + payment.getTotalAmountFormatted() + " €");
-
+        holder.tvNewPaymentAccount.setText(payment.getSender());
+        holder.tvNewPaymentConcept.setText(payment.getConcept());
+        holder.tvNewPaymentConcept.setVisibility(payment.getConcept() == null || payment.getConcept().isEmpty() ? View.GONE : View.VISIBLE);
         holder.tvNewPaymentDatetime.setText(payment.getTimestampFormatted());
+
+        // Falta info de si quien paga es entidad o usuario para calcular con la bonificación correspondiente
+        Data userData = App.getUserData(context);
+        float bonusPercent = payment.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+                userData.getEntity().getBonus_percent_general() :
+                userData.getEntity().getBonus_percent_entity();
+
+        String bonus = Util.getDecimalFormatted(payment.getTotal_amount() * (bonusPercent / 100f), true);
+
+        String textInfo = String.format(context.getString(R.string.payment_info_format),
+                payment.getTotalAmountFormatted() + " " + context.getString(R.string.euros),
+                payment.getBoniatosAmountFormatted() + " " + context.getString(R.string.currency_name_abrev),
+                bonus + " " + context.getString(R.string.currency_name_abrev));
+
+        Util.setHtmlLinkableText(holder.tvNewPaymentInfo, textInfo);
+
+//                payment.getSender() + " te ha enviado un pago de " +
+//                payment.getBoniatosAmountFormatted() + " Boniatos\n" +
+//                "La compra total es de: " + payment.getTotalAmountFormatted() + " €");
+
 
         holder.btnPaymentAccept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +136,8 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final TextView tvNewPaymentAccount;
+        private final TextView tvNewPaymentConcept;
         public View rootView;
         private TextView tvNewPaymentInfo;
         private AppCompatButton btnPaymentCancel;
@@ -126,6 +150,8 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
             super(itemView);
 
             tvNewPaymentInfo = (TextView) itemView.findViewById(R.id.tv_new_payment_info);
+            tvNewPaymentAccount = (TextView) itemView.findViewById(R.id.tv_new_payment_account);
+            tvNewPaymentConcept = (TextView) itemView.findViewById(R.id.tv_new_payment_concept);
             tvNewPaymentDatetime = (TextView) itemView.findViewById(R.id.tv_new_payment_datetime);
             btnPaymentCancel = (AppCompatButton) itemView.findViewById(R.id.btn_payment_cancel);
             btnPaymentAccept = (AppCompatButton) itemView.findViewById(R.id.btn_payment_accept);

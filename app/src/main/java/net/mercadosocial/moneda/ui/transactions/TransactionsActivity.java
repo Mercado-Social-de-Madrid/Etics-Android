@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -12,7 +13,7 @@ import net.mercadosocial.moneda.model.Transaction;
 
 import java.util.List;
 
-public class TransactionsActivity extends BaseActivity implements TransactionsView {
+public class TransactionsActivity extends BaseActivity implements TransactionsView, TransactionsAdapter.OnItemClickListener {
 
     private TransactionsPresenter presenter;
     private RecyclerView recyclerTransactions;
@@ -56,14 +57,22 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
         presenter.refreshData();
     }
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+        presenter.onItemClick(position);
+    }
+
     @Override
     public void showTransactions(List<Transaction> transactions) {
 
         if (adapter == null) {
             adapter = new TransactionsAdapter(this, transactions);
+            adapter.setOnItemClickListener(this);
             recyclerTransactions.setAdapter(adapter);
         } else {
             adapter.updateData(transactions);
         }
     }
+
 }

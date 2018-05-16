@@ -27,8 +27,8 @@ import es.dmoral.toasty.Toasty;
 public class RegisterPresenter extends BasePresenter {
 
     private final RegisterView view;
-    public final String TYPE_ENTITY = "entity";
-    public final String TYPE_PERSON = "person";
+    public static final String TYPE_ENTITY = "entity";
+    public static final String TYPE_PERSON = "person";
     private final AuthInteractor authInteractor;
     private User user;
     private int registerScreen = 1;

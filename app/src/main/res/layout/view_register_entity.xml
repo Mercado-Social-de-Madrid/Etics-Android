@@ -16,7 +16,7 @@
     <EditText
         android:id="@+id/edit_cif"
         style="@style/EditTextAuth"
-        android:hint="@string/cif"
+        android:hint="@string/nif"
         android:inputType="textCapCharacters|textNoSuggestions" />
 
 

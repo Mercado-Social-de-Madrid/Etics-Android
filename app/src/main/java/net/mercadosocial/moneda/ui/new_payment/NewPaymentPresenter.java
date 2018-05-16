@@ -119,12 +119,17 @@ public class NewPaymentPresenter extends BasePresenter {
         view.showSection(section);
     }
 
-    public void onConfirmPayment(String pin) {
+    public void onConfirmPayment(String pin, String concept) {
 
 //        Toasty.info(context, context.getString(R.string.sending_payment)).show();
 //        view.showProgressDialog(context.getString(R.string.sending_payment));
         view.setRefreshing(true);
         payment.setPin_code(pin);
+
+        if (concept != null && !concept.isEmpty()) {
+            payment.setConcept(concept);
+        }
+
         paymentInteractor.sendPayment(payment, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
@@ -148,7 +153,7 @@ public class NewPaymentPresenter extends BasePresenter {
                 .setTitle(R.string.payment_done)
                 .setMessage(String.format(context.getString(R.string.payment_done_message),
                         selectedEntity.getName(), selectedEntity.getBonusFormatted(context, payment.getTotal_amount())))
-                .setNeutralButton(R.string.back, null)
+                .setNeutralButton(R.string.ok, null)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {

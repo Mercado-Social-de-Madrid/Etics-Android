@@ -46,9 +46,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position2) {
 
-        final int safePosition = holder.getAdapterPosition();
-
-        final Transaction transaction = getItemAtPosition(safePosition);
+        final Transaction transaction = getItemAtPosition(holder.getAdapterPosition());
 
         holder.tvTransactionDatetime.setText(transaction.getDateTimeFormatted());
         holder.tvTransactionRelated.setText(transaction.getRelated());
@@ -71,7 +69,14 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
         holder.tvTransactionCurrentBalance.setText(Util.getDecimalFormatted(transaction.getCurrent_balance(), true));
 
-        addClickListener(holder.rootView, safePosition);
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(v, holder.getAdapterPosition());
+                }
+            }
+        });
 
 
     }

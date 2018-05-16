@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.model.Notification;
+import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
 import net.mercadosocial.moneda.util.Util;
 
 import es.dmoral.toasty.Toasty;
@@ -72,10 +75,20 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
         View layout = inflater.inflate(R.layout.view_dialog_new_payment, null);
         findViews(layout);
 
+
+        Data userData = App.getUserData(getActivity());
+        float bonusPercent = notification.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+                userData.getEntity().getBonus_percent_general() :
+                userData.getEntity().getBonus_percent_entity();
+
+        String bonus = Util.getDecimalFormatted(notification.getTotal_amount() * (bonusPercent / 100f), true);
+
         tvNewPaymentInfo.setText(Html.fromHtml(
                 String.format(getString(R.string.payment_received_message),
-                notification.getSender(), Util.getDecimalFormatted(notification.getAmount(), false)
-                        + " " + getString(R.string.currency_name_plural), Util.getDecimalFormatted(notification.getTotal_amount(), false) + " €")));
+                notification.getSender(),
+                        Util.getDecimalFormatted(notification.getAmount(), false) + " " + getString(R.string.currency_name_plural),
+                        Util.getDecimalFormatted(notification.getTotal_amount(), false) + " €",
+                        bonus + " " + getString(R.string.currency_name_plural)) ));
 
         return layout;
     }

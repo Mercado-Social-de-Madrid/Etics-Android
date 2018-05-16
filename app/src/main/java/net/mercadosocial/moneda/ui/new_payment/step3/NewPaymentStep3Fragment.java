@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
@@ -25,6 +26,7 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
     private PinEntryEditText editPinEntry;
     private TextView btnConfirmPayment;
     private NewPaymentStep3Presenter presenter;
+    private EditText editConcept;
 
 
     public NewPaymentStep3Fragment() {
@@ -38,6 +40,7 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
         tvBonusAmount = (TextView)layout.findViewById( R.id.tv_bonus_amount );
         editPinEntry = (PinEntryEditText)layout.findViewById( R.id.edit_pin_entry );
         btnConfirmPayment = (TextView)layout.findViewById( R.id.btn_confirm_payment );
+        editConcept = (EditText) layout.findViewById(R.id.edit_concept);
 
         editPinEntry.setOnPinEnteredListener(this);
         btnConfirmPayment.setOnClickListener(this);
@@ -83,7 +86,8 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
     private void confirmPayment() {
 
         String pin = editPinEntry.getText().toString();
-        presenter.onConfirmPaymentClick(pin);
+        String concept = editConcept.getText().toString();
+        presenter.onConfirmPaymentClick(pin, concept);
     }
 
     @Override

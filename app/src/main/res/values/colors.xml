@@ -19,7 +19,7 @@
 
     <color name="green_gradient_dark">#C6E504</color>
     <color name="green_gradient_light">#EBF49D</color>
-    <color name="transblack_entities">#9000</color>
+    <color name="transblack_entities">#77000000</color>
     <color name="white">#FFF</color>
     <color name="white_90">#e6ffffff</color>
     <color name="orange">#e78f00</color>
@@ -36,6 +36,9 @@
     <color name="red_orange">#F7722F</color>
     <color name="black_semitransp_pressed">#34000000</color>
     <color name="black_semitransp">#60000000</color>
+
+    <color name="purple_gradient_1">#f0e5f2</color>
+    <color name="purple_gradient_2">#b680c1</color>
 
 
 </resources>

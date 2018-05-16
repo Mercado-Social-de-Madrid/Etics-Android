@@ -90,6 +90,20 @@
                         android:layout_marginLeft="10dp" />
 
                 </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edit_concept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_edittext"
+                    android:inputType="textCapSentences"
+                    android:padding="7dp"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:hint="@string/concept_optional"/>
+
             </LinearLayout>
 
             <TextView
@@ -98,7 +112,7 @@
                 android:background="@color/purple"
                 android:padding="10dp"
                 android:text="@string/enter_pin_code"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="10dp"/>
 
             <com.alimuzaffar.lib.pin.PinEntryEditText
                 android:id="@+id/edit_pin_entry"

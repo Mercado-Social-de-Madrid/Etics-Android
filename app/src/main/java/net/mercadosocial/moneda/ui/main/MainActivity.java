@@ -255,7 +255,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.nav_contact_email:
-                String emailMES = "madrid@mercadosocial.net";
+                String emailMES = "monedamadrid@mercadosocial.net";
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto",emailMES, null));

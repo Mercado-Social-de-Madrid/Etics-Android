@@ -53,9 +53,9 @@ public class NewPaymentStep3Presenter extends BasePresenter {
 
     }
 
-    public void onConfirmPaymentClick(String pin) {
+    public void onConfirmPaymentClick(String pin, String concept) {
 
-        getNewPaymentPresenter().onConfirmPayment(pin);
+        getNewPaymentPresenter().onConfirmPayment(pin, concept);
 
     }
 
