@@ -22,6 +22,7 @@ import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.payments.PaymentsPresenter;
 import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
+import net.mercadosocial.moneda.ui.wallet_graphics.GraphicsPresenter;
 
 import es.dmoral.toasty.Toasty;
 
@@ -141,7 +142,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case R.id.btn_graphics:
-                Toasty.info(getActivity(), "En breve disponible...").show();
+                startActivity(GraphicsPresenter.newGraphicsActivity(getActivity()));
                 break;
 
             case R.id.btn_movements:
@@ -152,6 +153,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 startActivity(PaymentsPresenter.newPaymentsActivity(getActivity()));
                 break;
         }
+
     }
 
 

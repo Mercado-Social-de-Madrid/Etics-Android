@@ -39,6 +39,7 @@
 
     <color name="purple_gradient_1">#f0e5f2</color>
     <color name="purple_gradient_2">#b680c1</color>
+    <color name="grey_toast">#912991</color>
 
 
 </resources>

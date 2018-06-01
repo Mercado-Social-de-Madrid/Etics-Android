@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 
 import com.crashlytics.android.Crashlytics;
@@ -19,6 +20,7 @@ import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 
+import es.dmoral.toasty.Toasty;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -70,6 +72,15 @@ public class App extends MultiDexApplication {
 
 //        Log.i(TAG, "token:" + FirebaseInstanceId.getInstance().getToken());
 
+        Toasty.Config.getInstance()
+                .setErrorColor(ContextCompat.getColor(this, R.color.grey_toast))
+                .setInfoColor(ContextCompat.getColor(this, R.color.grey_toast))
+                .setSuccessColor(ContextCompat.getColor(this, R.color.grey_toast))
+                .setWarningColor(ContextCompat.getColor(this, R.color.grey_toast))
+                .setTextColor(ContextCompat.getColor(this, R.color.white))
+                .apply();
+
+//        Toasty.info(this, "Tostaditas moradas").show();
 
     }
 

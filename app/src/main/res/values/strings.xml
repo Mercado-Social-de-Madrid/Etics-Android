@@ -77,7 +77,8 @@
     <string name="select_amount">Indica la cantidad</string>
     <string name="favourites">Favoritos</string>
     <string name="total_amount_label">Introduce el importe total de tu compra en Euros para calcular tu bonificación</string>
-    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar. (1&currency_name_abrev; = 1€)</string>
+    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar. (1&currency_name_abrev;
+        = 1€)</string>
     <string name="check_payment_data">Revisa los datos</string>
     <string name="payment_amount_label">Vas a pagar:</string>
     <string name="payment_recipient_label">a:</string>
@@ -250,7 +251,7 @@
         Bonificación a enviar: <font color="#af64ac"><b>%s</b></font>
         ]]>
     </string>
-
+    <string name="graphics_x_label">Saldo por días</string>
 
 
 </resources>

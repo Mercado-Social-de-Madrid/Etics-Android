@@ -4,63 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/green_gradient"
+    android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity">
 
     <include layout="@layout/toolbar" />
 
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/tv_novelty_title"
-                style="@style/TextBase"
-                android:textSize="24sp"
-                android:fontFamily="@font/comfortaa_bold"
-                android:gravity="center_horizontal"
-                android:textStyle="bold"
-                android:padding="5dp"/>
-
-            <TextView
-                android:id="@+id/tv_novelty_subtitle"
-                style="@style/TextBase"
-                android:textSize="@dimen/text_medium"
-                android:gravity="center_horizontal"
-                android:padding="5dp"/>
-
-            <ImageView
-                android:id="@+id/img_novelty"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="200dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:layout_marginTop="10dp"/>
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_novelty_description"
-                style="@style/TextBase"
-                android:layout_width="match_parent"
-                android:textSize="@dimen/text_medium"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_more_info"
-                style="@style/ButtonMes"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/img_novelty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="200dp"
+                    android:scaleType="centerCrop" />
 
-        </LinearLayout>
-    </ScrollView>
+
+                <TextView
+                    android:id="@+id/tv_novelty_subtitle"
+                    style="@style/TextBase"
+                    android:gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/tv_novelty_description"
+                    style="@style/TextBase"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:textSize="@dimen/text_medium" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_more_info"
+                    style="@style/ButtonMes"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_novelty_title"
+            style="@style/TextBase.White"
+            android:layout_width="match_parent"
+            android:background="@color/transblack_entities"
+            android:fontFamily="@font/comfortaa_bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
 </LinearLayout>

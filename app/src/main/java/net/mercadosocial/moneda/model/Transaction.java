@@ -35,6 +35,19 @@ public class Transaction implements Serializable {
         return getTimestamp();
     }
 
+    public String getDateOnly() {
+
+        DateFormat dateFormatDateOnly = new SimpleDateFormat("dd/MM/yy");
+
+        try {
+            Date dateTime = dateFormatApi.parse(getTimestamp());
+            String dateTimeFormmated = dateFormatDateOnly.format(dateTime);
+            return dateTimeFormmated;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return getTimestamp();
+    }
 
 
     public Float getAmount() {

@@ -61,9 +61,10 @@
             android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".ui.get_boniatos.GetBoniatosActivity"
+        <activity
+            android:name=".ui.get_boniatos.GetBoniatosActivity"
             android:label="@string/get_boniatos"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!-- [START firebase_service] -->
         <service android:name=".messaging.MyFirebaseMessagingService">
@@ -83,8 +84,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBzx7rH3fchO0K9rRxjxdDdhrAeJP7hbM8" />
 
-        <!--<meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />-->
+        <!-- <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" /> -->
 
+        <activity android:name=".ui.wallet_graphics.GraphicsActivity"></activity>
     </application>
 
 </manifest>
