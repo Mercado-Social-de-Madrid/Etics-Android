@@ -174,12 +174,12 @@
                 android:textColor="@color/grey"
                 android:visibility="gone"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_get_boniatos"
                 style="@style/ButtonMes"
                 android:text="@string/get_boniatos" />
 
-            <TextView
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_new_payment"
                 style="@style/ButtonMes.Green"
                 android:layout_marginTop="15dp"

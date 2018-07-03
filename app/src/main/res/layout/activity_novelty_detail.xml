@@ -41,7 +41,7 @@
                     android:id="@+id/tv_novelty_subtitle"
                     style="@style/TextBase"
                     android:gravity="center_horizontal"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     android:textSize="@dimen/text_medium" />
 
                 <TextView
@@ -49,14 +49,14 @@
                     style="@style/TextBase"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     android:textSize="@dimen/text_medium" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_more_info"
                     style="@style/ButtonMes"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone" />
+                    android:layout_margin="15dp"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </ScrollView>

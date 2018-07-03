@@ -25,5 +25,8 @@ public interface PaymentApi {
     @POST("payment/{id}/cancel/")
     Observable<Response<Void>> cancelPayment(@Path("id") String id);
 
+//    @GET("sent_payment/?limit=100")
+//    Observable<Response<Void>> sendPayment(@Body Payment payment);
+
 
 }

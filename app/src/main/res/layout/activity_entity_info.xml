@@ -105,7 +105,7 @@
                 <View style="@style/SeparatorHorizontal.Grey" />
 
 
-                <TextView
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_new_payment"
                     style="@style/ButtonMes.Green"
                     android:layout_margin="15dp"
@@ -193,7 +193,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="7dp"
                         android:background="@drawable/shadow_header"/>
 
                 </RelativeLayout>

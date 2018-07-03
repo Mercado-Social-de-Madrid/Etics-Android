@@ -1,5 +1,7 @@
 package net.mercadosocial.moneda.model;
 
+import net.mercadosocial.moneda.api.common.ApiClient;
+
 /**
  * Created by julio on 1/02/18.
  */
@@ -10,8 +12,9 @@ public class Person {
     private String uuid_user;
     private String nif;
     private String name;
+    private String email;
     private String surname;
-    private String avatar;
+    private String profile_image;
     private String address;
 
     private transient String pin_code;
@@ -57,12 +60,12 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getProfile_image() {
+        return ApiClient.BASE_URL + profile_image;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
     }
 
     public String getPin_code() {
@@ -87,5 +90,13 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

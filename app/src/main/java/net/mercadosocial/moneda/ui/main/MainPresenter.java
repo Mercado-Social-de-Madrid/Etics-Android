@@ -58,6 +58,11 @@ import java.util.List;
              intent.getExtras().clear();
          }
 
+
+//         NumberFormat numberFormat = new DecimalFormat("0.##");
+//         String numb = numberFormat.format(3.455);
+//         view.toast(numb);
+
 //         :
 //         {
 //             'amount': transaction.amount,

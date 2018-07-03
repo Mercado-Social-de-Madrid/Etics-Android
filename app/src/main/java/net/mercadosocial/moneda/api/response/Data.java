@@ -26,6 +26,14 @@ public class Data {
         }
     }
 
+    public String getLogoThumbnail() {
+        if (entity != null) {
+            return entity.getLogoThumbnail();
+        } else {
+            return person.getProfile_image();
+        }
+    }
+
 
     public String getApiKeyFull() {
         return "ApiKey " + getUsername() + ":" + getApi_key();

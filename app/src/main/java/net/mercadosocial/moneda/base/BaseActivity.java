@@ -136,7 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(R.string.congratulations);
-        ab.setIcon(R.mipmap.img_happy_face);
+//        ab.setIcon(R.mipmap.img_happy_face);
         ab.setMessage(Html.fromHtml(String.format(getString(R.string.bonification_received_message),
                 amountFormatted, getString(R.string.currency_name_plural))));
         ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {

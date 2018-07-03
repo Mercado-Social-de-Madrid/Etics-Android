@@ -88,7 +88,7 @@ public class GetBoniatosPresenter extends BasePresenter {
     private void showPurchaseSuccessDialog(Float amount) {
         new AlertDialog.Builder(context)
                 .setTitle(R.string.congratulations)
-                .setIcon(R.mipmap.img_happy_face)
+//                .setIcon(R.mipmap.img_happy_face)
                 .setMessage(String.format(context.getString(R.string.purchase_success_message),
                         Util.getDecimalFormatted(amount, false)))
                 .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {

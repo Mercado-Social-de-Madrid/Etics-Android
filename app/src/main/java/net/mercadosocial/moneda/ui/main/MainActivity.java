@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
 
         if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
+//        if(true) {
             startActivity(new Intent(this, IntroActivity.class));
             getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
         }
@@ -182,7 +183,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void refreshData() {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
         if (fragment instanceof WalletFragment) {
-            ((WalletPresenter)((WalletFragment)fragment).getBasePresenter()).refreshData();
+            ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
         }
 
         presenter.refreshData();
@@ -258,7 +259,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 String emailMES = "monedamadrid@mercadosocial.net";
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",emailMES, null));
+                        "mailto", emailMES, null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_contact_subject));
 //                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 startActivity(emailIntent);
@@ -364,21 +365,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         if (userData != null) {
             tvUserName.setText(userData.getName());
-            if (userData.getEntity() != null) {
-                String logoUrl = userData.getEntity().getLogoThumbnail();
-                Picasso.with(this)
-                        .load(logoUrl)
-                        .placeholder(R.mipmap.ic_avatar)
-                        .transform(new CircleTransform())
-                        .error(R.mipmap.ic_mes_v2_144)
-                        .into(imgAvatar);
-            }
+            String logoUrl = userData.getLogoThumbnail();
+            Picasso.with(this)
+                    .load(logoUrl)
+                    .placeholder(R.mipmap.ic_avatar)
+                    .transform(new CircleTransform())
+                    .error(R.mipmap.ic_avatar)
+                    .into(imgAvatar);
+
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar);
 
             Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
             if (fragment instanceof WalletFragment) {
-                ((WalletPresenter)((WalletFragment)fragment).getBasePresenter()).refreshData();
+                ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
             }
         }
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
+import net.mercadosocial.moneda.util.SoftKeyboardManager;
 import net.mercadosocial.moneda.util.WindowUtils;
 
 /**
@@ -52,6 +53,13 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
         findViews(layout);
 
         setHasOptionsMenu(false);
+
+        SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(getActivity(), new SoftKeyboardManager.OnSoftKeyboardChangedListener() {
+            @Override
+            public void onSoftKeyboardVisible(boolean visible) {
+                btnContinue.setVisibility(visible ? View.GONE : View.VISIBLE);
+            }
+        });
 
         presenter.onCreate();
 

@@ -64,6 +64,7 @@
                 <TextView
                     style="@style/TextBase"
                     android:layout_marginTop="30dp"
+                    android:gravity="center_horizontal"
                     android:text="@string/boniatos_amount_label" />
 
                 <TextView
