@@ -60,10 +60,10 @@ import es.dmoral.toasty.Toasty;
 
      public void refreshData() {
 
-        entityInteractor.getEntities(new EntityInteractor.Callback() {
+        entityInteractor.getEntities(0, new EntityInteractor.Callback() {
 
             @Override
-            public void onResponse(List<Entity> entitiesReceived) {
+            public void onResponse(List<Entity> entitiesReceived, boolean hasMore) {
                 entities.clear();
                 entities.addAll(entitiesReceived);
                 view.showEntities(entities);

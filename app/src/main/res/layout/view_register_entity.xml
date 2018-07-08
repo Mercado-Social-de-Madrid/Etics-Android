@@ -56,8 +56,18 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_small"
-            android:layout_toLeftOf="@+id/edit_max_accept_percent" />
+            android:layout_toLeftOf="@+id/btn_info_max_accept_percent" />
 
+        <ImageView
+            android:id="@+id/btn_info_max_accept_percent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_info"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/edit_max_accept_percent"
+            android:background="@drawable/background_pressed_common"
+            android:layout_marginRight="10dp"/>
 
         <EditText
             android:id="@+id/edit_max_accept_percent"
@@ -91,8 +101,18 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_small"
-            android:layout_toLeftOf="@+id/edit_bonus_percent"/>
+            android:layout_toLeftOf="@+id/btn_info_bonus_percent"/>
 
+        <ImageView
+            android:id="@+id/btn_info_bonus_percent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_info"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/edit_bonus_percent"
+            android:background="@drawable/background_pressed_common"
+            android:layout_marginRight="10dp"/>
 
         <EditText
             android:id="@+id/edit_bonus_percent"
@@ -126,8 +146,18 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_small"
-            android:layout_toLeftOf="@+id/edit_bonus_percent_entities"/>
+            android:layout_toLeftOf="@+id/btn_info_bonus_percent_entities"/>
 
+        <ImageView
+            android:id="@+id/btn_info_bonus_percent_entities"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_info"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/edit_bonus_percent_entities"
+            android:background="@drawable/background_pressed_common"
+            android:layout_marginRight="10dp"/>
 
         <EditText
             android:id="@+id/edit_bonus_percent_entities"

@@ -93,7 +93,7 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
     }
 
     @Override
-    public void showEntities(List<Entity> entities) {
+    public void showEntities(List<Entity> entities, boolean hasMore) {
 
         map.getOverlays().clear();
 

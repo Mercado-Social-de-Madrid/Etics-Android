@@ -28,3 +28,5 @@
 -dontwarn **$$Lambda$*
 
 -keep class me.lobanov.mp3downloadsfree.models.** { *; }
+
+-dontwarn com.malinskiy.superrecyclerview.SwipeDismissRecyclerViewTouchListener*

@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface TransactionsView extends BaseView {
     void showTransactions(List<Transaction> transactions);
+
+    void disableMoreElementsRequest();
 }

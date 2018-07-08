@@ -1,5 +1,9 @@
 package net.mercadosocial.moneda;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -7,6 +11,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
@@ -41,6 +46,8 @@ public class App extends MultiDexApplication {
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
+    
+    public static boolean isInForeground;
 
 
     @Override
@@ -82,7 +89,26 @@ public class App extends MultiDexApplication {
 
 //        Toasty.info(this, "Tostaditas moradas").show();
 
+
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
+
     }
+
+    public class MyObserver implements LifecycleObserver {
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        public void onAppGoesForeground() {
+            App.isInForeground = true;
+            Log.i(TAG, "onAppGoesForeground: ");
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        public void onAppGoesBackground() {
+            App.isInForeground = false;
+            Log.i(TAG, "onAppGoesBackground: ");
+
+        }
+    }
+
 
     @Override
     protected void attachBaseContext(Context base) {

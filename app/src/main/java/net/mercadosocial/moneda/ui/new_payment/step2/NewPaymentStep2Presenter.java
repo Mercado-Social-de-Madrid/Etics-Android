@@ -59,7 +59,7 @@ import net.mercadosocial.moneda.util.Util;
 
      }
 
-    public void onContinueButtonClick(String totalAmount, String boniatosAmount) {
+    public void onContinueButtonClick(String totalAmount, String boniatosAmount, String concept) {
         Float totalAmountFloat = convertAmount(totalAmount);
         if (!checkMaxAcceptedByEntity(totalAmount, false)) {
             return;
@@ -96,7 +96,7 @@ import net.mercadosocial.moneda.util.Util;
             }
         }
 
-        getNewPaymentPresenter().onAmountsConfirmed(totalAmountFloat, boniatosAmountFloat);
+        getNewPaymentPresenter().onAmountsConfirmed(totalAmountFloat, boniatosAmountFloat, concept);
         view.enableContinueButton(true);
     }
 

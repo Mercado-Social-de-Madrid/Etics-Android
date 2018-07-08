@@ -91,18 +91,24 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/edit_concept"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:background="@color/bg_edittext"
-                    android:inputType="textCapSentences"
-                    android:padding="7dp"
-                    android:drawablePadding="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:hint="@string/concept_optional"/>
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:text="@string/concept_two_dots" />
+
+                    <TextView
+                        android:id="@+id/tv_concept"
+                        style="@style/TextBase"
+                        android:layout_marginLeft="10dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

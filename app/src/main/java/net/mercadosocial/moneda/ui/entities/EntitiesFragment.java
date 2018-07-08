@@ -112,8 +112,8 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
     // PRESENTER CALLBACKS
     @Override
-    public void showEntities(List<Entity> entities) {
-        pagerAdapter.updateData(entities);
+    public void showEntities(List<Entity> entities, boolean hasMore) {
+        pagerAdapter.updateData(entities, hasMore);
     }
 
     // CHILD ENTITIES CALLBACKS

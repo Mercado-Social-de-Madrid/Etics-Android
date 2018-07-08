@@ -42,9 +42,9 @@ public class EntitiesPagerAdapter extends FragmentStatePagerAdapter {
         return entitiesFragments.size();
     }
 
-    public void updateData(List<Entity> entities) {
+    public void updateData(List<Entity> entities, boolean hasMore) {
         for (EntitiesView entitiyView : entitiesFragments) {
-            entitiyView.showEntities(entities);
+            entitiyView.showEntities(entities, hasMore);
         }
         notifyDataSetChanged();
     }

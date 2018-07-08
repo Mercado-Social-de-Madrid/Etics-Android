@@ -25,6 +25,7 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
     private TextView btnContinue;
     private TextView tvMaxAcceptedByEntity;
     private NewPaymentStep2Presenter presenter;
+    private EditText editConcept;
 
     public NewPaymentStep2Fragment() {
         // Required empty public constructor
@@ -34,6 +35,7 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
 
         editTotalAmountEur = (EditText)layout.findViewById( R.id.edit_total_amount_eur );
         editBoniatosAmount = (EditText)layout.findViewById( R.id.edit_boniatos_amount );
+        editConcept = (EditText) layout.findViewById(R.id.edit_concept);
         tvMaxAcceptedByEntity = (TextView) layout.findViewById(R.id.tv_max_accepted_entity);
         btnContinue = (TextView)layout.findViewById( R.id.btn_continue );
 
@@ -97,7 +99,8 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
     private void getAmountData() {
         String totalAmount = editTotalAmountEur.getText().toString();
         String boniatosAmount = editBoniatosAmount.getText().toString();
-        presenter.onContinueButtonClick(totalAmount, boniatosAmount);
+        String concept = editConcept.getText().toString();
+        presenter.onContinueButtonClick(totalAmount, boniatosAmount, concept);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class EntityInteractor extends BaseInteractor {
 
     public interface Callback {
 
-        void onResponse(List<Entity> entities);
+        void onResponse(List<Entity> entities, boolean hasMore);
 
         void onError(String error);
     }
@@ -39,14 +39,16 @@ public class EntityInteractor extends BaseInteractor {
     }
 
 
-    public void getEntities(final Callback callback) {
+    public void getEntities(int pageApi, final Callback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
             return;
         }
 
-        getApi().getEntities()
+        int offset = pageApi * EntitiesApi.PAGE_LIMIT;
+
+        getApi().getEntities(offset)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<EntitiesResponse>>() {
                     @Override
@@ -69,8 +71,9 @@ public class EntityInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body().getEntities());
+                        boolean hasMore = response.body().getMeta().getNext() != null;
 
+                        callback.onResponse(response.body().getEntities(), hasMore);
 
                     }
                 });
@@ -107,7 +110,8 @@ public class EntityInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body().getEntities());
+                        boolean hasMore = response.body().getMeta().getNext() != null;
+                        callback.onResponse(response.body().getEntities(), hasMore);
 
 
                     }

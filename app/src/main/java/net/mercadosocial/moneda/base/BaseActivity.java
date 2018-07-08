@@ -2,7 +2,6 @@ package net.mercadosocial.moneda.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,7 +31,6 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
-import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.ProgressDialogMESOLD;
 import net.mercadosocial.moneda.views.custom_dialog.BonusDialog;
@@ -130,36 +128,36 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     }
 
-    private void showBonificationDialog(String amountFormatted) {
-
-        View layout = getLayoutInflater().inflate(R.layout.view_dialog_bonus, null);
-
-        AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle(R.string.congratulations);
-//        ab.setIcon(R.mipmap.img_happy_face);
-        ab.setMessage(Html.fromHtml(String.format(getString(R.string.bonification_received_message),
-                amountFormatted, getString(R.string.currency_name_plural))));
-        ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(TransactionsPresenter.newTransactionsActivity(BaseActivity.this));
-            }
-        });
-        ab.setNeutralButton(R.string.close, null);
-        Dialog dialog = ab.show();
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                refreshData();
-            }
-        });
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                refreshData();
-            }
-        });
-    }
+//    private void showBonificationDialog(String amountFormatted) {
+//
+//        View layout = getLayoutInflater().inflate(R.layout.view_dialog_bonus, null);
+//
+//        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+//        ab.setTitle(R.string.congratulations);
+////        ab.setIcon(R.mipmap.img_happy_face);
+//        ab.setMessage(Html.fromHtml(String.format(getString(R.string.bonification_received_message),
+//                amountFormatted, getString(R.string.currency_name_plural))));
+//        ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                startActivity(TransactionsPresenter.newTransactionsActivity(BaseActivity.this));
+//            }
+//        });
+//        ab.setNeutralButton(R.string.close, null);
+//        Dialog dialog = ab.show();
+//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                refreshData();
+//            }
+//        });
+//        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//                refreshData();
+//            }
+//        });
+//    }
 
 
     private void showNewsDialog(final Notification notification) {

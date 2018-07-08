@@ -4,6 +4,7 @@ import android.content.Context;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.common.ApiClient;
+import net.mercadosocial.moneda.api.response.Meta;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -40,6 +41,10 @@ public class BaseInteractor {
         void onResponse(List<T> list);
 
         void onError(String message);
+    }
+
+    public interface BasePaginationCallback {
+        void paginationInfo(Meta meta);
     }
 
     public Action0 actionTerminate = new Action0() {

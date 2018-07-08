@@ -49,13 +49,14 @@ public class NewPaymentStep3Presenter extends BasePresenter {
                 payment.getEurosAmountFormatted() + " " + context.getString(R.string.euros),
                 entity.getName(),
                 entity.getBonusFormatted(context, payment.getTotal_amount()) + " " +
-                        context.getString(R.string.currency_name_plural));
+                        context.getString(R.string.currency_name_plural),
+                payment.getConcept());
 
     }
 
-    public void onConfirmPaymentClick(String pin, String concept) {
+    public void onConfirmPaymentClick(String pin) {
 
-        getNewPaymentPresenter().onConfirmPayment(pin, concept);
+        getNewPaymentPresenter().onConfirmPayment(pin);
 
     }
 

@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface EntitiesView extends BaseView {
 
-    void showEntities(List<Entity> entities);
+    void showEntities(List<Entity> entities, boolean hasMore);
 }

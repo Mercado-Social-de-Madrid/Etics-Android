@@ -29,14 +29,59 @@ public class TransactionInteractor extends BaseInteractor {
     }
 
 
-    public void getTransactions(final BaseApiGETListCallback<Transaction> callback) {
+    public void getTransactions(int pageApi, final BaseApiGETListCallback<Transaction> callback, final BasePaginationCallback paginationCallback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
             return;
         }
 
-        getApi().getTransactions()
+        int offset = pageApi * TransactionApi.PAGE_LIMIT;
+
+        getApi().getTransactions(offset)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<TransactionResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<TransactionResponse> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body().getTransactions());
+
+                        paginationCallback.paginationInfo(response.body().getMeta());
+
+
+                    }
+                });
+
+
+    }
+
+
+    public void getTransactions100(final BaseApiGETListCallback<Transaction> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+
+        getApi().getTransactions100()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<TransactionResponse>>() {

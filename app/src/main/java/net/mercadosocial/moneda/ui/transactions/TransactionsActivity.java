@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.malinskiy.superrecyclerview.OnMoreListener;
+import com.malinskiy.superrecyclerview.SuperRecyclerView;
+
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Transaction;
@@ -16,11 +19,11 @@ import java.util.List;
 public class TransactionsActivity extends BaseActivity implements TransactionsView, TransactionsAdapter.OnItemClickListener {
 
     private TransactionsPresenter presenter;
-    private RecyclerView recyclerTransactions;
+    private SuperRecyclerView recyclerTransactions;
     private TransactionsAdapter adapter;
 
     private void findViews() {
-        recyclerTransactions = (RecyclerView) findViewById(R.id.recycler_transactions);
+        recyclerTransactions = findViewById(R.id.recycler_transactions);
     }
 
     @Override
@@ -40,6 +43,13 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider_horizontal));
         recyclerTransactions.addItemDecoration(divider);
+
+        recyclerTransactions.setupMoreListener(new OnMoreListener() {
+            @Override
+            public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
+                presenter.loadNextPage();
+            }
+        }, 5);
 
         presenter.onCreate();
 
@@ -75,4 +85,8 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
         }
     }
 
+    @Override
+    public void disableMoreElementsRequest() {
+        recyclerTransactions.setupMoreListener(null, 0);
+    }
 }

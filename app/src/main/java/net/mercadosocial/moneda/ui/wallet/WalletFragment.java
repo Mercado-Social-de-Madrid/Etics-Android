@@ -21,10 +21,9 @@ import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.payments.PaymentsPresenter;
+import net.mercadosocial.moneda.ui.sent_payments.SentPaymentsPresenter;
 import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.ui.wallet_graphics.GraphicsPresenter;
-
-import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +45,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     private TextView tvNumberPendingPayments;
     private View btnPendingPayments;
     private MenuItem menuItemQR;
+    private View btnSentPayments;
+    private TextView tvNumberSentPayments;
 
 
     private void findViews(View layout) {
@@ -60,6 +61,9 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         btnPendingPayments = layout.findViewById(R.id.btn_pending_payments);
         tvNumberPendingPayments = (TextView) layout.findViewById(R.id.tv_number_pending_payments);
 
+        btnSentPayments = layout.findViewById(R.id.btn_sent_payments);
+        tvNumberSentPayments = (TextView) layout.findViewById(R.id.tv_number_sent_payments);
+
         viewWallet = layout.findViewById(R.id.view_wallet);
         viewNoWallet = layout.findViewById(R.id.view_no_wallet);
 
@@ -73,6 +77,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
         btnPendingPayments.setOnClickListener(this);
+        btnSentPayments.setOnClickListener(this);
     }
 
     public WalletFragment() {
@@ -152,10 +157,16 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             case R.id.btn_pending_payments:
                 startActivity(PaymentsPresenter.newPaymentsActivity(getActivity()));
                 break;
+
+            case R.id.btn_sent_payments:
+                startActivity(SentPaymentsPresenter.newSentPaymentsActivity(getActivity()));
+                break;
         }
 
     }
 
+
+    // PRESENTER CALLBACKS
 
     @Override
     public void showUserInfo(String name) {
@@ -174,6 +185,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             menuItemQR.setVisible(false);
         }
     }
+
 
     @Override
     public void showWalletData(boolean showLoading, Wallet wallet) {
@@ -201,4 +213,20 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         ((MainActivity) getActivity()).showPendingPaymentsNumber(numberPendingPayments);
     }
+
+
+    @Override
+    public void showSentPaymentsNumber(int numberSentPayments) {
+
+        if (numberSentPayments == 0) {
+            btnSentPayments.setVisibility(View.GONE);
+            return;
+        }
+
+        btnSentPayments.setVisibility(View.VISIBLE);
+        tvNumberSentPayments.setText(String.format(getString(R.string.sent_payments_warning), numberSentPayments));
+
+    }
+
+
 }

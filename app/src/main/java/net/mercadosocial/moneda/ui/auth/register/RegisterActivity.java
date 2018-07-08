@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -53,6 +54,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText editEmail;
     private EditText editSurnamesPerson;
     private View btnInfoUsername;
+    private ImageView btnInfoMaxAcceptPercent;
+    private ImageView btnInfoBonusPercent;
+    private ImageView btnInfoBonusPercentEntities;
 
 
     private void findViews() {
@@ -90,12 +94,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         btnInfoUsername = findViewById(R.id.btn_info_username);
 
+        btnInfoMaxAcceptPercent = (ImageView)findViewById( R.id.btn_info_max_accept_percent );
+        btnInfoBonusPercent = (ImageView)findViewById( R.id.btn_info_bonus_percent );
+        btnInfoBonusPercentEntities = (ImageView)findViewById( R.id.btn_info_bonus_percent_entities );
+
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
         btnRegisterContinue.setOnClickListener(this);
         btnRegisterBack.setOnClickListener(this);
         btnGoToLogin.setOnClickListener(this);
         btnInfoUsername.setOnClickListener(this);
+        btnInfoMaxAcceptPercent.setOnClickListener(this);
+        btnInfoBonusPercent.setOnClickListener(this);
+        btnInfoBonusPercentEntities.setOnClickListener(this);
     }
 
 
@@ -178,16 +189,28 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.btn_info_username:
-                showInfoUsernameDialog();
+                showInfoDialog(R.string.username_info);
+                break;
+
+            case R.id.btn_info_max_accept_percent:
+                showInfoDialog(R.string.info_max_accept_percent);
+                break;
+
+            case R.id.btn_info_bonus_percent:
+                showInfoDialog(R.string.info_bonus_percent);
+                break;
+
+            case R.id.btn_info_bonus_percent_entities:
+                showInfoDialog(R.string.info_bonus_percent_entities);
                 break;
         }
     }
 
-    private void showInfoUsernameDialog() {
+    private void showInfoDialog(int stringId) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.info)
                 .setIcon(R.mipmap.ic_info)
-                .setMessage(R.string.username_info)
+                .setMessage(stringId)
                 .setNegativeButton(R.string.back, null)
                 .show();
     }

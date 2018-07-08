@@ -87,25 +87,25 @@ public class BonusDialog extends AppCompatDialogFragment implements View.OnClick
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                if (onDismissOrCancelListener != null) {
-                    onDismissOrCancelListener.onClose();
-                }
-            }
-        });
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (onDismissOrCancelListener != null) {
-                    onDismissOrCancelListener.onClose();
-                }
-            }
-        });
+
         return dialog;
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissOrCancelListener != null) {
+            onDismissOrCancelListener.onClose();
+        }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        if (onDismissOrCancelListener != null) {
+            onDismissOrCancelListener.onClose();
+        }
+    }
 
     @Override
     public void onClick(View v) {

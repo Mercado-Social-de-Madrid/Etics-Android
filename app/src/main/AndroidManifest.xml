@@ -87,6 +87,17 @@
         <!-- <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" /> -->
 
         <activity android:name=".ui.wallet_graphics.GraphicsActivity"></activity>
+        <activity android:name=".ui.sent_payments.SentPaymentsActivity"
+            android:label="@string/sent_payments"/>
+
+        <service android:name=".messaging.OperationService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.callforme.app.ACTION_ACCEPT_PAYMENT" />
+                <action android:name="com.callforme.app.ACTION_REJECT_PAYMENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

@@ -100,9 +100,14 @@ public class NewPaymentPresenter extends BasePresenter {
         showSection(2);
     }
 
-    public void onAmountsConfirmed(Float totalAmount, Float boniatosAmount) {
+    public void onAmountsConfirmed(Float totalAmount, Float boniatosAmount, String concept) {
         payment.setTotal_amount(totalAmount);
         payment.setCurrency_amount(boniatosAmount);
+
+        if (concept != null && !concept.isEmpty()) {
+            payment.setConcept(concept);
+        }
+
         showSection(3);
     }
 
@@ -119,16 +124,12 @@ public class NewPaymentPresenter extends BasePresenter {
         view.showSection(section);
     }
 
-    public void onConfirmPayment(String pin, String concept) {
+    public void onConfirmPayment(String pin) {
 
 //        Toasty.info(context, context.getString(R.string.sending_payment)).show();
 //        view.showProgressDialog(context.getString(R.string.sending_payment));
         view.setRefreshing(true);
         payment.setPin_code(pin);
-
-        if (concept != null && !concept.isEmpty()) {
-            payment.setConcept(concept);
-        }
 
         paymentInteractor.sendPayment(payment, new BaseInteractor.BaseApiPOSTCallback() {
             @Override

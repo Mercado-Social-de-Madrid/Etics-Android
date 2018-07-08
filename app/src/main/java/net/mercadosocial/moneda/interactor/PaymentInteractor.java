@@ -191,6 +191,45 @@ public class PaymentInteractor extends BaseInteractor {
 
     }
 
+
+
+    public void getSentPayments(final BaseApiGETListCallback<Payment> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().getSentPayments()
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<PaymentsResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<PaymentsResponse> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body().getPayments());
+
+                    }
+                });
+
+
+    }
+
     private PaymentApi getApi() {
         return getApi(PaymentApi.class);
     }

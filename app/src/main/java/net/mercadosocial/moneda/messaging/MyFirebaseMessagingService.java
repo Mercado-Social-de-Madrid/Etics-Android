@@ -16,12 +16,16 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.main.MainActivity;
+import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
+import net.mercadosocial.moneda.util.Util;
 
 import java.util.Map;
 
@@ -30,6 +34,7 @@ import es.dmoral.toasty.Toasty;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+    public static final String KEY_ID_NOTIFICATION = "idNotification";
 
     /**
      * Called when message is received.
@@ -111,45 +116,66 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             bundle.putString(entry.getKey(), entry.getValue());
         }
 
-//        bundle.putString("title", title);
-//        bundle.putString("message", message);
-
-//        switch (bundle.getString("type")) {
-//            case "payment":
-//            case "transaction":
-                Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
-                intent.putExtras(bundle);
-                sendBroadcast(intent);
-//                break;
-//
-//            case "news":
-//                sendNotification(title, message, bundle);
-//                break;
-//        }
-
+        if (App.isInForeground) {
+            Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
+            intent.putExtras(bundle);
+            sendBroadcast(intent);
+        } else {
+            showCustomNotification(bundle);
+        }
 
 
 
     }
 
-    private void openDialog(String title, String message, Bundle bundle) {
 
-//        App.openBonificationDialog(this, title, message );
-    }
+    public void showCustomNotification(Bundle extras) {
 
-    private void sendNotification(String title, String text, Bundle extras) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Notification notification = Notification.parseNotification(extras);
+        if (notification == null) {
+            Crashlytics.logException(new IllegalArgumentException(
+                    "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(extras)));
+            return;
+        }
+
+        Intent intent = null;
+        Intent intentActionButton1 = null;
+        Intent intentActionButton2 = null;
+
+        switch (notification.getType()) {
+            case Notification.TYPE_PAYMENT:
+                intent = new Intent(this, MainActivity.class);
+
+                break;
+
+            case Notification.TYPE_TRANSACTION:
+                intent = new Intent(this, MainActivity.class);
+                break;
+
+            case Notification.TYPE_NEWS:
+                intent = NoveltyDetailPresenter.newNoveltyDetailActivity(this, notification.getId());
+
+                break;
+        }
+
+        int idNotification = (int) System.currentTimeMillis();
+
+        extras.putInt(KEY_ID_NOTIFICATION, idNotification);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(extras);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        String title = extras.getString("title");
+        String message = extras.getString("message");
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "notif")
                 .setSmallIcon(R.mipmap.ic_mes_v2_144)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
                 .setContentTitle(title != null ? title : getString(R.string.app_name))
-                .setContentText(text)
+                .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
@@ -157,6 +183,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(idNotification /* ID of notification */, notificationBuilder.build());
+
     }
+
+//    private void sendNotification(String title, String text, Bundle extras) {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.putExtras(extras);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+//                PendingIntent.FLAG_ONE_SHOT);
+//
+//        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                .setSmallIcon(R.mipmap.ic_mes_v2_144)
+//                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
+//                .setContentTitle(title != null ? title : getString(R.string.app_name))
+//                .setContentText(text)
+//                .setAutoCancel(true)
+//                .setSound(defaultSoundUri)
+//                .setContentIntent(pendingIntent);
+//
+//        NotificationManager notificationManager =
+//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+//    }
 }

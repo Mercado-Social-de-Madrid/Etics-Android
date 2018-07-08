@@ -8,5 +8,5 @@ import net.mercadosocial.moneda.base.BaseView;
 
 public interface NewPaymentStep3View extends BaseView {
 
-    void showPaymentSummaryInfo(String boniatosAmount, String eurosAmount, String entityName, String bonus);
+    void showPaymentSummaryInfo(String boniatosAmount, String eurosAmount, String entityName, String bonus, String concept);
 }

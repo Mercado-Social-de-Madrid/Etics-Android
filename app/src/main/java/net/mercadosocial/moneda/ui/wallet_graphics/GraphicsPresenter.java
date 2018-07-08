@@ -58,7 +58,7 @@ import es.dmoral.toasty.Toasty;
 
          view.setRefreshing(true);
 
-         new TransactionInteractor(context, view).getTransactions(new BaseInteractor.BaseApiGETListCallback<Transaction>() {
+         new TransactionInteractor(context, view).getTransactions100(new BaseInteractor.BaseApiGETListCallback<Transaction>() {
              @Override
              public void onResponse(List<Transaction> list) {
                  transactions = getBalancePerDayOrdered(list);

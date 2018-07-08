@@ -34,6 +34,7 @@
 
                 <TextView
                     style="@style/TextBase"
+                    android:gravity="center_horizontal"
                     android:text="@string/total_amount_label" />
 
                 <LinearLayout
@@ -63,19 +64,19 @@
 
                 <TextView
                     style="@style/TextBase"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:text="@string/boniatos_amount_label" />
 
                 <TextView
                     android:id="@+id/tv_max_accepted_entity"
                     style="@style/TextBase.Purple"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="2dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
                     android:gravity="bottom"
                     android:orientation="horizontal">
 
@@ -96,6 +97,25 @@
                         android:layout_marginLeft="10dp"
                         android:text="@string/currency_name_plural" />
                 </LinearLayout>
+
+                <TextView
+                    style="@style/TextBase"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/enter_concept_optional" />
+
+                <EditText
+                    android:id="@+id/edit_concept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_edittext"
+                    android:inputType="textCapSentences"
+                    android:padding="7dp"
+                    android:gravity="center_horizontal"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"/>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

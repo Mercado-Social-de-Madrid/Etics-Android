@@ -59,12 +59,14 @@ public class WalletPresenter extends BasePresenter {
             view.showUserInfo(data.getName());
             refreshWalletData();
             refreshPendingPayments();
+            refreshSentPayments();
         } else {
             view.showLoggedOutView();
         }
 
 
     }
+
 
     public boolean isQRGeneratorVisible() {
         return App.isEntity(context);
@@ -77,6 +79,24 @@ public class WalletPresenter extends BasePresenter {
             public void onResponse(List<Payment> list) {
                 if (list != null) {
                     view.showPendingPaymentsNumber(list.size());
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
+
+
+    private void refreshSentPayments() {
+
+        new PaymentInteractor(context, view).getSentPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
+            @Override
+            public void onResponse(List<Payment> list) {
+                if (list != null) {
+                    view.showSentPaymentsNumber(list.size());
                 }
             }
 

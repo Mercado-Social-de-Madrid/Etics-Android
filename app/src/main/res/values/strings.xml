@@ -64,7 +64,7 @@
     <string name="discover_how">Descubre cómo \></string>
     <string name="your_balance_is">Tienes un saldo de:</string>
     <string name="pending_payments_warning">Tienes %d pagos pendientes de revisión</string>
-    <string name="pending_payments_warning_person">Te tienen que revisar %d pagos</string>
+    <string name="sent_payments_warning">Te tienen que revisar %d pagos</string>
     <string name="consult_statistics">Consulta tus estadísticas de consumo y bonificaciones</string>
     <string name="graphics">Gráficas</string>
     <string name="transactions">Movimientos</string>
@@ -77,8 +77,9 @@
     <string name="new_payment">Nuevo pago</string>
     <string name="select_amount">Indica la cantidad</string>
     <string name="favourites">Favoritos</string>
-    <string name="total_amount_label">Introduce el importe total de tu compra en Euros</string>
-    <string name="boniatos_amount_label">Introduce la cantidad de &currency_name_plural; que vas a pagar (1 &currency_name; equivale a 1€)</string>
+    <string name="total_amount_label">1. Introduce el importe total de tu compra en Euros</string>
+    <string name="boniatos_amount_label">2. Introduce la cantidad de &currency_name_plural; que vas a pagar (1 &currency_name; equivale a 1€)</string>
+    <string name="enter_concept_optional">3. Introduce el concepto del pago (Opcional)</string>
     <string name="check_payment_data">Revisa los datos</string>
     <string name="payment_amount_label">Vas a pagar:</string>
     <string name="payment_recipient_label">a:</string>
@@ -251,7 +252,21 @@
         Bonificación a enviar: <font color="#af64ac"><b>%s</b></font>
         ]]>
     </string>
+
+    <string name="sent_payment_info_format">
+        <![CDATA[
+        Importe total: <font color="#af64ac"><b>%s</b></font><br>
+        Importe en boniatos: <font color="#af64ac"><b>%s</b></font><br>
+        Bonificación a recibir: <font color="#af64ac"><b>%s</b></font>
+        ]]>
+    </string>
     <string name="graphics_x_label">Saldo por días</string>
+    <string name="concept_two_dots">Concepto:</string>
+    <string name="sent_payments_pending_check">Pagos enviados pendientes de revisión</string>
+    <string name="sent_payments">Pagos enviados</string>
+    <string name="info_max_accept_percent">Máximo pago en boniatos: es el máximo % de pago en boniatos que acepta tu entidad. Recomendamos aceptar el 100%, ya que si se acumulan muchos boniatos, las entidades pueden cambiar a euro en todo momento.</string>
+    <string name="info_bonus_percent">% bonificación general: el % de bonificación en boniatos que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 boniato.</string>
+    <string name="info_bonus_percent_entities">% de bonificación a entidades: como es probable que las entidades hagan intercambios mayores, puedes elegir un % especial para las mismas en función de tus necesidades.</string>
 
 
 </resources>

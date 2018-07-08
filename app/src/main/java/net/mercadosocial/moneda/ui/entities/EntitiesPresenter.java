@@ -22,6 +22,7 @@ public class EntitiesPresenter extends BasePresenter {
     private final EntitiesView view;
     private final EntityInteractor entityInteractor;
     private List<Entity> entities = new ArrayList<>();
+    private int currentApiPage;
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
 
@@ -52,16 +53,30 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void refreshData() {
 
-        view.setRefreshing(true);
+        entities.clear();
+        currentApiPage = 0;
 
-        entityInteractor.getEntities(new EntityInteractor.Callback() {
+        view.setRefreshing(true);
+        loadEntities();
+
+    }
+
+    public void loadNextPage() {
+
+        currentApiPage++;
+        loadEntities();
+
+    }
+
+    private void loadEntities() {
+
+        entityInteractor.getEntities(currentApiPage, new EntityInteractor.Callback() {
 
             @Override
-            public void onResponse(List<Entity> entitiesApi) {
-                entities.clear();
+            public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
                 entities.addAll(entitiesApi);
 
-                view.showEntities(entities);
+                view.showEntities(entities, hasMore);
             }
 
             @Override
@@ -69,7 +84,6 @@ public class EntitiesPresenter extends BasePresenter {
                 view.toast(error);
             }
         });
-
     }
 
     public void onSearch(String query) {
@@ -79,11 +93,11 @@ public class EntitiesPresenter extends BasePresenter {
         entityInteractor.getEntitiesFiltered(query, new EntityInteractor.Callback() {
 
             @Override
-            public void onResponse(List<Entity> entitiesApi) {
+            public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
                 entities.clear();
                 entities.addAll(entitiesApi);
 
-                view.showEntities(entities);
+                view.showEntities(entities, hasMore);
             }
 
             @Override
@@ -119,4 +133,5 @@ public class EntitiesPresenter extends BasePresenter {
         Entity entity = entities.get(position);
 //        view.toast("Entity Fav: " + entity.getName());
     }
+
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
         android:id="@+id/view_wallet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,12 +151,43 @@
                 <TextView
                     android:id="@+id/tv_number_pending_payments"
                     style="@style/TextBase"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/pending_payments_warning"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btn_sent_payments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/green_gradient_light"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:visibility="gone">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_sent_payment" />
+
+                <TextView
+                    android:id="@+id/tv_number_sent_payments"
+                    style="@style/TextBase"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/pending_payments_warning"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

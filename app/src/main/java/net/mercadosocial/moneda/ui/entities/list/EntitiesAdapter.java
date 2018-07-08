@@ -108,8 +108,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         return entities.get(position);
     }
 
-    public void updateData(List<Entity> entities) {
-        this.entities = entities;
+    public void updateData() {
         notifyDataSetChanged();
     }
 

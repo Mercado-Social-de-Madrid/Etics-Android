@@ -12,10 +12,12 @@ import rx.Observable;
 
 public interface EntitiesApi {
 
-    @GET("entities/?limit=100")
-    Observable<Response<EntitiesResponse>> getEntities();
+    public static final int PAGE_LIMIT = 10;
 
-    @GET("entities/?limit=100")
+    @GET("entities/?limit=" + PAGE_LIMIT)
+    Observable<Response<EntitiesResponse>> getEntities(@Query("offset") int offset);
+
+    @GET("entities/?limit=" + PAGE_LIMIT)
     Observable<Response<EntitiesResponse>> getEntitiesFiltered(@Query("q") String query);
 
     @GET("entities/{id}")
