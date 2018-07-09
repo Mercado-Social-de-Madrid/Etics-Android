@@ -5,6 +5,7 @@ package net.mercadosocial.moneda.messaging;
  */
 
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,8 +13,10 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.text.Html;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -22,7 +25,9 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.model.Notification;
+import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;
@@ -35,6 +40,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
     public static final String KEY_ID_NOTIFICATION = "idNotification";
+
+    public static String CHANNEL_ID = "channel_payments_notifs";
 
     /**
      * Called when message is received.
@@ -128,6 +135,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     public void showCustomNotification(Bundle extras) {
 
@@ -138,6 +163,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             return;
         }
 
+
+        String title = extras.getString("title");
+        String message = extras.getString("message");
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_mes_v2_144)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
+                .setContentTitle(title != null ? title : getString(R.string.app_name))
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri);
+
+        int idNotification = (int) System.currentTimeMillis();
+
+        extras.putInt(KEY_ID_NOTIFICATION, idNotification);
+
         Intent intent = null;
         Intent intentActionButton1 = null;
         Intent intentActionButton2 = null;
@@ -146,10 +188,59 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             case Notification.TYPE_PAYMENT:
                 intent = new Intent(this, MainActivity.class);
 
+                intentActionButton1 = new Intent(OperationService.ACTION_ACCEPT_PAYMENT);
+                intentActionButton1.putExtras(extras);
+                PendingIntent pendingIntentActionButton1 = PendingIntent.getService(this, 0, intentActionButton1,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                notificationBuilder.addAction(R.mipmap.ic_accept, getString(R.string.accept), pendingIntentActionButton1);
+
+                intentActionButton2 = new Intent(OperationService.ACTION_REJECT_PAYMENT);
+                intentActionButton2.putExtras(extras);
+                PendingIntent pendingIntentActionButton2 = PendingIntent.getService(this, 0, intentActionButton2,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                notificationBuilder.addAction(R.mipmap.ic_cancel, getString(R.string.reject), pendingIntentActionButton2);
+
+                notificationBuilder.setContentTitle(getString(R.string.new_payment));
+
+                Data userData = App.getUserData(this);
+                float bonusPercent = notification.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+                        userData.getEntity().getBonus_percent_general() :
+                        userData.getEntity().getBonus_percent_entity();
+                String bonus = Util.getDecimalFormatted(notification.getTotal_amount() * (bonusPercent / 100f), true);
+
+                notificationBuilder.setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(Html.fromHtml(
+                                String.format(getString(R.string.payment_received_message),
+                                        notification.getSender(),
+                                        Util.getDecimalFormatted(notification.getAmount(), false) + " " + getString(R.string.currency_name_plural),
+                                        Util.getDecimalFormatted(notification.getTotal_amount(), false) + " €",
+                                        bonus + " " + getString(R.string.currency_name_plural)))));
+
+
                 break;
 
             case Notification.TYPE_TRANSACTION:
                 intent = new Intent(this, MainActivity.class);
+                notificationBuilder.setContentTitle(getString(R.string.income_received));
+
+                String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), false);
+
+                String textHtml = null;
+                if (notification.getIs_bonification()) {
+                    textHtml = String.format(getString(R.string.bonification_received_message),
+                            amountFormatted, getString(R.string.currency_name_plural));
+                } else if (notification.getIs_euro_purchase()) {
+                    textHtml = String.format(getString(R.string.income_received_buy_mes_format),
+                            amountFormatted, getString(R.string.currency_name_plural));
+                } else {
+                    textHtml = String.format(getString(R.string.income_was_made_format),
+                            amountFormatted, getString(R.string.currency_name_plural));
+                }
+
+                notificationBuilder.setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(Html.fromHtml(textHtml)));
                 break;
 
             case Notification.TYPE_NEWS:
@@ -158,27 +249,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 break;
         }
 
-        int idNotification = (int) System.currentTimeMillis();
-
-        extras.putInt(KEY_ID_NOTIFICATION, idNotification);
-
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(extras);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String title = extras.getString("title");
-        String message = extras.getString("message");
+                notificationBuilder.setContentIntent(pendingIntent);
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "notif")
-                .setSmallIcon(R.mipmap.ic_mes_v2_144)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
-                .setContentTitle(title != null ? title : getString(R.string.app_name))
-                .setContentText(message)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -187,26 +264,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
-//    private void sendNotification(String title, String text, Bundle extras) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtras(extras);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-//                PendingIntent.FLAG_ONE_SHOT);
-//
-//        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-//                .setSmallIcon(R.mipmap.ic_mes_v2_144)
-//                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
-//                .setContentTitle(title != null ? title : getString(R.string.app_name))
-//                .setContentText(text)
-//                .setAutoCancel(true)
-//                .setSound(defaultSoundUri)
-//                .setContentIntent(pendingIntent);
-//
-//        NotificationManager notificationManager =
-//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-//    }
 }

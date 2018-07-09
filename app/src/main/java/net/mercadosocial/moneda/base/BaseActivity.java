@@ -113,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                     bonusDialog.show(getSupportFragmentManager(), null);
 //                    showBonificationDialog(amountFormatted);
                 } else {
-                    Toasty.info(this, String.format(getString(R.string.income_received), amountFormatted)).show();
+                    Toasty.info(this, String.format(getString(R.string.income_received_format), amountFormatted)).show();
                 }
                 break;
 

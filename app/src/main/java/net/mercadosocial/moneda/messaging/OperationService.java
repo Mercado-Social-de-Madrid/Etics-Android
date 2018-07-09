@@ -76,7 +76,7 @@ public class OperationService extends IntentService {
 
         String title = notification.getTitle();
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "notif")
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, MyFirebaseMessagingService.CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_mes_v2_144)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mes_v2_144))
                 .setContentTitle(title != null ? title : getString(R.string.app_name))

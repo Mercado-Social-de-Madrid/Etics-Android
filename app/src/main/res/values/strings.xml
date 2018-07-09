@@ -128,8 +128,6 @@
     <string name="cancel_payment">Cancelar pago</string>
     <string name="cancel_payment_message">Si sales se perderán los datos del pago actual. Confirma para salir</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_entities">Buscar entidades</string>
     <string name="payment_enter_user_before">Para enviar un pago debes registrar tu usuario primero</string>
     <string name="end_date_offer">Hasta: %s</string>
@@ -145,7 +143,8 @@
     <string name="processing">Procesando</string>
     <string name="pending_payments">Pagos pendientes</string>
     <string name="has_pending_payments_to_confirm">Tu entidad tiene pagos pendientes de confirmar</string>
-    <string name="income_received">Ingreso recibido: %s &currency_name_plural;</string>
+    <string name="income_received">Ingreso recibido</string>
+    <string name="income_received_format">Ingreso recibido: %s &currency_name_plural;</string>
     <string name="bonus_percent_entities">Bonificación para entidades</string>
     <string name="cannot_pay_yourself">¿Seguro que te quieres pagar a ti misma? ;)</string>
     <string name="no_more_pending_payments">No hay más pagos pendientes</string>
@@ -206,6 +205,10 @@
     <string name="congratulations">¡Enhorabuena!</string>
     <string name="bonification_received_message"><![CDATA[
         Has recibido <font color="#af64ac"><b>%s %s</b></font> de bonificación por tu compra en el Mercado Social.]]></string>
+    <string name="income_received_buy_mes_format"><![CDATA[
+        <font color="#af64ac"><b>%s %s</b></font> comprados al Mercado Social]]></string>
+    <string name="income_was_made_format"><![CDATA[
+        Te han hecho una transacci&oacute;n de <font color="#af64ac"><b>%s %s</b></font>]]></string>
     <string name="already_have_account">Ya tengo cuenta</string>
     <string name="dont_have_account">No tengo cuenta</string>
     <string name="purchase_success_message">Se ha realizado con éxito tu compra de %s &currency_name_plural;</string>
@@ -267,6 +270,8 @@
     <string name="info_max_accept_percent">Máximo pago en boniatos: es el máximo % de pago en boniatos que acepta tu entidad. Recomendamos aceptar el 100%, ya que si se acumulan muchos boniatos, las entidades pueden cambiar a euro en todo momento.</string>
     <string name="info_bonus_percent">% bonificación general: el % de bonificación en boniatos que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 boniato.</string>
     <string name="info_bonus_percent_entities">% de bonificación a entidades: como es probable que las entidades hagan intercambios mayores, puedes elegir un % especial para las mismas en función de tus necesidades.</string>
+    <string name="channel_name">Pagos y transacciones</string>
+    <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural; en tu cuenta</string>
 
 
 </resources>

@@ -10,6 +10,7 @@ public class DebugHelper {
     private static final boolean ACRA_ENABLED = true;
     private static final boolean FINAL_TTF = true;
     private static final boolean PROD_ENVIRONMENT = true;
+    private static final boolean EXIT_AFTER_PAYMENT = false;
 
 
     // Falses
@@ -65,4 +66,6 @@ public class DebugHelper {
     public static final boolean SWITCH_TEST_FUNCTION = BuildConfig.DEBUG
             || FORZE_BETA_ENV_APK ? TEST_FUNCTION : false;
 
+    public static final boolean SWITCH_EXIT_AFTER_PAYMENT = BuildConfig.DEBUG
+            || FORZE_BETA_ENV_APK ? EXIT_AFTER_PAYMENT : true;
 }

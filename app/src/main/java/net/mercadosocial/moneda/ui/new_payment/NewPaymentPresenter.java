@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -158,13 +159,17 @@ public class NewPaymentPresenter extends BasePresenter {
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        finish();
+                        if (DebugHelper.SWITCH_EXIT_AFTER_PAYMENT) {
+                            finish();
+                        }
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        finish();
+                        if (DebugHelper.SWITCH_EXIT_AFTER_PAYMENT) {
+                            finish();
+                        }
                     }
                 })
                 .show();
