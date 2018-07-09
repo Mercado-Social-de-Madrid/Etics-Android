@@ -128,6 +128,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent.putExtras(bundle);
             sendBroadcast(intent);
         } else {
+            createNotificationChannel();
             showCustomNotification(bundle);
         }
 
@@ -139,17 +140,28 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (notificationManager.getNotificationChannels().contains(CHANNEL_ID)) {
+                return;
+            }
+
+
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
+
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel description");
+
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            channel.setImportance(importance);
             notificationManager.createNotificationChannel(channel);
+
         }
     }
 
