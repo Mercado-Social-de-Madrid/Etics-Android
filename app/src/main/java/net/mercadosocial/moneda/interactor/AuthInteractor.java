@@ -20,9 +20,9 @@ import net.mercadosocial.moneda.util.Util;
 
 import java.io.IOException;
 
+import rx.android.schedulers.AndroidSchedulers;
 import retrofit2.Response;
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**

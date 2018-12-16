@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -25,7 +25,24 @@
             style="@style/TextBase"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="@string/register_to_use_wallet_text" />
+            android:text="@string/register_to_use_wallet_text"
+            android:visibility="gone"/>
+
+        <TextView
+            style="@style/TextBase"
+            android:text="@string/intro_member_info"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="@dimen/text_medium"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/btn_members_info"
+            style="@style/TextBase.Purple"
+            android:text="@string/discover_how"
+            android:textSize="@dimen/text_medium"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
 
         <LinearLayout
             android:id="@+id/view_enter_buttons"

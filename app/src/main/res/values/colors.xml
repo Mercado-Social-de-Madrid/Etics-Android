@@ -31,6 +31,7 @@
     <color name="bg_edittext">#F8FCE1</color>
 
     <color name="grey_disabled">#7dababab</color>
+    <color name="grey_unselected">#999999</color>
     <color name="red">#F00</color>
     <color name="red_dark">#d10000</color>
     <color name="red_orange">#F7722F</color>

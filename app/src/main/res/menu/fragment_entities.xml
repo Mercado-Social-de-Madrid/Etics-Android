@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_search"
         android:title="@string/search"
         app:showAsAction="always"
-        android:orderInCategory="100"/>
+        android:orderInCategory="300"/>
 
     <item
         android:id="@+id/menuItem_show_map_list"

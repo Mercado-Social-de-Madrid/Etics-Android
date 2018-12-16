@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
+import net.mercadosocial.moneda.model.MES;
+import net.mercadosocial.moneda.views.SelectMESView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,13 +21,15 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
     
     private TextView btnIntroEnter;
     private TextView btnMembersInfo;
+    private SelectMESView selectMESView;
 
     private void findViews(View layout) {
         btnIntroEnter = (TextView)layout.findViewById( R.id.btn_intro_enter );
         btnMembersInfo = (TextView)layout.findViewById( R.id.btn_members_info );
+        selectMESView = (SelectMESView) layout.findViewById(R.id.select_mes_view);
 
         btnIntroEnter.setOnClickListener(this);
-        btnMembersInfo.setOnClickListener(this);
+//        btnMembersInfo.setOnClickListener(this);
     }
 
 
@@ -41,6 +46,15 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
         View layout = inflater.inflate(R.layout.fragment_intro_last_item, container, false);
         findViews(layout);
 
+        String codeMESSaved = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null);
+        int positionSaved = MES.getMESPositionByCode(codeMESSaved);
+        selectMESView.setSelectedMESPosition(positionSaved);
+        selectMESView.setOnItemClickListener((view, position) -> {
+            if (position > -1) {
+                btnIntroEnter.setEnabled(true);
+            }
+        });
+
         return layout;
     }
 
@@ -51,6 +65,10 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
             case R.id.btn_members_info:
 //                startActivity();
             case R.id.btn_intro_enter:
+
+                MES mesSelected = selectMESView.getSelectedMES();
+                getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
+
                 getActivity().finish();
                 break;
         }

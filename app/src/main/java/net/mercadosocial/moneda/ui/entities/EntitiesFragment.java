@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.util.WindowUtils;
+import net.mercadosocial.moneda.ui.main.MainActivity;
 
 import java.util.List;
 
@@ -83,10 +83,13 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
         switch (item.getItemId()) {
             case R.id.menuItem_search:
-                viewSearchEntities.setVisibility(viewSearchEntities.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-                if (viewSearchEntities.getVisibility() == View.GONE) {
-                    WindowUtils.hideSoftKeyboard(getActivity());
-                }
+
+                ((MainActivity) getActivity()).onMenuFilterClick();
+
+//                viewSearchEntities.setVisibility(viewSearchEntities.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+//                if (viewSearchEntities.getVisibility() == View.GONE) {
+//                    WindowUtils.hideSoftKeyboard(getActivity());
+//                }
 
                 break;
 

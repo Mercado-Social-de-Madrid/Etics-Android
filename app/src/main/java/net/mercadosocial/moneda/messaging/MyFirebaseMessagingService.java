@@ -153,9 +153,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
 
-
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Channel description");
 
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             channel.setDescription(description);

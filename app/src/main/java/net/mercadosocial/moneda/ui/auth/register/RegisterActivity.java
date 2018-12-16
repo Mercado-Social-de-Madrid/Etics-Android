@@ -28,6 +28,7 @@ import net.mercadosocial.moneda.util.WindowUtils;
 
 import es.dmoral.toasty.Toasty;
 
+
 public class RegisterActivity extends BaseActivity implements View.OnClickListener, RegisterView {
 
     private View btnRegisterEntity;

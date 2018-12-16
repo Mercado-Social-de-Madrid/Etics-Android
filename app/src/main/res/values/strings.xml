@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Boniato"><!ENTITY currency_name_plural "Boniatos"><!ENTITY currency_name_abrev "Bts">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Etic"><!ENTITY currency_name_plural "Etics"><!ENTITY currency_name_abrev "Eti">]>
 
 <resources>
-    <string name="app_name">MonedaMES</string>
+    <string name="app_name">Etics</string>
 
     <string name="currency_name">&currency_name;</string>
     <string name="currency_name_plural">&currency_name_plural;</string>
@@ -60,7 +60,7 @@
 
     <string name="start">¿Comenzamos?</string>
     <string name="go_to_entities_list">Ir al listado de entidades</string>
-    <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna socia te invite.</string>
+    <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna persona socia te invite.</string>
     <string name="discover_how">Descubre cómo \></string>
     <string name="your_balance_is">Tienes un saldo de:</string>
     <string name="pending_payments_warning">Tienes %d pagos pendientes de revisión</string>
@@ -78,7 +78,8 @@
     <string name="select_amount">Indica la cantidad</string>
     <string name="favourites">Favoritos</string>
     <string name="total_amount_label">1. Introduce el importe total de tu compra en Euros</string>
-    <string name="boniatos_amount_label">2. Introduce la cantidad de &currency_name_plural; que vas a pagar (1 &currency_name; equivale a 1€)</string>
+    <string name="boniatos_amount_label">2. Introduce la cantidad de &currency_name_plural; que vas a pagar (1 &currency_name;
+        equivale a 1€)</string>
     <string name="enter_concept_optional">3. Introduce el concepto del pago (Opcional)</string>
     <string name="check_payment_data">Revisa los datos</string>
     <string name="payment_amount_label">Vas a pagar:</string>
@@ -164,7 +165,7 @@
         Esta sección estará en breve disponible.\n
         Aquí se podrán comprar Boniatos automáticamente mediante pago por tarjeta de débito o crédito.\n
         El pago y los datos de la tarjeta son totalmente seguros al implementarse a través de la pasarela Stripe\n
-        De momento para la beta vamos a simular esa compra de Boniatos, simplemente escribe la cantidad que quieres recargar:
+        De momento para la beta vamos a simular esa compra de &currency_name_plural;, simplemente escribe la cantidad que quieres recargar:
     </string>
     <string name="recharge">Recargar</string>
     <string name="amount_must_be_positive">La cantidad debe ser mayor que 0</string>
@@ -246,7 +247,7 @@
     <string name="payment_received_from">Pago recibido de</string>
     <string name="bonus_received_from">Bonificación recibida de</string>
     <string name="bonus_sent_to">Bonificación enviada a</string>
-    <string name="currency_purchase">Compra de boniatos</string>
+    <string name="currency_purchase">Compra de &currency_name_plural;</string>
 
     <string name="payment_info_format">
         <![CDATA[
@@ -271,7 +272,23 @@
     <string name="info_bonus_percent">% bonificación general: el % de bonificación en boniatos que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 boniato.</string>
     <string name="info_bonus_percent_entities">% de bonificación a entidades: como es probable que las entidades hagan intercambios mayores, puedes elegir un % especial para las mismas en función de tus necesidades.</string>
     <string name="channel_name">Pagos y transacciones</string>
-    <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural; en tu cuenta</string>
+    <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural;
+        en tu cuenta</string>
 
+    <string name="intro_message_1">Bienvenida/o a la app del Mercado Social de Madrid (MES), una red que promueve el consumo ético</string>
+    <string name="intro_message_2">Aquí podrás encontrar las entidades y ofertas del MES</string>
+    <string name="intro_message_3">También las últimas novedades y convocatorias</string>
+    <string name="intro_message_4">Podrás realizar pagos en &currency_name_plural;, la moneda del MES…</string>
+    <string name="intro_message_5">… y por cada compra que realices, recibirás una bonificación en &currency_name_plural;!</string>
+    <string name="select_mes">Selecciona Mercado Social</string>
+    <string name="change_social_market">Cambiar Mercado Social</string>
+    <string name="select">Seleccionar</string>
+    <string name="change_social_market_warning">Ten en cuenta que si has accedido con tu usuario, al cambiar de Mercado Social se cerrará la sesión</string>
+    <string name="enter_in_mes_x">Entrar en el MES %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="categories">Categorías</string>
+    <string name="only_favs">Sólo favoritas</string>
 
 </resources>

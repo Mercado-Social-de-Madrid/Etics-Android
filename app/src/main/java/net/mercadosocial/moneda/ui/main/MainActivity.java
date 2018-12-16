@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
 import net.mercadosocial.moneda.views.CircleTransform;
+import net.mercadosocial.moneda.views.DialogSelectMES;
 import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
 
 import es.dmoral.toasty.Toasty;
@@ -92,6 +94,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         findViews();
         configureToolbar();
         configureDrawerLayout();
+        configureToolbarBackArrowBehaviour();
         configureBottomNavView();
 
 
@@ -178,6 +181,23 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        }
 //    }
 
+    private void configureToolbarBackArrowBehaviour() {
+
+        ((Toolbar) findViewById(R.id.toolbar)).setNavigationOnClickListener(v -> {
+
+            if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+            } else {
+
+                if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                } else {
+                    drawerLayout.openDrawer(Gravity.LEFT);
+                }
+
+            }
+        });
+    }
 
     @Override
     public void refreshData() {
@@ -189,6 +209,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         presenter.refreshData();
     }
 
+
+
+    // INTERACTIONS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -212,6 +235,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             case R.id.menuItem_the_social_market:
                 WebViewActivity.startLocalHtml(this, getString(R.string.the_social_market), WebViewActivity.FILENAME_QUE_ES_MES);
+                break;
+
+            case R.id.menuItem_change_social_market:
+                DialogSelectMES.with(this)
+                        .setOnSelectMESListener(mes -> {
+                            toast("MES seleccionado: " + mes.getName());
+                            getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mes.getCode()).commit();
+                        })
+                        .show();
                 break;
 
             case R.id.menuItem_how_boniato_works:
@@ -349,11 +381,26 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout.closeDrawer(Gravity.LEFT);
-        } else {
+        } else if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+            drawerLayout.closeDrawer(Gravity.RIGHT);
+        }  else {
             super.onBackPressed();
         }
     }
 
+    public void onMenuFilterClick() {
+
+        if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+            drawerLayout.closeDrawer(Gravity.RIGHT);
+        } else {
+
+            if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+            }
+
+            drawerLayout.openDrawer(Gravity.RIGHT);
+        }
+    }
 
     // PRESENTER CALLBACKS
 
@@ -388,4 +435,5 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         tvPendingPaymentsBadge.setText(String.valueOf(numberPendingPayments));
         tvPendingPaymentsBadge.setVisibility(numberPendingPayments > 0 ? View.VISIBLE : View.GONE);
     }
+
 }

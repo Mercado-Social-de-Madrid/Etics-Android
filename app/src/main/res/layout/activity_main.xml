@@ -51,11 +51,12 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/view_header_menu"/>
 
-        <!--<include-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="end"-->
-            <!--layout="@layout/view_register_entity" />-->
+        <fragment
+            android:name="net.mercadosocial.moneda.ui.entities.filter.FilterEntitiesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="end"/>
 
     </android.support.v4.widget.DrawerLayout>
 

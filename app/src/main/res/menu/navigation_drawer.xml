@@ -6,6 +6,10 @@
         android:icon="@mipmap/ic_drawer_user"
         android:title="@string/the_social_market" />
 
+    <item
+        android:id="@+id/menuItem_change_social_market"
+        android:icon="@drawable/ic_swap"
+        android:title="@string/change_social_market" />
 
     <item android:title="@string/the_boniato" >
 

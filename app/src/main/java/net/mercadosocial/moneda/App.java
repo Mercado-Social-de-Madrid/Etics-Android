@@ -45,6 +45,7 @@ public class App extends MultiDexApplication {
     public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen";
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
+    public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     
     public static boolean isInForeground;

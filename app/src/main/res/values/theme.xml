@@ -53,7 +53,7 @@
         <!--<item name="android:backgroundDimAmount">0.0</item>-->
         <!--<item name="android:backgroundDimEnabled">false</item>-->
 
-        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
 
         <item name="android:background">@android:color/transparent</item>
 

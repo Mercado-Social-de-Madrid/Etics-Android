@@ -57,6 +57,10 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
