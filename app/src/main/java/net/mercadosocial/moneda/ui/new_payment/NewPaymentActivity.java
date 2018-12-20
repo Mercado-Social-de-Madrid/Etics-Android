@@ -1,7 +1,8 @@
 package net.mercadosocial.moneda.ui.new_payment;
 
-import android.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -57,7 +58,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         configureSecondLevelActivity();
 
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         fragmentStep1 = new NewPaymentStep1Fragment();
         fragmentStep2 = new NewPaymentStep2Fragment();
         fragmentStep3 = new NewPaymentStep3Fragment();
@@ -92,7 +93,7 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
 
         WindowUtils.hideSoftKeyboard(this);
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         switch (step) {
             case 1:
                 ft.show(fragmentStep1);

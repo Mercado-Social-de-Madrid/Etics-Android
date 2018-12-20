@@ -1,6 +1,6 @@
 package net.mercadosocial.moneda.ui.main;
 
-import android.app.Fragment;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -29,10 +31,12 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
+import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
+import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
@@ -42,6 +46,8 @@ import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
+
+import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 
@@ -59,6 +65,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private MainPresenter presenter;
     private ImageView imgAvatar;
     private TextView tvPendingPaymentsBadge;
+
+    private ArrayList<BaseFragment> sections = new ArrayList<>();
+    private EntitiesFragment entitiesFragment;
+    private WalletFragment walletFragment;
+    private NoveltiesFragment noveltiesFragment;
+    private int currentSection = -1;
 
     private void findViews() {
 
@@ -96,6 +108,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         configureDrawerLayout();
         configureToolbarBackArrowBehaviour();
         configureBottomNavView();
+        configureFragments();
 
 
         if (DebugHelper.SHORTCUT_ACTIVITY != null) {
@@ -109,7 +122,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //            return;
 //        }
 
-        getFragmentManager().beginTransaction().replace(R.id.content, new EntitiesFragment()).commit();
+        showFragment(0);
 
         if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
 //        if(true) {
@@ -123,6 +136,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        showMockNotificationDialog();
     }
 
+    private void configureFragments() {
+
+        entitiesFragment = new EntitiesFragment();
+        walletFragment = new WalletFragment();
+        noveltiesFragment = new NoveltiesFragment();
+
+        sections.add(entitiesFragment);
+        sections.add(walletFragment);
+        sections.add(noveltiesFragment);
+    }
+
+
     private void showMockNotificationDialog() {
 
         Notification notification = new Notification();
@@ -132,7 +157,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        BonusDialog bonusDialog = BonusDialog.newInstance(notification);
 //        bonusDialog.show(getSupportFragmentManager(), null);
 
-        NewPaymentDialog.newInstance(notification).show(getFragmentManager(), null);
+        NewPaymentDialog.newInstance(notification).show(getSupportFragmentManager(), null);
     }
 
 
@@ -201,7 +226,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void refreshData() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
         if (fragment instanceof WalletFragment) {
             ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
         }
@@ -209,6 +234,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         presenter.refreshData();
     }
 
+
+    public void setFilterEntities(FilterEntities filterEntities) {
+        if (currentSection == 0) {
+            ((EntitiesPresenter) entitiesFragment.getBasePresenter()).setFilterEntities(filterEntities);
+            if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        }
+    }
 
 
     // INTERACTIONS
@@ -222,15 +256,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (item.getItemId()) {
             case R.id.navigation_entities:
                 setToolbarTitle(R.string.entities);
-                showSection(new EntitiesFragment());
+                showFragment(0);
                 return true;
             case R.id.navigation_wallet:
                 setToolbarTitle(R.string.wallet);
-                showSection(new WalletFragment());
+                showFragment(1);
                 return true;
             case R.id.navigation_profile:
                 setToolbarTitle(R.string.news);
-                showSection(new NoveltiesFragment());
+                showFragment(2);
                 return true;
 
             case R.id.menuItem_the_social_market:
@@ -283,7 +317,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                            public void onClose() {
 //                                refreshData();
 //                            }
-//                        }).show(getFragmentManager(), null);
+//                        }).show(getSupportFragmentManager(), null);
 
                 break;
 
@@ -323,6 +357,33 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         return false;
     }
 
+
+    private void showFragment(int sectionNumber) {
+
+        BaseFragment fragmentToShow = sections.get(sectionNumber);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+
+        if (!fragmentToShow.isAdded()) {
+            fragmentTransaction.add(R.id.content, fragmentToShow);
+        } else if (fragmentToShow.isHidden()) {
+            fragmentTransaction.show(fragmentToShow);
+        } else {
+            throw new IllegalStateException("WTF happen with this fragment: " + fragmentToShow.toString());
+        }
+
+
+        if (currentSection >= 0) {
+            android.support.v4.app.Fragment fragmentToHide = sections.get(currentSection);
+            fragmentTransaction.hide(fragmentToHide);
+        }
+        fragmentTransaction.commit();
+
+        currentSection = sectionNumber;
+
+    }
+
     private void openIPDialog() {
         final EditText editText = new EditText(this);
         editText.setText("192.168.43.42:8000");
@@ -335,14 +396,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         getPrefs().edit().putString("baseUrl", "http://" + editText.getText().toString()).commit();
                     }
                 }).show();
-    }
-
-    private void showSection(BaseFragment fragment) {
-
-        getFragmentManager().beginTransaction().setCustomAnimations(
-                R.animator.fade_in, R.animator.fade_out)
-                .replace(R.id.content, fragment)
-                .commit();
     }
 
 
@@ -423,7 +476,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar);
 
-            Fragment fragment = getFragmentManager().findFragmentById(R.id.content);
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
             if (fragment instanceof WalletFragment) {
                 ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
             }

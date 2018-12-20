@@ -15,8 +15,8 @@ import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -123,8 +123,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         findViews();
         presenter.onCreate();
 
-        final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        final SupportPlaceAutocompleteFragment autocompleteFragment = (SupportPlaceAutocompleteFragment)
+                getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setHint(getString(R.string.address));
 
         AutocompleteFilter countryFilter = new AutocompleteFilter.Builder()

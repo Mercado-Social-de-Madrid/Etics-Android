@@ -59,7 +59,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);
 
-        pagerAdapter = new EntitiesPagerAdapter(getChildFragmentManager(), this);
+        pagerAdapter = new EntitiesPagerAdapter(getActivity().getSupportFragmentManager(), this);
         viewpagerEntities.setAdapter(pagerAdapter);
         viewpagerEntities.addOnPageChangeListener(this);
 
@@ -106,7 +106,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_search_entities:
-                presenter.onSearch(editSearchEntities.getText().toString());
+//                presenter.onSearch(editSearchEntities.getText().toString());
                 break;
         }
 

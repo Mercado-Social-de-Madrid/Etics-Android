@@ -141,7 +141,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         }
 
         GalleryPagerFragment galleryPagerFragment = GalleryPagerFragment.newInstance(entity.getGalleryImages(), 0);
-        getFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
 
         setupRRSSButtons(entity);
 

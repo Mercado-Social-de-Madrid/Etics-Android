@@ -1,8 +1,9 @@
 package net.mercadosocial.moneda.ui.entity_info.gallery;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import java.util.List;

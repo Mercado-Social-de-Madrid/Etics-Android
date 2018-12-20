@@ -15,10 +15,12 @@ public interface EntitiesApi {
     public static final int PAGE_LIMIT = 10;
 
     @GET("entities/?limit=" + PAGE_LIMIT)
-    Observable<Response<EntitiesResponse>> getEntities(@Query("offset") int offset);
+    Observable<Response<EntitiesResponse>> getEntities(@Query("offset") int offset,
+                                                       @Query("q") String text,
+                                                       @Query("categories__in") String categoriesIdsCommaSeparated);
 
-    @GET("entities/?limit=" + PAGE_LIMIT)
-    Observable<Response<EntitiesResponse>> getEntitiesFiltered(@Query("q") String query);
+//    @GET("entities/?limit=" + PAGE_LIMIT)
+//    Observable<Response<EntitiesResponse>> getEntitiesFiltered();
 
     @GET("entities/{id}")
     Observable<Response<Entity>> getEntityById(@Path("id") String id);

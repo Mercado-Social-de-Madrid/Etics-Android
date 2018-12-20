@@ -11,7 +11,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 193
-        versionName "1.93Poz"
+        versionName "1.93"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true //important
@@ -21,6 +21,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+//        debug {
+//            applicationIdSuffix ".debug"
+//            versionNameSuffix " debug"
+//        }
     }
     compileOptions {
         sourceCompatibility = '1.8'
@@ -90,9 +95,12 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     // Lifecycles only (no ViewModel or LiveData)
-    implementation "android.arch.lifecycle:runtime:1.1.1"
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    def lifecycle_version = "1.1.0"
+    implementation "android.arch.lifecycle:runtime:$lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+
 
 }
 

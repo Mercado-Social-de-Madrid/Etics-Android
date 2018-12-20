@@ -1,12 +1,12 @@
 package net.mercadosocial.moneda;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.DefaultLifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.ContextCompat;
@@ -21,9 +21,13 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
+import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
+import net.mercadosocial.moneda.model.Category;
 import net.mercadosocial.moneda.model.Device;
+
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.fabric.sdk.android.Fabric;
@@ -45,6 +49,7 @@ public class App extends MultiDexApplication {
     public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen";
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
+    public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
     public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     
@@ -91,22 +96,45 @@ public class App extends MultiDexApplication {
 //        Toasty.info(this, "Tostaditas moradas").show();
 
 
+
+
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
+
+        loadFirstTime();
 
     }
 
-    public class MyObserver implements LifecycleObserver {
-        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        public void onAppGoesForeground() {
+    private void loadFirstTime() {
+        if (getPrefs(this).getString(SHARED_CATEGORIES_SAVED, null) == null) {
+            new CategoriesInteractor(this, null).loadCategoriesDefault();
+        }
+    }
+
+
+    public class MyObserver implements DefaultLifecycleObserver {
+//        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+//        public void onAppGoesForeground() {
+//            App.isInForeground = true;
+//            Log.i(TAG, "onAppGoesForeground: ");
+//        }
+//
+//        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+//        public void onAppGoesBackground() {
+//            App.isInForeground = false;
+//            Log.i(TAG, "onAppGoesBackground: ");
+//
+//        }
+
+        @Override
+        public void onResume(@NonNull LifecycleOwner owner) {
             App.isInForeground = true;
             Log.i(TAG, "onAppGoesForeground: ");
         }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-        public void onAppGoesBackground() {
+        @Override
+        public void onPause(@NonNull LifecycleOwner owner) {
             App.isInForeground = false;
             Log.i(TAG, "onAppGoesBackground: ");
-
         }
     }
 

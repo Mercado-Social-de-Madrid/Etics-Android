@@ -2,10 +2,10 @@ package net.mercadosocial.moneda.ui.entities;
 
 import android.content.Context;
 
-import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.EntityInteractor;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ public class EntitiesPresenter extends BasePresenter {
     private final EntityInteractor entityInteractor;
     private List<Entity> entities = new ArrayList<>();
     private int currentApiPage;
+    private FilterEntities filterEntities;
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
 
@@ -57,20 +58,20 @@ public class EntitiesPresenter extends BasePresenter {
         currentApiPage = 0;
 
         view.setRefreshing(true);
-        loadEntities();
+        refreshEntities();
 
     }
 
     public void loadNextPage() {
 
         currentApiPage++;
-        loadEntities();
+        refreshEntities();
 
     }
 
-    private void loadEntities() {
+    private void refreshEntities() {
 
-        entityInteractor.getEntities(currentApiPage, new EntityInteractor.Callback() {
+        entityInteractor.getEntities(currentApiPage, filterEntities, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
@@ -86,26 +87,6 @@ public class EntitiesPresenter extends BasePresenter {
         });
     }
 
-    public void onSearch(String query) {
-
-        view.showProgressDialog(context.getString(R.string.searching));
-
-        entityInteractor.getEntitiesFiltered(query, new EntityInteractor.Callback() {
-
-            @Override
-            public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
-                entities.clear();
-                entities.addAll(entitiesApi);
-
-                view.showEntities(entities, hasMore);
-            }
-
-            @Override
-            public void onError(String error) {
-                view.toast(error);
-            }
-        });
-    }
 
     public void onEntityClicked(int position, String id) {
 
@@ -134,4 +115,8 @@ public class EntitiesPresenter extends BasePresenter {
 //        view.toast("Entity Fav: " + entity.getName());
     }
 
+    public void setFilterEntities(FilterEntities filterEntities) {
+        this.filterEntities = filterEntities;
+        refreshData();
+    }
 }

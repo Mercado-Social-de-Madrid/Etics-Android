@@ -47,14 +47,14 @@ public class GalleryFullScreenActivity extends AppCompatActivity {
         List<String> imagesUrls = new Gson().fromJson(imagesSerialized, listType);
 
         galleryPagerFragment = GalleryPagerFragment.newInstance(imagesUrls, startPosition);
-        getFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(EXTRA_IMAGES_SERIALIZED, imagesSerialized);
         outState.putInt(EXTRA_START_IMAGE_POSITION, galleryPagerFragment.getCurrentPagerPosition());
-        getFragmentManager().beginTransaction().detach(galleryPagerFragment).commit();
+        getSupportFragmentManager().beginTransaction().detach(galleryPagerFragment).commit();
         super.onSaveInstanceState(outState);
     }
 

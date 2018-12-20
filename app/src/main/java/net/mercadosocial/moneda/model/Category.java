@@ -1,8 +1,5 @@
 package net.mercadosocial.moneda.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by julio on 1/02/18.
  */
@@ -14,16 +11,16 @@ public class Category {
     private String description;
     private String color;
 
-    private transient boolean checked;
+    private transient boolean checked = true;
 
-    public static List<Category> categoriyNames = new ArrayList<>();
-
-    static {
-        categoriyNames.add(new Category("Tecnología"));
-        categoriyNames.add(new Category("Coworking"));
-        categoriyNames.add(new Category("Librería"));
-        categoriyNames.add(new Category("Alimentación"));
-    }
+//    public static List<Category> categoriyNames = new ArrayList<>();
+//
+//    static {
+//        categoriyNames.add(new Category("Tecnología"));
+//        categoriyNames.add(new Category("Coworking"));
+//        categoriyNames.add(new Category("Librería"));
+//        categoriyNames.add(new Category("Alimentación"));
+//    }
 
     public Category(String name) {
         this.name = name;

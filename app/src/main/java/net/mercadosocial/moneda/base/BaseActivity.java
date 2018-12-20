@@ -97,7 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                             public void onClose() {
                                 refreshData();
                             }
-                        }).show(getFragmentManager(), null);
+                        }).show(getSupportFragmentManager(), null);
                 break;
 
             case Notification.TYPE_TRANSACTION:
@@ -307,9 +307,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         Log.i(TAG, "setRefreshing: refreshing = " + refresing);
 
         if (refresing) {
-            ProgressDialogMES.getInstance(getFragmentManager()).show();
+            ProgressDialogMES.getInstance(getSupportFragmentManager()).show();
         } else {
-            ProgressDialogMES.getInstance(getFragmentManager()).hide();
+            ProgressDialogMES.getInstance(getSupportFragmentManager()).hide();
         }
 
 //        try {
@@ -326,7 +326,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //                            if (refreshingDialog == null) {
 //                                Log.i(TAG, "setRefreshing: showing dialog");
 //                                refreshingDialog = ProgressDialogMESOLD.newInstance();
-//                                refreshingDialog.show(getFragmentManager(), null);
+//                                refreshingDialog.show(getSupportFragmentManager(), null);
 //                            }
 //                        }
 //                    }, ProgressDialogMES.MIN_DELAY);

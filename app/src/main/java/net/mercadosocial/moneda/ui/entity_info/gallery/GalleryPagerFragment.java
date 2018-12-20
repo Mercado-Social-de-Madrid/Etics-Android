@@ -1,8 +1,8 @@
 package net.mercadosocial.moneda.ui.entity_info.gallery;
 
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +67,7 @@ public class GalleryPagerFragment extends Fragment implements ViewPager.OnPageCh
         }.getType();
         imagesUrls = new Gson().fromJson(imagesSerialized, listType);
 
-        GalleryPagerAdapter adapter = new GalleryPagerAdapter(getFragmentManager(), imagesUrls);
+        GalleryPagerAdapter adapter = new GalleryPagerAdapter(getActivity().getSupportFragmentManager(), imagesUrls);
         if (!(getActivity() instanceof GalleryFullScreenActivity)) {
             adapter.setOnImageClickListener(new GalleryPagerAdapter.onImageClickListener() {
                 @Override

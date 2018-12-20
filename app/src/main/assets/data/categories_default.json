@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "color": "#7ec621",
+      "description": "",
+      "id": "65948541-6bee-426a-87c5-c65352614db5",
+      "name": "Alimentación"
+    },
+    {
+      "color": "#0000BB",
+      "description": "",
+      "id": "d3833e02-4fff-423e-a7b9-935af246f979",
+      "name": "Coworking"
+    },
+    {
+      "color": "#d80f0f",
+      "description": "",
+      "id": "61fe5fcb-00d6-48b0-8336-d149456ac542",
+      "name": "Librería"
+    }
+//  ,
+//    {
+//      "color": "#ece306",
+//      "description": "",
+//      "id": "0e96aea5-9050-4c4d-b64d-b50adf32bd4c",
+//      "name": "Tecnología"
+//    }
+  ],
+  "meta": {
+    "limit": 20,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total_count": 4
+  }
+}

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Category;
@@ -70,6 +71,13 @@ public class CategoriesFilterAdapter extends RecyclerView.Adapter<CategoriesFilt
             checkCategory = (CheckBox) itemView.findViewById(R.id.check_category);
 
             rootView = itemView;
+
+            checkCategory.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    getItemAtPosition(getAdapterPosition()).setChecked(isChecked);
+                }
+            });
         }
 
     }

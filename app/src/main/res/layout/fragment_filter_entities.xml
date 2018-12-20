@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ui.entities.filter.FilterEntitiesFragment">
 
@@ -25,7 +26,8 @@
                 android:hint="@string/search_entities"
                 android:inputType="textFilter" />
 
-            <View style="@style/SeparatorHorizontal.Grey"
+            <View
+                style="@style/SeparatorHorizontal.Grey"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
 
@@ -34,9 +36,10 @@
                 android:id="@+id/switch_only_favs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/only_favs"/>
+                android:text="@string/only_favs" />
 
-            <View style="@style/SeparatorHorizontal.Grey"
+            <View
+                style="@style/SeparatorHorizontal.Grey"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
 
@@ -48,11 +51,34 @@
                 android:id="@+id/recycler_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_apply"
+            style="@style/ButtonMes.Green"
+            android:layout_margin="10dp"
+            android:minWidth="0dp"
+            android:text="@string/apply_filters" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btn_remove_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/background_pressed_common"
+            android:src="@mipmap/ic_remove_filters" />
+    </LinearLayout>
 
 </LinearLayout>

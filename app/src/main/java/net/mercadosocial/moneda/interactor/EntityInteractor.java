@@ -9,6 +9,7 @@ import net.mercadosocial.moneda.api.response.EntitiesResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class EntityInteractor extends BaseInteractor {
     }
 
 
-    public void getEntities(int pageApi, final Callback callback) {
+    public void getEntities(int pageApi, FilterEntities filterEntities, final Callback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
@@ -48,7 +49,24 @@ public class EntityInteractor extends BaseInteractor {
 
         int offset = pageApi * EntitiesApi.PAGE_LIMIT;
 
-        getApi().getEntities(offset)
+        String text = null;
+        String categoriesIdsStr = null;
+
+        if (filterEntities != null) {
+
+            text = filterEntities.getText();
+
+            categoriesIdsStr = "";
+            for (int i = 0; i < filterEntities.getCategoriesIds().size(); i++) {
+                String id = filterEntities.getCategoriesIds().get(i);
+                categoriesIdsStr += id + (i < filterEntities.getCategoriesIds().size() - 1 ? "," : "");
+            }
+
+            if(categoriesIdsStr.isEmpty()) categoriesIdsStr = null;
+        }
+
+
+        getApi().getEntities(offset, text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<EntitiesResponse>>() {
                     @Override
@@ -81,44 +99,44 @@ public class EntityInteractor extends BaseInteractor {
 
     }
 
-    public void getEntitiesFiltered(String query, final Callback callback) {
-
-        if (!Util.isConnected(context)) {
-            baseView.toast(R.string.no_connection);
-            return;
-        }
-
-        getApi().getEntitiesFiltered(query)
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<EntitiesResponse>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        callback.onError(e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Response<EntitiesResponse> response) {
-
-                        if (!response.isSuccessful()) {
-                            ApiError apiError = ApiError.parse(response);
-                            callback.onError(apiError.getMessage());
-                            return;
-                        }
-
-                        boolean hasMore = response.body().getMeta().getNext() != null;
-                        callback.onResponse(response.body().getEntities(), hasMore);
-
-
-                    }
-                });
-
-
-    }
+//    public void getEntitiesFiltered(String query, final Callback callback) {
+//
+//        if (!Util.isConnected(context)) {
+//            baseView.toast(R.string.no_connection);
+//            return;
+//        }
+//
+//        getApi().getEntitiesFiltered(query)
+//                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+//                .subscribe(new Observer<Response<EntitiesResponse>>() {
+//                    @Override
+//                    public void onCompleted() {
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                        callback.onError(e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onNext(Response<EntitiesResponse> response) {
+//
+//                        if (!response.isSuccessful()) {
+//                            ApiError apiError = ApiError.parse(response);
+//                            callback.onError(apiError.getMessage());
+//                            return;
+//                        }
+//
+//                        boolean hasMore = response.body().getMeta().getNext() != null;
+//                        callback.onResponse(response.body().getEntities(), hasMore);
+//
+//
+//                    }
+//                });
+//
+//
+//    }
 
     public void getEntityById(String id, final BaseApiCallback<Entity> callback) {
 

@@ -1,10 +1,11 @@
 package net.mercadosocial.moneda.views.custom_dialog;
 
+
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.view.LayoutInflater;

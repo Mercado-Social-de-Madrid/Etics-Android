@@ -36,7 +36,7 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
         setContentView(R.layout.activity_intro);
         findViews();
 
-        adapter = new IntroPagerAdapter(getFragmentManager());
+        adapter = new IntroPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         viewPager.setPageTransformer(false, new IntroTransformer());
