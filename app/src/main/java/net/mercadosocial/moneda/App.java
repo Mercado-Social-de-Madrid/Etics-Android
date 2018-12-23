@@ -24,10 +24,8 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
-import net.mercadosocial.moneda.model.Category;
 import net.mercadosocial.moneda.model.Device;
-
-import java.util.List;
+import net.mercadosocial.moneda.model.MES;
 
 import es.dmoral.toasty.Toasty;
 import io.fabric.sdk.android.Fabric;
@@ -102,6 +100,12 @@ public class App extends MultiDexApplication {
 
         loadFirstTime();
 
+        loadMESCity();
+
+    }
+
+    private void loadMESCity() {
+        MES.cityCode = getPrefs(this).getString(SHARED_MES_CODE_SAVED, null);
     }
 
     private void loadFirstTime() {

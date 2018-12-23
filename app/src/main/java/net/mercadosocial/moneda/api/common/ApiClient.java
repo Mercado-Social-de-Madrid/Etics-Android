@@ -13,6 +13,7 @@ import com.google.gson.JsonParseException;
 
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.model.AuthLogin;
+import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.util.DateUtils;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import okhttp3.HttpUrl;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -101,6 +103,7 @@ public class ApiClient {
                 if (AuthLogin.API_KEY != null) {
                     requestBuilder.header("Authorization", AuthLogin.API_KEY);
                 }
+
 //
 //                if (Auth.token != null) {
 //                    requestBuilder.header("nonce", Auth.token);
@@ -109,6 +112,8 @@ public class ApiClient {
                 requestBuilder.method(original.method(), original.body());
                 okhttp3.Request request = requestBuilder.build();
 
+                HttpUrl url = request.url().newBuilder().addQueryParameter("city", MES.cityCode).build();
+                request = request.newBuilder().url(url).build();
 
                 okhttp3.Response response = chain.proceed(request);
 

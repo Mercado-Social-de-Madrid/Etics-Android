@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +31,7 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.FilterEntities;
+import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
@@ -42,7 +42,6 @@ import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
-import net.mercadosocial.moneda.ui.wallet.WalletPresenter;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
@@ -53,6 +52,8 @@ import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
+
+    private static final int REQ_CODE_INTRO = 11;
 
     private DrawerLayout drawerLayout;
     private TextView btnLogin;
@@ -122,18 +123,37 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //            return;
 //        }
 
-        showFragment(0);
-
         if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
 //        if(true) {
-            startActivity(new Intent(this, IntroActivity.class));
+            startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
             getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
+        } else {
+            showFragment(0);
         }
 
 
         presenter.onCreate(getIntent());
 
 //        showMockNotificationDialog();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (DebugHelper.SHORTCUT_ACTIVITY != null) {
+            DebugHelper.SHORTCUT_ACTIVITY = null;
+            return;
+        }
+
+        presenter.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_CODE_INTRO) {
+            showFragment(0);
+        }
     }
 
     private void configureFragments() {
@@ -158,17 +178,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        bonusDialog.show(getSupportFragmentManager(), null);
 
         NewPaymentDialog.newInstance(notification).show(getSupportFragmentManager(), null);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (DebugHelper.SHORTCUT_ACTIVITY != null) {
-            DebugHelper.SHORTCUT_ACTIVITY = null;
-            return;
-        }
-        presenter.onResume();
     }
 
 
@@ -226,12 +235,26 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void refreshData() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
-        if (fragment instanceof WalletFragment) {
-            ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
+
+        for (BaseFragment baseFragment : sections) {
+            if (baseFragment.isAdded()) {
+                baseFragment.refreshData();
+            }
         }
+//        if (fragmentShowing != null) {
+//            fragmentShowing.refreshData();
+//        }
 
         presenter.refreshData();
+    }
+
+    public void onMESCityChanged() {
+
+        for (BaseFragment baseFragment : sections) {
+            if (baseFragment.isAdded()) {
+                baseFragment.onMESCityChanged();
+            }
+        }
     }
 
 
@@ -276,6 +299,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         .setOnSelectMESListener(mes -> {
                             toast("MES seleccionado: " + mes.getName());
                             getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mes.getCode()).commit();
+                            MES.cityCode = mes.getCode();
+                            onMESCityChanged();
+                            presenter.onLogoutClick();
                         })
                         .show();
                 break;
@@ -436,7 +462,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             drawerLayout.closeDrawer(Gravity.LEFT);
         } else if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
             drawerLayout.closeDrawer(Gravity.RIGHT);
-        }  else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -476,9 +502,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar);
 
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
-            if (fragment instanceof WalletFragment) {
-                ((WalletPresenter) ((WalletFragment) fragment).getBasePresenter()).refreshData();
+            for (BaseFragment baseFragment : sections) {
+                if (baseFragment.isAdded()) {
+                    baseFragment.refreshData();
+                }
             }
         }
     }

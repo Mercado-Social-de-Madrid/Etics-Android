@@ -15,80 +15,93 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/ic_intro_4" />
-
-        <TextView
-            style="@style/TextBase"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="@string/register_to_use_wallet_text"
-            android:visibility="gone"/>
-
-        <TextView
-            style="@style/TextBase"
-            android:text="@string/intro_member_info"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:textSize="@dimen/text_medium"
-            android:layout_marginTop="30dp"/>
-
-        <TextView
-            android:id="@+id/btn_members_info"
-            style="@style/TextBase.Purple"
-            android:text="@string/discover_how"
-            android:textSize="@dimen/text_medium"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"/>
-
-        <LinearLayout
-            android:id="@+id/view_enter_buttons"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_intro_4" />
 
                 <TextView
                     style="@style/TextBase"
-                    android:text="@string/already_have_account"
-                    android:layout_marginBottom="5dp"/>
-
-                <TextView
-                    android:id="@+id/btn_login"
-                    style="@style/ButtonMes"
+                    android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="@string/enter" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="20dp">
+                    android:text="@string/register_to_use_wallet_text"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/TextBase"
-                    android:text="@string/dont_have_account"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginTop="30dp"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="@string/intro_member_info"
+                    android:textSize="@dimen/text_medium" />
 
                 <TextView
-                    android:id="@+id/btn_singup"
-                    style="@style/ButtonMes"
-                    android:padding="10dp"
-                    android:text="@string/register" />
+                    android:id="@+id/btn_members_info"
+                    style="@style/TextBase.Purple"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/discover_how"
+                    android:textSize="@dimen/text_medium" />
+
+                <LinearLayout
+                    android:id="@+id/view_enter_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/already_have_account" />
+
+                        <TextView
+                            android:id="@+id/btn_login"
+                            style="@style/ButtonMes"
+                            android:padding="10dp"
+                            android:text="@string/enter" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextBase"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/dont_have_account" />
+
+                        <TextView
+                            android:id="@+id/btn_singup"
+                            style="@style/ButtonMes"
+                            android:padding="10dp"
+                            android:text="@string/register" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <ScrollView
@@ -102,8 +115,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingBottom="15dp"
-            android:paddingTop="10dp">
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp">
 
 
             <TextView
@@ -133,8 +146,8 @@
                         android:id="@+id/progress_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/tv_balance"
                         android:layout_alignTop="@+id/tv_balance"
+                        android:layout_alignBottom="@+id/tv_balance"
                         android:indeterminate="true"
                         android:visibility="gone" />
 
@@ -199,8 +212,8 @@
                 <TextView
                     android:id="@+id/tv_number_sent_payments"
                     style="@style/TextBase"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/pending_payments_warning"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/text_medium"
@@ -210,17 +223,17 @@
 
             <View
                 style="@style/SeparatorHorizontal.White"
-                android:layout_marginBottom="25dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp" />
 
             <TextView
                 style="@style/TextBase"
                 android:layout_gravity="left"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/operations"
                 android:textColor="@color/grey"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_get_boniatos"
@@ -235,14 +248,14 @@
 
             <View
                 style="@style/SeparatorHorizontal.White"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="25dp" />
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp" />
 
             <TextView
                 style="@style/TextBase"
                 android:layout_gravity="left"
-                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/consult_statistics"
                 android:textColor="@color/grey" />
 

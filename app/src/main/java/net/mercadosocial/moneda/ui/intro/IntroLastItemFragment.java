@@ -68,6 +68,7 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
 
                 MES mesSelected = selectMESView.getSelectedMES();
                 getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
+                MES.cityCode = mesSelected.getCode();
 
                 getActivity().finish();
                 break;

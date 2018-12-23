@@ -7,6 +7,7 @@ import java.util.List;
 
 public class MES {
 
+    public static String cityCode;
     private String name;
     private String code;
 

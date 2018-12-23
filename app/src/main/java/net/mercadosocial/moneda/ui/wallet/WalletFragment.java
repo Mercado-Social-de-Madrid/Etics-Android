@@ -108,6 +108,17 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onMESCityChanged() {
+        super.onMESCityChanged();
+    }
+
+    @Override
+    public void refreshData() {
+        super.refreshData();
+        presenter.refreshData();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.wallet, menu);
         menuItemQR = menu.findItem(R.id.menuItem_show_qr);
