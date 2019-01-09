@@ -94,8 +94,8 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     }
 
     @Override
-    public void onEntityFavouriteClicked(String id, int position) {
-        entityListener.onEntityFavouriteClick(position, id);
+    public void onEntityFavouriteClicked(int position, boolean isFavourite) {
+        entityListener.onEntityFavouriteClick(position, isFavourite);
     }
 
 

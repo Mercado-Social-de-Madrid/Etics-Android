@@ -6,7 +6,7 @@ import com.crashlytics.android.Crashlytics;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.AuthApi;
-import net.mercadosocial.moneda.api.CustomApiException;
+import net.mercadosocial.moneda.api.common.CustomApiException;
 import net.mercadosocial.moneda.api.model.ResetPassword;
 import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.ApiFormError;

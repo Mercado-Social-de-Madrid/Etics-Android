@@ -62,7 +62,17 @@
                     android:text="@string/logout"
                     android:drawableTint="@color/white"
                     android:gravity="center_vertical"
-                    android:drawableRight="@mipmap/ic_logout" />
+                    android:drawableRight="@mipmap/ic_logout"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/btn_go_to_profile"
+                    style="@style/TextBase.White"
+                    android:background="@drawable/background_pressed_common"
+                    android:padding="5dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_gravity="right"
+                    android:text="@string/go_to_profile"/>
             </LinearLayout>
 
             <LinearLayout

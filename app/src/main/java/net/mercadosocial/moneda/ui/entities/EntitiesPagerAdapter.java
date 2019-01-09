@@ -54,6 +54,6 @@ public class EntitiesPagerAdapter extends FragmentStatePagerAdapter {
     public interface EntityListener {
         void onEntityClick(int position, String id);
 
-        void onEntityFavouriteClick(int position, String id);
+        void onEntityFavouriteClick(int position, boolean isFavourite);
     }
 }

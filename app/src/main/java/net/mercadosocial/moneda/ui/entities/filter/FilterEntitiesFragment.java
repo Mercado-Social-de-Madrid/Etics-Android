@@ -82,7 +82,8 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
         switch (v.getId()) {
             case R.id.btn_apply:
                 String text = editSearchEntities.getText().toString();
-                presenter.applyFilter(text);
+                boolean onlyFavs = switchOnlyFavs.isChecked();
+                presenter.applyFilter(text, onlyFavs);
                 WindowUtils.hideSoftKeyboard(getActivity());
                 break;
 

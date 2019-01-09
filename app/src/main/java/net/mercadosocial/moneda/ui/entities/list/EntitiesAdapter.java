@@ -46,9 +46,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position2) {
 
-        final int safePosition = holder.getAdapterPosition();
-
-        final Entity entity = getItemAtPosition(safePosition);
+        final Entity entity = getItemAtPosition(position2);
 
         holder.tvEntityName.setText(entity.getName());
         holder.tvEntityCategory.setText(entity.getCategoriesString());
@@ -62,41 +60,15 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
         holder.tvAddress.setText(entity.getAddress());
 
+        holder.imgStarred.setSelected(entity.isFavourite());
+
 //        holder.imgStarred.setSelected(entity.isStarred());
 
 //        int color = ContextCompat.getColor(context, entity.getImageLogoUrlFull() != null ? android.R.color.white : android.R.color.black);
 //        holder.tvEventName.setTextColor(color);
 //        holder.tvEventGenre.setTextColor(color);
 
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.onEntityClicked(entity.getId(), safePosition);
-            }
-        });
 
-        holder.imgStarred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                holder.imgStarred.setSelected(!holder.imgStarred.isSelected());
-                itemClickListener.onEntityFavouriteClicked(entity.getId(), safePosition);
-            }
-        });
-
-    }
-
-    private void addClickListener(View view, final int position) {
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                if (itemClickListener != null) {
-//                    itemClickListener.onItemClick(v, position);
-//                }
-            }
-        });
     }
 
     @Override
@@ -113,7 +85,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgEntity;
         private TextView tvEntityName;
@@ -133,6 +105,18 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
             tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
 
             rootView = itemView;
+
+
+            rootView.setOnClickListener(v -> {
+                Entity entity = getItemAtPosition(getAdapterPosition());
+                itemClickListener.onEntityClicked(entity.getId(), getAdapterPosition());
+            });
+
+            imgStarred.setOnClickListener(v -> {
+                Entity entity = getItemAtPosition(getAdapterPosition());
+                imgStarred.setSelected(!imgStarred.isSelected());
+                itemClickListener.onEntityFavouriteClicked(getAdapterPosition(), imgStarred.isSelected());
+            });
         }
     }
 
@@ -144,7 +128,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     public interface OnItemClickListener {
         void onEntityClicked(String id, int position);
 
-        void onEntityFavouriteClicked(String id, int position);
+        void onEntityFavouriteClicked(int position, boolean isFavourite);
 
     }
 }

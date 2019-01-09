@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.entities;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -63,11 +64,26 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         viewpagerEntities.setAdapter(pagerAdapter);
         viewpagerEntities.addOnPageChangeListener(this);
 
-        presenter.onCreate();
+        new Handler().postDelayed(() -> presenter.onCreate(), 100);
+
 
         setHasOptionsMenu(true);
 
         return layout;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            presenter.onPause();
+        }
     }
 
     @Override
@@ -132,8 +148,8 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     }
 
     @Override
-    public void onEntityFavouriteClick(int position, String id) {
-        presenter.onEntityFavouriteClicked(position, id);
+    public void onEntityFavouriteClick(int position, boolean isFavourite) {
+        presenter.onEntityFavouriteClicked(position, isFavourite);
     }
 
 

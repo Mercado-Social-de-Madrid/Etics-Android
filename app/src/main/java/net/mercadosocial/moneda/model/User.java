@@ -1,5 +1,7 @@
 package net.mercadosocial.moneda.model;
 
+import java.util.List;
+
 /**
  * Created by julio on 1/02/18.
  */
@@ -19,6 +21,7 @@ public class User {
     private String pin_code;
 
     private transient String repeatPassword;
+
 
     public String getUuid() {
         return uuid;

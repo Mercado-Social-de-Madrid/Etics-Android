@@ -94,6 +94,7 @@ public class App extends MultiDexApplication {
 //        Toasty.info(this, "Tostaditas moradas").show();
 
 
+        Data userData = getUserData(this);
 
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
@@ -101,6 +102,8 @@ public class App extends MultiDexApplication {
         loadFirstTime();
 
         loadMESCity();
+
+
 
     }
 

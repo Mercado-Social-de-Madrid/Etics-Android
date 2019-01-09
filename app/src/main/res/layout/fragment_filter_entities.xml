@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:clickable="true"
     tools:context=".ui.entities.filter.FilterEntitiesFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -28,8 +29,8 @@
 
             <View
                 style="@style/SeparatorHorizontal.Grey"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
 
             <android.support.v7.widget.SwitchCompat

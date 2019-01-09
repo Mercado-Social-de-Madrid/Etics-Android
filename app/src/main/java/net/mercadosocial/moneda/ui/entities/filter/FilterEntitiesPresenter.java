@@ -63,7 +63,7 @@ public class FilterEntitiesPresenter extends BasePresenter {
         });
     }
 
-    public void applyFilter(String text) {
+    public void applyFilter(String text, boolean onlyFavs) {
         FilterEntities filterEntities = new FilterEntities();
         filterEntities.setText(TextUtils.isEmpty(text) ? null : text);
 
@@ -74,6 +74,8 @@ public class FilterEntitiesPresenter extends BasePresenter {
             }
         }
         filterEntities.setCategoriesIds(categoriesIds);
+
+        filterEntities.setOnlyFavourites(onlyFavs);
 
         ((MainActivity)context).setFilterEntities(filterEntities);
     }

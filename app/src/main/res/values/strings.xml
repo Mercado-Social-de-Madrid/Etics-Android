@@ -291,5 +291,6 @@
     <string name="categories">Categorías</string>
     <string name="only_favs">Sólo favoritas</string>
     <string name="apply_filters">Aplicar filtros</string>
+    <string name="go_to_profile">Mi perfil</string>
 
 </resources>

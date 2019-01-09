@@ -2,6 +2,8 @@ package net.mercadosocial.moneda.model;
 
 import net.mercadosocial.moneda.api.common.ApiClient;
 
+import java.util.List;
+
 /**
  * Created by julio on 1/02/18.
  */
@@ -9,31 +11,29 @@ import net.mercadosocial.moneda.api.common.ApiClient;
 public class Person {
 
     private String id;
-    private String uuid_user;
     private String nif;
     private String name;
     private String email;
     private String surname;
     private String profile_image;
     private String address;
+    private List<String> fav_entities;
 
     private transient String pin_code;
     private transient String pin_codeRepeat;
 
-    public String getIid() {
+    public static Person createPersonProfileFavourites(List<String> favEntitiesUpdated) {
+        Person person = new Person();
+        person.setFav_entities(favEntitiesUpdated);
+        return person;
+    }
+
+    public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUuid_user() {
-        return uuid_user;
-    }
-
-    public void setUuid_user(String uuid_user) {
-        this.uuid_user = uuid_user;
     }
 
     public String getNif() {
@@ -98,5 +98,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<String> getFav_entities() {
+        return fav_entities;
+    }
+
+    public void setFav_entities(List<String> fav_entities) {
+        this.fav_entities = fav_entities;
     }
 }

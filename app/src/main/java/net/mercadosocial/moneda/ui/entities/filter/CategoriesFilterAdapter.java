@@ -2,12 +2,14 @@ package net.mercadosocial.moneda.ui.entities.filter;
 
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Category;
@@ -46,7 +48,18 @@ public class CategoriesFilterAdapter extends RecyclerView.Adapter<CategoriesFilt
         holder.checkCategory.setText(category.getName());
         holder.checkCategory.setChecked(category.isChecked());
 
+        int color = Color.parseColor(category.getColor());
+        holder.checkCategory.setTextColor(color);
+        setCheckBoxColor(holder.checkCategory, color, color);
 
+
+    }
+
+    public void setCheckBoxColor(CheckBox checkBox, int checkedColor, int uncheckedColor) {
+        int states[][] = {{android.R.attr.state_checked}, {}};
+        int colors[] = {checkedColor, uncheckedColor};
+        CompoundButtonCompat.setButtonTintList(checkBox, new
+                ColorStateList(states, colors));
     }
 
     @Override
@@ -72,12 +85,7 @@ public class CategoriesFilterAdapter extends RecyclerView.Adapter<CategoriesFilt
 
             rootView = itemView;
 
-            checkCategory.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    getItemAtPosition(getAdapterPosition()).setChecked(isChecked);
-                }
-            });
+            checkCategory.setOnCheckedChangeListener((buttonView, isChecked) -> getItemAtPosition(getAdapterPosition()).setChecked(isChecked));
         }
 
     }

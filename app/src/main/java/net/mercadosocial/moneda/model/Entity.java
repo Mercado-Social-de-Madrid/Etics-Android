@@ -51,6 +51,8 @@ public class Entity implements Serializable {
     private transient String pin_code;
     private transient String pin_codeRepeat;
 
+    private transient boolean favourite;
+
     public String getCategoriesString() {
 
         String categoriesStr = "";
@@ -382,4 +384,11 @@ public class Entity implements Serializable {
         this.pin_codeRepeat = pin_codeRepeat;
     }
 
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
 }

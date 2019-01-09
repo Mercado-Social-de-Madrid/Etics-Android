@@ -41,6 +41,7 @@ import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
+import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
@@ -72,6 +73,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private WalletFragment walletFragment;
     private NoveltiesFragment noveltiesFragment;
     private int currentSection = -1;
+    private TextView btnGoToProfile;
 
     private void findViews() {
 
@@ -89,10 +91,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         viewUserInfo = navigationView.getHeaderView(0).findViewById(R.id.view_user_info);
         btnLogout = navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         imgAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        btnGoToProfile = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
+        btnGoToProfile.setOnClickListener(this);
+
     }
 
     @Override
@@ -452,6 +457,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             case R.id.btn_logout:
                 presenter.onLogoutClick();
+                break;
+
+            case R.id.btn_go_to_profile:
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
         }
     }
