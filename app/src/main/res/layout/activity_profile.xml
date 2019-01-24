@@ -10,9 +10,50 @@
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CUENTA"
-        android:layout_gravity="center"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_profile"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true" />
+
+
+            <EditText
+                android:id="@+id/edit_name_person"
+                style="@style/EditTextAuth"
+                android:hint="@string/name"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/edit_surnames_person"
+                style="@style/EditTextAuth"
+                android:hint="@string/surname"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/edit_nif"
+                style="@style/EditTextAuth"
+                android:hint="@string/nif"
+                android:inputType="textCapCharacters" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_save_profile"
+        style="@style/ButtonMes"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/save" />
 </LinearLayout>

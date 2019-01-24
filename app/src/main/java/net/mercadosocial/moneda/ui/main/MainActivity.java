@@ -34,7 +34,7 @@ import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
-import net.mercadosocial.moneda.ui.auth.register.RegisterActivity;
+import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
@@ -55,6 +55,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
 
     private static final int REQ_CODE_INTRO = 11;
+    private static final int REQ_CODE_PROFILE = 22;
 
     private DrawerLayout drawerLayout;
     private TextView btnLogin;
@@ -156,8 +157,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_CODE_INTRO) {
-            showFragment(0);
+
+        switch (requestCode) {
+            case REQ_CODE_INTRO:
+                showFragment(0);
+                break;
+
+            case REQ_CODE_PROFILE:
+                if (resultCode == RESULT_OK) {
+                    presenter.onLogoutClick();
+                }
+                break;
+
         }
     }
 
@@ -452,7 +463,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.btn_singup:
-                startActivity(new Intent(this, RegisterActivity.class));
+                startActivity(RegisterPresenter.newRegisterActivity(this));
                 break;
 
             case R.id.btn_logout:
@@ -460,7 +471,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.btn_go_to_profile:
-                startActivity(new Intent(this, ProfileActivity.class));
+                startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
                 break;
         }
     }
@@ -475,6 +486,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             super.onBackPressed();
         }
     }
+
+
 
     public void onMenuFilterClick() {
 

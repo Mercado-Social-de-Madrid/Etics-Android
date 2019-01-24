@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/green_gradient"
+    android:gravity="center_horizontal"
+    tools:context="net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        style="@style/TextBase"
+        android:text="@string/select_profile"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/btn_register_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/bg_frame_black_corners"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_persons"
+                android:tint="@color/purple" />
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/person_customer"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_large"
+                android:layout_marginTop="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_register_entity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/bg_frame_black_corners"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_entities"
+                android:tint="@color/purple" />
+
+            <TextView
+                style="@style/TextBase"
+                android:text="@string/entity"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_large"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

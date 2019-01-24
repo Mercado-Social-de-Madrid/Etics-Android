@@ -42,6 +42,8 @@ public class ApiClient {
     public static final String BASE_URL_PRODUCTION = "http://vps530178.ovh.net";
     public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
+    public static final String BASE_URL_TOOL = "http://vps632673.ovh.net/";
+
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
     public static final String BASE_URL_MEDIA = BASE_URL + "/media/";
     public static final String API_PATH = "/api/v1/";

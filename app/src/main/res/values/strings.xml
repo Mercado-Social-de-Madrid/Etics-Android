@@ -292,5 +292,13 @@
     <string name="only_favs">Sólo favoritas</string>
     <string name="apply_filters">Aplicar filtros</string>
     <string name="go_to_profile">Mi perfil</string>
+    <string name="entities_dont_edit_profile">Entidades no editan perfil en la app</string>
+    <string name="profile_saved">Perfil guardado</string>
+    <string name="saving">Guardando...</string>
+    <string name="new_consumer">Nueva consumidora</string>
+    <string name="new_provider">Nueva entidad proveedora</string>
+    <string name="select_profile">Selecciona tu perfil</string>
+    <string name="person_customer">Persona consumidora</string>
+    <string name="new_register">Nuevo registro</string>
 
 </resources>

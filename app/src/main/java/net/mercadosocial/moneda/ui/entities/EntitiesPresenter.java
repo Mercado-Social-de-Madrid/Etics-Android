@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.entities;
 
 import android.content.Context;
+import android.util.Log;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.response.Data;
@@ -86,15 +87,15 @@ public class EntitiesPresenter extends BasePresenter {
         App.saveUserData(context, data);
 
         Person profile = Person.createPersonProfileFavourites(favEntitiesUpdated);
-        userInteractor.updateFavourites(profile, new BaseInteractor.BaseApiPOSTCallback() {
+        userInteractor.updateProfile(profile, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
-                view.toast("bien");
+
             }
 
             @Override
             public void onError(String message) {
-                view.toast("mal. " + message);
+                Log.e(TAG, "onError: updateFavouritesOnServer. " + message);
             }
         });
 
@@ -139,7 +140,7 @@ public class EntitiesPresenter extends BasePresenter {
     private void processFavs() {
 
         Data data = App.getUserData(context);
-        if (data.isEntity()) {
+        if (data == null || data.isEntity()) {
             return;
         }
 

@@ -28,6 +28,14 @@ public class Person {
         return person;
     }
 
+    public static Person createPersonProfileData(String name, String surname, String nif) {
+        Person person = new Person();
+        person.setName(name);
+        person.setSurname(surname);
+        person.setNif(nif);
+        return person;
+    }
+
     public String getId() {
         return id;
     }

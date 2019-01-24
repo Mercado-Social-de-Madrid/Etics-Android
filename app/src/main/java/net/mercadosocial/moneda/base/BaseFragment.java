@@ -55,6 +55,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void showProgressDialog(String message) {
 
+//        try {
+//            View progressView = getView().findViewById(R.id.progress_view);
+//        } catch (NullPointerException e) {
+//            // no problem
+//        }
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).showProgressDialog(message);
         }

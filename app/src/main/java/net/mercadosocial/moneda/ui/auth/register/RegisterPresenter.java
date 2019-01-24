@@ -15,6 +15,7 @@ import net.mercadosocial.moneda.interactor.AuthInteractor;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.model.User;
+import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.main.MainPresenter;
 
 import es.dmoral.toasty.Toasty;
@@ -36,7 +37,7 @@ public class RegisterPresenter extends BasePresenter {
 
     public static Intent newRegisterActivity(Context context) {
 
-        Intent intent = new Intent(context, RegisterActivity.class);
+        Intent intent = new Intent(context, RegisterWebActivity.class);
 
         return intent;
     }

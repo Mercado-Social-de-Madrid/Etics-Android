@@ -29,7 +29,7 @@ public class UserInteractor extends BaseInteractor {
     }
 
 
-    public void updateFavourites(Person profile, final BaseApiPOSTCallback callback) {
+    public void updateProfile(Person profile, final BaseApiPOSTCallback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);

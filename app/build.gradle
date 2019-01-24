@@ -10,8 +10,8 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 194
-        versionName "1.94"
+        versionCode 195
+        versionName "1.95"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true //important
