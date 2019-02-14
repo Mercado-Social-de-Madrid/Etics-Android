@@ -45,7 +45,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
         }
 
         String url = ApiClient.BASE_URL_TOOL + "accounts/signup/" + type + "/";
-        WebViewActivity.startRemoteUrl(this, getString(R.string.new_provider), url);
+        WebViewActivity.startRemoteUrl(this, getString(R.string.new_register), url);
         finish();
     }
 }

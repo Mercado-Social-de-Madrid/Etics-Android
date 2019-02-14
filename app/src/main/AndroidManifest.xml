@@ -11,13 +11,12 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_logo_etics"
+        android:icon="@mipmap/ic_app_mes_only_circle"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/security"
-        android:roundIcon="@mipmap/ic_logo_etics"
+        android:roundIcon="@mipmap/ic_app_mes_only_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
@@ -28,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.BlockActivity"
+            android:label="@string/app_name"></activity>
+
         <activity
             android:name=".ui.entity_info.EntityInfoActivity"
             android:label="@string/entity_info" />
@@ -44,7 +47,8 @@
         <activity
             android:name=".ui.auth.register.RegisterActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.auth.register_web.RegisterWebActivity"
+        <activity
+            android:name=".ui.auth.register_web.RegisterWebActivity"
             android:label="@string/new_register" />
         <activity
             android:name=".ui.new_payment.NewPaymentActivity"

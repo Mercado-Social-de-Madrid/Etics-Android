@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="net.mercadosocial.moneda.ui.BlockActivity"
+    android:background="@drawable/green_gradient"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/ic_logo_etics"/>
+
+    <TextView
+        android:id="@+id/tv_block_text"
+        style="@style/TextBase"
+        android:textSize="20sp"
+        android:text="@string/block_text"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+
+</LinearLayout>

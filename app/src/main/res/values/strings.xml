@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "Etic"><!ENTITY currency_name_plural "Etics"><!ENTITY currency_name_abrev "Eti">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "etic"><!ENTITY currency_name_plural "etics"><!ENTITY currency_name_abrev "ETI">]>
 
 <resources>
-    <string name="app_name">Etics</string>
+    <string name="app_name">Mercado Social</string>
 
     <string name="currency_name">&currency_name;</string>
     <string name="currency_name_plural">&currency_name_plural;</string>
@@ -60,7 +60,7 @@
 
     <string name="start">¿Comenzamos?</string>
     <string name="go_to_entities_list">Ir al listado de entidades</string>
-    <string name="intro_member_info">Para pagar con moneda social y obtener bonificaciones has de ser soci@ del MES o que alguna persona socia te invite.</string>
+    <string name="intro_member_info">Para obtener bonificaciones en &currency_name_plural; y pagar con ellos, has de ser soci@ del Mercado Social o que alguna persona socia te invite.</string>
     <string name="discover_how">Descubre cómo \></string>
     <string name="your_balance_is">Tienes un saldo de:</string>
     <string name="pending_payments_warning">Tienes %d pagos pendientes de revisión</string>
@@ -163,7 +163,7 @@
     <string name="yout_balance_is">Tu saldo es de %s &currency_name_abrev;</string>
     <string name="get_boniatos_under_construction_message">
         Esta sección estará en breve disponible.\n
-        Aquí se podrán comprar Boniatos automáticamente mediante pago por tarjeta de débito o crédito.\n
+        Aquí se podrán comprar &currency_name_plural; automáticamente mediante pago por tarjeta de débito o crédito.\n
         El pago y los datos de la tarjeta son totalmente seguros al implementarse a través de la pasarela Stripe\n
         De momento para la beta vamos a simular esa compra de &currency_name_plural;, simplemente escribe la cantidad que quieres recargar:
     </string>
@@ -300,5 +300,6 @@
     <string name="select_profile">Selecciona tu perfil</string>
     <string name="person_customer">Persona consumidora</string>
     <string name="new_register">Nuevo registro</string>
+    <string name="block_text">Esta aplicación está en proceso de rediseño.\n\nEl objetivo es incentivar el consumo responsable dentro de las empresas y entidades del Mercado Social.\n\nPulsa aquí para más información</string>
 
 </resources>

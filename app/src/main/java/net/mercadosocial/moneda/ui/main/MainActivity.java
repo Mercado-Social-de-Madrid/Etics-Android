@@ -516,13 +516,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             String logoUrl = userData.getLogoThumbnail();
             Picasso.with(this)
                     .load(logoUrl)
-                    .placeholder(R.mipmap.ic_avatar)
+                    .placeholder(R.mipmap.ic_avatar_2)
                     .transform(new CircleTransform())
-                    .error(R.mipmap.ic_avatar)
+                    .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
 
         } else {
-            imgAvatar.setImageResource(R.mipmap.ic_avatar);
+            imgAvatar.setImageResource(R.mipmap.ic_avatar_2);
 
             for (BaseFragment baseFragment : sections) {
                 if (baseFragment.isAdded()) {
