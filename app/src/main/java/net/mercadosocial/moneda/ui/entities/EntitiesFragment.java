@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.ui.entities.list.EntitiesListFragment;
+import net.mercadosocial.moneda.ui.entities.map.EntitiesMapFragment;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 
 import java.util.List;
@@ -24,23 +26,20 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesFragment extends BaseFragment implements EntitiesView, EntitiesPagerAdapter.EntityListener, ViewPager.OnPageChangeListener, View.OnClickListener {
+public class EntitiesFragment extends BaseFragment implements EntitiesView, EntitiesPagerAdapter.EntityListener, ViewPager.OnPageChangeListener {
     
     private LinearLayout viewSearchEntities;
     private EditText editSearchEntities;
-    private ViewPager viewpagerEntities;
+//    private ViewPager viewpagerEntities;
     private EntitiesPresenter presenter;
-    private EntitiesPagerAdapter pagerAdapter;
+//    private EntitiesPagerAdapter pagerAdapter;
     private MenuItem menuItemMapList;
     private View btnSearchEntities;
+    private View progressBarEntities;
 
     private void findViews(View layout) {
-        viewSearchEntities = (LinearLayout)layout.findViewById( R.id.view_search_entities );
         editSearchEntities = (EditText)layout.findViewById( R.id.edit_search_entities );
-        viewpagerEntities = (ViewPager)layout.findViewById( R.id.viewpager_entities );
-        btnSearchEntities = layout.findViewById(R.id.btn_search_entities);
-
-        btnSearchEntities.setOnClickListener(this);
+        progressBarEntities = layout.findViewById(R.id.progress_entities);
     }
 
 
@@ -60,9 +59,10 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);
 
-        pagerAdapter = new EntitiesPagerAdapter(getActivity().getSupportFragmentManager(), this);
-        viewpagerEntities.setAdapter(pagerAdapter);
-        viewpagerEntities.addOnPageChangeListener(this);
+//        pagerAdapter = new EntitiesPagerAdapter(getActivity().getSupportFragmentManager(), this);
+//        viewpagerEntities.setAdapter(pagerAdapter);
+//        viewpagerEntities.addOnPageChangeListener(this);
+
 
         new Handler().postDelayed(() -> presenter.onCreate(), 100);
 
@@ -71,6 +71,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
         return layout;
     }
+
 
     @Override
     public void onPause() {
@@ -116,7 +117,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
                 break;
 
             case R.id.menuItem_show_map_list:
-                viewpagerEntities.setCurrentItem(viewpagerEntities.getCurrentItem() == 0 ? 1 : 0, true);
+//                viewpagerEntities.setCurrentItem(viewpagerEntities.getCurrentItem() == 0 ? 1 : 0, true);
+                presenter.onMapListButtonClick();
+
                 break;
         }
 
@@ -124,21 +127,29 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_search_entities:
-//                presenter.onSearch(editSearchEntities.getText().toString());
-                break;
-        }
+    // PRESENTER CALLBACKS
 
+
+    @Override
+    public void showScreenType(int currentScreen) {
+        Fragment fragment = null;
+        switch (currentScreen) {
+            case EntitiesPresenter.SCREEN_ENTITIES_TYPE_LIST:
+                fragment = new EntitiesListFragment();
+                break;
+
+            case EntitiesPresenter.SCREEN_ENTITIES_TYPE_MAP:
+                fragment = new EntitiesMapFragment();
+                break;
+
+        }
+        getChildFragmentManager().beginTransaction().replace(R.id.frame_entities, fragment).commit();
     }
 
-
-    // PRESENTER CALLBACKS
     @Override
     public void showEntities(List<Entity> entities, boolean hasMore) {
-        pagerAdapter.updateData(entities, hasMore);
+        EntitiesChildView entitiesChildView = (EntitiesChildView) getChildFragmentManager().findFragmentById(R.id.frame_entities);
+        entitiesChildView.showEntities(entities, hasMore);
     }
 
     // CHILD ENTITIES CALLBACKS

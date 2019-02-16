@@ -11,9 +11,8 @@ import android.view.ViewGroup;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
 import net.mercadosocial.moneda.ui.entities.EntitiesPagerAdapter;
-import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
-import net.mercadosocial.moneda.ui.entities.EntitiesView;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
@@ -29,14 +28,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiver, EntitiesView, Marker.OnMarkerClickListener {
+public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiver, EntitiesChildView, Marker.OnMarkerClickListener {
 
 
     private MapEventsOverlay mapEntitiesOverlay;
     private MapView map;
 
     private final GeoPoint pointCenterMadrid = new GeoPoint(40.4378693,-3.8199624);
-    private EntitiesPresenter presenter;
     private EntitiesPagerAdapter.EntityListener entityListener;
 
     public EntitiesMapFragment() {
@@ -51,8 +49,6 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        presenter = EntitiesPresenter.newInstance(this, getActivity());
-        setBasePresenter(presenter);
 
         View layout = inflater.inflate(R.layout.fragment_entities_map, container, false);
         findViews(layout);

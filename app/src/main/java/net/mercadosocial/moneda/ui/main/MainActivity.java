@@ -154,6 +154,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         presenter.onResume();
     }
 
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        getSupportFragmentManager().beginTransaction().remove(currentSection);
+//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -364,7 +370,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.nav_contact_email:
-                String emailMES = "monedamadrid@mercadosocial.net";
+                String emailMES = getString(R.string.contact_email_address);
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", emailMES, null));
@@ -388,8 +394,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlTwitter)));
                 break;
 
-            case R.id.nav_contact_youtube:
-                String urlYoutube = "https://www.youtube.com/channel/UCWfYyNJGH-ruUqrsWbYa4Jw";
+            case R.id.nav_contact_vimeo:
+                String urlYoutube = "https://vimeo.com/mercadosocial";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlYoutube)));
                 break;
         }
@@ -407,19 +413,21 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
 
-        if (!fragmentToShow.isAdded()) {
-            fragmentTransaction.add(R.id.content, fragmentToShow);
-        } else if (fragmentToShow.isHidden()) {
-            fragmentTransaction.show(fragmentToShow);
-        } else {
-            throw new IllegalStateException("WTF happen with this fragment: " + fragmentToShow.toString());
-        }
+        fragmentTransaction.replace(R.id.content, fragmentToShow);
 
-
-        if (currentSection >= 0) {
-            android.support.v4.app.Fragment fragmentToHide = sections.get(currentSection);
-            fragmentTransaction.hide(fragmentToHide);
-        }
+//        if (!fragmentToShow.isAdded()) {
+//            fragmentTransaction.add(R.id.content, fragmentToShow);
+//        } else if (fragmentToShow.isHidden()) {
+//            fragmentTransaction.show(fragmentToShow);
+//        } else {
+//            throw new IllegalStateException("WTF happen with this fragment: " + fragmentToShow.toString());
+//        }
+//
+//
+//        if (currentSection >= 0) {
+//            android.support.v4.app.Fragment fragmentToHide = sections.get(currentSection);
+//            fragmentTransaction.hide(fragmentToHide);
+//        }
         fragmentTransaction.commit();
 
         currentSection = sectionNumber;

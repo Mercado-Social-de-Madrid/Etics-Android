@@ -301,5 +301,9 @@
     <string name="person_customer">Persona consumidora</string>
     <string name="new_register">Nuevo registro</string>
     <string name="block_text">Esta aplicación está en proceso de rediseño.\n\nEl objetivo es incentivar el consumo responsable dentro de las empresas y entidades del Mercado Social.\n\nPulsa aquí para más información</string>
+    <string name="test_code">Código de pruebas</string>
+    <string name="enter_test_code">Si tienes acceso al entorno de pruebas introduce aquí el código:</string>
+    <string name="invalid_code">Código inválido</string>
+    <string name="vimeo">Vimeo</string>
 
 </resources>

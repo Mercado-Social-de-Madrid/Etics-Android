@@ -33,6 +33,11 @@ public class EntitiesPresenter extends BasePresenter {
     private FilterEntities filterEntities;
     private boolean refreshFavouritesAtEnd;
 
+    public static final int SCREEN_ENTITIES_TYPE_LIST = 0;
+    public static final int SCREEN_ENTITIES_TYPE_MAP = 1;
+
+    private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
+
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
 
         return new EntitiesPresenter(view, context);
@@ -72,7 +77,7 @@ public class EntitiesPresenter extends BasePresenter {
     private void updateFavouritesOnServer() {
         Data data = App.getUserData(context);
 
-        if (data.isEntity()) {
+        if (data == null || data.isEntity()) {
             return;
         }
 
@@ -191,4 +196,8 @@ public class EntitiesPresenter extends BasePresenter {
         refreshData();
     }
 
+    public void onMapListButtonClick() {
+        currentScreen = currentScreen == SCREEN_ENTITIES_TYPE_LIST ? SCREEN_ENTITIES_TYPE_MAP : SCREEN_ENTITIES_TYPE_LIST;
+        view.showScreenType(currentScreen);
+    }
 }

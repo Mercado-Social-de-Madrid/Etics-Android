@@ -1,40 +1,19 @@
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.entities.EntitiesFragment">
 
-    <LinearLayout
-        android:id="@+id/view_search_entities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green_light"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:visibility="gone">
+    <ProgressBar
+        android:id="@+id/progress_entities"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"/>
 
-        <EditText
-            android:id="@+id/edit_search_entities"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/search_entities" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_search_entities"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/purple"
-            android:text="@string/search"
-            android:textColor="@color/green" />
-    </LinearLayout>
-
-    <net.mercadosocial.moneda.views.NonSwipeableViewPager
-        android:id="@+id/viewpager_entities"
+    <FrameLayout
+        android:id="@+id/frame_entities"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
-</android.support.v7.widget.LinearLayoutCompat>
+</RelativeLayout>

@@ -6,7 +6,6 @@ import android.view.View;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.ui.info.WebViewActivity;
 
 public class RegisterWebActivity extends BaseActivity implements View.OnClickListener {
 
@@ -45,7 +44,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
         }
 
         String url = ApiClient.BASE_URL_TOOL + "accounts/signup/" + type + "/";
-        WebViewActivity.startRemoteUrl(this, getString(R.string.new_register), url);
+        WebViewRegisterActivity.startRemoteUrl(this, getString(R.string.new_register), url);
         finish();
     }
 }

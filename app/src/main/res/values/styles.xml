@@ -43,7 +43,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:src">@mipmap/ic_logo_etics</item>
+        <item name="android:src">@mipmap/ic_app_mes_only_circle</item>
         <item name="android:id">@id/progress_mes</item>
     </style>
 

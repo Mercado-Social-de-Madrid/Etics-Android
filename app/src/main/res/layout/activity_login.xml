@@ -37,12 +37,21 @@
                 android:hint="@string/username"
                 android:inputType="textAutoComplete" />
 
-            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                android:id="@+id/edit_password"
-                style="@style/EditTextAuth"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"/>
+                app:passwordToggleEnabled="true"
+                app:hintEnabled="false">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_password"
+                    style="@style/EditTextAuth"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 

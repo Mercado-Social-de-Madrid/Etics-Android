@@ -49,9 +49,9 @@
                 android:title="@string/twitter" />
 
             <item
-                android:id="@+id/nav_contact_youtube"
-                android:icon="@mipmap/ic_nav_youtube"
-                android:title="@string/youtube" />
+                android:id="@+id/nav_contact_vimeo"
+                android:icon="@mipmap/ic_nav_vimeo"
+                android:title="@string/vimeo" />
 
         </menu>
     </item>

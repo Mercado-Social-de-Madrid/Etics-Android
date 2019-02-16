@@ -3,8 +3,9 @@ package net.mercadosocial.moneda.ui.entities;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
+import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entities.list.EntitiesListFragment;
 import net.mercadosocial.moneda.ui.entities.map.EntitiesMapFragment;
@@ -16,12 +17,14 @@ import java.util.List;
  * Created by julio on 21/02/18.
  */
 
-public class EntitiesPagerAdapter extends FragmentStatePagerAdapter {
+public class EntitiesPagerAdapter extends FragmentPagerAdapter {
 
     private List<EntitiesView> entitiesFragments = new ArrayList<>();
 
     public EntitiesPagerAdapter(FragmentManager fm, EntityListener entityListener) {
         super(fm);
+
+        entitiesFragments.clear();
 
         EntitiesListFragment listFragment = new EntitiesListFragment();
         listFragment.setEntityListener(entityListener);
@@ -45,6 +48,12 @@ public class EntitiesPagerAdapter extends FragmentStatePagerAdapter {
 
     public void updateData(List<Entity> entities, boolean hasMore) {
         for (EntitiesView entitiyView : entitiesFragments) {
+            if (entitiyView instanceof BaseFragment) {
+                boolean isAdded = ((BaseFragment) entitiyView).isAdded();
+                if (isAdded) {
+                }
+            }
+
             entitiyView.showEntities(entities, hasMore);
         }
         notifyDataSetChanged();

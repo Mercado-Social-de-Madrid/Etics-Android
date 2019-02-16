@@ -14,17 +14,17 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPagerAdapter;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
-import net.mercadosocial.moneda.ui.entities.EntitiesView;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesView {
+public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesChildView {
 
 
     private SuperRecyclerView recyclerEntities;
@@ -87,6 +87,8 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
             adapter.updateData();
         }
     }
+
+
 
     @Override
     public void onEntityClicked(String id, int position) {

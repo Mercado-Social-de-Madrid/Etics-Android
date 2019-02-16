@@ -11,5 +11,6 @@ import java.util.List;
 
 public interface EntitiesView extends BaseView {
 
+    void showScreenType(int currentScreen);
     void showEntities(List<Entity> entities, boolean hasMore);
 }
