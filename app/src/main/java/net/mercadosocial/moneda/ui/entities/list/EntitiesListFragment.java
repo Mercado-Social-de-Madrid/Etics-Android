@@ -16,8 +16,8 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
-import net.mercadosocial.moneda.ui.entities.EntitiesPagerAdapter;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
+import net.mercadosocial.moneda.ui.entities.EntityListener;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
     private SuperRecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
-    private EntitiesPagerAdapter.EntityListener entityListener;
+    private EntityListener entityListener;
 
 
     public EntitiesListFragment() {
@@ -60,6 +60,10 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 //        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
 //        recyclerEntities.addItemDecoration(divider);
 
+        setEntityListener((EntityListener) getParentFragment());
+
+        updateData();
+
         return layout;
     }
 
@@ -69,12 +73,21 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
 
     // Presenter Callbacks
+
+
     @Override
-    public void showEntities(List<Entity> entities, boolean hasMore) {
+    public void updateData() {
+
+        boolean hasMore = getEntitiesPresenter().hasMore();
+        showEntities(getEntitiesPresenter().getEntities());
 
         if (!hasMore) {
             recyclerEntities.setupMoreListener(null, 0);
         }
+    }
+
+    public void showEntities(List<Entity> entities) {
+
 
         if (adapter == null) {
 
@@ -101,7 +114,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     }
 
 
-    public void setEntityListener(EntitiesPagerAdapter.EntityListener entityListener) {
+    public void setEntityListener(EntityListener entityListener) {
         this.entityListener = entityListener;
     }
 }

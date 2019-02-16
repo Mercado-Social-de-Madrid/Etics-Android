@@ -305,5 +305,11 @@
     <string name="enter_test_code">Si tienes acceso al entorno de pruebas introduce aquí el código:</string>
     <string name="invalid_code">Código inválido</string>
     <string name="vimeo">Vimeo</string>
+    <string name="user_data">Datos de usuari@</string>
+    <string name="invitations">Invitaciones</string>
+    <string name="invitations_intro">Puedes invitar a tus contactos para que prueben por un tiempo el sistema de bonificaciones: etics</string>
+    <string name="invite">Invitar</string>
+    <string name="invitation_sent">Invitación enviada. ¡Gracias!</string>
+    <string name="sending">Enviando</string>
 
 </resources>

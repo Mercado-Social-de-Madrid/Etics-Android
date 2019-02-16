@@ -1,9 +1,6 @@
 package net.mercadosocial.moneda.ui.entities;
 
 import net.mercadosocial.moneda.base.BaseView;
-import net.mercadosocial.moneda.model.Entity;
-
-import java.util.List;
 
 /**
  * Created by julio on 11/10/17.
@@ -12,5 +9,6 @@ import java.util.List;
 public interface EntitiesView extends BaseView {
 
     void showScreenType(int currentScreen);
-    void showEntities(List<Entity> entities, boolean hasMore);
+
+    void updateData();
 }

@@ -60,6 +60,12 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         return layout;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        adapter = null;
+    }
+
     private List<Novelty> generateMockNovelties() {
 
         List<Novelty> novelties = new ArrayList<>();

@@ -1,12 +1,11 @@
 package net.mercadosocial.moneda.ui.entities.map;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.ui.entities.EntitiesPagerAdapter;
+import net.mercadosocial.moneda.ui.entities.EntityListener;
 
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.MarkerInfoWindow;
@@ -17,7 +16,7 @@ import org.osmdroid.views.overlay.infowindow.MarkerInfoWindow;
 
 public class EntityInfoWindow extends MarkerInfoWindow {
 
-    private EntitiesPagerAdapter.EntityListener entityClickListener;
+    private EntityListener entityClickListener;
 
     /**
      * @param layoutResId layout that must contain these ids: bubble_title,bubble_description,
@@ -28,7 +27,7 @@ public class EntityInfoWindow extends MarkerInfoWindow {
         super(layoutResId, mapView);
     }
 
-    public void setOnEntityClickListener(EntitiesPagerAdapter.EntityListener entityClickListener) {
+    public void setOnEntityClickListener(EntityListener entityClickListener) {
         this.entityClickListener = entityClickListener;
     }
 

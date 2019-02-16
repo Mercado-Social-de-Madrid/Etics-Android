@@ -24,10 +24,19 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_profile"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:adjustViewBounds="true" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@mipmap/ic_avatar_2"/>
 
+
+            <TextView
+                style="@style/TextBase.Purple"
+                android:textSize="@dimen/text_medium"
+                android:text="@string/user_data"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/edit_name_person"
@@ -46,6 +55,46 @@
                 style="@style/EditTextAuth"
                 android:hint="@string/nif"
                 android:inputType="textCapCharacters" />
+
+            <View style="@style/SeparatorHorizontal.Grey" />
+
+            <TextView
+                style="@style/TextBase.Purple"
+                android:text="@string/invitations"
+                android:layout_gravity="left"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                style="@style/TextBase"
+                android:layout_marginTop="5dp"
+                android:text="@string/invitations_intro"
+                android:layout_gravity="left"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/edit_email_invitation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_frame_grey"
+                    android:padding="10dp"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_invite"
+                    style="@style/ButtonMes"
+                    android:minWidth="100dp"
+                    android:text="@string/invite"
+                    android:layout_marginLeft="15dp"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

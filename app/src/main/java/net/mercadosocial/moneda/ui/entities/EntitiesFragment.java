@@ -2,7 +2,6 @@ package net.mercadosocial.moneda.ui.entities;
 
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -16,17 +15,14 @@ import android.widget.LinearLayout;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
-import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entities.list.EntitiesListFragment;
 import net.mercadosocial.moneda.ui.entities.map.EntitiesMapFragment;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 
-import java.util.List;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesFragment extends BaseFragment implements EntitiesView, EntitiesPagerAdapter.EntityListener, ViewPager.OnPageChangeListener {
+public class EntitiesFragment extends BaseFragment implements EntitiesView, EntityListener, ViewPager.OnPageChangeListener {
     
     private LinearLayout viewSearchEntities;
     private EditText editSearchEntities;
@@ -59,12 +55,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
         findViews(layout);
 
-//        pagerAdapter = new EntitiesPagerAdapter(getActivity().getSupportFragmentManager(), this);
-//        viewpagerEntities.setAdapter(pagerAdapter);
-//        viewpagerEntities.addOnPageChangeListener(this);
-
-
-        new Handler().postDelayed(() -> presenter.onCreate(), 100);
+        presenter.onCreate();
 
 
         setHasOptionsMenu(true);
@@ -147,10 +138,11 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     }
 
     @Override
-    public void showEntities(List<Entity> entities, boolean hasMore) {
+    public void updateData() {
         EntitiesChildView entitiesChildView = (EntitiesChildView) getChildFragmentManager().findFragmentById(R.id.frame_entities);
-        entitiesChildView.showEntities(entities, hasMore);
+        entitiesChildView.updateData();
     }
+
 
     // CHILD ENTITIES CALLBACKS
     @Override

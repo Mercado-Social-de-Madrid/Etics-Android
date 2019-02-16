@@ -12,7 +12,9 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
-import net.mercadosocial.moneda.ui.entities.EntitiesPagerAdapter;
+import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
+import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
+import net.mercadosocial.moneda.ui.entities.EntityListener;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
@@ -35,7 +37,7 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
     private MapView map;
 
     private final GeoPoint pointCenterMadrid = new GeoPoint(40.4378693,-3.8199624);
-    private EntitiesPagerAdapter.EntityListener entityListener;
+    private EntityListener entityListener;
 
     public EntitiesMapFragment() {
         // Required empty public constructor
@@ -54,6 +56,10 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
         findViews(layout);
 
         configureMap();
+
+        setEntityListener((EntityListener) getParentFragment());
+
+        updateData();
 
         return layout;
     }
@@ -88,8 +94,18 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
         return false;
     }
 
+    private EntitiesPresenter getEntitiesPresenter() {
+        return (EntitiesPresenter) ((EntitiesFragment) getParentFragment()).getBasePresenter();
+    }
+
     @Override
-    public void showEntities(List<Entity> entities, boolean hasMore) {
+    public void updateData() {
+
+        showEntities(getEntitiesPresenter().getEntities());
+
+    }
+
+    public void showEntities(List<Entity> entities) {
 
         map.getOverlays().clear();
 
@@ -112,7 +128,7 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
 
     }
 
-    public void setEntityListener(EntitiesPagerAdapter.EntityListener entityListener) {
+    public void setEntityListener(EntityListener entityListener) {
         this.entityListener = entityListener;
     }
 
@@ -126,4 +142,5 @@ public class EntitiesMapFragment extends BaseFragment implements MapEventsReceiv
         map.getController().animateTo(marker.getPosition());
         return false;
     }
+
 }

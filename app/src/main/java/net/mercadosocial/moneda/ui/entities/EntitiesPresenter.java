@@ -29,6 +29,7 @@ public class EntitiesPresenter extends BasePresenter {
     private final EntityInteractor entityInteractor;
     private final UserInteractor userInteractor;
     private List<Entity> entities = new ArrayList<>();
+    private boolean hasMore;
     private int currentApiPage;
     private FilterEntities filterEntities;
     private boolean refreshFavouritesAtEnd;
@@ -37,6 +38,7 @@ public class EntitiesPresenter extends BasePresenter {
     public static final int SCREEN_ENTITIES_TYPE_MAP = 1;
 
     private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
+
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
 
@@ -55,6 +57,7 @@ public class EntitiesPresenter extends BasePresenter {
     }
 
     public void onCreate() {
+        view.showScreenType(currentScreen);
         refreshData();
     }
 
@@ -127,12 +130,15 @@ public class EntitiesPresenter extends BasePresenter {
 
         entityInteractor.getEntities(currentApiPage, filterEntities, new EntityInteractor.Callback() {
 
+
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
                 entities.addAll(entitiesApi);
                 processFavs();
 
-                view.showEntities(entities, hasMore);
+                EntitiesPresenter.this.hasMore = hasMore;
+
+                view.updateData();
             }
 
             @Override
@@ -140,6 +146,14 @@ public class EntitiesPresenter extends BasePresenter {
                 view.toast(error);
             }
         });
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    public boolean hasMore() {
+        return hasMore;
     }
 
     private void processFavs() {

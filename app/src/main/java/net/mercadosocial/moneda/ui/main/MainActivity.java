@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -154,11 +155,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         presenter.onResume();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        getSupportFragmentManager().beginTransaction().remove(currentSection);
-//    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+        super.onSaveInstanceState(outState);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
