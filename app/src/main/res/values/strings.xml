@@ -121,7 +121,7 @@
     <string name="bonus_percent">Porcentaje de bonificación</string>
     <string name="description_entity">Descripción de tu entidad</string>
     <string name="label_fill_info_later">Puedes completar esta información con calma más tarde. Te enviaremos un correo una vez completado el registro.</string>
-    <string name="not_account_yet_register">¿Todavía no tienes cuenta?\n¡Regístrate!</string>
+    <string name="not_account_yet_register">¿No tienes cuenta?\n¡Regístrate!</string>
     <string name="already_account_login">Si ya tienes tu cuenta, entra pulsando aquí</string>
     <string name="social_balance_info_soon">En breve verás la información del balance social ;)</string>
     <string name="offer">Oferta</string>

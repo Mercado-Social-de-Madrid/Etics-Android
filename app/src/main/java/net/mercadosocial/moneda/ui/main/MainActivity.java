@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -119,7 +118,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         configureFragments();
 
 
-        if (DebugHelper.SHORTCUT_ACTIVITY != null) {
+        if (DebugHelper.SHORTCUT_ACTIVITY != null && DebugHelper.SHORTCUT_ACTIVITY != MainActivity.class) {
             startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
             return;
         }
@@ -158,8 +157,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
-        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+//        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
 
         super.onSaveInstanceState(outState);
     }
@@ -385,7 +384,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.nav_contact_web:
-                String urlWeb = "https://madrid.mercadosocial.net/";
+                String urlWeb = "https://mercadosocial.net/";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlWeb)));
                 break;
 

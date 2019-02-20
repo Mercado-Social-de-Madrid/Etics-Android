@@ -98,7 +98,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void handleNow(RemoteMessage remoteMessage) {
 
         if (remoteMessage == null) {
-            // todo report error
             Toasty.error(getApplicationContext(), "remoteMessage null").show();
             return;
         }

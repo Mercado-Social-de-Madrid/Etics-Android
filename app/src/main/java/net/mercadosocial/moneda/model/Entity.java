@@ -174,8 +174,8 @@ public class Entity implements Serializable {
 
     public Float getBonus_percent_general() {
         if (bonus_percent_general == null) {
-        return 0f;
-    }
+            return 0f;
+        }
         return bonus_percent_general;
     }
 

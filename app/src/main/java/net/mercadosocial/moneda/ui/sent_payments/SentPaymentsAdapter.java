@@ -11,7 +11,6 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.model.Payment;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -57,11 +56,19 @@ public class SentPaymentsAdapter extends RecyclerView.Adapter<SentPaymentsAdapte
 
         // Falta info de si quien paga es entidad o usuario para calcular con la bonificación correspondiente
         Data userData = App.getUserData(context);
-        float bonusPercent = payment.getUser_type() == RegisterPresenter.TYPE_PERSON ?
-                userData.getEntity().getBonus_percent_general() :
-                userData.getEntity().getBonus_percent_entity();
+//        float bonusPercent = 0;
+//        if (userData.isEntity()) {
+//            bonusPercent = payment.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+//                    userData.getEntity().getBonus_percent_general() :
+//                    userData.getEntity().getBonus_percent_entity();
+//        } else {
+////            payment.get
+//        }
 
-        String bonus = Util.getDecimalFormatted(payment.getTotal_amount() * (bonusPercent / 100f), true);
+//        String bonus = Util.getDecimalFormatted(payment.getTotal_amount() * (bonusPercent / 100f), true);
+
+
+        float bonus = payment.getCurrency_amount();
 
         String textInfo = String.format(context.getString(R.string.sent_payment_info_format),
                 payment.getTotalAmountFormatted() + " " + context.getString(R.string.euros),

@@ -10,7 +10,7 @@ public class DebugHelper {
     private static final boolean ACRA_ENABLED = true;
     private static final boolean FINAL_TTF = true;
     private static final boolean PROD_ENVIRONMENT = true;
-    private static final boolean EXIT_AFTER_PAYMENT = false;
+    private static final boolean EXIT_AFTER_PAYMENT = true;
 
 
     // Falses

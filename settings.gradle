@@ -1,3 +1,2 @@
-include ':app', ':LoginView2', ':materialbarcodescanner'
-project(':LoginView2').projectDir = new File('LoginView')
+include ':app', ':materialbarcodescanner'
 project(':materialbarcodescanner').projectDir = new File('app/libs/materialbarcodescanner')

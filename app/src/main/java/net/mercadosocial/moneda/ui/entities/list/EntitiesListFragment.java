@@ -24,9 +24,10 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesChildView {
+public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesChildView, OnMoreListener {
 
 
+    private static final int NUMBER_ITEM_ASK_MORE = 3;
     private SuperRecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
     private EntityListener entityListener;
@@ -51,11 +52,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerEntities.setLayoutManager(linearLayoutManager);
 
-        recyclerEntities.setupMoreListener(new OnMoreListener() {
-            @Override
-            public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
-                getEntitiesPresenter().loadNextPage();
-            }}, 3);
+        recyclerEntities.setupMoreListener(this, NUMBER_ITEM_ASK_MORE);
 
 //        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
 //        recyclerEntities.addItemDecoration(divider);
@@ -81,7 +78,9 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         boolean hasMore = getEntitiesPresenter().hasMore();
         showEntities(getEntitiesPresenter().getEntities());
 
-        if (!hasMore) {
+        if (hasMore) {
+            recyclerEntities.setupMoreListener(this, NUMBER_ITEM_ASK_MORE);
+        } else {
             recyclerEntities.setupMoreListener(null, 0);
         }
     }
@@ -116,5 +115,12 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
     public void setEntityListener(EntityListener entityListener) {
         this.entityListener = entityListener;
+    }
+
+
+    // Recycler on more asked
+    @Override
+    public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
+        getEntitiesPresenter().loadNextPage();
     }
 }

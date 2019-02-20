@@ -69,6 +69,7 @@
             <TextView
                 style="@style/TextBase"
                 android:layout_marginTop="5dp"
+                android:textSize="@dimen/text_small"
                 android:text="@string/invitations_intro"
                 android:layout_gravity="left"/>
 
