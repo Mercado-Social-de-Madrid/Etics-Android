@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/green_gradient"
+    android:orientation="vertical"
+    tools:context="net.mercadosocial.moneda.ui.invitations.InvitationsActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            style="@style/TextBase.Purple"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="@string/invitations"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:text="@string/invitations_intro"
+            android:textSize="@dimen/text_small" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_email_invitation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_frame_grey"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_invite"
+                style="@style/ButtonMes"
+                android:layout_marginLeft="15dp"
+                android:minWidth="100dp"
+                android:text="@string/invite" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

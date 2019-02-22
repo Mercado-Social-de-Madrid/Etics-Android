@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_swap"
         android:title="@string/change_social_market" />
 
+    <item
+        android:id="@+id/menuItem_invitations"
+        android:icon="@mipmap/ic_invitation"
+        android:title="@string/invitations" />
+
     <item android:title="@string/the_boniato" >
 
         <menu>

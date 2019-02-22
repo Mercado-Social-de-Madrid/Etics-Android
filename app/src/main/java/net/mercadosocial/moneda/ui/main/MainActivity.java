@@ -40,6 +40,7 @@ import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
+import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
@@ -330,6 +331,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                             presenter.onLogoutClick();
                         })
                         .show();
+                break;
+
+            case R.id.menuItem_invitations:
+                InvitationsPresenter.launchInvitationsActivity(this);
                 break;
 
             case R.id.menuItem_how_boniato_works:

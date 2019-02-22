@@ -23,8 +23,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private EditText editNif;
     private Button btnSaveProfile;
     private ProfilePresenter presenter;
-    private EditText editEmailInvitation;
-    private Button btnInvite;
 
     private void findViews() {
         imgProfile = (AppCompatImageView) findViewById(R.id.img_profile);
@@ -33,10 +31,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         editNif = (EditText) findViewById(R.id.edit_nif);
         btnSaveProfile = (Button) findViewById(R.id.btn_save_profile);
 
-        editEmailInvitation = findViewById(R.id.edit_email_invitation);
-        btnInvite = findViewById(R.id.btn_invite);
-
-        btnInvite.setOnClickListener(this);
         btnSaveProfile.setOnClickListener(this);
     }
 
@@ -86,11 +80,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
                 break;
 
-            case R.id.btn_invite:
-                String emailInvitation = editEmailInvitation.getText().toString();
-                presenter.sendInvitation(emailInvitation);
-                WindowUtils.hideSoftKeyboard(this);
-                break;
         }
     }
 
@@ -109,15 +98,4 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    @Override
-    public void configureInviteButton(String text, boolean enabled) {
-
-        btnInvite.setEnabled(enabled);
-        btnInvite.setText(text);
-    }
-
-    @Override
-    public void clearInvitationEmailText() {
-        editEmailInvitation.setText("");
-    }
 }

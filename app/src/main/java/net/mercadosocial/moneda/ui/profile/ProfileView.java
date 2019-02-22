@@ -6,7 +6,4 @@ import net.mercadosocial.moneda.model.Person;
 public interface ProfileView extends BaseView {
     void showPersonProfile(Person person);
 
-    void configureInviteButton(String text, boolean enabled);
-
-    void clearInvitationEmailText();
 }

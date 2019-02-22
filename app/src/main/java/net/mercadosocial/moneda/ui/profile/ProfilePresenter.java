@@ -3,7 +3,6 @@ package net.mercadosocial.moneda.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Patterns;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -87,27 +86,4 @@ public class ProfilePresenter extends BasePresenter {
 
     }
 
-    public void sendInvitation(String emailInvitation) {
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailInvitation).matches()) {
-            view.toast(R.string.invalid_email);
-            return;
-        }
-
-        view.configureInviteButton(context.getString(R.string.sending), false);
-        userInteractor.sendInvitation(emailInvitation, new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
-                view.toast(R.string.invitation_sent);
-                view.configureInviteButton(context.getString(R.string.invite), true);
-                view.clearInvitationEmailText();
-            }
-
-            @Override
-            public void onError(String message) {
-                view.toast(message);
-                view.configureInviteButton(context.getString(R.string.invite), true);
-            }
-        });
-    }
 }
