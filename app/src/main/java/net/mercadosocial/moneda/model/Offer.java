@@ -16,8 +16,8 @@ public class Offer implements Serializable, Novelty {
     private String description;
     private String banner_image;
     private String banner_thumbnail;
-    private Integer discount_percent;
-    private Integer discounted_price;
+    private Float discount_percent;
+    private Float discounted_price;
     private String begin_date;
     private String end_date;
     private Entity entity;
@@ -79,19 +79,19 @@ public class Offer implements Serializable, Novelty {
         this.description = description;
     }
 
-    public Integer getDiscount_percent() {
+    public Float getDiscount_percent() {
         return discount_percent;
     }
 
-    public void setDiscount_percent(Integer discount_percent) {
+    public void setDiscount_percent(Float discount_percent) {
         this.discount_percent = discount_percent;
     }
 
-    public Integer getDiscounted_price() {
+    public Float getDiscounted_price() {
         return discounted_price;
     }
 
-    public void setDiscounted_price(Integer discounted_price) {
+    public void setDiscounted_price(Float discounted_price) {
         this.discounted_price = discounted_price;
     }
 

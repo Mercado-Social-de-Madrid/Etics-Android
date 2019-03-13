@@ -43,7 +43,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
 
-        String url = ApiClient.BASE_URL_TOOL + "accounts/signup/" + type + "/";
+        String url = ApiClient.BASE_URL_TOOL + "accounts/signup/" + type + "/?from_app=true"; // to remove web headers
         WebViewRegisterActivity.startRemoteUrl(this, getString(R.string.new_register), url);
         finish();
     }

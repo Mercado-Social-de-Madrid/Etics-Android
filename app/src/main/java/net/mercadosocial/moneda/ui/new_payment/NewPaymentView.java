@@ -9,4 +9,6 @@ import net.mercadosocial.moneda.base.BaseView;
 public interface NewPaymentView extends BaseView {
 
     void showSection(int section);
+
+    void onQRScanned(String url);
 }

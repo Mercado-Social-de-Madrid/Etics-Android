@@ -122,8 +122,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
 
         tvNoOffers.setVisibility(entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
 
-        tvAcceptBoniatos.setText(entity.getMax_percent_payment() + "%");
-        tvBonusBoniatos.setText(entity.getBonusPercent(this) + "%");
+        tvAcceptBoniatos.setText(Util.getDecimalFormatted(entity.getMax_percent_payment(), false) + "%");
+        tvBonusBoniatos.setText(Util.getDecimalFormatted(entity.getBonusPercent(this), false) + "%");
 
         Picasso.with(this)
                 .load(entity.getLogo())

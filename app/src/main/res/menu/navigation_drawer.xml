@@ -14,7 +14,8 @@
     <item
         android:id="@+id/menuItem_invitations"
         android:icon="@mipmap/ic_invitation"
-        android:title="@string/invitations" />
+        android:title="@string/invitations"
+        android:visible="false"/>
 
     <item android:title="@string/the_boniato" >
 

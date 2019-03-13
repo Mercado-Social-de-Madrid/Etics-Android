@@ -22,8 +22,8 @@ import net.mercadosocial.moneda.views.RotativeImageView;
 public class ProgressDialogMES extends DialogFragment {
 
 
-    public static final long MIN_DELAY = 350;
-    private static final long MIN_SHOW_TIME = 800;
+    public static final long MIN_DELAY = 500;
+    private static final long MIN_SHOW_TIME = 600;
 
     private static final String TAG = "ProgressDialogMES";
     private static ProgressDialogMES progressInstance;

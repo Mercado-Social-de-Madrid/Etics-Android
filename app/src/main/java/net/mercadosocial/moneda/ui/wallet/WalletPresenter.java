@@ -56,7 +56,7 @@ public class WalletPresenter extends BasePresenter {
 
         Data data = App.getUserData(context);
         if (data != null) {
-            view.showUserInfo(data.getName());
+            view.showUserInfo(data.getName(false));
             refreshWalletData();
             refreshPendingPayments();
             refreshSentPayments();
@@ -127,9 +127,10 @@ public class WalletPresenter extends BasePresenter {
     public void onShowQRClick() {
 
         String id = App.getUserData(context).getEntity().getId();
+        String urlId = App.URL_QR_ENTITY + id;
         int sizeQR = context.getResources().getDimensionPixelSize(R.dimen.size_qr);
 
-        Bitmap qrBitmap = QRCode.from(id).withSize(sizeQR, sizeQR).bitmap();
+        Bitmap qrBitmap = QRCode.from(urlId).withSize(sizeQR, sizeQR).bitmap();
         ImageView imageView = new ImageView(context);
         imageView.setImageBitmap(qrBitmap);
 

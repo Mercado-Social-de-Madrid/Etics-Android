@@ -1,8 +1,10 @@
 package net.mercadosocial.moneda.ui.wallet_graphics;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -46,6 +48,11 @@ public class GraphicsActivity extends BaseActivity implements GraphicsView {
         List<Entry> entries = new ArrayList<Entry>();
         final List<String> axisValues = new ArrayList<>();
 
+        if (transactions.isEmpty()) {
+            showNoTransactionsDialog();
+            return;
+        }
+
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
             // turn your data into Entry objects
@@ -53,6 +60,7 @@ public class GraphicsActivity extends BaseActivity implements GraphicsView {
             axisValues.add(transaction.getDateOnly());
 
         }
+
 
         LineDataSet dataSet = new LineDataSet(entries, getString(R.string.graphics_x_label));
         dataSet.setColor(Color.rgb(0, 155, 0));
@@ -76,6 +84,17 @@ public class GraphicsActivity extends BaseActivity implements GraphicsView {
 
         });
 
-// set a custom value formatter
+    }
+
+    private void showNoTransactionsDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.attention)
+                .setMessage(R.string.no_transactions_graph_message)
+                .setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 }

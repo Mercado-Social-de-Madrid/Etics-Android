@@ -39,10 +39,10 @@ public class ApiClient {
     // Tutorial Retrofit 2.0
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
-    public static final String BASE_URL_PRODUCTION = "http://vps530178.ovh.net";
+    public static final String BASE_URL_PRODUCTION = "https://app.mercadosocial.net";
     public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
-    public static final String BASE_URL_TOOL = "http://vps632673.ovh.net/";
+    public static final String BASE_URL_TOOL = "https://gestionmadrid.mercadosocial.net/";
 
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
     public static final String BASE_URL_MEDIA = BASE_URL + "/media/";

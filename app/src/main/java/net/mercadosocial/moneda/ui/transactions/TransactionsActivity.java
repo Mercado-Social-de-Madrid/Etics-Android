@@ -21,9 +21,11 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
     private TransactionsPresenter presenter;
     private SuperRecyclerView recyclerTransactions;
     private TransactionsAdapter adapter;
+    private View viewEmptyList;
 
     private void findViews() {
         recyclerTransactions = findViewById(R.id.recycler_transactions);
+        viewEmptyList = findViewById(R.id.view_empty_list);
     }
 
     @Override
@@ -83,6 +85,8 @@ public class TransactionsActivity extends BaseActivity implements TransactionsVi
         } else {
             adapter.updateData(transactions);
         }
+
+        viewEmptyList.setVisibility(transactions == null || transactions.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

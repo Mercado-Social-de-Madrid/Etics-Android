@@ -23,9 +23,9 @@ public class MES {
         this.code = code;
     }
 
-    public static int getMESPositionByCode(String codeMESSaved) {
+    public static int getMESPositionByCode(String codeMES) {
         for (int i = 0; i < mesList.size(); i++) {
-            if (TextUtils.equals(mesList.get(i).getCode(), codeMESSaved)) {
+            if (TextUtils.equals(mesList.get(i).getCode(), codeMES)) {
                 return i;
             }
         }

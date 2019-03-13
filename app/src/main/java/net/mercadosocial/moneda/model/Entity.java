@@ -24,6 +24,7 @@ public class Entity implements Serializable {
     private String short_description;
     private String logo;
     private String logo_thumbnail;
+    private String city;
 
     private String phone_number;
 
@@ -36,7 +37,7 @@ public class Entity implements Serializable {
     private String legal_form;
     private String address;
     private String registered;
-    private transient List<Category> categories;
+    private List<String> categories;
     private Double latitude;
     private Double longitude;
 
@@ -61,7 +62,7 @@ public class Entity implements Serializable {
 //        for (int i = 0; i < categories.size(); i++) {
 //            categoriesStr += categories.get(i);
 //            if (i < categories.size() - 1) {
-//                categoriesStr += ",";
+//                categoriesStr += ", ";
 //            }
 //        }
 
@@ -183,11 +184,11 @@ public class Entity implements Serializable {
         this.bonus_percent_general = bonus_percent_general;
     }
 
-    public List<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 
@@ -390,5 +391,13 @@ public class Entity implements Serializable {
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

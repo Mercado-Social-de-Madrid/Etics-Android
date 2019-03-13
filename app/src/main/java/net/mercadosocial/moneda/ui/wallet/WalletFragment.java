@@ -205,10 +205,11 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         tvBalance.setVisibility(showLoading ? View.INVISIBLE : View.VISIBLE);
 
         if (wallet != null) {
-            tvBalance.setText(wallet.getBalanceFormatted() + " B");
+            tvBalance.setText(wallet.getBalanceFormatted() + " " + getString(R.string.currency_name_abrev));
         } else {
             tvBalance.setText("---");
         }
+
     }
 
     @Override

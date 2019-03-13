@@ -3,7 +3,6 @@ package net.mercadosocial.moneda.ui.entities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +21,7 @@ import net.mercadosocial.moneda.ui.main.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesFragment extends BaseFragment implements EntitiesView, EntityListener, ViewPager.OnPageChangeListener {
+public class EntitiesFragment extends BaseFragment implements EntitiesView, EntityListener {
     
     private LinearLayout viewSearchEntities;
     private EditText editSearchEntities;
@@ -134,6 +133,11 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
                 break;
 
         }
+
+        if (menuItemMapList != null) {
+            menuItemMapList.setIcon(currentScreen == EntitiesPresenter.SCREEN_ENTITIES_TYPE_LIST ? R.mipmap.ic_map : R.mipmap.ic_list);
+        }
+
         getChildFragmentManager().beginTransaction().replace(R.id.frame_entities, fragment).commit();
     }
 
@@ -155,22 +159,5 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         presenter.onEntityFavouriteClicked(position, isFavourite);
     }
 
-
-    // VIEW PAGER CALLBACKS
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        menuItemMapList.setIcon(position == 0 ? R.mipmap.ic_map : R.mipmap.ic_list);
-    }
-
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
 
 }

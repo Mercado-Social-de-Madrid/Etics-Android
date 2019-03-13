@@ -12,38 +12,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/purple"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:background="@color/purple">
+        android:padding="5dp">
 
         <TextView
             style="@style/TextTransactionsHeader"
             android:gravity="center_horizontal"
             android:text="@string/date_and_time" />
-        
+
         <TextView
             style="@style/TextTransactionsHeader"
             android:layout_width="0dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:layout_weight="1"
-            android:text="@string/account"
-            android:gravity="center_horizontal" />
-        
+            android:gravity="center_horizontal"
+            android:text="@string/account" />
+
         <TextView
             style="@style/TextTransactionsHeader"
-            android:text="@string/amount"
-            android:layout_marginRight="15dp" />
-        
+            android:layout_marginRight="15dp"
+            android:text="@string/amount" />
+
         <TextView
             style="@style/TextTransactionsHeader"
             android:text="@string/balance" />
     </LinearLayout>
 
-    <com.malinskiy.superrecyclerview.SuperRecyclerView
-        android:id="@+id/recycler_transactions"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_moreProgress="@layout/view_more_progress"
-        app:mainLayoutId="@layout/layout_recyclerview_verticalscroll" />
+        android:layout_height="match_parent">
+
+        <com.malinskiy.superrecyclerview.SuperRecyclerView
+            android:id="@+id/recycler_transactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_moreProgress="@layout/view_more_progress"
+            app:mainLayoutId="@layout/layout_recyclerview_verticalscroll" />
+
+        <LinearLayout
+            android:id="@+id/view_empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_intro_4" />
+
+            <TextView
+                style="@style/TextBase.Purple"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/transactions_empty_message" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

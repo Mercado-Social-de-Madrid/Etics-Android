@@ -49,12 +49,13 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         final Entity entity = getItemAtPosition(position2);
 
         holder.tvEntityName.setText(entity.getName());
-        holder.tvEntityCategory.setText(entity.getCategoriesString());
+//        holder.tvEntityCategory.setText(entity.getCategoriesString());
+        holder.tvEntityCategory.setVisibility(View.GONE);
 
         Picasso.with(context)
                 .load(entity.getImageCover())
-//                .placeholder(R.mipmap.img_default_grid)
-                .error(R.mipmap.img_mes_header)
+                .placeholder(R.mipmap.img_mes_default_banner_2)
+                .error(R.mipmap.img_mes_default_banner_2)
 //                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
                 .into(holder.imgEntity);
 

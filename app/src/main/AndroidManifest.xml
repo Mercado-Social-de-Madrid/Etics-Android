@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.BlockActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
             
             android:windowSoftInputMode="stateAlwaysHidden">
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.BlockActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".ui.entity_info.EntityInfoActivity"
@@ -52,7 +52,20 @@
         <activity
             android:name=".ui.new_payment.NewPaymentActivity"
             android:label="@string/new_payment"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:parentActivityName=".ui.main.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+
+            <intent-filter android:autoVerify="true"
+                android:label="@string/mes_send_payment">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="app.mercadosocial.net" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.barcode.BarcodeActivity"
             android:label="@string/qr_code_scan" />

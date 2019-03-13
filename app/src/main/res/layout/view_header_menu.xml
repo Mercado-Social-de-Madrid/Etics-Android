@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/purple"
     android:orientation="vertical"
-    android:paddingBottom="15dp"
-    android:paddingTop="15dp">
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +19,8 @@
             android:id="@+id/img_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:maxWidth="100dp"
             android:adjustViewBounds="true"
+            android:maxWidth="100dp"
             android:src="@mipmap/ic_avatar_2" />
 
         <RelativeLayout
@@ -32,39 +32,60 @@
                 android:id="@+id/view_user_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:visibility="gone">
 
-                <TextView
-                    style="@style/TextBase.White"
-                    android:text="@string/account" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_user_name"
-                    style="@style/TextBase"
-                    android:layout_centerVertical="true"
-                    android:text="adsfasdfasdfasfd"
-                    android:textColor="@color/green"
-                    android:gravity="center_horizontal"
-                    android:textSize="@dimen/text_large" />
+                    <TextView
+                        android:id="@+id/tv_user_name"
+                        style="@style/TextBase.White"
+                        android:textSize="@dimen/text_large"/>
 
+                    <TextView
+                        android:id="@+id/tv_mes"
+                        style="@style/TextBase.White"
+                        android:textSize="@dimen/text_small_2"
+                        android:visibility="visible"
+                        android:layout_marginTop="5dp"/>
 
-                <TextView
-                    android:id="@+id/btn_go_to_profile"
-                    style="@style/ButtonMes.Green"
-                    android:padding="10dp"
-                    android:text="@string/go_to_profile"
-                    android:layout_marginTop="15dp" />
+                    <TextView
+                        android:id="@+id/tv_guest_info"
+                        style="@style/TextBase"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/yellow"
+                        android:layout_marginTop="5dp"/>
 
-                <TextView
-                    android:id="@+id/btn_logout"
-                    style="@style/TextBase.White"
-                    android:background="@drawable/background_pressed_common"
-                    android:padding="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="right"
-                    android:text="@string/logout"/>
+                    <TextView
+                        android:id="@+id/btn_go_to_profile"
+                        style="@style/ButtonMes.Green"
+                        android:layout_marginTop="15dp"
+                        android:padding="10dp"
+                        android:text="@string/go_to_profile"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/btn_logout"
+                        style="@style/TextBase.White"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_pressed_common"
+                        android:padding="5dp"
+                        android:text="@string/logout"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_arrow_gallery_right"/>
             </LinearLayout>
 
             <LinearLayout
@@ -87,8 +108,8 @@
 
                 <TextView
                     style="@style/TextBase.White"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/dont_have_account" />
 
                 <TextView

@@ -34,11 +34,11 @@
             android:textAllCaps="false"
             android:textSize="@dimen/text_medium"
             android:textStyle="normal"
-            app:backgroundTint="@color/red_orange" />
+            android:background="@drawable/bg_button_purple_outline" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
-            style="@style/ButtonMes.Green"
+            style="@style/ButtonMes"
             android:layout_marginLeft="50dp"
             android:minWidth="70dp"
             android:text="@string/accept"

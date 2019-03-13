@@ -23,7 +23,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
-import static junit.framework.Assert.assertNotNull;
 
 public class MaterialBarcodeScannerActivity extends AppCompatActivity {
 
@@ -71,7 +70,6 @@ public class MaterialBarcodeScannerActivity extends AppCompatActivity {
 
     private void setupLayout() {
         final TextView topTextView = (TextView) findViewById(R.id.topText);
-        assertNotNull(topTextView);
         String topText = mMaterialBarcodeScannerBuilder.getText();
         if(!mMaterialBarcodeScannerBuilder.getText().equals("")){
             topTextView.setText(topText);
@@ -103,7 +101,6 @@ public class MaterialBarcodeScannerActivity extends AppCompatActivity {
     private void setupButtons() {
         final LinearLayout flashOnButton = (LinearLayout)findViewById(R.id.flashIconButton);
         final ImageView flashToggleIcon = (ImageView)findViewById(R.id.flashIcon);
-        assertNotNull(flashOnButton);
         flashOnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

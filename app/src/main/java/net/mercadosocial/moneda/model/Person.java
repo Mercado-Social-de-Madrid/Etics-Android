@@ -16,8 +16,13 @@ public class Person {
     private String email;
     private String surname;
     private String profile_image;
+    private String profile_thumbnail;
     private String address;
     private List<String> fav_entities;
+    private String city;
+    private boolean is_guest_account;
+    private String expiration_date;
+
 
     private transient String pin_code;
     private transient String pin_codeRepeat;
@@ -72,6 +77,10 @@ public class Person {
         return ApiClient.BASE_URL + profile_image;
     }
 
+    public String getProfile_thumbnail() {
+        return ApiClient.BASE_URL + profile_thumbnail;
+    }
+
     public void setProfile_image(String profile_image) {
         this.profile_image = profile_image;
     }
@@ -114,5 +123,37 @@ public class Person {
 
     public void setFav_entities(List<String> fav_entities) {
         this.fav_entities = fav_entities;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getExpiration_date() {
+//        if (true) {
+//            return "20/05/2019";
+//        }
+        return expiration_date;
+    }
+
+    public void setExpiration_date(String expiration_date) {
+        this.expiration_date = expiration_date;
+    }
+
+    public boolean is_guest_account() {
+        return is_guest_account;
+    }
+
+    public void setIs_guest_account(boolean is_guest_account) {
+        this.is_guest_account = is_guest_account;
+    }
+
+
+    public void setProfile_thumbnail(String profile_thumbnail) {
+        this.profile_thumbnail = profile_thumbnail;
     }
 }

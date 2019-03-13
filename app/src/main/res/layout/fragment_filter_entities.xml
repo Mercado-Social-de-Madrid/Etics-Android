@@ -41,8 +41,8 @@
 
             <View
                 style="@style/SeparatorHorizontal.Grey"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 style="@style/TextBase"

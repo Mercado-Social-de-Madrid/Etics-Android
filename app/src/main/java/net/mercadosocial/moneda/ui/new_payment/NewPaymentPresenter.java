@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -68,7 +69,23 @@ public class NewPaymentPresenter extends BasePresenter {
         } else {
             showSection(1);
         }
+
+        checkIntentUriReceived(intent);
+
     }
+
+    private void checkIntentUriReceived(Intent intent) {
+
+        String appLinkAction = intent.getAction();
+        Uri appLinkData = intent.getData();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String url = appLinkData.toString();
+            if (url.contains(App.URL_QR_ENTITY)) {
+                view.onQRScanned(url);
+            }
+        }
+    }
+
 
     public void onResume() {
 

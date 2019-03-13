@@ -76,6 +76,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private NoveltiesFragment noveltiesFragment;
     private int currentSection = -1;
     private TextView btnGoToProfile;
+    private NavigationView navigationView;
+    private MenuItem menuItemInvitations;
+    private TextView tvMES;
+    private TextView tvGuestInfo;
 
     private void findViews() {
 
@@ -83,22 +87,27 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         bottomNavView = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
         bottomNavView.setOnNavigationItemSelectedListener(this);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         btnLogin = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
         btnSignup = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_singup);
         tvUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_user_name);
+        tvMES = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_mes);
+        tvGuestInfo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_guest_info);
         viewEnterButtons = navigationView.getHeaderView(0).findViewById(R.id.view_enter_buttons);
         viewUserInfo = navigationView.getHeaderView(0).findViewById(R.id.view_user_info);
         btnLogout = navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         imgAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         btnGoToProfile = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
 
+        menuItemInvitations = navigationView.getMenu().findItem(R.id.menuItem_invitations);
+
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         btnGoToProfile.setOnClickListener(this);
+        viewUserInfo.setOnClickListener(this);
 
     }
 
@@ -474,7 +483,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                loginDialog.setAvoidDismiss(true);
 //                loginDialog.show(getSupportFragmentManager(), null);
 
-                drawerLayout.closeDrawer(Gravity.LEFT);
                 startActivity(new Intent(this, LoginActivity.class));
 
                 break;
@@ -488,9 +496,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.btn_go_to_profile:
+            case R.id.view_user_info:
                 startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
                 break;
         }
+
+        drawerLayout.closeDrawer(Gravity.LEFT);
     }
 
     @Override
@@ -529,7 +540,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         viewUserInfo.setVisibility(userData == null ? View.GONE : View.VISIBLE);
 
         if (userData != null) {
-            tvUserName.setText(userData.getName());
+            tvUserName.setText(userData.getName(true));
             String logoUrl = userData.getLogoThumbnail();
             Picasso.with(this)
                     .load(logoUrl)
@@ -537,6 +548,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .transform(new CircleTransform())
                     .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
+
+            showInvitationMenuItem(true);
+
+            tvMES.setText(String.format(getString(R.string.mes_format), userData.getCity()));
+            if (!userData.isEntity()) {
+                if (userData.getPerson().is_guest_account()) {
+                    tvGuestInfo.setText(String.format(getString(R.string.guest_account_info_format), userData.getPerson().getExpiration_date()));
+                }
+            }
 
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar_2);
@@ -546,7 +566,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     baseFragment.refreshData();
                 }
             }
+
+            showInvitationMenuItem(false);
         }
+
+    }
+
+    private void showInvitationMenuItem(boolean show) {
+        menuItemInvitations.setVisible(show);
     }
 
     @Override

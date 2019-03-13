@@ -12,7 +12,6 @@
         android:layout_height="120dp"
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
-        android:alpha="1"
         android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@mipmap/img_entitiy_example2"/>

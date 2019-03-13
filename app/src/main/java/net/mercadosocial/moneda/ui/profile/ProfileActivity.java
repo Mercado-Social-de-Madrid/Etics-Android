@@ -12,8 +12,10 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.util.WindowUtils;
+import net.mercadosocial.moneda.views.CircleTransform;
 
 public class ProfileActivity extends BaseActivity implements View.OnClickListener, ProfileView {
 
@@ -94,8 +96,26 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 .load(person.getProfile_image())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)
+                .transform(new CircleTransform())
                 .into(imgProfile);
 
     }
 
+    @Override
+    public void showEntityInfo(Entity entity) {
+
+        editNamePerson.setText(entity.getName());
+        editNif.setText(entity.getCif());
+
+        editNamePerson.setEnabled(false);
+        editSurnamesPerson.setVisibility(View.GONE);
+        btnSaveProfile.setVisibility(View.GONE);
+
+        Picasso.with(this)
+                .load(entity.getLogoThumbnailOrCover())
+                .placeholder(R.mipmap.ic_avatar_2)
+                .error(R.mipmap.ic_avatar_2)
+                .transform(new CircleTransform())
+                .into(imgProfile);
+    }
 }

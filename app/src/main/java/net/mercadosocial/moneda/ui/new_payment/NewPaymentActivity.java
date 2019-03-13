@@ -120,6 +120,11 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
         selectIndicator(step);
     }
 
+    @Override
+    public void onQRScanned(String url) {
+            fragmentStep1.onQRScanned(url);
+    }
+
     private void selectIndicator(int step) {
         for (int i = 0; i < stepsViews.length; i++) {
             View stepsView = stepsViews[i];

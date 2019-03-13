@@ -1,6 +1,9 @@
 package net.mercadosocial.moneda.api.response;
 
+import android.text.TextUtils;
+
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Person;
 
 /**
@@ -18,11 +21,11 @@ public class Data {
     // ---
     private String username;
 
-    public String getName() {
+    public String getName(boolean withSurnamesPerson) {
         if (entity != null) {
             return entity.getName();
         } else {
-            return person.getName();
+            return person.getName() + (withSurnamesPerson ? " " + person.getSurname() : "");
         }
     }
 
@@ -30,7 +33,22 @@ public class Data {
         if (entity != null) {
             return entity.getLogoThumbnail();
         } else {
-            return person.getProfile_image();
+            return person.getProfile_thumbnail();
+        }
+    }
+
+    public String getCity() {
+        String cityCode = "";
+        if (entity != null) {
+            cityCode = entity.getCity();
+        } else {
+            cityCode = person.getCity();
+        }
+
+        if (!TextUtils.isEmpty(cityCode)) {
+            return MES.mesList.get(MES.getMESPositionByCode(cityCode)).getName();
+        } else {
+            return null;
         }
     }
 
@@ -83,4 +101,5 @@ public class Data {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }

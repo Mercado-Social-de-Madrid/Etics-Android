@@ -1,9 +1,10 @@
 package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
@@ -93,7 +94,20 @@ import es.dmoral.toasty.Toasty;
          return (NewPaymentPresenter) ((NewPaymentActivity) context).getBasePresenter();
      }
 
-    public void onIdScanned(String id) {
+    public void onQRScanned(String urlId) {
+
+        if (!urlId.contains(App.URL_QR_ENTITY)) {
+            view.toast(R.string.invalid_link);
+            return;
+        }
+
+        Uri uri = Uri.parse(urlId);
+        if (uri == null) {
+            view.toast(R.string.invalid_link);
+            return;
+        }
+
+        String id = uri.getLastPathSegment();
 
         view.setRefreshing(true);
 
@@ -114,12 +128,9 @@ import es.dmoral.toasty.Toasty;
         new AlertDialog.Builder(context)
                 .setTitle(entity.getName())
                 .setMessage(String.format(context.getString(R.string.entity_recognized_message), entity.getName()))
-                .setPositiveButton(R.string.continue_str, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        entitySelected = entity;
-                        getNewPaymentPresenter().onRecipientSelected(entitySelected);
-                    }
+                .setPositiveButton(R.string.continue_str, (dialog, which) -> {
+                    entitySelected = entity;
+                    getNewPaymentPresenter().onRecipientSelected(entitySelected);
                 })
                 .setNeutralButton(R.string.back, null)
                 .show();

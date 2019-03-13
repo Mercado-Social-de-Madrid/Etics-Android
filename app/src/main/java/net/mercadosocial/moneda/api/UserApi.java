@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.api;
 
 
+import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.api.model.InvitationRequest;
 import net.mercadosocial.moneda.model.Person;
 
@@ -16,7 +17,7 @@ public interface UserApi {
     Observable<Response<Void>> updateFavourites(@Body Person profile);
 
 
-    @POST("invite/")
+    @POST(ApiClient.BASE_URL_TOOL + "invite/")
     Observable<Response<Void>> sendInvitation(@Body InvitationRequest invitationRequest);
 
 

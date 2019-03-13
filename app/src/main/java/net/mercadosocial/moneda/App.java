@@ -53,6 +53,7 @@ public class App extends MultiDexApplication {
     
     public static boolean isInForeground;
 
+    public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
 
     @Override
     public void onCreate() {

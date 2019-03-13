@@ -47,7 +47,7 @@ public class EntityInteractor extends BaseInteractor {
             return;
         }
 
-        int offset = pageApi * EntitiesApi.PAGE_LIMIT;
+        int offset = pageApi * EntitiesApi.PAGE_LIMIT_ENTITIES;
 
         String text = null;
         String categoriesIdsStr = null;

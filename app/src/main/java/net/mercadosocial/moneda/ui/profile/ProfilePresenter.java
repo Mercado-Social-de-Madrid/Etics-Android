@@ -46,12 +46,11 @@ public class ProfilePresenter extends BasePresenter {
     private void loadData() {
         Data data = App.getUserData(context);
         if (data.isEntity()) {
-            view.toast(R.string.entities_dont_edit_profile);
-            finish();
-            return;
+            view.showEntityInfo(data.getEntity());
+        } else {
+            view.showPersonProfile(data.getPerson());
         }
 
-        view.showPersonProfile(data.getPerson());
     }
 
 

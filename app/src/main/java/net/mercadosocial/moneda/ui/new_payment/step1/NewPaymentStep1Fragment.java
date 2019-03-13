@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
-import com.google.android.gms.vision.barcode.Barcode;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -35,6 +34,7 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     private NewPaymentStep1Presenter presenter;
     private ProgressBar progressRecipients;
     private EntitiesPaymentAdapter adapter;
+    private String urlIdEntity;
 
 
     public NewPaymentStep1Fragment() {
@@ -71,6 +71,11 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
 
         presenter.onCreate();
 
+        if (urlIdEntity != null) {
+            presenter.onQRScanned(urlIdEntity);
+            urlIdEntity = null;
+        }
+
         return layout;
     }
 
@@ -97,17 +102,12 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
         final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
                 .withActivity(getActivity())
                 .withEnableAutoFocus(true)
-                .withBleepEnabled(true)
+                .withBleepEnabled(false)
                 .withBackfacingCamera()
                 .withText(getString(R.string.focus_qr_code_entity))
                 .withOnlyQRCodeScanning()
 //                .withCenterTracker()
-                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
-                    @Override
-                    public void onResult(Barcode barcode) {
-                        presenter.onIdScanned(barcode.rawValue);
-                    }
-                })
+                .withResultListener(barcode -> presenter.onQRScanned(barcode.rawValue))
                 .build();
         materialBarcodeScanner.startScan();
     }
@@ -126,6 +126,14 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     @Override
     public void onItemClick(View view, int position) {
         presenter.onEntityItemClick(position);
+    }
+
+    public void onQRScanned(String url) {
+        if (presenter == null) {
+            urlIdEntity = url;
+        } else {
+            presenter.onQRScanned(url);
+        }
     }
 
     // PRESENTER CALLBACKS

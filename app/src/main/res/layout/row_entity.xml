@@ -35,8 +35,7 @@
             android:textSize="20sp"
             android:text="Fabricantes de sueños"
             android:textStyle="bold"
-            android:fontFamily="@font/comfortaa_bold"
-            android:lineSpacingMultiplier="0.8"/>
+            android:fontFamily="@font/comfortaa_bold"/>
 
         <TextView
             android:id="@+id/tv_entity_category"
