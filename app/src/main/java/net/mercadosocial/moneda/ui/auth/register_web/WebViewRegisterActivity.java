@@ -105,14 +105,14 @@ public class WebViewRegisterActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (webView.canGoBack()) {
+//            webView.goBack();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
