@@ -32,7 +32,7 @@ public class RotativeImageView extends AppCompatImageView {
 //        rotateAnim.setInterpolator(new CycleInterpolator(1f));
 //        rotateAnim.setInterpolator(new LinearOutSlowInInterpolator());
         rotateAnim.setRepeatCount(Animation.INFINITE);
-        rotateAnim.setDuration(3000);
+        rotateAnim.setDuration(1000);
 
         setVisibility(View.INVISIBLE);
         setAdjustViewBounds(true);

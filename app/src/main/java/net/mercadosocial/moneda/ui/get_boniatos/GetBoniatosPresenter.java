@@ -76,7 +76,7 @@ public class GetBoniatosPresenter extends BasePresenter {
             @Override
             public void onResponse(String url) {
 
-                view.showUrlPayment(url.replace("http", "https") + "?from_app=true");
+                view.showUrlPayment(url.replace("http://", "https://") + "?from_app=true");
 //                showPurchaseSuccessDialog(amount);
             }
 
