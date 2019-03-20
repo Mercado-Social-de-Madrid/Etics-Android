@@ -20,7 +20,7 @@ public class Person {
     private String address;
     private List<String> fav_entities;
     private String city;
-    private boolean is_guest_account;
+    private Boolean is_guest_account;
     private String expiration_date;
 
 
@@ -145,7 +145,7 @@ public class Person {
     }
 
     public boolean is_guest_account() {
-        return is_guest_account;
+        return is_guest_account == null ? false : is_guest_account;
     }
 
     public void setIs_guest_account(boolean is_guest_account) {

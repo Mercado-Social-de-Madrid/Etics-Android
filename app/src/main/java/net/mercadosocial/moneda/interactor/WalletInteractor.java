@@ -6,6 +6,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.WalletApi;
 import net.mercadosocial.moneda.api.model.Purchase;
 import net.mercadosocial.moneda.api.response.ApiError;
+import net.mercadosocial.moneda.api.response.PurchaseResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Wallet;
@@ -74,7 +75,7 @@ public class WalletInteractor extends BaseInteractor {
 
     }
 
-    public void purchaseCurrency(Float amount, final BaseApiPOSTCallback callback) {
+    public void purchaseCurrency(Float amount, final BaseApiCallback<String> callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
@@ -85,7 +86,7 @@ public class WalletInteractor extends BaseInteractor {
 
         getApi().purchaseCurrency(purchase)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<Void>>() {
+                .subscribe(new Observer<Response<PurchaseResponse>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -97,7 +98,7 @@ public class WalletInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<Void> response) {
+                    public void onNext(Response<PurchaseResponse> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -105,7 +106,7 @@ public class WalletInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onSuccess(null);
+                        callback.onResponse(response.body().getUrl());
 
                     }
                 });

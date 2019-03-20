@@ -2,12 +2,15 @@ package net.mercadosocial.moneda.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -18,6 +21,7 @@ import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.model.Payment;
+import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 import java.util.List;
 
@@ -58,6 +62,7 @@ import java.util.List;
              intent.getExtras().clear();
          }
 
+         checkIntentUriReceived(intent);
 
 //         NumberFormat numberFormat = new DecimalFormat("0.##");
 //         String numb = numberFormat.format(3.455);
@@ -91,6 +96,40 @@ import java.util.List;
      }
 
 
+    private void checkIntentUriReceived(Intent intent) {
+
+        String appLinkAction = intent.getAction();
+        Uri appLinkData = intent.getData();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String url = appLinkData.toString();
+            if (url.contains(App.URL_QR_ENTITY)) {
+                if (App.getUserData(context) != null) {
+                    context.startActivity(NewPaymentPresenter.newNewPaymentActivityWithUrl(context, url));
+                } else {
+                    showNotLoggedDialog();
+                }
+            } else {
+                showWebLinkDialog(url);
+            }
+        }
+    }
+
+    private void showNotLoggedDialog() {
+        new AlertDialog.Builder(context)
+                .setMessage(R.string.not_logged_dialog_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.understood, null)
+                .show();
+    }
+
+    private void showWebLinkDialog(String url) {
+        new AlertDialog.Builder(context)
+                .setMessage(String.format(context.getString(R.string.web_link_dialog_message), url))
+                .setCancelable(false)
+                .setPositiveButton(R.string.open_link, (dialog, which) -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))))
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
 
     private void refreshPendingPayments() {
         new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {

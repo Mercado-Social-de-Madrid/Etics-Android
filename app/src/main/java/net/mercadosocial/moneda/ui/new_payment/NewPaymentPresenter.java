@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -28,6 +27,7 @@ import es.dmoral.toasty.Toasty;
 public class NewPaymentPresenter extends BasePresenter {
 
     private static final String EXTRA_ENTITY = "extra_id_entity";
+    private static final String EXTRA_URL_SCANNED = "extra_url_scanned";
 
     private final NewPaymentView view;
     private final PaymentInteractor paymentInteractor;
@@ -41,6 +41,15 @@ public class NewPaymentPresenter extends BasePresenter {
         Intent intent = new Intent(context, NewPaymentActivity.class);
         if (entity != null) {
             intent.putExtra(EXTRA_ENTITY, entity);
+        }
+        return intent;
+    }
+
+    public static Intent newNewPaymentActivityWithUrl(Context context, String urlScanned) {
+
+        Intent intent = new Intent(context, NewPaymentActivity.class);
+        if (urlScanned != null) {
+            intent.putExtra(EXTRA_URL_SCANNED, urlScanned);
         }
         return intent;
     }
@@ -66,24 +75,14 @@ public class NewPaymentPresenter extends BasePresenter {
         if (intent.hasExtra(EXTRA_ENTITY)) {
             entityPreselected = (Entity) intent.getSerializableExtra(EXTRA_ENTITY);
             onRecipientSelected(entityPreselected);
+        } else if (intent.hasExtra(EXTRA_URL_SCANNED)) {
+            String urlScanned = intent.getStringExtra(EXTRA_URL_SCANNED);
+            view.onQRScanned(urlScanned);
         } else {
             showSection(1);
         }
 
-        checkIntentUriReceived(intent);
 
-    }
-
-    private void checkIntentUriReceived(Intent intent) {
-
-        String appLinkAction = intent.getAction();
-        Uri appLinkData = intent.getData();
-        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
-            String url = appLinkData.toString();
-            if (url.contains(App.URL_QR_ENTITY)) {
-                view.onQRScanned(url);
-            }
-        }
     }
 
 
@@ -140,6 +139,7 @@ public class NewPaymentPresenter extends BasePresenter {
     private void showSection(Integer section) {
         currentSection = section;
         view.showSection(section);
+        view.showTitle(section == 1 ? getString(R.string.new_payment) : getString(R.string.new_payment_to) + " " + selectedEntity.getName());
     }
 
     public void onConfirmPayment(String pin) {
@@ -195,7 +195,7 @@ public class NewPaymentPresenter extends BasePresenter {
     public void onBackPressed() {
         if (currentSection > 1) {
             currentSection--;
-            view.showSection(currentSection);
+            showSection(currentSection);
         } else {
             showConfirmExitDialog();
         }

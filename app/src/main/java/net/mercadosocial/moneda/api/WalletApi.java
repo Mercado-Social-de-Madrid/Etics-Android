@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.api;
 
 
 import net.mercadosocial.moneda.api.model.Purchase;
+import net.mercadosocial.moneda.api.response.PurchaseResponse;
 import net.mercadosocial.moneda.model.Wallet;
 
 import retrofit2.Response;
@@ -16,6 +17,6 @@ public interface WalletApi {
     Observable<Response<Wallet>> getWallet();
 
     @POST("wallet/purchase/")
-    Observable<Response<Void>> purchaseCurrency(@Body Purchase purchase);
+    Observable<Response<PurchaseResponse>> purchaseCurrency(@Body Purchase purchase);
 
 }

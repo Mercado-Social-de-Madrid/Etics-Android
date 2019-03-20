@@ -8,4 +8,5 @@ import net.mercadosocial.moneda.base.BaseView;
 
 public interface GetBoniatosView extends BaseView {
 
+    void showUrlPayment(String url);
 }

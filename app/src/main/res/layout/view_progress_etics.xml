@@ -4,10 +4,10 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/img_etics_rotatitve"
+        android:id="@+id/img_mes_rotatitve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@mipmap/ic_logo_etics"/>
+        android:src="@mipmap/ic_app_mes_only_circle"/>
 
 </RelativeLayout>

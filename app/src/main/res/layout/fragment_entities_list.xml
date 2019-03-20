@@ -40,6 +40,10 @@
             app:layout_moreProgress="@layout/view_more_progress"
             app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"/>
 
+        <net.mercadosocial.moneda.views.RotativeImageView
+            style="@style/ProgressMES"
+            android:layout_centerInParent="true"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"

@@ -125,6 +125,11 @@ public class NewPaymentActivity extends BaseActivity implements NewPaymentView, 
             fragmentStep1.onQRScanned(url);
     }
 
+    @Override
+    public void showTitle(String title) {
+        setToolbarTitle(title);
+    }
+
     private void selectIndicator(int step) {
         for (int i = 0; i < stepsViews.length; i++) {
             View stepsView = stepsViews[i];

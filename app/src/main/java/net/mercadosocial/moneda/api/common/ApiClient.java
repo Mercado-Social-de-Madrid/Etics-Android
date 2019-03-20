@@ -91,7 +91,7 @@ public class ApiClient {
     private static okhttp3.OkHttpClient getOkHttpClient() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         okhttp3.Interceptor headersInterceptor = new okhttp3.Interceptor() {
             @Override
@@ -136,39 +136,6 @@ public class ApiClient {
         };
 
 
-        // Create a trust manager that does not validate certificate chains
-//        final TrustManager[] trustAllCerts = new TrustManager[] {
-//                new X509TrustManager() {
-//                    @Override
-//                    public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-//                    }
-//
-//
-//                    @Override
-//                    public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-//                    }
-//
-//                    @Override
-//                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-//                        return new java.security.cert.X509Certificate[]{};
-//                    }
-//                }
-//        };
-//
-//        // Install the all-trusting trust manager
-//        SSLContext sslContext = null;
-//        try {
-//            sslContext = SSLContext.getInstance("SSL");
-//            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Create an ssl socket factory with our all-trusting manager
-//        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-
-
-
         okhttp3.OkHttpClient client = new okhttp3.OkHttpClient().newBuilder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(headersInterceptor)
@@ -189,87 +156,4 @@ public class ApiClient {
 
     }
 
-    public static void clearInstance() {
-        sharedInstance = null;
-    }
-
-//    private static OkHttpClient getSSLClient(Context context) {
-//
-//
-//        SchemeRegistry schemeRegistry = new SchemeRegistry();
-//        schemeRegistry.register(new Scheme("http", PlainSocketFactory
-//                .getSocketFactory(), 80));
-//        schemeRegistry.register(new Scheme("https", new EasySSLSocketFactory(),
-//                443));
-//
-//        HttpParams params = new BasicHttpParams();
-//        params.setParameter(ConnManagerPNames.MAX_TOTAL_CONNECTIONS, 30);
-//        params.setParameter(ConnManagerPNames.MAX_CONNECTIONS_PER_ROUTE,
-//                new ConnPerRouteBean(30));
-//        params.setParameter(HttpProtocolParams.USE_EXPECT_CONTINUE, false);
-//        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-//
-//        ClientConnectionManager cm = new SingleClientConnManager(params,
-//                schemeRegistry);
-//        DefaultHttpClient httpClient = new DefaultHttpClient(cm, params);
-//
-//        OkHttpClient client = new OkHttpClient();
-//
-//        return null;
-//
-//    }
-//
-//
-//    private static OkHttpClient getSSLClientTrusted(Context context) {
-//
-//        try {
-//            OkHttpClient client = new OkHttpClient();
-//            KeyStore keyStore = readKeyStore(context); //your method to obtain KeyStore
-//
-//            SSLContext sslContext = SSLContext.getInstance("SSL");
-//
-//            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-//            trustManagerFactory.init(keyStore);
-//            KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-//            keyManagerFactory.init(keyStore, "keystore_pass".toCharArray());
-//            sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
-//            client.setSslSocketFactory(sslContext.getSocketFactory());
-//
-//            return client;
-//
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (UnrecoverableKeyException e) {
-//            e.printStackTrace();
-//        } catch (KeyStoreException e) {
-//            e.printStackTrace();
-//        } catch (KeyManagementException e) {
-//            e.printStackTrace();
-//        } catch (CertificateException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        throw new RuntimeException("Unable to configure SSL client");
-//
-//    }
-//
-//    static KeyStore readKeyStore(Context context) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
-//        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-//
-//        // get user password and file input stream
-//        char[] password = getPassword();
-//
-//        FileInputStream fis = null;
-//        try {
-//            fis = context.getResources().openRawResource(R.raw.your_keystore_filename);
-//            ks.load(fis, password);
-//        } finally {
-//            if (fis != null) {
-//                fis.close();
-//            }
-//        }
-//        return ks;
-//    }
 }

@@ -322,7 +322,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 showFragment(1);
                 return true;
             case R.id.navigation_profile:
-                setToolbarTitle(R.string.news);
+                setToolbarTitle(R.string.highlighted);
                 showFragment(2);
                 return true;
 
@@ -549,7 +549,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
 
-            showInvitationMenuItem(true);
+            showInvitationMenuItem(userData.getPerson() != null && !userData.getPerson().is_guest_account());
 
             tvMES.setText(String.format(getString(R.string.mes_format), userData.getCity()));
             if (!userData.isEntity()) {

@@ -28,7 +28,7 @@ public class ProgressView extends FrameLayout {
         super(context, attrs, defStyle);
 
         View layout = View.inflate(getContext(), R.layout.view_progress_etics, null);
-        imgEticsRotative = layout.findViewById(R.id.img_etics_rotatitve);
+        imgEticsRotative = layout.findViewById(R.id.img_mes_rotatitve);
 
         rotateAnim = new RotateAnimation(360.0f, 0f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
@@ -41,6 +41,8 @@ public class ProgressView extends FrameLayout {
 
         setVisibility(View.INVISIBLE);
         isShowing = false;
+
+        show();
     }
 
 

@@ -114,7 +114,7 @@ public class EntitiesPresenter extends BasePresenter {
         entities.clear();
         currentApiPage = 0;
 
-        view.setRefreshing(true);
+//        view.setRefreshing(true);
         refreshEntities();
 
     }

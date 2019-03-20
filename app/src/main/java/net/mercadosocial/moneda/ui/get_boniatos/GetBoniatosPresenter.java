@@ -1,7 +1,6 @@
 package net.mercadosocial.moneda.ui.get_boniatos;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 
@@ -21,6 +20,7 @@ import es.dmoral.toasty.Toasty;
 public class GetBoniatosPresenter extends BasePresenter {
 
     private final GetBoniatosView view;
+    private Float amount;
 
     public static Intent newGetBoniatosActivity(Context context) {
 
@@ -68,14 +68,17 @@ public class GetBoniatosPresenter extends BasePresenter {
 
     private void purchase(final Float amount) {
 
+        this.amount = amount;
+
         view.setRefreshing(true);
-        new WalletInteractor(context, view).purchaseCurrency(amount, new BaseInteractor.BaseApiPOSTCallback() {
+        new WalletInteractor(context, view).purchaseCurrency(amount, new BaseInteractor.BaseApiCallback<String>() {
+
             @Override
-            public void onSuccess(Integer id) {
+            public void onResponse(String url) {
 
-                showPurchaseSuccessDialog(amount);
+                view.showUrlPayment(url.replace("http", "https") + "?from_app=true");
+//                showPurchaseSuccessDialog(amount);
             }
-
 
             @Override
             public void onError(String message) {
@@ -85,18 +88,13 @@ public class GetBoniatosPresenter extends BasePresenter {
         });
     }
 
-    private void showPurchaseSuccessDialog(Float amount) {
+    public void showPurchaseSuccessDialog() {
         new AlertDialog.Builder(context)
                 .setTitle(R.string.congratulations)
 //                .setIcon(R.mipmap.img_happy_face)
                 .setMessage(String.format(context.getString(R.string.purchase_success_message),
                         Util.getDecimalFormatted(amount, false)))
-                .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
+                .setNegativeButton(R.string.back, (dialog, which) -> finish())
                 .show();
     }
 }

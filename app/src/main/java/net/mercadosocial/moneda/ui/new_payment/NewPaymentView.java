@@ -11,4 +11,6 @@ public interface NewPaymentView extends BaseView {
     void showSection(int section);
 
     void onQRScanned(String url);
+
+    void showTitle(String title);
 }

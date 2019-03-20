@@ -132,7 +132,7 @@ import es.dmoral.toasty.Toasty;
                     entitySelected = entity;
                     getNewPaymentPresenter().onRecipientSelected(entitySelected);
                 })
-                .setNeutralButton(R.string.back, null)
+                .setNeutralButton(R.string.back, (dialog, which) -> finish())
                 .show();
     }
 }

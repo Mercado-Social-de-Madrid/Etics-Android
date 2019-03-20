@@ -316,5 +316,21 @@
     <string name="transactions_empty_message">Todavía no tienes movimientos en etics para mostrar.</string>
     <string name="mes_format">Mercado: %s</string>
     <string name="guest_account_info_format">Cuenta invitada.\nVálida hasta: %s</string>
+    <string name="invitation_code_text">Ahora puedes registrarte como invitada y probar gratuitamente el sistema de bonificaciones éticas durante un tiempo limitado. Introduce aquí el código de invitada:</string>
+    <string name="invited_customer">Consumidora invitada</string>
+    <string name="customer">Consumidora</string>
+    <string name="invitation_code_text_short">Introduce el código \"consumeconsciente\" para probar el sistema de bonificaciones éticas gratuitamente</string>
+    <string name="invitation_code">Código de invitación</string>
+    <string name="complete_register">Completar registro</string>
+    <string name="enter_code">Introduce el código</string>
+    <string name="how_many_etics">¿Cuantos etics quieres?</string>
+    <string name="purchase_payment_text">Introduce tus datos de pago. La transacción es segura, a través de Redsys.</string>
+    <string name="not_logged_dialog_message">Para hacer un pago primero tienes que estar registrado en la aplicación</string>
+    <string name="go_to_main_screen">Ir a la pantalla principal</string>
+    <string name="open_link">Abrir link</string>
+    <string name="web_link_dialog_message">El siguiente enlace %s no corresponde a un enlace de pago válido para esta app. Intenta abrirlo en tu navegador móvil.</string>
+    <string name="understood">Entendido</string>
+    <string name="highlighted">Destacados</string>
+    <string name="new_payment_to">Nuevo pago a:</string>
 
 </resources>

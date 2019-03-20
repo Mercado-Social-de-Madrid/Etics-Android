@@ -18,6 +18,7 @@ import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.entities.EntityListener;
+import net.mercadosocial.moneda.views.RotativeImageView;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private SuperRecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
     private EntityListener entityListener;
+    private RotativeImageView progressMES;
 
 
     public EntitiesListFragment() {
@@ -39,6 +41,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
     private void findViews(View layout) {
         recyclerEntities = layout.findViewById(R.id.recycler_entities);
+        progressMES = layout.findViewById(R.id.progress_mes);
     }
 
     @Override
@@ -97,6 +100,12 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
         } else {
             adapter.updateData();
+        }
+
+        if (entities.isEmpty()) {
+            progressMES.show();
+        } else {
+            progressMES.hide();
         }
     }
 

@@ -34,7 +34,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
     private void findViews(View layout) {
         editSearchEntities = (EditText)layout.findViewById( R.id.edit_search_entities );
-        progressBarEntities = layout.findViewById(R.id.progress_entities);
+        progressBarEntities = layout.findViewById(R.id.progress_mes);
     }
 
 
@@ -76,6 +76,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
             presenter.onPause();
         }
     }
+
 
     @Override
     public void onMESCityChanged() {

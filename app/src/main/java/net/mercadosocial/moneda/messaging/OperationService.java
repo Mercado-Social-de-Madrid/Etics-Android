@@ -24,8 +24,8 @@ public class OperationService extends IntentService {
 
     private static final String TAG = "OperationService";
 
-    public static final String ACTION_ACCEPT_PAYMENT = "com.callforme.app.ACTION_ACCEPT_PAYMENT";
-    public static final String ACTION_REJECT_PAYMENT = "com.callforme.app.ACTION_REJECT_PAYMENT";
+    public static final String ACTION_ACCEPT_PAYMENT = "net.mercadosocial.moneda.ACTION_ACCEPT_PAYMENT";
+    public static final String ACTION_REJECT_PAYMENT = "net.mercadosocial.moneda.ACTION_REJECT_PAYMENT";
     private NotificationManager notificationManager;
     private PaymentInteractor paymentInteractor;
 

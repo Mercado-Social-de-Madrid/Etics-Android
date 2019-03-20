@@ -1,8 +1,10 @@
 package net.mercadosocial.moneda.ui.new_payment.step1;
 
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +19,20 @@ import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
 
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,9 +53,9 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
 
     private void findViews(View layout) {
 
-        recyclerRecipients = (RecyclerView)layout.findViewById( R.id.recycler_recipients );
+        recyclerRecipients = (RecyclerView) layout.findViewById(R.id.recycler_recipients);
         progressRecipients = (ProgressBar) layout.findViewById(R.id.progress_recipients);
-        btnContinue = (TextView)layout.findViewById( R.id.btn_continue );
+        btnContinue = (TextView) layout.findViewById(R.id.btn_continue);
 
         btnContinue.setOnClickListener(this);
 
@@ -90,11 +100,37 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
 
         switch (item.getItemId()) {
             case R.id.menuItem_scan_qr:
-                startScan();
+                checkPermissionAndStart();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkPermissionAndStart() {
+        Dexter.withActivity(getActivity())
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        startScan();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Toasty.warning(getActivity(), getString(R.string.permission_denied)).show();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage(R.string.need_access_camera)
+                                .setPositiveButton(R.string.go_ahead, (dialog, which) -> token.continuePermissionRequest())
+                                .setNegativeButton(R.string.cancel, (dialog, which) -> token.cancelPermissionRequest())
+                                .show();
+                    }
+                })
+                .check();
     }
 
     private void startScan() {

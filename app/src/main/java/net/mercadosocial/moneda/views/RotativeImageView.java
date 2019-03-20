@@ -5,7 +5,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.CycleInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
 public class RotativeImageView extends AppCompatImageView {
@@ -28,7 +28,8 @@ public class RotativeImageView extends AppCompatImageView {
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 
-        rotateAnim.setInterpolator(new CycleInterpolator(1f));
+        rotateAnim.setInterpolator(new LinearInterpolator());
+//        rotateAnim.setInterpolator(new CycleInterpolator(1f));
 //        rotateAnim.setInterpolator(new LinearOutSlowInInterpolator());
         rotateAnim.setRepeatCount(Animation.INFINITE);
         rotateAnim.setDuration(3000);
