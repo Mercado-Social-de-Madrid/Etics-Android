@@ -44,6 +44,7 @@ import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
+import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
@@ -554,7 +555,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             tvMES.setText(String.format(getString(R.string.mes_format), userData.getCity()));
             if (!userData.isEntity()) {
                 if (userData.getPerson().is_guest_account()) {
-                    tvGuestInfo.setText(String.format(getString(R.string.guest_account_info_format), userData.getPerson().getExpiration_date()));
+                    String dateFormatted = DateUtils.convertDateApiToUserFormat(userData.getPerson().getExpiration_date());
+                    tvGuestInfo.setText(String.format(getString(R.string.guest_account_info_format), dateFormatted));
                 }
             }
 

@@ -41,7 +41,7 @@ public class Offer implements Serializable, Novelty {
 
     public String getPublishedDateFormatted() {
         try {
-            return formatDatetimeUser.format(formatDatetimeApi.parse(getPublished_date()));
+            return formatDateUser.format(formatDatetimeApi.parse(getPublished_date()));
         } catch (ParseException e) {
             return getEnd_date();
         }

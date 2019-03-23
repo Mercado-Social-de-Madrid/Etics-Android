@@ -92,6 +92,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         editSurnamesPerson.setText(person.getSurname());
         editNif.setText(person.getNif());
 
+        if (person.is_guest_account()) {
+            editNif.setVisibility(View.GONE);
+        }
+
         Picasso.with(this)
                 .load(person.getProfile_image())
                 .placeholder(R.mipmap.ic_avatar_2)

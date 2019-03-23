@@ -32,7 +32,7 @@ public class News implements Serializable, Novelty {
 
     private String getDateFormatted() {
         try {
-            return formatDatetimeUser.format(formatDatetimeApi.parse(published_date));
+            return formatDateUser.format(formatDatetimeApi.parse(published_date));
         } catch (ParseException e) {
             return published_date;
         }
