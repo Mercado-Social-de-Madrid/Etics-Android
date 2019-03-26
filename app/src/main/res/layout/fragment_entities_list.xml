@@ -44,6 +44,31 @@
             style="@style/ProgressMES"
             android:layout_centerInParent="true"/>
 
+        <LinearLayout
+            android:id="@+id/view_empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:tint="@color/grey"
+                android:src="@mipmap/ic_entity_not_found"/>
+
+            <TextView
+                style="@style/TextBase"
+                android:layout_width="200dp"
+                android:textColor="@color/grey"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="@string/empty_state_text_entities"/>
+
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"

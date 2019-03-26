@@ -33,6 +33,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private EntitiesAdapter adapter;
     private EntityListener entityListener;
     private RotativeImageView progressMES;
+    private View viewEmptyList;
 
 
     public EntitiesListFragment() {
@@ -42,6 +43,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private void findViews(View layout) {
         recyclerEntities = layout.findViewById(R.id.recycler_entities);
         progressMES = layout.findViewById(R.id.progress_mes);
+        viewEmptyList = layout.findViewById(R.id.view_empty_list);
     }
 
     @Override
@@ -79,7 +81,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     public void updateData() {
 
         boolean hasMore = getEntitiesPresenter().hasMore();
-        showEntities(getEntitiesPresenter().getEntities());
+        showEntities(getEntitiesPresenter().getEntities(), getEntitiesPresenter().isRefreshing());
 
         if (hasMore) {
             recyclerEntities.setupMoreListener(this, NUMBER_ITEM_ASK_MORE);
@@ -88,7 +90,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         }
     }
 
-    public void showEntities(List<Entity> entities) {
+    public void showEntities(List<Entity> entities, boolean refreshing) {
 
 
         if (adapter == null) {
@@ -102,10 +104,13 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
             adapter.updateData();
         }
 
-        if (entities.isEmpty()) {
+        if (refreshing) {
             progressMES.show();
+            viewEmptyList.setVisibility(View.GONE);
+
         } else {
             progressMES.hide();
+            viewEmptyList.setVisibility(entities.isEmpty() ? View.VISIBLE : View.GONE);
         }
     }
 

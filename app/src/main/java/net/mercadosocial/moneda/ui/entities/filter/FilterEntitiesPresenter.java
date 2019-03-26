@@ -74,7 +74,12 @@ public class FilterEntitiesPresenter extends BasePresenter {
                 categoriesIds.add(category.getId());
             }
         }
+
         filterEntities.setCategoriesIds(categoriesIds);
+
+        if (categoriesIds.size() == categories.size()) {
+            filterEntities.getCategoriesIds().clear();
+        }
 
         filterEntities.setOnlyFavourites(onlyFavs);
 

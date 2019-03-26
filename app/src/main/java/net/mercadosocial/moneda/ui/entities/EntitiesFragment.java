@@ -145,7 +145,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     @Override
     public void updateData() {
         EntitiesChildView entitiesChildView = (EntitiesChildView) getChildFragmentManager().findFragmentById(R.id.frame_entities);
-        entitiesChildView.updateData();
+        if (entitiesChildView != null) {
+            entitiesChildView.updateData();
+        }
     }
 
 

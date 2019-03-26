@@ -332,5 +332,6 @@
     <string name="understood">Entendido</string>
     <string name="highlighted">Destacados</string>
     <string name="new_payment_to">Nuevo pago a:</string>
+    <string name="empty_state_text_entities">No se ha encontrado ninguna entidad con esos criterios de búsqueda…</string>
 
 </resources>

@@ -74,12 +74,12 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/btn_remove_filter"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:adjustViewBounds="true"
             android:background="@drawable/background_pressed_common"
-            android:src="@mipmap/ic_remove_filters" />
+            android:src="@mipmap/ic_remove_filters_thin" />
     </LinearLayout>
 
 </LinearLayout>

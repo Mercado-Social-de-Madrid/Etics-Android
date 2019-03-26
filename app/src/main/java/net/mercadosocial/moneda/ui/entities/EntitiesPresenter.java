@@ -38,6 +38,7 @@ public class EntitiesPresenter extends BasePresenter {
     public static final int SCREEN_ENTITIES_TYPE_MAP = 1;
 
     private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
+    private boolean refreshing;
 
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
@@ -128,11 +129,14 @@ public class EntitiesPresenter extends BasePresenter {
 
     private void refreshEntities() {
 
+        refreshing = true;
+        view.updateData();
         entityInteractor.getEntities(currentApiPage, filterEntities, new EntityInteractor.Callback() {
 
 
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
+                refreshing = false;
                 entities.addAll(entitiesApi);
                 processFavs();
 
@@ -143,6 +147,7 @@ public class EntitiesPresenter extends BasePresenter {
 
             @Override
             public void onError(String error) {
+                refreshing = false;
                 view.toast(error);
             }
         });
@@ -213,5 +218,9 @@ public class EntitiesPresenter extends BasePresenter {
     public void onMapListButtonClick() {
         currentScreen = currentScreen == SCREEN_ENTITIES_TYPE_LIST ? SCREEN_ENTITIES_TYPE_MAP : SCREEN_ENTITIES_TYPE_LIST;
         view.showScreenType(currentScreen);
+    }
+
+    public boolean isRefreshing() {
+        return refreshing;
     }
 }
