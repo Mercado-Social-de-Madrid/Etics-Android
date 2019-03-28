@@ -118,7 +118,8 @@
                 android:background="@color/purple"
                 android:padding="10dp"
                 android:text="@string/enter_pin_code"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
 
             <com.alimuzaffar.lib.pin.PinEntryEditText
                 android:id="@+id/edit_pin_entry"
@@ -136,7 +137,8 @@
                 app:pinBackgroundIsSquare="true"
                 app:pinCharacterMask="*"
                 app:pinLineStroke="2dp"
-                app:pinLineStrokeSelected="4dp" />
+                app:pinLineStrokeSelected="4dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

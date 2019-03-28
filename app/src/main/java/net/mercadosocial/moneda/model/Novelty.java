@@ -14,7 +14,7 @@ public interface Novelty extends Comparable {
     SimpleDateFormat   formatDatetimeApi = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS"); //2018-02-27T10:53:47.340816
     SimpleDateFormat formatDatetimeApi2 = new SimpleDateFormat("yyyy-MM-dd"); //2018-02-27
 //    SimpleDateFormat formatDatetimeUser = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-SimpleDateFormat formatDateUser = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatDateUser = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat formatDatetimeUser = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm");
 
     String getTitleNovelty();

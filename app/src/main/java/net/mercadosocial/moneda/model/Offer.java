@@ -25,7 +25,7 @@ public class Offer implements Serializable, Novelty {
 
     public String getBeginDateFormatted() {
         try {
-            return formatDatetimeUser.format(formatDatetimeApi2.parse(getBegin_date()));
+            return formatDateUser.format(formatDatetimeApi2.parse(getBegin_date()));
         } catch (ParseException e) {
             return getBegin_date();
         }
@@ -33,7 +33,7 @@ public class Offer implements Serializable, Novelty {
 
     public String getEndDateFormatted() {
         try {
-            return formatDatetimeUser.format(formatDatetimeApi2.parse(getEnd_date()));
+            return formatDateUser.format(formatDatetimeApi2.parse(getEnd_date()));
         } catch (ParseException e) {
             return getEnd_date();
         }
