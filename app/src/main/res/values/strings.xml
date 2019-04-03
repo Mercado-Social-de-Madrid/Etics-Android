@@ -269,8 +269,10 @@
     <string name="concept_two_dots">Concepto:</string>
     <string name="sent_payments_pending_check">Pagos enviados pendientes de revisión</string>
     <string name="sent_payments">Pagos enviados</string>
-    <string name="info_max_accept_percent">Máximo pago en &currency_name_plural;: es el máximo % de pago en &currency_name_plural; que acepta tu entidad. Recomendamos aceptar el 100%, ya que si se acumulan muchos &currency_name_plural;, las entidades pueden cambiar a euro en todo momento.</string>
-    <string name="info_bonus_percent">% bonificación general: el % de bonificación en &currency_name_plural; que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 &currency_name;.</string>
+    <string name="info_max_accept_percent">Máximo pago en &currency_name_plural;: es el máximo % de pago en &currency_name_plural;
+        que acepta tu entidad. Recomendamos aceptar el 100%, ya que si se acumulan muchos &currency_name_plural;, las entidades pueden cambiar a euro en todo momento.</string>
+    <string name="info_bonus_percent">% bonificación general: el % de bonificación en &currency_name_plural;
+        que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 &currency_name;.</string>
     <string name="info_bonus_percent_entities">% de bonificación a entidades: como es probable que las entidades hagan intercambios mayores, puedes elegir un % especial para las mismas en función de tus necesidades.</string>
     <string name="channel_name">Pagos y transacciones</string>
     <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural;
@@ -333,5 +335,13 @@
     <string name="highlighted">Destacados</string>
     <string name="new_payment_to">Nuevo pago a:</string>
     <string name="empty_state_text_entities">No se ha encontrado ninguna entidad con esos criterios de búsqueda…</string>
+    <string name="type">Tipo</string>
+    <string name="market">Mercado</string>
+    <string name="change_pin">Cambiar PIN</string>
+    <string name="change_pincode">Cambiar código PIN</string>
+    <string name="change_pincode_intro_text">Introduce tu nuevo código PIN</string>
+    <string name="change_pincode_intro_text_password">Por seguridad introduce tu contraseña de acceso a la aplicación</string>
+    <string name="consumer">Consumidora</string>
+    <string name="incorrect_password">Contraseña incorrecta</string>
 
 </resources>

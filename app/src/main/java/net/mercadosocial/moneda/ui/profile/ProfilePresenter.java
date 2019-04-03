@@ -12,6 +12,8 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.Person;
 
+import es.dmoral.toasty.Toasty;
+
 public class ProfilePresenter extends BasePresenter {
 
     private final ProfileView view;
@@ -58,18 +60,20 @@ public class ProfilePresenter extends BasePresenter {
 
         view.showProgressDialog(context.getString(R.string.saving));
         Person person = Person.createPersonProfileData(name, surname, nif);
+        person.setProfile_image(null);
+        person.setProfile_thumbnail(null);
         userInteractor.updateProfile(person, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
                 view.hideProgressDialog();
-                view.toast(R.string.profile_saved);
+                Toasty.success(context, getString(R.string.profile_saved)).show();
                 updateLocalData(person);
             }
 
             @Override
             public void onError(String message) {
                 view.hideProgressDialog();
-                view.toast(message);
+                Toasty.error(context, message).show();
 
             }
         });

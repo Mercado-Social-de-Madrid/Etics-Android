@@ -152,6 +152,10 @@ public class Entity implements Serializable {
         return images;
     }
 
+    public String getCityName() {
+        return MES.getMESNameByCode(getCity());
+    }
+
     // ------------------------------
 
     public String getAddress() {
@@ -400,4 +404,5 @@ public class Entity implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
+
 }

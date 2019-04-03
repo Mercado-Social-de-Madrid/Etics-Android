@@ -57,7 +57,9 @@
             style="@style/TextBase.Purple"
             android:text="@string/purchase_payment_text"
             android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"/>
 
         <net.mercadosocial.moneda.views.WebViewCustom
             android:id="@+id/webview_purchase"

@@ -112,33 +112,41 @@
 
             </LinearLayout>
 
-            <TextView
-                style="@style/TextBase.White"
+            <LinearLayout
+                android:id="@+id/view_pincode"
                 android:layout_width="match_parent"
-                android:background="@color/purple"
-                android:padding="10dp"
-                android:text="@string/enter_pin_code"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"/>
-
-            <com.alimuzaffar.lib.pin.PinEntryEditText
-                android:id="@+id/edit_pin_entry"
-                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:cursorVisible="false"
-                android:layout_marginTop="10dp"
-                android:digits="1234567890"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLength="4"
-                android:textIsSelectable="false"
-                android:textSize="20sp"
-                app:pinAnimationType="popIn"
-                app:pinBackgroundIsSquare="true"
-                app:pinCharacterMask="*"
-                app:pinLineStroke="2dp"
-                app:pinLineStrokeSelected="4dp"
-                android:visibility="gone"/>
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    style="@style/TextBase.White"
+                    android:layout_width="match_parent"
+                    android:background="@color/purple"
+                    android:padding="10dp"
+                    android:text="@string/enter_pin_code"
+                    android:visibility="visible"/>
+
+                <com.alimuzaffar.lib.pin.PinEntryEditText
+                    android:id="@+id/edit_pin_entry"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:layout_marginTop="10dp"
+                    android:digits="1234567890"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textIsSelectable="false"
+                    android:textSize="20sp"
+                    app:pinAnimationType="popIn"
+                    app:pinBackgroundIsSquare="true"
+                    app:pinCharacterMask="*"
+                    app:pinLineStroke="2dp"
+                    app:pinLineStrokeSelected="4dp"
+                    android:visibility="visible"/>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

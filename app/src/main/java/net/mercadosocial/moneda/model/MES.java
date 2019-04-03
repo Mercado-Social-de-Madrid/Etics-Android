@@ -33,6 +33,10 @@ public class MES {
         return -1;
     }
 
+    public static String getMESNameByCode(String codeMES) {
+        return mesList.get(getMESPositionByCode(codeMES)).getName();
+    }
+
     public String getName() {
         return name;
     }

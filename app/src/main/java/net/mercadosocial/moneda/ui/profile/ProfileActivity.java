@@ -1,12 +1,13 @@
 package net.mercadosocial.moneda.ui.profile;
 
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -14,6 +15,9 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
+import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
+import net.mercadosocial.moneda.ui.profile.pincode_change.PincodeChangePresenter;
+import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.WindowUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 
@@ -25,6 +29,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private EditText editNif;
     private Button btnSaveProfile;
     private ProfilePresenter presenter;
+    private TextView tvProfileType;
+    private TextView tvProfileMarket;
+    private LinearLayout btnChangePincode;
+    private LinearLayout btnInvitations;
+    private AppCompatButton btnLogout;
 
     private void findViews() {
         imgProfile = (AppCompatImageView) findViewById(R.id.img_profile);
@@ -32,10 +41,17 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         editSurnamesPerson = (EditText) findViewById(R.id.edit_surnames_person);
         editNif = (EditText) findViewById(R.id.edit_nif);
         btnSaveProfile = (Button) findViewById(R.id.btn_save_profile);
+        tvProfileType = (TextView) findViewById(R.id.tv_profile_type);
+        tvProfileMarket = (TextView) findViewById(R.id.tv_profile_market);
+        btnChangePincode = (LinearLayout) findViewById(R.id.btn_change_pincode);
+        btnInvitations = (LinearLayout) findViewById(R.id.btn_invitations);
+        btnLogout = (AppCompatButton) findViewById(R.id.btn_logout);
 
+        btnLogout.setOnClickListener(this);
         btnSaveProfile.setOnClickListener(this);
+        btnChangePincode.setOnClickListener(this);
+        btnInvitations.setOnClickListener(this);
     }
-
 
 
     @Override
@@ -51,23 +67,23 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_profile, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuItem_logout:
-                setResult(RESULT_OK);
-                finish();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.activity_profile, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menuItem_logout:
+//                setResult(RESULT_OK);
+//                finish();
+//                break;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onClick(View v) {
@@ -82,6 +98,20 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
                 break;
 
+            case R.id.btn_logout:
+                setResult(RESULT_OK);
+                finish();
+                break;
+
+            case R.id.btn_invitations:
+                InvitationsPresenter.launchInvitationsActivity(this);
+                break;
+
+            case R.id.btn_change_pincode:
+                PincodeChangePresenter.launchPincodeChangeActivity(this);
+                break;
+
+
         }
     }
 
@@ -91,9 +121,16 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         editNamePerson.setText(person.getName());
         editSurnamesPerson.setText(person.getSurname());
         editNif.setText(person.getNif());
+        tvProfileMarket.setText(person.getCityName());
 
         if (person.is_guest_account()) {
+
             editNif.setVisibility(View.GONE);
+
+            String dateFormatted = DateUtils.convertDateApiToUserFormat(person.getExpiration_date());
+            tvProfileType.setText(String.format(getString(R.string.guest_account_info_format), dateFormatted));
+        } else {
+           tvProfileType.setText(R.string.consumer);
         }
 
         Picasso.with(this)
@@ -110,6 +147,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
         editNamePerson.setText(entity.getName());
         editNif.setText(entity.getCif());
+        tvProfileMarket.setText(entity.getCityName());
+        tvProfileType.setText(R.string.entity);
 
         editNamePerson.setEnabled(false);
         editSurnamesPerson.setVisibility(View.GONE);

@@ -37,6 +37,12 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="EditTextWhiteBg" parent="TextBase">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
     <style name="EditTextAuth.PinCode" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/text_small_2</item>

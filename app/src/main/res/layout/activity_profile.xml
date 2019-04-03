@@ -19,53 +19,185 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/img_profile"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:adjustViewBounds="true"
-                app:srcCompat="@mipmap/ic_avatar_2"
-                android:layout_marginBottom="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:orientation="vertical">
 
-            <TextView
-                style="@style/TextBase.Purple"
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_marginBottom="20dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/ic_avatar_2" />
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:text="@string/type"
+                        android:textSize="@dimen/text_small_2" />
+
+                    <TextView
+                        android:id="@+id/tv_profile_type"
+                        style="@style/TextBase.Purple"
+                        android:layout_marginTop="3dp"
+                        android:text="Consumidora"
+                        android:textSize="@dimen/text_small_2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/market"
+                        android:textSize="@dimen/text_small_2" />
+
+                    <TextView
+                        android:id="@+id/tv_profile_market"
+                        style="@style/TextBase.Purple"
+                        android:layout_marginTop="3dp"
+                        android:text="Madrid"
+                        android:textSize="@dimen/text_small_2"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/edit_name_person"
+                            style="@style/EditTextWhiteBg"
+                            android:layout_marginTop="15dp"
+                            android:hint="@string/name"
+                            android:inputType="textCapWords" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:id="@+id/edit_surnames_person"
+                            style="@style/EditTextWhiteBg"
+                            android:hint="@string/surname"
+                            android:inputType="textCapWords" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:id="@+id/edit_nif"
+                            style="@style/EditTextWhiteBg"
+                            android:enabled="false"
+                            android:hint="@string/nif"
+                            android:inputType="textCapCharacters" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btn_save_profile"
+                        style="@style/ButtonMes"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:minWidth="0dp"
+                        android:text="@string/save" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <View style="@style/XpansorHoriz" />
+
+                <LinearLayout
+                    android:id="@+id/btn_change_pincode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_pincode_profile"
+                        app:tint="@color/purple" />
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:hint="@string/transactions"
+                        android:text="@string/change_pin" />
+                </LinearLayout>
+
+                <View style="@style/XpansorHoriz" />
+
+                <LinearLayout
+                    android:id="@+id/btn_invitations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_invitation_profile"
+                        app:tint="@color/purple" />
+
+                    <TextView
+                        style="@style/TextBase.Purple"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/invitations" />
+                </LinearLayout>
+
+                <View style="@style/XpansorHoriz" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_logout"
+                style="@style/ButtonMes.Green"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button_purple_outline"
+                android:minWidth="70dp"
+                android:text="@string/logout"
+                android:textAllCaps="false"
                 android:textSize="@dimen/text_medium"
-                android:text="@string/user_data"
-                android:layout_gravity="left"
-                android:textStyle="bold"
-                android:visibility="gone"/>
+                android:textStyle="normal"
+                android:layout_marginBottom="15dp"/>
 
-            <EditText
-                android:id="@+id/edit_name_person"
-                style="@style/EditTextAuth"
-                android:hint="@string/name"
-                android:inputType="textCapWords" />
-
-            <EditText
-                android:id="@+id/edit_surnames_person"
-                style="@style/EditTextAuth"
-                android:hint="@string/surname"
-                android:inputType="textCapWords" />
-
-            <EditText
-                android:id="@+id/edit_nif"
-                style="@style/EditTextAuth"
-                android:hint="@string/nif"
-                android:inputType="textCapCharacters"
-                android:enabled="false"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_save_profile"
-        style="@style/ButtonMes"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/save" />
 </LinearLayout>

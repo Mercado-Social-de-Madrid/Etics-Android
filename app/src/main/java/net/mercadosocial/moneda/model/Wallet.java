@@ -12,6 +12,7 @@ public class Wallet {
 
     private Float balance;
     private String id;
+    private Boolean has_pincode;
     private String last_transaction;
     private List<Transaction> transaction_logs;
 
@@ -52,4 +53,11 @@ public class Wallet {
         this.transaction_logs = transaction_logs;
     }
 
+    public boolean getHas_pincode() {
+        return has_pincode != null ? has_pincode : false;
+    }
+
+    public void setHas_pincode(Boolean has_pincode) {
+        this.has_pincode = has_pincode;
+    }
 }

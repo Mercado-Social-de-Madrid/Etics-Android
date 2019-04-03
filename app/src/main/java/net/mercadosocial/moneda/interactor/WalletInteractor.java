@@ -1,10 +1,12 @@
 package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.WalletApi;
 import net.mercadosocial.moneda.api.model.Purchase;
+import net.mercadosocial.moneda.api.model.ResetPincodeRequest;
 import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.api.response.PurchaseResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -107,6 +109,49 @@ public class WalletInteractor extends BaseInteractor {
                         }
 
                         callback.onResponse(response.body().getUrl());
+
+                    }
+                });
+
+
+    }
+
+    public void resetPincode(String pincode, String password, final BaseApiPOSTCallback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        ResetPincodeRequest resetPincodeRequest = new ResetPincodeRequest(pincode, password);
+
+        getApi().resetPincode(resetPincodeRequest)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            if (TextUtils.equals(apiError.getMessage(), "incorrect")) {
+                                callback.onError(context.getString(R.string.incorrect_password));
+                            } else {
+                                callback.onError(apiError.getMessage());
+                            }
+                            return;
+                        }
+
+                        callback.onSuccess(null);
 
                     }
                 });

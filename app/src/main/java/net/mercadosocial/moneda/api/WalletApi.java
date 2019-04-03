@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.api;
 
 
 import net.mercadosocial.moneda.api.model.Purchase;
+import net.mercadosocial.moneda.api.model.ResetPincodeRequest;
 import net.mercadosocial.moneda.api.response.PurchaseResponse;
 import net.mercadosocial.moneda.model.Wallet;
 
@@ -18,5 +19,8 @@ public interface WalletApi {
 
     @POST("wallet/purchase/")
     Observable<Response<PurchaseResponse>> purchaseCurrency(@Body Purchase purchase);
+
+    @POST("wallet/reset_pincode/")
+    Observable<Response<Void>> resetPincode(@Body ResetPincodeRequest resetPincodeRequest);
 
 }

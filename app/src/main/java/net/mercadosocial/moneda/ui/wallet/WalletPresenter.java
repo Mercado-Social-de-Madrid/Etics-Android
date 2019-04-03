@@ -114,6 +114,7 @@ public class WalletPresenter extends BasePresenter {
         walletInteractor.getWallet(new WalletInteractor.Callback() {
             @Override
             public void onResponse(Wallet wallet) {
+                getPrefs().edit().putBoolean(App.SHARED_HAS_PINCODE, wallet.getHas_pincode()).commit();
                 view.showWalletData(false, wallet);
             }
 

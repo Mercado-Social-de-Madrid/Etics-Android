@@ -50,6 +50,7 @@ public class App extends MultiDexApplication {
     public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
     public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
+    public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
     
     public static boolean isInForeground;
 
@@ -103,7 +104,6 @@ public class App extends MultiDexApplication {
         loadFirstTime();
 
         loadMESCity();
-
 
 
     }

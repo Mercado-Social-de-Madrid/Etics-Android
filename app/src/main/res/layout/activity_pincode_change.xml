@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/green_gradient"
+    android:orientation="vertical"
+    tools:context="net.mercadosocial.moneda.ui.profile.pincode_change.PincodeChangeActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_pincode_profile"
+            app:tint="@color/purple" />
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_marginTop="20dp"
+            android:text="@string/change_pincode_intro_text"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/edit_pin_entry"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            android:visibility="visible"
+            app:pinAnimationType="popIn"
+            app:pinBackgroundIsSquare="true"
+            app:pinCharacterMask="*"
+            app:pinLineStroke="2dp"
+            app:pinLineStrokeSelected="4dp" />
+
+        <TextView
+            style="@style/TextBase"
+            android:layout_marginTop="20dp"
+            android:text="@string/change_pincode_intro_text_password" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            style="@style/EditTextAuth"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            style="@style/ButtonMes"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:minWidth="0dp"
+            android:text="@string/save" />
+    </LinearLayout>
+</LinearLayout>

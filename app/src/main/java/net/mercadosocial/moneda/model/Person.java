@@ -41,6 +41,10 @@ public class Person {
         return person;
     }
 
+    public String getCityName() {
+        return MES.getMESNameByCode(getCity());
+    }
+
     public String getId() {
         return id;
     }

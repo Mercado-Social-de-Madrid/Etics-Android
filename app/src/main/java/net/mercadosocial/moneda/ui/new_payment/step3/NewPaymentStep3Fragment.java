@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.util.WindowUtils;
@@ -26,6 +27,7 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
     private TextView btnConfirmPayment;
     private NewPaymentStep3Presenter presenter;
     private TextView tvConcept;
+    private View viewPincode;
 
 
     public NewPaymentStep3Fragment() {
@@ -40,6 +42,7 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
         editPinEntry = (PinEntryEditText)layout.findViewById( R.id.edit_pin_entry );
         btnConfirmPayment = (TextView)layout.findViewById( R.id.btn_confirm_payment );
         tvConcept = (TextView) layout.findViewById(R.id.tv_concept);
+        viewPincode = layout.findViewById(R.id.view_pincode);
 
         editPinEntry.setOnPinEnteredListener(this);
         btnConfirmPayment.setOnClickListener(this);
@@ -54,6 +57,8 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
 
         View layout = inflater.inflate(R.layout.fragment_payment_step3, container, false);
         findViews(layout);
+
+        viewPincode.setVisibility(getPrefs().getBoolean(App.SHARED_HAS_PINCODE, false) ? View.VISIBLE : View.GONE);
 
 
         setHasOptionsMenu(false);

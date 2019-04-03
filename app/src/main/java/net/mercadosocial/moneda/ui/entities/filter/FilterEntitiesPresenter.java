@@ -51,7 +51,7 @@ public class FilterEntitiesPresenter extends BasePresenter {
         new CategoriesInteractor(context, view).getCategories(new BaseInteractor.BaseApiGETListCallback<Category>() {
             @Override
             public void onResponse(List<Category> list) {
-                for(Category category : list) category.setChecked(true);
+//                for(Category category : list) category.setChecked(true);
                 categories.clear();
                 categories.addAll(list);
                 view.showCategories(categories);
@@ -89,7 +89,7 @@ public class FilterEntitiesPresenter extends BasePresenter {
     public void removeFilter() {
 
         for (Category category : categories) {
-            category.setChecked(true);
+            category.setChecked(false);
         }
 
         view.showCategories(categories);
