@@ -9,7 +9,7 @@ import rx.Observable;
 
 public interface CategoriesApi {
 
-    @GET("categories/")
+    @GET("categories/?limit=100")
     Observable<Response<CategoriesResponse>> getCategories();
 
 
