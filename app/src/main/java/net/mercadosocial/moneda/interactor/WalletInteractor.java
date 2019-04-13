@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.interactor;
 import android.content.Context;
 import android.text.TextUtils;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.WalletApi;
 import net.mercadosocial.moneda.api.model.Purchase;
@@ -68,8 +69,9 @@ public class WalletInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body());
-
+                        Wallet wallet = response.body();
+                        App.getPrefs(context).edit().putBoolean(App.SHARED_HAS_PINCODE, wallet.getHas_pincode()).commit();
+                        callback.onResponse(wallet);
 
                     }
                 });
