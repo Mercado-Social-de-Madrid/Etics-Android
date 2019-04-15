@@ -44,7 +44,7 @@ public class NewPaymentStep3Presenter extends BasePresenter {
         Entity entity = getNewPaymentPresenter().getSelectedEntity();
         Payment payment = getNewPaymentPresenter().getPayment();
         view.showPaymentSummaryInfo(
-                payment.getBoniatosAmountFormatted() + " " +
+                payment.getCurrencyAmountFormatted() + " " +
                         context.getString(R.string.currency_name_plural),
                 payment.getEurosAmountFormatted() + " " + context.getString(R.string.euros),
                 entity.getName(),

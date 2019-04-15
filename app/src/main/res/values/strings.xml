@@ -262,9 +262,10 @@
         <![CDATA[
         Importe total: <font color="#af64ac"><b>%s</b></font><br>
         Importe en etics: <font color="#af64ac"><b>%s</b></font><br>
-        Bonificación a recibir: <font color="#af64ac"><b>%s</b></font>
         ]]>
     </string>
+    <!--  Bonificación a recibir: <font color="#af64ac"><b>%s</b></font> -->
+
     <string name="graphics_x_label">Saldo por días</string>
     <string name="concept_two_dots">Concepto:</string>
     <string name="sent_payments_pending_check">Pagos enviados pendientes de revisión</string>

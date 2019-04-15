@@ -35,7 +35,7 @@ public class Payment implements Comparable<Payment> {
     public transient DateFormat timestampFormat = Novelty.formatDatetimeApi;
 
 
-    public String getBoniatosAmountFormatted() {
+    public String getCurrencyAmountFormatted() {
 
         NumberFormat numberFormat = new DecimalFormat("0.##");
         String amountFormatted = numberFormat.format(getCurrency_amount());

@@ -94,7 +94,7 @@ public class ApiClient {
     private static okhttp3.OkHttpClient getOkHttpClient() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         okhttp3.Interceptor headersInterceptor = new okhttp3.Interceptor() {
             @Override

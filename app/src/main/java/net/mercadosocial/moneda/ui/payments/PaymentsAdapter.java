@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.payments;
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
 
         // Falta info de si quien paga es entidad o usuario para calcular con la bonificación correspondiente
         Data userData = App.getUserData(context);
-        float bonusPercent = payment.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+        float bonusPercent = TextUtils.equals(payment.getUser_type(), RegisterPresenter.TYPE_PERSON) ?
                 userData.getEntity().getBonus_percent_general() :
                 userData.getEntity().getBonus_percent_entity();
 
@@ -66,13 +67,13 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
 
         String textInfo = String.format(context.getString(R.string.payment_info_format),
                 payment.getTotalAmountFormatted() + " " + context.getString(R.string.euros),
-                payment.getBoniatosAmountFormatted() + " " + context.getString(R.string.currency_name_abrev),
+                payment.getCurrencyAmountFormatted() + " " + context.getString(R.string.currency_name_abrev),
                 bonus + " " + context.getString(R.string.currency_name_abrev));
 
         Util.setHtmlLinkableText(holder.tvNewPaymentInfo, textInfo);
 
 //                payment.getSender() + " te ha enviado un pago de " +
-//                payment.getBoniatosAmountFormatted() + " Boniatos\n" +
+//                payment.getCurrencyAmountFormatted() + " Boniatos\n" +
 //                "La compra total es de: " + payment.getTotalAmountFormatted() + " €");
 
 

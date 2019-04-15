@@ -68,17 +68,19 @@ public class SentPaymentsAdapter extends RecyclerView.Adapter<SentPaymentsAdapte
 //        String bonus = Util.getDecimalFormatted(payment.getTotal_amount() * (bonusPercent / 100f), true);
 
 
-        float bonus = payment.getCurrency_amount();
+//        float bonus = payment.getCurrency_amount();
 
         String textInfo = String.format(context.getString(R.string.sent_payment_info_format),
                 payment.getTotalAmountFormatted() + " " + context.getString(R.string.euros),
-                payment.getBoniatosAmountFormatted() + " " + context.getString(R.string.currency_name_abrev),
-                bonus + " " + context.getString(R.string.currency_name_abrev));
+                payment.getCurrencyAmountFormatted() + " " + context.getString(R.string.currency_name_abrev)
+//                ,
+//                bonus + " " + context.getString(R.string.currency_name_abrev)
+        );
 
         Util.setHtmlLinkableText(holder.tvNewPaymentInfo, textInfo);
 
 //                payment.getSender() + " te ha enviado un pago de " +
-//                payment.getBoniatosAmountFormatted() + " Boniatos\n" +
+//                payment.getCurrencyAmountFormatted() + " Boniatos\n" +
 //                "La compra total es de: " + payment.getTotalAmountFormatted() + " €");
 
 
