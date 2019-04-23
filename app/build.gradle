@@ -14,10 +14,10 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 225
-        versionName "2.2.5"
+        versionCode 228
+        versionName "2.2.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
     }
     buildTypes {
@@ -36,6 +36,10 @@ android {
         targetCompatibility = '1.8'
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 
@@ -85,6 +89,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-config:16.5.0'
 
     implementation 'com.android.support:multidex:1.0.3'
 

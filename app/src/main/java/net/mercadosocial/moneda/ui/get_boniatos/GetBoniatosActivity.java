@@ -79,7 +79,7 @@ public class GetBoniatosActivity extends BaseActivity implements GetBoniatosView
 
     @Override
     public boolean shouldOverrideUrlLoading(String url) {
-        if (url.endsWith("/payments/end")) {
+        if (url.contains("/payments/end/success")) {
             presenter.showPurchaseSuccessDialog();
             return true;
         }

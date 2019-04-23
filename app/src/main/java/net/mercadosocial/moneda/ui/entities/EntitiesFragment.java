@@ -98,7 +98,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         switch (item.getItemId()) {
             case R.id.menuItem_search:
 
-                ((MainActivity) getActivity()).onMenuFilterClick();
+                if (getActivity() != null) {
+                    ((MainActivity) getActivity()).onMenuFilterClick();
+                }
 
 //                viewSearchEntities.setVisibility(viewSearchEntities.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
 //                if (viewSearchEntities.getVisibility() == View.GONE) {

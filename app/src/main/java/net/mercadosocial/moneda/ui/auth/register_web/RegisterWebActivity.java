@@ -53,7 +53,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.btn_register_person_guest:
-                String code = editInvitationCode.getText().toString();
+                String code = editInvitationCode.getText().toString().replace("#", "");
                 if (TextUtils.isEmpty(code)) {
                     Toasty.warning(this, getString(R.string.enter_code)).show();
                     return;
