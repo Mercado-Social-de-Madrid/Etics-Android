@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
@@ -95,12 +96,15 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
         if (adapter == null) {
 
-            adapter = new EntitiesAdapter(getActivity(), entities);
+            boolean showFavsStars = App.getUserData(getActivity()) != null;
+            adapter = new EntitiesAdapter(getActivity(), entities, showFavsStars);
             adapter.setOnItemClickListener(this);
 
             recyclerEntities.setAdapter(adapter);
 
         } else {
+            boolean showFavsStars = App.getUserData(getActivity()) != null;
+            adapter.setShowFavsStarts(showFavsStars);
             adapter.updateData();
         }
 

@@ -40,6 +40,7 @@
                 android:text="@string/only_favs" />
 
             <View
+                android:id="@+id/view_separator_favs"
                 style="@style/SeparatorHorizontal.Grey"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" />

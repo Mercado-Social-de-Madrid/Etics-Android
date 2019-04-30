@@ -64,10 +64,10 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void onResume() {
 
-//         List<Entity> users = getUserList();
-//         List<Entity> result = EntityFilter.builder()
-//                 .name().contains("")
-//                 .on(entities);
+        if (entities != null && !entities.isEmpty()) {
+            processFavs();
+            view.updateData();
+        }
     }
 
     public void onPause() {
@@ -78,10 +78,11 @@ public class EntitiesPresenter extends BasePresenter {
 
     }
 
-    private void updateFavouritesOnServer() {
+    private void updateFavouritesLocally() {
+
         Data data = App.getUserData(context);
 
-        if (data == null || data.isEntity()) {
+        if (data == null) {
             return;
         }
 
@@ -92,21 +93,38 @@ public class EntitiesPresenter extends BasePresenter {
             }
         }
 
-        data.getPerson().setFav_entities(favEntitiesUpdated);
+        data.setFav_entities(favEntitiesUpdated);
         App.saveUserData(context, data);
+    }
 
-        Person profile = Person.createPersonProfileFavourites(favEntitiesUpdated);
-        userInteractor.updateProfile(profile, new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
+    private void updateFavouritesOnServer() {
+        Data data = App.getUserData(context);
 
+        if (data == null) {
+            return;
+        }
+
+        List<String> favEntitiesUpdated = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity.isFavourite()) {
+                favEntitiesUpdated.add(entity.getId());
             }
+        }
 
-            @Override
-            public void onError(String message) {
-                Log.e(TAG, "onError: updateFavouritesOnServer. " + message);
-            }
-        });
+        if (!data.isEntity()) {
+            Person profile = Person.createPersonProfileFavourites(favEntitiesUpdated);
+            userInteractor.updateProfile(profile, new BaseInteractor.BaseApiPOSTCallback() {
+                @Override
+                public void onSuccess(Integer id) {
+
+                }
+
+                @Override
+                public void onError(String message) {
+                    Log.e(TAG, "onError: updateFavouritesOnServer. " + message);
+                }
+            });
+        }
 
     }
 
@@ -164,14 +182,14 @@ public class EntitiesPresenter extends BasePresenter {
     private void processFavs() {
 
         Data data = App.getUserData(context);
-        if (data == null || data.isEntity()) {
+        if (data == null) {
             return;
         }
 
         List<Entity> entitiesToRemove = new ArrayList<>();
 
         for (Entity entity : entities) {
-            if (data.getPerson().getFav_entities().contains(entity.getId())) {
+            if (data.getFav_entities().contains(entity.getId())) {
                 entity.setFavourite(true);
             } else if (filterEntities != null && filterEntities.isOnlyFavourites()) {
                 entitiesToRemove.add(entity);
@@ -207,6 +225,7 @@ public class EntitiesPresenter extends BasePresenter {
 
         entities.get(position).setFavourite(isFavourite);
         refreshFavouritesAtEnd = true;
+        updateFavouritesLocally();
 
     }
 

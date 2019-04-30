@@ -21,6 +21,7 @@ import java.util.List;
 public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHolder> {
 
 
+    private boolean showFavsStars;
     private List<Entity> entities;
     private Context context;
     private OnItemClickListener itemClickListener;
@@ -28,9 +29,10 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     private Integer selectedNumber = -1;
 
 
-    public EntitiesAdapter(Context context, List<Entity> entities) {
+    public EntitiesAdapter(Context context, List<Entity> entities, boolean showFavsStars) {
         this.context = context;
         this.entities = entities;
+        this.showFavsStars = showFavsStars;
     }
 
     @Override
@@ -62,6 +64,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         holder.tvAddress.setText(entity.getAddress());
 
         holder.imgStarred.setSelected(entity.isFavourite());
+        holder.imgStarred.setVisibility(showFavsStars ? View.VISIBLE : View.INVISIBLE);
 
 //        holder.imgStarred.setSelected(entity.isStarred());
 
@@ -83,6 +86,10 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
     public void updateData() {
         notifyDataSetChanged();
+    }
+
+    public void setShowFavsStarts(boolean showFavsStars) {
+        this.showFavsStars = showFavsStars;
     }
 
 

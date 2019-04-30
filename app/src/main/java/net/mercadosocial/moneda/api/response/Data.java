@@ -6,6 +6,9 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Person;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by julio on 1/02/18.
  */
@@ -34,6 +37,24 @@ public class Data {
             return entity.getLogoThumbnail();
         } else {
             return person.getProfile_thumbnail();
+        }
+    }
+
+    public void setFav_entities(List<String> favEntitiesUpdated) {
+
+        if (entity != null) {
+            entity.setFav_entities(favEntitiesUpdated);
+        } else {
+            person.setFav_entities(favEntitiesUpdated);
+        }
+    }
+
+    public List<String> getFav_entities() {
+        if (entity != null) {
+            List<String> favsEntities = entity.getFav_entities(); // First time will be null (workaround)
+            return favsEntities !=  null ? favsEntities : new ArrayList<>();
+        } else {
+            return person.getFav_entities();
         }
     }
 

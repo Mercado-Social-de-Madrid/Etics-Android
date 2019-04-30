@@ -62,6 +62,11 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         return layout;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
 
     @Override
     public void onPause() {

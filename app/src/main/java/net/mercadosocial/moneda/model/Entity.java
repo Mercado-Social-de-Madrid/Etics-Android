@@ -49,6 +49,9 @@ public class Entity implements Serializable {
     private String telegram_link;
     private String instagram_link;
 
+
+    private List<String> fav_entities;
+
     private transient String pin_code;
     private transient String pin_codeRepeat;
 
@@ -405,4 +408,11 @@ public class Entity implements Serializable {
         this.city = city;
     }
 
+    public List<String> getFav_entities() {
+        return fav_entities;
+    }
+
+    public void setFav_entities(List<String> fav_entities) {
+        this.fav_entities = fav_entities;
+    }
 }

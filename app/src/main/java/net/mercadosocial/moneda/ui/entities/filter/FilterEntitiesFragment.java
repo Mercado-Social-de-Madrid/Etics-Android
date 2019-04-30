@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Category;
@@ -32,6 +33,7 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
     private RecyclerView recyclerCategories;
     private AppCompatButton btnApply;
     private View btnRemoveFilter;
+    private View viewSeparatorFavs;
 
     private void findViews(View layout) {
         editSearchEntities = (EditText) layout.findViewById(R.id.edit_search_entities);
@@ -39,6 +41,7 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
         recyclerCategories = (RecyclerView) layout.findViewById(R.id.recycler_categories);
         btnApply = (AppCompatButton) layout.findViewById(R.id.btn_apply);
         btnRemoveFilter = layout.findViewById(R.id.btn_remove_filter);
+        viewSeparatorFavs = layout.findViewById(R.id.view_separator_favs);
 
         btnApply.setOnClickListener(this);
         btnRemoveFilter.setOnClickListener(this);
@@ -61,6 +64,13 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
         findViews(layout);
 
         recyclerCategories.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        boolean showFavsView = App.getUserData(getActivity()) != null;
+        if (!showFavsView) {
+            switchOnlyFavs.setVisibility(View.GONE);
+            viewSeparatorFavs.setVisibility(View.GONE);
+        }
 
         presenter.onCreate();
 
