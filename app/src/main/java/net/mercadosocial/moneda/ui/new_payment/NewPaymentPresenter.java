@@ -102,19 +102,20 @@ public class NewPaymentPresenter extends BasePresenter {
         return payment;
     }
 
-    public void onRecipientSelected(Entity entity) {
+    public boolean onRecipientSelected(Entity entity) {
 
         Data data = App.getUserData(context);
         if (data != null && data.isEntity()) {
             if (entity.getId().equals(data.getEntity().getId())) {
                 Toasty.warning(context, context.getString(R.string.cannot_pay_yourself)).show();
-                return;
+                return false;
             }
         }
 
         this.selectedEntity = entity;
         payment.setReceiver(entity.getId());
         showSection(2);
+        return true;
     }
 
     public void onAmountsConfirmed(Float totalAmount, Float boniatosAmount, String concept) {

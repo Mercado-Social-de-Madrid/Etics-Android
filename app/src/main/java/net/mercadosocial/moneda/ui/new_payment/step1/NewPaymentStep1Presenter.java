@@ -130,7 +130,9 @@ import es.dmoral.toasty.Toasty;
                 .setMessage(String.format(context.getString(R.string.entity_recognized_message), entity.getName()))
                 .setPositiveButton(R.string.continue_str, (dialog, which) -> {
                     entitySelected = entity;
-                    getNewPaymentPresenter().onRecipientSelected(entitySelected);
+                    if (!getNewPaymentPresenter().onRecipientSelected(entitySelected)) {
+                        finish();
+                    }
                 })
                 .setNeutralButton(R.string.back, (dialog, which) -> finish())
                 .show();
