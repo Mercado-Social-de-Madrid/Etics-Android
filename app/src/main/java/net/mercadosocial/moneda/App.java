@@ -49,6 +49,8 @@ public class App extends MultiDexApplication {
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
     public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
     public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
+    public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
+
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
     
@@ -105,7 +107,16 @@ public class App extends MultiDexApplication {
 
         loadMESCity();
 
+        processWorkarounds();
 
+
+    }
+
+    private void processWorkarounds() {
+        if (getPrefs(this).getBoolean(SHARED_FORCE_SEND_TOKEN_FCM_DEVICE, true)) {
+            getPrefs(getApplicationContext()).edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false).commit();
+            getPrefs(getApplicationContext()).edit().putBoolean(App.SHARED_FORCE_SEND_TOKEN_FCM_DEVICE, false).commit();
+        }
     }
 
     private void loadMESCity() {

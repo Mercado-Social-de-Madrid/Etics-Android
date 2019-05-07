@@ -20,7 +20,7 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.model.Notification;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
 import es.dmoral.toasty.Toasty;
@@ -78,7 +78,7 @@ public class NewPaymentDialog extends DialogFragment implements View.OnClickList
 
 
         Data userData = App.getUserData(getActivity());
-        float bonusPercent = notification.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+        float bonusPercent = notification.getUser_type() == User.TYPE_PERSON ?
                 userData.getEntity().getBonus_percent_general() :
                 userData.getEntity().getBonus_percent_entity();
 

@@ -151,17 +151,27 @@ import java.util.List;
     private void sendDevice() {
 
         String model = Build.MANUFACTURER + " " + Build.MODEL;
-        Device device = new Device(model, FirebaseInstanceId.getInstance().getToken());
-        new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
-                getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
-            }
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "getInstanceId failed", task.getException());
+                        return;
+                    }
 
-            @Override
-            public void onError(String message) {
-                Log.e(TAG, "onError: error sending device token");
-            }
-        });
+                    Device device = new Device(model, task.getResult().getToken());
+                    new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
+                        @Override
+                        public void onSuccess(Integer id) {
+                            getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            Log.e(TAG, "onError: error sending device token");
+                        }
+                    });
+
+                });
+
     }
 }

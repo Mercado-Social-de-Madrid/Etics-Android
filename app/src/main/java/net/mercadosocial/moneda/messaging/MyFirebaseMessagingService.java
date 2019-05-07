@@ -27,7 +27,7 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.model.Notification;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;
@@ -42,6 +42,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public static final String KEY_ID_NOTIFICATION = "idNotification";
 
     public static String CHANNEL_ID = "channel_payments_notifs";
+
+    @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+
+        App.getPrefs(getApplicationContext()).edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false).commit();
+    }
 
     /**
      * Called when message is received.
@@ -214,7 +221,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 notificationBuilder.setContentTitle(getString(R.string.new_payment));
 
                 Data userData = App.getUserData(this);
-                float bonusPercent = notification.getUser_type() == RegisterPresenter.TYPE_PERSON ?
+                float bonusPercent = notification.getUser_type() == User.TYPE_PERSON ?
                         userData.getEntity().getBonus_percent_general() :
                         userData.getEntity().getBonus_percent_entity();
                 String bonus = Util.getDecimalFormatted(notification.getTotal_amount() * (bonusPercent / 100f), true);

@@ -34,7 +34,7 @@ import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
@@ -489,7 +489,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
             case R.id.btn_singup:
-                startActivity(RegisterPresenter.newRegisterActivity(this));
+                startActivity(new Intent(this, RegisterWebActivity.class));
                 break;
 
             case R.id.btn_logout:

@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.ui.auth.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -7,7 +8,7 @@ import android.widget.EditText;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginView {
 
@@ -66,7 +67,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 break;
 
             case R.id.btn_register:
-                startActivity(RegisterPresenter.newRegisterActivity(this));
+                startActivity(new Intent(this, RegisterWebActivity.class));
                 finish();
                 overridePendingTransition(0, 0);
                 break;

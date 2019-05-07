@@ -13,7 +13,7 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.model.Payment;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.model.User;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.ViewHo
 
         // Falta info de si quien paga es entidad o usuario para calcular con la bonificación correspondiente
         Data userData = App.getUserData(context);
-        float bonusPercent = TextUtils.equals(payment.getUser_type(), RegisterPresenter.TYPE_PERSON) ?
+        float bonusPercent = TextUtils.equals(payment.getUser_type(), User.TYPE_PERSON) ?
                 userData.getEntity().getBonus_percent_general() :
                 userData.getEntity().getBonus_percent_entity();
 

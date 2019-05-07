@@ -14,8 +14,8 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 230
-        versionName "2.3.0"
+        versionCode 231
+        versionName "2.3.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
@@ -79,7 +79,6 @@ dependencies {
     implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
 
     implementation 'com.google.android.gms:play-services-vision:11.8.0'
-    implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
 
@@ -87,8 +86,8 @@ dependencies {
         transitive = true
     }
 
-    implementation 'com.google.firebase:firebase-core:16.0.5'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     implementation 'com.google.firebase:firebase-config:16.5.0'
 
     implementation 'com.android.support:multidex:1.0.3'

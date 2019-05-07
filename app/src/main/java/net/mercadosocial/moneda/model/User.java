@@ -1,12 +1,13 @@
 package net.mercadosocial.moneda.model;
 
-import java.util.List;
-
 /**
  * Created by julio on 1/02/18.
  */
 
 public class User {
+
+    public static final String TYPE_ENTITY = "entity";
+    public static final String TYPE_PERSON = "person";
 
     private String uuid;
     private String email;

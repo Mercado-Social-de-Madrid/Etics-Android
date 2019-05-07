@@ -16,7 +16,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Wallet;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
-import net.mercadosocial.moneda.ui.auth.register.RegisterPresenter;
+import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
@@ -150,7 +150,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case R.id.btn_singup:
-                startActivity(RegisterPresenter.newRegisterActivity(getActivity()));
+                startActivity(new Intent(getActivity(), RegisterWebActivity.class));
                 break;
 
             case R.id.btn_get_boniatos:
