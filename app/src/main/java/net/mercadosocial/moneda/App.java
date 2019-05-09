@@ -14,6 +14,7 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttpDownloader;
@@ -53,7 +54,11 @@ public class App extends MultiDexApplication {
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
-    
+
+    // FIREBASE MESSAGING
+    private static final String TOPIC_NEWS = "news";
+    private static final String TOPIC_OFFERS = "offers";
+
     public static boolean isInForeground;
 
     public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
@@ -100,6 +105,12 @@ public class App extends MultiDexApplication {
 
         Data userData = getUserData(this);
 
+        try {
+            FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_NEWS);
+            FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_OFFERS);
+        } catch (Exception e) {
+            Crashlytics.logException(e);
+        }
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 

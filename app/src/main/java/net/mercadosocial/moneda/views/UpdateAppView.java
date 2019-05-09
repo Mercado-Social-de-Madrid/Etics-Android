@@ -125,7 +125,7 @@ public class UpdateAppView extends FrameLayout implements View.OnClickListener {
                 .addOnCompleteListener((Activity) getContext(), task -> {
                     if (task.isSuccessful()) {
                         firebaseRemoteConfig.activate();
-                        int marketCode = (int) FirebaseRemoteConfig.getInstance().getLong(remoteConfigVariableName);
+                        int marketCode = Integer.parseInt(FirebaseRemoteConfig.getInstance().getString(remoteConfigVariableName));
                         int localCode = BuildConfig.VERSION_CODE;
                         if (marketCode > localCode) {
                             setVisibility(VISIBLE);
