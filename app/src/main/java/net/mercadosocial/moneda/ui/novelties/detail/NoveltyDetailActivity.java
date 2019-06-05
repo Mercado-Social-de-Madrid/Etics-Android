@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
@@ -70,14 +71,11 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
         if (news.getMore_info_text() != null) {
             btnMoreInfo.setVisibility(View.VISIBLE);
             btnMoreInfo.setText(news.getMore_info_text());
-            btnMoreInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(news.getMore_info_url())));
-                    } catch (ActivityNotFoundException e) {
-                        Toasty.warning(NoveltyDetailActivity.this, getString(R.string.invalid_link)).show();
-                    }
+            btnMoreInfo.setOnClickListener(v -> {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(news.getMore_info_url())));
+                } catch (ActivityNotFoundException e) {
+                    Toasty.warning(NoveltyDetailActivity.this, getString(R.string.invalid_link)).show();
                 }
             });
         }
@@ -85,7 +83,30 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
 
     private void showNovelty(Novelty novelty) {
         tvNoveltyTitle.setText(novelty.getTitleNovelty());
-        tvNoveltySubtitle.setText(novelty.getSubtitleNovelty());
+
+
+        switch (novelty.getNoveltyType()) {
+            case Novelty.TYPE_NEWS:
+                String subtitleNews = String.format(getString(R.string.published), novelty.getDate());
+                tvNoveltySubtitle.setText(subtitleNews);
+                break;
+
+            case Novelty.TYPE_OFFER:
+                String entityName = "";
+                try {
+                    entityName = ((Offer) novelty).getEntity().getName() + "\n";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Crashlytics.logException(e);
+                }
+                String subtitleOffer = entityName + String.format(getString(R.string.valid_until), novelty.getDate());
+                tvNoveltySubtitle.setText(subtitleOffer);
+                break;
+
+            default:
+                throw new IllegalStateException("Novelty type don't exists: " + novelty.getNoveltyType());
+
+        }
 
         String image = novelty.getImageNoveltyUrl();
 

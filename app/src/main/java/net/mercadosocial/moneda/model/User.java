@@ -24,6 +24,7 @@ public class User {
     private transient String repeatPassword;
 
 
+
     public String getUuid() {
         return uuid;
     }

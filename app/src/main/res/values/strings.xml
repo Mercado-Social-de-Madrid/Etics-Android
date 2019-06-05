@@ -344,5 +344,7 @@
     <string name="change_pincode_intro_text_password">Por seguridad introduce tu contraseña de acceso a la aplicación</string>
     <string name="consumer">Consumidora</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
+    <string name="published">Publicada: %s</string>
+    <string name="valid_until">Válida hasta: %s</string>
 
 </resources>

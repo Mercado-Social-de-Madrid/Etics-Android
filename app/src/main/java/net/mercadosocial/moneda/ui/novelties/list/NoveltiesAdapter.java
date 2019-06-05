@@ -68,33 +68,29 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
             holder.imgNovelty.setImageResource(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.ic_mes_v2_144 : R.mipmap.ic_offer_solid);
         }
 
-        holder.tvNoveltyDate.setText(novelty.getDate());
+        switch (novelty.getNoveltyType()) {
+            case Novelty.TYPE_NEWS:
+                String dateTextNews = String.format(context.getString(R.string.published), novelty.getDate());
+                holder.tvNoveltyDate.setText(dateTextNews);
+                break;
+
+            case Novelty.TYPE_OFFER:
+                String dateTextOffer = String.format(context.getString(R.string.valid_until), novelty.getDate());
+                holder.tvNoveltyDate.setText(dateTextOffer);
+                break;
+
+                default:
+                    throw new IllegalStateException("Novelty type don't exists: " + novelty.getNoveltyType());
+
+        }
 
         holder.itemView.setSelected(novelty.getNoveltyType() == Novelty.TYPE_NEWS);
 //        int backgroundColorResId = novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.color.green_light : android.R.color.transparent;
 //        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, backgroundColorResId));
 
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.onItemClick(safePosition);
-            }
-        });
 
     }
 
-    private void addClickListener(View view, final int position) {
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                if (itemClickListener != null) {
-//                    itemClickListener.onItemClick(v, position);
-//                }
-            }
-        });
-    }
 
     @Override
     public int getItemCount() {
@@ -111,7 +107,7 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         
         private final View rootView;
         private ImageView imgNovelty;
@@ -129,6 +125,12 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
             tvNoveltyDate = (TextView)itemView.findViewById( R.id.tv_novelty_date );
 
             rootView = itemView;
+
+            rootView.setOnClickListener(v -> {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(getAdapterPosition());
+                }
+            });
         }
     }
 

@@ -10,6 +10,7 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.UserInteractor;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 
 import es.dmoral.toasty.Toasty;
@@ -48,11 +49,47 @@ public class ProfilePresenter extends BasePresenter {
     private void loadData() {
         Data data = App.getUserData(context);
         if (data.isEntity()) {
-            view.showEntityInfo(data.getEntity());
+            view.showEntityProfile(data.getEntity());
         } else {
             view.showPersonProfile(data.getPerson());
         }
 
+        refreshProfile(data.isEntity());
+    }
+
+    private void refreshProfile(boolean isEntity) {
+        if (isEntity) {
+            userInteractor.getEntityProfile(new BaseInteractor.BaseApiCallback<Entity>() {
+                @Override
+                public void onResponse(Entity entity) {
+
+                    Data data = App.getUserData(context);
+                    data.setEntity(entity);
+                    App.saveUserData(context, data);
+
+                    view.showEntityProfile(entity);
+                }
+
+                @Override
+                public void onError(String message) {
+                }
+            });
+        } else {
+            userInteractor.getPersonProfile(new BaseInteractor.BaseApiCallback<Person>() {
+                @Override
+                public void onResponse(Person person) {
+                    Data data = App.getUserData(context);
+                    data.setPerson(person);
+                    App.saveUserData(context, data);
+
+                    view.showPersonProfile(person);
+                }
+
+                @Override
+                public void onError(String message) {
+                }
+            });
+        }
     }
 
 

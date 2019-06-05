@@ -151,7 +151,7 @@ public class Offer implements Serializable, Novelty {
 
     @Override
     public String getSubtitleNovelty() {
-        return (getEntity() != null ? getEntity().getName() + " - " : "") + getBeginDateFormatted();
+        return (getEntity() != null ? getEntity().getName() + " - " : "") + getEndDateFormatted();
     }
 
     @Override
@@ -171,7 +171,7 @@ public class Offer implements Serializable, Novelty {
 
     @Override
     public String getDate() {
-        return getPublishedDateFormatted();
+        return getEndDateFormatted();
     }
 
     @Override

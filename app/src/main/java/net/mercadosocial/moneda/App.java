@@ -51,6 +51,8 @@ public class App extends MultiDexApplication {
     public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
     public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
+    public static final String SHARED_ENTITIES_CACHE = PREFIX + "shared_entities_cache";
+
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
@@ -61,11 +63,15 @@ public class App extends MultiDexApplication {
 
     public static boolean isInForeground;
 
+//    private List<Entity> entitiesCache = new ArrayList<>();
+
     public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        getPrefs(getApplicationContext()).edit().remove(App.SHARED_ENTITIES_CACHE).commit();
 
         loadApiKey(this);
 
@@ -140,6 +146,15 @@ public class App extends MultiDexApplication {
         }
     }
 
+//    public List<Entity> getEntitiesCache() {
+//        return entitiesCache;
+//    }
+//
+//    public void setEntitiesCache(List<Entity> entitiesCache) {
+//        this.entitiesCache.clear();
+//        this.entitiesCache.addAll(entitiesCache);
+//    }
+
 
     public class MyObserver implements DefaultLifecycleObserver {
 //        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -154,6 +169,13 @@ public class App extends MultiDexApplication {
 //            Log.i(TAG, "onAppGoesBackground: ");
 //
 //        }
+//
+//        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+//        public void onAppGoesDestroyed() {
+//            App.isInForeground = false;
+//            Log.i(TAG, "onAppGoesDestoyed: ");
+//
+//        }
 
         @Override
         public void onResume(@NonNull LifecycleOwner owner) {
@@ -166,6 +188,7 @@ public class App extends MultiDexApplication {
             App.isInForeground = false;
             Log.i(TAG, "onAppGoesBackground: ");
         }
+
     }
 
 

@@ -143,7 +143,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    public void showEntityInfo(Entity entity) {
+    public void showEntityProfile(Entity entity) {
 
         editNamePerson.setText(entity.getName());
         editNif.setText(entity.getCif());

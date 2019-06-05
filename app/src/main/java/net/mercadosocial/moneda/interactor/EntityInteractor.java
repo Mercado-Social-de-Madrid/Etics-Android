@@ -2,6 +2,10 @@ package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.EntitiesApi;
 import net.mercadosocial.moneda.api.response.ApiError;
@@ -12,6 +16,8 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.util.Util;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
@@ -23,7 +29,6 @@ import rx.schedulers.Schedulers;
  * Created by julio on 14/02/16.
  */
 public class EntityInteractor extends BaseInteractor {
-
 
 
     public interface Callback {
@@ -62,7 +67,12 @@ public class EntityInteractor extends BaseInteractor {
                 categoriesIdsStr += id + (i < filterEntities.getCategoriesIds().size() - 1 ? "," : "");
             }
 
-            if(categoriesIdsStr.isEmpty()) categoriesIdsStr = null;
+            if (categoriesIdsStr.isEmpty()) categoriesIdsStr = null;
+        } else {
+            if (hasCachedEntities()) {
+                callback.onResponse(getCachedEntities(), false);
+                return;
+            }
         }
 
 
@@ -93,10 +103,31 @@ public class EntityInteractor extends BaseInteractor {
 
                         callback.onResponse(response.body().getEntities(), hasMore);
 
+                        if (filterEntities == null) {
+                            cacheEntities(response.body().getEntities());
+                        }
+
                     }
                 });
 
 
+    }
+
+    private boolean hasCachedEntities() {
+        String entitiesSerialized = App.getPrefs(context).getString(App.SHARED_ENTITIES_CACHE, null);
+        return entitiesSerialized != null && !entitiesSerialized.isEmpty();
+    }
+
+    private List<Entity> getCachedEntities() {
+        String entitiesSerialized = App.getPrefs(context).getString(App.SHARED_ENTITIES_CACHE, null);
+        Type listType = new TypeToken<ArrayList<Entity>>(){}.getType();
+        List<Entity> entities = new Gson().fromJson(entitiesSerialized, listType);
+        return entities;
+    }
+
+    private void cacheEntities(List<Entity> entities) {
+        String entitiesSerialized = new Gson().toJson(entities);
+        App.getPrefs(context).edit().putString(App.SHARED_ENTITIES_CACHE, entitiesSerialized).commit();
     }
 
 //    public void getEntitiesFiltered(String query, final Callback callback) {

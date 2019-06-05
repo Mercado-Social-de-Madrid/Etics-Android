@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import net.mercadosocial.moneda.BuildConfig;
@@ -96,12 +97,12 @@ public class UpdateAppView extends FrameLayout implements View.OnClickListener {
 
     public void onUpdateVersionClick() {
 
-        Intent directPlayIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(directUrl));
-        if (directPlayIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            getContext().startActivity(directPlayIntent);
-        } else {
+//        Intent directPlayIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(directUrl));
+//        if (directPlayIntent.resolveActivity(getContext().getPackageManager()) != null) {
+//            getContext().startActivity(directPlayIntent);
+//        } else {
             getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(httpUrl)));
-        }
+//        }
     }
 
 
@@ -124,12 +125,18 @@ public class UpdateAppView extends FrameLayout implements View.OnClickListener {
         firebaseRemoteConfig.fetch(cacheExpiration)
                 .addOnCompleteListener((Activity) getContext(), task -> {
                     if (task.isSuccessful()) {
-                        firebaseRemoteConfig.activate();
-                        int marketCode = Integer.parseInt(FirebaseRemoteConfig.getInstance().getString(remoteConfigVariableName));
-                        int localCode = BuildConfig.VERSION_CODE;
-                        if (marketCode > localCode) {
-                            setVisibility(VISIBLE);
+                        String lastVersionMarketAndroid = FirebaseRemoteConfig.getInstance().getString(remoteConfigVariableName);
+                        try {
+                            int marketCode = Integer.parseInt(lastVersionMarketAndroid);
+                            int localCode = BuildConfig.VERSION_CODE;
+                            if (marketCode > localCode) {
+                                setVisibility(VISIBLE);
+                            }
+                        } catch (Exception e) {
+                            Crashlytics.logException(new Error("Wrong last_version_market_variable: " + lastVersionMarketAndroid + ", remote variable name: "+ remoteConfigVariableName));
                         }
+
+                        firebaseRemoteConfig.activate();
                     } else {
                         Log.e(TAG, "onComplete: remote config task failed", task.getException());
                     }

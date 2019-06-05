@@ -7,5 +7,5 @@ import net.mercadosocial.moneda.model.Person;
 public interface ProfileView extends BaseView {
     void showPersonProfile(Person person);
 
-    void showEntityInfo(Entity entity);
+    void showEntityProfile(Entity entity);
 }

@@ -51,7 +51,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
         final Offer offer = getItemAtPosition(safePosition);
 
         holder.tvOfferName.setText(offer.getTitle());
-        holder.tvOfferDate.setText(String.format(context.getString(R.string.end_date_offer), offer.getEndDateFormatted()));
+        holder.tvOfferDate.setText(String.format(context.getString(R.string.valid_until), offer.getEndDateFormatted()));
 //
         String image = offer.getImageNoveltyUrl();
         Picasso.with(context)
@@ -61,28 +61,6 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
                 .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
                 .into(holder.imgOffer);
 
-
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.onOfferClicked(offer.getId(), safePosition);
-            }
-        });
-
-
-    }
-
-    private void addClickListener(View view, final int position) {
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                if (itemClickListener != null) {
-//                    itemClickListener.onItemClick(v, position);
-//                }
-            }
-        });
     }
 
     @Override
@@ -100,7 +78,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgOffer;
         private TextView tvOfferName;
@@ -116,6 +94,13 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
             tvOfferDate = (TextView) itemView.findViewById(R.id.tv_offer_date);
 
             rootView = itemView;
+
+            rootView.setOnClickListener(v -> {
+                if (itemClickListener != null) {
+                    Offer offer = getItemAtPosition(getAdapterPosition());
+                    itemClickListener.onOfferClicked(offer.getId(), getAdapterPosition());
+                }
+            });
         }
     }
 

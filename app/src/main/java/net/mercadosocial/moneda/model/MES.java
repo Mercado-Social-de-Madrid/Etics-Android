@@ -34,6 +34,10 @@ public class MES {
     }
 
     public static String getMESNameByCode(String codeMES) {
+        if (TextUtils.isEmpty(codeMES)) {
+            return null;
+        }
+
         return mesList.get(getMESPositionByCode(codeMES)).getName();
     }
 
