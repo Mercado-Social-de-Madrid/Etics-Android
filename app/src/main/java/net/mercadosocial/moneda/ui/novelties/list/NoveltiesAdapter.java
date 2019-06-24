@@ -53,7 +53,7 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
         final Novelty novelty = getItemAtPosition(safePosition);
 
         holder.tvNoveltyTitle.setText(novelty.getTitleNovelty());
-        holder.tvNoveltyTextShort.setText(Html.fromHtml(novelty.getDescriptionShortNovelty()));
+        holder.tvNoveltyTextShort.setText(Html.fromHtml(novelty.getDescriptionShortNovelty()).toString());
 
         String image = novelty.getImageNoveltyUrl();
 
