@@ -24,6 +24,7 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.MES;
@@ -110,6 +111,9 @@ public class App extends MultiDexApplication {
 
 
         Data userData = getUserData(this);
+        if (userData != null) {
+            refreshUserData();
+        }
 
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_NEWS);
@@ -127,6 +131,11 @@ public class App extends MultiDexApplication {
         processWorkarounds();
 
 
+    }
+
+    private void refreshUserData() {
+        // Refresh has_pincode field
+        new WalletInteractor(this, null).getWallet(null);
     }
 
     private void processWorkarounds() {

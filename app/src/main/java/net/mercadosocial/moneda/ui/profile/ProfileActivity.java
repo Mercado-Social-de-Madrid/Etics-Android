@@ -67,7 +67,13 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-//    @Override
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.activity_profile, menu);
 //        return super.onCreateOptionsMenu(menu);

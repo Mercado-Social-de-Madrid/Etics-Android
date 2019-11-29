@@ -58,7 +58,8 @@ public class NewPaymentStep3Fragment extends BaseFragment implements PinEntryEdi
         View layout = inflater.inflate(R.layout.fragment_payment_step3, container, false);
         findViews(layout);
 
-        viewPincode.setVisibility(getPrefs().getBoolean(App.SHARED_HAS_PINCODE, false) ? View.VISIBLE : View.GONE);
+        boolean hasPinCode = getPrefs().getBoolean(App.SHARED_HAS_PINCODE, false);
+        viewPincode.setVisibility(hasPinCode ? View.VISIBLE : View.GONE);
 
 
         setHasOptionsMenu(false);

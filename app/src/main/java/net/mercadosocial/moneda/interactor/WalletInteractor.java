@@ -57,21 +57,28 @@ public class WalletInteractor extends BaseInteractor {
                     @Override
                     public void onError(Throwable e) {
 
-                        callback.onError(e.getMessage());
+                        if (callback != null) {
+                            callback.onError(e.getMessage());
+                        }
                     }
 
                     @Override
                     public void onNext(Response<Wallet> response) {
 
                         if (!response.isSuccessful()) {
-                            ApiError apiError = ApiError.parse(response);
-                            callback.onError(apiError.getMessage());
+                            if (callback != null) {
+                                ApiError apiError = ApiError.parse(response);
+                                callback.onError(apiError.getMessage());
+                            }
                             return;
                         }
 
                         Wallet wallet = response.body();
                         App.getPrefs(context).edit().putBoolean(App.SHARED_HAS_PINCODE, wallet.getHas_pincode()).commit();
-                        callback.onResponse(wallet);
+
+                        if (callback != null) {
+                            callback.onResponse(wallet);
+                        }
 
                     }
                 });
