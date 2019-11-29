@@ -22,6 +22,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -221,6 +222,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 notificationBuilder.setContentTitle(getString(R.string.new_payment));
 
                 Data userData = App.getUserData(this);
+                if (userData == null || !userData.isEntity()) {
+                    Crashlytics.logException(new IllegalStateException("Receiving payment notification to user profile logged in." +
+                            "User data info: " + userData == null ? "null" : new Gson().toJson(userData) + ". " +
+                            "Notification info: " + new Gson().toJson(notification)));
+                    return;
+                }
                 float bonusPercent = notification.getUser_type() == User.TYPE_PERSON ?
                         userData.getEntity().getBonus_percent_general() :
                         userData.getEntity().getBonus_percent_entity();

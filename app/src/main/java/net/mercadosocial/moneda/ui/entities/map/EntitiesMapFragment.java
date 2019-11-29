@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
+import net.mercadosocial.moneda.ui.entities.EntitiesRefreshListener;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.entities.EntityListener;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesMapFragment extends BaseFragment implements EntitiesChildView, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class EntitiesMapFragment extends BaseFragment implements EntitiesRefreshListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
 
     private final LatLng pointCenterMadrid = new LatLng(40.4378693, -3.8199624);
@@ -59,9 +59,17 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesChildVi
 
         setEntityListener((EntityListener) getParentFragment());
 
+        getEntitiesPresenter().setEntitiesRefreshListener(this);
+
         return layout;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        getEntitiesPresenter().removeEntitiesRefreshListener(this);
+    }
 
     private void configureMap() {
 

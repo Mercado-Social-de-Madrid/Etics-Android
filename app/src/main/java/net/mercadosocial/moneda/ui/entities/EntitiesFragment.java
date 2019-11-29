@@ -149,13 +149,6 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         getChildFragmentManager().beginTransaction().replace(R.id.frame_entities, fragment).commit();
     }
 
-    @Override
-    public void updateData() {
-        EntitiesChildView entitiesChildView = (EntitiesChildView) getChildFragmentManager().findFragmentById(R.id.frame_entities);
-        if (entitiesChildView != null) {
-            entitiesChildView.updateData();
-        }
-    }
 
 
     // CHILD ENTITIES CALLBACKS

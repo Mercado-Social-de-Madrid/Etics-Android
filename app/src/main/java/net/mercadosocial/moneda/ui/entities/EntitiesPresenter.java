@@ -39,6 +39,7 @@ public class EntitiesPresenter extends BasePresenter {
 
     private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
     private boolean refreshing;
+    private EntitiesRefreshListener entitiesRefreshListener;
 
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
@@ -66,7 +67,9 @@ public class EntitiesPresenter extends BasePresenter {
 
         if (entities != null && !entities.isEmpty()) {
             processFavs();
-            view.updateData();
+            if (entitiesRefreshListener != null) {
+                entitiesRefreshListener.updateData();
+            }
         }
     }
 
@@ -148,7 +151,9 @@ public class EntitiesPresenter extends BasePresenter {
     private void refreshEntities() {
 
         refreshing = true;
-        view.updateData();
+        if (entitiesRefreshListener != null) {
+            entitiesRefreshListener.updateData();
+        }
         entityInteractor.getEntities(currentApiPage, filterEntities, new EntityInteractor.Callback() {
 
 
@@ -160,7 +165,9 @@ public class EntitiesPresenter extends BasePresenter {
 
                 EntitiesPresenter.this.hasMore = hasMore;
 
-                view.updateData();
+                if (entitiesRefreshListener != null) {
+                    entitiesRefreshListener.updateData();
+                }
             }
 
             @Override
@@ -241,5 +248,15 @@ public class EntitiesPresenter extends BasePresenter {
 
     public boolean isRefreshing() {
         return refreshing;
+    }
+
+    public void setEntitiesRefreshListener(EntitiesRefreshListener entitiesRefreshListener) {
+        this.entitiesRefreshListener = entitiesRefreshListener;
+    }
+
+    public void removeEntitiesRefreshListener(EntitiesRefreshListener entitiesRefreshListener) {
+        if (this.entitiesRefreshListener == entitiesRefreshListener) {
+            this.entitiesRefreshListener = null;
+        }
     }
 }

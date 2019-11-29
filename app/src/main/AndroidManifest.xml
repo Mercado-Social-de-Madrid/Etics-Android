@@ -22,6 +22,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,38 +44,51 @@
         </activity>
         <activity
             android:name=".ui.BlockActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.entity_info.EntityInfoActivity"
-            android:label="@string/entity_info" />
-        <activity android:name=".ui.intro.IntroActivity" />
+            android:label="@string/entity_info"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.intro.IntroActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.recipient_select.RecipientSelectActivity"
             android:label="@string/select_recipient"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.auth.login.LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.auth.register_web.RegisterWebActivity"
             android:label="@string/new_register"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.new_payment.NewPaymentActivity"
             android:label="@string/new_payment"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".ui.barcode.BarcodeActivity"
-            android:label="@string/qr_code_scan" />
-        <activity android:name=".ui.novelties.detail.NoveltyDetailActivity" />
-        <activity android:name=".ui.info.WebViewActivity" />
-        <activity android:name=".ui.auth.register_web.WebViewRegisterActivity" />
+            android:label="@string/qr_code_scan"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.novelties.detail.NoveltyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.info.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.auth.register_web.WebViewRegisterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.payments.PaymentsActivity"
-            android:label="@string/pending_payments" />
+            android:label="@string/pending_payments"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.transactions.TransactionsActivity"
-            android:label="@string/transactions" />
+            android:label="@string/transactions"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
             android:configChanges="orientation|screenSize"
@@ -82,20 +96,26 @@
         <activity
             android:name=".ui.get_boniatos.GetBoniatosActivity"
             android:label="@string/get_boniatos"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/account"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" /> <!-- [START firebase_service] -->
         <activity
             android:name=".ui.invitations.InvitationsActivity"
             android:label="@string/invitations"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.wallet_graphics.GraphicsActivity" />
+        <activity android:name=".ui.wallet_graphics.GraphicsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.sent_payments.SentPaymentsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/sent_payments" />
         <activity android:name=".ui.profile.pincode_change.PincodeChangeActivity"
+            android:screenOrientation="portrait"
             android:label="@string/change_pincode" />
 
         <service android:name=".messaging.MyFirebaseMessagingService">

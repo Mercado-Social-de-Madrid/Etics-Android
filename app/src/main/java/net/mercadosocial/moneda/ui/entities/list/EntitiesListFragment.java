@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crashlytics.android.Crashlytics;
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
@@ -15,9 +16,9 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.ui.entities.EntitiesChildView;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
+import net.mercadosocial.moneda.ui.entities.EntitiesRefreshListener;
 import net.mercadosocial.moneda.ui.entities.EntityListener;
 import net.mercadosocial.moneda.views.RotativeImageView;
 
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesChildView, OnMoreListener {
+public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesRefreshListener, OnMoreListener {
 
 
     private static final int NUMBER_ITEM_ASK_MORE = 3;
@@ -67,11 +68,20 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
         updateData();
 
+        getEntitiesPresenter().setEntitiesRefreshListener(this);
+
         return layout;
     }
 
     private EntitiesPresenter getEntitiesPresenter() {
         return (EntitiesPresenter) ((EntitiesFragment) getParentFragment()).getBasePresenter();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        getEntitiesPresenter().removeEntitiesRefreshListener(this);
     }
 
 
@@ -100,7 +110,13 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
             adapter = new EntitiesAdapter(getActivity(), entities, showFavsStars);
             adapter.setOnItemClickListener(this);
 
-            recyclerEntities.setAdapter(adapter);
+            if (recyclerEntities == null) {
+                // Strange error ¿?
+                Crashlytics.logException(new IllegalStateException("recyclerEntities == null when trying to set adapter"));
+            } else {
+                recyclerEntities.setAdapter(adapter);
+            }
+
 
         } else {
             boolean showFavsStars = App.getUserData(getActivity()) != null;

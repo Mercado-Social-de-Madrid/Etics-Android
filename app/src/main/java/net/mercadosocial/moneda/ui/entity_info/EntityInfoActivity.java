@@ -107,7 +107,12 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.btn_rrss_twitter:
             case R.id.btn_rrss_facebook:
             case R.id.btn_rrss_instagram:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(v.getTag()))));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(v.getTag())));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Toasty.error(this, getString(R.string.app_not_found)).show();
+                }
                 break;
         }
     }

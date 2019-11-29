@@ -10,5 +10,5 @@ public interface EntitiesView extends BaseView {
 
     void showScreenType(int currentScreen);
 
-    void updateData();
+//    void updateData();
 }
