@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MonedaMES.iml" filepath="$PROJECT_DIR$/MonedaMES.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/libs/materialbarcodescanner/materialbarcodescanner.iml" filepath="$PROJECT_DIR$/app/libs/materialbarcodescanner/materialbarcodescanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MonedaMES.iml" filepath="$PROJECT_DIR$/MonedaMES.iml" group="MonedaMES" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="MonedaMES/app" />
+      <module fileurl="file://$PROJECT_DIR$/app/libs/materialbarcodescanner/materialbarcodescanner.iml" filepath="$PROJECT_DIR$/app/libs/materialbarcodescanner/materialbarcodescanner.iml" group="MonedaMES/materialbarcodescanner" />
     </modules>
   </component>
 </project>

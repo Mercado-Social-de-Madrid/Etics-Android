@@ -186,7 +186,7 @@ public class Offer implements Serializable, Novelty {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        Novelty novelty2 = (Offer) o;
+        Novelty novelty2 = (Novelty) o;
         try {
             boolean isDateAfterDate2 = Novelty.formatDatetimeApi.parse(this.getDatePublished())
                     .before(Novelty.formatDatetimeApi.parse(novelty2.getDatePublished()));
