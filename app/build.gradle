@@ -3,8 +3,7 @@ plugins {
 }
 
 apply plugin: 'com.android.application'
-//apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
@@ -82,13 +81,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
 
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.6') {
-        transitive = true
-    }
 
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
     implementation 'com.google.firebase:firebase-config:16.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
 
     implementation 'com.android.support:multidex:1.0.3'
 
