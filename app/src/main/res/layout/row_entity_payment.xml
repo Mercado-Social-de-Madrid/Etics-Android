@@ -7,7 +7,7 @@
     android:background="@drawable/bg_row_entity_payment"
     android:padding="3dp">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_entity"
         android:layout_width="60dp"
         android:layout_height="60dp"

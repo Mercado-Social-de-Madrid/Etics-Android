@@ -1,8 +1,8 @@
 package net.mercadosocial.moneda.ui.profile;
 
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;

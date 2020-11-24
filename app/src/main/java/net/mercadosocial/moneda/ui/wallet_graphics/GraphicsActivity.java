@@ -3,8 +3,8 @@ package net.mercadosocial.moneda.ui.wallet_graphics;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

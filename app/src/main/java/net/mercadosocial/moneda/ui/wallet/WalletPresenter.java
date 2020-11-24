@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.ui.wallet;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.widget.ImageView;
 
 import net.glxn.qrgen.android.QRCode;

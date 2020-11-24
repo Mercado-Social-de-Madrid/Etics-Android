@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.ui.transactions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.mercadosocial.moneda.api.response.Meta;
 import net.mercadosocial.moneda.base.BaseInteractor;

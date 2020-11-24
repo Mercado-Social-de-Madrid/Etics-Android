@@ -14,9 +14,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,8 +26,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.crashlytics.android.Crashlytics;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -83,7 +83,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         Notification notification = Notification.parseNotification(intent.getExtras());
         if (notification == null) {
-            Crashlytics.logException(new IllegalArgumentException(
+            FirebaseCrashlytics.getInstance().recordException(new IllegalArgumentException(
                     "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(intent.getExtras())));
             return;
         }

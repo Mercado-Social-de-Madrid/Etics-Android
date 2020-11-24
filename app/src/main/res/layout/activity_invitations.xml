@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -46,7 +46,7 @@
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_invite"
                 style="@style/ButtonMes"
                 android:layout_marginLeft="15dp"

@@ -7,7 +7,7 @@ public class DebugHelper {
     // === SWITCHES DEBUG ===
 
     // Trues in production apk (automatic)
-    private static final boolean ACRA_ENABLED = true;
+    private static final boolean CRASH_REPORTS_ENABLED = false;
     private static final boolean FINAL_TTF = true;
     private static final boolean PROD_ENVIRONMENT = true;
     private static final boolean EXIT_AFTER_PAYMENT = true;
@@ -39,8 +39,8 @@ public class DebugHelper {
     public static final boolean SWITCH_FINAL_TTF = BuildConfig.DEBUG
             || FORZE_BETA_ENV_APK ? FINAL_TTF : true;
 
-    public static final boolean SWITCH_ACRA_ENABLED = BuildConfig.DEBUG
-            || FORZE_BETA_ENV_APK ? ACRA_ENABLED : true;
+    public static final boolean SWITCH_CRASH_REPORTS_ENABLED = BuildConfig.DEBUG
+            || FORZE_BETA_ENV_APK ? CRASH_REPORTS_ENABLED : true;
 
     public static final boolean SWITCH_SKIP_SPLASH = BuildConfig.DEBUG
             || FORZE_BETA_ENV_APK ? SKIP_SPLASH : false;

@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import net.mercadosocial.moneda.BuildConfig;
@@ -133,7 +133,7 @@ public class UpdateAppView extends FrameLayout implements View.OnClickListener {
                                 setVisibility(VISIBLE);
                             }
                         } catch (Exception e) {
-                            Crashlytics.logException(new Error("Wrong last_version_market_variable: " + lastVersionMarketAndroid + ", remote variable name: "+ remoteConfigVariableName));
+                            FirebaseCrashlytics.getInstance().recordException(new Error("Wrong last_version_market_variable: " + lastVersionMarketAndroid + ", remote variable name: "+ remoteConfigVariableName));
                         }
 
                         firebaseRemoteConfig.activate();

@@ -1,6 +1,6 @@
 package net.mercadosocial.moneda.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;

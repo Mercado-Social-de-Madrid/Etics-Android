@@ -15,11 +15,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.text.Html;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
@@ -175,7 +175,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Notification notification = Notification.parseNotification(extras);
         if (notification == null) {
-            Crashlytics.logException(new IllegalArgumentException(
+            FirebaseCrashlytics.getInstance().recordException(new IllegalArgumentException(
                     "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(extras)));
             return;
         }
@@ -223,7 +223,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                 Data userData = App.getUserData(this);
                 if (userData == null || !userData.isEntity()) {
-                    Crashlytics.logException(new IllegalStateException("Receiving payment notification to user profile logged in." +
+                    FirebaseCrashlytics.getInstance().recordException(new IllegalStateException("Receiving payment notification to user profile logged in." +
                             "User data info: " + userData == null ? "null" : new Gson().toJson(userData) + ". " +
                             "Notification info: " + new Gson().toJson(notification)));
                     return;

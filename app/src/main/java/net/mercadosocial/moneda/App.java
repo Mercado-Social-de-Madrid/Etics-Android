@@ -1,19 +1,19 @@
 package net.mercadosocial.moneda;
 
-import android.arch.lifecycle.DefaultLifecycleObserver;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.ProcessLifecycleOwner;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.ContentLoadingProgressBar;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
@@ -30,7 +30,6 @@ import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.MES;
 
 import es.dmoral.toasty.Toasty;
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by julio on 17/06/16.
@@ -76,18 +75,7 @@ public class App extends MultiDexApplication {
 
         loadApiKey(this);
 
-        ContentLoadingProgressBar progressBar = new ContentLoadingProgressBar(this);
-
-
-        final Fabric fabric = new Fabric.Builder(this)
-                .kits(new Crashlytics())
-                .debuggable(true)           // Enables Crashlytics debugger
-                .build();
-        Fabric.with(fabric);
-
-
-//        CrashlyticsCore.getInstance().crash();
-
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(DebugHelper.SWITCH_CRASH_REPORTS_ENABLED);
 
         Picasso.Builder builder = new Picasso.Builder(this);
         builder.downloader(new OkHttpDownloader(this, Integer.MAX_VALUE))
@@ -119,7 +107,7 @@ public class App extends MultiDexApplication {
             FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_NEWS);
             FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_OFFERS);
         } catch (Exception e) {
-            Crashlytics.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());

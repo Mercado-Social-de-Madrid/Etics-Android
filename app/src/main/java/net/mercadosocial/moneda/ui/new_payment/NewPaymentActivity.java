@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;

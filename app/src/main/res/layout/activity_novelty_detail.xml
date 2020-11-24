@@ -52,7 +52,7 @@
                     android:padding="15dp"
                     android:textSize="@dimen/text_medium" />
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_more_info"
                     style="@style/ButtonMes"
                     android:layout_margin="15dp"

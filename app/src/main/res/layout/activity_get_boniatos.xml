@@ -44,7 +44,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/currency_name_plural" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_continue_purchase"
                 style="@style/ButtonMes"
                 android:text="@string/continue_str"

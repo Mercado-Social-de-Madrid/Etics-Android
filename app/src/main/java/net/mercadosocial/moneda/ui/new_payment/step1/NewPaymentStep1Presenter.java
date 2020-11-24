@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;

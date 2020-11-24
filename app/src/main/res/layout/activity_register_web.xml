@@ -126,7 +126,7 @@
                         android:inputType="textShortMessage"
                         android:padding="10dp" />
 
-                    <android.support.v7.widget.AppCompatButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_register_person_guest"
                         style="@style/ButtonMes"
                         android:minWidth="0dp"

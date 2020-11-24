@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.ui.recipient_select;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import com.google.android.material.tabs.TabLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

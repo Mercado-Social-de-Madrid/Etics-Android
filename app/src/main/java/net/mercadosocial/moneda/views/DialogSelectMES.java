@@ -1,7 +1,7 @@
 package net.mercadosocial.moneda.views;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 
 import net.mercadosocial.moneda.App;

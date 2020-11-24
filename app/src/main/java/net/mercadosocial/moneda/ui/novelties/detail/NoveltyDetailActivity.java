@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
@@ -97,7 +97,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
                     entityName = ((Offer) novelty).getEntity().getName() + "\n";
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Crashlytics.logException(e);
+                    FirebaseCrashlytics.getInstance().recordException(e);
                 }
                 String subtitleOffer = entityName + String.format(getString(R.string.valid_until), novelty.getDate());
                 tvNoveltySubtitle.setText(subtitleOffer);

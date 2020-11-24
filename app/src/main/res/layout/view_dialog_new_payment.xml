@@ -26,7 +26,7 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_payment_cancel"
             style="@style/ButtonMes.Green"
             android:minWidth="70dp"
@@ -36,7 +36,7 @@
             android:textStyle="normal"
             android:background="@drawable/bg_button_purple_outline" />
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_payment_accept"
             style="@style/ButtonMes"
             android:layout_marginLeft="50dp"

@@ -2,13 +2,13 @@ package net.mercadosocial.moneda.ui.entities.list;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
@@ -112,7 +112,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
             if (recyclerEntities == null) {
                 // Strange error ¿?
-                Crashlytics.logException(new IllegalStateException("recyclerEntities == null when trying to set adapter"));
+                FirebaseCrashlytics.getInstance().recordException(new IllegalStateException("recyclerEntities == null when trying to set adapter"));
             } else {
                 recyclerEntities.setAdapter(adapter);
             }

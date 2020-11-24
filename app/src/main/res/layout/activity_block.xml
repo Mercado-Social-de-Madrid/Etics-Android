@@ -11,7 +11,7 @@
     tools:context="net.mercadosocial.moneda.ui.BlockActivity">
 
     <View style="@style/XpansorVert" />
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -39,14 +39,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edit_test_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/test_code" />
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_enter_test_code"
             style="@style/TextBase.White"
             android:layout_marginLeft="15dp"

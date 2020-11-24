@@ -1,8 +1,8 @@
 package net.mercadosocial.moneda.ui.recipient_select;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatDialogFragment;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

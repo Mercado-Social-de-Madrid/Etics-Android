@@ -2,7 +2,7 @@ package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.AuthApi;
@@ -107,7 +107,7 @@ public class AuthInteractor extends BaseInteractor {
                     public void onError(Throwable e) {
 
                         callback.onError(e.getMessage());
-                        Crashlytics.logException(new CustomApiException("onError", e));
+                        FirebaseCrashlytics.getInstance().recordException(new CustomApiException("onError", e));
                     }
 
                     @Override
@@ -125,7 +125,7 @@ public class AuthInteractor extends BaseInteractor {
                             ApiError apiError = ApiError.parse(response);
                             callback.onError(apiError.getMessage());
                             try {
-                                Crashlytics.logException(new CustomApiException(response.errorBody().string()));
+                                FirebaseCrashlytics.getInstance().recordException(new CustomApiException(response.errorBody().string()));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

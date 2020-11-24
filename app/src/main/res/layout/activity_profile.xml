@@ -35,7 +35,7 @@
                     android:layout_weight="0.4"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_profile"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
@@ -78,7 +78,7 @@
                     android:layout_weight="0.6"
                     android:orientation="vertical">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -88,9 +88,9 @@
                             android:layout_marginTop="15dp"
                             android:hint="@string/name"
                             android:inputType="textCapWords" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp">
@@ -100,9 +100,9 @@
                             style="@style/EditTextWhiteBg"
                             android:hint="@string/surname"
                             android:inputType="textCapWords" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp">
@@ -113,9 +113,9 @@
                             android:enabled="false"
                             android:hint="@string/nif"
                             android:inputType="textCapCharacters" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <android.support.v7.widget.AppCompatButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_save_profile"
                         style="@style/ButtonMes"
                         android:layout_gravity="center_horizontal"
@@ -142,7 +142,7 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -168,7 +168,7 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -184,7 +184,7 @@
                 <View style="@style/XpansorHoriz" />
             </LinearLayout>
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_logout"
                 style="@style/ButtonMes.Green"
                 android:layout_marginTop="20dp"
