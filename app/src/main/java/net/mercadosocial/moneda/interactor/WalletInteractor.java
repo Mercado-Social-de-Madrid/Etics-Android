@@ -43,7 +43,9 @@ public class WalletInteractor extends BaseInteractor {
     public void getWallet(final Callback callback) {
 
         if (!Util.isConnected(context)) {
-            baseView.toast(R.string.no_connection);
+            if (baseView != null) {
+                baseView.toast(R.string.no_connection);
+            }
             return;
         }
 
