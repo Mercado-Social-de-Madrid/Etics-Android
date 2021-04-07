@@ -14,4 +14,6 @@ public interface NewPaymentStep1View extends BaseView {
     void enableContinueButton(boolean enable);
 
     void showEntities(List<Entity> entities);
+
+    void showProgress(boolean show);
 }

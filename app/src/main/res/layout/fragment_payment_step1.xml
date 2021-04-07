@@ -49,6 +49,33 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_search_recipients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_edittext"
+            android:hint="@string/search"
+            android:inputType="textFilter"
+            android:lines="1"
+            android:imeOptions="actionSearch"
+            android:padding="7dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_search_recipients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_pressed_common"
+            android:padding="3dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_search" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
@@ -57,13 +84,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_90"
-            android:padding="5dp"/>
+            android:padding="5dp" />
 
         <ProgressBar
             android:id="@+id/progress_recipients"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/tv_no_results"
+            style="@style/TextBase.Purple"
+            android:text="@string/no_results"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

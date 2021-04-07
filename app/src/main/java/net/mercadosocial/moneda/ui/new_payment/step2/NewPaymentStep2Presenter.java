@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment.step2;
 
 import android.content.Context;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.WalletInteractor;
@@ -18,7 +19,9 @@ import net.mercadosocial.moneda.util.Util;
 
  public class NewPaymentStep2Presenter extends BasePresenter {
 
-     private final NewPaymentStep2View view;
+    private static final int ENTITY_NEGATIVE_BALANCE_LIMIT = -300;
+
+    private final NewPaymentStep2View view;
     private Wallet wallet;
 
     public static NewPaymentStep2Presenter newInstance(NewPaymentStep2View view, Context context) {
@@ -89,10 +92,19 @@ import net.mercadosocial.moneda.util.Util;
         }
 
         if (wallet != null) {
-            if (boniatosAmountFloat > wallet.getBalance()) {
-                view.showBoniatosAmountInputError(String.format(context.getString(R.string.yout_balance_is),
-                        wallet.getBalanceFormatted()));
-                return;
+            if (boniatosAmountFloat > 0 && boniatosAmountFloat > wallet.getBalance()) {
+                boolean isEntity = App.getUserData(context).isEntity();
+                if (isEntity) {
+                    if (wallet.getBalance() - boniatosAmountFloat < ENTITY_NEGATIVE_BALANCE_LIMIT) {
+                        view.showBoniatosAmountInputError(String.format(context.getString(R.string.balance_entity_limit_warning),
+                                ENTITY_NEGATIVE_BALANCE_LIMIT));
+                        return;
+                    }
+                } else {
+                    view.showBoniatosAmountInputError(String.format(context.getString(R.string.yout_balance_is),
+                            wallet.getBalanceFormatted()));
+                    return;
+                }
             }
         }
 
@@ -127,7 +139,8 @@ import net.mercadosocial.moneda.util.Util;
 
             if (updateSuggestedBoniatosAmount && wallet != null) {
                 Float minAmount = Math.min(getSelectedEntity().getMaxAcceptedBoniatosAmount(totalAmountFloat), wallet.getBalance());
-                view.showPresetBoniatosAmount(Util.getDecimalFormatted(minAmount, false));
+                Float minAmountPositive = Math.max(0, minAmount);
+                view.showPresetBoniatosAmount(Util.getDecimalFormatted(minAmountPositive, false));
             }
             return true;
         } else {

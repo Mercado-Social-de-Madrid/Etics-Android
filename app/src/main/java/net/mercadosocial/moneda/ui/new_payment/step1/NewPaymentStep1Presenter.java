@@ -2,6 +2,8 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
+
 import androidx.appcompat.app.AlertDialog;
 
 import net.mercadosocial.moneda.App;
@@ -10,6 +12,7 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.EntityInteractor;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentActivity;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
@@ -23,51 +26,49 @@ import es.dmoral.toasty.Toasty;
  */
 
 
- public class NewPaymentStep1Presenter extends BasePresenter {
+public class NewPaymentStep1Presenter extends BasePresenter {
 
-     private final NewPaymentStep1View view;
+    private final NewPaymentStep1View view;
     private final EntityInteractor entityInteractor;
     public List<Entity> entities = new ArrayList<>();
     private Entity entitySelected;
 
     public static NewPaymentStep1Presenter newInstance(NewPaymentStep1View view, Context context) {
 
-         return new NewPaymentStep1Presenter(view, context);
+        return new NewPaymentStep1Presenter(view, context);
 
-     }
+    }
 
-     private NewPaymentStep1Presenter(NewPaymentStep1View view, Context context) {
-         super(context, view);
+    private NewPaymentStep1Presenter(NewPaymentStep1View view, Context context) {
+        super(context, view);
 
-         this.view = view;
-         entityInteractor = new EntityInteractor(context, view);
+        this.view = view;
+        entityInteractor = new EntityInteractor(context, view);
 
-     }
+    }
 
-     public void onCreate() {
+    public void onCreate() {
 
 //         if (getNewPaymentPresenter().getPreselectedEntity() != null) {
 //             showPreselectedEntity(getNewPaymentPresenter().getPreselectedEntity());
 //         }
 
-         refreshData();
-         view.enableContinueButton(false);
-     }
+        refreshData();
+        view.enableContinueButton(false);
+    }
 
 
     public void onResume() {
 
-     }
+    }
 
-     public void refreshData() {
+    public void refreshData() {
 
         entityInteractor.getEntities(0, null, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesReceived, boolean hasMore) {
-                entities.clear();
-                entities.addAll(entitiesReceived);
-                view.showEntities(entities);
+                reloadEntities(entitiesReceived);
             }
 
             @Override
@@ -76,7 +77,37 @@ import es.dmoral.toasty.Toasty;
             }
         });
 
-     }
+    }
+
+    public void searchEntities(String text) {
+
+        FilterEntities filterEntities = null;
+        if (!TextUtils.isEmpty(text)) {
+            filterEntities = new FilterEntities();
+            filterEntities.setText(text);
+        }
+
+        view.showProgress(true);
+
+        entityInteractor.getEntities(0, filterEntities, new EntityInteractor.Callback() {
+
+            @Override
+            public void onResponse(List<Entity> entitiesReceived, boolean hasMore) {
+                reloadEntities(entitiesReceived);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    private void reloadEntities(List<Entity> entitiesReceived) {
+        entities.clear();
+        entities.addAll(entitiesReceived);
+        view.showEntities(entities);
+    }
 
     public void onEntityItemClick(int position) {
         this.entitySelected = entities.get(position);
@@ -84,15 +115,14 @@ import es.dmoral.toasty.Toasty;
     }
 
 
+    public void onContinueClick() {
+        getNewPaymentPresenter().onRecipientSelected(entitySelected);
+    }
 
-     public void onContinueClick() {
-         getNewPaymentPresenter().onRecipientSelected(entitySelected);
-     }
 
-
-     private NewPaymentPresenter getNewPaymentPresenter() {
-         return (NewPaymentPresenter) ((NewPaymentActivity) context).getBasePresenter();
-     }
+    private NewPaymentPresenter getNewPaymentPresenter() {
+        return (NewPaymentPresenter) ((NewPaymentActivity) context).getBasePresenter();
+    }
 
     public void onQRScanned(String urlId) {
 

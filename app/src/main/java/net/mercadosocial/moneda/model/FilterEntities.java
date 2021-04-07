@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterEntities {

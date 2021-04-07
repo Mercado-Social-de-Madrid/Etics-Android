@@ -61,13 +61,14 @@ public class EntityInteractor extends BaseInteractor {
 
             text = filterEntities.getText();
 
-            categoriesIdsStr = "";
-            for (int i = 0; i < filterEntities.getCategoriesIds().size(); i++) {
-                String id = filterEntities.getCategoriesIds().get(i);
-                categoriesIdsStr += id + (i < filterEntities.getCategoriesIds().size() - 1 ? "," : "");
+            if (filterEntities.getCategoriesIds() != null && !filterEntities.getCategoriesIds().isEmpty()) {
+                categoriesIdsStr = "";
+                for (int i = 0; i < filterEntities.getCategoriesIds().size(); i++) {
+                    String id = filterEntities.getCategoriesIds().get(i);
+                    categoriesIdsStr += id + (i < filterEntities.getCategoriesIds().size() - 1 ? "," : "");
+                }
             }
 
-            if (categoriesIdsStr.isEmpty()) categoriesIdsStr = null;
         } else {
             if (hasCachedEntities()) {
                 callback.onResponse(getCachedEntities(), false);

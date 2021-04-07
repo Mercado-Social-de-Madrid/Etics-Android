@@ -347,5 +347,7 @@
     <string name="published">Publicada: %s</string>
     <string name="valid_until">Válida hasta: %s</string>
     <string name="app_not_found">No se encuentra aplicación para abrir este enlace.</string>
+    <string name="balance_entity_limit_warning">Tu entidad tiene un límite negativo de %d etics</string>
+    <string name="no_results">Sin resultados</string>
 
 </resources>

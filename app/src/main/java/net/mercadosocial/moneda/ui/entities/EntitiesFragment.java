@@ -22,20 +22,9 @@ import net.mercadosocial.moneda.ui.main.MainActivity;
  * A simple {@link Fragment} subclass.
  */
 public class EntitiesFragment extends BaseFragment implements EntitiesView, EntityListener {
-    
-    private LinearLayout viewSearchEntities;
-    private EditText editSearchEntities;
-//    private ViewPager viewpagerEntities;
-    private EntitiesPresenter presenter;
-//    private EntitiesPagerAdapter pagerAdapter;
-    private MenuItem menuItemMapList;
-    private View btnSearchEntities;
-    private View progressBarEntities;
 
-    private void findViews(View layout) {
-        editSearchEntities = (EditText)layout.findViewById( R.id.edit_search_entities );
-        progressBarEntities = layout.findViewById(R.id.progress_mes);
-    }
+    private EntitiesPresenter presenter;
+    private MenuItem menuItemMapList;
 
 
 
@@ -52,7 +41,6 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         setBasePresenter(presenter);
 
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
-        findViews(layout);
 
         presenter.onCreate();
 

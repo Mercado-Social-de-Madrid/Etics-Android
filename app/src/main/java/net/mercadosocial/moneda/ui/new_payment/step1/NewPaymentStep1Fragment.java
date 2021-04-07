@@ -3,17 +3,24 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 import android.Manifest;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,6 +36,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.util.WindowUtils;
 
 import java.util.List;
 
@@ -45,6 +53,9 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     private ProgressBar progressRecipients;
     private EntitiesPaymentAdapter adapter;
     private String urlIdEntity;
+    private AppCompatImageView btnSearchRecipints;
+    private AppCompatEditText editSearchRecipients;
+    private View tvNoResults;
 
 
     public NewPaymentStep1Fragment() {
@@ -56,8 +67,20 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
         recyclerRecipients = (RecyclerView) layout.findViewById(R.id.recycler_recipients);
         progressRecipients = (ProgressBar) layout.findViewById(R.id.progress_recipients);
         btnContinue = (TextView) layout.findViewById(R.id.btn_continue);
+        btnSearchRecipints = layout.findViewById(R.id.btn_search_recipients);
+        editSearchRecipients = layout.findViewById(R.id.edit_search_recipients);
+        tvNoResults = layout.findViewById(R.id.tv_no_results);
 
         btnContinue.setOnClickListener(this);
+        btnSearchRecipints.setOnClickListener(this);
+
+        editSearchRecipients.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch();
+                return true;
+            }
+            return false;
+        });
 
     }
 
@@ -155,7 +178,17 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
             case R.id.btn_continue:
                 presenter.onContinueClick();
                 break;
+
+            case R.id.btn_search_recipients:
+                performSearch();
+                break;
         }
+    }
+
+    private void performSearch() {
+        WindowUtils.hideSoftKeyboard(getActivity());
+        String text = editSearchRecipients.getText().toString().trim();
+        presenter.searchEntities(text);
     }
 
 
@@ -181,6 +214,7 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
     @Override
     public void showEntities(List<Entity> entities) {
         progressRecipients.setVisibility(View.GONE);
+        recyclerRecipients.setVisibility(View.VISIBLE);
 
         if (adapter == null) {
             adapter = new EntitiesPaymentAdapter(getActivity(), entities);
@@ -189,6 +223,15 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
         } else {
             adapter.updateData(entities);
         }
+
+        tvNoResults.setVisibility(entities != null && !entities.isEmpty() ? View.GONE : View.VISIBLE);
+
     }
 
+    @Override
+    public void showProgress(boolean show) {
+        progressRecipients.setVisibility(View.VISIBLE);
+        recyclerRecipients.setVisibility(View.GONE);
+
+    }
 }

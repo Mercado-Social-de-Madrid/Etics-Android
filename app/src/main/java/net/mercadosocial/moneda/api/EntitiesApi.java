@@ -12,7 +12,7 @@ import rx.Observable;
 
 public interface EntitiesApi {
 
-    int PAGE_LIMIT_ENTITIES = 500; // for map screen all entities are needed.
+    int PAGE_LIMIT_ENTITIES = 2000; // for map screen all entities are needed.
 
     @GET("entities/?limit=" + PAGE_LIMIT_ENTITIES)
     Observable<Response<EntitiesResponse>> getEntities(@Query("offset") int offset,
