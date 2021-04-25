@@ -15,5 +15,6 @@
     <dimen name="text_extra_large">20sp</dimen>
 
     <dimen name="text_title_comfortaa">21sp</dimen>
+    <dimen name="padding_map">20dp</dimen>
 
 </resources>

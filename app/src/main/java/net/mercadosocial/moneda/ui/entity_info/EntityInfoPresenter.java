@@ -2,12 +2,14 @@ package net.mercadosocial.moneda.ui.entity_info;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
@@ -56,6 +58,12 @@ import es.dmoral.toasty.Toasty;
              if (entity.getId().equals(data.getEntity().getId())) {
                  view.hidePaymentButton(); // Cannot pay myself
              }
+         }
+
+
+         boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
+         if (!isMadrid) {
+             view.hidePaymentButton();
          }
      }
 

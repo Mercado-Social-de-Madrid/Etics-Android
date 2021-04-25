@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
@@ -17,7 +15,6 @@ import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.util.DateUtils;
 
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +38,8 @@ public class ApiClient {
     public static final String BASE_URL_PRODUCTION = "https://app.mercadosocial.net";
     public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
+    public static final String BASE_URL_REGION_MURCIA = "http://app.mercadosocial.net:8080";
+
     public static final String BASE_URL_TOOL_PRODUCTION_MADRID = "https://gestionmadrid.mercadosocial.net/";
     public static final String BASE_URL_TOOL_DEBUG = "https://gestionmadrid.mercadosocial.net/";
 
@@ -54,17 +53,23 @@ public class ApiClient {
 
     private static Retrofit sharedInstance;
 
-    private static JsonDeserializer<Date> jsonDateDeserializer = new JsonDeserializer<Date>() {
-        public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    private static String baseUrl = BASE_API_URL;
 
-            try {
-                return DateUtils.formatDateApi.parse(((JsonObject) json).get("initDate").getAsString());
-            } catch (ParseException e) {
-                throw new JsonParseException(e);
-            }
+    private static JsonDeserializer<Date> jsonDateDeserializer = (json, typeOfT, context) -> {
 
+        try {
+            return DateUtils.formatDateApi.parse(((JsonObject) json).get("initDate").getAsString());
+        } catch (ParseException e) {
+            throw new JsonParseException(e);
         }
+
     };
+
+    public static void setBaseUrl(String url) {
+        sharedInstance = null;
+        baseUrl = url + API_PATH;
+        getInstance();
+    }
 
     public static Retrofit getInstance() {
         if (sharedInstance == null) {
@@ -79,7 +84,7 @@ public class ApiClient {
 
 
             sharedInstance = new Retrofit.Builder()
-                    .baseUrl(BASE_API_URL)
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -114,7 +119,7 @@ public class ApiClient {
             requestBuilder.method(original.method(), original.body());
             okhttp3.Request request = requestBuilder.build();
 
-            HttpUrl url = request.url().newBuilder().addQueryParameter("city", MES.cityCode).build();
+            HttpUrl url = request.url().newBuilder().addQueryParameter("city", MES.getCityCodeHeaderParam()).build();
             request = request.newBuilder().url(url).build();
 
             okhttp3.Response response = chain.proceed(request);

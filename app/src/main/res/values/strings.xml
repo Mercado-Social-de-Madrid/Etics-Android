@@ -203,6 +203,9 @@
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>
     <string name="youtube">Youtube</string>
+    <string name="vimeo">Vimeo</string>
+    <string name="instagram">Instagram</string>
+
     <string name="email_contact_subject">Contacto desde la app Android</string>
     <string name="congratulations">¡Enhorabuena!</string>
     <string name="bonification_received_message"><![CDATA[
@@ -308,7 +311,6 @@
     <string name="test_code">Código de pruebas</string>
     <string name="enter_test_code">Si tienes acceso al entorno de pruebas introduce aquí el código:</string>
     <string name="invalid_code">Código inválido</string>
-    <string name="vimeo">Vimeo</string>
     <string name="user_data">Datos de usuari@</string>
     <string name="invitations">Invitaciones</string>
     <string name="invitations_intro">Puedes invitar a tus contactos para que prueben por un tiempo el sistema de bonificaciones: etics</string>

@@ -1,8 +1,10 @@
 package net.mercadosocial.moneda.ui.intro;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -51,7 +53,7 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
 
         switch (v.getId()) {
             case R.id.btn_intro_next:
-                viewPager.setCurrentItem(viewPager.getCurrentItem()+1, true);
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
                 break;
         }
 

@@ -50,8 +50,8 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 //                linearLayoutManager.getOrientation());
 //        recyclerNovelties.addItemDecoration(dividerItemDecoration);
 
-        List<Novelty> novelties = generateMockNovelties();
-        showNovelties(novelties);
+//        List<Novelty> novelties = generateMockNovelties();
+//        showNovelties(novelties);
 
         setHasOptionsMenu(false);
 
@@ -64,6 +64,12 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
     public void onDestroyView() {
         super.onDestroyView();
         adapter = null;
+    }
+
+    @Override
+    public void refreshData() {
+        super.refreshData();
+        presenter.refreshData();
     }
 
     private List<Novelty> generateMockNovelties() {

@@ -58,8 +58,11 @@ public class App extends MultiDexApplication {
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
 
     // FIREBASE MESSAGING
-    private static final String TOPIC_NEWS = "news";
-    private static final String TOPIC_OFFERS = "offers";
+    public static final String TOPIC_NEWS_MADRID = "news";
+    public static final String TOPIC_OFFERS_MADRID = "offers";
+
+    public static final String TOPIC_NEWS_MURCIA = "news_mur";
+    public static final String TOPIC_OFFERS_MURCIA = "offers_mur";
 
     public static boolean isInForeground;
 
@@ -103,13 +106,6 @@ public class App extends MultiDexApplication {
             refreshUserData();
         }
 
-        try {
-            FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_NEWS);
-            FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_OFFERS);
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-        }
-
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 
         loadFirstTime();
@@ -134,7 +130,7 @@ public class App extends MultiDexApplication {
     }
 
     private void loadMESCity() {
-        MES.cityCode = getPrefs(this).getString(SHARED_MES_CODE_SAVED, null);
+        MES.setCityCode(getPrefs(this).getString(SHARED_MES_CODE_SAVED, null));
     }
 
     private void loadFirstTime() {

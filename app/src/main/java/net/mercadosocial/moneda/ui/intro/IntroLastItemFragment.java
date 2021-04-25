@@ -57,10 +57,11 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
 
 
         // Temporal, autoselect Madrid market
-        MES mesSelected = MES.mesList.get(0);
-        getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
-        MES.cityCode = mesSelected.getCode();
-        getActivity().finish();
+//        MES mesSelected = MES.mesList.get(0);
+//        getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
+//        MES.setCityCode(mesSelected.getCode());
+
+//        getActivity().finish();
 
         return layout;
     }
@@ -75,7 +76,7 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
 
                 MES mesSelected = selectMESView.getSelectedMES();
                 getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
-                MES.cityCode = mesSelected.getCode();
+                MES.setCityCode(mesSelected.getCode());
 
                 getActivity().finish();
                 break;

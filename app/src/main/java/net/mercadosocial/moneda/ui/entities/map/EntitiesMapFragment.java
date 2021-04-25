@@ -2,7 +2,9 @@ package net.mercadosocial.moneda.ui.entities.map;
 
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -33,11 +36,13 @@ import java.util.List;
 public class EntitiesMapFragment extends BaseFragment implements EntitiesRefreshListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
 
-    private final LatLng pointCenterMadrid = new LatLng(40.4378693, -3.8199624);
+//    private final LatLng pointCenterMadrid = new LatLng(40.4378693, -3.8199624);
+
     private EntityListener entityListener;
     private GoogleMap mMap;
 
     List<Marker> markersEntities = new ArrayList<>();
+    private boolean mapLoaded;
 
     public EntitiesMapFragment() {
         // Required empty public constructor
@@ -104,9 +109,33 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesRefresh
 
 //        mMap.setOnMarkerClickListener(this);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pointCenterMadrid, 8));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pointCenterMadrid, 8));
 
         updateData();
+
+        mMap.setOnMapLoadedCallback(() -> {
+            mapLoaded = true;
+            updateCamera();
+        });
+    }
+
+    private void updateCamera() {
+
+        if (!mapLoaded) {
+            return;
+        }
+
+        if (markersEntities == null || markersEntities.isEmpty()) {
+            return;
+        }
+
+        LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
+        for (Marker marker : markersEntities) {
+            latLngBoundsBuilder.include(marker.getPosition());
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsBuilder.build(),
+                getResources().getDimensionPixelSize(R.dimen.padding_map)));
     }
 
     private EntitiesPresenter getEntitiesPresenter() {
@@ -117,6 +146,7 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesRefresh
     public void updateData() {
 
         showEntities(getEntitiesPresenter().getEntities());
+        updateCamera();
 
     }
 

@@ -13,8 +13,8 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 250
-        versionName "2.5.0"
+        versionCode 253
+        versionName "2.5.3"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
@@ -82,10 +82,10 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.5'
 
 
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
-    implementation 'com.google.firebase:firebase-config:16.5.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-config'
+    implementation 'com.google.firebase:firebase-crashlytics'
 
     implementation 'androidx.multidex:multidex:2.0.0'
 

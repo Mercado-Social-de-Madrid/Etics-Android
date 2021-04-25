@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">vps530178.ovh.net</domain>
         <domain includeSubdomains="true">vps632673.ovh.net</domain>
+        <domain includeSubdomains="true">app.mercadosocial.net</domain>
     </domain-config>
 </network-security-config>

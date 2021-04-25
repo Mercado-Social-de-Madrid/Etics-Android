@@ -14,5 +14,6 @@
         android:gravity="center"
         android:textSize="@dimen/text_extra_large"
         android:textAllCaps="true"
+        android:padding="10dp"
         app:backgroundTint="@color/bg_button_green_selectable"/>
 </LinearLayout>
