@@ -45,7 +45,7 @@ public class MES {
             }
         }
 
-        return -1;
+        return 0;
     }
 
     public static String getMESNameByCode(String codeMES) {

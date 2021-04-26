@@ -6,15 +6,19 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
 import net.mercadosocial.moneda.util.Util;
 
@@ -38,6 +42,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private ImageView btnRrssTwitter;
     private ImageView btnRrssFacebook;
     private ImageView btnRrssInstagram;
+    private View viewEticsInfo;
 
 
     private void findViews() {
@@ -56,6 +61,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         btnRrssTwitter = (ImageView)findViewById( R.id.btn_rrss_twitter );
         btnRrssFacebook = (ImageView)findViewById( R.id.btn_rrss_facebook );
         btnRrssInstagram = (ImageView)findViewById( R.id.btn_rrss_instagram );
+
+        viewEticsInfo = findViewById(R.id.view_etics_info);
 
         btnNewPayment.setOnClickListener(this);
         imgHeart.setOnClickListener(this);
@@ -174,6 +181,11 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void hidePaymentButton() {
         btnNewPayment.setVisibility(View.GONE);
+
+        boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
+        if (!isMadrid) {
+            viewEticsInfo.setVisibility(View.GONE);
+        }
     }
 
     @Override

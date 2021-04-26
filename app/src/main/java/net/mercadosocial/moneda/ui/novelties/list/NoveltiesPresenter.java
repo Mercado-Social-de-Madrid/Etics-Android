@@ -73,6 +73,7 @@ public class NoveltiesPresenter extends BasePresenter {
 
             @Override
             public void onError(String message) {
+                baseView.hideProgressDialog();
                 Toasty.error(context, message).show();
             }
         });

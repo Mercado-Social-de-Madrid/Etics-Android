@@ -351,5 +351,6 @@
     <string name="app_not_found">No se encuentra aplicación para abrir este enlace.</string>
     <string name="balance_entity_limit_warning">Tu entidad tiene un límite negativo de %d etics</string>
     <string name="no_results">Sin resultados</string>
+    <string name="no_novelties">De momento no hay noticias y ofertas.\n¡En breve lanzaremos la primera!</string>
 
 </resources>

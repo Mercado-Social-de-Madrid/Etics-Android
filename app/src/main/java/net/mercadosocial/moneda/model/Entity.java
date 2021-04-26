@@ -149,7 +149,7 @@ public class Entity implements Serializable {
         }
 
         if (images.isEmpty()) {
-            images.add(getLogo());
+            images.add("https://wrongpathtoshowerrorimage.workaround");
         }
 
         return images;

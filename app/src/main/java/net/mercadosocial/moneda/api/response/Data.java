@@ -67,7 +67,7 @@ public class Data {
         }
 
         if (!TextUtils.isEmpty(cityCode)) {
-            return MES.mesList.get(MES.getMESPositionByCode(cityCode)).getName();
+            return MES.getMESbyCode(cityCode).getName();
         } else {
             return null;
         }

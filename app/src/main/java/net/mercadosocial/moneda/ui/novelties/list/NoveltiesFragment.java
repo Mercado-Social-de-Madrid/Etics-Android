@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -26,6 +27,7 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
     private RecyclerView recyclerNovelties;
     private NoveltiesAdapter adapter;
     private NoveltiesPresenter presenter;
+    private TextView tvEmptyState;
 
     public NoveltiesFragment() {
         // Required empty public constructor
@@ -33,6 +35,7 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
 
     private void findViews(View layout) {
         recyclerNovelties = (RecyclerView) layout.findViewById(R.id.recycler_novelties);
+        tvEmptyState = layout.findViewById(R.id.tv_empty_state);
     }
 
     @Override
@@ -100,6 +103,8 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         } else {
             adapter.updateData(novelties);
         }
+
+        tvEmptyState.setVisibility(novelties != null && !novelties.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
     @Override
