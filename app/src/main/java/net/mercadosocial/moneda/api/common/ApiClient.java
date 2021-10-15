@@ -39,7 +39,7 @@ public class ApiClient {
     public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
 
 //    public static final String BASE_URL_REGION_MURCIA = "http://app.mercadosocial.net:8080";
-    public static final String BASE_URL_REGION_MURCIA = "https://triskelapps.es/apps/mesmurcia";
+    public static final String BASE_URL_REGION_MURCIA = "https://triskelapps.com/apps/mesmurcia";
 
 
     public static final String BASE_URL_TOOL_PRODUCTION_MADRID = "https://gestionmadrid.mercadosocial.net/";
