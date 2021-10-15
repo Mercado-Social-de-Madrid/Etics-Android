@@ -143,7 +143,7 @@ public class News implements Serializable, Novelty {
     }
 
     public String getBanner_image() {
-        return ApiClient.BASE_URL + banner_image;
+        return ApiClient.baseUrl + banner_image;
     }
 
     public void setBanner_image(String banner_image) {

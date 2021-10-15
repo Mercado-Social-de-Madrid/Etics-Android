@@ -48,7 +48,7 @@ public class Offer implements Serializable, Novelty {
     }
 
     public String getBanner_image() {
-        return ApiClient.BASE_URL + banner_image;
+        return ApiClient.baseUrl + banner_image;
     }
 
     public void setBanner_image(String banner_image) {
@@ -56,7 +56,7 @@ public class Offer implements Serializable, Novelty {
     }
 
     public String getBanner_thumbnail() {
-        return ApiClient.BASE_URL + banner_thumbnail;
+        return ApiClient.baseUrl + banner_thumbnail;
     }
 
     public void setBanner_thumbnail(String banner_thumbnail) {

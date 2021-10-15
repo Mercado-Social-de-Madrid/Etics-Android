@@ -81,11 +81,11 @@ public class Entity implements Serializable {
     }
 
     public String getLogoThumbnail() {
-        return ApiClient.BASE_URL + logo_thumbnail;
+        return ApiClient.baseUrl + logo_thumbnail;
     }
 
     public String getLogo() {
-        return ApiClient.BASE_URL + logo;
+        return ApiClient.baseUrl + logo;
     }
 
     public String getLogoThumbnailOrCover() {

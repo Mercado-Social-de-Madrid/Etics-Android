@@ -55,7 +55,8 @@ public class ApiClient {
 
     private static Retrofit sharedInstance;
 
-    private static String baseUrl = BASE_API_URL;
+    public static String baseUrl = BASE_URL;
+    public static String baseApiUrl = BASE_API_URL;
 
     private static JsonDeserializer<Date> jsonDateDeserializer = (json, typeOfT, context) -> {
 
@@ -67,9 +68,11 @@ public class ApiClient {
 
     };
 
+
     public static void setBaseUrl(String url) {
         sharedInstance = null;
-        baseUrl = url + API_PATH;
+        baseUrl = url;
+        baseApiUrl = url + API_PATH;
         getInstance();
     }
 
@@ -86,7 +89,7 @@ public class ApiClient {
 
 
             sharedInstance = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                    .baseUrl(baseApiUrl)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

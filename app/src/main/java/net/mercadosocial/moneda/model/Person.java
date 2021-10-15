@@ -78,11 +78,11 @@ public class Person {
     }
 
     public String getProfile_image() {
-        return ApiClient.BASE_URL + profile_image;
+        return ApiClient.baseUrl + profile_image;
     }
 
     public String getProfile_thumbnail() {
-        return ApiClient.BASE_URL + profile_thumbnail;
+        return ApiClient.baseUrl + profile_thumbnail;
     }
 
     public void setProfile_image(String profile_image) {
