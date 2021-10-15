@@ -36,7 +36,7 @@ public class GalleryItemFragment extends Fragment {
 
         String imageUrl = getArguments().getString(ARG_IMAGE_URL);
 
-        Picasso.with(getActivity())
+        Picasso.get()
                 .load(imageUrl)
                 .error(R.mipmap.img_mes_default_banner_2)
                 .into(imageView);

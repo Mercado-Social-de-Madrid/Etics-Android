@@ -112,7 +112,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
 
         if (Util.isValidLink(image)) {
             imgNovelty.setVisibility(View.VISIBLE);
-            Picasso.with(this)
+            Picasso.get()
                     .load(image)
                     .placeholder(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.img_mes_header : R.mipmap.ic_offer_semitransp)
                     .resizeDimen(R.dimen.width_image_standard, R.dimen.height_image_small)

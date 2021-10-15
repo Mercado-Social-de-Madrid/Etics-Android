@@ -55,7 +55,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         holder.tvEntityCategory.setVisibility(View.GONE);
 
         String urlImageCover = entity.getImageCover();
-        Picasso.with(context)
+        Picasso.get()
                 .load(urlImageCover)
                 .placeholder(R.mipmap.img_mes_default_banner_2)
                 .error(R.mipmap.img_mes_default_banner_2)

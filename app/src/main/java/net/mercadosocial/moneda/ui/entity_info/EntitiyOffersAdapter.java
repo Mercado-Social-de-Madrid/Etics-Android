@@ -54,7 +54,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
         holder.tvOfferDate.setText(String.format(context.getString(R.string.valid_until), offer.getEndDateFormatted()));
 //
         String image = offer.getImageNoveltyUrl();
-        Picasso.with(context)
+        Picasso.get()
                 .load(image)
 //                .placeholder(R.mipmap.img_default_grid)
                 .error(R.mipmap.ic_mes_v2_144)

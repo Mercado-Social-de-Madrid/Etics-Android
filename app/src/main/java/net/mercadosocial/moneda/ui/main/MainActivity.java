@@ -354,6 +354,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                                 updateMenuViewsByMES();
                                 onMESCityChanged();
                                 presenter.onLogoutClick();
+                                bottomNavView.setSelectedItemId(R.id.navigation_entities);
                             })
                             .show();
                     break;
@@ -583,7 +584,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (userData != null) {
             tvUserName.setText(userData.getName(true));
             String logoUrl = userData.getLogoThumbnail();
-            Picasso.with(this)
+            Picasso.get()
                     .load(logoUrl)
                     .placeholder(R.mipmap.ic_avatar_2)
                     .transform(new CircleTransform())

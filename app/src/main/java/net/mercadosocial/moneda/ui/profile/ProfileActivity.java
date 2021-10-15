@@ -139,7 +139,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
            tvProfileType.setText(R.string.consumer);
         }
 
-        Picasso.with(this)
+        Picasso.get()
                 .load(person.getProfile_image())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)
@@ -160,7 +160,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         editSurnamesPerson.setVisibility(View.GONE);
         btnSaveProfile.setVisibility(View.GONE);
 
-        Picasso.with(this)
+        Picasso.get()
                 .load(entity.getLogoThumbnailOrCover())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)

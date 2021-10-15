@@ -17,7 +17,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
-import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.api.response.Data;
@@ -81,7 +81,7 @@ public class App extends MultiDexApplication {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(DebugHelper.SWITCH_CRASH_REPORTS_ENABLED);
 
         Picasso.Builder builder = new Picasso.Builder(this);
-        builder.downloader(new OkHttpDownloader(this, Integer.MAX_VALUE))
+        builder.downloader(new OkHttp3Downloader(this, Integer.MAX_VALUE))
                 .memoryCache(new LruCache(10000000));
         Picasso built = builder.build();
 //        built.setIndicatorsEnabled(true);

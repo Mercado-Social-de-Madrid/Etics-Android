@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.new_payment.step1;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -158,17 +161,28 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
 
     private void startScan() {
 
-        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
-                .withActivity(getActivity())
-                .withEnableAutoFocus(true)
-                .withBleepEnabled(false)
-                .withBackfacingCamera()
-                .withText(getString(R.string.focus_qr_code_entity))
-                .withOnlyQRCodeScanning()
-//                .withCenterTracker()
-                .withResultListener(barcode -> presenter.onQRScanned(barcode.rawValue))
-                .build();
-        materialBarcodeScanner.startScan();
+        // https://github.com/journeyapps/zxing-Android-embedded
+        IntentIntegrator.forSupportFragment(this)
+                .setBeepEnabled(true)
+                .setPrompt(getString(R.string.focus_qr_code_entity))
+                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+                .setOrientationLocked(false)
+                .initiateScan();
+
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() != null) {
+                presenter.onQRScanned(result.getContents());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 

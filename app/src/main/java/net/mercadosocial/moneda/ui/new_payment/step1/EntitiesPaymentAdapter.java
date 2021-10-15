@@ -59,7 +59,7 @@ public class EntitiesPaymentAdapter extends RecyclerView.Adapter<EntitiesPayment
 
         if (logoUrl != null) {
 
-            Picasso.with(context)
+            Picasso.get()
                     .load(logoUrl)
 //              .placeholder(R.mipmap.img_default_grid)
                     .placeholder(R.mipmap.ic_mes_v2_144_semitransp)
