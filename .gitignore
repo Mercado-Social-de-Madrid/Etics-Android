@@ -9,3 +9,4 @@
 .externalNativeBuild
 /res_hidden
 /.idea/sonarlint/issuestore/
+/.idea/

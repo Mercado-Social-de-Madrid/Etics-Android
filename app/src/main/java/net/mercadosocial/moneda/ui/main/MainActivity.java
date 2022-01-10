@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView btnLogin;
     private TextView btnSignup;
     private BottomNavigationView bottomNavView;
-    private TextView tvUserName;
+    private TextView tvName;
     private View viewEnterButtons;
     private View btnLogout;
     private View viewUserInfo;
@@ -86,26 +86,28 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private MenuItem menuItemInvitations;
     private TextView tvMES;
     private TextView tvGuestInfo;
+    private TextView tvUsername;
 
     private void findViews() {
 
 
-        bottomNavView = (BottomNavigationView) findViewById(R.id.navigation_bottom_view);
+        bottomNavView = findViewById(R.id.navigation_bottom_view);
         bottomNavView.setOnNavigationItemSelectedListener(this);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        btnLogin = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
-        btnSignup = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_singup);
-        tvUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_user_name);
-        tvMES = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_mes);
-        tvGuestInfo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_guest_info);
+        btnLogin = navigationView.getHeaderView(0).findViewById(R.id.btn_login);
+        btnSignup = navigationView.getHeaderView(0).findViewById(R.id.btn_singup);
+        tvName = navigationView.getHeaderView(0).findViewById(R.id.tv_name);
+        tvUsername = navigationView.getHeaderView(0).findViewById(R.id.tv_username);
+        tvMES = navigationView.getHeaderView(0).findViewById(R.id.tv_mes);
+        tvGuestInfo = navigationView.getHeaderView(0).findViewById(R.id.tv_guest_info);
         viewEnterButtons = navigationView.getHeaderView(0).findViewById(R.id.view_enter_buttons);
         viewUserInfo = navigationView.getHeaderView(0).findViewById(R.id.view_user_info);
         btnLogout = navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
-        imgAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
-        btnGoToProfile = (TextView) navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
+        imgAvatar = navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        btnGoToProfile = navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
 
         menuItemInvitations = navigationView.getMenu().findItem(R.id.menuItem_invitations);
 
@@ -233,7 +235,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         View view = LayoutInflater.from(this)
                 .inflate(R.layout.view_pending_payments_badge, bottomNavView, false);
 
-        tvPendingPaymentsBadge = (TextView) view.findViewById(R.id.tv_number_pending_payments_main);
+        tvPendingPaymentsBadge = view.findViewById(R.id.tv_number_pending_payments_main);
         itemView.addView(view);
 
 //        showNewNewsMessage();
@@ -582,7 +584,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         viewUserInfo.setVisibility(userData == null ? View.GONE : View.VISIBLE);
 
         if (userData != null) {
-            tvUserName.setText(userData.getName(true));
+            tvName.setText(userData.getName(true));
+            tvUsername.setText(userData.getUsername());
             String logoUrl = userData.getLogoThumbnail();
             Picasso.get()
                     .load(logoUrl)
