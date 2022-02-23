@@ -56,22 +56,13 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
 
         setHasOptionsMenu(false);
 
-        SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(getActivity(), new SoftKeyboardManager.OnSoftKeyboardChangedListener() {
-            @Override
-            public void onSoftKeyboardVisible(boolean visible) {
-                btnContinue.setVisibility(visible ? View.GONE : View.VISIBLE);
-            }
-        });
+        SoftKeyboardManager.newInstance().configureSoftKeyboardVisibilityBehaviour(
+                getActivity(), visible -> btnContinue.setVisibility(visible ? View.GONE : View.VISIBLE));
 
         presenter.onCreate();
 
         // Dont know why second edittext gets focus when coming from entity info. fixed with this
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                editTotalAmountEur.requestFocus();
-            }
-        }, 20);
+        new Handler().postDelayed(() -> editTotalAmountEur.requestFocus(), 20);
 
         return layout;
     }
