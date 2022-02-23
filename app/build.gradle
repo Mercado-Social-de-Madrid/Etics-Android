@@ -7,14 +7,14 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "net.mercadosocial.moneda"
-        minSdkVersion 17
-        targetSdkVersion 30
-        versionCode 260
-        versionName "2.6.0"
+        minSdkVersion 19
+        targetSdkVersion 31
+        versionCode 261
+        versionName "2.6.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
@@ -34,11 +34,11 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-
-    lintOptions {
-        checkReleaseBuilds false
+    lint {
         abortOnError false
+        checkReleaseBuilds false
     }
+
 }
 
 
@@ -81,7 +81,7 @@ dependencies {
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.1'
 
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.maps.android:android-maps-utils:0.6.2'
 
 

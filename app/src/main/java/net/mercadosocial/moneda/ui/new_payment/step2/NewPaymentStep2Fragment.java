@@ -138,8 +138,9 @@ public class NewPaymentStep2Fragment extends BaseFragment implements NewPaymentS
 
     @Override
     public void showPresetBoniatosAmount(String amount) {
-        editBoniatosAmount.setText(amount);
-        editBoniatosAmount.selectAll();
+        // Requirement changed. Avoid etics autocomplete
+//        editBoniatosAmount.setText(amount);
+//        editBoniatosAmount.selectAll();
     }
 
 }

@@ -92,24 +92,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         switch (notification.getType()) {
             case Notification.TYPE_PAYMENT:
                 NewPaymentDialog.newInstance(notification)
-                        .setOnCloseListener(new OnCloseListener() {
-                            @Override
-                            public void onClose() {
-                                refreshData();
-                            }
-                        }).show(getSupportFragmentManager(), null);
+                        .setOnCloseListener(() -> refreshData()).show(getSupportFragmentManager(), null);
                 break;
 
             case Notification.TYPE_TRANSACTION:
                 String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), true);
                 if (notification.getIs_bonification()) {
                     BonusDialog bonusDialog = BonusDialog.newInstance(notification);
-                    bonusDialog.setOnDismissOrCancelListener(new OnCloseListener() {
-                        @Override
-                        public void onClose() {
-                            refreshData();
-                        }
-                    });
+                    bonusDialog.setOnDismissOrCancelListener(() -> refreshData());
                     bonusDialog.show(getSupportFragmentManager(), null);
 //                    showBonificationDialog(amountFormatted);
                 } else {

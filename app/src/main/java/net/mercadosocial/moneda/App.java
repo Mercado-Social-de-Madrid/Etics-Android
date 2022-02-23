@@ -1,20 +1,19 @@
 package net.mercadosocial.moneda;
 
-import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.ContentLoadingProgressBar;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
+
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
@@ -87,8 +86,6 @@ public class App extends MultiDexApplication {
 //        built.setIndicatorsEnabled(true);
         built.setLoggingEnabled(true);
         Picasso.setSingletonInstance(built);
-
-//        Log.i(TAG, "token:" + FirebaseInstanceId.getInstance().getToken());
 
         Toasty.Config.getInstance()
                 .setErrorColor(ContextCompat.getColor(this, R.color.grey_toast))

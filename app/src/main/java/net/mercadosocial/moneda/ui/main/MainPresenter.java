@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -151,27 +152,27 @@ import java.util.List;
     private void sendDevice() {
 
         String model = Build.MANUFACTURER + " " + Build.MODEL;
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w(TAG, "getInstanceId failed", task.getException());
-                        return;
-                    }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
 
-                    Device device = new Device(model, task.getResult().getToken());
-                    new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
-                        @Override
-                        public void onSuccess(Integer id) {
-                            getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
-                        }
+            if (!task.isSuccessful()) {
+                Log.w(TAG, "getInstanceId failed", task.getException());
+                return;
+            }
 
-                        @Override
-                        public void onError(String message) {
-                            Log.e(TAG, "onError: error sending device token");
-                        }
-                    });
+            Device device = new Device(model, task.getResult());
+            new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
+                @Override
+                public void onSuccess(Integer id) {
+                    getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
+                }
 
-                });
+                @Override
+                public void onError(String message) {
+                    Log.e(TAG, "onError: error sending device token");
+                }
+            });
+
+        });
 
     }
 }
