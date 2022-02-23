@@ -162,7 +162,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
 
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             channel.setDescription(description);
             channel.setImportance(importance);
             notificationManager.createNotificationChannel(channel);
