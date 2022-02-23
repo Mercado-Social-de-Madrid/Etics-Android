@@ -208,14 +208,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 intentActionButton1 = new Intent(OperationService.ACTION_ACCEPT_PAYMENT);
                 intentActionButton1.putExtras(extras);
                 PendingIntent pendingIntentActionButton1 = PendingIntent.getService(this, 0, intentActionButton1,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                 notificationBuilder.addAction(R.mipmap.ic_accept, getString(R.string.accept), pendingIntentActionButton1);
 
                 intentActionButton2 = new Intent(OperationService.ACTION_REJECT_PAYMENT);
                 intentActionButton2.putExtras(extras);
                 PendingIntent pendingIntentActionButton2 = PendingIntent.getService(this, 0, intentActionButton2,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                 notificationBuilder.addAction(R.mipmap.ic_cancel, getString(R.string.reject), pendingIntentActionButton2);
 
@@ -275,7 +275,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(extras);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                 notificationBuilder.setContentIntent(pendingIntent);
 

@@ -191,6 +191,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (requestCode) {
             case REQ_CODE_INTRO:
                 showFragment(0);
+                updateMenuViewsByMES();
                 break;
 
             case REQ_CODE_PROFILE:

@@ -13,8 +13,8 @@ android {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 258
-        versionName "2.5.8"
+        versionCode 260
+        versionName "2.6.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
