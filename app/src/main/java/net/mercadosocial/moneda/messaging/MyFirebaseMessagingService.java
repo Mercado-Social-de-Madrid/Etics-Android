@@ -133,6 +133,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (App.isInForeground) {
             Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
             intent.putExtras(bundle);
+            intent.setPackage(getPackageName());
             sendBroadcast(intent);
         } else {
             createNotificationChannel();
