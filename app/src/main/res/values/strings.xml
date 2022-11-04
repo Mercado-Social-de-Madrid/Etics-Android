@@ -352,5 +352,6 @@
     <string name="balance_entity_limit_warning">Tu entidad tiene un límite negativo de %d etics</string>
     <string name="no_results">Sin resultados</string>
     <string name="no_novelties">De momento no hay noticias y ofertas.\n¡En breve lanzaremos la primera!</string>
+    <string name="end_etics_temporal_msg">El la ultima asamblea de 2022 se acordo la desaparición de los etics y generar y nuevas funciones para la app.\n\nSi tienes etics, ¡no te asustes que no te vas a quedar sin ellos! \nEl primer paso es que a partir de ahora no se podrán adquirir nuevos etics pero sí podrás seguir gastando los que tienes en las entidades que los aceptan :).\n\nPronto te informaremos de los siguientes pasos.</string>
 
 </resources>

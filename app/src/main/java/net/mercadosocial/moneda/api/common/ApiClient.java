@@ -129,16 +129,16 @@ public class ApiClient {
 
             okhttp3.Response response = chain.proceed(request);
 
-            int tryCount = 0;
-            while (!response.isSuccessful() && tryCount < 3) {
-
-                Log.d("intercept", "Request is not successful - " + tryCount);
-
-                tryCount++;
-
-                // retry the request
-                response = chain.proceed(request);
-            }
+//            int tryCount = 0;
+//            while (!response.isSuccessful() && tryCount < 3) {
+//
+//                Log.d("intercept", "Request is not successful - " + tryCount);
+//
+//                tryCount++;
+//
+//                // retry the request
+//                response = chain.proceed(request);
+//            }
 
             // otherwise just pass the original response on
             return response;
