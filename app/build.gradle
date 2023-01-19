@@ -38,6 +38,7 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+    namespace 'net.mercadosocial.moneda'
 
 }
 
