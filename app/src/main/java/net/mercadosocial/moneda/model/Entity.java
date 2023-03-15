@@ -170,25 +170,11 @@ public class Entity implements Serializable {
     }
 
     public Float getBonus_percent_entity() {
-        if (bonus_percent_entity == null) {
-            return 0f;
-        }
-        return bonus_percent_entity;
-    }
-
-    public void setBonus_percent_entity(Float bonus_percent_entity) {
-        this.bonus_percent_entity = bonus_percent_entity;
+        return 0f;
     }
 
     public Float getBonus_percent_general() {
-        if (bonus_percent_general == null) {
-            return 0f;
-        }
-        return bonus_percent_general;
-    }
-
-    public void setBonus_percent_general(Float bonus_percent_general) {
-        this.bonus_percent_general = bonus_percent_general;
+        return 0f;
     }
 
     public List<String> getCategories() {

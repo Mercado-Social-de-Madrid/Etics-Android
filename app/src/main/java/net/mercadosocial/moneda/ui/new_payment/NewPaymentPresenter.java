@@ -174,12 +174,9 @@ public class NewPaymentPresenter extends BasePresenter {
                 .setMessage(String.format(context.getString(R.string.payment_done_message),
                         selectedEntity.getName(), selectedEntity.getBonusFormatted(context, payment.getTotal_amount())))
                 .setNeutralButton(R.string.ok, null)
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        if (DebugHelper.SWITCH_EXIT_AFTER_PAYMENT) {
-                            finish();
-                        }
+                .setOnDismissListener(dialog -> {
+                    if (DebugHelper.SWITCH_EXIT_AFTER_PAYMENT) {
+                        finish();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
