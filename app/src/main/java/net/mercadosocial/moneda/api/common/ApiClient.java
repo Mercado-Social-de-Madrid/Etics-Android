@@ -35,18 +35,8 @@ public class ApiClient {
     // Tutorial Retrofit 2.0
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
-    public static final String BASE_URL_PRODUCTION = "https://app.mercadosocial.net";
-    public static final String BASE_URL_DEBUG = "http://192.168.43.42:8000";
-
-//    public static final String BASE_URL_REGION_MURCIA = "http://app.mercadosocial.net:8080";
-    public static final String BASE_URL_REGION_MURCIA = "https://triskelapps.com/apps/mesmurcia";
-
-
-    public static final String BASE_URL_TOOL_PRODUCTION_MADRID = "https://gestionmadrid.mercadosocial.net/";
-    public static final String BASE_URL_TOOL_DEBUG = "https://gestionmadrid.mercadosocial.net/";
-
-    public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_PRODUCTION : BASE_URL_DEBUG;
-    public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? BASE_URL_TOOL_PRODUCTION_MADRID : BASE_URL_TOOL_DEBUG;
+    public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_PRODUCTION : ApiConfig.BASE_URL_DEBUG;
+    public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_TOOL_PRODUCTION_MADRID : ApiConfig.BASE_URL_TOOL_DEBUG;
 
     public static final String BASE_URL_MEDIA = BASE_URL + "/media/";
     public static final String API_PATH = "/api/v1/";

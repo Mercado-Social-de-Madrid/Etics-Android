@@ -18,7 +18,7 @@
         android:title="@string/invitations"
         android:visible="false"/>
 
-    <item android:title="@string/the_boniato" >
+    <item android:title="@string/the_boniato" android:visible="false" >
 
         <menu>
             <item

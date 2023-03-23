@@ -7,6 +7,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.common.ApiClient;
+import net.mercadosocial.moneda.api.common.ApiConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,7 +93,7 @@ public class MES {
     private static void updateBaseUrlApi(String cityCode) {
         Map<String, String> baseUrls = new HashMap() {{
             put(CODE_MADRID, ApiClient.BASE_URL);
-            put(CODE_REG_MURCIA, ApiClient.BASE_URL_REGION_MURCIA);
+            put(CODE_REG_MURCIA, ApiConfig.BASE_URL_REGION_MURCIA);
         }};
 
         ApiClient.setBaseUrl(baseUrls.get(cityCode));

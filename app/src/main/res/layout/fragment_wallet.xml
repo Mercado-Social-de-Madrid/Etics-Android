@@ -36,22 +36,8 @@
                     android:gravity="center_horizontal"
                     android:padding="10dp"
                     android:text="@string/register_to_use_wallet_text"
-                    android:visibility="gone" />
-
-                <TextView
-                    style="@style/TextBase"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="@string/intro_member_info"
                     android:textSize="@dimen/text_medium" />
 
-                <TextView
-                    android:id="@+id/btn_members_info"
-                    style="@style/TextBase.Purple"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/discover_how"
-                    android:textSize="@dimen/text_medium" />
 
                 <LinearLayout
                     android:id="@+id/view_enter_buttons"

@@ -46,6 +46,7 @@ import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
+import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
@@ -87,6 +88,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView tvMES;
     private TextView tvGuestInfo;
     private TextView tvUsername;
+    private MemberCardFragment memberCardFragment;
 
     private void findViews() {
 
@@ -206,10 +208,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private void configureFragments() {
 
         entitiesFragment = new EntitiesFragment();
+        memberCardFragment = new MemberCardFragment();
         walletFragment = new WalletFragment();
         noveltiesFragment = new NoveltiesFragment();
 
         sections.add(entitiesFragment);
+        sections.add(memberCardFragment);
         sections.add(walletFragment);
         sections.add(noveltiesFragment);
     }
@@ -332,13 +336,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     setToolbarTitle(R.string.entities);
                     showFragment(0);
                     return true;
+                case R.id.navigation_member_card:
+                    setToolbarTitle(R.string.member_card);
+                    showFragment(1);
+                    return true;
                 case R.id.navigation_wallet:
                     setToolbarTitle(R.string.wallet);
-                    showFragment(1);
+                    showFragment(2);
                     return true;
                 case R.id.navigation_profile:
                     setToolbarTitle(R.string.highlighted);
-                    showFragment(2);
+                    showFragment(3);
                     return true;
 
                 case R.id.menuItem_the_social_market:

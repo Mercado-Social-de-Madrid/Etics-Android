@@ -269,10 +269,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showProgressDialog(String message) {
 
-        if (true) {
-            return;
-        }
-
+        Log.i(TAG, "showProgressDialog: ");
         try {
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage(message);
@@ -286,6 +283,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void hideProgressDialog() {
 
+        Log.i(TAG, "hideProgressDialog: ");
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }

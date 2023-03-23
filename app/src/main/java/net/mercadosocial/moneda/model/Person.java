@@ -1,5 +1,7 @@
 package net.mercadosocial.moneda.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import net.mercadosocial.moneda.api.common.ApiClient;
 
 import java.util.List;
@@ -8,9 +10,8 @@ import java.util.List;
  * Created by julio on 1/02/18.
  */
 
-public class Person {
+public class Person extends Account {
 
-    private String id;
     private String nif;
     private String name;
     private String email;
@@ -22,10 +23,6 @@ public class Person {
     private String city;
     private Boolean is_guest_account;
     private String expiration_date;
-
-
-    private transient String pin_code;
-    private transient String pin_codeRepeat;
 
     public static Person createPersonProfileFavourites(List<String> favEntitiesUpdated) {
         Person person = new Person();
@@ -41,16 +38,18 @@ public class Person {
         return person;
     }
 
+    @Override
+    public String getMemberName() {
+        return String.format("%s %s", getName(), getSurname());
+    }
+
+    @Override
+    public String getMemberImage() {
+        return getProfile_image();
+    }
+
     public String getCityName() {
         return MES.getMESNameByCode(getCity());
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNif() {
@@ -89,21 +88,6 @@ public class Person {
         this.profile_image = profile_image;
     }
 
-    public String getPin_code() {
-        return pin_code;
-    }
-
-    public void setPin_code(String pin_code) {
-        this.pin_code = pin_code;
-    }
-
-    public String getPin_codeRepeat() {
-        return pin_codeRepeat;
-    }
-
-    public void setPin_codeRepeat(String pin_codeRepeat) {
-        this.pin_codeRepeat = pin_codeRepeat;
-    }
 
     public String getAddress() {
         return address;
@@ -161,4 +145,5 @@ public class Person {
     public void setProfile_thumbnail(String profile_thumbnail) {
         this.profile_thumbnail = profile_thumbnail;
     }
+
 }

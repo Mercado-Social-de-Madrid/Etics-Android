@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.api.response;
 
 import android.text.TextUtils;
 
+import net.mercadosocial.moneda.model.Account;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Person;
@@ -18,8 +19,6 @@ public class Data {
     private String api_key;
     private Entity entity;
     private Person person;
-    private String type; // person or entity. not necessary with previous fields (one of them always is null)
-
 
     // ---
     private String username;
@@ -79,7 +78,7 @@ public class Data {
     }
 
     public boolean isEntity() {
-        return type != null && type.equals("entity");
+        return entity != null;
     }
 
     public String getApi_key() {
@@ -106,21 +105,22 @@ public class Data {
         this.person = person;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Account getAccount() {
+        if (person != null) {
+            return person;
+        } else if (entity != null) {
+            return entity;
+        } else {
+            return null;
+        }
     }
 
 }

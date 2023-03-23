@@ -20,16 +20,13 @@ import net.mercadosocial.moneda.views.SelectMESView;
 public class IntroLastItemFragment extends BaseFragment implements View.OnClickListener {
     
     private TextView btnIntroEnter;
-    private TextView btnMembersInfo;
     private SelectMESView selectMESView;
 
     private void findViews(View layout) {
         btnIntroEnter = (TextView)layout.findViewById( R.id.btn_intro_enter );
-        btnMembersInfo = (TextView)layout.findViewById( R.id.btn_members_info );
         selectMESView = (SelectMESView) layout.findViewById(R.id.select_mes_view);
 
         btnIntroEnter.setOnClickListener(this);
-//        btnMembersInfo.setOnClickListener(this);
     }
 
 
@@ -49,19 +46,8 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
         String codeMESSaved = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null);
         int positionSaved = MES.getMESPositionByCode(codeMESSaved);
         selectMESView.setSelectedMESPosition(positionSaved);
-        selectMESView.setOnItemClickListener((view, position) -> {
-            if (position > -1) {
-                btnIntroEnter.setEnabled(true);
-            }
-        });
 
-
-        // Temporal, autoselect Madrid market
-//        MES mesSelected = MES.mesList.get(0);
-//        getPrefs().edit().putString(App.SHARED_MES_CODE_SAVED, mesSelected.getCode()).commit();
-//        MES.setCityCode(mesSelected.getCode());
-
-//        getActivity().finish();
+        btnIntroEnter.setEnabled(true);
 
         return layout;
     }
@@ -70,8 +56,6 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btn_members_info:
-//                startActivity();
             case R.id.btn_intro_enter:
 
                 MES mesSelected = selectMESView.getSelectedMES();

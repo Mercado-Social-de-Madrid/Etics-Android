@@ -14,9 +14,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entity implements Serializable {
+public class Entity extends Account implements Serializable {
 
-    private String id;
     private String name;
     private String email;
     private String cif;
@@ -36,7 +35,6 @@ public class Entity implements Serializable {
     private Integer num_workers;
     private String legal_form;
     private String address;
-    private String registered;
     private List<String> categories;
     private Double latitude;
     private Double longitude;
@@ -56,6 +54,19 @@ public class Entity implements Serializable {
     private transient String pin_codeRepeat;
 
     private transient boolean favourite;
+
+
+
+    @Override
+    public String getMemberName() {
+        return getName();
+    }
+
+    @Override
+    public String getMemberImage() {
+        return getLogo();
+    }
+
 
     public String getCategoriesString() {
 
@@ -210,15 +221,6 @@ public class Entity implements Serializable {
     }
 
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
     public Double getLatitude() {
         return latitude;
     }
@@ -269,14 +271,6 @@ public class Entity implements Serializable {
         this.offers = offers;
     }
 
-
-    public String getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(String registered) {
-        this.registered = registered;
-    }
 
     public void setLogo_thumbnail(String logo_thumbnail) {
         this.logo_thumbnail = logo_thumbnail;
@@ -360,22 +354,6 @@ public class Entity implements Serializable {
 
     public void setGallery(Gallery gallery) {
         this.gallery = gallery;
-    }
-
-    public String getPin_code() {
-        return pin_code;
-    }
-
-    public void setPin_code(String pin_code) {
-        this.pin_code = pin_code;
-    }
-
-    public String getPin_codeRepeat() {
-        return pin_codeRepeat;
-    }
-
-    public void setPin_codeRepeat(String pin_codeRepeat) {
-        this.pin_codeRepeat = pin_codeRepeat;
     }
 
     public boolean isFavourite() {

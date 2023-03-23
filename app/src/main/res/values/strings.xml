@@ -96,7 +96,7 @@
     <string name="click_continue">Pulsa continuar</string>
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
-    <string name="register_to_use_wallet_text">Para usar tu monedero tienes que ser usuari@ registrado en el Mercado Social.</string>
+    <string name="register_to_use_wallet_text">Para usar tu monedero has de ser soci@ del Mercado Social o que alguna persona socia te invite.</string>
     <string name="welcome_name_wallet">¡Hola %s!</string>
     <string name="entity_info">Información de entidad</string>
     <string name="payment_fail">Algo ha fallado en el pago</string>
@@ -353,5 +353,10 @@
     <string name="no_results">Sin resultados</string>
     <string name="no_novelties">De momento no hay noticias y ofertas.\n¡En breve lanzaremos la primera!</string>
     <string name="end_etics_temporal_msg">El la ultima asamblea de 2022 se acordo la desaparición de los etics y generar y nuevas funciones para la app.\n\nSi tienes etics, ¡no te asustes que no te vas a quedar sin ellos! \nEl primer paso es que a partir de ahora no se podrán adquirir nuevos etics pero sí podrás seguir gastando los que tienes en las entidades que los aceptan :).\n\nPronto te informaremos de los siguientes pasos.</string>
+    <string name="member_card">Carnet soci@</string>
+    <string name="focus_qr_code_member">Enfoca al código QR de la socia</string>
+    <string name="checking_member">Comprobando socia: %s</string>
+    <string name="member_check_result">La socia número %s está %s</string>
+    <string name="register_to_use_member_card_text">Para ver tu carné de socia tienes que entrar con tu cuenta. Si todavía no lo eres, te puedes registrar pulsando el botón inferior.</string>
 
 </resources>
