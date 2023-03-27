@@ -14,7 +14,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entity extends Account implements Serializable {
+public class Entity extends Account {
 
     private String name;
     private String email;
@@ -47,6 +47,7 @@ public class Entity extends Account implements Serializable {
     private String telegram_link;
     private String instagram_link;
 
+    private Benefit benefit;
 
     private List<String> fav_entities;
 
@@ -378,5 +379,13 @@ public class Entity extends Account implements Serializable {
 
     public void setFav_entities(List<String> fav_entities) {
         this.fav_entities = fav_entities;
+    }
+
+    public Benefit getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(Benefit benefit) {
+        this.benefit = benefit;
     }
 }

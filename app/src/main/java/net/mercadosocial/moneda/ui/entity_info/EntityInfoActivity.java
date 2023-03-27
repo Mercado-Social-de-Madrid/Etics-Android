@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private TextView tvEntityDescription;
     private RecyclerView recyclerOffers;
     private TextView tvEntityName;
+    private TextView tvMembersBenefits;
     private EntityInfoPresenter presenter;
     private EntitiyOffersAdapter adapter;
     private TextView tvNoOffers;
@@ -63,6 +65,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         btnRrssInstagram = (ImageView)findViewById( R.id.btn_rrss_instagram );
 
         viewEticsInfo = findViewById(R.id.view_etics_info);
+
+        tvMembersBenefits = findViewById(R.id.tv_members_benefits);
 
         btnNewPayment.setOnClickListener(this);
         imgHeart.setOnClickListener(this);
@@ -136,6 +140,10 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
 
         tvAcceptBoniatos.setText(Util.getDecimalFormatted(entity.getMax_percent_payment(), false) + "%");
         tvBonusBoniatos.setText(Util.getDecimalFormatted(entity.getBonusPercent(this), false) + "%");
+
+        if (entity.getBenefit() != null) {
+            tvMembersBenefits.setText(Html.fromHtml(entity.getBenefit().getBenefitForMembers()));
+        }
 
         Picasso.get()
                 .load(entity.getLogo())

@@ -358,5 +358,6 @@
     <string name="checking_member">Comprobando socia: %s</string>
     <string name="member_check_result">La socia número %s está %s</string>
     <string name="register_to_use_member_card_text">Para ver tu carné de socia tienes que entrar con tu cuenta. Si todavía no lo eres, te puedes registrar pulsando el botón inferior.</string>
+    <string name="members_benefits">Ventajas para soci@s</string>
 
 </resources>

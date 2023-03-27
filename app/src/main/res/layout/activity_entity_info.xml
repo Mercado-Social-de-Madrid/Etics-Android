@@ -168,6 +168,27 @@
                     <TextView
                         style="@style/TextBase.White"
                         android:layout_marginLeft="20dp"
+                        android:text="@string/members_benefits"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_members_benefits"
+                    style="@style/TextBase"
+                    android:padding="10dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/purple"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <TextView
+                        style="@style/TextBase.White"
+                        android:layout_marginLeft="20dp"
                         android:text="@string/entity_offers"
                         android:textSize="20dp" />
 
