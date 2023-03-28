@@ -1,13 +1,15 @@
 package net.mercadosocial.moneda.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,37 +20,40 @@ import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.profile.pincode_change.PincodeChangePresenter;
 import net.mercadosocial.moneda.util.DateUtils;
-import net.mercadosocial.moneda.util.WindowUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
+
+import org.jetbrains.annotations.NotNull;
+
+import pl.aprilapps.easyphotopicker.ChooserType;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
+import pl.aprilapps.easyphotopicker.MediaFile;
+import pl.aprilapps.easyphotopicker.MediaSource;
 
 public class ProfileActivity extends BaseActivity implements View.OnClickListener, ProfileView {
 
     private AppCompatImageView imgProfile;
-    private EditText editNamePerson;
-    private EditText editSurnamesPerson;
-    private EditText editNif;
-    private Button btnSaveProfile;
+    private AppCompatButton btnChangeImage;
     private ProfilePresenter presenter;
-    private TextView tvProfileType;
-    private TextView tvProfileMarket;
+    private TextView tvProfileName, tvProfileType, tvProfileMarket;
     private LinearLayout btnChangePincode;
     private LinearLayout btnInvitations;
     private AppCompatButton btnLogout;
+    private EasyImage easyImage;
 
     private void findViews() {
-        imgProfile = (AppCompatImageView) findViewById(R.id.img_profile);
-        editNamePerson = (EditText) findViewById(R.id.edit_name_person);
-        editSurnamesPerson = (EditText) findViewById(R.id.edit_surnames_person);
-        editNif = (EditText) findViewById(R.id.edit_nif);
-        btnSaveProfile = (Button) findViewById(R.id.btn_save_profile);
-        tvProfileType = (TextView) findViewById(R.id.tv_profile_type);
-        tvProfileMarket = (TextView) findViewById(R.id.tv_profile_market);
-        btnChangePincode = (LinearLayout) findViewById(R.id.btn_change_pincode);
-        btnInvitations = (LinearLayout) findViewById(R.id.btn_invitations);
-        btnLogout = (AppCompatButton) findViewById(R.id.btn_logout);
+        imgProfile = findViewById(R.id.img_profile);
+        tvProfileType = findViewById(R.id.tv_profile_type);
+        tvProfileMarket = findViewById(R.id.tv_profile_market);
+        btnChangePincode = findViewById(R.id.btn_change_pincode);
+        btnInvitations = findViewById(R.id.btn_invitations);
+        btnLogout = findViewById(R.id.btn_logout);
+
+        tvProfileName = findViewById(R.id.tv_profile_name);
+        btnChangeImage = findViewById(R.id.btn_change_image);
 
         btnLogout.setOnClickListener(this);
-        btnSaveProfile.setOnClickListener(this);
+        btnChangeImage.setOnClickListener(this);
         btnChangePincode.setOnClickListener(this);
         btnInvitations.setOnClickListener(this);
     }
@@ -62,6 +67,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_profile);
         configureSecondLevelActivity();
         findViews();
+
+        easyImage = new EasyImage.Builder(this)
+                .setChooserTitle("aaa")
+                .setChooserType(ChooserType.CAMERA_AND_GALLERY)
+                .build();
 
         presenter.onCreate();
 
@@ -91,16 +101,22 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 //        return super.onOptionsItemSelected(item);
 //    }
 
+//    ActivityResultLauncher<Intent> launcher =
+//            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), (ActivityResult result) -> {
+//                if (result.getResultCode() == RESULT_OK) {
+//                    Uri uri = result.getData().getData();
+//                    // Use the uri to load the image
+//                } else if (result.getResultCode() == ImagePicker.RESULT_ERROR) {
+//                    // Use ImagePicker.Companion.getError(result.getData()) to show an error
+//                }
+//            });
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_save_profile:
-                String name = editNamePerson.getText().toString();
-                String surname = editSurnamesPerson.getText().toString();
-                String nif = editNif.getText().toString();
-                presenter.onSaveProfile(name, surname, nif);
+            case R.id.btn_change_image:
 
-                WindowUtils.hideSoftKeyboard(this);
+                easyImage.openChooser(this);
 
                 break;
 
@@ -121,22 +137,43 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        easyImage.handleActivityResult(requestCode, resultCode, data, this, new EasyImage.Callbacks() {
+
+            @Override
+            public void onImagePickerError(@NotNull Throwable throwable, @NotNull MediaSource mediaSource) {
+                Log.i(TAG, "onImagePickerError: ");
+            }
+
+            @Override
+            public void onMediaFilesPicked(@NotNull MediaFile[] mediaFiles, @NotNull MediaSource mediaSource) {
+                Log.i(TAG, "onMediaFilesPicked: " + mediaFiles.length);
+
+            }
+
+            @Override
+            public void onCanceled(@NotNull MediaSource mediaSource) {
+                Log.i(TAG, "onCanceled: ");
+
+            }
+        });
+    }
+
+
     @Override
     public void showPersonProfile(Person person) {
 
-        editNamePerson.setText(person.getName());
-        editSurnamesPerson.setText(person.getSurname());
-        editNif.setText(person.getNif());
+        tvProfileName.setText(String.format("%s %s", person.getName(), person.getSurname()));
         tvProfileMarket.setText(person.getCityName());
 
         if (person.is_guest_account()) {
-
-            editNif.setVisibility(View.GONE);
-
             String dateFormatted = DateUtils.convertDateApiToUserFormat(person.getExpiration_date());
             tvProfileType.setText(String.format(getString(R.string.guest_account_info_format), dateFormatted));
         } else {
-           tvProfileType.setText(R.string.consumer);
+            tvProfileType.setText(R.string.consumer);
         }
 
         Picasso.get()
@@ -151,14 +188,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void showEntityProfile(Entity entity) {
 
-        editNamePerson.setText(entity.getName());
-        editNif.setText(entity.getCif());
+        tvProfileName.setText(entity.getName());
         tvProfileMarket.setText(entity.getCityName());
         tvProfileType.setText(R.string.entity);
-
-        editNamePerson.setEnabled(false);
-        editSurnamesPerson.setVisibility(View.GONE);
-        btnSaveProfile.setVisibility(View.GONE);
 
         Picasso.get()
                 .load(entity.getLogoThumbnailOrCover())

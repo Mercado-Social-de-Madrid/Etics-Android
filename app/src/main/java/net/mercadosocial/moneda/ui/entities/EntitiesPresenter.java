@@ -112,7 +112,7 @@ public class EntitiesPresenter extends BasePresenter {
 
         if (!data.isEntity()) {
             Person profile = Person.createPersonProfileFavourites(favEntitiesUpdated);
-            userInteractor.updateProfile(profile, new BaseInteractor.BaseApiPOSTCallback() {
+            userInteractor.updatePerson(profile, new BaseInteractor.BaseApiPOSTCallback() {
                 @Override
                 public void onSuccess(Integer id) {
 

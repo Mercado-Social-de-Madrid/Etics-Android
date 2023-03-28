@@ -38,7 +38,6 @@ public class ApiClient {
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_PRODUCTION : ApiConfig.BASE_URL_DEBUG;
     public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_TOOL_PRODUCTION_MADRID : ApiConfig.BASE_URL_TOOL_DEBUG;
 
-    public static final String BASE_URL_MEDIA = BASE_URL + "/media/";
     public static final String API_PATH = "/api/v1/";
 
     public static String BASE_API_URL = BASE_URL + API_PATH;

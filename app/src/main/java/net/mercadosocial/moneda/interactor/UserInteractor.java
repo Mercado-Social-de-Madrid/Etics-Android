@@ -37,7 +37,7 @@ public class UserInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getPersonProfile()
+        getApi().getPerson()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Person>>() {
@@ -73,7 +73,7 @@ public class UserInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getEntityProfile()
+        getApi().getEntity()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Entity>>() {
@@ -102,14 +102,52 @@ public class UserInteractor extends BaseInteractor {
                 });
     }
 
-    public void updateProfile(Person profile, final BaseApiPOSTCallback callback) {
+    public void updatePerson(Person person, final BaseApiPOSTCallback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
             return;
         }
 
-        getApi().updateFavourites(profile)
+        getApi().updatePerson(person)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+//                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Void>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Void> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onSuccess(null);
+
+                    }
+                });
+
+
+    }
+
+    public void updateEntity(Entity entity, final BaseApiPOSTCallback callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().updateEntity(entity)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Void>>() {

@@ -105,7 +105,7 @@ public class ProfilePresenter extends BasePresenter {
         Person person = Person.createPersonProfileData(name, surname, nif);
         person.setProfile_image(null);
         person.setProfile_thumbnail(null);
-        userInteractor.updateProfile(person, new BaseInteractor.BaseApiPOSTCallback() {
+        userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
             public void onSuccess(Integer id) {
                 view.hideProgressDialog();

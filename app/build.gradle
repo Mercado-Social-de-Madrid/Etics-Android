@@ -7,12 +7,12 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "net.mercadosocial.moneda"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 300
         versionName "3.0.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -99,6 +99,8 @@ dependencies {
     implementation project(path: ':materialbarcodescanner')
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    implementation 'com.github.jkwiecien:EasyImage:3.2.0'
 
     // Lifecycles only (no ViewModel or LiveData)
     def lifecycle_version = "2.2.0"

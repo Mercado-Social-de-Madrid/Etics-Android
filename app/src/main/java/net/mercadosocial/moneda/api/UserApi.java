@@ -15,14 +15,17 @@ import rx.Observable;
 
 public interface UserApi {
 
-    @PUT("profile/")
-    Observable<Response<Void>> updateFavourites(@Body Person profile);
-
     @GET("profile/")
-    Observable<Response<Person>> getPersonProfile();
+    Observable<Response<Person>> getPerson();
+
+    @PUT("profile/")
+    Observable<Response<Void>> updatePerson(@Body Person person);
 
     @GET("entity/")
-    Observable<Response<Entity>> getEntityProfile();
+    Observable<Response<Entity>> getEntity();
+
+    @PUT("entity/")
+    Observable<Response<Void>> updateEntity(@Body Entity entity);
 
     @POST("invite/")
     Observable<Response<Void>> sendInvitation(@Body InvitationRequest invitationRequest);
