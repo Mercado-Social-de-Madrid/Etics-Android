@@ -22,7 +22,7 @@ public class ApiError {
         try {
             String errorBody = response.errorBody().string();
             return new Gson().fromJson(errorBody, ApiError.class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ApiError("Error", "Error");
         }

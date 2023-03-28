@@ -173,6 +173,9 @@ public class EntitiesPresenter extends BasePresenter {
             @Override
             public void onError(String error) {
                 refreshing = false;
+                if (entitiesRefreshListener != null) {
+                    entitiesRefreshListener.updateData();
+                }
                 view.toast(error);
             }
         });
