@@ -15,8 +15,7 @@ public interface EntitiesApi {
     int PAGE_LIMIT_ENTITIES = 2000; // for map screen all entities are needed.
 
     @GET("entities/?limit=" + PAGE_LIMIT_ENTITIES)
-    Observable<Response<EntitiesResponse>> getEntities(@Query("offset") int offset,
-                                                       @Query("q") String text,
+    Observable<Response<EntitiesResponse>> getEntities(@Query("q") String text,
                                                        @Query("categories__in") String categoriesIdsCommaSeparated);
 
 //    @GET("entities/?limit=" + PAGE_LIMIT)

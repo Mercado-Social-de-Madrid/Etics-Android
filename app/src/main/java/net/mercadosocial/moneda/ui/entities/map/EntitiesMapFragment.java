@@ -111,12 +111,12 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesRefresh
 
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pointCenterMadrid, 8));
 
-        updateData();
-
         mMap.setOnMapLoadedCallback(() -> {
             mapLoaded = true;
             updateCamera();
         });
+
+        getEntitiesPresenter().refreshData();
     }
 
     private void updateCamera() {
@@ -143,9 +143,9 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesRefresh
     }
 
     @Override
-    public void updateData() {
+    public void updateEntities(List<Entity> entities) {
 
-        showEntities(getEntitiesPresenter().getEntities());
+        showEntities(entities);
         updateCamera();
 
     }
@@ -181,6 +181,11 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesRefresh
 //            map.getOverlays().add(marker);
         }
 
+
+    }
+
+    @Override
+    public void onError(boolean showEmptyView) {
 
     }
 

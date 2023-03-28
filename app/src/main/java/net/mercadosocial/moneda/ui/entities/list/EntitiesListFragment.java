@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.malinskiy.superrecyclerview.OnMoreListener;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesRefreshListener, OnMoreListener {
+public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesRefreshListener {
 
 
     private static final int NUMBER_ITEM_ASK_MORE = 3;
@@ -36,6 +37,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private EntityListener entityListener;
     private RotativeImageView progressMES;
     private View viewEmptyList;
+    private TextView tvEmptyListEntities;
 
 
     public EntitiesListFragment() {
@@ -46,6 +48,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         recyclerEntities = layout.findViewById(R.id.recycler_entities);
         progressMES = layout.findViewById(R.id.progress_mes);
         viewEmptyList = layout.findViewById(R.id.view_empty_list);
+        tvEmptyListEntities = layout.findViewById(R.id.tv_empty_list_entities);
     }
 
     @Override
@@ -59,16 +62,11 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerEntities.setLayoutManager(linearLayoutManager);
 
-        recyclerEntities.setupMoreListener(this, NUMBER_ITEM_ASK_MORE);
-
-//        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-//        recyclerEntities.addItemDecoration(divider);
-
         setEntityListener((EntityListener) getParentFragment());
 
-        updateData();
-
         getEntitiesPresenter().setEntitiesRefreshListener(this);
+
+        getEntitiesPresenter().refreshData();
 
         return layout;
     }
@@ -89,20 +87,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
 
     @Override
-    public void updateData() {
-
-        boolean hasMore = getEntitiesPresenter().hasMore();
-        showEntities(getEntitiesPresenter().getEntities(), getEntitiesPresenter().isRefreshing());
-
-        if (hasMore) {
-            recyclerEntities.setupMoreListener(this, NUMBER_ITEM_ASK_MORE);
-        } else {
-            recyclerEntities.setupMoreListener(null, 0);
-        }
-    }
-
-    public void showEntities(List<Entity> entities, boolean refreshing) {
-
+    public void updateEntities(List<Entity> entities) {
 
         if (adapter == null) {
 
@@ -124,16 +109,28 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
             adapter.updateData();
         }
 
+        viewEmptyList.setVisibility(entities.isEmpty() ? View.VISIBLE : View.GONE);
+        tvEmptyListEntities.setText(R.string.empty_state_text_entities);
+    }
+
+    @Override
+    public void onError(boolean showEmptyView) {
+        viewEmptyList.setVisibility(View.VISIBLE);
+        tvEmptyListEntities.setText(R.string.error_retrieving_data);
+    }
+
+    @Override
+    public void setRefreshing(boolean refreshing) {
+        super.setRefreshing(refreshing);
+
         if (refreshing) {
             progressMES.show();
             viewEmptyList.setVisibility(View.GONE);
-
         } else {
             progressMES.hide();
-            viewEmptyList.setVisibility(entities.isEmpty() ? View.VISIBLE : View.GONE);
+            viewEmptyList.setVisibility(View.VISIBLE);
         }
     }
-
 
 
     @Override
@@ -151,10 +148,4 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         this.entityListener = entityListener;
     }
 
-
-    // Recycler on more asked
-    @Override
-    public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
-        getEntitiesPresenter().loadNextPage();
-    }
 }

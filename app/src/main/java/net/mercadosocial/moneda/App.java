@@ -73,8 +73,6 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        getPrefs(getApplicationContext()).edit().remove(App.SHARED_ENTITIES_CACHE).commit();
-
         loadApiKey(this);
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(DebugHelper.SWITCH_CRASH_REPORTS_ENABLED);

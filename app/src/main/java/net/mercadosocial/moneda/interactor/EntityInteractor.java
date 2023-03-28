@@ -45,14 +45,12 @@ public class EntityInteractor extends BaseInteractor {
     }
 
 
-    public void getEntities(int pageApi, FilterEntities filterEntities, final Callback callback) {
+    public void getEntities(FilterEntities filterEntities, final Callback callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        int offset = pageApi * EntitiesApi.PAGE_LIMIT_ENTITIES;
 
         String text = null;
         String categoriesIdsStr = null;
@@ -72,12 +70,11 @@ public class EntityInteractor extends BaseInteractor {
         } else {
             if (hasCachedEntities()) {
                 callback.onResponse(getCachedEntities(), false);
-                return;
             }
         }
 
 
-        getApi().getEntities(offset, text, categoriesIdsStr)
+        getApi().getEntities(text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<EntitiesResponse>>() {
                     @Override
@@ -128,7 +125,7 @@ public class EntityInteractor extends BaseInteractor {
 
     private void cacheEntities(List<Entity> entities) {
         String entitiesSerialized = new Gson().toJson(entities);
-        App.getPrefs(context).edit().putString(App.SHARED_ENTITIES_CACHE, entitiesSerialized).commit();
+        App.getPrefs(context).edit().putString(App.SHARED_ENTITIES_CACHE, entitiesSerialized).apply();
     }
 
 //    public void getEntitiesFiltered(String query, final Callback callback) {

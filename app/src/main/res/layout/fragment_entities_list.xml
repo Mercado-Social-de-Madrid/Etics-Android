@@ -60,6 +60,7 @@
                 android:src="@mipmap/ic_entity_not_found"/>
 
             <TextView
+                android:id="@+id/tv_empty_list_entities"
                 style="@style/TextBase"
                 android:layout_width="200dp"
                 android:textColor="@color/grey"

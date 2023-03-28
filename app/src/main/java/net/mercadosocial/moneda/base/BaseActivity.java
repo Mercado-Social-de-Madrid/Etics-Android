@@ -290,11 +290,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void setRefreshing(boolean refresing) {
+    public void setRefreshing(boolean refreshing) {
 
-        Log.i(TAG, "setRefreshing: refreshing = " + refresing);
+        Log.i(TAG, "setRefreshing: refreshing = " + refreshing);
 
-        if (refresing) {
+        if (refreshing) {
             ProgressDialogMES.getInstance(getSupportFragmentManager()).show();
         } else {
             ProgressDialogMES.getInstance(getSupportFragmentManager()).hide();

@@ -64,7 +64,7 @@ public class NewPaymentStep1Presenter extends BasePresenter {
 
     public void refreshData() {
 
-        entityInteractor.getEntities(0, null, new EntityInteractor.Callback() {
+        entityInteractor.getEntities(null, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesReceived, boolean hasMore) {
@@ -89,7 +89,7 @@ public class NewPaymentStep1Presenter extends BasePresenter {
 
         view.showProgress(true);
 
-        entityInteractor.getEntities(0, filterEntities, new EntityInteractor.Callback() {
+        entityInteractor.getEntities(filterEntities, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesReceived, boolean hasMore) {

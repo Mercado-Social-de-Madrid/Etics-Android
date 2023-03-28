@@ -5,7 +5,7 @@ package net.mercadosocial.moneda.base;
  */
 public interface BaseView {
 
-    void setRefreshing(boolean refresing);
+    void setRefreshing(boolean refreshing);
 
     void showProgressDialog(String message);
 

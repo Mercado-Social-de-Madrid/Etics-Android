@@ -29,8 +29,6 @@ public class EntitiesPresenter extends BasePresenter {
     private final EntityInteractor entityInteractor;
     private final UserInteractor userInteractor;
     private List<Entity> entities = new ArrayList<>();
-    private boolean hasMore;
-    private int currentApiPage;
     private FilterEntities filterEntities;
     private boolean refreshFavouritesAtEnd;
 
@@ -38,7 +36,6 @@ public class EntitiesPresenter extends BasePresenter {
     public static final int SCREEN_ENTITIES_TYPE_MAP = 1;
 
     private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
-    private boolean refreshing;
     private EntitiesRefreshListener entitiesRefreshListener;
 
 
@@ -60,7 +57,6 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void onCreate() {
         view.showScreenType(currentScreen);
-        refreshData();
     }
 
     public void onResume() {
@@ -68,7 +64,7 @@ public class EntitiesPresenter extends BasePresenter {
         if (entities != null && !entities.isEmpty()) {
             processFavs();
             if (entitiesRefreshListener != null) {
-                entitiesRefreshListener.updateData();
+                entitiesRefreshListener.updateEntities(entities);
             }
         }
     }
@@ -133,60 +129,46 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void refreshData() {
 
-        entities.clear();
-        currentApiPage = 0;
-
-//        view.setRefreshing(true);
+        loadEntitiesCache();
         refreshEntities();
 
     }
 
-    public void loadNextPage() {
-
-        currentApiPage++;
-        refreshEntities();
-
+    private void loadEntitiesCache() {
     }
 
     private void refreshEntities() {
 
-        refreshing = true;
         if (entitiesRefreshListener != null) {
-            entitiesRefreshListener.updateData();
+            entitiesRefreshListener.setRefreshing(true);
         }
-        entityInteractor.getEntities(currentApiPage, filterEntities, new EntityInteractor.Callback() {
 
+        entityInteractor.getEntities(filterEntities, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
-                refreshing = false;
+
+                entities.clear();
                 entities.addAll(entitiesApi);
                 processFavs();
 
-                EntitiesPresenter.this.hasMore = hasMore;
-
                 if (entitiesRefreshListener != null) {
-                    entitiesRefreshListener.updateData();
+                    entitiesRefreshListener.setRefreshing(false);
+                    entitiesRefreshListener.updateEntities(entities);
                 }
             }
 
             @Override
             public void onError(String error) {
-                refreshing = false;
+
                 if (entitiesRefreshListener != null) {
-                    entitiesRefreshListener.updateData();
+                    entitiesRefreshListener.setRefreshing(false);
+                    boolean showEmptyView = entities.isEmpty();
+                    entitiesRefreshListener.onError(showEmptyView);
                 }
                 view.toast(error);
             }
         });
-    }
-
-    public List<Entity> getEntities() {
-        return entities;
-    }
-
-    public boolean hasMore() {
-        return hasMore;
     }
 
     private void processFavs() {
@@ -247,10 +229,6 @@ public class EntitiesPresenter extends BasePresenter {
     public void onMapListButtonClick() {
         currentScreen = currentScreen == SCREEN_ENTITIES_TYPE_LIST ? SCREEN_ENTITIES_TYPE_MAP : SCREEN_ENTITIES_TYPE_LIST;
         view.showScreenType(currentScreen);
-    }
-
-    public boolean isRefreshing() {
-        return refreshing;
     }
 
     public void setEntitiesRefreshListener(EntitiesRefreshListener entitiesRefreshListener) {
