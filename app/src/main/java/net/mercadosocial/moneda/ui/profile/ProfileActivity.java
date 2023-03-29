@@ -2,12 +2,10 @@ package net.mercadosocial.moneda.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -25,7 +23,6 @@ import net.mercadosocial.moneda.views.CircleTransform;
 import org.jetbrains.annotations.NotNull;
 
 import pl.aprilapps.easyphotopicker.ChooserType;
-import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.aprilapps.easyphotopicker.MediaFile;
 import pl.aprilapps.easyphotopicker.MediaSource;
@@ -69,7 +66,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         findViews();
 
         easyImage = new EasyImage.Builder(this)
-                .setChooserTitle("aaa")
                 .setChooserType(ChooserType.CAMERA_AND_GALLERY)
                 .build();
 
@@ -145,19 +141,16 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onImagePickerError(@NotNull Throwable throwable, @NotNull MediaSource mediaSource) {
-                Log.i(TAG, "onImagePickerError: ");
+                toast(throwable.getMessage());
             }
 
             @Override
             public void onMediaFilesPicked(@NotNull MediaFile[] mediaFiles, @NotNull MediaSource mediaSource) {
-                Log.i(TAG, "onMediaFilesPicked: " + mediaFiles.length);
-
+                presenter.onImagePicked(mediaFiles[0].getFile());
             }
 
             @Override
             public void onCanceled(@NotNull MediaSource mediaSource) {
-                Log.i(TAG, "onCanceled: ");
-
             }
         });
     }

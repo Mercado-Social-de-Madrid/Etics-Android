@@ -360,5 +360,6 @@
     <string name="register_to_use_member_card_text">Para ver tu carné de socia tienes que entrar con tu cuenta. Si todavía no lo eres, te puedes registrar pulsando el botón inferior.</string>
     <string name="members_benefits">Ventajas para soci@s</string>
     <string name="change_image">Cambiar imagen</string>
+    <string name="error_image">Ha habido un error al subir la imagen</string>
 
 </resources>

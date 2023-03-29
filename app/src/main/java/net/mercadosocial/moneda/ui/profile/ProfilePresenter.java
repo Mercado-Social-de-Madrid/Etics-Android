@@ -3,6 +3,13 @@ package net.mercadosocial.moneda.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.util.Base64;
+import android.util.Log;
+
+import androidx.exifinterface.media.ExifInterface;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -13,6 +20,10 @@ import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 import es.dmoral.toasty.Toasty;
 
@@ -130,6 +141,88 @@ public class ProfilePresenter extends BasePresenter {
         personSaved.setNif(person.getNif());
         App.saveUserData(context, data);
 
+    }
+
+    public void onImagePicked(File file) {
+
+
+        Bitmap resizedBitmap;
+        try {
+            resizedBitmap = resizeBitmap(file.getPath());
+        } catch (IOException e) {
+            view.toast(R.string.error_image);
+            Log.d(TAG, "onImagePicked: ", e);
+            return;
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] bytes = baos.toByteArray();
+        String base64 = Base64.encodeToString(bytes, Base64.DEFAULT);
+        String imageData = "image/jpeg;" + base64;
+
+        Data data = App.getUserData(context);
+        if (data.isEntity()) {
+            Entity entity = new Entity();
+            entity.setLogo(imageData);
+            userInteractor.updateEntity(entity, new BaseInteractor.BaseApiPOSTCallback() {
+                @Override
+                public void onSuccess(Integer id) {
+                    loadData();
+                }
+
+                @Override
+                public void onError(String message) {
+                    view.toast(R.string.error_image);
+                }
+            });
+        } else {
+            Person person = new Person();
+            person.setProfile_image(imageData);
+            userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
+                @Override
+                public void onSuccess(Integer id) {
+                    loadData();
+                }
+
+                @Override
+                public void onError(String message) {
+                    view.toast(R.string.error_image);
+                }
+            });
+        }
+
+    }
+
+    public Bitmap resizeBitmap(String path) throws IOException {
+
+        Bitmap originalBitmap = BitmapFactory.decodeFile(path);
+
+        // Obtener la orientación de la imagen original
+        ExifInterface exif = new ExifInterface(path);
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+        // Rotar la imagen original si es necesario
+        Matrix matrix = new Matrix();
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+            matrix.postRotate(90);
+        } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+            matrix.postRotate(180);
+        } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+            matrix.postRotate(270);
+        }
+
+        // Redimensionar la imagen original para que tenga un ancho máximo de 600px y un alto proporcional
+        int originalWidth = originalBitmap.getWidth();
+        int originalHeight = originalBitmap.getHeight();
+        int newWidth = 600;
+        int newHeight = (int) (((float) newWidth / originalWidth) * originalHeight);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, false);
+
+        // Crear un nuevo Bitmap con la imagen redimensionada y rotada si es necesario
+        Bitmap rotatedResizedBitmap = Bitmap.createBitmap(resizedBitmap, 0, 0, resizedBitmap.getWidth(), resizedBitmap.getHeight(), matrix, true);
+
+        return rotatedResizedBitmap;
     }
 
 }
