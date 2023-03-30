@@ -244,8 +244,12 @@ public class UserInteractor extends BaseInteractor {
                     public void onNext(Response<MemberStatus> response) {
 
                         if (!response.isSuccessful()) {
-                            ApiError apiError = ApiError.parse(response);
-                            callback.onError(apiError.getMessage());
+                            if (response.code() == 404) {
+                                callback.onError(context.getString(R.string.member_id_not_found));
+                            } else {
+                                ApiError apiError = ApiError.parse(response);
+                                callback.onError(apiError.getMessage());
+                            }
                             return;
                         }
 

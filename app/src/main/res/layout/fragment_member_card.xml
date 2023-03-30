@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             style="@style/TextBase"
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,6 +138,15 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_inactive_member"
+            style="@style/TextBase.White"
+            android:padding="8dp"
+            android:background="@color/red"
+            android:gravity="center_horizontal"
+            android:text="@string/currently_inactive_member"
+            android:visibility="gone"/>
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -10,4 +10,13 @@
         app:iconTint="@color/purple"
         android:orderInCategory="200"/>
 
+    <item
+        android:id="@+id/menuItem_check_member_id"
+        android:icon="@drawable/ic_check"
+        android:title="@string/check"
+        app:showAsAction="always"
+        app:iconTint="@color/purple"
+        android:orderInCategory="300"/>
+
+
 </menu>

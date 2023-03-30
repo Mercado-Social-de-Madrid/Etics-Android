@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,7 @@ import net.mercadosocial.moneda.model.Account;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.views.CircleTransform;
+import net.mercadosocial.moneda.views.EditTextDialog;
 
 import es.dmoral.toasty.Toasty;
 
@@ -40,7 +42,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
     private MemberCardPresenter presenter;
 
-    private TextView tvMemberName, tvMemberType, tvMemberId, tvMemberDate;
+    private TextView tvMemberName, tvMemberType, tvMemberId, tvMemberDate, tvInactiveMember;
     private ImageView imgMemberQr, imgMemberProfile;
     private View viewMemberLogin, viewMemberLogout;
     private TextView btnLogin, btnSignup;
@@ -52,6 +54,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
         tvMemberDate = layout.findViewById(R.id.tv_member_date);
         imgMemberQr = layout.findViewById(R.id.img_member_qr);
         imgMemberProfile = layout.findViewById(R.id.img_member_profile);
+        tvInactiveMember = layout.findViewById(R.id.tv_inactive_member);
 
         viewMemberLogin = layout.findViewById(R.id.view_member_login);
         viewMemberLogout = layout.findViewById(R.id.view_member_logout);
@@ -96,9 +99,24 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
             case R.id.menuItem_scan_qr:
                 checkPermissionAndStart();
                 break;
+            case R.id.menuItem_check_member_id:
+                onManualMemberIdCheckClick();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onManualMemberIdCheckClick() {
+
+        EditTextDialog dialog = new EditTextDialog();
+        dialog.setTitle(getString(R.string.enter_member_id));
+        dialog.setInputType(InputType.TYPE_CLASS_PHONE);
+        dialog.setListener(result -> {
+            presenter.onManualMemberIdCheck(result);
+        });
+
+        dialog.show(getChildFragmentManager(), null);
     }
 
     private void checkPermissionAndStart() {
@@ -180,5 +198,10 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
     public void showLogoutView(boolean showLogoutView) {
         viewMemberLogin.setVisibility(showLogoutView ? View.GONE : View.VISIBLE);
         viewMemberLogout.setVisibility(showLogoutView ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showInactiveMemberView(boolean show) {
+        tvInactiveMember.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 }

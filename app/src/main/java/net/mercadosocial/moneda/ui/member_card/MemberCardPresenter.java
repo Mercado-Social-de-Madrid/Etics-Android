@@ -1,12 +1,9 @@
 package net.mercadosocial.moneda.ui.member_card;
 
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Looper;
 
 import com.google.gson.Gson;
 
@@ -19,9 +16,6 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.Account;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class MemberCardPresenter extends BasePresenter {
@@ -86,31 +80,44 @@ public class MemberCardPresenter extends BasePresenter {
         Bitmap qrBitmap = QRCode.from(qrText).withSize(sizeQR, sizeQR).bitmap();
         view.showQrBitmap(qrBitmap);
 
+        view.showInactiveMemberView(!account.isActive());
 
     }
 
     public void onQRScanned(String qrContent) {
 
+        QrInfo qrInfo = new Gson().fromJson(qrContent, QrInfo.class);
+        checkMemberStatus(qrInfo.getCity(), qrInfo.getMemberId());
+
+    }
+
+    private void checkMemberStatus(String city, String memberId) {
+
         final ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(context.getString(R.string.checking_member, qrContent));
+        progressDialog.setMessage(context.getString(R.string.checking_member, memberId));
         progressDialog.show();
 
-        QrInfo qrInfo = new Gson().fromJson(qrContent, QrInfo.class);
-        new UserInteractor(context, view).getMemberStatus(qrInfo.getCity(), qrInfo.getMemberId(), new BaseInteractor.BaseApiCallback<MemberStatus>() {
+        new UserInteractor(context, view).getMemberStatus(city, memberId, new BaseInteractor.BaseApiCallback<MemberStatus>() {
             @Override
             public void onResponse(MemberStatus memberStatus) {
 
                 progressDialog.dismiss();
                 String status = getString(memberStatus.isActive() ? R.string.active : R.string.inactive);
-                view.alert(null, context.getString(R.string.member_check_result, qrInfo.getMemberId(), status));
+                view.alert(null, context.getString(R.string.member_check_result, memberId, status));
             }
 
             @Override
             public void onError(String message) {
                 progressDialog.dismiss();
-                view.toast(R.string.error_retrieving_data);
+                view.toast(message);
             }
         });
+    }
+
+    public void onManualMemberIdCheck(String memberId) {
+
+        Data data = App.getUserData(context);
+        checkMemberStatus(data.getCityCode(), memberId);
 
     }
 }

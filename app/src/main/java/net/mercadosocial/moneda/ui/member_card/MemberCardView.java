@@ -15,4 +15,6 @@ public interface MemberCardView extends BaseView {
     void showQrScanButton(boolean show);
 
     void showLogoutView(boolean showLogoutView);
+
+    void showInactiveMemberView(boolean show);
 }
