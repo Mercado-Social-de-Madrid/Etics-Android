@@ -5,6 +5,7 @@ import android.content.Context;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.UserApi;
 import net.mercadosocial.moneda.api.model.InvitationRequest;
+import net.mercadosocial.moneda.api.model.MemberStatus;
 import net.mercadosocial.moneda.api.response.ApiError;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
@@ -217,6 +218,43 @@ public class UserInteractor extends BaseInteractor {
 
 
     }
+
+    public void getMemberStatus(String cityCode, String memberId, BaseApiCallback<MemberStatus> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().getMemberStatus(cityCode, memberId)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+//                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<MemberStatus>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<MemberStatus> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body());
+
+                    }
+                });
+    }
+
 
     private UserApi getApi() {
         return getApi(UserApi.class);

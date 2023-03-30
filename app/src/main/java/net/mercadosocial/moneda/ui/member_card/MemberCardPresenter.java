@@ -7,16 +7,21 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
+
+import com.google.gson.Gson;
 
 import net.glxn.qrgen.android.QRCode;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.model.MemberStatus;
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.Account;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MemberCardPresenter extends BasePresenter {
@@ -38,6 +43,15 @@ public class MemberCardPresenter extends BasePresenter {
 
     public void onCreate() {
 
+        checkInitialDialog();
+
+    }
+
+    private void checkInitialDialog() {
+        if (!getPrefs().getBoolean(App.SHARED_MEMBER_CARD_INTRO_SEEN, false)) {
+            view.alert(getString(R.string.member_card), getString(R.string.member_card_intro_message));
+            getPrefs().edit().putBoolean(App.SHARED_MEMBER_CARD_INTRO_SEEN, true).apply();
+        }
     }
 
     public void onResume() {
@@ -59,15 +73,19 @@ public class MemberCardPresenter extends BasePresenter {
             view.showQrScanButton(true);
         }
 
-        Account account = data.getAccount();
-        view.showMemberData(account);
+        String memberType = getString(data.isEntity() ? R.string.entity :
+                data.getPerson().isIntercoop() ? R.string.intercoop_member : R.string.member);
 
-//        String id = App.getUserData(context).getEntity().getMemberId();
-        String id = "000143";
+        Account account = data.getAccount();
+        view.showMemberData(account, memberType);
+
+        QrInfo qrInfo = new QrInfo(data.getCityCode(), account.getMemberId());
+        String qrText = new Gson().toJson(qrInfo);
         int sizeQR = context.getResources().getDimensionPixelSize(R.dimen.size_qr);
 
-        Bitmap qrBitmap = QRCode.from(id).withSize(sizeQR, sizeQR).bitmap();
+        Bitmap qrBitmap = QRCode.from(qrText).withSize(sizeQR, sizeQR).bitmap();
         view.showQrBitmap(qrBitmap);
+
 
     }
 
@@ -77,10 +95,22 @@ public class MemberCardPresenter extends BasePresenter {
         progressDialog.setMessage(context.getString(R.string.checking_member, qrContent));
         progressDialog.show();
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            progressDialog.dismiss();
-            String status = "ACTIVA";
-            view.alert(null, context.getString(R.string.member_check_result, qrContent, status));
-        }, 2000);
+        QrInfo qrInfo = new Gson().fromJson(qrContent, QrInfo.class);
+        new UserInteractor(context, view).getMemberStatus(qrInfo.getCity(), qrInfo.getMemberId(), new BaseInteractor.BaseApiCallback<MemberStatus>() {
+            @Override
+            public void onResponse(MemberStatus memberStatus) {
+
+                progressDialog.dismiss();
+                String status = getString(memberStatus.isActive() ? R.string.active : R.string.inactive);
+                view.alert(null, context.getString(R.string.member_check_result, qrInfo.getMemberId(), status));
+            }
+
+            @Override
+            public void onError(String message) {
+                progressDialog.dismiss();
+                view.toast(R.string.error_retrieving_data);
+            }
+        });
+
     }
 }

@@ -23,10 +23,14 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
+import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
+import net.mercadosocial.moneda.model.Person;
+import net.mercadosocial.moneda.model.User;
 
 import es.dmoral.toasty.Toasty;
 
@@ -51,6 +55,7 @@ public class App extends MultiDexApplication {
     public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
     public static final String SHARED_ENTITIES_CACHE = PREFIX + "shared_entities_cache";
+    public static final String SHARED_MEMBER_CARD_INTRO_SEEN = PREFIX + "member_card_intro_seen";;
 
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
@@ -109,7 +114,43 @@ public class App extends MultiDexApplication {
 
         processWorkarounds();
 
+        updateProfileStatus();
 
+
+    }
+
+    private void updateProfileStatus() {
+        Data data = getUserData(this);
+        if (data != null) {
+            UserInteractor userInteractor = new UserInteractor(this, null);
+            if (data.isEntity()) {
+                userInteractor.getEntityProfile(new BaseInteractor.BaseApiCallback<Entity>() {
+                    @Override
+                    public void onResponse(Entity entity) {
+                        data.setEntity(entity);
+                        saveUserData(App.this, data);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
+            } else {
+                userInteractor.getPersonProfile(new BaseInteractor.BaseApiCallback<Person>() {
+                    @Override
+                    public void onResponse(Person person) {
+                        data.setPerson(person);
+                        saveUserData(App.this, data);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
+            }
+        }
     }
 
     private void refreshUserData() {
@@ -134,37 +175,8 @@ public class App extends MultiDexApplication {
         }
     }
 
-//    public List<Entity> getEntitiesCache() {
-//        return entitiesCache;
-//    }
-//
-//    public void setEntitiesCache(List<Entity> entitiesCache) {
-//        this.entitiesCache.clear();
-//        this.entitiesCache.addAll(entitiesCache);
-//    }
-
 
     public class MyObserver implements DefaultLifecycleObserver {
-//        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-//        public void onAppGoesForeground() {
-//            App.isInForeground = true;
-//            Log.i(TAG, "onAppGoesForeground: ");
-//        }
-//
-//        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-//        public void onAppGoesBackground() {
-//            App.isInForeground = false;
-//            Log.i(TAG, "onAppGoesBackground: ");
-//
-//        }
-//
-//        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-//        public void onAppGoesDestroyed() {
-//            App.isInForeground = false;
-//            Log.i(TAG, "onAppGoesDestoyed: ");
-//
-//        }
-
         @Override
         public void onResume(@NonNull LifecycleOwner owner) {
             App.isInForeground = true;

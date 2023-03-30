@@ -361,5 +361,19 @@
     <string name="members_benefits">Ventajas para soci@s</string>
     <string name="change_image">Cambiar imagen</string>
     <string name="error_image">Ha habido un error al subir la imagen</string>
+    <string name="benefits_available_for_active_members">Descuentos solo disponibles para socias activas</string>
+    <string name="no_benefit_currently">Esta entidad no ofrece descuentos actualmente</string>
+    <string name="benefit_in_person">Descuento en persona</string>
+    <string name="benefit_online">Descuento online</string>
+    <string name="benefits_not_for_intercoop">Descuento no disponible para socias de intercooperación</string>
+    <string name="benefit_request_email_subject">Solicitud de descuento Mercado Social de Madrid</string>
+    <string name="benefit_code_x">Código de descuento: %s</string>
+    <string name="member_number">Número de socia: %s</string>
+    <string name="intercoop_member">Intercooperación</string>
+    <string name="member">Socia</string>
+    <string name="inactive">INACTIVA</string>
+    <string name="active">ACTIVA</string>
+    <string name="no_app_to_open_link">No se ha encontrado aplicación para abrir el enlace</string>
+    <string name="member_card_intro_message">Este carnet certifica tu pertenencia como socia/o al Mercado Social de Madrid. Con él podrás acceder a las ventajas y descuentos por formar parte de la red. ¡Muchas gracias por tu aportación a la Economía Solidaria madrileña!</string>
 
 </resources>

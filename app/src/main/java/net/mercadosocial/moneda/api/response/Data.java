@@ -57,7 +57,7 @@ public class Data {
         }
     }
 
-    public String getCity() {
+    public String getCityName() {
         String cityCode = "";
         if (entity != null) {
             cityCode = entity.getCity();
@@ -71,6 +71,15 @@ public class Data {
             return null;
         }
     }
+
+    public String getCityCode() {
+        if (entity != null) {
+            return entity.getCity();
+        } else {
+            return person.getCity();
+        }
+    }
+
 
 
     public String getApiKeyFull() {

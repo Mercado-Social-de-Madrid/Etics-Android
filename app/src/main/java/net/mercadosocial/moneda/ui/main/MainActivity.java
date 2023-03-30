@@ -605,7 +605,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             showInvitationMenuItem(userData.getPerson() != null && !userData.getPerson().is_guest_account());
 
-            tvMES.setText(String.format(getString(R.string.mes_format), userData.getCity()));
+            tvMES.setText(String.format(getString(R.string.mes_format), userData.getCityName()));
             if (!userData.isEntity()) {
                 if (userData.getPerson().is_guest_account()) {
                     String dateFormatted = DateUtils.convertDateApiToUserFormat(userData.getPerson().getExpiration_date());

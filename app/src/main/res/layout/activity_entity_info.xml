@@ -28,7 +28,7 @@
                     android:id="@+id/frame_gallery_pager"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:background="@color/white"/>
+                    android:background="@color/white" />
 
                 <ImageView
                     android:id="@+id/img_entity"
@@ -173,11 +173,49 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_members_benefits"
-                    style="@style/TextBase"
-                    android:padding="10dp"
-                    android:layout_marginBottom="16dp"/>
+                <!-- START BENEFITS SECTION -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_members_benefits"
+                        style="@style/TextBase"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_benefit_in_person"
+                        style="@style/TextBase.Purple"
+                        android:drawableStart="@mipmap/ic_green_check"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/benefit_in_person" />
+
+                    <TextView
+                        android:id="@+id/tv_benefit_online"
+                        style="@style/TextBase.Purple"
+                        android:layout_marginBottom="16dp"
+                        android:drawableStart="@mipmap/ic_red_cross"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/benefit_online" />
+
+                    <TextView
+                        android:id="@+id/tv_benefit_code"
+                        style="@style/TextBase"
+                        android:layout_marginBottom="16dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_benefit_link"
+                        style="@style/ButtonMes"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
+
+                <!-- END BENEFITS SECTION -->
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,7 +245,8 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center_horizontal"
                         android:text="@string/no_offers_right_now"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:padding="12dp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_offers"

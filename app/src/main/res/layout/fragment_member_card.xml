@@ -116,11 +116,10 @@
                     android:background="@color/orange_corp"
                     android:padding="5dp"
                     android:text="socia intercooperación"
-                    android:textSize="@dimen/text_small_2"
-                    android:visibility="gone"/>
+                    android:textSize="@dimen/text_small_2"/>
 
                 <TextView
-                    android:id="@+id/tv_member_number"
+                    android:id="@+id/tv_member_id"
                     style="@style/TextBase"
                     android:layout_marginTop="5dp"
                     android:text="Nº de socia: 000143"
@@ -132,6 +131,7 @@
                     style="@style/TextBase"
                     android:layout_marginTop="5dp"
                     android:text="Fecha de alta: 12/12/2012"
+                    android:visibility="gone"
                     android:textSize="@dimen/text_small_2" />
 
             </LinearLayout>

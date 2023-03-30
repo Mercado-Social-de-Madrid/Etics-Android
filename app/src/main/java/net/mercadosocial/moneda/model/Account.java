@@ -8,14 +8,16 @@ public abstract class Account implements Serializable {
 
     private String id;
 
-    private transient String pin_code;
-    private transient String pin_codeRepeat;
+    private boolean inactive;
 
     @SerializedName("member_id")
     private String memberId;
     @SerializedName("is_intercoop")
     private Boolean intercoop;
     private String registered;
+
+    private transient String pin_code;
+    private transient String pin_codeRepeat;
 
     public abstract String getMemberName();
 
@@ -68,4 +70,9 @@ public abstract class Account implements Serializable {
     public void setIntercoop(Boolean intercoop) {
         this.intercoop = intercoop;
     }
+
+    public boolean isActive() {
+        return !inactive;
+    }
+
 }

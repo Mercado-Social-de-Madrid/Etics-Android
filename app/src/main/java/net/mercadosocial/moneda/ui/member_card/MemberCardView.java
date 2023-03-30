@@ -8,7 +8,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 
 public interface MemberCardView extends BaseView {
-    void showMemberData(Account account);
+    void showMemberData(Account account, String memberType);
 
     void showQrBitmap(Bitmap qrBitmap);
 

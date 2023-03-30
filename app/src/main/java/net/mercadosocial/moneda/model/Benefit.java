@@ -1,5 +1,8 @@
 package net.mercadosocial.moneda.model;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -18,8 +21,11 @@ public class Benefit implements Serializable {
     @SerializedName("discount_code")
     private String discountCode;
 
-    @SerializedName("discount_link")
-    private String discountLink;
+    @SerializedName("discount_link_entities")
+    private String discountLinkEntities;
+
+    @SerializedName("discount_link_members")
+    private String discountLinkMembers;
 
     @SerializedName("discount_link_text")
     private String discountLinkText;
@@ -49,7 +55,7 @@ public class Benefit implements Serializable {
     }
 
     public String getBenefitForEntities() {
-        return benefitForEntities;
+        return benefitForEntities.replace("<p>", "").replace("</p>", "");
     }
 
     public void setBenefitForEntities(String benefitForEntities) {
@@ -57,7 +63,7 @@ public class Benefit implements Serializable {
     }
 
     public String getBenefitForMembers() {
-        return benefitForMembers;
+        return benefitForMembers.replace("<p>", "").replace("</p>", "");
     }
 
     public void setBenefitForMembers(String benefitForMembers) {
@@ -70,14 +76,6 @@ public class Benefit implements Serializable {
 
     public void setDiscountCode(String discountCode) {
         this.discountCode = discountCode;
-    }
-
-    public String getDiscountLink() {
-        return discountLink;
-    }
-
-    public void setDiscountLink(String discountLink) {
-        this.discountLink = discountLink;
     }
 
     public String getDiscountLinkText() {
@@ -104,11 +102,31 @@ public class Benefit implements Serializable {
         this.online = online;
     }
 
-    public boolean isIncludesIntercoopMembers() {
+    public boolean includesIntercoopMembers() {
         return includesIntercoopMembers;
     }
 
     public void setIncludesIntercoopMembers(boolean includesIntercoopMembers) {
         this.includesIntercoopMembers = includesIntercoopMembers;
+    }
+
+    public String getDiscountLinkEntities() {
+        return discountLinkEntities;
+    }
+
+    public void setDiscountLinkEntities(String discountLinkEntities) {
+        this.discountLinkEntities = discountLinkEntities;
+    }
+
+    public String getDiscountLinkMembers() {
+        return discountLinkMembers;
+    }
+
+    public void setDiscountLinkMembers(String discountLinkMembers) {
+        this.discountLinkMembers = discountLinkMembers;
+    }
+
+    public Spanned getBenefitText(boolean isEntity) {
+        return Html.fromHtml(isEntity ? getBenefitForEntities() : getBenefitForMembers());
     }
 }

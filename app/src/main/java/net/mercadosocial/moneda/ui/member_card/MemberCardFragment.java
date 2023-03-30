@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,8 +30,6 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Account;
-import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.views.CircleTransform;
@@ -43,7 +40,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
     private MemberCardPresenter presenter;
 
-    private TextView tvMemberName, tvMemberType, tvMemberNumber, tvMemberDate;
+    private TextView tvMemberName, tvMemberType, tvMemberId, tvMemberDate;
     private ImageView imgMemberQr, imgMemberProfile;
     private View viewMemberLogin, viewMemberLogout;
     private TextView btnLogin, btnSignup;
@@ -51,7 +48,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
     private void findViews(View layout) {
         tvMemberName = layout.findViewById(R.id.tv_member_name);
         tvMemberType = layout.findViewById(R.id.tv_member_type);
-        tvMemberNumber = layout.findViewById(R.id.tv_member_number);
+        tvMemberId = layout.findViewById(R.id.tv_member_id);
         tvMemberDate = layout.findViewById(R.id.tv_member_date);
         imgMemberQr = layout.findViewById(R.id.img_member_qr);
         imgMemberProfile = layout.findViewById(R.id.img_member_profile);
@@ -157,8 +154,10 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
     }
 
     @Override
-    public void showMemberData(Account account) {
+    public void showMemberData(Account account, String memberType) {
         tvMemberName.setText(account.getMemberName());
+        tvMemberId.setText(getString(R.string.member_number, account.getMemberId()));
+        tvMemberType.setText(memberType);
         Picasso.get()
                 .load(account.getMemberImage())
                 .placeholder(R.mipmap.ic_avatar_2)

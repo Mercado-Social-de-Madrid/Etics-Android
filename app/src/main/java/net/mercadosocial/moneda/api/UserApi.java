@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.api;
 
 
 import net.mercadosocial.moneda.api.model.InvitationRequest;
+import net.mercadosocial.moneda.api.model.MemberStatus;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 
@@ -10,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import rx.Observable;
 
 
@@ -30,5 +32,7 @@ public interface UserApi {
     @POST("invite/")
     Observable<Response<Void>> sendInvitation(@Body InvitationRequest invitationRequest);
 
+    @GET("member_status/")
+    Observable<Response<MemberStatus>> getMemberStatus(@Query("city") String cityCode, @Query("member_id") String memberId);
 
 }

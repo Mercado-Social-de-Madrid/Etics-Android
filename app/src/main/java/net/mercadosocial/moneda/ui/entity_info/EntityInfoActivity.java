@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.entity_info;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
+import net.mercadosocial.moneda.model.Benefit;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
@@ -35,7 +38,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private TextView tvEntityDescription;
     private RecyclerView recyclerOffers;
     private TextView tvEntityName;
-    private TextView tvMembersBenefits;
     private EntityInfoPresenter presenter;
     private EntitiyOffersAdapter adapter;
     private TextView tvNoOffers;
@@ -46,27 +48,37 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private ImageView btnRrssInstagram;
     private View viewEticsInfo;
 
+    private TextView tvMembersBenefits;
+    private TextView tvMembersBenefitInPerson;
+    private TextView tvMembersBenefitOnline;
+    private TextView tvBenefitCode;
+    private Button btnBenefitLink;
+
 
     private void findViews() {
-        imgEntity = (ImageView)findViewById( R.id.img_entity );
-        imgHeart = (ImageView)findViewById( R.id.img_heart );
-        tvAcceptBoniatos = (TextView)findViewById( R.id.tv_accept_boniatos );
-        tvBonusBoniatos = (TextView)findViewById( R.id.tv_bonus_boniatos );
-        btnNewPayment = (TextView)findViewById( R.id.btn_new_payment );
-        tvEntityDescription = (TextView)findViewById( R.id.tv_entity_description );
-        recyclerOffers = (RecyclerView)findViewById( R.id.recycler_offers );
-        tvEntityName = (TextView)findViewById( R.id.tv_entity_name );
+        imgEntity = (ImageView) findViewById(R.id.img_entity);
+        imgHeart = (ImageView) findViewById(R.id.img_heart);
+        tvAcceptBoniatos = (TextView) findViewById(R.id.tv_accept_boniatos);
+        tvBonusBoniatos = (TextView) findViewById(R.id.tv_bonus_boniatos);
+        btnNewPayment = (TextView) findViewById(R.id.btn_new_payment);
+        tvEntityDescription = (TextView) findViewById(R.id.tv_entity_description);
+        recyclerOffers = (RecyclerView) findViewById(R.id.recycler_offers);
+        tvEntityName = (TextView) findViewById(R.id.tv_entity_name);
         tvNoOffers = (TextView) findViewById(R.id.tv_no_offers);
 
-        btnRrssWeb = (ImageView)findViewById( R.id.btn_rrss_web );
-        btnRrssTelegram = (ImageView)findViewById( R.id.btn_rrss_telegram );
-        btnRrssTwitter = (ImageView)findViewById( R.id.btn_rrss_twitter );
-        btnRrssFacebook = (ImageView)findViewById( R.id.btn_rrss_facebook );
-        btnRrssInstagram = (ImageView)findViewById( R.id.btn_rrss_instagram );
+        btnRrssWeb = (ImageView) findViewById(R.id.btn_rrss_web);
+        btnRrssTelegram = (ImageView) findViewById(R.id.btn_rrss_telegram);
+        btnRrssTwitter = (ImageView) findViewById(R.id.btn_rrss_twitter);
+        btnRrssFacebook = (ImageView) findViewById(R.id.btn_rrss_facebook);
+        btnRrssInstagram = (ImageView) findViewById(R.id.btn_rrss_instagram);
 
         viewEticsInfo = findViewById(R.id.view_etics_info);
 
         tvMembersBenefits = findViewById(R.id.tv_members_benefits);
+        tvMembersBenefitInPerson = findViewById(R.id.tv_benefit_in_person);
+        tvMembersBenefitOnline = findViewById(R.id.tv_benefit_online);
+        tvBenefitCode = findViewById(R.id.tv_benefit_code);
+        btnBenefitLink = findViewById(R.id.btn_benefit_link);
 
         btnNewPayment.setOnClickListener(this);
         imgHeart.setOnClickListener(this);
@@ -141,10 +153,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         tvAcceptBoniatos.setText(Util.getDecimalFormatted(entity.getMax_percent_payment(), false) + "%");
         tvBonusBoniatos.setText(Util.getDecimalFormatted(entity.getBonusPercent(this), false) + "%");
 
-        if (entity.getBenefit() != null) {
-            tvMembersBenefits.setText(Html.fromHtml(entity.getBenefit().getBenefitForMembers()));
-        }
-
         Picasso.get()
                 .load(entity.getLogo())
 //                .placeholder(R.mipmap.img_default_grid)
@@ -164,6 +172,41 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
 
         setupRRSSButtons(entity);
+
+    }
+
+    @Override
+    public void showBenefitsInfo(Benefit benefit, boolean isEntity, String noBenefitText) {
+
+        if (noBenefitText != null) {
+            tvMembersBenefits.setText(noBenefitText);
+            tvMembersBenefitInPerson.setVisibility(View.GONE);
+            tvMembersBenefitOnline.setVisibility(View.GONE);
+            btnBenefitLink.setVisibility(View.GONE);
+            tvBenefitCode.setVisibility(View.GONE);
+            return;
+        }
+
+        tvMembersBenefits.setText(benefit.getBenefitText(isEntity));
+
+        tvMembersBenefitInPerson.setCompoundDrawablesWithIntrinsicBounds(
+                benefit.isInPerson() ? R.mipmap.ic_green_check : R.mipmap.ic_red_cross, 0, 0, 0);
+
+        tvMembersBenefitOnline.setCompoundDrawablesWithIntrinsicBounds(
+                benefit.isOnline() ? R.mipmap.ic_green_check : R.mipmap.ic_red_cross, 0, 0, 0);
+
+        tvBenefitCode.setVisibility(TextUtils.isEmpty(benefit.getDiscountCode()) ? View.GONE : View.VISIBLE);
+        tvBenefitCode.setText(getString(R.string.benefit_code_x, benefit.getDiscountCode()));
+
+        if (isEntity) {
+            btnBenefitLink.setVisibility(TextUtils.isEmpty(benefit.getDiscountLinkEntities()) ? View.GONE : View.VISIBLE);
+            btnBenefitLink.setOnClickListener(v -> presenter.onBenefitLinkClick(benefit.getDiscountLinkEntities()));
+        } else {
+            btnBenefitLink.setVisibility(TextUtils.isEmpty(benefit.getDiscountLinkMembers()) ? View.GONE : View.VISIBLE);
+            btnBenefitLink.setOnClickListener(v -> presenter.onBenefitLinkClick(benefit.getDiscountLinkMembers()));
+        }
+
+        btnBenefitLink.setText(benefit.getDiscountLinkText());
 
     }
 
