@@ -119,6 +119,8 @@ import es.dmoral.toasty.Toasty;
 
     public void onBenefitLinkClick(String benefitLink) {
 
+        Data data = App.getUserData(context);
+
         try {
             if (Patterns.WEB_URL.matcher(benefitLink).matches()) {
 
@@ -127,9 +129,9 @@ import es.dmoral.toasty.Toasty;
             } else if (Patterns.EMAIL_ADDRESS.matcher(benefitLink).matches()) {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:" + benefitLink +
-                        "?subject=" + getString(R.string.benefit_request_email_subject)); // &body=
-                intent.setData(data);
+                Uri intentData = Uri.parse("mailto:" + benefitLink + "?subject=" + context.getString(
+                        R.string.benefit_request_email_subject, data.getAccount().getMemberId())); // &body=
+                intent.setData(intentData);
 
                 context.startActivity(intent);
             } else {

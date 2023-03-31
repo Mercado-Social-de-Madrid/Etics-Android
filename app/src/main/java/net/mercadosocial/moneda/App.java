@@ -114,44 +114,8 @@ public class App extends MultiDexApplication {
 
         processWorkarounds();
 
-        updateProfileStatus();
-
-
     }
 
-    private void updateProfileStatus() {
-        Data data = getUserData(this);
-        if (data != null) {
-            UserInteractor userInteractor = new UserInteractor(this, null);
-            if (data.isEntity()) {
-                userInteractor.getEntityProfile(new BaseInteractor.BaseApiCallback<Entity>() {
-                    @Override
-                    public void onResponse(Entity entity) {
-                        data.setEntity(entity);
-                        saveUserData(App.this, data);
-                    }
-
-                    @Override
-                    public void onError(String message) {
-
-                    }
-                });
-            } else {
-                userInteractor.getPersonProfile(new BaseInteractor.BaseApiCallback<Person>() {
-                    @Override
-                    public void onResponse(Person person) {
-                        data.setPerson(person);
-                        saveUserData(App.this, data);
-                    }
-
-                    @Override
-                    public void onError(String message) {
-
-                    }
-                });
-            }
-        }
-    }
 
     private void refreshUserData() {
         // Refresh has_pincode field

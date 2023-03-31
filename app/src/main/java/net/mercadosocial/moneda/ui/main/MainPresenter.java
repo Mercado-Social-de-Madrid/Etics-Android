@@ -18,10 +18,13 @@ import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.interactor.PaymentInteractor;
+import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.model.Payment;
+import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 import java.util.List;
@@ -65,6 +68,8 @@ import java.util.List;
 
          checkIntentUriReceived(intent);
 
+         updateProfileStatus();
+
      }
 
 
@@ -84,6 +89,39 @@ import java.util.List;
          }
      }
 
+    private void updateProfileStatus() {
+        Data data = App.getUserData(context);
+        if (data != null) {
+            UserInteractor userInteractor = new UserInteractor(context, null);
+            if (data.isEntity()) {
+                userInteractor.getEntityProfile(new BaseInteractor.BaseApiCallback<Entity>() {
+                    @Override
+                    public void onResponse(Entity entity) {
+                        data.setEntity(entity);
+                        App.saveUserData(context, data);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
+            } else {
+                userInteractor.getPersonProfile(new BaseInteractor.BaseApiCallback<Person>() {
+                    @Override
+                    public void onResponse(Person person) {
+                        data.setPerson(person);
+                        App.saveUserData(context, data);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
+            }
+        }
+    }
 
     private void checkIntentUriReceived(Intent intent) {
 
