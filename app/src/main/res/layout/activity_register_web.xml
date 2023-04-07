@@ -87,62 +87,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/bg_frame_black_corners"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_invitation"
-                    android:tint="@color/purple" />
-
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="@string/invitation_code_text"
-                    android:textSize="@dimen/text_small_2"
-                    android:visibility="visible" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/edit_invitation_code"
-                        style="@style/TextBase"
-                        android:layout_weight="1"
-                        android:hint="@string/invitation_code"
-                        android:inputType="textShortMessage"
-                        android:padding="10dp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_register_person_guest"
-                        style="@style/ButtonMes"
-                        android:minWidth="0dp"
-                        android:text="@string/continue_str" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                style="@style/TextBase"
-                android:layout_marginTop="5dp"
-                android:gravity="center_horizontal"
-                android:padding="10dp"
-                android:text="@string/invitation_code_text"
-                android:textSize="@dimen/text_small_2"
-                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

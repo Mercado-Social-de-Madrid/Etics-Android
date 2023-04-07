@@ -84,7 +84,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private int currentSection = -1;
     private TextView btnGoToProfile;
     private NavigationView navigationView;
-    private MenuItem menuItemInvitations;
     private TextView tvMES;
     private TextView tvGuestInfo;
     private TextView tvUsername;
@@ -110,8 +109,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         btnLogout = navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         imgAvatar = navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         btnGoToProfile = navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
-
-        menuItemInvitations = navigationView.getMenu().findItem(R.id.menuItem_invitations);
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
@@ -603,8 +600,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
 
-            showInvitationMenuItem(userData.getPerson() != null && !userData.getPerson().is_guest_account());
-
             tvMES.setText(String.format(getString(R.string.mes_format), userData.getCityName()));
             if (!userData.isEntity()) {
                 if (userData.getPerson().is_guest_account()) {
@@ -621,15 +616,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     baseFragment.refreshData();
                 }
             }
-
-            showInvitationMenuItem(false);
         }
 
     }
 
-    private void showInvitationMenuItem(boolean show) {
-        menuItemInvitations.setVisible(show);
-    }
 
     @Override
     public void showPendingPaymentsNumber(int numberPendingPayments) {

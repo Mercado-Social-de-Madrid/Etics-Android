@@ -34,7 +34,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private ProfilePresenter presenter;
     private TextView tvProfileName, tvProfileType, tvProfileMarket;
     private LinearLayout btnChangePincode;
-    private LinearLayout btnInvitations;
     private AppCompatButton btnLogout;
     private EasyImage easyImage;
 
@@ -43,7 +42,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         tvProfileType = findViewById(R.id.tv_profile_type);
         tvProfileMarket = findViewById(R.id.tv_profile_market);
         btnChangePincode = findViewById(R.id.btn_change_pincode);
-        btnInvitations = findViewById(R.id.btn_invitations);
         btnLogout = findViewById(R.id.btn_logout);
 
         tvProfileName = findViewById(R.id.tv_profile_name);
@@ -52,7 +50,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         btnLogout.setOnClickListener(this);
         btnChangeImage.setOnClickListener(this);
         btnChangePincode.setOnClickListener(this);
-        btnInvitations.setOnClickListener(this);
     }
 
 
@@ -119,10 +116,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             case R.id.btn_logout:
                 setResult(RESULT_OK);
                 finish();
-                break;
-
-            case R.id.btn_invitations:
-                InvitationsPresenter.launchInvitationsActivity(this);
                 break;
 
             case R.id.btn_change_pincode:

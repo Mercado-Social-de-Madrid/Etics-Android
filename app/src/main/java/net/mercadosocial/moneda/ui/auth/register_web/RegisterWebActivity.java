@@ -15,19 +15,14 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
 
     private View btnRegisterPerson;
     private View btnRegisterEntity;
-    private View btnRegisterPersonGuest;
-    private EditText editInvitationCode;
 
     private void findViews() {
         btnRegisterPerson = findViewById(R.id.btn_register_person);
         btnRegisterEntity = findViewById(R.id.btn_register_entity);
         btnRegisterEntity = findViewById(R.id.btn_register_entity);
-        btnRegisterPersonGuest = findViewById(R.id.btn_register_person_guest);
-        editInvitationCode = (EditText) findViewById(R.id.edit_invitation_code);
 
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);
-        btnRegisterPersonGuest.setOnClickListener(this);
     }
 
 
@@ -50,15 +45,6 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
 
             case R.id.btn_register_entity:
                 path = "accounts/signup/provider/?from_app=true"; // to remove web headers
-                break;
-
-            case R.id.btn_register_person_guest:
-                String code = editInvitationCode.getText().toString().replace("#", "");
-                if (TextUtils.isEmpty(code)) {
-                    Toasty.warning(this, getString(R.string.enter_code)).show();
-                    return;
-                }
-                path = "invite/" + code + "/?from_app=true";
                 break;
 
         }

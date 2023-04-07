@@ -130,29 +130,6 @@
 
                 <View style="@style/XpansorHoriz" />
 
-                <LinearLayout
-                    android:id="@+id/btn_invitations"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="15dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@mipmap/ic_invitation_profile"
-                        app:tint="@color/purple" />
-
-                    <TextView
-                        style="@style/TextBase.Purple"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/invitations" />
-                </LinearLayout>
-
-                <View style="@style/XpansorHoriz" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton

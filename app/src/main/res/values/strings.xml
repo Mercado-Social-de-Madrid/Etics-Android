@@ -321,8 +321,6 @@
     <string name="transactions_empty_message">Todavía no tienes movimientos en etics para mostrar.</string>
     <string name="mes_format">Mercado: %s</string>
     <string name="guest_account_info_format">Cuenta invitada.\nVálida hasta: %s</string>
-    <string name="invitation_code_text">Ahora puedes registrarte como invitada y probar gratuitamente el sistema de bonificaciones éticas durante un tiempo limitado. Introduce aquí el código de invitada:</string>
-    <string name="invited_customer">Consumidora invitada</string>
     <string name="customer">Consumidora</string>
     <string name="invitation_code_text_short">Introduce el código \"consumeconsciente\" para probar el sistema de bonificaciones éticas gratuitamente</string>
     <string name="invitation_code">Código de invitación</string>
