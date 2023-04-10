@@ -1,21 +1,28 @@
 package net.mercadosocial.moneda.ui.profile;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
-import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.profile.pincode_change.PincodeChangePresenter;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
@@ -108,9 +115,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_image:
-
-                easyImage.openChooser(this);
-
+                checkPermissionAndOpenChooser();
                 break;
 
             case R.id.btn_logout:
@@ -126,6 +131,31 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    private void checkPermissionAndOpenChooser() {
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        easyImage.openChooser(ProfileActivity.this);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        easyImage.openGallery(ProfileActivity.this);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        new AlertDialog.Builder(ProfileActivity.this)
+                                .setMessage(R.string.need_access_camera_profile_photo)
+                                .setPositiveButton(R.string.go_ahead, (dialog, which) -> token.continuePermissionRequest())
+                                .setNegativeButton(R.string.cancel, (dialog, which) -> token.cancelPermissionRequest())
+                                .show();
+                    }
+                })
+                .check();
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

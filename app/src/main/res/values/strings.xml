@@ -72,7 +72,8 @@
     <string name="operations">Operaciones</string>
     <string name="continue_arrow">Continuar \></string>
     <string name="permission_denied">Permiso denegado</string>
-    <string name="need_access_camera">Se necesita acceder a la cámara de tu móvil para escanear el código</string>
+    <string name="need_access_camera_scan_qr">Se necesita acceder a la cámara de tu móvil para escanear el código</string>
+    <string name="need_access_camera_profile_photo">Se necesita acceder a la cámara de tu móvil para hacer foto de perfil. No es necesario si vas a escoger tu imagen desde la memoria del teléfono</string>
     <string name="qr_code_scan">Escanear código QR</string>
     <string name="go_ahead">Adelante</string>
     <string name="new_payment">Nuevo pago</string>

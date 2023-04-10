@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.member_card;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -43,7 +44,11 @@ public class MemberCardPresenter extends BasePresenter {
 
     private void checkInitialDialog() {
         if (!getPrefs().getBoolean(App.SHARED_MEMBER_CARD_INTRO_SEEN, false)) {
-            view.alert(getString(R.string.member_card), getString(R.string.member_card_intro_message));
+            new AlertDialog.Builder(context)
+                    .setTitle(R.string.member_card)
+                    .setMessage(R.string.member_card_intro_message)
+                    .setPositiveButton(R.string.accept, null)
+                    .show();
             getPrefs().edit().putBoolean(App.SHARED_MEMBER_CARD_INTRO_SEEN, true).apply();
         }
     }

@@ -136,7 +136,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         new AlertDialog.Builder(getActivity())
-                                .setMessage(R.string.need_access_camera)
+                                .setMessage(R.string.need_access_camera_scan_qr)
                                 .setPositiveButton(R.string.go_ahead, (dialog, which) -> token.continuePermissionRequest())
                                 .setNegativeButton(R.string.cancel, (dialog, which) -> token.cancelPermissionRequest())
                                 .show();

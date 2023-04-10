@@ -123,7 +123,7 @@ public class BarcodeActivity extends BaseActivity {
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, final PermissionToken token) {
                         new AlertDialog.Builder(BarcodeActivity.this)
-                                .setMessage(R.string.need_access_camera)
+                                .setMessage(R.string.need_access_camera_scan_qr)
                                 .setPositiveButton(R.string.go_ahead, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

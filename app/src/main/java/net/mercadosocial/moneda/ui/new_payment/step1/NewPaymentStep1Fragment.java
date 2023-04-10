@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,8 +23,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.karumi.dexter.Dexter;
@@ -150,7 +146,7 @@ public class NewPaymentStep1Fragment extends BaseFragment implements NewPaymentS
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         new AlertDialog.Builder(getActivity())
-                                .setMessage(R.string.need_access_camera)
+                                .setMessage(R.string.need_access_camera_scan_qr)
                                 .setPositiveButton(R.string.go_ahead, (dialog, which) -> token.continuePermissionRequest())
                                 .setNegativeButton(R.string.cancel, (dialog, which) -> token.cancelPermissionRequest())
                                 .show();
