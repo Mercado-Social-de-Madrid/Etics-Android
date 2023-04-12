@@ -378,5 +378,6 @@
     <string name="new_payment_only_active">Las socias inactivas no pueden enviar pagos</string>
     <string name="enter_member_id">Introduce número de socia</string>
     <string name="member_id_not_found">No se ha encontrado el número de socia</string>
+    <string name="uploading_image">Subiendo imagen...</string>
 
 </resources>

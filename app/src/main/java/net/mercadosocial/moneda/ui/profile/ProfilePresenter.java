@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.profile;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -161,6 +162,11 @@ public class ProfilePresenter extends BasePresenter {
         String base64 = Base64.encodeToString(bytes, Base64.DEFAULT);
         String imageData = "image/jpeg;" + base64;
 
+
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage(getString(R.string.uploading_image));
+        progressDialog.show();
+
         Data data = App.getUserData(context);
         if (data.isEntity()) {
             Entity entity = new Entity();
@@ -168,11 +174,13 @@ public class ProfilePresenter extends BasePresenter {
             userInteractor.updateEntity(entity, new BaseInteractor.BaseApiPOSTCallback() {
                 @Override
                 public void onSuccess(Integer id) {
+                    progressDialog.dismiss();
                     loadData();
                 }
 
                 @Override
                 public void onError(String message) {
+                    progressDialog.dismiss();
                     view.toast(R.string.error_image);
                 }
             });
@@ -182,11 +190,13 @@ public class ProfilePresenter extends BasePresenter {
             userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
                 @Override
                 public void onSuccess(Integer id) {
+                    progressDialog.dismiss();
                     loadData();
                 }
 
                 @Override
                 public void onError(String message) {
+                    progressDialog.dismiss();
                     view.toast(R.string.error_image);
                 }
             });
@@ -215,7 +225,7 @@ public class ProfilePresenter extends BasePresenter {
         // Redimensionar la imagen original para que tenga un ancho máximo de 600px y un alto proporcional
         int originalWidth = originalBitmap.getWidth();
         int originalHeight = originalBitmap.getHeight();
-        int newWidth = 600;
+        int newWidth = 400;
         int newHeight = (int) (((float) newWidth / originalWidth) * originalHeight);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, false);
 

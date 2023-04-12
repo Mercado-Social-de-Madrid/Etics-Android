@@ -127,7 +127,7 @@ public class ApiClient {
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(headersInterceptor)
                 .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
 //                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
                 .hostnameVerifier(new HostnameVerifier() {

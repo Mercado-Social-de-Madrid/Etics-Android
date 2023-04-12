@@ -138,14 +138,7 @@ import es.dmoral.toasty.Toasty;
         new AlertDialog.Builder(context)
                 .setTitle(R.string.remember_password)
                 .setMessage(R.string.remember_password_success_message)
-                .setPositiveButton(R.string.go_to_email, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        openEmailApp();
-
-                    }
-                })
+                .setPositiveButton(R.string.go_to_email, (dialog, which) -> openEmailApp())
                 .setNeutralButton(R.string.back, null)
                 .show();
     }
@@ -153,6 +146,7 @@ import es.dmoral.toasty.Toasty;
     private void openEmailApp() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
