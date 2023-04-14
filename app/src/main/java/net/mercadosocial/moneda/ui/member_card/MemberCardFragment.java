@@ -111,7 +111,6 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
         EditTextDialog dialog = new EditTextDialog();
         dialog.setTitle(getString(R.string.enter_member_id));
-        dialog.setInputType(InputType.TYPE_CLASS_PHONE);
         dialog.setListener(result -> {
             presenter.onManualMemberIdCheck(result);
         });

@@ -108,7 +108,12 @@ public class MemberCardPresenter extends BasePresenter {
 
                 progressDialog.dismiss();
                 String status = getString(memberStatus.isActive() ? R.string.active : R.string.inactive);
-                view.alert(null, context.getString(R.string.member_check_result, memberId, status));
+                new AlertDialog.Builder(context)
+                        .setIcon(memberStatus.isActive() ? R.mipmap.ic_green_check : R.mipmap.ic_red_cross)
+                        .setTitle(context.getString(R.string.member_status_x, status))
+                        .setMessage(context.getString(R.string.member_id_x, memberId))
+                        .setPositiveButton(R.string.back, null)
+                        .show();
             }
 
             @Override

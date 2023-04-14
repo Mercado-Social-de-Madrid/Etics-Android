@@ -97,7 +97,7 @@
     <string name="click_continue">Pulsa continuar</string>
     <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
-    <string name="register_to_use_wallet_text">Para usar tu monedero has de ser soci@ del Mercado Social o que alguna persona socia te invite.</string>
+    <string name="register_to_use_wallet_text">Para usar tu monedero has de ser soci@ del Mercado Social.</string>
     <string name="welcome_name_wallet">¡Hola %s!</string>
     <string name="entity_info">Información de entidad</string>
     <string name="payment_fail">Algo ha fallado en el pago</string>
@@ -379,5 +379,7 @@
     <string name="enter_member_id">Introduce número de socia</string>
     <string name="member_id_not_found">No se ha encontrado el número de socia</string>
     <string name="uploading_image">Subiendo imagen...</string>
+    <string name="member_status_x">Socia %s</string>
+    <string name="member_id_x">Número de socia: %s</string>
 
 </resources>
