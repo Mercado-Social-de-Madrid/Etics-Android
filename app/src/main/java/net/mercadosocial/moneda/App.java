@@ -73,6 +73,7 @@ public class App extends MultiDexApplication {
 //    private List<Entity> entitiesCache = new ArrayList<>();
 
     public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
+    public static final String URL_QR_MEMBER_CARD = "https://app.mercadosocial.net/socia/"; // {{uuid}}
 
     @Override
     public void onCreate() {

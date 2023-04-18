@@ -128,6 +128,7 @@ public class WebViewActivity extends BaseActivity {
             progressWebview.setProgress(newProgress);
             super.onProgressChanged(view, newProgress);
         }
+
     }
 
     private class CustomWebViewClient extends WebViewClient {

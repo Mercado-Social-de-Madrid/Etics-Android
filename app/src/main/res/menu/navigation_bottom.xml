@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_entities"
-        android:icon="@mipmap/ic_entities"
-        android:title="@string/entities" />
-
-    <item
         android:id="@+id/navigation_member_card"
         android:icon="@mipmap/ic_member_card"
         app:iconTint="@color/purple"
         android:title="@string/member_card" />
+
+    <item
+        android:id="@+id/navigation_entities"
+        android:icon="@mipmap/ic_entities"
+        android:title="@string/entities" />
+
 
     <item
         android:id="@+id/navigation_wallet"

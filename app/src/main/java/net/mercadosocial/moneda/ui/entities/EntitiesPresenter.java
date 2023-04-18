@@ -129,12 +129,8 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void refreshData() {
 
-        loadEntitiesCache();
         refreshEntities();
 
-    }
-
-    private void loadEntitiesCache() {
     }
 
     private void refreshEntities() {

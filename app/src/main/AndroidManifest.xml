@@ -33,16 +33,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter
-                android:autoVerify="true"
-                android:label="@string/mes_send_payment">
+                android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
                 <data android:host="app.mercadosocial.net" />
                 <data android:pathPrefix="/qr" />
+            </intent-filter>
+
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/mes_check_member">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="app.mercadosocial.net" />
+                <data android:pathPrefix="/socia" />
             </intent-filter>
         </activity>
         <activity

@@ -329,7 +329,7 @@
     <string name="enter_code">Introduce el código</string>
     <string name="how_many_etics">¿Cuantos etics quieres?</string>
     <string name="purchase_payment_text">Introduce tus datos de pago. La transacción es segura, a través de Redsys.</string>
-    <string name="not_logged_dialog_message">Para hacer un pago primero tienes que estar registrado en la aplicación</string>
+    <string name="not_logged_payment_dialog_message">Para hacer un pago debes estar registrado en la aplicación</string>
     <string name="go_to_main_screen">Ir a la pantalla principal</string>
     <string name="open_link">Abrir link</string>
     <string name="web_link_dialog_message">El siguiente enlace %s no corresponde a un enlace de pago válido para esta app. Intenta abrirlo en tu navegador móvil.</string>
@@ -381,5 +381,7 @@
     <string name="uploading_image">Subiendo imagen...</string>
     <string name="member_status_x">Socia %s</string>
     <string name="member_id_x">Número de socia: %s</string>
+    <string name="not_logged_member_check_message">Solo las entidades registradas en la app pueden comprobar el estado de una socia</string>
 
+    <string name="mes_check_member">Comprobar socia</string>
 </resources>

@@ -25,6 +25,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.model.Payment;
 import net.mercadosocial.moneda.model.Person;
+import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 
 import java.util.List;
@@ -133,7 +134,14 @@ import java.util.List;
                 if (App.getUserData(context) != null) {
                     context.startActivity(NewPaymentPresenter.newNewPaymentActivityWithUrl(context, url));
                 } else {
-                    showNotLoggedDialog();
+                    showNotLoggedDialog(R.string.not_logged_payment_dialog_message);
+                }
+            } else if (url.contains(App.URL_QR_MEMBER_CARD)) {
+                Data userData = App.getUserData(context);
+                if (userData == null || !userData.isEntity()) {
+                    showNotLoggedDialog(R.string.not_logged_member_check_message);
+                } else {
+                    new MemberCheckHelper(context, view).parseUrlAndCheck(url);
                 }
             } else {
                 showWebLinkDialog(url);
@@ -141,9 +149,9 @@ import java.util.List;
         }
     }
 
-    private void showNotLoggedDialog() {
+    private void showNotLoggedDialog(int messageId) {
         new AlertDialog.Builder(context)
-                .setMessage(R.string.not_logged_dialog_message)
+                .setMessage(messageId)
                 .setCancelable(false)
                 .setPositiveButton(R.string.understood, null)
                 .show();

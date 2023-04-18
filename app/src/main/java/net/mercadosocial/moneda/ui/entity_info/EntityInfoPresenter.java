@@ -120,6 +120,7 @@ import es.dmoral.toasty.Toasty;
     public void onBenefitLinkClick(String benefitLink) {
 
         Data data = App.getUserData(context);
+        benefitLink = benefitLink.trim();
 
         try {
             if (Patterns.WEB_URL.matcher(benefitLink).matches()) {

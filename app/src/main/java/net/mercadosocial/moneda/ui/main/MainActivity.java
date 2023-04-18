@@ -209,8 +209,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         walletFragment = new WalletFragment();
         noveltiesFragment = new NoveltiesFragment();
 
-        sections.add(entitiesFragment);
         sections.add(memberCardFragment);
+        sections.add(entitiesFragment);
         sections.add(walletFragment);
         sections.add(noveltiesFragment);
     }
@@ -307,7 +307,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
 
     public void setFilterEntities(FilterEntities filterEntities) {
-        if (currentSection == 0) {
+        if (currentSection == 1) {
             ((EntitiesPresenter) entitiesFragment.getBasePresenter()).setFilterEntities(filterEntities);
             if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout.closeDrawer(Gravity.RIGHT);
@@ -329,12 +329,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         try {
             switch (item.getItemId()) {
-                case R.id.navigation_entities:
-                    setToolbarTitle(R.string.entities);
-                    showFragment(0);
-                    return true;
                 case R.id.navigation_member_card:
                     setToolbarTitle(R.string.member_card);
+                    showFragment(0);
+                    return true;
+                case R.id.navigation_entities:
+                    setToolbarTitle(R.string.entities);
                     showFragment(1);
                     return true;
                 case R.id.navigation_wallet:
@@ -626,5 +626,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         tvPendingPaymentsBadge.setText(String.valueOf(numberPendingPayments));
         tvPendingPaymentsBadge.setVisibility(numberPendingPayments > 0 ? View.VISIBLE : View.GONE);
     }
+
 
 }

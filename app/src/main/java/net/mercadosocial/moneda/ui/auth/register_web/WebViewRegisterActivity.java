@@ -25,10 +25,6 @@ public class WebViewRegisterActivity extends BaseActivity {
     private static final String EXTRA_FILENAME = "extra_filename";
     private static final String EXTRA_TITLE = "extra_title";
 
-
-    public static final String FILENAME_QUE_ES_MES = "que_es_mes.html";
-    public static final String FILENAME_COMO_FUNCIONA_BONIATO = "como_funciona_boniato.html";
-
     private WebView webView;
     private ProgressBar progressWebview;
 

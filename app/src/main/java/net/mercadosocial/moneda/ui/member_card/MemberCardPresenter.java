@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.google.gson.Gson;
 
@@ -18,10 +19,13 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.Account;
 
+import java.net.URL;
+
 
 public class MemberCardPresenter extends BasePresenter {
 
     private final MemberCardView view;
+    private MemberCheckHelper memberCheckHelper;
 
     public static MemberCardPresenter newInstance(MemberCardView view, Context context) {
 
@@ -39,6 +43,7 @@ public class MemberCardPresenter extends BasePresenter {
     public void onCreate() {
 
         checkInitialDialog();
+        memberCheckHelper = new MemberCheckHelper(context, view);
 
     }
 
@@ -78,8 +83,7 @@ public class MemberCardPresenter extends BasePresenter {
         Account account = data.getAccount();
         view.showMemberData(account, memberType);
 
-        QrInfo qrInfo = new QrInfo(data.getCityCode(), account.getMemberId());
-        String qrText = new Gson().toJson(qrInfo);
+        String qrText = memberCheckHelper.createQrUrl(data.getCityCode(), account.getMemberId());
         int sizeQR = context.getResources().getDimensionPixelSize(R.dimen.size_qr);
 
         Bitmap qrBitmap = QRCode.from(qrText).withSize(sizeQR, sizeQR).bitmap();
@@ -91,43 +95,14 @@ public class MemberCardPresenter extends BasePresenter {
 
     public void onQRScanned(String qrContent) {
 
-        QrInfo qrInfo = new Gson().fromJson(qrContent, QrInfo.class);
-        checkMemberStatus(qrInfo.getCity(), qrInfo.getMemberId());
+        memberCheckHelper.parseUrlAndCheck(qrContent);
 
-    }
-
-    private void checkMemberStatus(String city, String memberId) {
-
-        final ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(context.getString(R.string.checking_member, memberId));
-        progressDialog.show();
-
-        new UserInteractor(context, view).getMemberStatus(city, memberId, new BaseInteractor.BaseApiCallback<MemberStatus>() {
-            @Override
-            public void onResponse(MemberStatus memberStatus) {
-
-                progressDialog.dismiss();
-                String status = getString(memberStatus.isActive() ? R.string.active : R.string.inactive);
-                new AlertDialog.Builder(context)
-                        .setIcon(memberStatus.isActive() ? R.mipmap.ic_green_check : R.mipmap.ic_red_cross)
-                        .setTitle(context.getString(R.string.member_status_x, status))
-                        .setMessage(context.getString(R.string.member_id_x, memberId))
-                        .setPositiveButton(R.string.back, null)
-                        .show();
-            }
-
-            @Override
-            public void onError(String message) {
-                progressDialog.dismiss();
-                view.toast(message);
-            }
-        });
     }
 
     public void onManualMemberIdCheck(String memberId) {
 
         Data data = App.getUserData(context);
-        checkMemberStatus(data.getCityCode(), memberId);
+        memberCheckHelper.checkMemberStatus(data.getCityCode(), memberId);
 
     }
 }
