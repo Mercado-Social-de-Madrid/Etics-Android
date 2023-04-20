@@ -33,13 +33,13 @@
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
-    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_password"
         style="@style/EditTextAuth"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
-    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_repeat_password"
         style="@style/EditTextAuth"
         android:layout_width="match_parent"

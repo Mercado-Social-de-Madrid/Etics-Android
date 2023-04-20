@@ -377,4 +377,6 @@
     <string name="not_logged_member_check_message">Solo las entidades registradas en la app pueden comprobar el estado de una socia</string>
 
     <string name="mes_check_member">Comprobar socia</string>
+    <string name="with_benefits">Con ventajas para socias</string>
+    <string name="accepts_etics">Acepta pago en etics</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -37,10 +38,23 @@
                 android:id="@+id/switch_only_favs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/only_favs" />
+                android:text="@string/only_favs"
+                android:layout_marginBottom="10dp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_with_benefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/with_benefits"
+                android:layout_marginBottom="10dp"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_accepts_etics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/accepts_etics" />
 
             <View
-                android:id="@+id/view_separator_favs"
                 style="@style/SeparatorHorizontal.Grey"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" />
@@ -54,7 +68,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
         </LinearLayout>
 
 

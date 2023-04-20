@@ -35,7 +35,6 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private SuperRecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
     private EntityListener entityListener;
-    private RotativeImageView progressMES;
     private View viewEmptyList;
     private TextView tvEmptyListEntities;
 
@@ -46,7 +45,6 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
     private void findViews(View layout) {
         recyclerEntities = layout.findViewById(R.id.recycler_entities);
-        progressMES = layout.findViewById(R.id.progress_mes);
         viewEmptyList = layout.findViewById(R.id.view_empty_list);
         tvEmptyListEntities = layout.findViewById(R.id.tv_empty_list_entities);
     }
@@ -124,10 +122,8 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         super.setRefreshing(refreshing);
 
         if (refreshing) {
-            progressMES.show();
             viewEmptyList.setVisibility(View.GONE);
         } else {
-            progressMES.hide();
             viewEmptyList.setVisibility(View.VISIBLE);
         }
     }

@@ -19,7 +19,6 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
     private void findViews() {
         btnRegisterPerson = findViewById(R.id.btn_register_person);
         btnRegisterEntity = findViewById(R.id.btn_register_entity);
-        btnRegisterEntity = findViewById(R.id.btn_register_entity);
 
         btnRegisterPerson.setOnClickListener(this);
         btnRegisterEntity.setOnClickListener(this);

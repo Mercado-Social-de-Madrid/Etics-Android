@@ -16,6 +16,7 @@ import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -63,6 +64,7 @@ public class EntitiesPresenter extends BasePresenter {
 
         if (entities != null && !entities.isEmpty()) {
             processFavs();
+            processLocalFilter();
             if (entitiesRefreshListener != null) {
                 entitiesRefreshListener.updateEntities(entities);
             }
@@ -147,6 +149,7 @@ public class EntitiesPresenter extends BasePresenter {
                 entities.clear();
                 entities.addAll(entitiesApi);
                 processFavs();
+                processLocalFilter();
 
                 if (entitiesRefreshListener != null) {
                     entitiesRefreshListener.setRefreshing(false);
@@ -165,6 +168,17 @@ public class EntitiesPresenter extends BasePresenter {
                 view.toast(error);
             }
         });
+    }
+
+    private void processLocalFilter() {
+        if (filterEntities != null) {
+            List<Entity> entitiesFiltered = entities.stream()
+                    .filter(entity -> !filterEntities.isAcceptsEtics() || entity.getMax_percent_payment() > 0)
+                    .filter(entity -> !filterEntities.isWithBenefits() || entity.getBenefit() != null)
+                    .collect(Collectors.toList());
+            entities.clear();
+            entities.addAll(entitiesFiltered);
+        }
     }
 
     private void processFavs() {
