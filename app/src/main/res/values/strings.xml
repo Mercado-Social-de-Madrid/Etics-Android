@@ -60,7 +60,7 @@
     <string name="entity_offers">Ofertas de la entidad</string>
 
     <string name="start">¿Comenzamos?</string>
-    <string name="go_to_entities_list">Ir al listado de entidades</string>
+    <string name="go_to_entities_list">¡Comenzar!</string>
     <string name="intro_member_info">Para obtener bonificaciones en &currency_name_plural; y pagar con ellos, has de ser soci@ del Mercado Social o que alguna persona socia te invite.</string>
     <string name="discover_how">Descubre cómo \></string>
     <string name="your_balance_is">Tienes un saldo de:</string>
@@ -283,19 +283,12 @@
     <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural;
         en tu cuenta</string>
 
-    <string name="intro_message_1">Bienvenida/o a la app del Mercado Social de Madrid (MES), una red que promueve el consumo ético</string>
-    <string name="intro_message_2">Aquí podrás encontrar las entidades y ofertas del MES</string>
-    <string name="intro_message_3">También las últimas novedades y convocatorias</string>
-    <string name="intro_message_4">Podrás realizar pagos en &currency_name_plural;, la moneda del MES…</string>
-    <string name="intro_message_5">… y por cada compra que realices, recibirás una bonificación en &currency_name_plural;!</string>
     <string name="select_mes">Selecciona Mercado Social</string>
     <string name="change_social_market">Cambiar Mercado Social</string>
     <string name="select">Seleccionar</string>
     <string name="change_social_market_warning">Ten en cuenta que si has accedido con tu usuario, al cambiar de Mercado Social se cerrará la sesión</string>
     <string name="enter_in_mes_x">Entrar en el MES %s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="categories">Categorías</string>
     <string name="only_favs">Sólo favoritas</string>
     <string name="apply_filters">Aplicar filtros</string>
@@ -368,8 +361,8 @@
     <string name="benefit_request_email_subject">Solicitud de descuento Mercado Social de Madrid. Número de socia: %s</string>
     <string name="benefit_code_x">Código de descuento: %s</string>
     <string name="member_number">Número de socia: %s</string>
-    <string name="intercoop_member">Intercooperación</string>
-    <string name="member">Socia</string>
+    <string name="intercoop_member">Socia intercooperación</string>
+    <string name="member_consumer">Socia consumidora</string>
     <string name="inactive">INACTIVA</string>
     <string name="active">ACTIVA</string>
     <string name="no_app_to_open_link">No se ha encontrado aplicación para abrir el enlace</string>

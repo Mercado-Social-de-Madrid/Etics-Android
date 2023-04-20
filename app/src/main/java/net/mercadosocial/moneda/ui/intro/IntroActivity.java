@@ -43,8 +43,7 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
 
         viewPager.setPageTransformer(false, new IntroTransformer());
 
-        // todo font
-
+        imgLogoMES.setVisibility(View.GONE);
 
     }
 
@@ -74,7 +73,7 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
         boolean visible = position < IntroPagerAdapter.NUM_INTRO_SCREENS - 1;
         btnIntroNext.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
 
-        imgLogoMES.setImageResource(position > 0 ? R.mipmap.img_logo_mes_watermark : R.mipmap.img_mes_header);
+        imgLogoMES.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
     }
 
     @Override

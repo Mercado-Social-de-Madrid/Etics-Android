@@ -43,12 +43,7 @@ public class App extends MultiDexApplication {
     private static final String TAG = "App";
 
     public static final String PREFIX = "net.mercadosocial.moneda.";
-    public static final String SHARED_TOKEN = PREFIX + "shared_token";
-    public static final String SHARED_PHONE_NUMBER = PREFIX + "shared_phone_number";
-
-    public static final String SHARED_FIRST_TIME = PREFIX + "first_time_7";
-    private static final String DEBUG_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3ZWIifQ.RR_ekblK831invbbLkIofHrgBXwIU5JVqnhcs_K_bqqcz2zA-wIVzXmWZPOfrSIVZNw4YWRUqXA8tymXKLj1bg";
-    public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen";
+    public static final String SHARED_INTRO_SEEN = PREFIX + "shared_intro_seen_3";
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
     public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
@@ -56,7 +51,6 @@ public class App extends MultiDexApplication {
     public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
     public static final String SHARED_ENTITIES_CACHE = PREFIX + "shared_entities_cache";
     public static final String SHARED_MEMBER_CARD_INTRO_SEEN = PREFIX + "member_card_intro_seen";;
-
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";

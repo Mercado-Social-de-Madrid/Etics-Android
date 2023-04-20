@@ -41,10 +41,10 @@ public class IntroItemFragment extends BaseFragment {
     
 
     private void findViews(View layout) {
-        viewWhiteBg = (LinearLayout)layout.findViewById( R.id.view_white_bg );
-        tvIntroTitle = (TextView)layout.findViewById( R.id.tv_intro_title );
-        tvIntroText = (TextView)layout.findViewById( R.id.tv_intro_text );
-        imgIntro = (ImageView) layout.findViewById(R.id.img_intro);
+        viewWhiteBg = layout.findViewById( R.id.view_white_bg );
+        tvIntroTitle = layout.findViewById( R.id.tv_intro_title );
+        tvIntroText = layout.findViewById( R.id.tv_intro_text );
+        imgIntro = layout.findViewById(R.id.img_intro);
 
     }
 

@@ -2,24 +2,17 @@ package net.mercadosocial.moneda.ui.member_card;
 
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-
-import com.google.gson.Gson;
 
 import net.glxn.qrgen.android.QRCode;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.api.model.MemberStatus;
 import net.mercadosocial.moneda.api.response.Data;
-import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
-import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.Account;
 
-import java.net.URL;
+import java.util.Locale;
 
 
 public class MemberCardPresenter extends BasePresenter {
@@ -78,7 +71,8 @@ public class MemberCardPresenter extends BasePresenter {
         }
 
         String memberType = getString(data.isEntity() ? R.string.entity :
-                data.getPerson().isIntercoop() ? R.string.intercoop_member : R.string.member);
+                data.getPerson().isIntercoop() ? R.string.intercoop_member : R.string.member_consumer)
+                .toLowerCase(Locale.ROOT);
 
         Account account = data.getAccount();
         view.showMemberData(account, memberType);

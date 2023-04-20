@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class IntroPagerAdapter extends FragmentPagerAdapter {
 
-    public static final int NUM_INTRO_SCREENS = 7;
+    public static final int NUM_INTRO_SCREENS = 8;
 
     public IntroPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -20,10 +20,12 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if (position == NUM_INTRO_SCREENS - 1) {
+        if (position == 0) {
+            return new IntroFirstItemFragment();
+        } else if (position == NUM_INTRO_SCREENS - 1) {
             return new IntroLastItemFragment();
         } else {
-            return IntroItemFragment.newInstance(position);
+            return IntroItemFragment.newInstance(position - 1);
         }
     }
 

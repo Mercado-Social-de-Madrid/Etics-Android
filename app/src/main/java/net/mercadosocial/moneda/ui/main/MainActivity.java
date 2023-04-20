@@ -148,12 +148,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //            return;
 //        }
 
-        if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
+        boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
+        if (isMadrid && !App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
 //        if(true) {
             startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
             getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
         } else {
-            showFragment(0);
+            showFragment(isMadrid ? 0: 1);
         }
 
 
@@ -456,6 +457,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
 
         bottomNavView.getMenu().findItem(R.id.navigation_wallet).setVisible(isMadrid);
+        bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(isMadrid);
 
         navigationView.getHeaderView(0).setVisibility(isMadrid ? View.VISIBLE : View.GONE);
 
