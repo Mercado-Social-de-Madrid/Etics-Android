@@ -39,28 +39,40 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/green_light"
-                app:menu="@menu/navigation_bottom"
-                app:itemTextColor="@color/nav_bottom"
                 app:itemIconTint="@color/nav_bottom"
-                />
+                app:itemTextColor="@color/nav_bottom"
+                app:menu="@menu/navigation_bottom" />
 
         </LinearLayout>
 
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:menu="@menu/navigation_drawer"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/view_header_menu"/>
+            android:background="@color/white"
+            android:layout_gravity="start">
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigation_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@id/tv_app_version"
+                app:headerLayout="@layout/view_header_menu"
+                app:menu="@menu/navigation_drawer" />
+
+            <TextView
+                android:id="@+id/tv_app_version"
+                style="@style/TextBase"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
 
         <fragment
             android:name="net.mercadosocial.moneda.ui.entities.filter.FilterEntitiesFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            android:layout_marginLeft="30dp" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

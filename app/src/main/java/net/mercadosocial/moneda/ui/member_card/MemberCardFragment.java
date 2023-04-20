@@ -33,6 +33,7 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Account;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
+import net.mercadosocial.moneda.ui.main.MainActivity;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.EditTextDialog;
 
@@ -76,6 +77,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
         btnLogin.setOnClickListener( view -> { startActivity(new Intent(getActivity(), LoginActivity.class)); });
         btnSignup.setOnClickListener( view -> { startActivity(new Intent(getActivity(), RegisterWebActivity.class)); });
+        imgMemberProfile.setOnClickListener( view -> ((MainActivity)getActivity()).openProfileActivity());
 
         return layout;
     }

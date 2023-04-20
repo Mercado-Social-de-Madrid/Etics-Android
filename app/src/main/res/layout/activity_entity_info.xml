@@ -57,7 +57,8 @@
                         android:background="@drawable/background_pressed_common"
                         android:padding="5dp"
                         android:src="@mipmap/ic_heart_empty"
-                        android:tint="@color/grey_disabled" />
+                        android:tint="@color/grey_disabled"
+                        android:visibility="gone"/>
 
                     <View style="@style/SeparatorVertical.Grey" />
 
@@ -252,7 +253,9 @@
                         android:id="@+id/recycler_offers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="vertical"/>
 
                     <View
                         android:layout_width="match_parent"

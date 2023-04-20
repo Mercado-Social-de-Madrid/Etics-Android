@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.App;
+import net.mercadosocial.moneda.BuildConfig;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
@@ -88,6 +89,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView tvGuestInfo;
     private TextView tvUsername;
     private MemberCardFragment memberCardFragment;
+    private TextView tvAppVersion;
 
     private void findViews() {
 
@@ -97,6 +99,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        tvAppVersion = findViewById(R.id.tv_app_version);
 
         btnLogin = navigationView.getHeaderView(0).findViewById(R.id.btn_login);
         btnSignup = navigationView.getHeaderView(0).findViewById(R.id.btn_singup);
@@ -136,6 +140,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         updateMenuViewsByMES();
 
+        tvAppVersion.setText(BuildConfig.VERSION_NAME);
+
 
         if (DebugHelper.SHORTCUT_ACTIVITY != null && DebugHelper.SHORTCUT_ACTIVITY != MainActivity.class) {
             startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
@@ -148,8 +154,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //            return;
 //        }
 
+        boolean noCityCodeSaved = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null) == null;
         boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
-        if (isMadrid && !App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
+        if ((noCityCodeSaved || isMadrid) && !App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
 //        if(true) {
             startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
             getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
@@ -549,11 +556,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             case R.id.btn_go_to_profile:
             case R.id.view_user_info:
-                startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
+                openProfileActivity();
                 break;
         }
 
         drawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    public void openProfileActivity() {
+        startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
     }
 
     @Override

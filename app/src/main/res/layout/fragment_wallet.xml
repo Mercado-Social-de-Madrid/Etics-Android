@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_intro_4" />
+                    android:src="@mipmap/ic_intro_5" />
 
                 <TextView
                     style="@style/TextBase"

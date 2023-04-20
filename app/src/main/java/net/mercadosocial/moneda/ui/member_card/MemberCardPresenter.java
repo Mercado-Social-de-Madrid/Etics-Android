@@ -70,8 +70,8 @@ public class MemberCardPresenter extends BasePresenter {
             view.showQrScanButton(true);
         }
 
-        String memberType = getString(data.isEntity() ? R.string.entity :
-                data.getPerson().isIntercoop() ? R.string.intercoop_member : R.string.member_consumer)
+        String memberType = getString(data.isEntity() ? R.string.member_entity :
+                data.getPerson().isIntercoop() ? R.string.member_intercoop : R.string.member_consumer)
                 .toLowerCase(Locale.ROOT);
 
         Account account = data.getAccount();

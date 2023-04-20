@@ -4,6 +4,8 @@ package net.mercadosocial.moneda.ui.entities.list;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
 
     private static final int NUMBER_ITEM_ASK_MORE = 3;
-    private SuperRecyclerView recyclerEntities;
+    private RecyclerView recyclerEntities;
     private EntitiesAdapter adapter;
     private EntityListener entityListener;
     private View viewEmptyList;

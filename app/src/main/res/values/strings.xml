@@ -361,8 +361,9 @@
     <string name="benefit_request_email_subject">Solicitud de descuento Mercado Social de Madrid. Número de socia: %s</string>
     <string name="benefit_code_x">Código de descuento: %s</string>
     <string name="member_number">Número de socia: %s</string>
-    <string name="intercoop_member">Socia intercooperación</string>
+    <string name="member_intercoop">Socia intercooperación</string>
     <string name="member_consumer">Socia consumidora</string>
+    <string name="member_entity">Socia proveedora</string>
     <string name="inactive">INACTIVA</string>
     <string name="active">ACTIVA</string>
     <string name="no_app_to_open_link">No se ha encontrado aplicación para abrir el enlace</string>
