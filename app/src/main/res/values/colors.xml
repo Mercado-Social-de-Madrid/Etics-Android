@@ -45,6 +45,7 @@
     <color name="purple_gradient_2">#b680c1</color>
     <color name="grey_toast">#912991</color>
     <color name="orange_corp">#f78154</color>
+    <color name="grey_info">#f8f7f2</color>
 
 
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_info">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/img_info_mes_1" />
+
+    <View style="@style/XpansorVert" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_where_to_consume"
+        style="@style/ButtonMes"
+        android:text="@string/where_to_consume"
+        android:layout_gravity="center_horizontal"/>
+
+
+    <View style="@style/XpansorVert" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/img_info_mes_2" />
+</LinearLayout>

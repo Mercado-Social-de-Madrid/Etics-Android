@@ -368,7 +368,7 @@
     <string name="active">ACTIVA</string>
     <string name="no_app_to_open_link">No se ha encontrado aplicación para abrir el enlace</string>
     <string name="member_card_intro_message">Este carnet certifica tu pertenencia como socia/o al Mercado Social de Madrid. Con él podrás acceder a las ventajas y descuentos por formar parte de la red. ¡Muchas gracias por tu aportación a la Economía Solidaria madrileña!</string>
-    <string name="currently_inactive_member">Actualmente esta socia se encuentra INACTIVA</string>
+    <string name="currently_inactive_member">Socia INACTIVA</string>
     <string name="new_payment_only_active">Las socias inactivas no pueden enviar pagos</string>
     <string name="enter_member_id">Introduce número de socia</string>
     <string name="member_id_not_found">No se ha encontrado el número de socia</string>
@@ -380,4 +380,5 @@
     <string name="mes_check_member">Comprobar socia</string>
     <string name="with_benefits">Con ventajas para socias</string>
     <string name="accepts_etics">Acepta pago en etics</string>
+    <string name="where_to_consume">Dónde puedes consumir</string>
 </resources>

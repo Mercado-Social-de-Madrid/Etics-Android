@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,6 +46,7 @@ import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
 import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
+import net.mercadosocial.moneda.ui.info.InfoMesActivity;
 import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
@@ -65,6 +68,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private static final int REQ_CODE_INTRO = 11;
     private static final int REQ_CODE_PROFILE = 22;
+    private static final int REQ_CODE_INFO_MES = 33;
 
     private DrawerLayout drawerLayout;
     private TextView btnLogin;
@@ -204,6 +208,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             case REQ_CODE_PROFILE:
                 if (resultCode == RESULT_OK) {
                     presenter.onLogoutClick();
+                }
+                break;
+
+            case REQ_CODE_INFO_MES:
+                if (resultCode == RESULT_OK) {
+                    bottomNavView.setSelectedItemId(R.id.navigation_entities);
                 }
                 break;
 
@@ -355,7 +365,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     return true;
 
                 case R.id.menuItem_the_social_market:
-                    WebViewActivity.startLocalHtml(this, getString(R.string.the_social_market), WebViewActivity.FILENAME_QUE_ES_MES);
+                    startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
                     break;
 
                 case R.id.menuItem_change_social_market:
