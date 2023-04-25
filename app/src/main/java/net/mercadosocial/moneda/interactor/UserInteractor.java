@@ -167,12 +167,6 @@ public class UserInteractor extends BaseInteractor {
 
                         if (!response.isSuccessful()) {
 
-                            // TEMPORAL SERVER FIX -- REMOVE IT!
-                            if (response.code() == 404) {
-                                callback.onSuccess(null);
-                                return;
-                            }
-
                             ApiError apiError = ApiError.parse(response);
                             callback.onError(apiError.getMessage());
                             return;
