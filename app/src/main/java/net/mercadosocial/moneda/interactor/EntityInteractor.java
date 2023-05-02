@@ -97,9 +97,12 @@ public class EntityInteractor extends BaseInteractor {
                             return;
                         }
 
-                        boolean hasMore = response.body().getMeta().getNext() != null;
-
-                        callback.onResponse(response.body().getEntities(), hasMore);
+                        // When adding entities shuffle, this causes a wierd behaviour changing order automatically
+                        // Better refresh entities next time cached data is retrieved
+                        if (!hasCachedEntities() || filterEntities != null) {
+                            boolean hasMore = response.body().getMeta().getNext() != null;
+                            callback.onResponse(response.body().getEntities(), hasMore);
+                        }
 
                         if (filterEntities == null) {
                             cacheEntities(response.body().getEntities());

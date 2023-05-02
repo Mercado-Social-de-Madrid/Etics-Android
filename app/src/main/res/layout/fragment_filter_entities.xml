@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/accepts_etics"
                 android:layout_marginBottom="10dp"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <View
                 style="@style/SeparatorHorizontal.Grey"

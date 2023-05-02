@@ -452,8 +452,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getTwitter())));
                     break;
 
-                case R.id.nav_contact_vimeo:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getVimeo())));
+                case R.id.nav_contact_linkedin:
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getLinkedIn())));
                     break;
             }
         } catch (ActivityNotFoundException e) {
@@ -486,7 +486,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         leftMenu.findItem(R.id.nav_contact_web).setVisible(mesData.getWeb() != null);
         leftMenu.findItem(R.id.nav_contact_facebook).setVisible(mesData.getFacebook() != null);
         leftMenu.findItem(R.id.nav_contact_twitter).setVisible(mesData.getTwitter() != null);
-        leftMenu.findItem(R.id.nav_contact_vimeo).setVisible(mesData.getVimeo() != null);
+        leftMenu.findItem(R.id.nav_contact_linkedin).setVisible(mesData.getLinkedIn() != null);
         leftMenu.findItem(R.id.nav_contact_instagram).setVisible(mesData.getInstagram() != null);
 
 

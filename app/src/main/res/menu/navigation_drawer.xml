@@ -56,9 +56,9 @@
                 android:title="@string/twitter" />
 
             <item
-                android:id="@+id/nav_contact_vimeo"
-                android:icon="@mipmap/ic_nav_vimeo"
-                android:title="@string/vimeo" />
+                android:id="@+id/nav_contact_linkedin"
+                android:icon="@mipmap/ic_nav_linkedin"
+                android:title="@string/linkedin" />
 
             <item
                 android:id="@+id/nav_contact_instagram"

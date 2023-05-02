@@ -6,16 +6,16 @@ public class MESData {
     private String web;
     private String facebook;
     private String twitter;
-    private String vimeo;
     private String instagram;
+    private String linkedIn;
 
     public static MESData madrid() {
         MESData mesData = new MESData();
-        mesData.setEmailContact("etics@mercadosocial.net");
+        mesData.setEmailContact("madrid@mercadosocial.net");
         mesData.setWeb("https://mercadosocial.net/");
         mesData.setFacebook("https://www.facebook.com/MercadoSocialMadrid");
         mesData.setTwitter("https://twitter.com/MES_Madrid");
-        mesData.setVimeo("https://vimeo.com/mercadosocial");
+        mesData.setLinkedIn("https://www.linkedin.com/company/mercado-social-madrid/");
         return mesData;
     }
 
@@ -61,19 +61,19 @@ public class MESData {
         this.twitter = twitter;
     }
 
-    public String getVimeo() {
-        return vimeo;
-    }
-
-    public void setVimeo(String vimeo) {
-        this.vimeo = vimeo;
-    }
-
     public String getInstagram() {
         return instagram;
     }
 
     public void setInstagram(String instagram) {
         this.instagram = instagram;
+    }
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
     }
 }
