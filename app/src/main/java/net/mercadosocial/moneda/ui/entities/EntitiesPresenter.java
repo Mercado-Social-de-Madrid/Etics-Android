@@ -177,6 +177,7 @@ public class EntitiesPresenter extends BasePresenter {
             List<Entity> entitiesFiltered = entities.stream()
                     .filter(entity -> !filterEntities.isAcceptsEtics() || entity.getMax_percent_payment() > 0)
                     .filter(entity -> !filterEntities.isWithBenefits() || entity.getBenefit() != null)
+                    .filter(entity -> !filterEntities.isWithBadge() || entity.getBalance_url() != null)
                     .collect(Collectors.toList());
             entities.clear();
             entities.addAll(entitiesFiltered);

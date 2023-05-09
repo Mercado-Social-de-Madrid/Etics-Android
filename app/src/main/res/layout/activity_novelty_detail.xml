@@ -10,68 +10,61 @@
 
     <include layout="@layout/toolbar" />
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tv_novelty_title"
+        style="@style/TextBase.White"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:background="@color/transblack_entities"
+        android:fontFamily="@font/comfortaa_bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="20dp">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <ImageView
+                android:id="@+id/img_novelty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="200dp"
+                android:scaleType="centerCrop" />
+
+
+            <TextView
+                android:id="@+id/tv_novelty_subtitle"
+                style="@style/TextBase"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:padding="15dp"
+                android:textSize="@dimen/text_medium" />
 
+            <TextView
+                android:id="@+id/tv_novelty_description"
+                style="@style/TextBase"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:textSize="@dimen/text_medium" />
 
-                <ImageView
-                    android:id="@+id/img_novelty"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:adjustViewBounds="true"
-                    android:maxHeight="200dp"
-                    android:scaleType="centerCrop" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_more_info"
+                style="@style/ButtonMes"
+                android:layout_margin="15dp"
+                android:visibility="gone" />
 
+        </LinearLayout>
+    </ScrollView>
 
-                <TextView
-                    android:id="@+id/tv_novelty_subtitle"
-                    style="@style/TextBase"
-                    android:gravity="center_horizontal"
-                    android:padding="15dp"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/tv_novelty_description"
-                    style="@style/TextBase"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:padding="15dp"
-                    android:textSize="@dimen/text_medium" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_more_info"
-                    style="@style/ButtonMes"
-                    android:layout_margin="15dp"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
-        </ScrollView>
-
-        <TextView
-            android:id="@+id/tv_novelty_title"
-            style="@style/TextBase.White"
-            android:layout_width="match_parent"
-            android:background="@color/transblack_entities"
-            android:fontFamily="@font/comfortaa_bold"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-
-    </RelativeLayout>
 </LinearLayout>

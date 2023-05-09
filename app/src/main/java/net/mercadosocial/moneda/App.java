@@ -23,14 +23,10 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
-import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
-import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
-import net.mercadosocial.moneda.model.Person;
-import net.mercadosocial.moneda.model.User;
 
 import es.dmoral.toasty.Toasty;
 
@@ -54,6 +50,8 @@ public class App extends MultiDexApplication {
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
+
+    public static final String SHARED_FILTER_ETICS_WARNING_SEEN = PREFIX + "filter_etics_warning";
 
     // FIREBASE MESSAGING
     public static final String TOPIC_NEWS_MADRID = "news";
@@ -109,6 +107,7 @@ public class App extends MultiDexApplication {
 
         processWorkarounds();
 
+        // FirebaseMessaging.getInstance().subscribeToTopic("news_test");
     }
 
 

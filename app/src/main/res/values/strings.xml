@@ -381,4 +381,7 @@
     <string name="with_benefits">Con ventajas para socias</string>
     <string name="accepts_etics">Acepta pago en etics</string>
     <string name="where_to_consume">Dónde puedes consumir</string>
+    <string name="distintivo_info">Este distintivo representa la transparencia de esta entidad y el compromiso con los valores de la Economía Social y Solidaria. Pulsa para \"ver su corazón\".</string>
+    <string name="with_badge">Con distintivo</string>
+    <string name="filter_etics_msg">De acuerdo a lo decidido en la última asamblea de 2022, los Etics (la moneda social del Mercado Social de Madrid) solo estarán activos para consumir hasta novmiembre de 2023. \n\nSi eres socio o socia consumidora y tienes etics te recomendamos que no dejes el gastarlos para el último momento, si no tienes etics, esta sección no te interesa ;)</string>
 </resources>

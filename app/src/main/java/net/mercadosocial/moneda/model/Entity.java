@@ -49,6 +49,8 @@ public class Entity extends Account {
 
     private Benefit benefit;
 
+    private String balance_url;
+
     private List<String> fav_entities;
 
     private transient String pin_code;
@@ -387,5 +389,13 @@ public class Entity extends Account {
 
     public void setBenefit(Benefit benefit) {
         this.benefit = benefit;
+    }
+
+    public String getBalance_url() {
+        return balance_url;
+    }
+
+    public void setBalance_url(String balance_url) {
+        this.balance_url = balance_url;
     }
 }

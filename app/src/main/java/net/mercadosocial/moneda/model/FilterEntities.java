@@ -10,6 +10,7 @@ public class FilterEntities {
     private boolean onlyFavourites;
     private boolean withBenefits;
     private boolean acceptsEtics;
+    private boolean withBadge;
 
     public String getText() {
         return text;
@@ -49,5 +50,13 @@ public class FilterEntities {
 
     public void setWithBenefits(boolean withBenefits) {
         this.withBenefits = withBenefits;
+    }
+
+    public boolean isWithBadge() {
+        return withBadge;
+    }
+
+    public void setWithBadge(boolean withBadge) {
+        this.withBadge = withBadge;
     }
 }
