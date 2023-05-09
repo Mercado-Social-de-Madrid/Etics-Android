@@ -27,6 +27,7 @@ import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.MES;
+import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
 import es.dmoral.toasty.Toasty;
 
@@ -93,6 +94,7 @@ public class App extends MultiDexApplication {
 
 //        Toasty.info(this, "Tostaditas moradas").show();
 
+        UpdateAppManager.scheduleAppUpdateCheckWork(this);
 
         Data userData = getUserData(this);
         if (userData != null) {

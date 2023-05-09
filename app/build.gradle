@@ -84,6 +84,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.maps.android:android-maps-utils:0.6.2'
 
+    // Update app view
+    implementation 'com.google.android.play:core:1.10.3'
+    implementation "androidx.work:work-runtime:2.8.1"
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation 'com.google.firebase:firebase-messaging'

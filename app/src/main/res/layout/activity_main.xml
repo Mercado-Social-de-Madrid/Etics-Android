@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <net.mercadosocial.moneda.views.UpdateAppView
+            <net.mercadosocial.moneda.util.update_app.UpdateAppView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

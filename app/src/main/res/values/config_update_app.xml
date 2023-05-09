@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="update_available">¡Nueva versión disponible!</string>
-    <string name="update">Actualizar</string>
-    <string name="firebase_remote_config_market_version_var_name">market_version_android</string>
-
-</resources>
