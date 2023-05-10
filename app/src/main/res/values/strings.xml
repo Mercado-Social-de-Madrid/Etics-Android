@@ -384,4 +384,9 @@
     <string name="distintivo_info">Este distintivo representa la transparencia de esta entidad y el compromiso con los valores de la Economía Social y Solidaria. Pulsa para \"ver su corazón\".</string>
     <string name="with_badge">Con distintivo</string>
     <string name="filter_etics_msg">De acuerdo a lo decidido en la última asamblea de 2022, los Etics (la moneda social del Mercado Social de Madrid) solo estarán activos para consumir hasta novmiembre de 2023. \n\nSi eres socio o socia consumidora y tienes etics te recomendamos que no dejes el gastarlos para el último momento, si no tienes etics, esta sección no te interesa ;)</string>
+
+    <string name="notifications_permission_rationale_msg">A partir de la versión 13 de Android, el usuario tiene la opción de elegir qué notificaciones quiere recibir. Si quieres estar al día de las noticias del Mercado Social, acepta el permiso ;)</string>
+    <string name="notifications_permission">Permiso de notificaciones</string>
+    <string name="notifications_permission_denied">Has desactivado las notificaciones del Mercado Social</string>
+    <string name="notifications_permission_granted">¡Notificaciones activadas!</string>
 </resources>

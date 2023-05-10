@@ -50,7 +50,7 @@ public class Notification implements Serializable {
 
     public static Notification parseNotification(Bundle extras) {
 
-        if (extras.containsKey(FIELD_TYPE)) {
+        if (extras != null && extras.containsKey(FIELD_TYPE)) {
 
             Notification notification = new Notification();
 

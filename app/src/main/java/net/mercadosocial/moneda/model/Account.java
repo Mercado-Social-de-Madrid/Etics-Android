@@ -63,8 +63,8 @@ public abstract class Account implements Serializable {
         this.registered = registered;
     }
 
-    public Boolean isIntercoop() {
-        return intercoop;
+    public boolean isIntercoop() {
+        return intercoop != null ? intercoop.booleanValue() : false;
     }
 
     public void setIntercoop(Boolean intercoop) {

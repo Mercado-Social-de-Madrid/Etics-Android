@@ -1,7 +1,13 @@
 package net.mercadosocial.moneda.ui.novelties.list;
 
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -61,6 +74,38 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
         presenter.onCreate();
 
         return layout;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            Dexter.withActivity(getActivity())
+                    .withPermission(Manifest.permission.POST_NOTIFICATIONS)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            toast(R.string.notifications_permission_granted);
+                        }
+
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            toast(R.string.notifications_permission_denied);
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, final PermissionToken token) {
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle(R.string.notifications_permission)
+                                    .setMessage(R.string.notifications_permission_rationale_msg)
+                                    .setPositiveButton(R.string.accept, (dialog, which) -> token.continuePermissionRequest())
+                                    .setNegativeButton(R.string.cancel, (dialog, which) -> token.cancelPermissionRequest())
+                                    .show();
+                        }
+                    }).check();
+        }
     }
 
     @Override

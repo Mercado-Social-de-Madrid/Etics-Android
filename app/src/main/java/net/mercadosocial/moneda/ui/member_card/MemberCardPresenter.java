@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import net.glxn.qrgen.android.QRCode;
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -75,6 +77,13 @@ public class MemberCardPresenter extends BasePresenter {
                 .toLowerCase(Locale.ROOT);
 
         Account account = data.getAccount();
+
+        if (account == null) {
+            FirebaseCrashlytics.getInstance().recordException(
+                    new IllegalStateException("Null account: " + data.getUsername()));
+            return;
+        }
+
         view.showMemberData(account, memberType);
 
         String qrText = memberCheckHelper.createQrUrl(data.getCityCode(), account.getMemberId());
