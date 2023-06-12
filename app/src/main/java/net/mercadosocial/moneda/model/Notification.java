@@ -54,7 +54,7 @@ public class Notification implements Serializable {
 
             Notification notification = new Notification();
 
-            notification.setType(extras.getString("type"));
+            notification.setType(extras.getString(FIELD_TYPE));
             notification.setFromOutside(extras.getBoolean(FIELD_FROM_OUTSIDE, false));
 
             switch (extras.getString(Notification.FIELD_TYPE)) {
