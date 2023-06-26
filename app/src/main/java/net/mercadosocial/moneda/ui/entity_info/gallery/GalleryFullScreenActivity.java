@@ -54,7 +54,6 @@ public class GalleryFullScreenActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(EXTRA_IMAGES_SERIALIZED, imagesSerialized);
         outState.putInt(EXTRA_START_IMAGE_POSITION, galleryPagerFragment.getCurrentPagerPosition());
-        getSupportFragmentManager().beginTransaction().detach(galleryPagerFragment).commit();
         super.onSaveInstanceState(outState);
     }
 
