@@ -1,2 +1,1 @@
-include ':app', ':materialbarcodescanner'
-project(':materialbarcodescanner').projectDir = new File('app/libs/materialbarcodescanner')
+include ':app'
