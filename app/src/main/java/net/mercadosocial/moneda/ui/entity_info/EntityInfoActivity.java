@@ -5,15 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -80,12 +75,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.btn_rrss_twitter:
             case R.id.btn_rrss_facebook:
             case R.id.btn_rrss_instagram:
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(v.getTag())));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toasty.error(this, getString(R.string.app_not_found)).show();
-                }
+                Util.openLink(this, String.valueOf(v.getTag()));
                 break;
         }
     }
@@ -128,7 +118,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         binding.viewDistintivo.setVisibility(entity.getBalance_url() != null ? View.VISIBLE : View.GONE);
         binding.imgDistintivoBalance.setOnClickListener(v -> {
             if (entity.getBalance_url() != null) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(entity.getBalance_url())));
+                Util.openLink(this, entity.getBalance_url());
             }
         });
 

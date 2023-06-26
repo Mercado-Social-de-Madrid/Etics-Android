@@ -1,12 +1,15 @@
 package net.mercadosocial.moneda.util;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,6 +23,8 @@ import android.util.TypedValue;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import net.mercadosocial.moneda.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -31,6 +36,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
+
+import es.dmoral.toasty.Toasty;
 
 public final class Util {
 
@@ -189,5 +196,19 @@ public final class Util {
             }
         }
         return extrasString;
+    }
+
+    public static void openLink(Context context, String link) {
+
+        if (!isValidLink(link)) {
+            Toasty.error(context, context.getString(R.string.invalid_link)).show();
+            return;
+        }
+
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+        } catch (ActivityNotFoundException e) {
+            Toasty.error(context, context.getString(R.string.no_app_to_open_link)).show();
+        }
     }
 }

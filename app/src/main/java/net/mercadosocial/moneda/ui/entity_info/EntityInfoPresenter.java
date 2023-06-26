@@ -16,6 +16,7 @@ import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
+import net.mercadosocial.moneda.util.Util;
 
 import es.dmoral.toasty.Toasty;
 
@@ -124,9 +125,7 @@ import es.dmoral.toasty.Toasty;
 
         try {
             if (Patterns.WEB_URL.matcher(benefitLink).matches()) {
-
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(benefitLink)));
-
+                Util.openLink(context, benefitLink);
             } else if (Patterns.EMAIL_ADDRESS.matcher(benefitLink).matches()) {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);

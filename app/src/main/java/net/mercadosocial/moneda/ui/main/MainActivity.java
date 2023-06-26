@@ -55,6 +55,7 @@ import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.util.DateUtils;
+import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
@@ -397,36 +398,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
                 case R.id.menuItem_get_boniatos:
 
-//                Bundle bundle = new Bundle();
-//                bundle.putString("title", "Noticia de prueba");
-//                bundle.putString("message", "Texto de noticia");
-//
-//                bundle.putString("type", Notification.TYPE_NEWS);
-//                bundle.putString("id", "87938556-10e1-41fb-bd1c-0fb854df72b1");
-//
-//                Intent intent = new Intent(App.ACTION_NOTIFICATION_RECEIVED);
-//                intent.putExtras(bundle);
-//                sendBroadcast(intent);
-
                     if (App.getUserData(this) != null) {
                         startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
                     } else {
                         Toasty.info(this, getString(R.string.enter_with_your_account)).show();
                         bottomNavView.findViewById(R.id.navigation_wallet).performClick();
                     }
-
-
-//                Notification notification = new Notification();
-//                notification.setId("");
-//                notification.setSender("Pepa");
-//                notification.setAmount(15.3f);
-//                NewPaymentDialog.newInstance(notification)
-//                        .setOnCloseListener(new NewPaymentDialog.OnCloseListener() {
-//                            @Override
-//                            public void onClose() {
-//                                refreshData();
-//                            }
-//                        }).show(getSupportFragmentManager(), null);
 
                     break;
 
@@ -441,19 +418,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     break;
 
                 case R.id.nav_contact_web:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getWeb())));
+                    Util.openLink(this, mesData.getWeb());
                     break;
 
                 case R.id.nav_contact_facebook:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getFacebook())));
+                    Util.openLink(this, mesData.getFacebook());
                     break;
 
                 case R.id.nav_contact_twitter:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getTwitter())));
+                    Util.openLink(this, mesData.getTwitter());
                     break;
 
                 case R.id.nav_contact_linkedin:
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(mesData.getLinkedIn())));
+                    Util.openLink(this, mesData.getLinkedIn());
                     break;
             }
         } catch (ActivityNotFoundException e) {

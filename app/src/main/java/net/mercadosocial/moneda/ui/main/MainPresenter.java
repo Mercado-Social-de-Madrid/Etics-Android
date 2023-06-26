@@ -27,6 +27,7 @@ import net.mercadosocial.moneda.model.Payment;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
 import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
+import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
 
@@ -161,7 +162,7 @@ import java.util.List;
         new AlertDialog.Builder(context)
                 .setMessage(String.format(context.getString(R.string.web_link_dialog_message), url))
                 .setCancelable(false)
-                .setPositiveButton(R.string.open_link, (dialog, which) -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))))
+                .setPositiveButton(R.string.open_link, (dialog, which) -> Util.openLink(context, url))
                 .setNegativeButton(R.string.cancel, null)
                 .show();
     }

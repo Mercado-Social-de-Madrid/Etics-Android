@@ -87,12 +87,10 @@ public class NoveltiesFragment extends BaseFragment implements NoveltiesAdapter.
                     .withListener(new PermissionListener() {
                         @Override
                         public void onPermissionGranted(PermissionGrantedResponse response) {
-                            toast(R.string.notifications_permission_granted);
                         }
 
                         @Override
                         public void onPermissionDenied(PermissionDeniedResponse response) {
-                            toast(R.string.notifications_permission_denied);
                         }
 
                         @Override

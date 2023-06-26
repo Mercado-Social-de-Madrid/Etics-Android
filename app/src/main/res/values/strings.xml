@@ -340,7 +340,7 @@
     <string name="incorrect_password">Contraseña incorrecta</string>
     <string name="published">Publicada: %s</string>
     <string name="valid_until">Válida hasta: %s</string>
-    <string name="app_not_found">No se encuentra aplicación para abrir este enlace.</string>
+    <string name="no_app_to_open_link">No se encuentra aplicación para abrir este enlace.</string>
     <string name="balance_entity_limit_warning">Tu entidad tiene un límite negativo de %d etics</string>
     <string name="no_results">Sin resultados</string>
     <string name="no_novelties">De momento no hay noticias y ofertas.\n¡En breve lanzaremos la primera!</string>
@@ -366,7 +366,6 @@
     <string name="member_entity">Socia proveedora</string>
     <string name="inactive">INACTIVA</string>
     <string name="active">ACTIVA</string>
-    <string name="no_app_to_open_link">No se ha encontrado aplicación para abrir el enlace</string>
     <string name="member_card_intro_message">Este carnet certifica tu pertenencia como socia/o al Mercado Social de Madrid. Con él podrás acceder a las ventajas y descuentos por formar parte de la red. ¡Muchas gracias por tu aportación a la Economía Solidaria madrileña!</string>
     <string name="currently_inactive_member">Socia INACTIVA</string>
     <string name="new_payment_only_active">Las socias inactivas no pueden enviar pagos</string>
@@ -387,6 +386,4 @@
 
     <string name="notifications_permission_rationale_msg">A partir de la versión 13 de Android, el usuario tiene la opción de elegir qué notificaciones quiere recibir. Si quieres estar al día de las noticias del Mercado Social, acepta el permiso ;)</string>
     <string name="notifications_permission">Permiso de notificaciones</string>
-    <string name="notifications_permission_denied">Has desactivado las notificaciones del Mercado Social</string>
-    <string name="notifications_permission_granted">¡Notificaciones activadas!</string>
 </resources>

@@ -71,13 +71,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
         if (news.getMore_info_text() != null) {
             btnMoreInfo.setVisibility(View.VISIBLE);
             btnMoreInfo.setText(news.getMore_info_text());
-            btnMoreInfo.setOnClickListener(v -> {
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(news.getMore_info_url())));
-                } catch (ActivityNotFoundException e) {
-                    Toasty.warning(NoveltyDetailActivity.this, getString(R.string.invalid_link)).show();
-                }
-            });
+            btnMoreInfo.setOnClickListener(v -> Util.openLink(NoveltyDetailActivity.this, news.getMore_info_url()));
         }
     }
 
