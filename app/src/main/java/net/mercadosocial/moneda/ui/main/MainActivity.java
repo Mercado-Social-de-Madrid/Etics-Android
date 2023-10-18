@@ -6,18 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.App;
@@ -40,29 +38,22 @@ import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.MESData;
-import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
-import net.mercadosocial.moneda.ui.get_boniatos.GetBoniatosPresenter;
 import net.mercadosocial.moneda.ui.info.InfoMesActivity;
-import net.mercadosocial.moneda.ui.info.WebViewActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
-import net.mercadosocial.moneda.ui.wallet.WalletFragment;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
-import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
 
 import java.util.ArrayList;
-
-import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
@@ -81,11 +72,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private View viewUserInfo;
     private MainPresenter presenter;
     private ImageView imgAvatar;
-    private TextView tvPendingPaymentsBadge;
-
     private ArrayList<BaseFragment> sections = new ArrayList<>();
     private EntitiesFragment entitiesFragment;
-    private WalletFragment walletFragment;
     private NoveltiesFragment noveltiesFragment;
     private int currentSection = -1;
     private TextView btnGoToProfile;
@@ -140,7 +128,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         configureToolbar();
         configureDrawerLayout();
         configureToolbarBackArrowBehaviour();
-        configureBottomNavView();
         configureFragments();
 
         updateMenuViewsByMES();
@@ -225,42 +212,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         entitiesFragment = new EntitiesFragment();
         memberCardFragment = new MemberCardFragment();
-        walletFragment = new WalletFragment();
         noveltiesFragment = new NoveltiesFragment();
 
         sections.add(memberCardFragment);
         sections.add(entitiesFragment);
-        sections.add(walletFragment);
         sections.add(noveltiesFragment);
     }
 
-
-    private void showMockNotificationDialog() {
-
-        Notification notification = new Notification();
-        notification.setAmount(10f);
-        notification.setSender("Pepa");
-        notification.setTotal_amount(20f);
-//        BonusDialog bonusDialog = BonusDialog.newInstance(notification);
-//        bonusDialog.show(getSupportFragmentManager(), null);
-
-        NewPaymentDialog.newInstance(notification).show(getSupportFragmentManager(), null);
-    }
-
-
-    private void configureBottomNavView() {
-
-        View v = bottomNavView.findViewById(R.id.navigation_wallet);
-        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
-
-        View view = LayoutInflater.from(this)
-                .inflate(R.layout.view_pending_payments_badge, bottomNavView, false);
-
-        tvPendingPaymentsBadge = view.findViewById(R.id.tv_number_pending_payments_main);
-        itemView.addView(view);
-
-//        showNewNewsMessage();
-    }
 
     private void configureDrawerLayout() {
 
@@ -356,13 +314,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     setToolbarTitle(R.string.entities);
                     showFragment(1);
                     return true;
-                case R.id.navigation_wallet:
-                    setToolbarTitle(R.string.wallet);
-                    showFragment(2);
-                    return true;
                 case R.id.navigation_profile:
                     setToolbarTitle(R.string.highlighted);
-                    showFragment(3);
+                    showFragment(2);
                     return true;
 
                 case R.id.menuItem_the_social_market:
@@ -388,23 +342,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
                 case R.id.menuItem_invitations:
                     InvitationsPresenter.launchInvitationsActivity(this);
-                    break;
-
-                case R.id.menuItem_how_boniato_works:
-                    WebViewActivity.startLocalHtml(this, getString(R.string.how_it_works), WebViewActivity.FILENAME_COMO_FUNCIONA_BONIATO);
-//                String url2 = "https://madrid.mercadosocial.net/reboniato/";
-//                WebViewActivity.startRemoteUrl(this, getString(R.string.how_it_works), url2);
-                    break;
-
-                case R.id.menuItem_get_boniatos:
-
-                    if (App.getUserData(this) != null) {
-                        startActivity(GetBoniatosPresenter.newGetBoniatosActivity(this));
-                    } else {
-                        Toasty.info(this, getString(R.string.enter_with_your_account)).show();
-                        bottomNavView.findViewById(R.id.navigation_wallet).performClick();
-                    }
-
                     break;
 
                 case R.id.nav_contact_email:
@@ -450,14 +387,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
 
-        bottomNavView.getMenu().findItem(R.id.navigation_wallet).setVisible(isMadrid);
         bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(isMadrid);
 
         navigationView.getHeaderView(0).setVisibility(isMadrid ? View.VISIBLE : View.GONE);
 
         Menu leftMenu = navigationView.getMenu();
-        leftMenu.findItem(R.id.menuItem_get_boniatos).setVisible(isMadrid);
-        leftMenu.findItem(R.id.menuItem_how_boniato_works).setVisible(isMadrid);
         leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(isMadrid);
 
         leftMenu.findItem(R.id.nav_contact_web).setVisible(mesData.getWeb() != null);
@@ -618,13 +552,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             }
         }
 
-    }
-
-
-    @Override
-    public void showPendingPaymentsNumber(int numberPendingPayments) {
-        tvPendingPaymentsBadge.setText(String.valueOf(numberPendingPayments));
-        tvPendingPaymentsBadge.setVisibility(numberPendingPayments > 0 ? View.VISIBLE : View.GONE);
     }
 
 

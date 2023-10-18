@@ -17,19 +17,14 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
-import net.mercadosocial.moneda.interactor.PaymentInteractor;
 import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Notification;
-import net.mercadosocial.moneda.model.Payment;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
-import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.util.Util;
-
-import java.util.List;
 
 /**
  * Created by julio on 2/02/18.
@@ -86,9 +81,6 @@ import java.util.List;
          Data data = App.getUserData(context);
          view.showUserData(data);
 
-         if (data != null) {
-             refreshPendingPayments();
-         }
      }
 
     private void updateProfileStatus() {
@@ -131,13 +123,7 @@ import java.util.List;
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
             String url = appLinkData.toString();
-            if (url.contains(App.URL_QR_ENTITY)) {
-                if (App.getUserData(context) != null) {
-                    context.startActivity(NewPaymentPresenter.newNewPaymentActivityWithUrl(context, url));
-                } else {
-                    showNotLoggedDialog(R.string.not_logged_payment_dialog_message);
-                }
-            } else if (url.contains(App.URL_QR_MEMBER_CARD)) {
+            if (url.contains(App.URL_QR_MEMBER_CARD)) {
                 Data userData = App.getUserData(context);
                 if (userData == null || !userData.isEntity()) {
                     showNotLoggedDialog(R.string.not_logged_member_check_message);
@@ -167,26 +153,9 @@ import java.util.List;
                 .show();
     }
 
-    private void refreshPendingPayments() {
-        new PaymentInteractor(context, view).getPendingPayments(new BaseInteractor.BaseApiGETListCallback<Payment>() {
-            @Override
-            public void onResponse(List<Payment> list) {
-                if (list != null) {
-                    view.showPendingPaymentsNumber(list.size());
-                }
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
-    }
-
     public void onLogoutClick() {
         App.removeUserData(context);
         view.showUserData(null);
-        view.showPendingPaymentsNumber(0);
     }
 
     private void checkTokenFirebaseSent() {

@@ -18,21 +18,6 @@
         android:title="@string/invitations"
         android:visible="false"/>
 
-    <item android:title="@string/the_boniato" android:visible="false" >
-
-        <menu>
-            <item
-                android:id="@+id/menuItem_how_boniato_works"
-                android:icon="@mipmap/ic_drawer_bulb"
-                android:title="@string/how_it_works" />
-
-            <item
-                android:id="@+id/menuItem_get_boniatos"
-                android:icon="@mipmap/ic_drawer_touch"
-                android:title="@string/get_boniatos" />
-        </menu>
-    </item>
-
     <item android:title="@string/contact">
         <menu>
             <item

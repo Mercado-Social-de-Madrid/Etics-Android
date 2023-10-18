@@ -18,7 +18,6 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.UserInteractor;
-import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
 
@@ -60,8 +59,6 @@ public class ProfilePresenter extends BasePresenter {
     }
 
     public void onResume() {
-        // Refresh has_pincode field
-        new WalletInteractor(context, null).getWallet(null);
     }
 
     private void loadData() {

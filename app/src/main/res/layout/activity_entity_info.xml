@@ -41,88 +41,13 @@
                     android:src="@mipmap/img_entitiy_example"
                     android:visibility="gone" />
 
-                <LinearLayout
-                    android:id="@+id/view_etics_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/img_heart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/background_pressed_common"
-                        android:padding="5dp"
-                        android:src="@mipmap/ic_heart_empty"
-                        android:tint="@color/grey_disabled"
-                        android:visibility="gone"/>
-
-                    <View style="@style/SeparatorVertical.Grey" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextBase"
-                            android:text="@string/accepts"
-                            android:textColor="@color/purple" />
-
-                        <TextView
-                            android:id="@+id/tv_accept_boniatos"
-                            style="@style/TextBase"
-                            android:layout_marginLeft="10dp"
-                            android:text="100%" />
-
-                    </LinearLayout>
-
-                    <View style="@style/SeparatorVertical.Grey" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextBase"
-                            android:text="@string/bonus_return"
-                            android:textColor="@color/purple" />
-
-                        <TextView
-                            android:id="@+id/tv_bonus_boniatos"
-                            style="@style/TextBase"
-                            android:layout_marginLeft="10dp"
-                            android:text="10%" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View style="@style/SeparatorHorizontal.Grey" />
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_new_payment"
-                    style="@style/ButtonMes.Green"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="15dp"
-                    android:text="@string/send_payment_next" />
-
                 <View style="@style/SeparatorHorizontal.Grey" />
 
                 <TextView
                     android:id="@+id/tv_entity_description"
                     style="@style/TextBase"
-                    android:layout_marginTop="15dp"
-                    android:padding="10dp" />
+                    android:layout_marginTop="12dp"
+                    android:padding="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

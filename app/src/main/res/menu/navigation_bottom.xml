@@ -13,12 +13,6 @@
         android:icon="@mipmap/ic_entities"
         android:title="@string/entities" />
 
-
-    <item
-        android:id="@+id/navigation_wallet"
-        android:icon="@mipmap/ic_wallet"
-        android:title="@string/wallet" />
-
     <item
         android:id="@+id/navigation_profile"
         android:icon="@mipmap/ic_novelties"

@@ -23,7 +23,6 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
-import net.mercadosocial.moneda.interactor.WalletInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.MES;
@@ -96,11 +95,6 @@ public class App extends MultiDexApplication {
 
         UpdateAppManager.scheduleAppUpdateCheckWork(this);
 
-        Data userData = getUserData(this);
-        if (userData != null) {
-            refreshUserData();
-        }
-
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 
         loadFirstTime();
@@ -110,13 +104,15 @@ public class App extends MultiDexApplication {
         processWorkarounds();
 
         // FirebaseMessaging.getInstance().subscribeToTopic("news_test");
+//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                Log.d(TAG, "Firebase token: " + task.getResult());
+//            } else {
+//                Log.d(TAG, "Firebase token ERROR: " + task.getException().getMessage());
+//            }
+//        });
     }
 
-
-    private void refreshUserData() {
-        // Refresh has_pincode field
-        new WalletInteractor(this, null).getWallet(null);
-    }
 
     private void processWorkarounds() {
         if (getPrefs(this).getBoolean(SHARED_FORCE_SEND_TOKEN_FCM_DEVICE, true)) {

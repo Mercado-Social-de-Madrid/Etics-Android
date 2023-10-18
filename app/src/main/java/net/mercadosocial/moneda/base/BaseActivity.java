@@ -2,7 +2,6 @@ package net.mercadosocial.moneda.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,11 +13,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
@@ -27,19 +21,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
-import net.mercadosocial.moneda.ui.transactions.TransactionsPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.ProgressDialogMESOLD;
-import net.mercadosocial.moneda.views.custom_dialog.BonusDialog;
-import net.mercadosocial.moneda.views.custom_dialog.NewPaymentDialog;
-import net.mercadosocial.moneda.views.custom_dialog.OnCloseListener;
 import net.mercadosocial.moneda.views.custom_dialog.ProgressDialogMES;
-
-import es.dmoral.toasty.Toasty;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
@@ -90,23 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
 
         switch (notification.getType()) {
-            case Notification.TYPE_PAYMENT:
-                NewPaymentDialog.newInstance(notification)
-                        .setOnCloseListener(() -> refreshData()).show(getSupportFragmentManager(), null);
-                break;
-
-            case Notification.TYPE_TRANSACTION:
-                String amountFormatted = Util.getDecimalFormatted(notification.getAmount(), true);
-                if (notification.getIs_bonification()) {
-                    BonusDialog bonusDialog = BonusDialog.newInstance(notification);
-                    bonusDialog.setOnDismissOrCancelListener(() -> refreshData());
-                    bonusDialog.show(getSupportFragmentManager(), null);
-//                    showBonificationDialog(amountFormatted);
-                } else {
-                    Toasty.info(this, String.format(getString(R.string.income_received_format), amountFormatted)).show();
-                }
-                break;
-
             case Notification.TYPE_NEWS:
                 if (notification.isFromOutside()) {
                     startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(this, notification.getId()));
@@ -116,37 +93,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 break;
         }
 
-    }
-
-    public void showBonificationDialog(String amountFormatted) {
-
-        View layout = getLayoutInflater().inflate(R.layout.view_dialog_bonus, null);
-
-        AlertDialog.Builder ab = new AlertDialog.Builder(this);
-        ab.setTitle(R.string.congratulations);
-//        ab.setIcon(R.mipmap.img_happy_face);
-        ab.setMessage(Html.fromHtml(String.format(getString(R.string.bonification_received_message),
-                amountFormatted, getString(R.string.currency_name_plural))));
-        ab.setPositiveButton(R.string.go_to_transactions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(TransactionsPresenter.newTransactionsActivity(BaseActivity.this));
-            }
-        });
-        ab.setNeutralButton(R.string.close, null);
-        Dialog dialog = ab.show();
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                refreshData();
-            }
-        });
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                refreshData();
-            }
-        });
     }
 
 

@@ -11,5 +11,4 @@ public interface MainView extends BaseView {
 
     void showUserData(Data userData);
 
-    void showPendingPaymentsNumber(int numberPendingPayments);
 }

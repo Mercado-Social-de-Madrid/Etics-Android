@@ -81,11 +81,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.new_payment.NewPaymentActivity"
-            android:label="@string/new_payment"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
-        <activity
             android:name=".ui.barcode.BarcodeActivity"
             android:label="@string/qr_code_scan"
             android:screenOrientation="portrait" />
@@ -96,22 +91,9 @@
         <activity android:name=".ui.auth.register_web.WebViewRegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.payments.PaymentsActivity"
-            android:label="@string/pending_payments"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.transactions.TransactionsActivity"
-            android:label="@string/transactions"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity
-            android:name=".ui.get_boniatos.GetBoniatosActivity"
-            android:label="@string/get_boniatos"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/account"
@@ -122,12 +104,6 @@
             android:label="@string/invitations"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.wallet_graphics.GraphicsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.sent_payments.SentPaymentsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/sent_payments" />
         <activity android:name=".ui.profile.pincode_change.PincodeChangeActivity"
             android:screenOrientation="portrait"
             android:label="@string/change_pincode" />
@@ -152,15 +128,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_geo_apikey" /> <!-- <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" /> -->
-        <service
-            android:name=".messaging.OperationService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="net.mercadosocial.moneda.ACTION_ACCEPT_PAYMENT" />
-                <action android:name="net.mercadosocial.moneda.ACTION_REJECT_PAYMENT" />
-            </intent-filter>
-        </service>
+
     </application>
 
 </manifest>

@@ -51,9 +51,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         binding.btnRrssFacebook.setOnClickListener(this);
         binding.btnRrssInstagram.setOnClickListener(this);
 
-        binding.btnNewPayment.setOnClickListener(this);
-        binding.imgHeart.setOnClickListener(this);
-
         presenter.onCreate(getIntent());
 
     }
@@ -62,13 +59,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_new_payment:
-                presenter.onNewPaymentClick();
-                break;
-
-            case R.id.img_heart:
-                Toasty.info(this, getString(R.string.social_balance_info_soon)).show();
-                break;
 
             case R.id.btn_rrss_web:
             case R.id.btn_rrss_telegram:
@@ -89,11 +79,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         }
 
         binding.tvNoOffers.setVisibility(entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
-
-        binding.tvAcceptBoniatos.setText(Util.getDecimalFormatted(entity.getMax_percent_payment(), false) + "%");
-        binding.tvBonusBoniatos.setText(Util.getDecimalFormatted(entity.getBonusPercent(this), false) + "%");
-
-        binding.btnNewPayment.setVisibility(entity.getMax_percent_payment() > 0 ? View.VISIBLE : View.GONE);
 
         Picasso.get()
                 .load(entity.getLogo())
@@ -176,16 +161,6 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         binding.btnRrssInstagram.setVisibility(Util.isValidLink(entity.getInstagram_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssInstagram.setTag(entity.getInstagram_link());
 
-    }
-
-    @Override
-    public void hidePaymentButton() {
-        binding.btnNewPayment.setVisibility(View.GONE);
-
-        boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
-        if (!isMadrid) {
-            binding.viewEticsInfo.setVisibility(View.GONE);
-        }
     }
 
     @Override

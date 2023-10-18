@@ -14,11 +14,8 @@ import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Offer;
-import net.mercadosocial.moneda.ui.new_payment.NewPaymentPresenter;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;
-
-import es.dmoral.toasty.Toasty;
 
 /**
  * Created by julio on 28/11/17.
@@ -59,17 +56,6 @@ import es.dmoral.toasty.Toasty;
          view.showEntityInfo(entity);
 
          data = App.getUserData(context);
-         if (data != null && data.isEntity()) {
-             if (entity.getId().equals(data.getEntity().getId())) {
-                 view.hidePaymentButton(); // Cannot pay myself
-             }
-         }
-
-
-         boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
-         if (!isMadrid) {
-             view.hidePaymentButton();
-         }
 
          processBenefits();
      }
@@ -106,16 +92,6 @@ import es.dmoral.toasty.Toasty;
     public void onOfferClicked(int position) {
         Offer offer = entity.getOffers().get(position);
         context.startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(context, offer));
-    }
-
-    public void onNewPaymentClick() {
-
-        Data data = App.getUserData(context);
-        if (data != null) {
-            context.startActivity(NewPaymentPresenter.newNewPaymentActivity(context, entity));
-        } else {
-            Toasty.info(context, context.getString(R.string.payment_enter_user_before)).show();
-        }
     }
 
     public void onBenefitLinkClick(String benefitLink) {

@@ -23,7 +23,6 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Person;
-import net.mercadosocial.moneda.ui.profile.pincode_change.PincodeChangePresenter;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 
@@ -40,7 +39,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private AppCompatButton btnChangeImage;
     private ProfilePresenter presenter;
     private TextView tvProfileName, tvProfileType, tvProfileMarket;
-    private LinearLayout btnChangePincode;
     private AppCompatButton btnLogout;
     private EasyImage easyImage;
 
@@ -48,7 +46,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         imgProfile = findViewById(R.id.img_profile);
         tvProfileType = findViewById(R.id.tv_profile_type);
         tvProfileMarket = findViewById(R.id.tv_profile_market);
-        btnChangePincode = findViewById(R.id.btn_change_pincode);
         btnLogout = findViewById(R.id.btn_logout);
 
         tvProfileName = findViewById(R.id.tv_profile_name);
@@ -56,7 +53,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
         btnLogout.setOnClickListener(this);
         btnChangeImage.setOnClickListener(this);
-        btnChangePincode.setOnClickListener(this);
     }
 
 
@@ -122,11 +118,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 setResult(RESULT_OK);
                 finish();
                 break;
-
-            case R.id.btn_change_pincode:
-                PincodeChangePresenter.launchPincodeChangeActivity(this);
-                break;
-
 
         }
     }
