@@ -369,6 +369,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 case R.id.nav_contact_linkedin:
                     Util.openLink(this, mesData.getLinkedIn());
                     break;
+
+                case R.id.nav_contact_instagram:
+                    Util.openLink(this, mesData.getInstagram());
+                    break;
             }
         } catch (ActivityNotFoundException e) {
             // ignore

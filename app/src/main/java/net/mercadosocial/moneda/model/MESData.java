@@ -16,6 +16,7 @@ public class MESData {
         mesData.setFacebook("https://www.facebook.com/MercadoSocialMadrid");
         mesData.setTwitter("https://twitter.com/MES_Madrid");
         mesData.setLinkedIn("https://www.linkedin.com/company/mercado-social-madrid/");
+        mesData.setInstagram("https://www.instagram.com/mercadosocialmadrid");
         return mesData;
     }
 
