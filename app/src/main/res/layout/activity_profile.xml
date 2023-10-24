@@ -63,7 +63,7 @@
                         android:id="@+id/tv_profile_name"
                         style="@style/TextTitleComfortaa"
                         android:layout_marginBottom="20dp"
-                        android:text="Juio Test" />
+                        tools:text="Juio Test" />
 
                     <TextView
                         style="@style/TextBase"
@@ -74,7 +74,7 @@
                         android:id="@+id/tv_profile_type"
                         style="@style/TextBase.Purple"
                         android:layout_marginTop="3dp"
-                        android:text="Consumidora"
+                        tools:text="Consumidora"
                         android:textSize="@dimen/text_small_2"
                         android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                         android:id="@+id/tv_profile_market"
                         style="@style/TextBase.Purple"
                         android:layout_marginTop="3dp"
-                        android:text="Madrid"
+                        tools:text="Madrid"
                         android:textSize="@dimen/text_small_2"
                         android:textStyle="bold" />
 

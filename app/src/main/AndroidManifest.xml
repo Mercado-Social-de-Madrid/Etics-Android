@@ -67,11 +67,6 @@
         <activity android:name=".ui.intro.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.recipient_select.RecipientSelectActivity"
-            android:label="@string/select_recipient"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
             android:name=".ui.auth.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -104,9 +99,6 @@
             android:label="@string/invitations"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.profile.pincode_change.PincodeChangeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/change_pincode" />
 
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

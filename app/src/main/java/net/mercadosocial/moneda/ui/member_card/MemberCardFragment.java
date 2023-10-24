@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,7 +89,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.new_payment_scan, menu);
+        inflater.inflate(R.menu.member_card, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/tv_intro_title"
                 style="@style/TextBase"
-                android:text="Más personalización"
+                tools:text="Más personalización"
                 android:textSize="@dimen/text_large"
                 android:textColor="@color/purple"
                 android:gravity="center_horizontal"/>
@@ -40,7 +40,7 @@
                 android:id="@+id/tv_intro_text"
                 style="@style/TextBase"
                 android:layout_marginTop="30dp"
-                android:text="Si necesitáramos un diseño especial para estas pantallas tambien se puede personalizar completamente el contenido (menos los botones de navegación de abajo)"
+                tools:text="Si necesitáramos un diseño especial para estas pantallas tambien se puede personalizar completamente el contenido (menos los botones de navegación de abajo)"
                 android:textSize="@dimen/text_medium"
                 android:gravity="center_horizontal" />
 

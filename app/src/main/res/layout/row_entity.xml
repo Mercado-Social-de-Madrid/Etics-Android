@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="230dp">
+    android:layout_height="230dp"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <ImageView
@@ -33,7 +34,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="20sp"
-            android:text="Fabricantes de sueños"
+            tools:text="Fabricantes de sueños"
             android:textStyle="bold"
             android:fontFamily="@font/comfortaa_bold"/>
 
@@ -45,7 +46,7 @@
             android:layout_below="@+id/tv_entity_name"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Librería" />
+            tools:text="Librería" />
 
         <ImageView
             android:id="@+id/img_starred"
@@ -64,7 +65,7 @@
             android:ellipsize="end"
             android:gravity="bottom"
             android:lines="2"
-            android:text="Pza Palacio"
+            tools:text="Pza Palacio"
             android:visibility="gone" />
 
     </RelativeLayout>

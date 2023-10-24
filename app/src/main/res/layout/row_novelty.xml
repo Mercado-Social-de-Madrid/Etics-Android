@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
@@ -40,7 +41,7 @@
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="Título"
+                tools:text="Título"
                 android:layout_marginRight="5dp"/>
 
             <TextView
@@ -51,7 +52,7 @@
                 android:lines="2"
                 android:textColor="@color/grey"
                 android:ellipsize="end"
-                android:text="Jazz"/>
+                tools:text="Jazz"/>
 
 
             <TextView
@@ -64,7 +65,7 @@
                 android:ellipsize="end"
                 android:gravity="bottom|right"
                 android:layout_marginTop="5dp"
-                android:text="20/02/2020"/>
+                tools:text="20/02/2020"/>
 
         </RelativeLayout>
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="15dp"
     android:background="@drawable/bg_frame_green"
     android:gravity="center"
@@ -106,7 +107,7 @@
                 <TextView
                     android:id="@+id/tv_member_name"
                     style="@style/TextTitleComfortaa"
-                    android:text="Ana García Rodriguez"
+                    tools:text="Ana García Rodriguez"
                     android:textSize="@dimen/text_medium" />
 
                 <TextView
@@ -115,14 +116,14 @@
                     android:layout_marginTop="5dp"
                     android:background="@color/orange_corp"
                     android:padding="5dp"
-                    android:text="socia intercooperación"
+                    tools:text="socia intercooperación"
                     android:textSize="@dimen/text_small_2"/>
 
                 <TextView
                     android:id="@+id/tv_member_id"
                     style="@style/TextBase"
                     android:layout_marginTop="5dp"
-                    android:text="Nº de socia: 000143"
+                    tools:text="Nº de socia: 000143"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_medium" />
 
@@ -130,7 +131,7 @@
                     android:id="@+id/tv_member_date"
                     style="@style/TextBase"
                     android:layout_marginTop="5dp"
-                    android:text="Fecha de alta: 12/12/2012"
+                    tools:text="Fecha de alta: 12/12/2012"
                     android:visibility="gone"
                     android:textSize="@dimen/text_small_2" />
 
