@@ -66,23 +66,23 @@ public class MemberCardPresenter extends BasePresenter {
             return;
         }
 
-        view.showLogoutView(false);
-
-        if (data.isEntity()) {
-            view.showQrScanButton(true);
-        }
-
-        String memberType = getString(data.isEntity() ? R.string.member_entity :
-                data.getPerson().isIntercoop() ? R.string.member_intercoop : R.string.member_consumer)
-                .toLowerCase(Locale.ROOT);
-
         Account account = data.getAccount();
 
         if (account == null) {
+            view.showLogoutView(true);
+            view.toast(R.string.error_no_member_data_found);
             FirebaseCrashlytics.getInstance().recordException(
                     new IllegalStateException("Null account: " + data.getUsername()));
             return;
         }
+
+        view.showLogoutView(false);
+
+        view.showQrScanButton(data.isEntity());
+
+        String memberType = getString(data.isEntity() ? R.string.member_entity :
+                data.getPerson().isIntercoop() ? R.string.member_intercoop : R.string.member_consumer)
+                .toLowerCase(Locale.ROOT);
 
         view.showMemberData(account, memberType);
 
