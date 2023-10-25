@@ -59,18 +59,6 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.switchAcceptsEtics.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked && !getPrefs().getBoolean(App.SHARED_FILTER_ETICS_WARNING_SEEN, false)) {
-                alert(getString(R.string.filter_etics_msg));
-                getPrefs().edit().putBoolean(App.SHARED_FILTER_ETICS_WARNING_SEEN, true).apply();
-            }
-        });
-    }
-
-    @Override
     public void showCategories(List<Category> categories) {
         if (adapter == null) {
             adapter = new CategoriesFilterAdapter(getActivity(), categories);
@@ -87,9 +75,8 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
                 String text = binding.editSearchEntities.getText().toString();
                 boolean onlyFavs = binding.switchOnlyFavs.isChecked();
                 boolean withBenefits = binding.switchWithBenefits.isChecked();
-                boolean acceptsEtics = binding.switchAcceptsEtics.isChecked();
                 boolean withBadge = binding.checkWithBadge.isChecked();
-                presenter.applyFilter(text, onlyFavs, withBenefits, acceptsEtics, withBadge);
+                presenter.applyFilter(text, onlyFavs, withBenefits, withBadge);
                 WindowUtils.hideSoftKeyboard(getActivity());
                 break;
 

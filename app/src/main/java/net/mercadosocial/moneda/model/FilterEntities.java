@@ -9,7 +9,6 @@ public class FilterEntities {
     private List<String> categoriesIds;
     private boolean onlyFavourites;
     private boolean withBenefits;
-    private boolean acceptsEtics;
     private boolean withBadge;
 
     public String getText() {
@@ -34,14 +33,6 @@ public class FilterEntities {
 
     public void setOnlyFavourites(boolean onlyFavourites) {
         this.onlyFavourites = onlyFavourites;
-    }
-
-    public boolean isAcceptsEtics() {
-        return acceptsEtics;
-    }
-
-    public void setAcceptsEtics(boolean acceptsEtics) {
-        this.acceptsEtics = acceptsEtics;
     }
 
     public boolean isWithBenefits() {

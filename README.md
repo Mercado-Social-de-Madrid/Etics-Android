@@ -1,6 +1,10 @@
-## [Etics](https://etics.mercadosocial.net/): bonificaciones éticas - App Android
+## [Mercado Social](https://madrid.mercadosocial.net/). App Android
 
-Los etics son el sistema de bonificaciones del Mercado Social. Consíguelos consumiendo dentro del Mercado Social y gástalos en cualquier entidad dentro del Mercado en tu siguiente compra.
+Aplicación del Mercado Social con las siguientes funciones:
+
+- Consultar entidades de nuestra red de Economía Social y Solidaria (ESS). Las empresas más transparentes tendrán su distintivo de garantía y se podrá acceder a su balance social para conocerla "por dentro".
+- Recibir avisos de noticias y ofertas para que estés al día de todo lo que te interesa.
+- Registrarte como entidad proveedora o persona consumidora y acceder a las ventajas y descuentos que se ofrecen dentro de la red
 
 ---
 

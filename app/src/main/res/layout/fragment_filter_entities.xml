@@ -49,14 +49,6 @@
                 android:layout_marginBottom="10dp"/>
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_accepts_etics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/accepts_etics"
-                android:layout_marginBottom="10dp"
-                android:visibility="visible"/>
-
-            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/check_with_badge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

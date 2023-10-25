@@ -51,8 +51,6 @@ public class App extends MultiDexApplication {
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
 
-    public static final String SHARED_FILTER_ETICS_WARNING_SEEN = PREFIX + "filter_etics_warning";
-
     // FIREBASE MESSAGING
     public static final String TOPIC_NEWS_MADRID = "news";
     public static final String TOPIC_OFFERS_MADRID = "offers";
