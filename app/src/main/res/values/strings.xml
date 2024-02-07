@@ -365,4 +365,6 @@
     <string name="notifications_permission_rationale_msg">A partir de la versión 13 de Android, el usuario tiene la opción de elegir qué notificaciones quiere recibir. Si quieres estar al día de las noticias del Mercado Social, acepta el permiso ;)</string>
     <string name="notifications_permission">Permiso de notificaciones</string>
     <string name="error_no_member_data_found">Error. No se ha encontrado información de soci@</string>
+
+    <string name="fediverse">Fediverso</string>
 </resources>

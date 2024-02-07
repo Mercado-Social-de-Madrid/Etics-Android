@@ -42,6 +42,7 @@ import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
+import net.mercadosocial.moneda.ui.fediverse.list.FediverseFragment;
 import net.mercadosocial.moneda.ui.info.InfoMesActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
@@ -75,6 +76,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private ArrayList<BaseFragment> sections = new ArrayList<>();
     private EntitiesFragment entitiesFragment;
     private NoveltiesFragment noveltiesFragment;
+    private FediverseFragment fediverseFragment;
     private int currentSection = -1;
     private TextView btnGoToProfile;
     private NavigationView navigationView;
@@ -213,10 +215,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         entitiesFragment = new EntitiesFragment();
         memberCardFragment = new MemberCardFragment();
         noveltiesFragment = new NoveltiesFragment();
+        fediverseFragment = new FediverseFragment();
 
         sections.add(memberCardFragment);
         sections.add(entitiesFragment);
         sections.add(noveltiesFragment);
+        sections.add(fediverseFragment);
     }
 
 
@@ -318,7 +322,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     setToolbarTitle(R.string.highlighted);
                     showFragment(2);
                     return true;
-
+                case R.id.navigation_fediverse:
+                    setToolbarTitle(R.string.fediverse);
+                    showFragment(3);
+                    return true;
                 case R.id.menuItem_the_social_market:
                     startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
                     break;

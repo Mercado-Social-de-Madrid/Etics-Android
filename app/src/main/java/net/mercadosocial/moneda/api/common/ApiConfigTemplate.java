@@ -11,4 +11,6 @@ public class ApiConfigTemplate {
 
     public static final String BASE_URL_TOOL_PRODUCTION_MADRID = "";
     public static final String BASE_URL_TOOL_DEBUG = "";
+
+    public static final String FEDIVERSE_URL = "";
 }

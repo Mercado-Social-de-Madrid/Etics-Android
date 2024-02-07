@@ -18,4 +18,9 @@
         android:icon="@mipmap/ic_novelties"
         android:title="@string/highlighted" />
 
+    <item
+        android:id="@+id/navigation_fediverse"
+        android:icon="@drawable/ic_fediverse"
+        android:title="@string/fediverse" />
+
 </menu>
