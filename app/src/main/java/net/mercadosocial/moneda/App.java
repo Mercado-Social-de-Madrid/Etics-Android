@@ -14,6 +14,7 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
@@ -25,8 +26,10 @@ import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
-import net.mercadosocial.moneda.model.MES;
+import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
+
+import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
 
@@ -43,22 +46,16 @@ public class App extends MultiDexApplication {
     private static final String SHARED_USER_DATA = PREFIX + "shared_user_data";
     public static final String SHARED_TOKEN_FIREBASE_SENT = PREFIX + "shared_token_firebase_sent";
     public static final String SHARED_CATEGORIES_SAVED = PREFIX + "shared_categories_saved";
-    public static final String SHARED_MES_CODE_SAVED = PREFIX + "shared_mes_code_saved";
     public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
     public static final String SHARED_ENTITIES_CACHE = PREFIX + "shared_entities_cache";
-    public static final String SHARED_MEMBER_CARD_INTRO_SEEN = PREFIX + "member_card_intro_seen";;
+    public static final String SHARED_MEMBER_CARD_INTRO_SEEN = PREFIX + "member_card_intro_seen";
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
-    public static final String SHARED_HAS_PINCODE = PREFIX + "has_pincode";
-
-    // FIREBASE MESSAGING
-    public static final String TOPIC_NEWS_MADRID = "news";
-    public static final String TOPIC_OFFERS_MADRID = "offers";
-
-    public static final String TOPIC_NEWS_MURCIA = "news_mur";
-    public static final String TOPIC_OFFERS_MURCIA = "offers_mur";
+    public static final String SHARED_CURRENT_NODE = PREFIX + "current_node";
 
     public static boolean isInForeground;
+
+    public static String currentNodeShortname;
 
 //    private List<Entity> entitiesCache = new ArrayList<>();
 
@@ -97,7 +94,10 @@ public class App extends MultiDexApplication {
 
         loadFirstTime();
 
-        loadMESCity();
+        Node currentNode = getCurrentNode();
+        if (currentNode != null) {
+            currentNodeShortname = currentNode.getShortname();
+        }
 
         processWorkarounds();
 
@@ -119,18 +119,48 @@ public class App extends MultiDexApplication {
         }
     }
 
-    private void loadMESCity() {
-        MES.setCityCode(getPrefs(this).getString(SHARED_MES_CODE_SAVED, null));
-    }
-
     private void loadFirstTime() {
         if (getPrefs(this).getString(SHARED_CATEGORIES_SAVED, null) == null) {
             new CategoriesInteractor(this, null).loadCategoriesDefault();
         }
     }
 
+    public Node getCurrentNode() {
+        String nodeSerialized = getPrefs(this).getString(SHARED_CURRENT_NODE, null);
+        if (nodeSerialized != null) {
+            return new Gson().fromJson(nodeSerialized, Node.class);
+        } else {
+            return null;
+        }
+    }
 
-    public class MyObserver implements DefaultLifecycleObserver {
+    public void setCurrentNode(Node node) {
+
+        Node previousNode = getCurrentNode();
+
+        if (previousNode != null && Objects.equals(previousNode.getShortname(), node.getShortname())) {
+            return;
+        }
+
+        currentNodeShortname = node.getShortname();
+
+        if (previousNode != null) {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_news");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_offers");
+        }
+
+        String nodeSerialized = new Gson().toJson(node);
+        getPrefs(this).edit()
+                .putString(App.SHARED_CURRENT_NODE, nodeSerialized)
+                .remove(App.SHARED_ENTITIES_CACHE)
+                .apply();
+
+        FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_news");
+        FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_offers");
+    }
+
+
+    public static class MyObserver implements DefaultLifecycleObserver {
         @Override
         public void onResume(@NonNull LifecycleOwner owner) {
             App.isInForeground = true;
@@ -160,7 +190,7 @@ public class App extends MultiDexApplication {
 
     public static void saveUserData(Context context, Data data) {
         String dataSerial = new Gson().toJson(data);
-        getPrefs(context).edit().putString(App.SHARED_USER_DATA, dataSerial).commit();
+        getPrefs(context).edit().putString(App.SHARED_USER_DATA, dataSerial).apply();
         AuthLogin.API_KEY = data.getApiKeyFull();
     }
 
@@ -186,7 +216,7 @@ public class App extends MultiDexApplication {
         getPrefs(context).edit()
                 .remove(SHARED_USER_DATA)
                 .remove(SHARED_TOKEN_FIREBASE_SENT)
-                .commit();
+                .apply();
 
         new DeviceInteractor(context, null).sendDevice(new Device(), new BaseInteractor.BaseApiPOSTCallback() {
             @Override

@@ -1,8 +1,6 @@
 package net.mercadosocial.moneda.views;
 
 import android.content.Context;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +8,22 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.model.MES;
+import androidx.recyclerview.widget.RecyclerView;
 
+import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.base.BaseInteractor;
+import net.mercadosocial.moneda.databinding.ViewSelectMesBinding;
+import net.mercadosocial.moneda.interactor.NodeInteractor;
+import net.mercadosocial.moneda.model.Node;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 public class SelectMESView extends FrameLayout {
-    private RecyclerView recyclerMESList;
+    private final List<Node> nodes = new ArrayList<>();
     private MESListAdapter adapter;
+    private ViewSelectMesBinding binding;
 
     public SelectMESView(Context context) {
         super(context);
@@ -38,41 +41,67 @@ public class SelectMESView extends FrameLayout {
     }
 
     private void init() {
-        View layout = View.inflate(getContext(), R.layout.view_select_mes, null);
+        binding = ViewSelectMesBinding.inflate(LayoutInflater.from(getContext()));
 
-        recyclerMESList = layout.findViewById(R.id.recycler_mes_list);
-        recyclerMESList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MESListAdapter(getContext(), MES.mesList);
-        recyclerMESList.setAdapter(adapter);
+        adapter = new MESListAdapter(getContext(), nodes);
+        binding.recyclerMesList.setAdapter(adapter);
 
-        addView(layout);
+        requestNodes();
+
+        addView(binding.getRoot());
     }
 
-    public MES getSelectedMES() {
+    private void requestNodes() {
+
+        binding.progressNodes.setVisibility(View.VISIBLE);
+
+        new NodeInteractor(getContext(), null).getNodes(new BaseInteractor.BaseApiGETListCallback<Node>() {
+            @Override
+            public void onResponse(List<Node> list) {
+                binding.progressNodes.setVisibility(View.GONE);
+                nodes.clear();
+                nodes.addAll(list);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String message) {
+                binding.progressNodes.setVisibility(View.GONE);
+                binding.tvErrorMsg.setText(message);
+            }
+        });
+    }
+
+    public Node getSelectedNode() {
         if (adapter.getSelectedPosition() == -1) {
             return null;
         } else {
-            return MES.mesList.get(adapter.getSelectedPosition());
+            return nodes.get(adapter.getSelectedPosition());
         }
     }
 
-    public void setSelectedMESPosition(int position) {
-        adapter.setSelectedPosition(position);
+    public void selectNode(Node node) {
+        for (int i = 0; i < nodes.size(); i++) {
+            Node nodeItem = nodes.get(i);
+            if (nodeItem.equals(node)) {
+                adapter.setSelectedPosition(i);
+                return;
+            }
+        }
     }
 
-
-    public class MESListAdapter extends RecyclerView.Adapter<MESListAdapter.ViewHolder> {
+    public static class MESListAdapter extends RecyclerView.Adapter<MESListAdapter.ViewHolder> {
 
 
         private int selectedPosition = -1;
-        private List<MES> mesList;
+        private List<Node> nodes;
         private Context context;
         private OnItemClickListener itemClickListener;
 
 
-        public MESListAdapter(Context context, List<MES> mesList) {
+        public MESListAdapter(Context context, List<Node> nodes) {
             this.context = context;
-            this.mesList = mesList;
+            this.nodes = nodes;
         }
 
         public int getSelectedPosition() {
@@ -96,18 +125,18 @@ public class SelectMESView extends FrameLayout {
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position2) {
 
-            final MES mes = getItemAtPosition(holder.getAdapterPosition());
-            holder.tvMESName.setText(mes.getName());
+            final Node node = getItemAtPosition(holder.getAdapterPosition());
+            holder.tvMESName.setText(node.getName());
             holder.tvMESName.setSelected(position2 == selectedPosition);
         }
 
         @Override
         public int getItemCount() {
-            return mesList.size();
+            return nodes.size();
         }
 
-        public MES getItemAtPosition(int position) {
-            return mesList.get(position);
+        public Node getItemAtPosition(int position) {
+            return nodes.get(position);
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {

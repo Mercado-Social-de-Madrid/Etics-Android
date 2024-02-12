@@ -5,11 +5,12 @@ import android.content.Context;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.NewsApi;
 import net.mercadosocial.moneda.api.response.ApiError;
-import net.mercadosocial.moneda.api.response.NewsResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.News;
 import net.mercadosocial.moneda.util.Util;
+
+import java.util.List;
 
 import retrofit2.Response;
 import rx.Observer;
@@ -38,7 +39,7 @@ public class NewsInteractor extends BaseInteractor {
 
         getApi().getNews()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<NewsResponse>>() {
+                .subscribe(new Observer<Response<List<News>>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -50,7 +51,7 @@ public class NewsInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<NewsResponse> response) {
+                    public void onNext(Response<List<News>> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -58,7 +59,7 @@ public class NewsInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body().getNews());
+                        callback.onResponse(response.body());
 
 
                     }

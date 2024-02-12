@@ -3,50 +3,39 @@ package net.mercadosocial.moneda.interactor;
 import android.content.Context;
 
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.api.OffersApi;
+import net.mercadosocial.moneda.api.NodesApi;
 import net.mercadosocial.moneda.api.response.ApiError;
-import net.mercadosocial.moneda.api.response.OffersResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
-import net.mercadosocial.moneda.model.Offer;
+import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.Util;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by julio on 14/02/16.
- */
-public class OfferInteractor extends BaseInteractor {
-    
+public class NodeInteractor extends BaseInteractor {
 
-    public OfferInteractor(Context context, BaseView baseView) {
+    public NodeInteractor(Context context, BaseView baseView) {
         this.baseView = baseView;
         this.context = context;
 
     }
 
 
-    public void getOffers(final BaseApiGETListCallback<Offer> callback) {
+    public void getNodes(final BaseApiGETListCallback<Node> callback) {
 
         if (!Util.isConnected(context)) {
             baseView.toast(R.string.no_connection);
             return;
         }
 
-        if (true) {
-            callback.onResponse(new ArrayList<>());
-            return;
-        }
-
-        getApi().getOffers()
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-//                .doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<OffersResponse>>() {
+        getApi(NodesApi.class).getNodes()
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<List<Node>>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -54,13 +43,11 @@ public class OfferInteractor extends BaseInteractor {
                     @Override
                     public void onError(Throwable e) {
 
-                        baseView.setRefreshing(false);
                         callback.onError(e.getMessage());
                     }
 
                     @Override
-                    public void onNext(Response<OffersResponse> response) {
-
+                    public void onNext(Response<List<Node>> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -68,7 +55,7 @@ public class OfferInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body().getOffers());
+                        callback.onResponse(response.body());
 
 
                     }
@@ -76,11 +63,5 @@ public class OfferInteractor extends BaseInteractor {
 
 
     }
-
-
-    private OffersApi getApi() {
-        return getApi(OffersApi.class);
-    }
-
 
 }

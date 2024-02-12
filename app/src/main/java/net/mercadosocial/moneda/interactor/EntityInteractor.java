@@ -76,7 +76,7 @@ public class EntityInteractor extends BaseInteractor {
 
         getApi().getEntities(text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<EntitiesResponse>>() {
+                .subscribe(new Observer<Response<List<Entity>>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -89,7 +89,7 @@ public class EntityInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<EntitiesResponse> response) {
+                    public void onNext(Response<List<Entity>> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -100,12 +100,11 @@ public class EntityInteractor extends BaseInteractor {
                         // When adding entities shuffle, this causes a wierd behaviour changing order automatically
                         // Better refresh entities next time cached data is retrieved
                         if (!hasCachedEntities() || filterEntities != null) {
-                            boolean hasMore = response.body().getMeta().getNext() != null;
-                            callback.onResponse(response.body().getEntities(), hasMore);
+                            callback.onResponse(response.body(), false);
                         }
 
                         if (filterEntities == null) {
-                            cacheEntities(response.body().getEntities());
+                            cacheEntities(response.body());
                         }
 
                     }

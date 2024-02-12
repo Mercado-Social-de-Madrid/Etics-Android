@@ -1,28 +1,21 @@
 package net.mercadosocial.moneda.ui.entity_info;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
-import android.view.View;
-
 import com.squareup.picasso.Picasso;
 
-import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.databinding.ActivityEntityInfoBinding;
 import net.mercadosocial.moneda.model.Benefit;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
 import net.mercadosocial.moneda.util.Util;
-
-import es.dmoral.toasty.Toasty;
 
 public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 

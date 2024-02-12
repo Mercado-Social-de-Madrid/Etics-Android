@@ -1,12 +1,13 @@
 package net.mercadosocial.moneda.views;
 
 import android.content.Context;
-import androidx.appcompat.app.AlertDialog;
 import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.model.MES;
+import net.mercadosocial.moneda.model.Node;
 
 public class DialogSelectMES {
 
@@ -31,12 +32,11 @@ public class DialogSelectMES {
                 .setNegativeButton(R.string.back, null)
                 .show();
 
-        String codeMESSaved = App.getPrefs(context).getString(App.SHARED_MES_CODE_SAVED, null);
-        int positionSaved = MES.getMESPositionByCode(codeMESSaved);
-        selectMESView.setSelectedMESPosition(positionSaved);
+        Node node = ((App) context.getApplicationContext()).getCurrentNode();
+        selectMESView.selectNode(node);
         selectMESView.setOnItemClickListener((view, position) -> {
             if (onSelectMESListener != null) {
-                onSelectMESListener.onMESSelected(selectMESView.getSelectedMES());
+                onSelectMESListener.onNodeSelected(selectMESView.getSelectedNode());
             }
 
             dialog.dismiss();
@@ -50,6 +50,6 @@ public class DialogSelectMES {
         return this;
     }
     public interface OnSelectMESListener {
-        void onMESSelected(MES mes);
+        void onNodeSelected(Node node);
     }
 }

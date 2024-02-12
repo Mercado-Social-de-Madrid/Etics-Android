@@ -119,7 +119,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     }
 
-    public void onMESCityChanged() {
+    public void onNodeChanged() {
 
     }
 

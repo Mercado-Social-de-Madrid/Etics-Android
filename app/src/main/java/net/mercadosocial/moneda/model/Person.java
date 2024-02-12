@@ -48,10 +48,6 @@ public class Person extends Account {
         return getProfile_image();
     }
 
-    public String getCityName() {
-        return MES.getMESNameByCode(getCity());
-    }
-
     public String getNif() {
         return nif;
     }
@@ -77,11 +73,11 @@ public class Person extends Account {
     }
 
     public String getProfile_image() {
-        return ApiClient.baseUrl + profile_image;
+        return ApiClient.BASE_URL + profile_image;
     }
 
     public String getProfile_thumbnail() {
-        return ApiClient.baseUrl + profile_thumbnail;
+        return ApiClient.BASE_URL + profile_thumbnail;
     }
 
     public void setProfile_image(String profile_image) {

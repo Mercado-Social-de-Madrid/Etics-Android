@@ -1,10 +1,7 @@
 package net.mercadosocial.moneda.api.response;
 
-import android.text.TextUtils;
-
 import net.mercadosocial.moneda.model.Account;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Person;
 
 import java.util.ArrayList;
@@ -57,21 +54,6 @@ public class Data {
         }
     }
 
-    public String getCityName() {
-        String cityCode = "";
-        if (entity != null) {
-            cityCode = entity.getCity();
-        } else {
-            cityCode = person.getCity();
-        }
-
-        if (!TextUtils.isEmpty(cityCode)) {
-            return MES.getMESbyCode(cityCode).getName();
-        } else {
-            return null;
-        }
-    }
-
     public String getCityCode() {
         if (entity != null) {
             return entity.getCity();
@@ -79,7 +61,6 @@ public class Data {
             return person.getCity();
         }
     }
-
 
 
     public String getApiKeyFull() {

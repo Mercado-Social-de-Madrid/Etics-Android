@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Patterns;
 
 import net.mercadosocial.moneda.App;
@@ -12,7 +11,6 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Entity;
-import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;

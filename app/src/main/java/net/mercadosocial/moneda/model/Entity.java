@@ -8,7 +8,6 @@ import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.model.gallery_entity.Gallery;
 import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -95,11 +94,11 @@ public class Entity extends Account {
     }
 
     public String getLogoThumbnail() {
-        return ApiClient.baseUrl + logo_thumbnail;
+        return ApiClient.BASE_URL + logo_thumbnail;
     }
 
     public String getLogo() {
-        return ApiClient.baseUrl + logo;
+        return ApiClient.BASE_URL + logo;
     }
 
     public String getLogoThumbnailOrCover() {
@@ -167,10 +166,6 @@ public class Entity extends Account {
         }
 
         return images;
-    }
-
-    public String getCityName() {
-        return MES.getMESNameByCode(getCity());
     }
 
     // ------------------------------

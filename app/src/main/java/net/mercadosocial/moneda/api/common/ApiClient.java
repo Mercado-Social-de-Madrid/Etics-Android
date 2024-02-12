@@ -1,17 +1,15 @@
 package net.mercadosocial.moneda.api.common;
 
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.model.AuthLogin;
-import net.mercadosocial.moneda.model.MES;
 import net.mercadosocial.moneda.util.DateUtils;
 
 import java.lang.reflect.Modifier;
@@ -38,14 +36,11 @@ public class ApiClient {
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_PRODUCTION : ApiConfig.BASE_URL_DEBUG;
     public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_TOOL_PRODUCTION_MADRID : ApiConfig.BASE_URL_TOOL_DEBUG;
 
-    public static final String API_PATH = "/api/v1/";
+    public static final String API_PATH = "/api/";
 
     public static String BASE_API_URL = BASE_URL + API_PATH;
 
     private static Retrofit sharedInstance;
-
-    public static String baseUrl = BASE_URL;
-    public static String baseApiUrl = BASE_API_URL;
 
     private static JsonDeserializer<Date> jsonDateDeserializer = (json, typeOfT, context) -> {
 
@@ -57,13 +52,6 @@ public class ApiClient {
 
     };
 
-
-    public static void setBaseUrl(String url) {
-        sharedInstance = null;
-        baseUrl = url;
-        baseApiUrl = url + API_PATH;
-        getInstance();
-    }
 
     public static Retrofit getInstance() {
         if (sharedInstance == null) {
@@ -78,7 +66,7 @@ public class ApiClient {
 
 
             sharedInstance = new Retrofit.Builder()
-                    .baseUrl(baseApiUrl)
+                    .baseUrl(BASE_API_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -105,20 +93,14 @@ public class ApiClient {
                 requestBuilder.header("Authorization", AuthLogin.API_KEY);
             }
 
-//
-//                if (Auth.token != null) {
-//                    requestBuilder.header("nonce", Auth.token);
-//                }
-
             requestBuilder.method(original.method(), original.body());
             okhttp3.Request request = requestBuilder.build();
 
-            HttpUrl url = request.url().newBuilder().addQueryParameter("city", MES.getCityCodeHeaderParam()).build();
+            HttpUrl url = request.url().newBuilder().addQueryParameter("node", App.currentNodeShortname).build();
             request = request.newBuilder().url(url).build();
 
             okhttp3.Response response = chain.proceed(request);
 
-            // otherwise just pass the original response on
             return response;
         };
 

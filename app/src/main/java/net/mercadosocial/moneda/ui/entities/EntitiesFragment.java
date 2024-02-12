@@ -9,8 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -72,8 +70,8 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
 
     @Override
-    public void onMESCityChanged() {
-        super.onMESCityChanged();
+    public void onNodeChanged() {
+        super.onNodeChanged();
         presenter.refreshData();
     }
 

@@ -174,7 +174,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     public void showPersonProfile(Person person) {
 
         tvProfileName.setText(String.format("%s %s", person.getName(), person.getSurname()));
-        tvProfileMarket.setText(person.getCityName());
+        tvProfileMarket.setText(getApp().getCurrentNode().getName());
 
         if (person.is_guest_account()) {
             String dateFormatted = DateUtils.convertDateApiToUserFormat(person.getExpiration_date());
@@ -195,8 +195,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void showEntityProfile(Entity entity) {
 
+
         tvProfileName.setText(entity.getName());
-        tvProfileMarket.setText(entity.getCityName());
+        tvProfileMarket.setText(getApp().getCurrentNode().getName());
         tvProfileType.setText(R.string.entity);
 
         Picasso.get()

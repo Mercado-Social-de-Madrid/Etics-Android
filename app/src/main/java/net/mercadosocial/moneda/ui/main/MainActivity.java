@@ -2,28 +2,22 @@ package net.mercadosocial.moneda.ui.main;
 
 
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -36,8 +30,7 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.FilterEntities;
-import net.mercadosocial.moneda.model.MES;
-import net.mercadosocial.moneda.model.MESData;
+import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
@@ -50,7 +43,6 @@ import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
-import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 
@@ -132,36 +124,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         configureToolbarBackArrowBehaviour();
         configureFragments();
 
-        updateMenuViewsByMES();
 
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
-
 
         if (DebugHelper.SHORTCUT_ACTIVITY != null && DebugHelper.SHORTCUT_ACTIVITY != MainActivity.class) {
             startActivity(new Intent(this, DebugHelper.SHORTCUT_ACTIVITY));
             return;
         }
 
-//        if (App.getUserData(this) == null) {
-//            startActivity(new Intent(this, LoginActivity.class));
-//            finish();
-//            return;
-//        }
-
-        boolean noCityCodeSaved = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null) == null;
-        boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
-        if ((noCityCodeSaved || isMadrid) && !App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
-//        if(true) {
+        Node node = getApp().getCurrentNode();
+        if (node != null) {
+            showFragment(node.isMemberCardEnabled() ? 0: 1);
+            updateMenuViewsByNode();
+        } else if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
             startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
-            getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).commit();
-        } else {
-            showFragment(isMadrid ? 0: 1);
         }
-
 
         presenter.onCreate(getIntent());
 
-//        showMockNotificationDialog();
     }
 
     @Override
@@ -176,7 +156,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
 
 //        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
 //        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
@@ -192,7 +172,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (requestCode) {
             case REQ_CODE_INTRO:
                 showFragment(0);
-                updateMenuViewsByMES();
+                updateMenuViewsByNode();
                 break;
 
             case REQ_CODE_PROFILE:
@@ -215,12 +195,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         entitiesFragment = new EntitiesFragment();
         memberCardFragment = new MemberCardFragment();
         noveltiesFragment = new NoveltiesFragment();
-        fediverseFragment = new FediverseFragment();
 
         sections.add(memberCardFragment);
         sections.add(entitiesFragment);
         sections.add(noveltiesFragment);
-        sections.add(fediverseFragment);
     }
 
 
@@ -232,30 +210,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
-//        toolbar.setNavigationIcon(null);
     }
-
-//    public void toggleDrawerRight() {
-//        if (drawerLayout.isDrawerOpen(Gravity.END)) {
-//            drawerLayout.closeDrawer(Gravity.END);
-//        } else {
-//            drawerLayout.openDrawer(Gravity.END);
-//        }
-//    }
 
     private void configureToolbarBackArrowBehaviour() {
 
         ((Toolbar) findViewById(R.id.toolbar)).setNavigationOnClickListener(v -> {
 
-            if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                drawerLayout.closeDrawer(Gravity.LEFT);
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
             } else {
 
-                if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                    drawerLayout.closeDrawer(GravityCompat.END);
                 } else {
-                    drawerLayout.openDrawer(Gravity.LEFT);
+                    drawerLayout.openDrawer(GravityCompat.START);
                 }
 
             }
@@ -277,11 +245,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         presenter.refreshData();
     }
 
-    public void onMESCityChanged() {
+    public void onNodeChanged() {
 
         for (BaseFragment baseFragment : sections) {
             if (baseFragment.isAdded()) {
-                baseFragment.onMESCityChanged();
+                baseFragment.onNodeChanged();
             }
         }
     }
@@ -290,8 +258,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void setFilterEntities(FilterEntities filterEntities) {
         if (currentSection == 1) {
             ((EntitiesPresenter) entitiesFragment.getBasePresenter()).setFilterEntities(filterEntities);
-            if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-                drawerLayout.closeDrawer(Gravity.RIGHT);
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END);
             }
         }
     }
@@ -305,111 +273,96 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             return false;
         }
 
-        String mesCode = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null);
-        MESData mesData = MES.getMESbyCode(mesCode).getMesData();
+        Node node = getApp().getCurrentNode();
 
         try {
-            switch (item.getItemId()) {
-                case R.id.navigation_member_card:
-                    setToolbarTitle(R.string.member_card);
-                    showFragment(0);
-                    return true;
-                case R.id.navigation_entities:
-                    setToolbarTitle(R.string.entities);
-                    showFragment(1);
-                    return true;
-                case R.id.navigation_profile:
-                    setToolbarTitle(R.string.highlighted);
-                    showFragment(2);
-                    return true;
-                case R.id.navigation_fediverse:
-                    setToolbarTitle(R.string.fediverse);
-                    showFragment(3);
-                    return true;
-                case R.id.menuItem_the_social_market:
-                    startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_member_card) {
+                setToolbarTitle(R.string.member_card);
+                showFragment(0);
+                return true;
+            } else if (itemId == R.id.navigation_entities) {
+                setToolbarTitle(R.string.entities);
+                showFragment(1);
+                return true;
+            } else if (itemId == R.id.navigation_profile) {
+                setToolbarTitle(R.string.highlighted);
+                showFragment(2);
+                return true;
+            }else if (itemId == R.id.navigation_fediverse) {
+                setToolbarTitle(R.string.fediverse);
+                showFragment(3);
+            } else if (itemId == R.id.menuItem_the_social_market) {
+                startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
+            } else if (itemId == R.id.menuItem_change_social_market) {
+                DialogSelectMES.with(this)
+                        .setOnSelectMESListener(nodeSelected -> {
+                            getApp().setCurrentNode(nodeSelected);
+                            updateMenuViewsByNode();
+                            onNodeChanged();
+                            presenter.onLogoutClick();
+                            bottomNavView.setSelectedItemId(R.id.navigation_entities);
+                        })
+                        .show();
+            } else if (itemId == R.id.menuItem_invitations) {
+                InvitationsPresenter.launchInvitationsActivity(this);
+            } else if (itemId == R.id.nav_contact_email) {
+                String emailMES = node.getContactEmail();
 
-                case R.id.menuItem_change_social_market:
-                    DialogSelectMES.with(this)
-                            .setOnSelectMESListener(mes -> {
-//                            toast("MES seleccionado: " + mes.getName());
-                                getPrefs().edit()
-                                        .putString(App.SHARED_MES_CODE_SAVED, mes.getCode())
-                                        .remove(App.SHARED_ENTITIES_CACHE)
-                                        .commit();
-                                MES.setCityCode(mes.getCode());
-                                updateMenuViewsByMES();
-                                onMESCityChanged();
-                                presenter.onLogoutClick();
-                                bottomNavView.setSelectedItemId(R.id.navigation_entities);
-                            })
-                            .show();
-                    break;
-
-                case R.id.menuItem_invitations:
-                    InvitationsPresenter.launchInvitationsActivity(this);
-                    break;
-
-                case R.id.nav_contact_email:
-                    String emailMES = mesData.getEmailContact();
-
-                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                            "mailto", emailMES, null));
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_contact_subject));
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", emailMES, null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_contact_subject));
 //                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
-                    startActivity(emailIntent);
-                    break;
+                startActivity(emailIntent);
 
-                case R.id.nav_contact_web:
-                    Util.openLink(this, mesData.getWeb());
-                    break;
-
-                case R.id.nav_contact_facebook:
-                    Util.openLink(this, mesData.getFacebook());
-                    break;
-
-                case R.id.nav_contact_twitter:
-                    Util.openLink(this, mesData.getTwitter());
-                    break;
-
-                case R.id.nav_contact_linkedin:
-                    Util.openLink(this, mesData.getLinkedIn());
-                    break;
-
-                case R.id.nav_contact_instagram:
-                    Util.openLink(this, mesData.getInstagram());
-                    break;
+                // TODO Node changes RRSS
+//                case R.id.nav_contact_web:
+//                    Util.openLink(this, mesData.getWeb());
+//                    break;
+//
+//                case R.id.nav_contact_facebook:
+//                    Util.openLink(this, mesData.getFacebook());
+//                    break;
+//
+//                case R.id.nav_contact_twitter:
+//                    Util.openLink(this, mesData.getTwitter());
+//                    break;
+//
+//                case R.id.nav_contact_linkedin:
+//                    Util.openLink(this, mesData.getLinkedIn());
+//                    break;
+//
+//                case R.id.nav_contact_instagram:
+//                    Util.openLink(this, mesData.getInstagram());
+//                    break;
             }
         } catch (ActivityNotFoundException e) {
             // ignore
         }
 
 //        toast("Pulsado: " + item.getTitle());
-        drawerLayout.closeDrawer(Gravity.LEFT);
+        drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
 
 
-    private void updateMenuViewsByMES() {
+    private void updateMenuViewsByNode() {
 
-        String mesCode = getPrefs().getString(App.SHARED_MES_CODE_SAVED, null);
-        MESData mesData = MES.getMESbyCode(mesCode).getMesData();
+        Node node = getApp().getCurrentNode();
 
-        boolean isMadrid = TextUtils.equals(getPrefs().getString(App.SHARED_MES_CODE_SAVED, null), MES.CODE_MADRID);
+        bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(node.isMemberCardEnabled());
 
-        bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(isMadrid);
+        // TODO Node changes
+//        navigationView.getHeaderView(0).setVisibility(isMadrid ? View.VISIBLE : View.GONE);
 
-        navigationView.getHeaderView(0).setVisibility(isMadrid ? View.VISIBLE : View.GONE);
-
-        Menu leftMenu = navigationView.getMenu();
-        leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(isMadrid);
-
-        leftMenu.findItem(R.id.nav_contact_web).setVisible(mesData.getWeb() != null);
-        leftMenu.findItem(R.id.nav_contact_facebook).setVisible(mesData.getFacebook() != null);
-        leftMenu.findItem(R.id.nav_contact_twitter).setVisible(mesData.getTwitter() != null);
-        leftMenu.findItem(R.id.nav_contact_linkedin).setVisible(mesData.getLinkedIn() != null);
-        leftMenu.findItem(R.id.nav_contact_instagram).setVisible(mesData.getInstagram() != null);
+//        Menu leftMenu = navigationView.getMenu();
+//        leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(isMadrid);
+//
+//        leftMenu.findItem(R.id.nav_contact_web).setVisible(mesData.getWeb() != null);
+//        leftMenu.findItem(R.id.nav_contact_facebook).setVisible(mesData.getFacebook() != null);
+//        leftMenu.findItem(R.id.nav_contact_twitter).setVisible(mesData.getTwitter() != null);
+//        leftMenu.findItem(R.id.nav_contact_linkedin).setVisible(mesData.getLinkedIn() != null);
+//        leftMenu.findItem(R.id.nav_contact_instagram).setVisible(mesData.getInstagram() != null);
 
 
     }
@@ -443,19 +396,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     }
 
-    private void openIPDialog() {
-        final EditText editText = new EditText(this);
-        editText.setText("192.168.43.42:8000");
-
-        new AlertDialog.Builder(this)
-                .setView(editText)
-                .setPositiveButton("Establecer IP", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        getPrefs().edit().putString("baseUrl", "http://" + editText.getText().toString()).commit();
-                    }
-                }).show();
-    }
 
 
     @Override
@@ -492,7 +432,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
         }
 
-        drawerLayout.closeDrawer(Gravity.LEFT);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void openProfileActivity() {
@@ -501,10 +441,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-            drawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-            drawerLayout.closeDrawer(Gravity.RIGHT);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END);
         } else {
             super.onBackPressed();
         }
@@ -514,15 +454,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     public void onMenuFilterClick() {
 
-        if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-            drawerLayout.closeDrawer(Gravity.RIGHT);
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END);
         } else {
 
-            if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                drawerLayout.closeDrawer(Gravity.LEFT);
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
             }
 
-            drawerLayout.openDrawer(Gravity.RIGHT);
+            drawerLayout.openDrawer(GravityCompat.END);
         }
     }
 
@@ -545,7 +485,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
 
-            tvMES.setText(String.format(getString(R.string.mes_format), userData.getCityName()));
+            String nodeName = getApp().getCurrentNode().getName();
+            tvMES.setText(String.format(getString(R.string.mes_format), nodeName));
             if (!userData.isEntity()) {
                 if (userData.getPerson().is_guest_account()) {
                     String dateFormatted = DateUtils.convertDateApiToUserFormat(userData.getPerson().getExpiration_date());
