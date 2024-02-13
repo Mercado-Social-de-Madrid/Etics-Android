@@ -195,10 +195,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         entitiesFragment = new EntitiesFragment();
         memberCardFragment = new MemberCardFragment();
         noveltiesFragment = new NoveltiesFragment();
+        fediverseFragment = new FediverseFragment();
 
         sections.add(memberCardFragment);
         sections.add(entitiesFragment);
         sections.add(noveltiesFragment);
+        sections.add(fediverseFragment);
     }
 
 
