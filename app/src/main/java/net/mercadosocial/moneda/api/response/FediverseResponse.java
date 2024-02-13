@@ -16,10 +16,12 @@ public class FediverseResponse {
     private List<MediaAttachment> mediaAttachments;
     @SerializedName("created_at")
     private String createdAt;
+    @SerializedName("emojis")
+    private List<Emoji> emojis;
 
 
     public String getId() {
-        return this.id;
+        return id;
     }
 
     public Account getAccount() {
@@ -27,14 +29,22 @@ public class FediverseResponse {
     }
 
     public String getContent() {
+        for (Emoji emoji : emojis) {
+            String shortcodePattern = ":" + emoji.getShortcode() + ":";
+            String replacement = String.format("<img src=\"%s\" alt=\"Emoji %s\">", emoji.getUrl(), emoji.getShortcode());
+            content = content.replaceAll(shortcodePattern, replacement);
+        }
+
         return content;
     }
+
     public List<MediaAttachment> getMediaAttachments() {
         return mediaAttachments;
     }
     public String getCreatedAt() {
         return createdAt;
     }
+
 
     public static class Account {
         @SerializedName("display_name")
@@ -60,6 +70,22 @@ public class FediverseResponse {
     public static class MediaAttachment {
         @SerializedName("url")
         private String url;
+
+        public String getUrl() {
+            return url;
+        }
+    }
+
+    public static class Emoji {
+        @SerializedName("shortcode")
+        private String shortcode;
+        @SerializedName("url")
+        private String url;
+
+
+        public String getShortcode() {
+            return shortcode;
+        }
 
         public String getUrl() {
             return url;

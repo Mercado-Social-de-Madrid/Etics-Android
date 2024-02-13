@@ -27,14 +27,18 @@ import net.mercadosocial.moneda.model.FediversePost;
 
 import java.util.List;
 
-public class FediverseFragment extends BaseFragment {
+public class FediverseFragment extends BaseFragment implements FediverseView {
 
     private SwipeRefreshLayout pullToRefresh;
     private RecyclerView recyclerPosts;
     private FediverseAdapter adapter;
     private FediversePresenter presenter;
 
-    public FediverseFragment() {}
+    private String fediverseServer;
+
+    public FediverseFragment(String fediverseServer) {
+        this.fediverseServer = fediverseServer;
+    }
 
     private void findViews(View layout) {
         pullToRefresh = layout.findViewById(R.id.pull_to_refresh);
@@ -44,14 +48,14 @@ public class FediverseFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        presenter = FediversePresenter.newInstance(this, getActivity());
+        presenter = FediversePresenter.newInstance(this, getActivity(), fediverseServer);
         setBasePresenter(presenter);
         View layout = inflater.inflate(R.layout.fragment_fediverse, container, false);
         findViews(layout);
 
         pullToRefresh.setOnRefreshListener(() -> {
             refreshData();
-            pullToRefresh.setRefreshing(false);
+            setRefreshing(false);
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -61,7 +65,7 @@ public class FediverseFragment extends BaseFragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 int totalItemCount = linearLayoutManager.getItemCount();
                 int currentLastItem = linearLayoutManager.findLastVisibleItemPosition();
-                if (!presenter.isRefreshing() && currentLastItem == totalItemCount - 1) {
+                if (!pullToRefresh.isRefreshing() && currentLastItem == totalItemCount - 1) {
                     refreshData();
                 }
             }
@@ -116,13 +120,19 @@ public class FediverseFragment extends BaseFragment {
         presenter.refreshData();
     }
 
+    @Override
+    public void setRefreshing(boolean refreshing) {
+        pullToRefresh.setRefreshing(refreshing);
+        super.setRefreshing(refreshing);
+    }
+
+    @Override
     public void showPosts(List<FediversePost> posts) {
         if (adapter == null) {
             adapter = new FediverseAdapter(getActivity(), posts);
             recyclerPosts.setAdapter(adapter);
-        } else {
-            adapter.updateData(posts);
         }
+        adapter.updateData(posts);
     }
 
 }

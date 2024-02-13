@@ -283,7 +283,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 return true;
             }else if (itemId == R.id.navigation_fediverse) {
                 setToolbarTitle(R.string.fediverse);
-                showFragment(new FediverseFragment());
+                showFragment(new FediverseFragment(node.getFediverseServer()));
+                return true;
             } else if (itemId == R.id.menuItem_the_social_market) {
                 startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
             } else if (itemId == R.id.menuItem_change_social_market) {
@@ -325,6 +326,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         Node node = getApp().getCurrentNode();
 
         bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(node.isMemberCardEnabled());
+        bottomNavView.getMenu().findItem(R.id.navigation_fediverse).setVisible(node.getFediverseServer() != null);
 
         navigationView.getHeaderView(0).setVisibility(node.isSelfRegisterAllowed() ? View.VISIBLE : View.GONE);
 

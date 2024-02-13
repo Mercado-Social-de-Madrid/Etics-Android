@@ -32,14 +32,15 @@ public class Node {
 
     @SerializedName("webpage_link")
     private String webpageLink;
-    @SerializedName("takahe_server")
-    private String takaheServer;
 
     @SerializedName("member_card_enabled")
     private boolean memberCardEnabled = true;
 
     @SerializedName("social_profiles")
     private List<SocialProfile> socialProfiles;
+
+    @SerializedName("takahe_server")
+    private String fediverseServer;
 
     public long getID() { return id; }
     public void setID(long value) { this.id = value; }
@@ -85,6 +86,14 @@ public class Node {
         this.memberCardEnabled = memberCardEnabled;
     }
 
+    public String getFediverseServer() {
+        return fediverseServer;
+    }
+
+    public void setFediverseServer(String fediverseServer) {
+        this.fediverseServer = fediverseServer;
+    }
+
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof Node) {
@@ -99,14 +108,6 @@ public class Node {
 
     public void setWebpageLink(String webpageLink) {
         this.webpageLink = webpageLink;
-    }
-
-    public String getTakaheServer() {
-        return takaheServer;
-    }
-
-    public void setTakaheServer(String takaheServer) {
-        this.takaheServer = takaheServer;
     }
 
     public List<SocialProfile> getSocialProfiles() {

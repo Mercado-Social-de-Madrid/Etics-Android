@@ -9,14 +9,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 public class FediverseApiClient {
 
-    public static final String BASE_URL = ApiConfig.FEDIVERSE_URL;
-
     private static Retrofit retrofit = null;
 
-    public static FediverseApi getApiService() {
+    public static FediverseApi getApiService(String fediverseUrl) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(fediverseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();

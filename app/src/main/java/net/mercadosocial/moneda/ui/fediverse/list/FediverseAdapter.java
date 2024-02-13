@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.FediversePost;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryFullScreenActivity;
+import net.mercadosocial.moneda.util.EmojiGetter;
 import net.mercadosocial.moneda.util.WebUtils;
 
 import java.util.ArrayList;
@@ -77,7 +78,8 @@ public class FediverseAdapter extends RecyclerView.Adapter<FediverseAdapter.View
         holder.username.setText(post.getAccountUsername());
         holder.timePosted.setText(post.getPublishedDate());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.content.setText(Html.fromHtml(post.getContent(), Html.FROM_HTML_MODE_COMPACT));
+            EmojiGetter imageGetter = new EmojiGetter(context, holder.content);
+            holder.content.setText(Html.fromHtml(post.getContent(), Html.FROM_HTML_MODE_COMPACT, imageGetter, null));
             holder.content.setMovementMethod(LinkMovementMethod.getInstance());
         } else {
             holder.content.setText(Html.fromHtml(post.getContent()));
@@ -118,6 +120,8 @@ public class FediverseAdapter extends RecyclerView.Adapter<FediverseAdapter.View
                     mediaAttachment.setVisibility(View.GONE);
                 }
             }
+
+            updateFirstAttachedImageSpan(holder.mediaAttachments.get(0), attachedImages.size());
         } else {
             // If there are no attached images, hide the entire gallery container
             holder.mediaGallery.setVisibility(View.GONE);
@@ -136,6 +140,15 @@ public class FediverseAdapter extends RecyclerView.Adapter<FediverseAdapter.View
     public void updateData(List<FediversePost> posts) {
         this.posts = posts;
         notifyDataSetChanged();
+    }
+
+    private void updateFirstAttachedImageSpan(ImageView firstImage, int imageCount) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            GridLayout.LayoutParams params = (GridLayout.LayoutParams) firstImage.getLayoutParams();
+            int columnSpan = imageCount == 3 ? 2 : 1;
+            params.columnSpec = GridLayout.spec(0, columnSpan, 1);
+            firstImage.setLayoutParams(params);
+        }
     }
 
 }

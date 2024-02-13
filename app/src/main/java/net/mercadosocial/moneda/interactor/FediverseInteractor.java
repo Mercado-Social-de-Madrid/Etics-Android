@@ -25,9 +25,12 @@ import rx.schedulers.Schedulers;
 
 public class FediverseInteractor extends BaseInteractor {
 
-    public FediverseInteractor(Context context, BaseView baseView) {
+    private String fediverseUrl;
+
+    public FediverseInteractor(Context context, BaseView baseView, String fediverseUrl) {
         this.context = context;
         this.baseView = baseView;
+        this.fediverseUrl = fediverseUrl;
     }
 
     public void getPosts(final BaseApiGETListCallback<FediversePost> callback, String lastId) {
@@ -37,7 +40,7 @@ public class FediverseInteractor extends BaseInteractor {
             return;
         }
 
-        FediverseApiClient.getApiService().getPosts(lastId)
+        FediverseApiClient.getApiService(fediverseUrl).getPosts(lastId)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<List<FediverseResponse>>>() {
                     @Override

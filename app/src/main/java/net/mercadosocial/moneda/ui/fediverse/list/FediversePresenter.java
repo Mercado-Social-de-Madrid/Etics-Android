@@ -14,21 +14,19 @@ import es.dmoral.toasty.Toasty;
 
 public class FediversePresenter extends BasePresenter {
 
-    private final FediverseFragment view;
+    private final FediverseView view;
     private final FediverseInteractor fediverseInteractor;
     private final List<FediversePost> posts = new ArrayList<>();
 
-    private boolean refreshing = false;
-
-    public static FediversePresenter newInstance(FediverseFragment view, Context context) {
-        return new FediversePresenter(view, context);
+    public static FediversePresenter newInstance(FediverseView view, Context context, String fediverseUrl) {
+        return new FediversePresenter(view, context, fediverseUrl);
     }
 
-    private FediversePresenter(FediverseFragment view, Context context) {
+    private FediversePresenter(FediverseView view, Context context, String fediverseUrl) {
         super(context, view);
 
         this.view = view;
-        fediverseInteractor = new FediverseInteractor(context, view);
+        fediverseInteractor = new FediverseInteractor(context, view, fediverseUrl);
     }
 
     public void onCreate() {
@@ -38,8 +36,6 @@ public class FediversePresenter extends BasePresenter {
     public void onResume() {}
 
     public void refreshData() {
-        setRefreshing(true);
-
         getPosts(posts.isEmpty() ? null : posts.get(posts.size()-1).getId());
     }
 
@@ -50,24 +46,15 @@ public class FediversePresenter extends BasePresenter {
                 if (!response.isEmpty()) {
                     posts.addAll(response);
                     view.showPosts(posts);
-                    setRefreshing(false);
                 }
             }
 
             @Override
             public void onError(String message) {
-                setRefreshing(false);
                 Toasty.error(context, message).show();
             }
         }, lastId);
+
     }
 
-    private void setRefreshing(boolean refreshing) {
-        view.setRefreshing(refreshing);
-        this.refreshing = refreshing;
-    }
-
-    public boolean isRefreshing() {
-        return refreshing;
-    }
 }
