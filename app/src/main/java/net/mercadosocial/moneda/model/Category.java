@@ -13,15 +13,6 @@ public class Category {
 
     private transient boolean checked = true;
 
-//    public static List<Category> categoriyNames = new ArrayList<>();
-//
-//    static {
-//        categoriyNames.add(new Category("Tecnología"));
-//        categoriyNames.add(new Category("Coworking"));
-//        categoriyNames.add(new Category("Librería"));
-//        categoriyNames.add(new Category("Alimentación"));
-//    }
-
     public Category(String name) {
         this.name = name;
     }

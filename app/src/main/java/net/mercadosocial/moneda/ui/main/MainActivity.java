@@ -65,17 +65,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private View viewUserInfo;
     private MainPresenter presenter;
     private ImageView imgAvatar;
-    private ArrayList<BaseFragment> sections = new ArrayList<>();
-    private EntitiesFragment entitiesFragment;
-    private NoveltiesFragment noveltiesFragment;
-    private FediverseFragment fediverseFragment;
-    private int currentSection = -1;
     private TextView btnGoToProfile;
     private NavigationView navigationView;
     private TextView tvMES;
     private TextView tvGuestInfo;
     private TextView tvUsername;
-    private MemberCardFragment memberCardFragment;
     private TextView tvAppVersion;
 
     private void findViews() {
@@ -122,7 +116,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         configureToolbar();
         configureDrawerLayout();
         configureToolbarBackArrowBehaviour();
-        configureFragments();
 
 
         tvAppVersion.setText(BuildConfig.VERSION_NAME);
@@ -134,7 +127,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         Node node = getApp().getCurrentNode();
         if (node != null) {
-            showFragment(node.isMemberCardEnabled() ? 0: 1);
+            showFragment(node.isMemberCardEnabled() ? new MemberCardFragment(): new EntitiesFragment());
             updateMenuViewsByNode();
         } else if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
             startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
@@ -171,7 +164,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         switch (requestCode) {
             case REQ_CODE_INTRO:
-                showFragment(0);
+//                showFragment(0);
                 updateMenuViewsByNode();
                 break;
 
@@ -188,19 +181,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
 
         }
-    }
-
-    private void configureFragments() {
-
-        entitiesFragment = new EntitiesFragment();
-        memberCardFragment = new MemberCardFragment();
-        noveltiesFragment = new NoveltiesFragment();
-        fediverseFragment = new FediverseFragment();
-
-        sections.add(memberCardFragment);
-        sections.add(entitiesFragment);
-        sections.add(noveltiesFragment);
-        sections.add(fediverseFragment);
     }
 
 
@@ -235,31 +215,33 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     public void refreshData() {
 
-        for (BaseFragment baseFragment : sections) {
-            if (baseFragment.isAdded()) {
-                baseFragment.refreshData();
-            }
-        }
-//        if (fragmentShowing != null) {
-//            fragmentShowing.refreshData();
-//        }
+        refreshFragmentData();
 
         presenter.refreshData();
     }
 
+    private void refreshFragmentData() {
+
+        BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content);
+        if (baseFragment != null && baseFragment.isAdded()) {
+            baseFragment.refreshData();
+        }
+    }
+
     public void onNodeChanged() {
 
-        for (BaseFragment baseFragment : sections) {
-            if (baseFragment.isAdded()) {
-                baseFragment.onNodeChanged();
-            }
+        BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content);
+        if (baseFragment != null && baseFragment.isAdded()) {
+            baseFragment.onNodeChanged();
         }
+
     }
 
 
     public void setFilterEntities(FilterEntities filterEntities) {
-        if (currentSection == 1) {
-            ((EntitiesPresenter) entitiesFragment.getBasePresenter()).setFilterEntities(filterEntities);
+        BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content);
+        if (baseFragment instanceof EntitiesFragment) {
+            ((EntitiesPresenter) baseFragment.getBasePresenter()).setFilterEntities(filterEntities);
             if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
@@ -281,19 +263,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_member_card) {
                 setToolbarTitle(R.string.member_card);
-                showFragment(0);
+                showFragment(new MemberCardFragment());
                 return true;
             } else if (itemId == R.id.navigation_entities) {
                 setToolbarTitle(R.string.entities);
-                showFragment(1);
+                showFragment(new EntitiesFragment());
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 setToolbarTitle(R.string.highlighted);
-                showFragment(2);
+                showFragment(new NoveltiesFragment());
                 return true;
             }else if (itemId == R.id.navigation_fediverse) {
                 setToolbarTitle(R.string.fediverse);
-                showFragment(3);
+                showFragment(new FediverseFragment());
             } else if (itemId == R.id.menuItem_the_social_market) {
                 startActivityForResult(new Intent(this, InfoMesActivity.class), REQ_CODE_INFO_MES);
             } else if (itemId == R.id.menuItem_change_social_market) {
@@ -370,31 +352,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
 
-    private void showFragment(int sectionNumber) {
-
-        BaseFragment fragmentToShow = sections.get(sectionNumber);
+    private void showFragment(BaseFragment fragment) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
 
-        fragmentTransaction.replace(R.id.content, fragmentToShow);
-
-//        if (!fragmentToShow.isAdded()) {
-//            fragmentTransaction.add(R.id.content, fragmentToShow);
-//        } else if (fragmentToShow.isHidden()) {
-//            fragmentTransaction.show(fragmentToShow);
-//        } else {
-//            throw new IllegalStateException("WTF happen with this fragment: " + fragmentToShow.toString());
-//        }
-//
-//
-//        if (currentSection >= 0) {
-//            android.support.v4.app.Fragment fragmentToHide = sections.get(currentSection);
-//            fragmentTransaction.hide(fragmentToHide);
-//        }
+        fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.commit();
-
-        currentSection = sectionNumber;
 
     }
 
@@ -499,11 +463,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar_2);
 
-            for (BaseFragment baseFragment : sections) {
-                if (baseFragment.isAdded()) {
-                    baseFragment.refreshData();
-                }
-            }
+            refreshFragmentData();
         }
 
     }

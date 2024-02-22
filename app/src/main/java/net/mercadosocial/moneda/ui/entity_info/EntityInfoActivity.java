@@ -71,7 +71,8 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
             Util.setHtmlLinkableText(binding.tvEntityDescription, entity.getDescription());
         }
 
-        binding.tvNoOffers.setVisibility(entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
+        binding.tvNoOffers.setVisibility(
+                entity.getOffers() == null || entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
 
         Picasso.get()
                 .load(entity.getLogo())

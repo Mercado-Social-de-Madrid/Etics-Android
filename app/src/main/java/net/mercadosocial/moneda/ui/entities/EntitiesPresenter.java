@@ -149,7 +149,7 @@ public class EntitiesPresenter extends BasePresenter {
 
                 entities.clear();
                 entities.addAll(entitiesApi);
-                Collections.shuffle(entities);
+//                Collections.shuffle(entities);
                 processFavs();
                 processLocalFilter();
 

@@ -3,6 +3,8 @@ package net.mercadosocial.moneda.interactor;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -14,6 +16,8 @@ import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Category;
 import net.mercadosocial.moneda.util.Util;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
@@ -46,7 +50,7 @@ public class CategoriesInteractor extends BaseInteractor {
 
         getApi().getCategories()
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<CategoriesResponse>>() {
+                .subscribe(new Observer<Response<List<Category>>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -58,7 +62,7 @@ public class CategoriesInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<CategoriesResponse> response) {
+                    public void onNext(Response<List<Category>> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -68,7 +72,7 @@ public class CategoriesInteractor extends BaseInteractor {
 
                         saveCategories(response.body());
 
-                        callback.onResponse(response.body().getCategories());
+                        callback.onResponse(response.body());
 
 
                     }
@@ -80,14 +84,22 @@ public class CategoriesInteractor extends BaseInteractor {
 
     private List<Category> getSavedCategories() {
         String serialized = App.getPrefs(context).getString(App.SHARED_CATEGORIES_SAVED, null);
-        // this never must be null
-        CategoriesResponse categoriesResponse = new Gson().fromJson(serialized, CategoriesResponse.class);
-        return categoriesResponse.getCategories();
+        if (serialized == null) {
+            return new ArrayList<>();
+        }
+
+        // For retrocompatibility
+        try {
+            Type listType = new TypeToken<List<Category>>() {}.getType();
+            return new Gson().fromJson(serialized, listType);
+        } catch (JsonSyntaxException e) {
+            return new ArrayList<>();
+        }
     }
 
-    private void saveCategories(CategoriesResponse body) {
-        String serialized = new Gson().toJson(body);
-        App.getPrefs(context).edit().putString(App.SHARED_CATEGORIES_SAVED, serialized).commit();
+    private void saveCategories(List<Category> categories) {
+        String serialized = new Gson().toJson(categories);
+        App.getPrefs(context).edit().putString(App.SHARED_CATEGORIES_SAVED, serialized).apply();
     }
 
     private CategoriesApi getApi() {

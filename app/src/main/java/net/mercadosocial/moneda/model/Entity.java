@@ -3,6 +3,8 @@ package net.mercadosocial.moneda.model;
 
 import android.content.Context;
 
+import com.google.gson.annotations.SerializedName;
+
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.model.gallery_entity.Gallery;
@@ -12,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Entity extends Account {
 
@@ -20,15 +23,13 @@ public class Entity extends Account {
     private String cif;
     private String description;
     private String short_description;
+
+    @SerializedName("profile_image")
     private String logo;
     private String logo_thumbnail;
     private String city;
 
     private String phone_number;
-
-    private Float bonus_percent_entity;
-    private Float bonus_percent_general;
-    private Float max_percent_payment;
 
     private List<Offer> offers;
     private Integer num_workers;
@@ -38,7 +39,7 @@ public class Entity extends Account {
     private Double latitude;
     private Double longitude;
 
-    private Gallery gallery;
+    private transient Gallery gallery;
 
     private String webpage_link;
     private String twitter_link;
@@ -51,9 +52,6 @@ public class Entity extends Account {
     private String balance_url;
 
     private List<String> fav_entities;
-
-    private transient String pin_code;
-    private transient String pin_codeRepeat;
 
     private transient boolean favourite;
 
@@ -98,58 +96,19 @@ public class Entity extends Account {
     }
 
     public String getLogo() {
-        return ApiClient.BASE_URL + logo;
+        if (logo != null && logo.startsWith("http")) {
+            return logo;
+        } else {
+            return ApiClient.BASE_URL + logo;
+        }
     }
 
     public String getLogoThumbnailOrCover() {
 
         if (logo_thumbnail != null) {
             return getLogoThumbnail();
-        } else if (gallery != null && gallery.getPhotos() != null && !gallery.getPhotos().isEmpty()) {
-            return gallery.getPhotos().get(0).getImage();
         } else {
-            return null;
-        }
-
-    }
-
-    public float getMaxAcceptedBoniatosAmount(Float totalAmountFloat) {
-        return getMax_percent_payment() * totalAmountFloat / 100f;
-    }
-
-    public String getMaxAcceptedBoniatosAmountFormatted(Float totalAmountFloat) {
-        NumberFormat numberFormat = new DecimalFormat("0.##");
-        String amountFormatted = numberFormat.format(getMaxAcceptedBoniatosAmount(totalAmountFloat));
-        return amountFormatted;
-    }
-
-    public Float getBonusGeneral(Float totalAmount) {
-        return (float) getBonus_percent_general() * totalAmount / 100f;
-    }
-
-    public Float getBonusEntity(Float totalAmount) {
-        return (float) getBonus_percent_entity() * totalAmount / 100f;
-    }
-
-    public String getBonusFormatted(Context context, Float totalAmount) {
-        NumberFormat numberFormat = new DecimalFormat("0.##");
-        String amountFormatted = numberFormat.format(getBonus(context, totalAmount));
-        return amountFormatted;
-    }
-
-    public Float getBonus(Context context, Float totalAmount) {
-        if (App.isEntity(context)) {
-            return getBonusEntity(totalAmount);
-        } else {
-            return getBonusGeneral(totalAmount);
-        }
-    }
-
-    public Float getBonusPercent(Context context) {
-        if (App.isEntity(context)) {
-            return getBonus_percent_entity();
-        } else {
-            return getBonus_percent_general();
+            return getImageCover();
         }
     }
 
@@ -238,18 +197,6 @@ public class Entity extends Account {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public Float getMax_percent_payment() {
-        if (max_percent_payment == null) {
-            return 100f;
-        }
-
-        return max_percent_payment;
-    }
-
-    public void setMax_percent_payment(Float max_percent_payment) {
-        this.max_percent_payment = max_percent_payment;
     }
 
     public String getName() {

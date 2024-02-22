@@ -65,7 +65,7 @@ public class EntitiyOffersAdapter extends RecyclerView.Adapter<EntitiyOffersAdap
 
     @Override
     public int getItemCount() {
-        return offers.size();
+        return offers != null ? offers.size() : 0;
     }
 
     public Offer getItemAtPosition(int position) {

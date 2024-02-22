@@ -34,8 +34,7 @@ public class FilterEntitiesPresenter extends BasePresenter {
     }
 
     public void onCreate() {
-
-        updateCategories();
+        refreshData();
     }
 
     public void onResume() {
@@ -44,6 +43,7 @@ public class FilterEntitiesPresenter extends BasePresenter {
 
     public void refreshData() {
 
+        updateCategories();
 
     }
 

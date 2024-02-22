@@ -27,7 +27,7 @@ public class Node {
     private String bannerImage;
 
     @SerializedName("member_card_enabled")
-    private boolean memberCardEnabled;
+    private boolean memberCardEnabled = true;
 
     public long getID() { return id; }
     public void setID(long value) { this.id = value; }

@@ -59,6 +59,12 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
     }
 
     @Override
+    public void onNodeChanged() {
+        super.onNodeChanged();
+        presenter.refreshData();
+    }
+
+    @Override
     public void showCategories(List<Category> categories) {
         if (adapter == null) {
             adapter = new CategoriesFilterAdapter(getActivity(), categories);

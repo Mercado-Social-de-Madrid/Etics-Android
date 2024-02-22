@@ -153,6 +153,7 @@ public class App extends MultiDexApplication {
         getPrefs(this).edit()
                 .putString(App.SHARED_CURRENT_NODE, nodeSerialized)
                 .remove(App.SHARED_ENTITIES_CACHE)
+                .remove(App.SHARED_CATEGORIES_SAVED)
                 .apply();
 
         FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_news");

@@ -21,6 +21,7 @@
     <item
         android:id="@+id/navigation_fediverse"
         android:icon="@drawable/ic_fediverse"
-        android:title="@string/fediverse" />
+        android:title="@string/fediverse"
+        android:visible="false"/>
 
 </menu>
