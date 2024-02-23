@@ -74,7 +74,7 @@ public class EntityInteractor extends BaseInteractor {
         }
 
 
-        getApi().getEntities(text, categoriesIdsStr)
+        getApi().getEntities(getNodeId(), text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<List<Entity>>>() {
                     @Override
@@ -176,7 +176,7 @@ public class EntityInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getEntityById(id)
+        getApi().getEntityById(getNodeId(), id)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Entity>>() {
                     @Override

@@ -16,7 +16,6 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
-import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.interactor.UserInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
@@ -73,7 +72,6 @@ import net.mercadosocial.moneda.util.Util;
     public void onResume() {
 
          refreshData();
-        checkTokenFirebaseSent();
      }
 
      public void refreshData() {
@@ -158,37 +156,5 @@ import net.mercadosocial.moneda.util.Util;
         view.showUserData(null);
     }
 
-    private void checkTokenFirebaseSent() {
-        if (!getPrefs().getBoolean(App.SHARED_TOKEN_FIREBASE_SENT, false)
-                && AuthLogin.API_KEY != null) {
-            sendDevice();
-        }
-    }
 
-    private void sendDevice() {
-
-        String model = Build.MANUFACTURER + " " + Build.MODEL;
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-
-            if (!task.isSuccessful()) {
-                Log.w(TAG, "getInstanceId failed", task.getException());
-                return;
-            }
-
-            Device device = new Device(model, task.getResult());
-            new DeviceInteractor(context,  view).sendDevice(device, new BaseInteractor.BaseApiPOSTCallback() {
-                @Override
-                public void onSuccess(Integer id) {
-                    getPrefs().edit().putBoolean(App.SHARED_TOKEN_FIREBASE_SENT, true).commit();
-                }
-
-                @Override
-                public void onError(String message) {
-                    Log.e(TAG, "onError: error sending device token");
-                }
-            });
-
-        });
-
-    }
 }

@@ -43,7 +43,7 @@ public class OfferInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getOffers()
+        getApi().getOffers(getNodeId())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<OffersResponse>>() {

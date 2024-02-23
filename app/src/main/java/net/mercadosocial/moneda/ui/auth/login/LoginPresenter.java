@@ -14,7 +14,6 @@ import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.AuthInteractor;
-import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.ui.main.MainPresenter;
 
@@ -29,7 +28,6 @@ import es.dmoral.toasty.Toasty;
 
      private final LoginView view;
     private final AuthInteractor authInteractor;
-    private final DeviceInteractor deviceInteractor;
 
     public static Intent newLoginActivity(Context context) {
 
@@ -49,8 +47,6 @@ import es.dmoral.toasty.Toasty;
 
          this.view = view;
          authInteractor = new AuthInteractor(context, view);
-         deviceInteractor = new DeviceInteractor(context, view);
-
      }
 
      public void onCreate() {

@@ -23,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
-import net.mercadosocial.moneda.interactor.DeviceInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.Node;
@@ -218,21 +217,6 @@ public class App extends MultiDexApplication {
                 .remove(SHARED_USER_DATA)
                 .remove(SHARED_TOKEN_FIREBASE_SENT)
                 .apply();
-
-        new DeviceInteractor(context, null).sendDevice(new Device(), new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
-                AuthLogin.API_KEY = null;
-            }
-
-            @Override
-            public void onError(String message) {
-                // not good at all
-                AuthLogin.API_KEY = null;
-            }
-        });
-
-
 
     }
 

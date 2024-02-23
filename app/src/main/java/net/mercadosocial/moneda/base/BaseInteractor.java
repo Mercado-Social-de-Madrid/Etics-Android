@@ -2,9 +2,11 @@ package net.mercadosocial.moneda.base;
 
 import android.content.Context;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.api.response.Meta;
+import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.List;
@@ -59,6 +61,15 @@ public class BaseInteractor {
         }
     };
 
+
+    protected long getNodeId() {
+        Node currentNode = ((App) context.getApplicationContext()).getCurrentNode();
+        if (currentNode != null) {
+            return currentNode.getID();
+        } else {
+            return -1;
+        }
+    }
 
     public boolean isConnected() {
 

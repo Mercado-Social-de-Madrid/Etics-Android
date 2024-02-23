@@ -8,12 +8,13 @@ import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public interface CategoriesApi {
 
-    @GET("categories/?limit=100")
-    Observable<Response<List<Category>>> getCategories();
+    @GET("nodes/{idNode}/categories/")
+    Observable<Response<List<Category>>> getCategories(@Path("idNode") long idNode);
 
 
 }

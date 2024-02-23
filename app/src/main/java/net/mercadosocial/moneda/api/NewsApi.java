@@ -13,10 +13,10 @@ import rx.Observable;
 
 public interface NewsApi {
 
-    @GET("news/?limit=100")
-    Observable<Response<List<News>>> getNews();
+    @GET("nodes/{idNode}/news/?limit=100")
+    Observable<Response<List<News>>> getNews(@Path("idNode") long idNode);
 
-    @GET("news/{id}")
-    Observable<Response<News>> getNewsById(@Path("id") String id);
+    @GET("nodes/{idNode}/news/{id}")
+    Observable<Response<News>> getNewsById(@Path("idNode") long idNode, @Path("id") String id);
 
 }

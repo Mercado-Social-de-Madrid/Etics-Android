@@ -37,7 +37,7 @@ public class NewsInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getNews()
+        getApi().getNews(getNodeId())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<List<News>>>() {
                     @Override
@@ -75,7 +75,7 @@ public class NewsInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getNewsById(id)
+        getApi().getNewsById(getNodeId(), id)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<News>>() {
                     @Override
