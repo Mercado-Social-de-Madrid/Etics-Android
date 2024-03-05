@@ -24,7 +24,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_margin="20dp"
             android:background="@drawable/bg_white_corners"
             android:gravity="center"
@@ -34,7 +33,7 @@
             <EditText
                 android:id="@+id/edit_username"
                 style="@style/EditTextAuth"
-                android:hint="@string/username"
+                android:hint="@string/email"
                 android:inputType="textAutoComplete" />
 
             <com.google.android.material.textfield.TextInputLayout
