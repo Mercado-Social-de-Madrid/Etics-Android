@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Node {
 
     private long id;
@@ -26,8 +28,16 @@ public class Node {
     @SerializedName("banner_image")
     private String bannerImage;
 
+    @SerializedName("webpage_link")
+    private String webpageLink;
+    @SerializedName("takahe_server")
+    private String takaheServer;
+
     @SerializedName("member_card_enabled")
     private boolean memberCardEnabled = true;
+
+    @SerializedName("social_profiles")
+    private List<SocialProfile> socialProfiles;
 
     public long getID() { return id; }
     public void setID(long value) { this.id = value; }
@@ -80,4 +90,29 @@ public class Node {
         }
         return false;
     }
+
+    public String getWebpageLink() {
+        return webpageLink;
+    }
+
+    public void setWebpageLink(String webpageLink) {
+        this.webpageLink = webpageLink;
+    }
+
+    public String getTakaheServer() {
+        return takaheServer;
+    }
+
+    public void setTakaheServer(String takaheServer) {
+        this.takaheServer = takaheServer;
+    }
+
+    public List<SocialProfile> getSocialProfiles() {
+        return socialProfiles;
+    }
+
+    public void setSocialProfiles(List<SocialProfile> socialProfiles) {
+        this.socialProfiles = socialProfiles;
+    }
+
 }

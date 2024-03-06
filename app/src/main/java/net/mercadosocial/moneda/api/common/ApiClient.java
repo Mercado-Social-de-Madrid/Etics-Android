@@ -36,7 +36,7 @@ public class ApiClient {
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_PRODUCTION : ApiConfig.BASE_URL_DEBUG;
     public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_TOOL_PRODUCTION_MADRID : ApiConfig.BASE_URL_TOOL_DEBUG;
 
-    public static final String API_PATH = "/api/v1/";
+    public static final String API_PATH = "api/v1/";
 
     public static String BASE_API_URL = BASE_URL + API_PATH;
 
@@ -96,12 +96,7 @@ public class ApiClient {
             requestBuilder.method(original.method(), original.body());
             okhttp3.Request request = requestBuilder.build();
 
-            HttpUrl url = request.url().newBuilder().addQueryParameter("node", App.currentNodeShortname).build();
-            request = request.newBuilder().url(url).build();
-
-            okhttp3.Response response = chain.proceed(request);
-
-            return response;
+            return chain.proceed(request);
         };
 
 

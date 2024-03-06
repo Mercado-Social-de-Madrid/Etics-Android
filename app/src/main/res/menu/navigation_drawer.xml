@@ -30,29 +30,6 @@
                 android:icon="@mipmap/ic_nav_web"
                 android:title="@string/web" />
 
-            <item
-                android:id="@+id/nav_contact_facebook"
-                android:icon="@mipmap/ic_nav_facebook"
-                android:title="@string/facebook" />
-
-            <item
-                android:id="@+id/nav_contact_twitter"
-                android:icon="@mipmap/ic_nav_twitter"
-                android:title="@string/twitter" />
-
-            <item
-                android:id="@+id/nav_contact_linkedin"
-                android:icon="@mipmap/ic_nav_linkedin"
-                android:title="@string/linkedin" />
-
-            <item
-                android:id="@+id/nav_contact_instagram"
-                android:icon="@mipmap/ic_nav_instagram"
-                android:title="@string/instagram" />
-
         </menu>
     </item>
-
-
-
 </menu>

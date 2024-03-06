@@ -49,22 +49,40 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_gravity="start">
+            android:layout_gravity="start"
+            android:background="@color/white">
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/navigation_view"
+            <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_above="@id/tv_app_version"
-                app:headerLayout="@layout/view_header_menu"
-                app:menu="@menu/navigation_drawer" />
+                android:layout_above="@id/tv_app_version">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.navigation.NavigationView
+                        android:id="@+id/navigation_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:headerLayout="@layout/view_header_menu"
+                        app:menu="@menu/navigation_drawer" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_social_profiles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+            </ScrollView>
 
             <TextView
                 android:id="@+id/tv_app_version"
                 style="@style/TextBase"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
         <fragment

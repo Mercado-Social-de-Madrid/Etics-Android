@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +32,7 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.Node;
+import net.mercadosocial.moneda.model.SocialProfile;
 import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
@@ -47,6 +49,7 @@ import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
 
@@ -71,6 +74,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView tvGuestInfo;
     private TextView tvUsername;
     private TextView tvAppVersion;
+    private RecyclerView recyclerSocialProfiles;
+    private List<SocialProfile> socialProfiles = new ArrayList<>();
 
     private void findViews() {
 
@@ -94,6 +99,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         btnLogout = navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         imgAvatar = navigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         btnGoToProfile = navigationView.getHeaderView(0).findViewById(R.id.btn_go_to_profile);
+
+        recyclerSocialProfiles = findViewById(R.id.recycler_social_profiles);
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
@@ -299,26 +306,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 startActivity(emailIntent);
 
-                // TODO Node changes RRSS
-//                case R.id.nav_contact_web:
-//                    Util.openLink(this, mesData.getWeb());
-//                    break;
-//
-//                case R.id.nav_contact_facebook:
-//                    Util.openLink(this, mesData.getFacebook());
-//                    break;
-//
-//                case R.id.nav_contact_twitter:
-//                    Util.openLink(this, mesData.getTwitter());
-//                    break;
-//
-//                case R.id.nav_contact_linkedin:
-//                    Util.openLink(this, mesData.getLinkedIn());
-//                    break;
-//
-//                case R.id.nav_contact_instagram:
-//                    Util.openLink(this, mesData.getInstagram());
-//                    break;
             }
         } catch (ActivityNotFoundException e) {
             // ignore
@@ -468,5 +455,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     }
 
-
+    @Override
+    public void showNodeData(Node node) {
+        socialProfiles.clear();
+        if (node.getSocialProfiles() != null) {
+            socialProfiles.addAll(node.getSocialProfiles());
+        }
+        SocialProfileAdapter socialProfileAdapter = new SocialProfileAdapter(this, socialProfiles);
+        recyclerSocialProfiles.setAdapter(socialProfileAdapter);
+    }
 }

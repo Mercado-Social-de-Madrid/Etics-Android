@@ -54,8 +54,6 @@ public class App extends MultiDexApplication {
 
     public static boolean isInForeground;
 
-    public static String currentNodeShortname;
-
 //    private List<Entity> entitiesCache = new ArrayList<>();
 
     public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
@@ -92,11 +90,6 @@ public class App extends MultiDexApplication {
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 
         loadFirstTime();
-
-        Node currentNode = getCurrentNode();
-        if (currentNode != null) {
-            currentNodeShortname = currentNode.getShortname();
-        }
 
         processWorkarounds();
 
@@ -140,8 +133,6 @@ public class App extends MultiDexApplication {
         if (previousNode != null && Objects.equals(previousNode.getShortname(), node.getShortname())) {
             return;
         }
-
-        currentNodeShortname = node.getShortname();
 
         if (previousNode != null) {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_news");

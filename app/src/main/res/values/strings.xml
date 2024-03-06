@@ -365,4 +365,5 @@
     <string name="error_no_member_data_found">Error. No se ha encontrado información de soci@</string>
 
     <string name="fediverse">Fediverso</string>
+    <string name="social_networks">Redes sociales</string>
 </resources>

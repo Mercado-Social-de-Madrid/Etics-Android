@@ -78,6 +78,7 @@ import net.mercadosocial.moneda.util.Util;
 
          Data data = App.getUserData(context);
          view.showUserData(data);
+         view.showNodeData(getApp().getCurrentNode());
 
      }
 
