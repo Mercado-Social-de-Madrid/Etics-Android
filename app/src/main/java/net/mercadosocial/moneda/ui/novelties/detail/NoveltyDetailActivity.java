@@ -17,6 +17,7 @@ import net.mercadosocial.moneda.model.News;
 import net.mercadosocial.moneda.model.Novelty;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 import es.dmoral.toasty.Toasty;
 
@@ -71,7 +72,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
         if (news.getMore_info_text() != null) {
             btnMoreInfo.setVisibility(View.VISIBLE);
             btnMoreInfo.setText(news.getMore_info_text());
-            btnMoreInfo.setOnClickListener(v -> Util.openLink(NoveltyDetailActivity.this, news.getMore_info_url()));
+            btnMoreInfo.setOnClickListener(v -> WebUtils.openLink(NoveltyDetailActivity.this, news.getMore_info_url()));
         }
     }
 
@@ -104,7 +105,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
 
         String image = novelty.getImageNoveltyUrl();
 
-        if (Util.isValidLink(image)) {
+        if (WebUtils.isValidLink(image)) {
             imgNovelty.setVisibility(View.VISIBLE);
             Picasso.get()
                     .load(image)

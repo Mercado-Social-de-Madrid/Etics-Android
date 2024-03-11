@@ -7,24 +7,9 @@
 
     <include layout="@layout/toolbar" />
 
-    <RelativeLayout
+    <net.mercadosocial.moneda.views.WebViewCustom
+        android:id="@+id/webview_custom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <ProgressBar
-            android:id="@+id/progress_webview"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:max="100"
-            android:progress="50"/>
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

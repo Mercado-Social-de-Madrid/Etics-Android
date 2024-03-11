@@ -21,12 +21,12 @@
     <item android:title="@string/contact">
         <menu>
             <item
-                android:id="@+id/nav_contact_email"
+                android:id="@+id/menuItem_contact_email"
                 android:icon="@mipmap/ic_nav_email"
                 android:title="@string/email" />
 
             <item
-                android:id="@+id/nav_contact_web"
+                android:id="@+id/menuItem_contact_web"
                 android:icon="@mipmap/ic_nav_web"
                 android:title="@string/web" />
 

@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.FediversePost;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryFullScreenActivity;
-import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class FediverseAdapter extends RecyclerView.Adapter<FediverseAdapter.View
         }
 
         String profilePicture = post.getProfilePicture();
-        if (Util.isValidLink(profilePicture)) {
+        if (WebUtils.isValidLink(profilePicture)) {
             Picasso.get()
                     .load(profilePicture)
                     .into(holder.logo);
@@ -98,7 +98,7 @@ public class FediverseAdapter extends RecyclerView.Adapter<FediverseAdapter.View
                 String attachedImage = attachedImages.get(attachedImageIndex);
                 ImageView mediaAttachment = holder.mediaAttachments.get(attachedImageIndex);
 
-                if (Util.isValidLink(attachedImage)) {
+                if (WebUtils.isValidLink(attachedImage)) {
                     Picasso.get()
                             .load(attachedImage)
                             .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)

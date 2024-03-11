@@ -16,6 +16,7 @@ import net.mercadosocial.moneda.model.Benefit;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
 import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
@@ -58,7 +59,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.btn_rrss_twitter:
             case R.id.btn_rrss_facebook:
             case R.id.btn_rrss_instagram:
-                Util.openLink(this, String.valueOf(v.getTag()));
+                WebUtils.openLink(this, String.valueOf(v.getTag()));
                 break;
         }
     }
@@ -97,7 +98,7 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         binding.viewDistintivo.setVisibility(entity.getBalance_url() != null ? View.VISIBLE : View.GONE);
         binding.imgDistintivoBalance.setOnClickListener(v -> {
             if (entity.getBalance_url() != null) {
-                Util.openLink(this, entity.getBalance_url());
+                WebUtils.openLink(this, entity.getBalance_url());
             }
         });
 
@@ -140,19 +141,19 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
 
     private void setupRRSSButtons(Entity entity) {
 
-        binding.btnRrssWeb.setVisibility(Util.isValidLink(entity.getWebpage_link()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssWeb.setVisibility(WebUtils.isValidLink(entity.getWebpage_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssWeb.setTag(entity.getWebpage_link());
 
-        binding.btnRrssTelegram.setVisibility(Util.isValidLink(entity.getTelegram_link()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssTelegram.setVisibility(WebUtils.isValidLink(entity.getTelegram_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssTelegram.setTag(entity.getTelegram_link());
 
-        binding.btnRrssTwitter.setVisibility(Util.isValidLink(entity.getTwitter_link()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssTwitter.setVisibility(WebUtils.isValidLink(entity.getTwitter_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssTwitter.setTag(entity.getTwitter_link());
 
-        binding.btnRrssFacebook.setVisibility(Util.isValidLink(entity.getFacebook_link()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssFacebook.setVisibility(WebUtils.isValidLink(entity.getFacebook_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssFacebook.setTag(entity.getFacebook_link());
 
-        binding.btnRrssInstagram.setVisibility(Util.isValidLink(entity.getInstagram_link()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssInstagram.setVisibility(WebUtils.isValidLink(entity.getInstagram_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssInstagram.setTag(entity.getInstagram_link());
 
     }

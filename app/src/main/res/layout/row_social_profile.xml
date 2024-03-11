@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_social_icon"
@@ -12,5 +13,6 @@
 
     <TextView
         android:id="@+id/tv_social_profile_name"
-        style="@style/TextBase" />
+        style="@style/TextBase"
+        android:visibility="gone"/>
 </LinearLayout>

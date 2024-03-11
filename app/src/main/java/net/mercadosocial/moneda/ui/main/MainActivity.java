@@ -5,7 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,6 +45,7 @@ import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
+import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 
@@ -297,7 +298,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         .show();
             } else if (itemId == R.id.menuItem_invitations) {
                 InvitationsPresenter.launchInvitationsActivity(this);
-            } else if (itemId == R.id.nav_contact_email) {
+            } else if (itemId == R.id.menuItem_contact_email) {
                 String emailMES = node.getContactEmail();
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
@@ -306,6 +307,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 startActivity(emailIntent);
 
+            } else if (itemId == R.id.menuItem_contact_web) {
+                WebUtils.openLink(this, node.getWebpageLink());
             }
         } catch (ActivityNotFoundException e) {
             // ignore
@@ -323,17 +326,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         bottomNavView.getMenu().findItem(R.id.navigation_member_card).setVisible(node.isMemberCardEnabled());
 
-        // TODO Node changes
-//        navigationView.getHeaderView(0).setVisibility(isMadrid ? View.VISIBLE : View.GONE);
+        navigationView.getHeaderView(0).setVisibility(node.isSelfRegisterAllowed() ? View.VISIBLE : View.GONE);
 
-//        Menu leftMenu = navigationView.getMenu();
-//        leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(isMadrid);
-//
-//        leftMenu.findItem(R.id.nav_contact_web).setVisible(mesData.getWeb() != null);
-//        leftMenu.findItem(R.id.nav_contact_facebook).setVisible(mesData.getFacebook() != null);
-//        leftMenu.findItem(R.id.nav_contact_twitter).setVisible(mesData.getTwitter() != null);
-//        leftMenu.findItem(R.id.nav_contact_linkedin).setVisible(mesData.getLinkedIn() != null);
-//        leftMenu.findItem(R.id.nav_contact_instagram).setVisible(mesData.getInstagram() != null);
+        Menu leftMenu = navigationView.getMenu();
+        if (node.getInfoPageUrl() != null) {
+            leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(true);
+            leftMenu.findItem(R.id.menuItem_the_social_market).setTitle(getString(R.string.social_market, node.getName()));
+        } else {
+            leftMenu.findItem(R.id.menuItem_the_social_market).setVisible(false);
+        }
+
+        leftMenu.findItem(R.id.menuItem_contact_web).setVisible(node.getWebpageLink() != null);
 
 
     }
@@ -355,20 +358,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-
-//                LoginDialog loginDialog = LoginDialog.newInstance();
-//                loginDialog.configure(getString(R.string.enter), new LoginDialog.LoginDialogListener() {
-//                    @Override
-//                    public void onAccept(String username, String password) {
-//                        toast("Entrando con: " + username + "...");
-//                    }
-//                });
-//
-//                loginDialog.setAvoidDismiss(true);
-//                loginDialog.show(getSupportFragmentManager(), null);
-
                 startActivity(new Intent(this, LoginActivity.class));
-
                 break;
 
             case R.id.btn_singup:
@@ -462,6 +452,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             socialProfiles.addAll(node.getSocialProfiles());
         }
         SocialProfileAdapter socialProfileAdapter = new SocialProfileAdapter(this, socialProfiles);
+        socialProfileAdapter.setOnItemClickListener((view, position) -> {
+            SocialProfile socialProfile = socialProfiles.get(position);
+            WebUtils.openLink(this, socialProfile.getUrl());
+        });
         recyclerSocialProfiles.setAdapter(socialProfileAdapter);
     }
 }

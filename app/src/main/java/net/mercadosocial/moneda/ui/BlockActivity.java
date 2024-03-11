@@ -9,7 +9,7 @@ import android.widget.EditText;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.ui.main.MainActivity;
-import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 public class BlockActivity extends BaseActivity {
 
@@ -23,7 +23,7 @@ public class BlockActivity extends BaseActivity {
         EditText editTestCode = (EditText) findViewById(R.id.edit_test_code);
 
         findViewById(R.id.tv_block_text).setOnClickListener(v ->
-                Util.openLink(this, "https://www.mercadosocial.net/"));
+                WebUtils.openLink(this, "https://www.mercadosocial.net/"));
 
         findViewById(R.id.btn_enter_test_code).setOnClickListener(v -> {
             String testCode = getString(R.string.test_code_string);

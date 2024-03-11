@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.Novelty;
-import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
 
         String image = novelty.getImageNoveltyUrl();
 
-        if (Util.isValidLink(image)) {
+        if (WebUtils.isValidLink(image)) {
             Picasso.get()
                     .load(image)
                     .placeholder(novelty.getNoveltyType() == Novelty.TYPE_NEWS ? R.mipmap.ic_mes_v2_144_semitransp : R.mipmap.ic_offer_semitransp)

@@ -14,6 +14,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.ui.novelties.detail.NoveltyDetailPresenter;
 import net.mercadosocial.moneda.util.Util;
+import net.mercadosocial.moneda.util.WebUtils;
 
 /**
  * Created by julio on 28/11/17.
@@ -99,7 +100,7 @@ import net.mercadosocial.moneda.util.Util;
 
         try {
             if (Patterns.WEB_URL.matcher(benefitLink).matches()) {
-                Util.openLink(context, benefitLink);
+                WebUtils.openLink(context, benefitLink);
             } else if (Patterns.EMAIL_ADDRESS.matcher(benefitLink).matches()) {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);

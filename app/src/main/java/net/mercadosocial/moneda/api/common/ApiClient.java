@@ -34,7 +34,6 @@ public class ApiClient {
     // http://inthecheesefactory.com/blog/retrofit-2.0/en
 
     public static final String BASE_URL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_PRODUCTION : ApiConfig.BASE_URL_DEBUG;
-    public static final String BASE_URL_TOOL = DebugHelper.SWITCH_PROD_ENVIRONMENT ? ApiConfig.BASE_URL_TOOL_PRODUCTION_MADRID : ApiConfig.BASE_URL_TOOL_DEBUG;
 
     public static final String API_PATH = "api/v1/";
 
@@ -42,7 +41,7 @@ public class ApiClient {
 
     private static Retrofit sharedInstance;
 
-    private static JsonDeserializer<Date> jsonDateDeserializer = (json, typeOfT, context) -> {
+    private static final JsonDeserializer<Date> jsonDateDeserializer = (json, typeOfT, context) -> {
 
         try {
             return DateUtils.formatDateApi.parse(((JsonObject) json).get("initDate").getAsString());

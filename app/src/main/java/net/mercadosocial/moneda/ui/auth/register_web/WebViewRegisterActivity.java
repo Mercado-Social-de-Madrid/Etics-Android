@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.base.BaseActivity;
+import net.mercadosocial.moneda.databinding.ActivityWebviewBinding;
 
 
 public class WebViewRegisterActivity extends BaseActivity {
@@ -24,9 +25,7 @@ public class WebViewRegisterActivity extends BaseActivity {
     private static final String EXTRA_URL = "extra_url";
     private static final String EXTRA_FILENAME = "extra_filename";
     private static final String EXTRA_TITLE = "extra_title";
-
-    private WebView webView;
-    private ProgressBar progressWebview;
+    private ActivityWebviewBinding binding;
 
 
     public static void startRemoteUrl(Context context, String title, String url) {
@@ -43,21 +42,14 @@ public class WebViewRegisterActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    private void findViews() {
-        webView = (WebView) findViewById(R.id.webview);
-        progressWebview = (ProgressBar) findViewById(R.id.progress_webview);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_webview);
-
-        findViews();
+        binding = ActivityWebviewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         configureSecondLevelActivity();
-        configWebView();
 
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         if (title != null) {
@@ -66,7 +58,17 @@ public class WebViewRegisterActivity extends BaseActivity {
 
         if (getIntent().hasExtra(EXTRA_URL)) {
             String url = getIntent().getStringExtra(EXTRA_URL);
-            webView.loadUrl(url);
+            binding.webviewCustom.loadUrl(url);
+
+            binding.webviewCustom.setWebViewCallback(url1 -> {
+
+                if (TextUtils.equals(url, "https://gestionmadrid.mercadosocial.net/login/?next=/accounts/signup/success/")) {
+                    finish();
+                    return true;
+                }
+
+                return false;
+            });
 
         } else if (getIntent().hasExtra(EXTRA_FILENAME)) {
             String filename = getIntent().getStringExtra(EXTRA_FILENAME);
@@ -82,22 +84,7 @@ public class WebViewRegisterActivity extends BaseActivity {
 
     private void loadHtml(String htmlFile) {
 
-        webView.loadUrl("file:///android_asset/html/" + htmlFile);
-
-    }
-
-    private void configWebView() {
-
-//        webView.setBackgroundColor(Color.TRANSPARENT);
-
-        WebSettings webviewSettings = webView.getSettings();
-
-        // webviewSettings.setLoadWithOverviewMode(true);
-        webviewSettings.setJavaScriptEnabled(true);
-        webviewSettings.setPluginState(PluginState.ON);
-
-        webView.setWebViewClient(new CustomWebViewClient());
-        webView.setWebChromeClient(new CustomWebChromeClient());
+        binding.webviewCustom.loadUrl("file:///android_asset/html/" + htmlFile);
 
     }
 
@@ -115,42 +102,5 @@ public class WebViewRegisterActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    private class CustomWebChromeClient extends WebChromeClient {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            progressWebview.setProgress(newProgress);
-            super.onProgressChanged(view, newProgress);
-        }
-    }
-
-    private class CustomWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            // Register success closes this screen:
-            if (TextUtils.equals(url, ApiClient.BASE_URL_TOOL + "login/?next=/accounts/signup/success/")) {
-                finish();
-                return true;
-            }
-
-            view.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            progressWebview.setVisibility(View.GONE);
-            progressWebview.setProgress(100);
-            super.onPageFinished(view, url);
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            progressWebview.setVisibility(View.VISIBLE);
-            progressWebview.setProgress(0);
-            super.onPageStarted(view, url, favicon);
-        }
-    }
 
 }

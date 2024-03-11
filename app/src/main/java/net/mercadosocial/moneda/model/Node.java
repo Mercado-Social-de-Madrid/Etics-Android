@@ -27,6 +27,8 @@ public class Node {
     private String preferredLocale;
     @SerializedName("banner_image")
     private String bannerImage;
+    @SerializedName("info_page_url")
+    private String infoPageUrl;
 
     @SerializedName("webpage_link")
     private String webpageLink;
@@ -60,7 +62,7 @@ public class Node {
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String value) { this.contactEmail = value; }
 
-    public boolean getSelfRegisterAllowed() { return selfRegisterAllowed; }
+    public boolean isSelfRegisterAllowed() { return selfRegisterAllowed; }
     public void setSelfRegisterAllowed(boolean value) { this.selfRegisterAllowed = value; }
 
     public String getRegisterProviderURL() { return registerProviderURL; }
@@ -115,4 +117,11 @@ public class Node {
         this.socialProfiles = socialProfiles;
     }
 
+    public String getInfoPageUrl() {
+        return infoPageUrl;
+    }
+
+    public void setInfoPageUrl(String infoPageUrl) {
+        this.infoPageUrl = infoPageUrl;
+    }
 }

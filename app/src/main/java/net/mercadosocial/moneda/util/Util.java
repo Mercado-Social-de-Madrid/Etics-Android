@@ -181,9 +181,6 @@ public final class Util {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public static boolean isValidLink(String link) {
-        return link != null && Patterns.WEB_URL.matcher(link).matches();
-    }
 
     public static String dumpIntentExtras(Bundle bundle) {
         String extrasString = "";
@@ -198,17 +195,4 @@ public final class Util {
         return extrasString;
     }
 
-    public static void openLink(Context context, String link) {
-
-        if (!isValidLink(link)) {
-            Toasty.error(context, context.getString(R.string.invalid_link)).show();
-            return;
-        }
-
-        try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
-        } catch (ActivityNotFoundException e) {
-            Toasty.error(context, context.getString(R.string.no_app_to_open_link)).show();
-        }
-    }
 }

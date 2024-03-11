@@ -366,4 +366,5 @@
 
     <string name="fediverse">Fediverso</string>
     <string name="social_networks">Redes sociales</string>
+    <string name="social_market">Mercado Social: %s</string>
 </resources>
