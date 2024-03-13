@@ -14,8 +14,7 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:background="@color/white"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/img_entitiy_example2"/>
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:layout_width="match_parent"

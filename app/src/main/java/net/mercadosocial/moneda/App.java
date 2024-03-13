@@ -21,10 +21,8 @@ import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.api.response.Data;
-import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
-import net.mercadosocial.moneda.model.Device;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
