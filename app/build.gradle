@@ -1,5 +1,6 @@
 plugins {
     id "org.sonarqube" version "2.6"
+    id 'com.google.gms.google-services'
 }
 
 apply plugin: 'com.android.application'
@@ -94,7 +95,7 @@ dependencies {
     implementation "androidx.work:work-runtime:2.8.1"
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
-    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation platform('com.google.firebase:firebase-bom:32.7.4')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-config'
     implementation 'com.google.firebase:firebase-crashlytics'
