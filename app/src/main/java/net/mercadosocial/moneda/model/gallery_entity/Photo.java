@@ -14,7 +14,7 @@ public class Photo implements Serializable {
     private int order;
 
     public String getImage() {
-        return ApiClient.BASE_URL + image;
+        return ApiClient.MEDIA_URL + image;
     }
 
     public void setImage(String image) {

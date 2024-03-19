@@ -73,11 +73,11 @@ public class Person extends Account {
     }
 
     public String getProfile_image() {
-        return ApiClient.BASE_URL + profile_image;
+        return ApiClient.MEDIA_URL + profile_image;
     }
 
     public String getProfile_thumbnail() {
-        return ApiClient.BASE_URL + profile_thumbnail;
+        return ApiClient.MEDIA_URL + profile_thumbnail;
     }
 
     public void setProfile_image(String profile_image) {

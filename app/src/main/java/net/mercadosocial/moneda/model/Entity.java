@@ -92,14 +92,14 @@ public class Entity extends Account {
     }
 
     public String getLogoThumbnail() {
-        return ApiClient.BASE_URL + logo_thumbnail;
+        return ApiClient.MEDIA_URL + logo_thumbnail;
     }
 
     public String getLogo() {
         if (logo != null && logo.startsWith("http")) {
             return logo;
         } else {
-            return ApiClient.BASE_URL + logo;
+            return ApiClient.MEDIA_URL + logo;
         }
     }
 

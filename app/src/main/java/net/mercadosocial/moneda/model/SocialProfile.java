@@ -26,7 +26,7 @@ public class SocialProfile {
     }
 
     public String getLogo() {
-        return ApiClient.BASE_URL + logo;
+        return ApiClient.MEDIA_URL + logo;
     }
 
     public void setLogo(String logo) {

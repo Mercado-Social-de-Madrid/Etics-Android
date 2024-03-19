@@ -146,7 +146,7 @@ public class News implements Serializable, Novelty {
         if (banner_image != null && banner_image.startsWith("http")) {
             return banner_image;
         } else {
-            return ApiClient.BASE_URL + banner_image;
+            return ApiClient.MEDIA_URL + banner_image;
         }
     }
 
