@@ -1,7 +1,6 @@
 package net.mercadosocial.moneda.api;
 
 
-import net.mercadosocial.moneda.api.response.NewsResponse;
 import net.mercadosocial.moneda.model.News;
 
 import java.util.List;

@@ -5,13 +5,12 @@ import android.content.Context;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.OffersApi;
 import net.mercadosocial.moneda.api.response.ApiError;
-import net.mercadosocial.moneda.api.response.OffersResponse;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.Util;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 import rx.Observer;
@@ -38,15 +37,11 @@ public class OfferInteractor extends BaseInteractor {
             return;
         }
 
-        if (true) {
-            callback.onResponse(new ArrayList<>());
-            return;
-        }
 
         getApi().getOffers(getNodeId())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-//                .doOnTerminate(actionTerminate)
-                .subscribe(new Observer<Response<OffersResponse>>() {
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<List<Offer>>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -59,8 +54,7 @@ public class OfferInteractor extends BaseInteractor {
                     }
 
                     @Override
-                    public void onNext(Response<OffersResponse> response) {
-
+                    public void onNext(Response<List<Offer>> response) {
 
                         if (!response.isSuccessful()) {
                             ApiError apiError = ApiError.parse(response);
@@ -68,7 +62,7 @@ public class OfferInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body().getOffers());
+                        callback.onResponse(response.body());
 
 
                     }
@@ -78,6 +72,44 @@ public class OfferInteractor extends BaseInteractor {
     }
 
 
+    public void getOfferById(String id, final BaseApiCallback<Offer> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        getApi().getOfferById(getNodeId(), id)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<Offer>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<Offer> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body());
+
+
+                    }
+                });
+
+
+    }
+    
     private OffersApi getApi() {
         return getApi(OffersApi.class);
     }

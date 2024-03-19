@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -35,6 +36,7 @@ import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.views.ProgressDialogMESOLD;
 import net.mercadosocial.moneda.views.custom_dialog.ProgressDialogMES;
 
+import java.util.Objects;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
@@ -67,44 +69,67 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            processNotification(intent);
+            processNotification(intent.getExtras());
         }
     };
 
 
-    public void processNotification(Intent intent) {
-
-        Notification notification = Notification.parseNotification(intent.getExtras());
+    public void processNotification(Bundle extras) {
+        Notification notification = Notification.parseNotification(extras);
         if (notification == null) {
             FirebaseCrashlytics.getInstance().recordException(new IllegalArgumentException(
-                    "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(intent.getExtras())));
+                    "Notification could not be parsed. Extras: " + Util.dumpIntentExtras(extras)));
             return;
         }
 
-
-        switch (notification.getType()) {
-            case Notification.TYPE_NEWS:
-                if (notification.isFromOutside()) {
-                    startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(this, notification.getId()));
-                } else {
-                    showNewsDialog(notification);
-                }
-                break;
+        if (notification.isFromOutside()) {
+            NoveltyDetailPresenter.NOVELTY_TYPE noveltyType = Objects.equals(notification.getType(), Notification.TYPE_NEWS)
+                    ? NoveltyDetailPresenter.NOVELTY_TYPE.NEWS
+                    : NoveltyDetailPresenter.NOVELTY_TYPE.OFFER;
+            startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(this, noveltyType, notification.getId()));
+        } else {
+            showNoveltyDialog(notification);
         }
-
     }
 
 
-    private void showNewsDialog(final Notification notification) {
+    private void showNoveltyDialog(final Notification notification) {
+
+        String title = "";
+        int positiveButtonStringId = R.string.see_more;
+
+        switch(notification.getType()) {
+            case Notification.TYPE_NEWS: {
+                title = getString(R.string.mes_news);
+                positiveButtonStringId = R.string.see_full_news;
+                break;
+            }
+            case Notification.TYPE_OFFER: {
+                String providerName = notification.getExtras().getString("proveedora");
+                if (providerName != null) {
+                    title = String.format(getString(R.string.new_offer_by), providerName);
+                } else {
+                    title = getString(R.string.new_offer);
+                }
+                positiveButtonStringId = R.string.see_full_offer;
+                break;
+            }
+
+        }
+
+
         new AlertDialog.Builder(this)
-                .setTitle(R.string.mes_news)
+                .setTitle(title)
                 .setMessage(Html.fromHtml(String.format(getString(R.string.mes_news_message_format),
                         notification.getTitle(), notification.getMessage())))
-                .setPositiveButton(R.string.see_full_news, new DialogInterface.OnClickListener() {
+                .setPositiveButton(positiveButtonStringId, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(BaseActivity.this, notification.getId()));
+                        NoveltyDetailPresenter.NOVELTY_TYPE noveltyType = notification.getType().equals(Notification.TYPE_NEWS)
+                                ? NoveltyDetailPresenter.NOVELTY_TYPE.NEWS
+                                : NoveltyDetailPresenter.NOVELTY_TYPE.OFFER;
+
+                        startActivity(NoveltyDetailPresenter.newNoveltyDetailActivity(BaseActivity.this, noveltyType, notification.getId()));
                     }
                 })
                 .setNeutralButton(R.string.close, null)
@@ -114,8 +139,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onResume() {
         super.onResume();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(notificationReceiver, new IntentFilter(App.ACTION_NOTIFICATION_RECEIVED), Context.RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(notificationReceiver, new IntentFilter(App.ACTION_NOTIFICATION_RECEIVED));
+        }
 
-        registerReceiver(notificationReceiver, new IntentFilter(App.ACTION_NOTIFICATION_RECEIVED));
     }
 
     @Override

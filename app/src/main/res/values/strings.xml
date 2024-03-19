@@ -127,6 +127,8 @@
     <string name="already_account_login">Si ya tienes tu cuenta, entra pulsando aquí</string>
     <string name="social_balance_info_soon">En breve verás la información del balance social ;)</string>
     <string name="offer">Oferta</string>
+    <string name="new_offer">Nueva oferta</string>
+    <string name="new_offer_by">Nueva oferta de %s</string>
     <string name="news_mes">Noticia del MES</string>
     <string name="cancel_payment">Cancelar pago</string>
     <string name="cancel_payment_message">Si sales se perderán los datos del pago actual. Confirma para salir</string>
@@ -140,6 +142,8 @@
             %s
     ]]></string>
     <string name="see_full_news">Ver noticia completa</string>
+    <string name="see_full_offer">Ver oferta completa</string>
+    <string name="see_more">Ver más</string>
     <string name="invalid_link">El enlace no es válido</string>
     <string name="reject">Rechazar</string>
     <string name="decide_later"><![CDATA[Decidir más tarde >]]></string>

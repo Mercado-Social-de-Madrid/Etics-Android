@@ -19,6 +19,8 @@ import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
 import net.mercadosocial.moneda.util.WebUtils;
 
+import java.util.Objects;
+
 /**
  * Created by julio on 2/02/18.
  */
@@ -50,10 +52,13 @@ import net.mercadosocial.moneda.util.WebUtils;
 
      public void onCreate(Intent intent) {
 
-         if (intent.hasExtra("type")) {
-             intent.putExtra(Notification.FIELD_FROM_OUTSIDE, true);
-             ((BaseActivity)context).processNotification(intent);
-             intent.getExtras().clear();
+         if (intent != null && intent.getExtras() != null) {
+             String event = intent.getExtras().getString("event");
+             if (Objects.equals(event, Notification.EVENT)) {
+                 intent.putExtra(Notification.FIELD_FROM_OUTSIDE, true);
+                 ((BaseActivity)context).processNotification(intent.getExtras());
+                 intent.getExtras().clear();
+             }
          }
 
          checkIntentUriReceived(intent);

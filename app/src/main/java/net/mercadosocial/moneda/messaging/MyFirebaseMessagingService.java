@@ -108,18 +108,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Map<String, String> extras = remoteMessage.getData();
 
-//        String title;
-//        String message;
-//        if (remoteMessage.getNotification() != null) {
-//            title = remoteMessage.getNotification().getTitle();
-//            message = remoteMessage.getNotification().getBody();
-//        } else {
-//            title = extras.get("title");
-//            message = extras.get("message");
-//
-////            title = "getNotification da null";
-//        }
-
+        RemoteMessage.Notification notification = remoteMessage.getNotification();
+        if (notification != null) {
+            extras.put("title", notification.getTitle());
+            extras.put("message", notification.getBody());
+        }
 
         Bundle bundle = new Bundle();
         for (Map.Entry<String, String> entry : extras.entrySet()) {
@@ -135,8 +128,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             createNotificationChannel();
             showCustomNotification(bundle);
         }
-
-
 
     }
 
@@ -200,7 +191,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         switch (notification.getType()) {
             case Notification.TYPE_NEWS:
-                intent = NoveltyDetailPresenter.newNoveltyDetailActivity(this, notification.getId());
+                intent = NoveltyDetailPresenter.newNoveltyDetailActivity(this, NoveltyDetailPresenter.NOVELTY_TYPE.NEWS, notification.getId());
+                break;
+            case Notification.TYPE_OFFER:
+                intent = NoveltyDetailPresenter.newNoveltyDetailActivity(this, NoveltyDetailPresenter.NOVELTY_TYPE.OFFER, notification.getId());
                 break;
         }
 

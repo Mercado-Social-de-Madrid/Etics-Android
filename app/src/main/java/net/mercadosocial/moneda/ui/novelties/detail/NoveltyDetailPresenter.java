@@ -8,6 +8,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.interactor.NewsInteractor;
+import net.mercadosocial.moneda.interactor.OfferInteractor;
 import net.mercadosocial.moneda.model.News;
 import net.mercadosocial.moneda.model.Novelty;
 import net.mercadosocial.moneda.model.Offer;
@@ -24,6 +25,13 @@ public class NoveltyDetailPresenter extends BasePresenter {
     private static final String EXTRA_OFFER = "extra_offer";
     private static final String EXTRA_NEWS = "extra_news";
     private static final String EXTRA_NEWS_ID = "extra_news_id";
+    private static final String EXTRA_OFFER_ID = "extra_offer_id";
+
+    public enum NOVELTY_TYPE {
+        OFFER,
+        NEWS,
+        OTHER,
+    }
 
 
     private final NoveltyDetailView view;
@@ -38,9 +46,16 @@ public class NoveltyDetailPresenter extends BasePresenter {
         return intent;
     }
 
-    public static Intent newNoveltyDetailActivity(Context context, String newsId) {
+    public static Intent newNoveltyDetailActivity(Context context, NOVELTY_TYPE type, String noveltyId) {
         Intent intent = new Intent(context, NoveltyDetailActivity.class);
-        intent.putExtra(EXTRA_NEWS_ID, newsId);
+        switch (type) {
+            case OFFER:
+                intent.putExtra(EXTRA_OFFER_ID, noveltyId);
+                break;
+            case NEWS:
+                intent.putExtra(EXTRA_NEWS_ID, noveltyId);
+                break;
+        }
         return intent;
     }
 
@@ -65,6 +80,8 @@ public class NoveltyDetailPresenter extends BasePresenter {
             view.showNews((News) extras.get(EXTRA_NEWS));
         } else if (extras.containsKey(EXTRA_NEWS_ID)) {
             getNewsById(extras.getString(EXTRA_NEWS_ID));
+        } else if (extras.containsKey(EXTRA_OFFER_ID)) {
+            getOfferById(extras.getString(EXTRA_OFFER_ID));
         } else {
             throw new IllegalStateException("Extras invalid in Novelty detail");
         }
@@ -85,6 +102,22 @@ public class NoveltyDetailPresenter extends BasePresenter {
             }
         });
     }
+
+    private void getOfferById(String offerId) {
+
+        new OfferInteractor(context, view).getOfferById(offerId, new BaseInteractor.BaseApiCallback<Offer>() {
+            @Override
+            public void onResponse(Offer offer) {
+                view.showOffer(offer);
+            }
+
+            @Override
+            public void onError(String message) {
+                Toasty.error(context, context.getString(R.string.error_retrieving_data)).show();
+            }
+        });
+    }
+
 
     public void onResume() {
 
