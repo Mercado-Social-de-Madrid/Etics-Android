@@ -26,7 +26,6 @@ public class Entity extends Account {
 
     @SerializedName("profile_image")
     private String logo;
-    private String logo_thumbnail;
     private String city;
 
     private String phone_number;
@@ -91,10 +90,6 @@ public class Entity extends Account {
         }
     }
 
-    public String getLogoThumbnail() {
-        return ApiClient.MEDIA_URL + logo_thumbnail;
-    }
-
     public String getLogo() {
         if (logo != null && logo.startsWith("http")) {
             return logo;
@@ -105,8 +100,8 @@ public class Entity extends Account {
 
     public String getLogoThumbnailOrCover() {
 
-        if (logo_thumbnail != null) {
-            return getLogoThumbnail();
+        if (getLogo() != null) {
+            return getLogo();
         } else {
             return getImageCover();
         }
@@ -214,11 +209,6 @@ public class Entity extends Account {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
-    }
-
-
-    public void setLogo_thumbnail(String logo_thumbnail) {
-        this.logo_thumbnail = logo_thumbnail;
     }
 
     public String getInstagram_link() {

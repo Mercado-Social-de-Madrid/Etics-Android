@@ -30,7 +30,7 @@ public class Data {
 
     public String getLogoThumbnail() {
         if (entity != null) {
-            return entity.getLogoThumbnail();
+            return entity.getLogo();
         } else {
             return person.getProfile_thumbnail();
         }

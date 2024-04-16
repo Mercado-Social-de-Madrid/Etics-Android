@@ -10,15 +10,15 @@ import java.io.Serializable;
 
 public class Photo implements Serializable {
 
-    private String image;
+    private String photo;
     private int order;
 
     public String getImage() {
-        return ApiClient.MEDIA_URL + image;
+        return ApiClient.MEDIA_URL + photo;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String photo) {
+        this.photo = photo;
     }
 
     public int getOrder() {

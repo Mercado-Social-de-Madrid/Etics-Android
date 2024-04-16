@@ -371,4 +371,9 @@
     <string name="fediverse">Fediverso</string>
     <string name="social_networks">Redes sociales</string>
     <string name="social_market">Mercado Social: %s</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="leave_request">Solicitar baja y eliminar cuenta</string>
+    <string name="send_leave_request">Enviar solicitud de baja</string>
+    <string name="delete_account_info">Si quieres eliminar tu cuenta de nuestra base de datos, escríbenos un correo con tu solicitud pulsando el siguiente botón y te responderemos lo antes posible para completar el proceso.</string>
+    <string name="open_email">Abrir email</string>
 </resources>

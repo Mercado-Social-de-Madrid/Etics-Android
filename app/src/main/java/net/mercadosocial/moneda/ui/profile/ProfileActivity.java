@@ -1,6 +1,7 @@
 package net.mercadosocial.moneda.ui.profile;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +20,12 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
@@ -41,18 +45,21 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private TextView tvProfileName, tvProfileType, tvProfileMarket;
     private AppCompatButton btnLogout;
     private EasyImage easyImage;
+    private View btnDeleteAccount;
 
     private void findViews() {
         imgProfile = findViewById(R.id.img_profile);
         tvProfileType = findViewById(R.id.tv_profile_type);
         tvProfileMarket = findViewById(R.id.tv_profile_market);
         btnLogout = findViewById(R.id.btn_logout);
+        btnDeleteAccount = findViewById(R.id.btn_delete_account);
 
         tvProfileName = findViewById(R.id.tv_profile_name);
         btnChangeImage = findViewById(R.id.btn_change_image);
 
         btnLogout.setOnClickListener(this);
         btnChangeImage.setOnClickListener(this);
+        btnDeleteAccount.setOnClickListener(this);
     }
 
 
@@ -119,7 +126,37 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
 
+            case R.id.btn_delete_account:
+                showDeleteAccountDialog();
+                break;
+
         }
+    }
+
+    private void showDeleteAccountDialog() {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.delete_account_info)
+                .setPositiveButton(R.string.open_email, (dialog, which) -> openDeleteAccountEmail())
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void openDeleteAccountEmail() {
+        Node node = getApp().getCurrentNode();
+
+        String text = "";
+        Data userData = App.getUserData(this);
+        if (userData != null) {
+            text = getString(R.string.member_id_x, userData.getAccount().getMemberId());
+        }
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/html");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{node.getContactEmail()});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.leave_request));
+        emailIntent.putExtra(Intent.EXTRA_TEXT, text);
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_leave_request)));
+
     }
 
     private void checkPermissionAndOpenChooser() {
