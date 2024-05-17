@@ -38,13 +38,12 @@ public class Entity extends Account {
     private Double latitude;
     private Double longitude;
 
-    private transient Gallery gallery;
+    private Gallery gallery;
 
     private String webpage_link;
-    private String twitter_link;
-    private String facebook_link;
-    private String telegram_link;
-    private String instagram_link;
+
+    @SerializedName("social_profiles")
+    private List<SocialProfile> socialProfiles;
 
     private Benefit benefit;
 
@@ -211,14 +210,6 @@ public class Entity extends Account {
         this.offers = offers;
     }
 
-    public String getInstagram_link() {
-        return instagram_link;
-    }
-
-    public void setInstagram_link(String instagram_link) {
-        this.instagram_link = instagram_link;
-    }
-
     public String getPhone_number() {
         return phone_number;
     }
@@ -233,30 +224,6 @@ public class Entity extends Account {
 
     public void setWebpage_link(String webpage_link) {
         this.webpage_link = webpage_link;
-    }
-
-    public String getTwitter_link() {
-        return twitter_link;
-    }
-
-    public void setTwitter_link(String twitter_link) {
-        this.twitter_link = twitter_link;
-    }
-
-    public String getFacebook_link() {
-        return facebook_link;
-    }
-
-    public void setFacebook_link(String facebook_link) {
-        this.facebook_link = facebook_link;
-    }
-
-    public String getTelegram_link() {
-        return telegram_link;
-    }
-
-    public void setTelegram_link(String telegram_link) {
-        this.telegram_link = telegram_link;
     }
 
     public Integer getNum_workers() {
@@ -329,5 +296,13 @@ public class Entity extends Account {
 
     public void setBalance_url(String balance_url) {
         this.balance_url = balance_url;
+    }
+
+    public List<SocialProfile> getSocialProfiles() {
+        return socialProfiles;
+    }
+
+    public void setSocialProfiles(List<SocialProfile> social_profiles) {
+        this.socialProfiles = social_profiles;
     }
 }

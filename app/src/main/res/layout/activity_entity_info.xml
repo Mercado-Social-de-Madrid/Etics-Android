@@ -61,25 +61,14 @@
                         style="@style/BtnRRSS"
                         android:src="@mipmap/ic_rrss_web" />
 
-                    <ImageView
-                        android:id="@+id/btn_rrss_telegram"
-                        style="@style/BtnRRSS"
-                        android:src="@mipmap/ic_rrss_telegram" />
-
-                    <ImageView
-                        android:id="@+id/btn_rrss_twitter"
-                        style="@style/BtnRRSS"
-                        android:src="@mipmap/ic_rrss_twitter" />
-
-                    <ImageView
-                        android:id="@+id/btn_rrss_facebook"
-                        style="@style/BtnRRSS"
-                        android:src="@mipmap/ic_rrss_facebook" />
-
-                    <ImageView
-                        android:id="@+id/btn_rrss_instagram"
-                        style="@style/BtnRRSS"
-                        android:src="@mipmap/ic_rrss_instagram" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_social_profiles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_provider_social_profile"/>
 
 
                 </LinearLayout>

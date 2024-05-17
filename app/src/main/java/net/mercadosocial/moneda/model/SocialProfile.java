@@ -2,7 +2,9 @@ package net.mercadosocial.moneda.model;
 
 import net.mercadosocial.moneda.api.common.ApiClient;
 
-public class SocialProfile {
+import java.io.Serializable;
+
+public class SocialProfile implements Serializable {
 
     private String name;
     private String url;

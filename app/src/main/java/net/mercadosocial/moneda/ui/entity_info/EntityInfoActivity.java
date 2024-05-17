@@ -18,7 +18,7 @@ import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.WebUtils;
 
-public class EntityInfoActivity extends BaseActivity implements View.OnClickListener, EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
+public class EntityInfoActivity extends BaseActivity implements EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
     private EntityInfoPresenter presenter;
     private EntitiyOffersAdapter adapter;
@@ -39,30 +39,10 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         binding.recyclerOffers.addItemDecoration(itemDecoration);
 
-        binding.btnRrssWeb.setOnClickListener(this);
-        binding.btnRrssTelegram.setOnClickListener(this);
-        binding.btnRrssTwitter.setOnClickListener(this);
-        binding.btnRrssFacebook.setOnClickListener(this);
-        binding.btnRrssInstagram.setOnClickListener(this);
-
         presenter.onCreate(getIntent());
 
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.btn_rrss_web:
-            case R.id.btn_rrss_telegram:
-            case R.id.btn_rrss_twitter:
-            case R.id.btn_rrss_facebook:
-            case R.id.btn_rrss_instagram:
-                WebUtils.openLink(this, String.valueOf(v.getTag()));
-                break;
-        }
-    }
 
     @Override
     public void showEntityInfo(Entity entity) {
@@ -142,19 +122,19 @@ public class EntityInfoActivity extends BaseActivity implements View.OnClickList
     private void setupRRSSButtons(Entity entity) {
 
         binding.btnRrssWeb.setVisibility(WebUtils.isValidLink(entity.getWebpage_link()) ? View.VISIBLE : View.GONE);
-        binding.btnRrssWeb.setTag(entity.getWebpage_link());
+        binding.btnRrssWeb.setOnClickListener(v -> WebUtils.openLink(this, entity.getWebpage_link()));
 
-        binding.btnRrssTelegram.setVisibility(WebUtils.isValidLink(entity.getTelegram_link()) ? View.VISIBLE : View.GONE);
-        binding.btnRrssTelegram.setTag(entity.getTelegram_link());
+        if (entity.getSocialProfiles() != null) {
+            ProviderSocialProfileAdapter socialProfileAdapter =
+                    new ProviderSocialProfileAdapter(this, entity.getSocialProfiles());
 
-        binding.btnRrssTwitter.setVisibility(WebUtils.isValidLink(entity.getTwitter_link()) ? View.VISIBLE : View.GONE);
-        binding.btnRrssTwitter.setTag(entity.getTwitter_link());
+            socialProfileAdapter.setOnItemClickListener((view, position) -> {
+                String url = entity.getSocialProfiles().get(position).getUrl();
+                WebUtils.openLink(this, url);
+            });
 
-        binding.btnRrssFacebook.setVisibility(WebUtils.isValidLink(entity.getFacebook_link()) ? View.VISIBLE : View.GONE);
-        binding.btnRrssFacebook.setTag(entity.getFacebook_link());
-
-        binding.btnRrssInstagram.setVisibility(WebUtils.isValidLink(entity.getInstagram_link()) ? View.VISIBLE : View.GONE);
-        binding.btnRrssInstagram.setTag(entity.getInstagram_link());
+            binding.recyclerSocialProfiles.setAdapter(socialProfileAdapter);
+        }
 
     }
 

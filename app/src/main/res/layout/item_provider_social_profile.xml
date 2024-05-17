@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_social_profile"
+        style="@style/BtnRRSS"
+        android:adjustViewBounds="true"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        app:tint="@color/white"/>
+</FrameLayout>
