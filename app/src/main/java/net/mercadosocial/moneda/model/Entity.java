@@ -1,20 +1,14 @@
 
 package net.mercadosocial.moneda.model;
 
-import android.content.Context;
-
 import com.google.gson.annotations.SerializedName;
 
-import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.model.gallery_entity.Gallery;
 import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Entity extends Account {
 
@@ -47,7 +41,8 @@ public class Entity extends Account {
 
     private Benefit benefit;
 
-    private String balance_url;
+    @SerializedName("balance_url")
+    private String balanceUrl;
 
     private List<String> fav_entities;
 
@@ -290,12 +285,12 @@ public class Entity extends Account {
         this.benefit = benefit;
     }
 
-    public String getBalance_url() {
-        return balance_url;
+    public String getBalanceUrl() {
+        return balanceUrl;
     }
 
-    public void setBalance_url(String balance_url) {
-        this.balance_url = balance_url;
+    public void setBalanceUrl(String balanceUrl) {
+        this.balanceUrl = balanceUrl;
     }
 
     public List<SocialProfile> getSocialProfiles() {

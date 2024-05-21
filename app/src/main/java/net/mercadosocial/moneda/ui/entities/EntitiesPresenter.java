@@ -15,7 +15,6 @@ import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -176,7 +175,7 @@ public class EntitiesPresenter extends BasePresenter {
         if (filterEntities != null) {
             List<Entity> entitiesFiltered = entities.stream()
                     .filter(entity -> !filterEntities.isWithBenefits() || entity.getBenefit() != null)
-                    .filter(entity -> !filterEntities.isWithBadge() || entity.getBalance_url() != null)
+                    .filter(entity -> !filterEntities.isWithBadge() || entity.getBalanceUrl() != null)
                     .collect(Collectors.toList());
             entities.clear();
             entities.addAll(entitiesFiltered);

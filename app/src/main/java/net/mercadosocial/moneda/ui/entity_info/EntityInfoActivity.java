@@ -75,10 +75,10 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
 
         setupRRSSButtons(entity);
 
-        binding.viewDistintivo.setVisibility(entity.getBalance_url() != null ? View.VISIBLE : View.GONE);
+        binding.viewDistintivo.setVisibility(entity.getBalanceUrl() != null ? View.VISIBLE : View.GONE);
         binding.imgDistintivoBalance.setOnClickListener(v -> {
-            if (entity.getBalance_url() != null) {
-                WebUtils.openLink(this, entity.getBalance_url());
+            if (entity.getBalanceUrl() != null) {
+                WebUtils.openLink(this, entity.getBalanceUrl());
             }
         });
 
