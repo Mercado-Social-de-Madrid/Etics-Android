@@ -46,7 +46,8 @@
             </intent-filter>
 
             <intent-filter
-                android:label="@string/mes_check_member">
+                android:label="@string/mes_check_member"
+                android:autoverify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -54,6 +55,7 @@
                 <data android:scheme="https" />
                 <data android:host="app.mercadosocial.net" />
                 <data android:pathPrefix="/socia" />
+
             </intent-filter>
         </activity>
         <activity
@@ -109,6 +111,7 @@
             android:name=".ui.info.InfoMesActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
+
 
         <service android:name=".messaging.MyFirebaseMessagingService"
             android:exported="true">
