@@ -11,6 +11,6 @@ import rx.Observable;
 
 public interface FediverseApi {
 
-    @GET("api/v1/timelines/public?local=true")
+    @GET("api/v1/timelines/public?local=true&limited=false")
     Observable<Response<List<FediverseResponse>>> getPosts(@Query("max_id") String id);
 }
