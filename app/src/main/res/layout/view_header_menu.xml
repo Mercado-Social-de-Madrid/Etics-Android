@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/purple"
+    android:background="@color/orange_mes"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -20,7 +20,8 @@
             android:layout_height="100dp"
             android:adjustViewBounds="true"
             android:maxWidth="100dp"
-            android:src="@mipmap/ic_avatar_2" />
+            android:src="@mipmap/ic_avatar_2"
+            app:tint="@color/white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                         android:id="@+id/tv_username"
                         style="@style/TextBase.White"
                         android:textSize="@dimen/text_small_2"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:layout_marginTop="5dp"/>
 
                     <TextView
@@ -108,7 +109,7 @@
 
                 <TextView
                     android:id="@+id/btn_login"
-                    style="@style/ButtonMes.Green"
+                    style="@style/ButtonMes"
                     android:padding="10dp"
                     android:text="@string/enter" />
 
@@ -120,7 +121,7 @@
 
                 <TextView
                     android:id="@+id/btn_singup"
-                    style="@style/ButtonMes.Green"
+                    style="@style/ButtonMes"
                     android:padding="10dp"
                     android:text="@string/register" />
             </LinearLayout>

@@ -21,6 +21,9 @@ public class ApiError {
 
         try {
             String errorBody = response.errorBody().string();
+            if (errorBody == null || errorBody.isEmpty()) {
+                return new ApiError("Error", "Error");
+            }
             return new Gson().fromJson(errorBody, ApiError.class);
         } catch (Exception e) {
             e.printStackTrace();
