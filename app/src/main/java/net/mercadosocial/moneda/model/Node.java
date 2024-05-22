@@ -42,6 +42,9 @@ public class Node {
     @SerializedName("takahe_server")
     private String fediverseServer;
 
+    @SerializedName("takahe_invite_url")
+    private String fediverseInviteUrl;
+
     public long getID() { return id; }
     public void setID(long value) { this.id = value; }
 
@@ -92,6 +95,14 @@ public class Node {
 
     public void setFediverseServer(String fediverseServer) {
         this.fediverseServer = fediverseServer;
+    }
+
+    public String getFediverseInviteUrl() {
+        return fediverseInviteUrl;
+    }
+
+    public void setFediverseInviteUrl(String fediverseInviteUrl) {
+        this.fediverseInviteUrl = fediverseInviteUrl;
     }
 
     @Override

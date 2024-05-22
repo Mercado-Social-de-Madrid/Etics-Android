@@ -4,6 +4,9 @@ import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,9 +24,12 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.FediversePost;
+import net.mercadosocial.moneda.model.Node;
+import net.mercadosocial.moneda.ui.info.WebViewActivity;
 
 import java.util.List;
 
@@ -71,7 +77,7 @@ public class FediverseFragment extends BaseFragment implements FediverseView {
             }
         });
 
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
 
         presenter.onCreate();
 
@@ -133,6 +139,39 @@ public class FediverseFragment extends BaseFragment implements FediverseView {
             recyclerPosts.setAdapter(adapter);
         }
         adapter.updateData(posts);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_info, menu);
+//        menuItemMapList = menu.findItem(R.id.menuItem_show_map_list);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menuItem_info) {
+            View layout = View.inflate(getActivity(), R.layout.view_dialog_fediverse_invitation, null);
+
+            new AlertDialog.Builder(requireActivity())
+                    .setView(layout)
+                    .setNegativeButton(R.string.back, null)
+                    .show();
+
+            View requestInvitationBtn = layout.findViewById(R.id.request_invitation);
+            requestInvitationBtn.setOnClickListener(v -> {
+                Node node = ((App) getActivity().getApplicationContext()).getCurrentNode();
+                if (node.getFediverseInviteUrl() != null) {
+                    WebViewActivity.startRemoteUrl(getActivity(), "Crea tu cuenta en el Fediverso" , node.getFediverseInviteUrl());
+                } else {
+                    toast(R.string.fediverse_invite_url_not_found);
+                }
+            });
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
