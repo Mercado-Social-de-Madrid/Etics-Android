@@ -132,4 +132,20 @@ public class Node {
     public void setInfoPageUrl(String infoPageUrl) {
         this.infoPageUrl = infoPageUrl;
     }
+
+    public String getFediverseInviteUrl() {
+        return fediverseInviteUrl;
+    }
+
+    public void setFediverseInviteUrl(String fediverseInviteUrl) {
+        this.fediverseInviteUrl = fediverseInviteUrl;
+    }
+
+    public String getBalanceBadge() {
+        return balanceBadge;
+    }
+
+    public void setBalanceBadge(String balanceBadge) {
+        this.balanceBadge = balanceBadge;
+    }
 }
