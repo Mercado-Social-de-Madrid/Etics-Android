@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <TextView
-        style="@style/TextTitleComfortaa.Purple"
+        style="@style/TextTitle.Purple"
         android:text="@string/request_invitation_header"
         android:gravity="center"
         android:layout_marginTop="10dp"/>

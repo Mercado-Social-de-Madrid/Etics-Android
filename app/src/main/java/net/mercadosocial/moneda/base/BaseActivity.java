@@ -358,11 +358,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white);
-
-//        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-//        upArrow.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
-//        getSupportActionBar().setHomeAsUpIndicator(upArrow);
     }
 
     public void setToolbarTitle(String title) {

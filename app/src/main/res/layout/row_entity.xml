@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/img_entity"
+        android:id="@+id/img_logo_entity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"

@@ -107,7 +107,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
             super(itemView);
 
-            imgEntity = (ImageView) itemView.findViewById(R.id.img_entity);
+            imgEntity = (ImageView) itemView.findViewById(R.id.img_logo_entity);
             tvEntityName = (TextView) itemView.findViewById(R.id.tv_entity_name);
             tvEntityCategory = (TextView) itemView.findViewById(R.id.tv_entity_category);
             imgStarred = (ImageView) itemView.findViewById(R.id.img_starred);

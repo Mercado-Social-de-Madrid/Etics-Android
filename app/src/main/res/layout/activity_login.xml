@@ -34,7 +34,7 @@
                 android:id="@+id/edit_username"
                 style="@style/EditTextAuth"
                 android:hint="@string/email"
-                android:inputType="textAutoComplete" />
+                android:inputType="textEmailAddress|textAutoComplete" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

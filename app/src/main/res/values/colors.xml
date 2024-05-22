@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/green</color>
-    <color name="colorPrimaryDark">#333333</color>
+    <color name="colorPrimaryDark">@color/purple_dark</color>
     <color name="colorAccent">@color/purple</color>
 
     <color name="text">#000</color>
 
-    <color name="green">#A7CE05</color>
-    <color name="green_dark">#829f0f</color>
-    <color name="green_light">#C6E504</color>
+    <color name="green">#b6b10a</color>
+    <color name="green_dark">#989409</color>
+    <color name="green_light">#DAD40C</color>
     <color name="green_extra_light">#f7ffc7</color>
-    <color name="purple">#912991</color>
-    <color name="purple_light_design">#af64ac</color>
+    <color name="purple">#5a366c</color>
+    <color name="purple_light_design">#864EA3</color>
     <color name="purple_light">#B7A0BF</color>
     <color name="purple_extra_light">#e4dce6</color>
-    <color name="purple_dark">#432850</color>
+    <color name="purple_dark">#4D2F5C</color>
     <color name="black">#000</color>
 
-    <color name="green_gradient_dark">#C6E504</color>
-    <color name="green_gradient_light">#EBF49D</color>
+    <color name="toolbar">@color/purple</color>
+    <color name="items_over_toolbar">@color/white</color>
+
+    <color name="green_gradient_dark">@color/green_extra_light</color>
+    <color name="green_gradient_light">@color/green_light</color>
     <color name="transblack_entities">#77000000</color>
     <color name="white">#FFF</color>
     <color name="white_90">#e6ffffff</color>

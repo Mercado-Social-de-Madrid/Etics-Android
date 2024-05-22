@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:orientation="vertical"
         app:elevation="0dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/toolbar">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,10 +26,9 @@
 
                 <TextView
                     android:id="@+id/tv_title_toolbar"
-                    style="@style/TextBase"
-                    android:textColor="@color/purple"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/comfortaa_bold"/>
+                    style="@style/TextTitle"
+                    android:textColor="@color/items_over_toolbar"
+                    tools:text="Título"/>
 
             </androidx.appcompat.widget.Toolbar>
 

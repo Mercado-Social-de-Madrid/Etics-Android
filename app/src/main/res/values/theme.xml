@@ -26,6 +26,12 @@
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/items_over_toolbar</item>
     </style>
 
     <style name="AppTheme.NoActionBar.FullScreen">
@@ -45,6 +51,7 @@
         <item name="android:textColorPrimary">@color/purple</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
         <item name="actionMenuTextColor">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/items_over_toolbar</item>
     </style>
 
 

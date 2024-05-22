@@ -7,6 +7,7 @@
         android:icon="@mipmap/ic_search"
         android:title="@string/search"
         app:showAsAction="always"
+        app:iconTint="@color/items_over_toolbar"
         android:orderInCategory="300"/>
 
     <item
@@ -14,6 +15,7 @@
         android:icon="@mipmap/ic_map"
         android:title="@string/map_list"
         app:showAsAction="always"
+        app:iconTint="@color/items_over_toolbar"
         android:orderInCategory="200"/>
 
 </menu>

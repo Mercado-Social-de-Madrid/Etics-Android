@@ -17,6 +17,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.WebUtils;
+import net.mercadosocial.moneda.views.CircleTransform;
 
 public class EntityInfoActivity extends BaseActivity implements EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
@@ -55,12 +56,17 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
         binding.tvNoOffers.setVisibility(
                 entity.getOffers() == null || entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
 
-        Picasso.get()
-                .load(entity.getLogo())
+        if (entity.getLogo() != null) {
+            Picasso.get()
+                    .load(entity.getLogo())
 //                .placeholder(R.mipmap.img_default_grid)
-                .error(R.mipmap.img_mes_header)
-//                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(binding.imgEntity);
+                    .error(R.mipmap.img_mes_header)
+                    .transform(new CircleTransform())
+                    .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
+                    .into(binding.imgLogoEntity);
+        } else {
+            binding.imgLogoEntity.setVisibility(View.GONE);
+        }
 
         if (adapter == null) {
             adapter = new EntitiyOffersAdapter(this, entity.getOffers());

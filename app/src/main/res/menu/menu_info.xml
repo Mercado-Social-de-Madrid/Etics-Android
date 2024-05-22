@@ -6,7 +6,7 @@
         android:id="@+id/menuItem_info"
         android:icon="@drawable/ic_info"
         android:title="@string/info"
-        app:iconTint="@color/purple"
+        app:iconTint="@color/items_over_toolbar"
         app:showAsAction="always"/>
 
 </menu>

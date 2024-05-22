@@ -29,7 +29,7 @@ public class WebUtils {
         }
 
         CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
-                .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .setToolbarColor(ContextCompat.getColor(context, R.color.toolbar))
                 .build();
 
         CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()

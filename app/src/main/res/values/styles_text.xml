@@ -14,12 +14,12 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="TextTitleComfortaa" parent="TextBase">
-        <item name="android:textSize">@dimen/text_title_comfortaa</item>
-        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    <style name="TextTitle" parent="TextBase">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="fontFamily">@font/league_gothic</item>
     </style>
 
-    <style name="TextTitleComfortaa.Purple">
+    <style name="TextTitle.Purple">
         <item name="android:textColor">@color/purple</item>
     </style>
 
