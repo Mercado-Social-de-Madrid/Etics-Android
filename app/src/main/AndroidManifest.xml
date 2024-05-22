@@ -47,7 +47,7 @@
 
             <intent-filter
                 android:label="@string/mes_check_member"
-                android:autoverify="true">
+                android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
