@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+import net.mercadosocial.moneda.api.common.ApiClient;
+
 import java.util.List;
 
 public class Node {
@@ -142,7 +144,14 @@ public class Node {
     }
 
     public String getBalanceBadge() {
-        return balanceBadge;
+        if (balanceBadge != null) {
+            if (balanceBadge.startsWith("http")) {
+                return balanceBadge;
+            } else {
+                return ApiClient.MEDIA_URL + balanceBadge;
+            }
+        }
+        return null;
     }
 
     public void setBalanceBadge(String balanceBadge) {

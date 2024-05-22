@@ -432,6 +432,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .error(R.mipmap.ic_avatar_2)
                     .into(imgAvatar);
 
+
             String nodeName = getApp().getCurrentNode().getName();
             tvMES.setText(String.format(getString(R.string.mes_format), nodeName));
             if (!userData.isEntity()) {

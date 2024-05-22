@@ -25,6 +25,7 @@ import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.NodeInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Node;
+import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
 import java.util.Objects;
@@ -92,6 +93,7 @@ public class App extends MultiDexApplication {
 
         processWorkarounds();
 
+        setDefaultNodeForMadridUpdates();
         new NodeInteractor(this, null).updateNodeData();
 
         // FirebaseMessaging.getInstance().subscribeToTopic("news_test");
@@ -102,6 +104,14 @@ public class App extends MultiDexApplication {
 //                Log.d(TAG, "Firebase token ERROR: " + task.getException().getMessage());
 //            }
 //        });
+    }
+
+    private void setDefaultNodeForMadridUpdates() {
+        if (getCurrentNode() == null) {
+            String madridNodeData = Util.getStringFromAssets(this, "data/node_mad.json");
+            Node madridNode = new Gson().fromJson(madridNodeData, Node.class);
+            setCurrentNode(madridNode);
+        }
     }
 
 

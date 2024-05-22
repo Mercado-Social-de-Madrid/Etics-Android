@@ -11,6 +11,8 @@ public abstract class Account implements Serializable {
     @SerializedName("is_active")
     private boolean active;
 
+    private boolean inactive;
+
     @SerializedName("member_id")
     private String memberId;
     @SerializedName("is_intercoop")
@@ -73,7 +75,14 @@ public abstract class Account implements Serializable {
     }
 
     public boolean isActive() {
-        return active;
+        return active | !inactive;
     }
 
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
