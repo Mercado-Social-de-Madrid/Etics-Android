@@ -43,7 +43,6 @@ import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
-import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
@@ -77,6 +76,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView tvAppVersion;
     private RecyclerView recyclerSocialProfiles;
     private List<SocialProfile> socialProfiles = new ArrayList<>();
+    private SocialProfileAdapter socialProfileAdapter;
 
     private void findViews() {
 
@@ -340,6 +340,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         leftMenu.findItem(R.id.menuItem_contact_web).setVisible(node.getWebpageLink() != null);
 
+        showNodeSocialProfiles(node);
 
     }
 
@@ -381,7 +382,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     public void openProfileActivity() {
-        startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
+        alert(getString(R.string.feature_temporarily_disabled));
+//        startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
     }
 
     @Override
@@ -448,16 +450,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    public void showNodeData(Node node) {
+    public void showNodeSocialProfiles(Node node) {
         socialProfiles.clear();
-        if (node.getSocialProfiles() != null) {
+        if (node != null && node.getSocialProfiles() != null) {
             socialProfiles.addAll(node.getSocialProfiles());
         }
-        SocialProfileAdapter socialProfileAdapter = new SocialProfileAdapter(this, socialProfiles);
-        socialProfileAdapter.setOnItemClickListener((view, position) -> {
-            SocialProfile socialProfile = socialProfiles.get(position);
-            WebUtils.openLink(this, socialProfile.getUrl());
-        });
-        recyclerSocialProfiles.setAdapter(socialProfileAdapter);
+        if (socialProfileAdapter == null) {
+            socialProfileAdapter = new SocialProfileAdapter(this, socialProfiles);
+            socialProfileAdapter.setOnItemClickListener((view, position) -> {
+                SocialProfile socialProfile = socialProfiles.get(position);
+                WebUtils.openLink(this, socialProfile.getUrl());
+            });
+            recyclerSocialProfiles.setAdapter(socialProfileAdapter);
+        } else {
+            socialProfileAdapter.notifyDataSetChanged();
+        }
     }
 }

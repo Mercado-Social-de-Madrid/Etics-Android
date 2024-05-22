@@ -1,7 +1,9 @@
 package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
+import android.util.Log;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.NodesApi;
 import net.mercadosocial.moneda.api.response.ApiError;
@@ -61,6 +63,38 @@ public class NodeInteractor extends BaseInteractor {
                     }
                 });
 
+
+    }
+
+    public void updateNodeData() {
+
+        App app = ((App) context.getApplicationContext());
+        Node currentNode = app.getCurrentNode();
+        if (currentNode != null) {
+
+            getApi(NodesApi.class).getNode(currentNode.getID())
+                    .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+//                    .doOnTerminate(actionTerminate)
+                    .subscribe(new Observer<Response<Node>>() {
+                        @Override
+                        public void onCompleted() {
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError: ", e);
+                        }
+
+                        @Override
+                        public void onNext(Response<Node> response) {
+                            if (response.isSuccessful()) {
+                                app.setCurrentNode(response.body());
+                            }
+
+                        }
+                    });
+
+        }
 
     }
 

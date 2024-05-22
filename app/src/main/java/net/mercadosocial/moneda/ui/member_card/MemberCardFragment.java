@@ -74,7 +74,10 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
 
         presenter.onCreate();
 
-        btnLogin.setOnClickListener( view -> { startActivity(new Intent(getActivity(), LoginActivity.class)); });
+        btnLogin.setOnClickListener( view -> {
+//            checkPermissionAndStart();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        });
         btnSignup.setOnClickListener( view -> { startActivity(new Intent(getActivity(), RegisterWebActivity.class)); });
         imgMemberProfile.setOnClickListener( view -> ((MainActivity)getActivity()).openProfileActivity());
 

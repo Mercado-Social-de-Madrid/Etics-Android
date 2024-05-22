@@ -376,6 +376,7 @@
     <string name="send_leave_request">Enviar solicitud de baja</string>
     <string name="delete_account_info">Si quieres eliminar tu cuenta de nuestra base de datos, escríbenos un correo con tu solicitud pulsando el siguiente botón y te responderemos lo antes posible para completar el proceso.</string>
     <string name="open_email">Abrir email</string>
+    <string name="feature_temporarily_disabled">Funcion deshabilitada temporalmente.\n¡Estará disponible pronto!</string>
     <string name="request_invitation_header">¿Te gustaría hacer publicaciones con tu entidad y que aparezcan en esta pantalla?</string>
     <string name="request_invitation_body">Si todavía no tienes cuenta en el Fediverso puedes solicitar una pulsando el siguiente botón:</string>
     <string name="request_invitation_btn">Solicita una invitación</string>

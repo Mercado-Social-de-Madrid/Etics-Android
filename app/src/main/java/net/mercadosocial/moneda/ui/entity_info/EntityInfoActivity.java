@@ -139,6 +139,15 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
     }
 
     @Override
+    public void setBalanceBadge(String balanceBadge) {
+        Picasso.get()
+                .load(balanceBadge)
+                .error(R.mipmap.img_distntivo_balance)
+                .into(binding.imgDistintivoBalance);
+
+    }
+
+    @Override
     public void onOfferClicked(String id, int position) {
 
         presenter.onOfferClicked(position);

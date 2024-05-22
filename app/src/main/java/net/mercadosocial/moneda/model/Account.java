@@ -8,7 +8,8 @@ public abstract class Account implements Serializable {
 
     private String id;
 
-    private boolean is_active;
+    @SerializedName("is_active")
+    private boolean active;
 
     @SerializedName("member_id")
     private String memberId;
@@ -72,7 +73,7 @@ public abstract class Account implements Serializable {
     }
 
     public boolean isActive() {
-        return is_active;
+        return active;
     }
 
 }

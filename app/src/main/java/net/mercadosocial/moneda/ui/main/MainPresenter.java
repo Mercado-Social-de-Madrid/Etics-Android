@@ -77,7 +77,7 @@ import java.util.Objects;
 
          Data data = App.getUserData(context);
          view.showUserData(data);
-         view.showNodeData(getApp().getCurrentNode());
+         view.showNodeSocialProfiles(getApp().getCurrentNode());
 
      }
 

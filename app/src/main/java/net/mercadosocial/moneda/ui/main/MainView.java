@@ -12,5 +12,5 @@ public interface MainView extends BaseView {
 
     void showUserData(Data userData);
 
-    void showNodeData(Node node);
+    void showNodeSocialProfiles(Node node);
 }

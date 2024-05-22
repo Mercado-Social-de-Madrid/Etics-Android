@@ -57,6 +57,9 @@ import net.mercadosocial.moneda.util.WebUtils;
          data = App.getUserData(context);
 
          processBenefits();
+
+         view.setBalanceBadge(getApp().getCurrentNode().getBalanceBadge());
+
      }
 
     private void processBenefits() {

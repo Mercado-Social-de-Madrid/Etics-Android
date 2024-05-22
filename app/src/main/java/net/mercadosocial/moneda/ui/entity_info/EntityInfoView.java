@@ -14,4 +14,6 @@ public interface EntityInfoView extends BaseView{
 
     void showBenefitsInfo(Benefit benefit, boolean isEntity, String noBenefitText);
 
+    void setBalanceBadge(String balanceBadge);
+
 }

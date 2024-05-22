@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
+import net.mercadosocial.moneda.interactor.NodeInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
@@ -91,6 +92,8 @@ public class App extends MultiDexApplication {
 
         processWorkarounds();
 
+        new NodeInteractor(this, null).updateNodeData();
+
         // FirebaseMessaging.getInstance().subscribeToTopic("news_test");
 //        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
 //            if (task.isSuccessful()) {
@@ -128,6 +131,11 @@ public class App extends MultiDexApplication {
 
         Node previousNode = getCurrentNode();
 
+        String nodeSerialized = new Gson().toJson(node);
+        getPrefs(this).edit()
+                .putString(App.SHARED_CURRENT_NODE, nodeSerialized)
+                .apply();
+
         if (previousNode != null && Objects.equals(previousNode.getShortname(), node.getShortname())) {
             return;
         }
@@ -137,9 +145,7 @@ public class App extends MultiDexApplication {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_offers");
         }
 
-        String nodeSerialized = new Gson().toJson(node);
         getPrefs(this).edit()
-                .putString(App.SHARED_CURRENT_NODE, nodeSerialized)
                 .remove(App.SHARED_ENTITIES_CACHE)
                 .remove(App.SHARED_CATEGORIES_SAVED)
                 .apply();
