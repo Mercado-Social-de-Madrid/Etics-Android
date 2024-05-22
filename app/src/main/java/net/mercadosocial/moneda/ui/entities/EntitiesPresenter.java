@@ -15,6 +15,7 @@ import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -148,7 +149,7 @@ public class EntitiesPresenter extends BasePresenter {
 
                 entities.clear();
                 entities.addAll(entitiesApi);
-//                Collections.shuffle(entities);
+                Collections.shuffle(entities);
                 processFavs();
                 processLocalFilter();
 
