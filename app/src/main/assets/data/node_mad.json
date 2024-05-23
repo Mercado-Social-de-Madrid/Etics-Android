@@ -1,0 +1,49 @@
+{
+  "id": 2,
+  "social_profiles": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/MercadoSocialMadrid",
+      "logo": "logos_redes_sociales/facebook.png"
+    },
+    {
+      "name": "Telegram",
+      "url": "https://t.me/mercadosocialmadrid",
+      "logo": "logos_redes_sociales/telegram.png"
+    },
+    {
+      "name": "X",
+      "url": "https://twitter.com/MES_Madrid",
+      "logo": "logos_redes_sociales/x.png"
+    },
+    {
+      "name": "Youtube",
+      "url": "https://www.youtube.com/channel/UCWfYyNJGH-ruUqrsWbYa4Jw",
+      "logo": "logos_redes_sociales/youtube.png"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/mercadosocialmadrid/?hl=es",
+      "logo": "logos_redes_sociales/instagram.png"
+    }
+  ],
+  "banner_image": "node/5b1c478f-805a-4d9f-acb1-e672070176b7.png",
+  "balance_badge": "badge/a5daa347-698e-4a7c-9344-72ab3a6d5902.png",
+  "name": "Madrid",
+  "shortname": "mad",
+  "visible": false,
+  "latitude": 40.4385858670433,
+  "longitude": -3.6968994140625,
+  "contact_email": "hola@mercadosocial.madrid",
+  "self_register_allowed": true,
+  "register_provider_url": "https://gestionmadrid.mercadosocial.net/accounts/signup/provider/?from_app=true",
+  "register_consumer_url": "https://gestionmadrid.mercadosocial.net/accounts/signup/consumer/?from_app=true",
+  "preferred_locale": "es-ES",
+  "webpage_link": "https://www.mercadosocial.madrid/",
+  "takahe_server": null,
+  "takahe_invite_url": null,
+  "has_linked_crm": false,
+  "linked_crm_url": null,
+  "member_card_enabled": true,
+  "info_page_url": "https://appmes.triskelapps.com/2/info"
+}

@@ -25,24 +25,24 @@ public class Offer implements Serializable, Novelty {
 
     public String getBeginDateFormatted() {
         try {
-            return formatDateUser.format(formatDatetimeApi2.parse(getBegin_date()));
-        } catch (ParseException e) {
-            return getBegin_date();
+            return formatDateUser.format(formatDateApi.parse(getBegin_date()));
+        } catch (Exception e) {
+            return "---";
         }
     }
 
     public String getEndDateFormatted() {
         try {
-            return formatDateUser.format(formatDatetimeApi2.parse(getEnd_date()));
-        } catch (ParseException e) {
-            return getEnd_date();
+            return formatDateUser.format(formatDateApi.parse(getEnd_date()));
+        } catch (Exception e) {
+            return "---";
         }
     }
 
     public String getPublishedDateFormatted() {
         try {
             return formatDateUser.format(formatDatetimeApi.parse(getPublished_date()));
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return getEnd_date();
         }
     }
