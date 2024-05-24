@@ -3,6 +3,8 @@ package net.mercadosocial.moneda.model;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import net.mercadosocial.moneda.api.common.ApiClient;
 
 import java.io.Serializable;
@@ -20,8 +22,11 @@ public class Offer implements Serializable, Novelty {
     private Float discounted_price;
     private String begin_date;
     private String end_date;
-    private Entity entity;
     private String published_date;
+
+    @SerializedName("provider")
+    private Entity entity;
+
 
     public String getBeginDateFormatted() {
         try {

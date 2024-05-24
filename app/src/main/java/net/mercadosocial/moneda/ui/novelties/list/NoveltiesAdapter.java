@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Novelty;
+import net.mercadosocial.moneda.model.Offer;
 import net.mercadosocial.moneda.util.WebUtils;
 
 import java.util.List;
@@ -53,7 +55,6 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
         final Novelty novelty = getItemAtPosition(safePosition);
 
         holder.tvNoveltyTitle.setText(novelty.getTitleNovelty());
-        holder.tvNoveltyTextShort.setText(Html.fromHtml(novelty.getDescriptionShortNovelty()).toString());
 
         String image = novelty.getImageNoveltyUrl();
 
@@ -72,11 +73,15 @@ public class NoveltiesAdapter extends RecyclerView.Adapter<NoveltiesAdapter.View
             case Novelty.TYPE_NEWS:
                 String dateTextNews = String.format(context.getString(R.string.published), novelty.getDate());
                 holder.tvNoveltyDate.setText(dateTextNews);
+                holder.tvNoveltyTextShort.setVisibility(View.GONE);
                 break;
 
             case Novelty.TYPE_OFFER:
                 String dateTextOffer = String.format(context.getString(R.string.valid_until), novelty.getDate());
                 holder.tvNoveltyDate.setText(dateTextOffer);
+                Entity entity = ((Offer) novelty).getEntity();
+                holder.tvNoveltyTextShort.setVisibility(entity != null ? View.VISIBLE : View.GONE);
+                holder.tvNoveltyTextShort.setText(entity != null ? entity.getName() : "");
                 break;
 
                 default:

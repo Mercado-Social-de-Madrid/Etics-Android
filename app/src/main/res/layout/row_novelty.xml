@@ -35,11 +35,10 @@
                 style="@style/TextBase"
                 android:textColor="#000"
                 android:layout_toRightOf="@+id/img_novelty"
-                android:layout_toLeftOf="@+id/img_starred"
                 android:layout_alignTop="@id/img_novelty"
                 android:textSize="@dimen/text_medium"
                 android:textStyle="bold"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="Título"
                 android:layout_marginRight="5dp"/>
@@ -49,7 +48,7 @@
                 style="@style/TextBase"
                 android:layout_alignLeft="@+id/tv_novelty_title"
                 android:layout_below="@+id/tv_novelty_title"
-                android:lines="2"
+                android:lines="1"
                 android:textColor="@color/grey"
                 android:ellipsize="end"
                 tools:text="Jazz"/>

@@ -107,8 +107,7 @@
                 <TextView
                     android:id="@+id/tv_member_name"
                     style="@style/TextTitle"
-                    tools:text="Ana García Rodriguez"
-                    android:textSize="@dimen/text_medium" />
+                    tools:text="Ana García Rodriguez" />
 
                 <TextView
                     android:id="@+id/tv_member_type"

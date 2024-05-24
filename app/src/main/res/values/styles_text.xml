@@ -17,6 +17,7 @@
     <style name="TextTitle" parent="TextBase">
         <item name="android:textSize">@dimen/text_title</item>
         <item name="fontFamily">@font/league_gothic</item>
+        <item name="android:lineSpacingMultiplier">0.8</item>
     </style>
 
     <style name="TextTitle.Purple">
