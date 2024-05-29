@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.ui.main;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.App;
@@ -453,7 +455,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     .placeholder(R.mipmap.ic_avatar_2)
                     .transform(new CircleTransform())
                     .error(R.mipmap.ic_avatar_2)
-                    .into(imgAvatar);
+                    .into(imgAvatar, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            imgAvatar.setColorFilter(Color.TRANSPARENT);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            imgAvatar.setColorFilter(Color.WHITE);
+                        }
+                    });
 
 
             String nodeName = getApp().getCurrentNode().getName();
@@ -467,6 +479,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar_2);
+            imgAvatar.setColorFilter(Color.WHITE);
 
             refreshFragmentData();
         }
