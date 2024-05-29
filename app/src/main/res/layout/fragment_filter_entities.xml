@@ -39,7 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/only_favs"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_with_benefits"
@@ -49,7 +50,7 @@
                 android:layout_marginBottom="10dp"/>
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/check_with_badge"
+                android:id="@+id/switch_with_badge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/with_badge"

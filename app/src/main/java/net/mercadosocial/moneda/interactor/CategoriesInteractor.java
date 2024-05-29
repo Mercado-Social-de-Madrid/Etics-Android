@@ -49,7 +49,7 @@ public class CategoriesInteractor extends BaseInteractor {
         callback.onResponse(categories);
 
         getApi().getCategories(getNodeId())
-                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<List<Category>>>() {
                     @Override
                     public void onCompleted() {

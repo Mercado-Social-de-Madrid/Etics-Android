@@ -70,12 +70,6 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
 
     @Override
-    public void onNodeChanged() {
-        super.onNodeChanged();
-        presenter.refreshData();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_entities, menu);
         menuItemMapList = menu.findItem(R.id.menuItem_show_map_list);

@@ -277,7 +277,7 @@
     <string name="enter_in_mes_x">Entrar en el MES %s</string>
 
     <string name="categories">Categorías</string>
-    <string name="only_favs">Sólo favoritas</string>
+    <string name="only_favs">Solo favoritas</string>
     <string name="apply_filters">Aplicar filtros</string>
     <string name="go_to_profile">Mi perfil</string>
     <string name="entities_dont_edit_profile">Entidades no editan perfil en la app</string>
@@ -335,13 +335,13 @@
     <string name="members_benefits">Ventajas para soci@s</string>
     <string name="change_image">Cambiar imagen</string>
     <string name="error_image">Ha habido un error al subir la imagen</string>
-    <string name="benefits_available_for_active_members">Descuentos solo disponibles para socias activas</string>
-    <string name="no_benefit_currently">Esta entidad no ofrece descuentos actualmente</string>
-    <string name="benefit_in_person">Descuento en persona</string>
-    <string name="benefit_online">Descuento online</string>
-    <string name="benefits_not_for_intercoop">Descuento no disponible para socias de intercooperación</string>
-    <string name="benefit_request_email_subject">Solicitud de descuento Mercado Social. Número de socia: %s</string>
-    <string name="benefit_code_x">Código de descuento: %s</string>
+    <string name="benefits_available_for_active_members">Ventajas solo disponibles para socias activas</string>
+    <string name="no_benefit_currently">Esta entidad no ofrece ventajas actualmente</string>
+    <string name="benefit_in_person">En persona</string>
+    <string name="benefit_online">Online</string>
+    <string name="benefits_not_for_intercoop">Ventaja no disponible para socias de intercooperación</string>
+    <string name="benefit_request_email_subject">Solicitud de ventaja o descuento Mercado Social. Número de socia: %s</string>
+    <string name="benefit_code_x">Código de ventaja/descuento: %s</string>
     <string name="member_number">Número de socia: %s</string>
     <string name="member_intercoop">Socia intercooperación</string>
     <string name="member_consumer">Socia consumidora</string>

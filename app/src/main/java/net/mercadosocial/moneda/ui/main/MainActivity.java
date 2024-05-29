@@ -37,6 +37,7 @@ import net.mercadosocial.moneda.ui.auth.login.LoginActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
+import net.mercadosocial.moneda.ui.entities.filter.FilterEntitiesFragment;
 import net.mercadosocial.moneda.ui.fediverse.list.FediverseFragment;
 import net.mercadosocial.moneda.ui.info.InfoMesActivity;
 import net.mercadosocial.moneda.ui.intro.IntroActivity;
@@ -243,13 +244,25 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             baseFragment.onNodeChanged();
         }
 
+        FilterEntitiesFragment filterFragment = getFilterEntitiesFragment();
+        if (filterFragment != null && filterFragment.isAdded()) {
+            filterFragment.onNodeChanged();
+        }
+
+        setFilterEntities(null);
+    }
+
+    private FilterEntitiesFragment getFilterEntitiesFragment() {
+        return  (FilterEntitiesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_filter);
     }
 
 
     public void setFilterEntities(FilterEntities filterEntities) {
         BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content);
         if (baseFragment instanceof EntitiesFragment) {
-            ((EntitiesPresenter) baseFragment.getBasePresenter()).setFilterEntities(filterEntities);
+            EntitiesPresenter entitiesPresenter = ((EntitiesPresenter) baseFragment.getBasePresenter());
+            entitiesPresenter.setFilterEntities(filterEntities);
+            entitiesPresenter.refreshData();
             if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
@@ -352,6 +365,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.commit();
+
+        if (fragment instanceof EntitiesFragment) {
+            FilterEntitiesFragment filterFragment = getFilterEntitiesFragment();
+            if (filterFragment != null && filterFragment.isAdded()) {
+                filterFragment.onCreateEntitiesFragment();
+            }
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GravityCompat.END);
+        } else {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.END);
+        }
 
     }
 

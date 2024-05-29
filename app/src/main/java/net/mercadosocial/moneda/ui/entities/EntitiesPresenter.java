@@ -235,7 +235,6 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void setFilterEntities(FilterEntities filterEntities) {
         this.filterEntities = filterEntities;
-        refreshData();
     }
 
     public void onMapListButtonClick() {

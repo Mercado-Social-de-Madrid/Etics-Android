@@ -8,4 +8,6 @@ import java.util.List;
 public interface FilterEntitiesView extends BaseView {
 
     void showCategories(List<Category> categories);
+
+    void resetFilter();
 }

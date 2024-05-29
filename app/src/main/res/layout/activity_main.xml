@@ -89,6 +89,7 @@
         </RelativeLayout>
 
         <fragment
+            android:id="@+id/fragment_filter"
             android:name="net.mercadosocial.moneda.ui.entities.filter.FilterEntitiesFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

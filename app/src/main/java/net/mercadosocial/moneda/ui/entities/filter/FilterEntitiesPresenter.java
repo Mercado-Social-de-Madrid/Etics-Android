@@ -34,24 +34,24 @@ public class FilterEntitiesPresenter extends BasePresenter {
     }
 
     public void onCreate() {
-        refreshData();
+        updateCategories();
     }
 
     public void onResume() {
 
     }
 
-    public void refreshData() {
+    public void onNodeChanged() {
 
+        resetFilter();
         updateCategories();
-
     }
 
     private void updateCategories() {
         new CategoriesInteractor(context, view).getCategories(new BaseInteractor.BaseApiGETListCallback<Category>() {
             @Override
             public void onResponse(List<Category> list) {
-//                for(Category category : list) category.setChecked(true);
+
                 categories.clear();
                 categories.addAll(list);
                 view.showCategories(categories);
@@ -88,13 +88,18 @@ public class FilterEntitiesPresenter extends BasePresenter {
         ((MainActivity)context).setFilterEntities(filterEntities);
     }
 
-    public void removeFilter() {
+    public void onRemoveFilterClick() {
+        resetFilter();
+        ((MainActivity)context).setFilterEntities(null);
+    }
+
+    public void resetFilter() {
 
         for (Category category : categories) {
             category.setChecked(false);
         }
 
         view.showCategories(categories);
-        ((MainActivity)context).setFilterEntities(null);
+        view.resetFilter();
     }
 }

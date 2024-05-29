@@ -3,8 +3,6 @@ package net.mercadosocial.moneda.ui.entities.filter;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -61,7 +59,11 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
     @Override
     public void onNodeChanged() {
         super.onNodeChanged();
-        presenter.refreshData();
+        presenter.onNodeChanged();
+    }
+
+    public void onCreateEntitiesFragment() {
+        resetFilter();
     }
 
     @Override
@@ -75,22 +77,31 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
     }
 
     @Override
+    public void resetFilter() {
+        binding.editSearchEntities.setText("");
+        binding.switchWithBadge.setChecked(false);
+        binding.switchWithBenefits.setChecked(false);
+        binding.switchOnlyFavs.setChecked(false);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_apply:
                 String text = binding.editSearchEntities.getText().toString();
                 boolean onlyFavs = binding.switchOnlyFavs.isChecked();
                 boolean withBenefits = binding.switchWithBenefits.isChecked();
-                boolean withBadge = binding.checkWithBadge.isChecked();
+                boolean withBadge = binding.switchWithBadge.isChecked();
                 presenter.applyFilter(text, onlyFavs, withBenefits, withBadge);
                 WindowUtils.hideSoftKeyboard(getActivity());
                 break;
 
             case R.id.btn_remove_filter:
-                binding.editSearchEntities.setText("");
-                presenter.removeFilter();
+                presenter.onRemoveFilterClick();
                 WindowUtils.hideSoftKeyboard(getActivity());
                 break;
         }
     }
+
+
 }
