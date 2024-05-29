@@ -5,12 +5,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.views.RotativeImageView;
@@ -38,14 +40,11 @@ public class ProgressDialogMES extends DialogFragment {
     private Handler handler;
 
 
-    private Runnable delayedHide = new Runnable() {
-        @Override
-        public void run() {
-            postedHide = false;
-            timeStart = -1;
-            if (getActivity() != null) {
-                dismiss();
-            }
+    private Runnable delayedHide = () -> {
+        postedHide = false;
+        timeStart = -1;
+        if (getActivity() != null) {
+            dismiss();
         }
     };
 
@@ -154,18 +153,28 @@ public class ProgressDialogMES extends DialogFragment {
     }
 
 
-
     public void hide() {
+
+        if (dismissed) {
+            return;
+        }
+
         dismissed = true;
 
         long millisShowing = System.currentTimeMillis() - timeStart;
         if (millisShowing > MIN_SHOW_TIME || timeStart == -1) {
-            if (getActivity() != null) {
-                dismiss();
+            try {
+                if (getActivity() != null) {
+                    dismiss();
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "hide progress dialog MES: ", e);
             }
+
         } else {
             postDelayed(delayedHide, MIN_SHOW_TIME - millisShowing);
         }
+
     }
 
     private void postDelayed(Runnable runnable, long timeStart) {

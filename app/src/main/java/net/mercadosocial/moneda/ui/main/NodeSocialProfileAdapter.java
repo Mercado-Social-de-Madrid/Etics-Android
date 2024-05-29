@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
-import net.mercadosocial.moneda.databinding.RowSocialProfileBinding;
+import net.mercadosocial.moneda.databinding.ItemNodeSocialProfileBinding;
 import net.mercadosocial.moneda.model.SocialProfile;
-import net.mercadosocial.moneda.views.CircleTransform;
 
 import java.util.List;
 
-public class SocialProfileAdapter extends RecyclerView.Adapter<SocialProfileAdapter.ViewHolder> {
+public class NodeSocialProfileAdapter extends RecyclerView.Adapter<NodeSocialProfileAdapter.ViewHolder> {
 
 
     private List<SocialProfile> socialProfiles;
@@ -25,14 +24,14 @@ public class SocialProfileAdapter extends RecyclerView.Adapter<SocialProfileAdap
     private OnItemClickListener itemClickListener;
 
 
-    public SocialProfileAdapter(Context context, List<SocialProfile> socialProfiles) {
+    public NodeSocialProfileAdapter(Context context, List<SocialProfile> socialProfiles) {
         this.context = context;
         this.socialProfiles = socialProfiles;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View contactView = LayoutInflater.from(context).inflate(R.layout.row_social_profile, parent, false);
+        View contactView = LayoutInflater.from(context).inflate(R.layout.item_node_social_profile, parent, false);
         return new ViewHolder(contactView);
     }
 
@@ -48,7 +47,6 @@ public class SocialProfileAdapter extends RecyclerView.Adapter<SocialProfileAdap
                 .load(socialProfile.getLogo())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)
-                .transform(new CircleTransform())
                 .into(holder.binding.imgSocialIcon);
 
 
@@ -66,13 +64,13 @@ public class SocialProfileAdapter extends RecyclerView.Adapter<SocialProfileAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final RowSocialProfileBinding binding;
+        private final ItemNodeSocialProfileBinding binding;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            binding = RowSocialProfileBinding.bind(itemView);
+            binding = ItemNodeSocialProfileBinding.bind(itemView);
 
             binding.getRoot().setOnClickListener(v -> {
                 if (itemClickListener != null) {

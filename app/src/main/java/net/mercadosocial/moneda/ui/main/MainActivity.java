@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private TextView tvAppVersion;
     private RecyclerView recyclerSocialProfiles;
     private List<SocialProfile> socialProfiles = new ArrayList<>();
-    private SocialProfileAdapter socialProfileAdapter;
+    private NodeSocialProfileAdapter nodeSocialProfileAdapter;
 
     private void findViews() {
 
@@ -136,11 +136,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             return;
         }
 
-        Node node = getApp().getCurrentNode();
-        if (node != null) {
-            showFragment(node.isMemberCardEnabled() ? new MemberCardFragment(): new EntitiesFragment());
-            updateMenuViewsByNode();
-        } else if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
+        bottomNavView.setSelectedItemId(R.id.navigation_entities);
+        updateMenuViewsByNode();
+
+        if (!App.getPrefs(this).getBoolean(App.SHARED_INTRO_SEEN, false)) {
             startActivityForResult(new Intent(this, IntroActivity.class), REQ_CODE_INTRO);
         }
 
@@ -255,7 +254,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     private FilterEntitiesFragment getFilterEntitiesFragment() {
-        return  (FilterEntitiesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_filter);
+        return (FilterEntitiesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_filter);
     }
 
 
@@ -296,7 +295,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 setToolbarTitle(R.string.highlighted);
                 showFragment(new NoveltiesFragment());
                 return true;
-            }else if (itemId == R.id.navigation_fediverse) {
+            } else if (itemId == R.id.navigation_fediverse) {
                 setToolbarTitle(R.string.fediverse);
                 showFragment(new FediverseFragment(node.getFediverseServer()));
                 return true;
@@ -381,7 +380,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -421,7 +419,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             super.onBackPressed();
         }
     }
-
 
 
     public void onMenuFilterClick() {
@@ -492,15 +489,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (node != null && node.getSocialProfiles() != null) {
             socialProfiles.addAll(node.getSocialProfiles());
         }
-        if (socialProfileAdapter == null) {
-            socialProfileAdapter = new SocialProfileAdapter(this, socialProfiles);
-            socialProfileAdapter.setOnItemClickListener((view, position) -> {
+        if (nodeSocialProfileAdapter == null) {
+            nodeSocialProfileAdapter = new NodeSocialProfileAdapter(this, socialProfiles);
+            nodeSocialProfileAdapter.setOnItemClickListener((view, position) -> {
                 SocialProfile socialProfile = socialProfiles.get(position);
                 WebUtils.openLink(this, socialProfile.getUrl());
             });
-            recyclerSocialProfiles.setAdapter(socialProfileAdapter);
+            recyclerSocialProfiles.setAdapter(nodeSocialProfileAdapter);
         } else {
-            socialProfileAdapter.notifyDataSetChanged();
+            nodeSocialProfileAdapter.notifyDataSetChanged();
         }
     }
 }

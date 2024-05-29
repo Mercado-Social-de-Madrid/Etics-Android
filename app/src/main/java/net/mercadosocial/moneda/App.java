@@ -158,7 +158,7 @@ public class App extends MultiDexApplication {
         getPrefs(this).edit()
                 .remove(App.SHARED_ENTITIES_CACHE)
                 .remove(App.SHARED_CATEGORIES_SAVED)
-                .apply();
+                .commit();
 
         FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_news");
         FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_offers");
