@@ -57,10 +57,13 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
 
         if (v.getId() == R.id.btn_intro_enter) {
             Node node = selectMESView.getSelectedNode();
-            ((App) getActivity().getApplicationContext()).setCurrentNode(node);
-
-            getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).apply();
-            getActivity().finish();
+            if (node != null) {
+                ((App) getActivity().getApplicationContext()).setCurrentNode(node);
+                getPrefs().edit().putBoolean(App.SHARED_INTRO_SEEN, true).apply();
+                getActivity().finish();
+            } else {
+                toast(R.string.select_market);
+            }
         }
     }
 }

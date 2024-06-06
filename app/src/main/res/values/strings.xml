@@ -382,4 +382,5 @@
     <string name="request_invitation_btn">Solicita una invitación</string>
     <string name="accept_privacy_policy">Acepto la politica de privacidad.</string>
     <string name="fediverse_invite_url_not_found">Actualmente no hay invitaciones disponibles.</string>
+    <string name="select_market">Selecciona el mercado al que quieres acceder</string>
 </resources>

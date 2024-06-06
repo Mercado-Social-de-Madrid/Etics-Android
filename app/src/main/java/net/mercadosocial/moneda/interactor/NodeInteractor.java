@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -31,7 +32,7 @@ public class NodeInteractor extends BaseInteractor {
     public void getNodes(final BaseApiGETListCallback<Node> callback) {
 
         if (!Util.isConnected(context)) {
-            baseView.toast(R.string.no_connection);
+            Toast.makeText(context, R.string.no_connection, Toast.LENGTH_SHORT).show();
             return;
         }
 

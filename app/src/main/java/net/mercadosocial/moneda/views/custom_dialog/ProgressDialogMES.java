@@ -43,8 +43,14 @@ public class ProgressDialogMES extends DialogFragment {
     private Runnable delayedHide = () -> {
         postedHide = false;
         timeStart = -1;
+
         if (getActivity() != null) {
-            dismiss();
+
+            try {
+                dismiss();
+            } catch (Exception e) {
+                Log.e(TAG, "error dialog: ", e);
+            }
         }
     };
 
@@ -55,7 +61,13 @@ public class ProgressDialogMES extends DialogFragment {
             postedShow = false;
             if (!dismissed) {
                 timeStart = System.currentTimeMillis();
-                show(fragmentManager, null);
+                try {
+                    if (!isAdded()) {
+                        show(fragmentManager, null);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "run: error dialog delay show", e);
+                }
             }
         }
     };
@@ -87,7 +99,11 @@ public class ProgressDialogMES extends DialogFragment {
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogProgressMES);
 
         if (dismissed) {
-            dismiss();
+            try {
+                dismiss();
+            } catch (Exception e) {
+                Log.e(TAG, "error dialog: ", e);
+            }
         }
 
     }
