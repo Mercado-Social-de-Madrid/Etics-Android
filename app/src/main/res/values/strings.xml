@@ -383,4 +383,6 @@
     <string name="accept_privacy_policy">Acepto la politica de privacidad.</string>
     <string name="fediverse_invite_url_not_found">Actualmente no hay invitaciones disponibles.</string>
     <string name="select_market">Selecciona el mercado al que quieres acceder</string>
+    <string name="change_image_temporarily_disabled">La función de cambiar imagen desde el teléfono estará disponible pronto.\nDe momento puedes cambiarla desde la web. Pulsa el siguiente botón:</string>
+    <string name="go_to_web">Ir a la web</string>
 </resources>

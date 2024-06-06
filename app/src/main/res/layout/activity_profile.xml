@@ -117,7 +117,6 @@
                 android:minWidth="70dp"
                 android:text="@string/logout"
                 android:textAllCaps="false"
-                android:textSize="@dimen/text_medium"
                 android:textStyle="normal" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -129,7 +128,6 @@
                 android:minWidth="70dp"
                 android:text="@string/delete_account"
                 android:textAllCaps="false"
-                android:textSize="@dimen/text_medium"
                 android:textStyle="normal" />
 
 

@@ -44,7 +44,7 @@
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
                         android:src="@mipmap/img_entitiy_example"
-                        android:background="@drawable/bg_circle_purple"
+                        android:background="@drawable/bg_circle_orange"
                         android:padding="3dp"/>
 
                 </RelativeLayout>

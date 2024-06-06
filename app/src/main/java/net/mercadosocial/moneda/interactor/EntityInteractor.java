@@ -53,11 +53,20 @@ public class EntityInteractor extends BaseInteractor {
         }
 
         String text = null;
-        List<String> categoriesIds = new ArrayList<>();
+        String categoriesIdsStr = null;
 
         if (filterEntities != null) {
-            categoriesIds = filterEntities.getCategoriesIds();
+
             text = filterEntities.getText();
+
+            if (filterEntities.getCategoriesIds() != null && !filterEntities.getCategoriesIds().isEmpty()) {
+                categoriesIdsStr = "";
+                for (int i = 0; i < filterEntities.getCategoriesIds().size(); i++) {
+                    String id = filterEntities.getCategoriesIds().get(i);
+                    categoriesIdsStr += id + (i < filterEntities.getCategoriesIds().size() - 1 ? "," : "");
+                }
+            }
+
         } else {
             if (hasCachedEntities()) {
                 callback.onResponse(getCachedEntities(), false);
@@ -65,7 +74,7 @@ public class EntityInteractor extends BaseInteractor {
         }
 
 
-        getApi().getEntities(getNodeId(), text, categoriesIds)
+        getApi().getEntities(getNodeId(), text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<List<Entity>>>() {
                     @Override

@@ -46,6 +46,7 @@ import net.mercadosocial.moneda.ui.intro.IntroActivity;
 import net.mercadosocial.moneda.ui.invitations.InvitationsPresenter;
 import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
+import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
@@ -405,8 +406,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     public void openProfileActivity() {
-        alert(getString(R.string.feature_temporarily_disabled));
-//        startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
+        startActivityForResult(new Intent(this, ProfileActivity.class), REQ_CODE_PROFILE);
     }
 
     @Override

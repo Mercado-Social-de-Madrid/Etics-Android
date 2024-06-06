@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,12 +21,14 @@ import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.util.DateUtils;
+import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 
 import org.jetbrains.annotations.NotNull;
@@ -118,7 +119,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_image:
-                checkPermissionAndOpenChooser();
+
+                showImageChangeDisabledDialog();
+//                checkPermissionAndOpenChooser();
                 break;
 
             case R.id.btn_logout:
@@ -131,6 +134,19 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 break;
 
         }
+    }
+
+    private void showImageChangeDisabledDialog() {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.change_image_temporarily_disabled)
+                .setPositiveButton(R.string.go_to_web, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        WebUtils.openLink(ProfileActivity.this, ApiClient.BASE_URL);
+                    }
+                })
+                .setNegativeButton(R.string.back, null)
+                .show();
     }
 
     private void showDeleteAccountDialog() {
