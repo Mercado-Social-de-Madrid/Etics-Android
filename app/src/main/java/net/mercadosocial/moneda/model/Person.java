@@ -16,7 +16,6 @@ public class Person extends Account {
     private String name;
     private String email;
     private String surname;
-    private String profile_image;
     private String profile_thumbnail;
     private String address;
     private List<String> fav_entities;
@@ -43,11 +42,6 @@ public class Person extends Account {
         return String.format("%s %s", getName(), getSurname());
     }
 
-    @Override
-    public String getMemberImage() {
-        return getProfile_image();
-    }
-
     public String getNif() {
         return nif;
     }
@@ -72,16 +66,8 @@ public class Person extends Account {
         this.surname = surname;
     }
 
-    public String getProfile_image() {
-        return ApiClient.MEDIA_URL + profile_image;
-    }
-
     public String getProfile_thumbnail() {
         return ApiClient.MEDIA_URL + profile_thumbnail;
-    }
-
-    public void setProfile_image(String profile_image) {
-        this.profile_image = profile_image;
     }
 
 

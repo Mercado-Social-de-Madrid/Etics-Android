@@ -17,7 +17,7 @@ public interface EntitiesApi {
     int PAGE_LIMIT_ENTITIES = 2000; // for map screen all entities are needed.
 
     @GET("nodes/{idNode}/providers/")
-    Observable<Response<List<Entity>>> getEntities(@Path("idNode") long idNode, @Query("q") String text,
+    Observable<Response<List<Entity>>> getEntities(@Path("idNode") long idNode, @Query("search") String text,
                                                    @Query("categories__in") String categoriesIdsCommaSeparated);
 
 

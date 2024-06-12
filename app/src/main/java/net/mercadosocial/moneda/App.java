@@ -2,7 +2,6 @@ package net.mercadosocial.moneda;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
+import androidx.preference.PreferenceManager;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -62,8 +62,6 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        loadApiKey(this);
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(DebugHelper.SWITCH_CRASH_REPORTS_ENABLED);
 
@@ -189,14 +187,12 @@ public class App extends MultiDexApplication {
     }
 
     public static SharedPreferences getPrefs(Context context) {
-//        return new SecurePreferences(context);
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static void saveUserData(Context context, Data data) {
         String dataSerial = new Gson().toJson(data);
         getPrefs(context).edit().putString(App.SHARED_USER_DATA, dataSerial).apply();
-        AuthLogin.API_KEY = data.getApiKeyFull();
     }
 
     public static Data getUserData(Context context) {
@@ -209,20 +205,11 @@ public class App extends MultiDexApplication {
         return data;
     }
 
-
-    private static void loadApiKey(Context context) {
-        Data data = getUserData(context);
-        if (data != null) {
-            AuthLogin.API_KEY = data.getApiKeyFull();
-        }
-    }
-
     public static void removeUserData(Context context) {
         getPrefs(context).edit()
                 .remove(SHARED_USER_DATA)
                 .remove(SHARED_TOKEN_FIREBASE_SENT)
                 .apply();
-
     }
 
 

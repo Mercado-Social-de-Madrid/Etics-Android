@@ -3,7 +3,6 @@ package net.mercadosocial.moneda.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import net.mercadosocial.moneda.api.common.ApiClient;
 import net.mercadosocial.moneda.model.gallery_entity.Gallery;
 import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
@@ -18,8 +17,6 @@ public class Entity extends Account {
     private String description;
     private String short_description;
 
-    @SerializedName("profile_image")
-    private String logo;
     private String city;
 
     private String phone_number;
@@ -55,11 +52,6 @@ public class Entity extends Account {
         return getName();
     }
 
-    @Override
-    public String getMemberImage() {
-        return getLogo();
-    }
-
 
     public String getCategoriesString() {
 
@@ -80,22 +72,15 @@ public class Entity extends Account {
         if (gallery != null && gallery.getPhotos() != null && !gallery.getPhotos().isEmpty()) {
             return gallery.getPhotos().get(0).getImage();
         } else {
-            return getLogo();
+            return getProfileImage();
         }
     }
 
-    public String getLogo() {
-        if (logo != null && logo.startsWith("http")) {
-            return logo;
-        } else {
-            return ApiClient.MEDIA_URL + logo;
-        }
-    }
 
     public String getLogoThumbnailOrCover() {
 
-        if (getLogo() != null) {
-            return getLogo();
+        if (getProfileImage() != null) {
+            return getProfileImage();
         } else {
             return getImageCover();
         }
@@ -173,11 +158,6 @@ public class Entity extends Account {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
-    }
-
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public Double getLongitude() {

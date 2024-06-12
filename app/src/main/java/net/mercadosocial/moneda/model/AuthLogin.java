@@ -6,10 +6,8 @@ package net.mercadosocial.moneda.model;
 
 public class AuthLogin {
 
-    public static String API_KEY;
-
-    private String username; //juliotest
-    private String password; //boniatos
+    private String username;
+    private String password;
 
     public AuthLogin(String username, String password) {
         this.username = username;

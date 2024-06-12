@@ -91,10 +91,6 @@ public class ApiClient {
             okhttp3.Request.Builder requestBuilder = original.newBuilder();
             requestBuilder.header("Content-Type", "application/json");
 
-            if (AuthLogin.API_KEY != null) {
-                requestBuilder.header("Authorization", AuthLogin.API_KEY);
-            }
-
             requestBuilder.method(original.method(), original.body());
             okhttp3.Request request = requestBuilder.build();
 
@@ -109,13 +105,7 @@ public class ApiClient {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
 //                .sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0])
-                .hostnameVerifier(new HostnameVerifier() {
-                    @Override
-                    public boolean verify(String hostname, SSLSession session) {
-                        return true;
-//                        return hostname.equals("triskelapps.com");
-                    }
-                })
+                .hostnameVerifier((hostname, session) -> true)
                 .build();
 
         return client;

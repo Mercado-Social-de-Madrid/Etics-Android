@@ -56,9 +56,9 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
         binding.tvNoOffers.setVisibility(
                 entity.getOffers() == null || entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
 
-        if (entity.getLogo() != null) {
+        if (entity.getProfileImage() != null) {
             Picasso.get()
-                    .load(entity.getLogo())
+                    .load(entity.getProfileImage())
 //                .placeholder(R.mipmap.img_default_grid)
                     .error(R.mipmap.img_mes_header)
                     .transform(new CircleTransform())

@@ -2,6 +2,8 @@ package net.mercadosocial.moneda.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import net.mercadosocial.moneda.api.common.ApiClient;
+
 import java.io.Serializable;
 
 public abstract class Account implements Serializable {
@@ -19,12 +21,13 @@ public abstract class Account implements Serializable {
     private Boolean intercoop;
     private String registered;
 
+    @SerializedName("profile_image")
+    private String profileImage;
+
     private transient String pin_code;
     private transient String pin_codeRepeat;
 
     public abstract String getMemberName();
-
-    public abstract String getMemberImage();
 
     public String getId() {
         return id;
@@ -84,5 +87,17 @@ public abstract class Account implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getProfileImage() {
+        if (profileImage != null && profileImage.startsWith("http")) {
+            return profileImage;
+        } else {
+            return ApiClient.MEDIA_URL + profileImage.replace("media/", "");
+        }
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

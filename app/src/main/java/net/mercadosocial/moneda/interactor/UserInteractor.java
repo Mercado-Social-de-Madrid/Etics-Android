@@ -2,11 +2,14 @@ package net.mercadosocial.moneda.interactor;
 
 import android.content.Context;
 
+import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.UserApi;
 import net.mercadosocial.moneda.api.model.InvitationRequest;
 import net.mercadosocial.moneda.api.model.MemberStatus;
+import net.mercadosocial.moneda.api.model.ProfileImageReqRes;
 import net.mercadosocial.moneda.api.response.ApiError;
+import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BaseView;
 import net.mercadosocial.moneda.model.Entity;
@@ -101,6 +104,48 @@ public class UserInteractor extends BaseInteractor {
 
                     }
                 });
+    }
+
+    public void updateProfileImage(String imageBase64, final BaseApiCallback<String> callback) {
+
+        if (!Util.isConnected(context)) {
+            baseView.toast(R.string.no_connection);
+            return;
+        }
+
+        ProfileImageReqRes profileImageRequest = new ProfileImageReqRes(imageBase64);
+        Data data = App.getUserData(context);
+        String tokenHeader = "Token " + data.getApi_key();
+
+        getApi().updateProfileImage(tokenHeader, profileImageRequest)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate(actionTerminate)
+                .subscribe(new Observer<Response<ProfileImageReqRes>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<ProfileImageReqRes> response) {
+
+                        if (!response.isSuccessful()) {
+                            ApiError apiError = ApiError.parse(response);
+                            callback.onError(apiError.getMessage());
+                            return;
+                        }
+
+                        callback.onResponse(response.body().getProfileImage());
+
+                    }
+                });
+
+
     }
 
     public void updatePerson(Person person, final BaseApiPOSTCallback callback) {

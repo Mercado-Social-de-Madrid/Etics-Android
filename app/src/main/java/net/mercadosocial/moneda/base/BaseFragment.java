@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import net.mercadosocial.moneda.views.custom_dialog.ProgressDialogMES;
 

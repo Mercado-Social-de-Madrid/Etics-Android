@@ -69,7 +69,7 @@ public class ProfilePresenter extends BasePresenter {
             view.showPersonProfile(data.getPerson());
         }
 
-        refreshProfile(data.isEntity());
+//        refreshProfile(data.isEntity());
     }
 
     private void refreshProfile(boolean isEntity) {
@@ -112,7 +112,7 @@ public class ProfilePresenter extends BasePresenter {
 
         view.showProgressDialog(context.getString(R.string.saving));
         Person person = Person.createPersonProfileData(name, surname, nif);
-        person.setProfile_image(null);
+        person.setProfileImage(null);
         person.setProfile_thumbnail(null);
         userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
             @Override
@@ -157,47 +157,28 @@ public class ProfilePresenter extends BasePresenter {
         resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] bytes = baos.toByteArray();
         String base64 = Base64.encodeToString(bytes, Base64.DEFAULT);
-        String imageData = "image/jpeg;" + base64;
-
 
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(getString(R.string.uploading_image));
         progressDialog.show();
 
-        Data data = App.getUserData(context);
-        if (data.isEntity()) {
-            Entity entity = new Entity();
-            entity.setLogo(imageData);
-            userInteractor.updateEntity(entity, new BaseInteractor.BaseApiPOSTCallback() {
-                @Override
-                public void onSuccess(Integer id) {
-                    progressDialog.dismiss();
-                    loadData();
-                }
+        userInteractor.updateProfileImage(base64, new BaseInteractor.BaseApiCallback<String>() {
+            @Override
+            public void onResponse(String profileImagePath) {
+                progressDialog.dismiss();
 
-                @Override
-                public void onError(String message) {
-                    progressDialog.dismiss();
-                    view.toast(R.string.error_image);
-                }
-            });
-        } else {
-            Person person = new Person();
-            person.setProfile_image(imageData);
-            userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
-                @Override
-                public void onSuccess(Integer id) {
-                    progressDialog.dismiss();
-                    loadData();
-                }
+                Data data = App.getUserData(context);
+                data.getAccount().setProfileImage(profileImagePath);
+                App.saveUserData(context, data);
+                loadData();
+            }
 
-                @Override
-                public void onError(String message) {
-                    progressDialog.dismiss();
-                    view.toast(R.string.error_image);
-                }
-            });
-        }
+            @Override
+            public void onError(String message) {
+                progressDialog.dismiss();
+                view.toast(R.string.error_image);
+            }
+        });
 
     }
 

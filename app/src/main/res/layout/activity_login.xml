@@ -34,6 +34,7 @@
                 android:id="@+id/edit_username"
                 style="@style/EditTextAuth"
                 android:hint="@string/email"
+                android:imeOptions="actionNext"
                 android:inputType="textEmailAddress|textAutoComplete" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -48,6 +49,7 @@
                     android:id="@+id/edit_password"
                     style="@style/EditTextAuth"
                     android:hint="@string/password"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>

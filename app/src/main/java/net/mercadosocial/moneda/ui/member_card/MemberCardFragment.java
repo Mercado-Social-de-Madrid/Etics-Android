@@ -180,7 +180,7 @@ public class MemberCardFragment  extends BaseFragment implements MemberCardView 
         tvMemberId.setText(getString(R.string.member_number, account.getMemberId()));
         tvMemberType.setText(memberType);
         Picasso.get()
-                .load(account.getMemberImage())
+                .load(account.getProfileImage())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .transform(new CircleTransform())
                 .error(R.mipmap.ic_avatar_2)

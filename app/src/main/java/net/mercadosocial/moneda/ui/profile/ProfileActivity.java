@@ -120,8 +120,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.btn_change_image:
 
-                showImageChangeDisabledDialog();
-//                checkPermissionAndOpenChooser();
+//                showImageChangeDisabledDialog();
+                checkPermissionAndOpenChooser();
                 break;
 
             case R.id.btn_logout:
@@ -237,7 +237,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
 
         Picasso.get()
-                .load(person.getProfile_image())
+                .load(person.getProfileImage())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)
                 .transform(new CircleTransform())
@@ -254,7 +254,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         tvProfileType.setText(R.string.entity);
 
         Picasso.get()
-                .load(entity.getLogoThumbnailOrCover())
+                .load(entity.getProfileImage())
                 .placeholder(R.mipmap.ic_avatar_2)
                 .error(R.mipmap.ic_avatar_2)
                 .transform(new CircleTransform())
