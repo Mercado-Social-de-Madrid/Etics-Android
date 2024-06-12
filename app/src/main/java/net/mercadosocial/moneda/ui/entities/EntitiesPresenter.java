@@ -193,7 +193,7 @@ public class EntitiesPresenter extends BasePresenter {
         List<Entity> entitiesToRemove = new ArrayList<>();
 
         for (Entity entity : entities) {
-            if (data.getFav_entities().contains(entity.getId())) {
+            if (data.getFav_entities() != null && data.getFav_entities().contains(entity.getId())) {
                 entity.setFavourite(true);
             } else if (filterEntities != null && filterEntities.isOnlyFavourites()) {
                 entitiesToRemove.add(entity);

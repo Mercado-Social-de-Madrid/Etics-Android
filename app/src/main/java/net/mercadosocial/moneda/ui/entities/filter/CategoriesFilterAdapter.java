@@ -49,9 +49,9 @@ public class CategoriesFilterAdapter extends RecyclerView.Adapter<CategoriesFilt
         holder.checkCategory.setChecked(category.isChecked());
 
         int color = Color.BLACK;
-        if (category.getColor() != null) {
-            color = Color.parseColor(category.getColor());
-        }
+//        if (category.getColor() != null) {
+//            color = Color.parseColor(category.getColor());
+//        }
         holder.checkCategory.setTextColor(color);
         setCheckBoxColor(holder.checkCategory, color, color);
 
