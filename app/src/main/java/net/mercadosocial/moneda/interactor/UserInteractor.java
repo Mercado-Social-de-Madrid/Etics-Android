@@ -34,6 +34,12 @@ public class UserInteractor extends BaseInteractor {
 
     }
 
+    private String getUserToken() {
+        Data data = App.getUserData(context);
+        String userToken = "Token " + data.getApi_key();
+        return userToken;
+    }
+
     public void getPersonProfile(BaseApiCallback<Person> callback) {
 
         if (!Util.isConnected(context)) {
@@ -41,7 +47,7 @@ public class UserInteractor extends BaseInteractor {
             return;
         }
 
-        getApi().getPerson()
+        getApi().getPerson(getUserToken())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Person>>() {
@@ -76,8 +82,7 @@ public class UserInteractor extends BaseInteractor {
             baseView.toast(R.string.no_connection);
             return;
         }
-
-        getApi().getEntity()
+        getApi().getEntity(getUserToken())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 //                .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<Entity>>() {
@@ -106,6 +111,7 @@ public class UserInteractor extends BaseInteractor {
                 });
     }
 
+
     public void updateProfileImage(String imageBase64, final BaseApiCallback<String> callback) {
 
         if (!Util.isConnected(context)) {
@@ -114,10 +120,8 @@ public class UserInteractor extends BaseInteractor {
         }
 
         ProfileImageReqRes profileImageRequest = new ProfileImageReqRes(imageBase64);
-        Data data = App.getUserData(context);
-        String tokenHeader = "Token " + data.getApi_key();
 
-        getApi().updateProfileImage(tokenHeader, profileImageRequest)
+        getApi().updateProfileImage(getUserToken(), profileImageRequest)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate(actionTerminate)
                 .subscribe(new Observer<Response<ProfileImageReqRes>>() {

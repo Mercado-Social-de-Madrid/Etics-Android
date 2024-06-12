@@ -24,16 +24,16 @@ public interface UserApi {
     Observable<Response<ProfileImageReqRes>> updateProfileImage(
             @Header("Authorization") String token, @Body ProfileImageReqRes profileImageRequest);
 
-    @GET("profile/")
-    Observable<Response<Person>> getPerson();
+    @GET("consumer/")
+    Observable<Response<Person>> getPerson(@Header("Authorization") String token);
 
-    @PUT("profile/")
+    @PUT("consumer/")
     Observable<Response<Void>> updatePerson(@Body Person person);
 
-    @GET("entity/")
-    Observable<Response<Entity>> getEntity();
+    @GET("provider/")
+    Observable<Response<Entity>> getEntity(@Header("Authorization") String token);
 
-    @PUT("entity/")
+    @PUT("provider/")
     Observable<Response<Void>> updateEntity(@Body Entity entity);
 
     @POST("invite/")
