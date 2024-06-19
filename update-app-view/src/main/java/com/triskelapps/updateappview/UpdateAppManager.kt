@@ -39,12 +39,16 @@ class UpdateAppManager(private val context: Context) {
         lateinit var PACKAGE_NAME: String
         var VERSION_CODE: Int = 0
 
-        fun init(context: Context, versionCode: Int) {
+        @JvmStatic
+        fun init(context: Context, versionCode: Int, scheduleAppUpdateCheckWorker: Boolean = false) {
             PACKAGE_NAME = context.packageName
             VERSION_CODE = versionCode
+            if (scheduleAppUpdateCheckWorker) {
+                scheduleAppUpdateCheckWork(context)
+            }
         }
 
-        fun scheduleAppUpdateCheckWork(context: Context?) {
+        private fun scheduleAppUpdateCheckWork(context: Context?) {
             val constraints: Constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()

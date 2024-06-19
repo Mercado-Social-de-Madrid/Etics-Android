@@ -19,14 +19,13 @@ import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+import com.triskelapps.updateappview.UpdateAppManager;
 
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.NodeInteractor;
-import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.Util;
-import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
 import java.util.Objects;
 
@@ -83,7 +82,7 @@ public class App extends MultiDexApplication {
 
 //        Toasty.info(this, "Tostaditas moradas").show();
 
-        UpdateAppManager.scheduleAppUpdateCheckWork(this);
+        UpdateAppManager.init(this, BuildConfig.VERSION_CODE, true);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 

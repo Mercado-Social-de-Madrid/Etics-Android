@@ -13,9 +13,14 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.triskelapps.updateappview.databinding.ViewUpdateAppBinding
 
-class UpdateAppView(context: Context, attrs: AttributeSet, defStyleAttr: Int) : FrameLayout(context, attrs, defStyleAttr) {
+class UpdateAppView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
+
     private var updateAppManager = UpdateAppManager(context)
-    private var binding =  ViewUpdateAppBinding.inflate(LayoutInflater.from(context), this, true)
+    private var binding = ViewUpdateAppBinding.inflate(LayoutInflater.from(context), this, true)
 
     private val lifecycleObserver: LifecycleObserver = object : DefaultLifecycleObserver {
         override fun onResume(owner: LifecycleOwner) {
@@ -24,7 +29,7 @@ class UpdateAppView(context: Context, attrs: AttributeSet, defStyleAttr: Int) : 
             updateAppManager.onResume()
         }
     }
-    
+
     init {
 
         binding.btnUpdateApp.setOnClickListener { v: View? -> updateAppManager.onUpdateVersionClick() }
@@ -32,12 +37,11 @@ class UpdateAppView(context: Context, attrs: AttributeSet, defStyleAttr: Int) : 
 
         visibility = GONE
 
-        configure() 
+        configure()
     }
 
 
     private fun configure() {
-        updateAppManager = UpdateAppManager(context)
         updateAppManager.setUpdateAvailableListener { visibility = VISIBLE }
 
         if (context is Activity) {
