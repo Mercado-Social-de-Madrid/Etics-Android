@@ -1,17 +1,22 @@
 package com.triskelapps.updateappview
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.triskelapps.updateappview.databinding.ViewUpdateAppBinding
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 
 class UpdateAppView @JvmOverloads constructor(
     context: Context,
@@ -32,8 +37,20 @@ class UpdateAppView @JvmOverloads constructor(
 
     init {
 
-        binding.btnUpdateApp.setOnClickListener { v: View? -> updateAppManager.onUpdateVersionClick() }
-        binding.btnCloseUpdateAppView.setOnClickListener { v: View? -> visibility = GONE }
+        binding.btnUpdateApp.setOnClickListener { updateAppManager.onUpdateVersionClick() }
+        binding.btnCloseUpdateAppView.setOnClickListener { visibility = GONE }
+
+        UpdateAppManager.updateBarStyle?.let {
+            binding.root.setBackgroundColor(ContextCompat.getColor(context, it.backgroundColor))
+            binding.tvNewVersionAvailable.setTextColor(ContextCompat.getColor(context, it.foregroundElementsColor))
+            binding.btnUpdateApp.setTextColor(ContextCompat.getColor(context, it.foregroundElementsColor))
+            binding.btnCloseUpdateAppView.setColorFilter(ContextCompat.getColor(context, it.foregroundElementsColor))
+
+            it.textStyle?.let {style ->
+                binding.tvNewVersionAvailable.setTextAppearance(context, style)
+                binding.btnUpdateApp.setTextAppearance(context, style)
+            }
+        }
 
         visibility = GONE
 
@@ -42,6 +59,13 @@ class UpdateAppView @JvmOverloads constructor(
 
 
     private fun configure() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            (context as AppCompatActivity).apply {
+                val permissionRequest = permissionsBuilder(Manifest.permission.POST_NOTIFICATIONS).build()
+                permissionRequest.send()
+            }
+        }
         updateAppManager.setUpdateAvailableListener { visibility = VISIBLE }
 
         if (context is Activity) {

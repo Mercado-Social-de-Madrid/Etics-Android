@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.triskelapps.updateappview.NotificationUtils;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.BuildConfig;
@@ -157,6 +158,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
 
         presenter.onResume();
+
     }
 
     @Override

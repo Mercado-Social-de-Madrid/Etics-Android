@@ -19,7 +19,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+import com.triskelapps.updateappview.CheckWorkerConfiguration;
 import com.triskelapps.updateappview.UpdateAppManager;
+import com.triskelapps.updateappview.UpdateBarStyle;
 
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
@@ -28,6 +30,7 @@ import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.Util;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
 
@@ -82,7 +85,9 @@ public class App extends MultiDexApplication {
 
 //        Toasty.info(this, "Tostaditas moradas").show();
 
-        UpdateAppManager.init(this, BuildConfig.VERSION_CODE, true);
+        UpdateBarStyle updateBarStyle = new UpdateBarStyle(R.color.green, R.color.purple, R.style.TextBase_Purple);
+        CheckWorkerConfiguration checkWorkerConfiguration = new CheckWorkerConfiguration(1, TimeUnit.HOURS, 30, TimeUnit.MINUTES);
+        UpdateAppManager.init(this, BuildConfig.VERSION_CODE, R.mipmap.ic_mes_v2_144, updateBarStyle, checkWorkerConfiguration);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 

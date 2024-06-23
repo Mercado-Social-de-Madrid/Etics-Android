@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
+import androidx.work.Operation
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.google.android.gms.tasks.Task
@@ -39,23 +40,41 @@ class UpdateAppManager(private val context: Context) {
         lateinit var PACKAGE_NAME: String
         var VERSION_CODE: Int = 0
 
+        var notificationIcon = 0
+        var updateBarStyle: UpdateBarStyle? = null
+
         @JvmStatic
-        fun init(context: Context, versionCode: Int, scheduleAppUpdateCheckWorker: Boolean = false) {
+        @JvmOverloads
+        fun init(
+            context: Context,
+            versionCode: Int,
+            notificationIcon: Int,
+            updateBarStyle: UpdateBarStyle? = null,
+            checkWorkerConfiguration: CheckWorkerConfiguration? = CheckWorkerConfiguration()
+        ) {
             PACKAGE_NAME = context.packageName
             VERSION_CODE = versionCode
-            if (scheduleAppUpdateCheckWorker) {
-                scheduleAppUpdateCheckWork(context)
+            if (checkWorkerConfiguration != null) {
+                scheduleAppUpdateCheckWork(context, checkWorkerConfiguration)
             }
+            UpdateAppManager.notificationIcon = notificationIcon
+            UpdateAppManager.updateBarStyle = updateBarStyle
+
+            sendRemoteLog("UpdateAppManager init")
         }
 
-        private fun scheduleAppUpdateCheckWork(context: Context?) {
+        private fun scheduleAppUpdateCheckWork(
+            context: Context?,
+            checkWorkerConfiguration: CheckWorkerConfiguration
+        ) {
             val constraints: Constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
             val updateAppCheckWork: PeriodicWorkRequest = PeriodicWorkRequest.Builder(
                 UpdateAppCheckWorker::class.java,
-                8, TimeUnit.HOURS, 60, TimeUnit.MINUTES
+                checkWorkerConfiguration.repeatInterval, checkWorkerConfiguration.repeatIntervalTimeUnit,
+                checkWorkerConfiguration.flexInterval, checkWorkerConfiguration.flexIntervalTimeUnit,
             )
                 .setConstraints(constraints)
                 .build()
@@ -63,7 +82,10 @@ class UpdateAppManager(private val context: Context) {
             WorkManager.getInstance(context!!).enqueueUniquePeriodicWork(
                 "appUpdateCheckWork",
                 ExistingPeriodicWorkPolicy.KEEP, updateAppCheckWork
-            )
+            ).state.observeForever {state: Operation.State ->
+
+                sendRemoteLog("Periodic work status: $state")
+            }
         }
     }
 
@@ -130,7 +152,7 @@ class UpdateAppManager(private val context: Context) {
                 .setAllowAssetPackDeletion(true).build()
 
             if (context is Activity) {
-                appUpdateManager.startUpdateFlow(appUpdateInfo!!, context as Activity, options)
+                appUpdateManager.startUpdateFlow(appUpdateInfo!!, context, options)
             }
         }
     }
