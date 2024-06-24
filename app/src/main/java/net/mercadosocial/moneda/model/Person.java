@@ -12,16 +12,13 @@ import java.util.List;
 
 public class Person extends Account {
 
-    private String nif;
-    private String name;
+    @SerializedName("first_name")
+    private String firstName;
+    @SerializedName("last_name")
+    private String lastName;
     private String email;
-    private String surname;
-    private String profile_thumbnail;
     private String address;
     private List<String> fav_entities;
-    private String city;
-    private Boolean is_guest_account;
-    private String expiration_date;
 
     public static Person createPersonProfileFavourites(List<String> favEntitiesUpdated) {
         Person person = new Person();
@@ -31,45 +28,16 @@ public class Person extends Account {
 
     public static Person createPersonProfileData(String name, String surname, String nif) {
         Person person = new Person();
-        person.setName(name);
-        person.setSurname(surname);
-        person.setNif(nif);
+        person.setFirstName(name);
+        person.setLastName(surname);
+        person.setCif(nif);
         return person;
     }
 
     @Override
     public String getMemberName() {
-        return String.format("%s %s", getName(), getSurname());
+        return String.format("%s %s", getFirstName(), getLastName());
     }
-
-    public String getNif() {
-        return nif;
-    }
-
-    public void setNif(String nif) {
-        this.nif = nif;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getProfile_thumbnail() {
-        return ApiClient.MEDIA_URL + profile_thumbnail;
-    }
-
 
     public String getAddress() {
         return address;
@@ -95,37 +63,19 @@ public class Person extends Account {
         this.fav_entities = fav_entities;
     }
 
-    public String getCity() {
-        return city;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getExpiration_date() {
-//        if (true) {
-//            return "20/05/2019";
-//        }
-        return expiration_date;
+    public String getLastName() {
+        return lastName;
     }
 
-
-    public void setExpiration_date(String expiration_date) {
-        this.expiration_date = expiration_date;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-
-    public boolean is_guest_account() {
-        return is_guest_account == null ? false : is_guest_account;
-    }
-
-    public void setIs_guest_account(boolean is_guest_account) {
-        this.is_guest_account = is_guest_account;
-    }
-
-
-    public void setProfile_thumbnail(String profile_thumbnail) {
-        this.profile_thumbnail = profile_thumbnail;
-    }
-
 }

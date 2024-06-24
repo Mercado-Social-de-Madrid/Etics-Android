@@ -27,7 +27,6 @@ import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.model.Person;
-import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 
@@ -226,15 +225,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void showPersonProfile(Person person) {
 
-        tvProfileName.setText(String.format("%s %s", person.getName(), person.getSurname()));
+        tvProfileName.setText(String.format("%s %s", person.getFirstName(), person.getLastName()));
         tvProfileMarket.setText(getApp().getCurrentNode().getName());
 
-        if (person.is_guest_account()) {
-            String dateFormatted = DateUtils.convertDateApiToUserFormat(person.getExpiration_date());
-            tvProfileType.setText(String.format(getString(R.string.guest_account_info_format), dateFormatted));
-        } else {
-            tvProfileType.setText(R.string.consumer);
-        }
+        tvProfileType.setText(R.string.consumer);
 
         Picasso.get()
                 .load(person.getProfileImage())

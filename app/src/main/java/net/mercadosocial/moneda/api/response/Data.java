@@ -24,16 +24,13 @@ public class Data {
         if (entity != null) {
             return entity.getName();
         } else {
-            return person.getName() + (withSurnamesPerson ? " " + person.getSurname() : "");
+            return person.getFirstName() + (withSurnamesPerson ? " " + person.getLastName() : "");
         }
     }
 
     public String getLogoThumbnail() {
-        if (entity != null) {
-            return entity.getProfileImage();
-        } else {
-            return person.getProfile_thumbnail();
-        }
+        Account account = entity != null ? entity : person;
+        return account != null ? account.getProfileImage() : null;
     }
 
     public void setFav_entities(List<String> favEntitiesUpdated) {
@@ -54,29 +51,12 @@ public class Data {
         }
     }
 
-    public String getCityCode() {
-        if (entity != null) {
-            return entity.getCity();
-        } else {
-            return person.getCity();
-        }
-    }
-
-
-    public String getApiKeyFull() {
-        return "ApiKey " + getUsername() + ":" + getApi_key();
-    }
-
     public boolean isEntity() {
         return entity != null;
     }
 
     public String getApi_key() {
         return api_key;
-    }
-
-    public void setApi_key(String api_key) {
-        this.api_key = api_key;
     }
 
     public Entity getEntity() {
@@ -104,13 +84,7 @@ public class Data {
     }
 
     public Account getAccount() {
-        if (person != null) {
-            return person;
-        } else if (entity != null) {
-            return entity;
-        } else {
-            return null;
-        }
+        return entity != null ? entity : person;
     }
 
 }

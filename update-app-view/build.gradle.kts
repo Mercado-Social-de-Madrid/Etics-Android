@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    `maven-publish`
 }
 
 
@@ -31,21 +32,22 @@ android {
 
     viewBinding.enable = true
 
-//    publishing {
-//        publications {
-//            register<MavenPublication>("release") {
-//                groupId = "com.my-company"
-//                artifactId = "my-library"
-//                version = "1.0"
-//
-//                afterEvaluate {
-//                    from(components["release"])
-//                }
-//            }
-//        }
-//    }
-
 }
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.triskelapps"
+            artifactId = "update-app-view"
+            version = "0.1"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
+
 
 dependencies {
 

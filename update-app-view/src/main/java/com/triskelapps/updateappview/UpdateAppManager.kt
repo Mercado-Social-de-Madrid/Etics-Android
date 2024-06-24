@@ -19,7 +19,6 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import java.util.concurrent.TimeUnit
 
 class UpdateAppManager(private val context: Context) {
 
@@ -81,7 +80,7 @@ class UpdateAppManager(private val context: Context) {
 
             WorkManager.getInstance(context!!).enqueueUniquePeriodicWork(
                 "appUpdateCheckWork",
-                ExistingPeriodicWorkPolicy.KEEP, updateAppCheckWork
+                ExistingPeriodicWorkPolicy.UPDATE, updateAppCheckWork
             ).state.observeForever {state: Operation.State ->
 
                 sendRemoteLog("Periodic work status: $state")

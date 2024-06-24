@@ -2,6 +2,7 @@ package net.mercadosocial.moneda;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -83,11 +84,10 @@ public class App extends MultiDexApplication {
                 .setTextColor(ContextCompat.getColor(this, R.color.white))
                 .apply();
 
-//        Toasty.info(this, "Tostaditas moradas").show();
-
         UpdateBarStyle updateBarStyle = new UpdateBarStyle(R.color.green, R.color.purple, R.style.TextBase_Purple);
-        CheckWorkerConfiguration checkWorkerConfiguration = new CheckWorkerConfiguration(1, TimeUnit.HOURS, 30, TimeUnit.MINUTES);
-        UpdateAppManager.init(this, BuildConfig.VERSION_CODE, R.mipmap.ic_mes_v2_144, updateBarStyle, checkWorkerConfiguration);
+        CheckWorkerConfiguration checkWorkerConfiguration = new CheckWorkerConfiguration(8, TimeUnit.HOURS, 2, TimeUnit.HOURS);
+        UpdateAppManager.init(this, BuildConfig.VERSION_CODE, R.mipmap.ic_mes_v2_144,
+                updateBarStyle, checkWorkerConfiguration);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 

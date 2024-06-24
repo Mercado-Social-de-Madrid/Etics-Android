@@ -17,6 +17,9 @@ public abstract class Account implements Serializable {
 
     @SerializedName("member_id")
     private String memberId;
+
+    private String cif;
+
     @SerializedName("is_intercoop")
     private Boolean intercoop;
     private String registered;
@@ -103,5 +106,13 @@ public abstract class Account implements Serializable {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
     }
 }

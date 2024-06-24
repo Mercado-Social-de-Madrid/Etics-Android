@@ -13,6 +13,7 @@ import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BasePresenter;
 import net.mercadosocial.moneda.model.Account;
+import net.mercadosocial.moneda.model.Node;
 
 import java.util.Locale;
 
@@ -86,7 +87,8 @@ public class MemberCardPresenter extends BasePresenter {
 
         view.showMemberData(account, memberType);
 
-        String qrText = memberCheckHelper.createQrUrl(data.getCityCode(), account.getMemberId());
+        Node node = getApp().getCurrentNode();
+        String qrText = memberCheckHelper.createQrUrl(node.getShortname(), account.getMemberId());
         int sizeQR = context.getResources().getDimensionPixelSize(R.dimen.size_qr);
 
         Bitmap qrBitmap = QRCode.from(qrText).withSize(sizeQR, sizeQR).bitmap();
@@ -104,8 +106,8 @@ public class MemberCardPresenter extends BasePresenter {
 
     public void onManualMemberIdCheck(String memberId) {
 
-        Data data = App.getUserData(context);
-        memberCheckHelper.checkMemberStatus(data.getCityCode(), memberId);
+        Node node = getApp().getCurrentNode();
+        memberCheckHelper.checkMemberStatus(node.getShortname(), memberId);
 
     }
 }

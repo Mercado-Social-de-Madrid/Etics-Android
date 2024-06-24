@@ -13,7 +13,6 @@ public class Entity extends Account {
 
     private String name;
     private String email;
-    private String cif;
     private String description;
     private String short_description;
 
@@ -125,14 +124,6 @@ public class Entity extends Account {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
-    }
-
-    public String getCif() {
-        return cif;
-    }
-
-    public void setCif(String cif) {
-        this.cif = cif;
     }
 
     public String getDescription() {

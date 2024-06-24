@@ -469,12 +469,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             String nodeName = getApp().getCurrentNode().getName();
             tvMES.setText(String.format(getString(R.string.mes_format), nodeName));
-            if (!userData.isEntity()) {
-                if (userData.getPerson().is_guest_account()) {
-                    String dateFormatted = DateUtils.convertDateApiToUserFormat(userData.getPerson().getExpiration_date());
-                    tvGuestInfo.setText(String.format(getString(R.string.guest_account_info_format), dateFormatted));
-                }
-            }
+
 
         } else {
             imgAvatar.setImageResource(R.mipmap.ic_avatar_2);

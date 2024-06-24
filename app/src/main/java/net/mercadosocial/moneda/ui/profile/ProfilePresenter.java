@@ -107,42 +107,7 @@ public class ProfilePresenter extends BasePresenter {
         }
     }
 
-
-    public void onSaveProfile(String name, String surname, String nif) {
-
-        view.showProgressDialog(context.getString(R.string.saving));
-        Person person = Person.createPersonProfileData(name, surname, nif);
-        person.setProfileImage(null);
-        person.setProfile_thumbnail(null);
-        userInteractor.updatePerson(person, new BaseInteractor.BaseApiPOSTCallback() {
-            @Override
-            public void onSuccess(Integer id) {
-                view.hideProgressDialog();
-                Toasty.success(context, getString(R.string.profile_saved)).show();
-                updateLocalData(person);
-            }
-
-            @Override
-            public void onError(String message) {
-                view.hideProgressDialog();
-                Toasty.error(context, message).show();
-
-            }
-        });
-    }
-
-    private void updateLocalData(Person person) {
-        Data data = App.getUserData(context);
-        Person personSaved = data.getPerson();
-        personSaved.setName(person.getName());
-        personSaved.setSurname(person.getSurname());
-        personSaved.setNif(person.getNif());
-        App.saveUserData(context, data);
-
-    }
-
     public void onImagePicked(File file) {
-
 
         Bitmap resizedBitmap;
         try {
