@@ -13,10 +13,10 @@ android {
 
     defaultConfig {
         applicationId "net.mercadosocial.moneda"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 34
-        versionCode 416
-        versionName "4.1.6"
+        versionCode 445
+        versionName "4.4.5"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true //important
@@ -48,6 +48,10 @@ android {
     namespace 'net.mercadosocial.moneda'
 
     viewBinding.enabled = true
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 

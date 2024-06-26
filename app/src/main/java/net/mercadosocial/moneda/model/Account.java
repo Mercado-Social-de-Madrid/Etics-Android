@@ -90,15 +90,7 @@ public abstract class Account implements Serializable {
     }
 
     public String getProfileImage() {
-        if (profileImage == null) {
-            return null;
-        }
-
-        if (profileImage.startsWith("http")) {
-            return profileImage;
-        } else {
-            return ApiClient.MEDIA_URL + profileImage.replace("media/", "");
-        }
+        return profileImage;
     }
 
     public void setProfileImage(String profileImage) {
