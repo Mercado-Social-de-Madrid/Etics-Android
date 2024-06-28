@@ -91,6 +91,7 @@ import java.util.Objects;
                     public void onResponse(Entity entity) {
                         data.setEntity(entity);
                         App.saveUserData(context, data);
+                        view.showUserData(data);
                     }
 
                     @Override
@@ -104,6 +105,7 @@ import java.util.Objects;
                     public void onResponse(Person person) {
                         data.setPerson(person);
                         App.saveUserData(context, data);
+                        view.showUserData(data);
                     }
 
                     @Override

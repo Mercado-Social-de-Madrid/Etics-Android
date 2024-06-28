@@ -90,7 +90,7 @@ public abstract class Account implements Serializable {
     }
 
     public String getProfileImage() {
-        return profileImage;
+        return ApiClient.MEDIA_URL + profileImage;
     }
 
     public void setProfileImage(String profileImage) {

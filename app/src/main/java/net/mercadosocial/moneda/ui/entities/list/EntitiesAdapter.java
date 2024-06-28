@@ -55,12 +55,14 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         holder.tvEntityCategory.setVisibility(View.GONE);
 
         String urlImageCover = entity.getImageCover();
-        Picasso.get()
-                .load(urlImageCover)
-                .placeholder(R.mipmap.img_mes_default_banner_2)
-                .error(R.mipmap.img_mes_default_banner_2)
+        if (urlImageCover != null && !urlImageCover.isEmpty()) {
+            Picasso.get()
+                    .load(urlImageCover)
+                    .placeholder(R.mipmap.img_mes_default_banner_2)
+                    .error(R.mipmap.img_mes_default_banner_2)
 //                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                .into(holder.imgEntity);
+                    .into(holder.imgEntity);
+        }
 
         holder.tvAddress.setText(entity.getAddress());
 

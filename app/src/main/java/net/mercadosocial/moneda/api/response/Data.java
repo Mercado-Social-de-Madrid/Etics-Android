@@ -32,7 +32,7 @@ public class Data {
         if (entity != null) {
             return entity.getProfileImage();
         } else {
-            return person.getProfile_thumbnail();
+            return person.getProfileImage();
         }
     }
 

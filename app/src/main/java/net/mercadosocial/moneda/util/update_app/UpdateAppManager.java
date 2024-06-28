@@ -48,12 +48,12 @@ public class UpdateAppManager {
                 .build();
 
         PeriodicWorkRequest updateAppCheckWork = new PeriodicWorkRequest.Builder(UpdateAppCheckWorker.class,
-                8, TimeUnit.HOURS,60, TimeUnit.MINUTES)
+                8, TimeUnit.HOURS,2, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build();
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork("appUpdateCheckWork",
-                ExistingPeriodicWorkPolicy.KEEP, updateAppCheckWork);
+                ExistingPeriodicWorkPolicy.UPDATE, updateAppCheckWork);
 
     }
 
