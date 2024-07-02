@@ -2,6 +2,7 @@ package net.mercadosocial.moneda.ui.main;
 
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,7 +15,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
@@ -314,6 +318,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         .show();
             } else if (itemId == R.id.menuItem_invitations) {
                 InvitationsPresenter.launchInvitationsActivity(this);
+            } else if (itemId == R.id.menuItem_change_language) {
+                showChangeLanguagePicker();
             } else if (itemId == R.id.menuItem_contact_email) {
                 String emailMES = node.getContactEmail();
 
@@ -333,6 +339,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 //        toast("Pulsado: " + item.getTitle());
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    private void showChangeLanguagePicker() {
+
+        new AlertDialog.Builder(this)
+                .setSingleChoiceItems(R.array.language_names, -1, (dialog, which) -> {
+                    String[] languages = getResources().getStringArray(R.array.language_codes);
+                    String languageSelected = languages[which];
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageSelected);
+                    AppCompatDelegate.setApplicationLocales(appLocale);
+                }).show();
+
     }
 
 

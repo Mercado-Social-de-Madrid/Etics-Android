@@ -13,6 +13,12 @@
         android:visible="true"/>
 
     <item
+        android:id="@+id/menuItem_change_language"
+        android:icon="@drawable/ic_language"
+        android:title="@string/change_language"
+        android:visible="true"/>
+
+    <item
         android:id="@+id/menuItem_invitations"
         android:icon="@mipmap/ic_invitation"
         android:title="@string/invitations"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_names">
+        <item>Castellano</item>
+        <item>Euskara</item>
+    </string-array>
+
+    <string-array name="language_codes">
+        <item>es</item>
+        <item>eu</item>
+    </string-array>
+</resources>
