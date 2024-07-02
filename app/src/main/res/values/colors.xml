@@ -27,28 +27,16 @@
     <color name="green_gradient_light">@color/green_light</color>
     <color name="transblack_entities">#77000000</color>
     <color name="white">#FFF</color>
-    <color name="white_90">#e6ffffff</color>
-    <color name="orange">#e78f00</color>
     <color name="grey">#807f7f</color>
-
-    <color name="grey_empty_state">#A8A8A8</color>
-
-    <color name="tab_selected">#F8FCE1</color>
-    <color name="tab_unselected">#E7F498</color>
-
-    <color name="bg_edittext">#F8FCE1</color>
 
     <color name="grey_disabled">#7dababab</color>
     <color name="grey_unselected">#999999</color>
     <color name="red">#F00</color>
     <color name="red_dark">#d10000</color>
-    <color name="red_orange">#F7722F</color>
     <color name="yellow">#F7E32F</color>
     <color name="black_semitransp_pressed">#34000000</color>
     <color name="black_semitransp">#60000000</color>
 
-    <color name="purple_gradient_1">#f0e5f2</color>
-    <color name="purple_gradient_2">#b680c1</color>
     <color name="grey_toast">#912991</color>
     <color name="orange_corp">#f78154</color>
     <color name="grey_info">#f8f7f2</color>

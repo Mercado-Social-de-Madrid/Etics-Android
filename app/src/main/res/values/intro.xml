@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title_intro_0">¡Hola!</string>
-    <string name="text_intro_0">Bienvenida a la app del Mercado Social</string>
-
-    <string name="title_intro_1">Somos</string>
-    <string name="text_intro_1">una red que promueve la economía social y solidaria</string>
-
-    <string name="title_intro_2">Aquí podrás</string>
-    <string name="text_intro_2">encontrar las entidades del Mercado Social y sus ofertas</string>
-
-    <string name="title_intro_3">Accederás</string>
-    <string name="text_intro_3">a las últimas novedades y convocatorias del Mercado Social</string>
-
-    <string name="title_intro_4">Tendrás</string>
-    <string name="text_intro_4">acceso a tu carné de socia digital</string>
-
-    <string name="title_intro_5">Para beneficiarte</string>
-    <string name="text_intro_5">de las ventajas y descuentos de entidades del MES</string>
 </resources>

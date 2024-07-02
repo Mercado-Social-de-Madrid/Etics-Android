@@ -2,140 +2,37 @@
 
 <resources>
     <string name="app_name">Mercado Social</string>
-
-    <string name="currency_name">&currency_name;</string>
-    <string name="currency_name_plural">&currency_name_plural;</string>
-    <string name="currency_name_abrev">&currency_name_abrev;</string>
-
-
+    
     <string name="entities">Entidades</string>
-    <string name="wallet">Monedero</string>
-    <string name="profile">Perfil</string>
 
-    <string name="favourite">Favorito</string>
-    <string name="offers">Ofertas</string>
-    <string name="recipient">Destinataria</string>
-    <string name="calculate_bonus">Calcular bonificación</string>
-    <string name="send_payment">Enviar pago</string>
-    <string name="mes_send_payment">MES - Enviar pago</string>
-    <string name="send_payment_next">Enviar pago ></string>
-    <string name="news">Noticias</string>
     <string name="open">Abrir</string>
-    <string name="start_session">Iniciar sesión</string>
     <string name="register">Registrarse</string>
     <string name="enter">Entrar</string>
-    <string name="about_mes">Sobre el Mercado Social</string>
-    <string name="about_boniatos">Qué son los &currency_name_plural;</string>
-    <string name="map">Mapa</string>
     <string name="map_list">Mapa - Lista</string>
     <string name="the_social_market">El Mercado Social</string>
-    <string name="the_boniato">El &currency_name;</string>
-    <string name="how_it_works">Cómo funciona</string>
-    <string name="get_boniatos">Obtener &currency_name_plural;</string>
     <string name="search">Buscar</string>
-    <string name="select_with_following_buttons">Seleccionar con los siguientes botones</string>
-    <string name="recipient_two_dots">Destinataria:</string>
-    <string name="favourite_fem">Favorita</string>
-    <string name="list">Lista</string>
-    <string name="qr_code">Código QR</string>
-    <string name="amount_two_dots">Importe:</string>
-    <string name="calculate_bonus_two_lines">Calcular\nbonificación</string>
-    <string name="focus_qr_code_entity">Enfoca al código QR de la entidad</string>
-    <string name="select_recipient">Elige destinataria</string>
-    <string name="persons">Personas</string>
     <string name="remember_password">Recordar\ncontraseña</string>
-    <string name="repeat_password">Repetir contraseña</string>
-    <string name="person">Persona</string>
     <string name="entity">Entidad</string>
-    <string name="scan_qr">Escanear QR</string>
-    <string name="total_amount_purchase">Importe total de la compra</string>
-    <string name="boniatos_payment">Pago en &currency_name_plural;</string>
-    <string name="summary_confirm_payment">Resumen / confirmación del pago</string>
-    <string name="security_pin_code">Código PIN de seguridad</string>
-    <string name="confirm">Confirmar</string>
-    <string name="return_back">Volver</string>
-    <string name="sending_payment">Enviando pago...</string>
-    <string name="accepts">Acepta:</string>
-    <string name="bonus_return">Bonifica:</string>
     <string name="entity_offers">Ofertas de la entidad</string>
 
     <string name="start">¿Comenzamos?</string>
     <string name="go_to_entities_list">¡Comenzar!</string>
-    <string name="intro_member_info">Para obtener bonificaciones en &currency_name_plural; y pagar con ellos, has de ser soci@ del Mercado Social o que alguna persona socia te invite.</string>
-    <string name="discover_how">Descubre cómo \></string>
-    <string name="your_balance_is">Tienes un saldo de:</string>
-    <string name="pending_payments_warning">Tienes %d pagos pendientes de revisión</string>
-    <string name="sent_payments_warning">Te tienen que revisar %d pagos</string>
-    <string name="consult_statistics">Consulta tus estadísticas de consumo y bonificaciones</string>
-    <string name="graphics">Gráficas</string>
-    <string name="transactions">Movimientos</string>
-    <string name="operations">Operaciones</string>
-    <string name="continue_arrow">Continuar \></string>
     <string name="permission_denied">Permiso denegado</string>
     <string name="need_access_camera_scan_qr">Se necesita acceder a la cámara de tu móvil para escanear el código</string>
     <string name="need_access_camera_profile_photo">Se necesita acceder a la cámara de tu móvil para hacer foto de perfil. No es necesario si vas a escoger tu imagen desde la memoria del teléfono</string>
     <string name="qr_code_scan">Escanear código QR</string>
     <string name="go_ahead">Adelante</string>
-    <string name="new_payment">Nuevo pago</string>
-    <string name="select_amount">Indica la cantidad</string>
-    <string name="favourites">Favoritos</string>
-    <string name="total_amount_label">1. Introduce el importe total de tu compra en Euros</string>
-    <string name="boniatos_amount_label">2. Introduce la cantidad de &currency_name_plural; que vas a pagar (1 &currency_name;
-        equivale a 1€)</string>
-    <string name="enter_concept_optional">3. Introduce el concepto del pago (Opcional)</string>
-    <string name="check_payment_data">Revisa los datos</string>
-    <string name="payment_amount_label">Vas a pagar:</string>
-    <string name="payment_recipient_label">a:</string>
-    <string name="payment_bonus_is_label">Tu bonificación es:</string>
-    <string name="enter_pin_code">Introduce tu código PIN</string>
-    <string name="confirm_payment">Confirmar pago</string>
-    <string name="euros">Euros</string>
-    <string name="max_boniatos_accepted_by_entity">Máximo aceptado por la entidad: %s &currency_name_abrev;\nTu saldo: %s &currency_name_abrev;</string>
-    <string name="invalid_number">El número no es válido</string>
-    <string name="boniatos_amount_exceed_accepted_payment">Esta entidad acepta un máximo de %s &currency_name_plural;
-        para esta compra</string>
-    <string name="click_continue">Pulsa continuar</string>
-    <string name="invalid_pin_code">Código PIN inválido</string>
     <string name="welcome">¡Bienvenid@!</string>
-    <string name="register_to_use_wallet_text">Para usar tu monedero has de ser soci@ del Mercado Social.</string>
-    <string name="welcome_name_wallet">¡Hola %s!</string>
     <string name="entity_info">Información de entidad</string>
-    <string name="payment_fail">Algo ha fallado en el pago</string>
-    <string name="payment_done">Pago realizado</string>
-    <string name="payment_done_message">El pago a %s se ha realizado correctamente.\nEn cuanto confirme la entidad ¡recibirás tu bonificación de %s &currency_name_plural;!</string>
     <string name="email">Email</string>
-    <string name="nif">NIF</string>
-    <string name="name">Nombre</string>
-    <string name="cif">CIF</string>
-    <string name="address">Dirección</string>
     <string name="invalid_email">Email inválido</string>
-    <string name="paswords_does_not_match">Las contraseñas no coinciden</string>
-    <string name="select_person_or_entity">Selecciona persona o entidad</string>
-    <string name="password_empty">La contraseña no puede estar vacía</string>
-    <string name="exit_register">Salir del registro</string>
-    <string name="exit_register_message">Si sales ahora del registro se perderán los datos introducidos hasta ahora</string>
-    <string name="exit">Salir</string>
-    <string name="remain">Quedarse</string>
-    <string name="password_at_least_5_chars">La contraseña debe tener al menos 5 caracteres</string>
-    <string name="phone_number">Número de teléfono</string>
-    <string name="social_currency">Moneda social</string>
-    <string name="how_much_boniatos_accept_max">Cuánto aceptas en &currency_name_plural;</string>
-    <string name="bonus_percent">Porcentaje de bonificación</string>
-    <string name="description_entity">Descripción de tu entidad</string>
-    <string name="label_fill_info_later">Puedes completar esta información con calma más tarde. Te enviaremos un correo una vez completado el registro.</string>
     <string name="not_account_yet_register">¿No tienes cuenta?\n¡Regístrate!</string>
-    <string name="already_account_login">Si ya tienes tu cuenta, entra pulsando aquí</string>
-    <string name="social_balance_info_soon">En breve verás la información del balance social ;)</string>
     <string name="offer">Oferta</string>
     <string name="new_offer">Nueva oferta</string>
     <string name="new_offer_by">Nueva oferta de %s</string>
     <string name="news_mes">Noticia del MES</string>
-    <string name="cancel_payment">Cancelar pago</string>
-    <string name="cancel_payment_message">Si sales se perderán los datos del pago actual. Confirma para salir</string>
 
     <string name="search_entities">Buscar entidades</string>
-    <string name="payment_enter_user_before">Para enviar un pago debes registrar tu usuario primero</string>
-    <string name="end_date_offer">Hasta: %s</string>
     <string name="mes_news">Noticia del MES</string>
     <string name="mes_news_message_format"><![CDATA[
             <b>%s</b><p>
@@ -145,154 +42,47 @@
     <string name="see_full_offer">Ver oferta completa</string>
     <string name="see_more">Ver más</string>
     <string name="invalid_link">El enlace no es válido</string>
-    <string name="reject">Rechazar</string>
-    <string name="decide_later"><![CDATA[Decidir más tarde >]]></string>
-    <string name="processing">Procesando</string>
-    <string name="pending_payments">Pagos pendientes</string>
-    <string name="has_pending_payments_to_confirm">Tu entidad tiene pagos pendientes de confirmar</string>
-    <string name="income_received">Ingreso recibido</string>
-    <string name="income_received_format">Ingreso recibido: %s &currency_name_plural;</string>
-    <string name="bonus_percent_entities">Bonificación para entidades</string>
-    <string name="cannot_pay_yourself">¿Seguro que te quieres pagar a ti misma? ;)</string>
-    <string name="no_more_pending_payments">No hay más pagos pendientes</string>
-    <string name="bonus">Bonificación</string>
-    <string name="balance">Saldo</string>
-    <string name="date_and_time">Fecha y hora</string>
     <string name="account">Cuenta</string>
-    <string name="amount">Cantidad</string>
     <string name="no_offers_right_now">Ahora mismo esta entidad no tiene ofertas activas</string>
-    <string name="go_to_transactions">Ver movimientos</string>
-    <string name="entity_qr">QR de tu entidad</string>
-    <string name="user_not_recognized">Entidad no reconocida</string>
-    <string name="entity_recognized_message">Se ha escaneado el código de la entidad %s.\n\nSi es correcto pulsa \'Continuar\' para seguir con el pago</string>
-    <string name="purchase">Compra</string>
-    <string name="yout_balance_is">Tu saldo es de %s &currency_name_abrev;</string>
-    <string name="get_boniatos_under_construction_message">
-        Esta sección estará en breve disponible.\n
-        Aquí se podrán comprar &currency_name_plural; automáticamente mediante pago por tarjeta de débito o crédito.\n
-        El pago y los datos de la tarjeta son totalmente seguros al implementarse a través de la pasarela Stripe\n
-        De momento para la beta vamos a simular esa compra de &currency_name_plural;, simplemente escribe la cantidad que quieres recargar:
-    </string>
-    <string name="recharge">Recargar</string>
-    <string name="amount_must_be_positive">La cantidad debe ser mayor que 0</string>
-    <string name="amount_cant_be_negative">La cantidad no puede ser negativa</string>
-    <string name="pin_repeat">Repite PIN</string>
-    <string name="pin">PIN</string>
-    <string name="pin_code">Código PIN</string>
-    <string name="pin_code_register_explanation">Por seguridad en cada transacción se te pedirá el código PIN que especifiques aquí.</string>
-    <string name="name_cannot_be_empty">El nombre no puede estar vacío</string>
-    <string name="nif_cannot_be_empty">El nif no puede estar vacío</string>
-    <string name="pin_code_4_lenght">El código PIN debe tener 4 dígitos</string>
-    <string name="invalid_pin_number">PIN no válido. Sólo números del 0 al 9</string>
-    <string name="pin_codes_does_not_match">Los códigos PIN no coinciden</string>
-    <string name="back_with_arrow"><![CDATA[< Atrás]]></string>
-    <string name="invalid_field">Campo no válido</string>
-    <string name="new_payment_received">Nuevo pago recibido</string>
-    <string name="username_or_email">Usuari@ o Email</string>
 
-    <string name="at_least_x_characters">Minimo %d caracteres</string>
     <string name="password">Contraseña</string>
     <string name="check">Comprobar</string>
-    <string name="login">Acceder</string>
 
-    <string name="surname">Apellidos</string>
-    <string name="payment_received_message"><![CDATA[
-    <font color="#af64ac"><b>%s</b></font> te ha enviado un pago de<br>
-    <font color="#af64ac"><b>%s </b></font><p>La cantidad total es de <font color="#af64ac"><b>%s</b></font><br>
-    La bonificaci&oacute;n a enviar es de <font color="#af64ac"><b>%s</b></font>
-    ]]></string>
-    <string name="finish_pending_payments">¡Terminaste!</string>
     <string name="contact">Contacto</string>
     <string name="web">Página web</string>
-    <string name="facebook">Facebook</string>
-    <string name="twitter">Twitter</string>
-    <string name="youtube">Youtube</string>
-    <string name="linkedin">Linkedin</string>
-    <string name="instagram">Instagram</string>
 
     <string name="email_contact_subject">Contacto desde la app Android</string>
-    <string name="congratulations">¡Enhorabuena!</string>
-    <string name="bonification_received_message"><![CDATA[
-        Has recibido <font color="#af64ac"><b>%s %s</b></font> de bonificación por tu compra en el Mercado Social.]]></string>
-    <string name="income_received_buy_mes_format"><![CDATA[
-        <font color="#af64ac"><b>%s %s</b></font> comprados al Mercado Social]]></string>
-    <string name="income_was_made_format"><![CDATA[
-        Te han hecho una transacci&oacute;n de <font color="#af64ac"><b>%s %s</b></font>]]></string>
     <string name="already_have_account">Ya tengo cuenta</string>
     <string name="dont_have_account">No tengo cuenta</string>
-    <string name="purchase_success_message">Se ha realizado con éxito tu compra de %s &currency_name_plural;</string>
-    <string name="purchase_verb">Comprar</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="register_complete">Regitro completado</string>
-    <string name="register_email">Email de registro</string>
     <string name="send_to_email">Enviar al correo</string>
     <string name="remember_password_success_message">Hemos enviado las instrucciones para resetear tu contraseña a tu correo electrónico.</string>
     <string name="go_to_email">Ir al correo</string>
-    <string name="close_arrow"><![CDATA[Cerrar >]]></string>
-    <string name="enter_with_your_account">Entra con tu cuenta</string>
     <string name="error_in">Error en %s:</string>
     <string name="access_data_incorrect">Datos de acceso incorrectos</string>
     <string name="info">Información</string>
-    <string name="bonus_cannot_be_zero">El porcentaje de bonificación tiene que ser mayor que 0</string>
-    <string name="max_percent_payment_cannot_be_zero">Todas las entidades deben aceptar un porcentaje mayor que 0 en sus pagos</string>
-    <string name="ok">OK</string>
-    <string name="novelties">Novedades</string>
-    <string name="concept_optional">Concepto (opcional)</string>
-    <string name="concept">Concepto</string>
-    <string name="transaction_detail">Detalle del movimiento</string>
-
-    <string name="transaction_detail_message">
-        <![CDATA[
-        Fecha y hora: <font color="#af64ac"><b>%s</b></font><p>
-        %s: <font color="#af64ac"><b>%s</b></font><p>
-        Cantidad: <font color="#af64ac"><b>%s</b></font><p>
-        Concepto: <font color="#af64ac"><b>%s</b></font><p>
-        Saldo final: <font color="#af64ac"><b>%s</b></font>
-        ]]>
-    </string>
-    <string name="payment_sent_to">Pago enviado a</string>
-    <string name="payment_received_from">Pago recibido de</string>
-    <string name="bonus_received_from">Bonificación recibida de</string>
-    <string name="bonus_sent_to">Bonificación enviada a</string>
-    <string name="currency_purchase">Compra de &currency_name_plural;</string>
 
 
-    <string name="graphics_x_label">Saldo por días</string>
-    <string name="concept_two_dots">Concepto:</string>
-    <string name="sent_payments_pending_check">Pagos enviados pendientes de revisión</string>
-    <string name="sent_payments">Pagos enviados</string>
-    <string name="info_max_accept_percent">Máximo pago en &currency_name_plural;: es el máximo % de pago en &currency_name_plural;
-        que acepta tu entidad. Recomendamos aceptar el 100%, ya que si se acumulan muchos &currency_name_plural;, las entidades pueden cambiar a euro en todo momento.</string>
-    <string name="info_bonus_percent">% bonificación general: el % de bonificación en &currency_name_plural;
-        que realiza tu entidad a un usuario de moneda social.\nPor ejemplo, si una persona realiza una compra equivalente a 20 euros y tienes un % de bonificación de 5%, la bonificación a ingresar será de 1 &currency_name;.</string>
-    <string name="info_bonus_percent_entities">% de bonificación a entidades: como es probable que las entidades hagan intercambios mayores, puedes elegir un % especial para las mismas en función de tus necesidades.</string>
     <string name="channel_name">Pagos y transacciones</string>
     <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural;
         en tu cuenta</string>
 
     <string name="select_mes">Selecciona Mercado Social</string>
     <string name="change_social_market">Cambiar Mercado Social</string>
-    <string name="select">Seleccionar</string>
     <string name="change_social_market_warning">Ten en cuenta que si has accedido con tu usuario, al cambiar de Mercado Social se cerrará la sesión</string>
-    <string name="enter_in_mes_x">Entrar en el MES %s</string>
 
     <string name="categories">Categorías</string>
     <string name="only_favs">Solo favoritas</string>
     <string name="apply_filters">Aplicar filtros</string>
     <string name="go_to_profile">Mi perfil</string>
-    <string name="entities_dont_edit_profile">Entidades no editan perfil en la app</string>
     <string name="profile_saved">Perfil guardado</string>
     <string name="saving">Guardando...</string>
-    <string name="new_consumer">Nueva consumidora</string>
-    <string name="new_provider">Nueva entidad proveedora</string>
     <string name="select_profile">Selecciona tu perfil</string>
-    <string name="person_customer">Persona consumidora</string>
     <string name="new_register">Nuevo registro</string>
     <string name="block_text">Esta aplicación está en proceso de rediseño.\n\nEl objetivo es incentivar el consumo responsable dentro de las empresas y entidades del Mercado Social.\n\nPulsa aquí para más información</string>
     <string name="test_code">Código de pruebas</string>
     <string name="enter_test_code">Si tienes acceso al entorno de pruebas introduce aquí el código:</string>
     <string name="invalid_code">Código inválido</string>
-    <string name="user_data">Datos de usuari@</string>
     <string name="invitations">Invitaciones</string>
     <string name="invitations_intro">Puedes invitar a tus contactos para que prueben por un tiempo el sistema de bonificaciones: etics</string>
     <string name="invite">Invitar</string>
@@ -302,35 +92,21 @@
     <string name="guest_account_info_format">Cuenta invitada.\nVálida hasta: %s</string>
     <string name="customer">Consumidora</string>
     <string name="invitation_code_text_short">Introduce el código \"consumeconsciente\" para probar el sistema de bonificaciones éticas gratuitamente</string>
-    <string name="invitation_code">Código de invitación</string>
-    <string name="complete_register">Completar registro</string>
-    <string name="enter_code">Introduce el código</string>
-    <string name="purchase_payment_text">Introduce tus datos de pago. La transacción es segura, a través de Redsys.</string>
-    <string name="not_logged_payment_dialog_message">Para hacer un pago debes estar registrado en la aplicación</string>
-    <string name="go_to_main_screen">Ir a la pantalla principal</string>
     <string name="open_link">Abrir link</string>
     <string name="web_link_dialog_message">El siguiente enlace %s no corresponde a un enlace de pago válido para esta app. Intenta abrirlo en tu navegador móvil.</string>
     <string name="understood">Entendido</string>
     <string name="highlighted">Destacados</string>
-    <string name="new_payment_to">Nuevo pago a:</string>
     <string name="empty_state_text_entities">No se ha encontrado ninguna entidad con esos criterios de búsqueda…</string>
     <string name="type">Tipo</string>
     <string name="market">Mercado</string>
-    <string name="change_pin">Cambiar PIN</string>
-    <string name="change_pincode">Cambiar código PIN</string>
-    <string name="change_pincode_intro_text">Introduce tu nuevo código PIN</string>
-    <string name="change_pincode_intro_text_password">Por seguridad introduce tu contraseña de acceso a la aplicación</string>
     <string name="consumer">Consumidora</string>
-    <string name="incorrect_password">Contraseña incorrecta</string>
     <string name="published">Publicada: %s</string>
     <string name="valid_until">Válida hasta: %s</string>
     <string name="no_app_to_open_link">No se encuentra aplicación para abrir este enlace.</string>
-    <string name="no_results">Sin resultados</string>
     <string name="no_novelties">De momento no hay noticias y ofertas.\n¡En breve lanzaremos la primera!</string>
     <string name="member_card">Carnet soci@</string>
     <string name="focus_qr_code_member">Enfoca al código QR de la socia</string>
     <string name="checking_member">Comprobando socia: %s</string>
-    <string name="member_check_result">La socia número %s está %s</string>
     <string name="register_to_use_member_card_text">Para ver tu carné de socia tienes que entrar con tu cuenta. Si todavía no lo eres, te puedes registrar pulsando el botón inferior.</string>
     <string name="members_benefits">Ventajas para soci@s</string>
     <string name="change_image">Cambiar imagen</string>
@@ -350,7 +126,6 @@
     <string name="active">ACTIVA</string>
     <string name="member_card_intro_message">Este carnet certifica tu pertenencia como socia/o al Mercado Social. Con él podrás acceder a las ventajas y descuentos por formar parte de la red. ¡Muchas gracias por tu aportación a la Economía Solidaria!</string>
     <string name="currently_inactive_member">Socia INACTIVA</string>
-    <string name="new_payment_only_active">Las socias inactivas no pueden enviar pagos</string>
     <string name="enter_member_id">Introduce número de socia</string>
     <string name="member_id_not_found">No se ha encontrado el número de socia</string>
     <string name="uploading_image">Subiendo imagen...</string>
@@ -369,18 +144,15 @@
     <string name="error_no_member_data_found">Error. No se ha encontrado información de soci@</string>
 
     <string name="fediverse">Fediverso</string>
-    <string name="social_networks">Redes sociales</string>
     <string name="social_market">Mercado Social: %s</string>
     <string name="delete_account">Eliminar cuenta</string>
     <string name="leave_request">Solicitar baja y eliminar cuenta</string>
     <string name="send_leave_request">Enviar solicitud de baja</string>
     <string name="delete_account_info">Si quieres eliminar tu cuenta de nuestra base de datos, escríbenos un correo con tu solicitud pulsando el siguiente botón y te responderemos lo antes posible para completar el proceso.</string>
     <string name="open_email">Abrir email</string>
-    <string name="feature_temporarily_disabled">Funcion deshabilitada temporalmente.\n¡Estará disponible pronto!</string>
     <string name="request_invitation_header">¿Te gustaría hacer publicaciones con tu entidad y que aparezcan en esta pantalla?</string>
     <string name="request_invitation_body">Si todavía no tienes cuenta en el Fediverso puedes solicitar una pulsando el siguiente botón:</string>
     <string name="request_invitation_btn">Solicita una invitación</string>
-    <string name="accept_privacy_policy">Acepto la politica de privacidad.</string>
     <string name="fediverse_invite_url_not_found">Actualmente no hay invitaciones disponibles.</string>
     <string name="select_market">Selecciona el mercado al que quieres acceder</string>
     <string name="change_image_temporarily_disabled">La función de cambiar imagen desde el teléfono estará disponible pronto.\nDe momento puedes cambiarla desde la web. Pulsa el siguiente botón:</string>
