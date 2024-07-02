@@ -1,11 +1,13 @@
 plugins {
     id "org.sonarqube" version "2.6"
     id 'com.google.gms.google-services'
+    id "org.jetbrains.kotlin.android"
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.crashlytics'
 
+apply plugin: 'kotlin-android'
 
 android {
 
@@ -40,6 +42,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     lint {
         abortOnError false
         checkReleaseBuilds false
@@ -62,6 +68,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'

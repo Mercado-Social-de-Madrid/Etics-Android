@@ -7,20 +7,15 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.DebugHelper;
-import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.util.DateUtils;
+import net.mercadosocial.moneda.util.LangUtils;
 
 import java.lang.reflect.Modifier;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-
-import okhttp3.HttpUrl;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -90,6 +85,12 @@ public class ApiClient {
 
             okhttp3.Request.Builder requestBuilder = original.newBuilder();
             requestBuilder.header("Content-Type", "application/json");
+
+            String currentLang = LangUtils.getCurrentLang();
+            if (currentLang != null) {
+                requestBuilder.header("Accept-Language", currentLang);
+            }
+
 
             requestBuilder.method(original.method(), original.body());
             okhttp3.Request request = requestBuilder.build();

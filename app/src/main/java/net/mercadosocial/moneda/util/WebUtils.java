@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Browser;
 import android.util.Patterns;
 
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
@@ -36,6 +38,13 @@ public class WebUtils {
                 .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
                 .setDefaultColorSchemeParams(params)
                 .build();
+
+        String currentLang = LangUtils.getCurrentLang();
+        if (currentLang != null) {
+            Bundle acceptLang = new Bundle();
+            acceptLang.putString("Accept-Language", currentLang);
+            customTabsIntent.intent.putExtra(Browser.EXTRA_HEADERS, acceptLang);
+        }
 
         try {
             customTabsIntent.launchUrl(context, Uri.parse(url));

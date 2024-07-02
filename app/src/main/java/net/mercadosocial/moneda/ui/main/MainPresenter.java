@@ -3,8 +3,10 @@ package net.mercadosocial.moneda.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
@@ -17,8 +19,10 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
+import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.WebUtils;
 
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -64,6 +68,10 @@ import java.util.Objects;
          checkIntentUriReceived(intent);
 
          updateProfileStatus();
+
+         Log.i(TAG, "onCreate: Langs: " + AppCompatDelegate.getApplicationLocales().toLanguageTags());
+         Log.i(TAG, "onCreate: Locale: " + Locale.getDefault().getLanguage());
+         Log.i(TAG, "onCreate: CurrentLocale: " + LangUtils.getCurrentLang());
 
      }
 
