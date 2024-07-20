@@ -153,13 +153,17 @@ public class App extends MultiDexApplication {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_offers");
         }
 
-        getPrefs(this).edit()
-                .remove(App.SHARED_ENTITIES_CACHE)
-                .remove(App.SHARED_CATEGORIES_SAVED)
-                .commit();
+        clearContentCache();
 
         FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_news");
         FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_offers");
+    }
+
+    public void clearContentCache() {
+        getPrefs(this).edit()
+                .remove(App.SHARED_ENTITIES_CACHE)
+                .remove(App.SHARED_CATEGORIES_SAVED)
+                .apply();
     }
 
 

@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.os.LocaleListCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -345,6 +346,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         new AlertDialog.Builder(this)
                 .setSingleChoiceItems(R.array.language_names, -1, (dialog, which) -> {
+                    getApp().clearContentCache();
+                    Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content);
+                    if (currentFragment instanceof EntitiesFragment) {
+                        getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+                    }
                     String[] languages = getResources().getStringArray(R.array.language_codes);
                     String languageSelected = languages[which];
                     LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageSelected);
