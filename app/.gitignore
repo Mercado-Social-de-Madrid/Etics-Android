@@ -1,4 +1,4 @@
 /build
 /src/main/res/values/secret.xml
-/google-services.json
+google-services.json
 /release/app-release.aab
