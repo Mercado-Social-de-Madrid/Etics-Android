@@ -25,6 +25,7 @@ import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.NodeInteractor;
 import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Node;
+import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
@@ -48,6 +49,7 @@ public class App extends MultiDexApplication {
     public static final String SHARED_FORCE_SEND_TOKEN_FCM_DEVICE = PREFIX + "shared_force_send_token_fcm_device";
     public static final String SHARED_ENTITIES_CACHE = PREFIX + "shared_entities_cache";
     public static final String SHARED_MEMBER_CARD_INTRO_SEEN = PREFIX + "member_card_intro_seen";
+    public static final String SHARED_MULTILANG_TOPICS_UPDATED = PREFIX +"multilang_topics_updated";
 
     public static final String ACTION_NOTIFICATION_RECEIVED = PREFIX + "action_notification_received";
     public static final String SHARED_CURRENT_NODE = PREFIX + "current_node";
@@ -102,6 +104,8 @@ public class App extends MultiDexApplication {
 //                Log.d(TAG, "Firebase token ERROR: " + task.getException().getMessage());
 //            }
 //        });
+
+        updateTopicsForMultilang();
     }
 
     private void setDefaultNodeForMadridUpdates() {
@@ -148,6 +152,20 @@ public class App extends MultiDexApplication {
             return;
         }
 
+        updateFirebaseTopicsNode(previousNode, node);
+
+    }
+
+    private void updateTopicsForMultilang() {
+        SharedPreferences prefs = getPrefs(this);
+        if (!prefs.getBoolean(App.SHARED_MULTILANG_TOPICS_UPDATED, false)) {
+            String currentLang = LangUtils.getCurrentLang();
+            updateFirebaseTopicsLang(null, currentLang);
+            prefs.edit().putBoolean(App.SHARED_MULTILANG_TOPICS_UPDATED, true).apply();
+        }
+    }
+
+    private void updateFirebaseTopicsNode(Node previousNode, Node newNode) {
         if (previousNode != null) {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_news");
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_offers");
@@ -155,8 +173,25 @@ public class App extends MultiDexApplication {
 
         clearContentCache();
 
-        FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_news");
-        FirebaseMessaging.getInstance().subscribeToTopic(node.getShortname() + "_offers");
+        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_news");
+        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_offers");
+    }
+
+    public void updateFirebaseTopicsLang(String previousLang, String newLang) {
+        String currentNodeShortname = getCurrentNode().getShortname();
+
+        if (previousLang != null) {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_news_" + previousLang);
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_offers_" + previousLang);
+        } else {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_news");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_offers");
+        }
+
+        clearContentCache();
+
+        FirebaseMessaging.getInstance().subscribeToTopic(currentNodeShortname + "_news_" + newLang);
+        FirebaseMessaging.getInstance().subscribeToTopic(currentNodeShortname + "_offers_" + newLang);
     }
 
     public void clearContentCache() {

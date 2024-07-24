@@ -53,6 +53,7 @@ import net.mercadosocial.moneda.ui.member_card.MemberCardFragment;
 import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
+import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
@@ -352,9 +353,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
                     }
                     String[] languages = getResources().getStringArray(R.array.language_codes);
+                    String currentLang = LangUtils.getCurrentLang();
                     String languageSelected = languages[which];
                     LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageSelected);
                     AppCompatDelegate.setApplicationLocales(appLocale);
+                    getApp().updateFirebaseTopicsLang(currentLang, languageSelected);
                 }).show();
 
     }
