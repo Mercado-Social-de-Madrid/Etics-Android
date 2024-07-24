@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "etic"><!ENTITY currency_name_plural "etics"><!ENTITY currency_name_abrev "etics">]>
+<?xml version="1.0" encoding="utf-8"?>
 
 <resources>
     <string name="app_name">Mercado Social</string>
@@ -63,9 +63,8 @@
     <string name="info">Información</string>
 
 
-    <string name="channel_name">Pagos y transacciones</string>
-    <string name="channel_description">Notificaciones cuando se hacen pagos a entidades y cuando se ingresan &currency_name_plural;
-        en tu cuenta</string>
+    <string name="channel_name">Notificaciones generales</string>
+    <string name="channel_description">Avisos genéricos de la app</string>
 
     <string name="select_mes">Selecciona Mercado Social</string>
     <string name="change_social_market">Cambiar Mercado Social</string>

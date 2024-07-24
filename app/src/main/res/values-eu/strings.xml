@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY currency_name "etic"><!ENTITY currency_name_plural "etics"><!ENTITY currency_name_abrev "etics">]>
+<?xml version="1.0" encoding="utf-8"?>
 
 <resources>
     <string name="app_name">Merkatu Soziala</string>
@@ -62,9 +62,8 @@
     <string name="access_data_incorrect">Sarbide datuak okerrak dira</string>
     <string name="info">Informazioa</string>
 
-
-    <string name="channel_name">Ordainketak eta transakzioak</string>
-    <string name="channel_description">Erakundeei ordainketak egiten diren eta &currency_name_plural; zure kontuan sartzen diren jakinarazpenak</string>
+    <string name="channel_name">Jakinarazpen orokorrak</string>
+    <string name="channel_description">Aplikazioaren ohar generikoak</string>
 
     <string name="select_mes">Hautatu Merkatu Soziala</string>
     <string name="change_social_market">Aldatu Merkatu Soziala</string>
