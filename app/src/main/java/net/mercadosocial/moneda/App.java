@@ -1,7 +1,5 @@
 package net.mercadosocial.moneda;
 
-import static net.mercadosocial.moneda.util.LangUtils.DEFAULT_LANG;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -177,8 +175,8 @@ public class App extends MultiDexApplication {
 
         clearContentCache();
 
-        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_news_" + DEFAULT_LANG);
-        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_offers_" + DEFAULT_LANG);
+        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_news_" + currentLang);
+        FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_offers_" + currentLang);
     }
 
     public void updateFirebaseTopicsLang(String previousLang, String newLang) {
