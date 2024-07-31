@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import net.mercadosocial.moneda.api.common.ApiClient;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Node {
@@ -49,6 +50,9 @@ public class Node {
 
     @SerializedName("balance_badge")
     private String balanceBadge;
+
+    @SerializedName("enabled_langs")
+    private List<String> enabledLangs;
 
 
     public long getID() { return id; }
@@ -156,5 +160,12 @@ public class Node {
 
     public void setBalanceBadge(String balanceBadge) {
         this.balanceBadge = balanceBadge;
+    }
+
+    public List<String> getEnabledLangs() {
+        if(enabledLangs == null) {
+            return Collections.emptyList();
+        }
+        return enabledLangs;
     }
 }

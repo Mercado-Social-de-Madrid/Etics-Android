@@ -29,6 +29,7 @@ import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
+import java.util.List;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
@@ -169,20 +170,38 @@ public class App extends MultiDexApplication {
         String currentLang = LangUtils.getCurrentLang();
 
         if (previousNode != null) {
+            if(!previousNode.getEnabledLangs().contains(currentLang)) {
+                // If the current language is not available in the previous node, we subscribe the user to the DEFAULT_LANG topic
+                currentLang = LangUtils.DEFAULT_LANG;
+            }
+
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_news_" + currentLang);
             FirebaseMessaging.getInstance().unsubscribeFromTopic(previousNode.getShortname() + "_offers_" + currentLang);
         }
 
         clearContentCache();
 
+        if(!newNode.getEnabledLangs().contains(currentLang)) {
+            // If the current language is not available in the new node, we subscribe the user to the DEFAULT_LANG topic
+            currentLang = LangUtils.DEFAULT_LANG;
+        }
+
         FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_news_" + currentLang);
         FirebaseMessaging.getInstance().subscribeToTopic(newNode.getShortname() + "_offers_" + currentLang);
     }
 
     public void updateFirebaseTopicsLang(String previousLang, String newLang) {
-        String currentNodeShortname = getCurrentNode().getShortname();
+        Node currentNode = getCurrentNode();
+        String currentNodeShortname = currentNode.getShortname();
+
+        List<String> enabledLangs = currentNode.getEnabledLangs();
 
         if (previousLang != null) {
+            if (!enabledLangs.contains(previousLang)) {
+                // If the previous language is not available in the node, we subscribe the user to the DEFAULT_LANG topic
+                previousLang = LangUtils.DEFAULT_LANG;
+            }
+
             FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_news_" + previousLang);
             FirebaseMessaging.getInstance().unsubscribeFromTopic(currentNodeShortname + "_offers_" + previousLang);
         } else {
@@ -191,6 +210,11 @@ public class App extends MultiDexApplication {
         }
 
         clearContentCache();
+
+        if (!enabledLangs.contains(newLang)) {
+            // If the selected language is not available in the node, we subscribe the user to the DEFAULT_LANG topic
+            newLang = LangUtils.DEFAULT_LANG;
+        }
 
         FirebaseMessaging.getInstance().subscribeToTopic(currentNodeShortname + "_news_" + newLang);
         FirebaseMessaging.getInstance().subscribeToTopic(currentNodeShortname + "_offers_" + newLang);

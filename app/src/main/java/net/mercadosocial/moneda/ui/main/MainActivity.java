@@ -59,6 +59,7 @@ import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -344,20 +345,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     private void showChangeLanguagePicker() {
+        List<String> availableLangs = Arrays.stream(this.getResources().getStringArray(R.array.language_codes)).toList();
+        String currentLang = LangUtils.getCurrentLang();
+        int selectedPosition = availableLangs.indexOf(currentLang);
 
         new AlertDialog.Builder(this)
-                .setSingleChoiceItems(R.array.language_names, -1, (dialog, which) -> {
-                    getApp().clearContentCache();
+                .setSingleChoiceItems(R.array.language_names, selectedPosition, (dialog, which) -> {
+                    App app = getApp();
+                    app.clearContentCache();
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content);
                     if (currentFragment instanceof EntitiesFragment) {
                         getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
                     }
                     String[] languages = getResources().getStringArray(R.array.language_codes);
-                    String currentLang = LangUtils.getCurrentLang();
                     String languageSelected = languages[which];
                     LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageSelected);
                     AppCompatDelegate.setApplicationLocales(appLocale);
-                    getApp().updateFirebaseTopicsLang(currentLang, languageSelected);
+
+                    app.updateFirebaseTopicsLang(currentLang, languageSelected);
                 }).show();
 
     }
