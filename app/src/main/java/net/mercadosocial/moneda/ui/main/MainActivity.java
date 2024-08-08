@@ -345,7 +345,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     private void showChangeLanguagePicker() {
-        List<String> availableLangs = Arrays.stream(this.getResources().getStringArray(R.array.language_codes)).toList();
+        List<String> availableLangs = Arrays.asList(this.getResources().getStringArray(R.array.language_codes));
         String currentLang = LangUtils.getCurrentLang();
         int selectedPosition = availableLangs.indexOf(currentLang);
 
