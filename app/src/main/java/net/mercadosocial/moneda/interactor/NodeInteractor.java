@@ -67,7 +67,7 @@ public class NodeInteractor extends BaseInteractor {
 
     }
 
-    public void updateNodeData() {
+    public void updateNodeData(BaseApiPOSTCallback callback) {
 
         App app = ((App) context.getApplicationContext());
         Node currentNode = app.getCurrentNode();
@@ -89,6 +89,9 @@ public class NodeInteractor extends BaseInteractor {
                         @Override
                         public void onNext(Response<Node> response) {
                             if (response.isSuccessful()) {
+                                if (callback != null) {
+                                    callback.onSuccess(null);
+                                }
                                 app.setCurrentNode(response.body());
                             }
 

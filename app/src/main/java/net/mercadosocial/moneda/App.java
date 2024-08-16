@@ -21,9 +21,9 @@ import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.api.response.Data;
+import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.NodeInteractor;
-import net.mercadosocial.moneda.model.AuthLogin;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.Util;
@@ -95,7 +95,17 @@ public class App extends MultiDexApplication {
         processWorkarounds();
 
         setDefaultNodeForMadridUpdates();
-        new NodeInteractor(this, null).updateNodeData();
+        new NodeInteractor(this, null).updateNodeData(new BaseInteractor.BaseApiPOSTCallback() {
+            @Override
+            public void onSuccess(Integer id) {
+                updateTopicsForMultilang();
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
 
         // FirebaseMessaging.getInstance().subscribeToTopic("news_test");
 //        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
@@ -106,7 +116,6 @@ public class App extends MultiDexApplication {
 //            }
 //        });
 
-        updateTopicsForMultilang();
     }
 
     private void setDefaultNodeForMadridUpdates() {
