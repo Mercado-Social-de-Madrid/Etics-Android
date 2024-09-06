@@ -20,9 +20,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <net.mercadosocial.moneda.util.update_app.UpdateAppView
+            <com.triskelapps.simpleappupdate.SimpleAppUpdateView
+                android:id="@+id/view_update_app"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:backgroundColor="@color/green_light"
+                app:foregroundColor="@color/black"
+                app:textStyle="@style/TextBase.Purple"/>
 
             <FrameLayout
                 android:id="@+id/content"

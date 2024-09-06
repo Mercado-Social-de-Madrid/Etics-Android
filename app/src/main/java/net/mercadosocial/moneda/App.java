@@ -19,6 +19,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+import com.triskelapps.simpleappupdate.SimpleAppUpdate;
+import com.triskelapps.simpleappupdate.config.NotificationStyle;
+import com.triskelapps.simpleappupdate.config.WorkerConfig;
 
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
@@ -27,10 +30,10 @@ import net.mercadosocial.moneda.interactor.NodeInteractor;
 import net.mercadosocial.moneda.model.Node;
 import net.mercadosocial.moneda.util.LangUtils;
 import net.mercadosocial.moneda.util.Util;
-import net.mercadosocial.moneda.util.update_app.UpdateAppManager;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
 
@@ -86,7 +89,11 @@ public class App extends MultiDexApplication {
 
 //        Toasty.info(this, "Tostaditas moradas").show();
 
-        UpdateAppManager.scheduleAppUpdateCheckWork(this);
+        // Periodic app update configuration
+        new SimpleAppUpdate(this).cancelWork("appUpdateCheckWork");
+        NotificationStyle notificationStyle = new NotificationStyle(R.mipmap.ic_mes_v2_144, R.color.colorPrimary);
+        WorkerConfig workerConfig = new WorkerConfig(6, TimeUnit.HOURS, 2, TimeUnit.HOURS);
+        SimpleAppUpdate.schedulePeriodicChecks(this, BuildConfig.VERSION_CODE, notificationStyle, workerConfig);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyObserver());
 
