@@ -3,6 +3,8 @@ package net.mercadosocial.moneda.ui.entities;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,9 +14,12 @@ import android.view.ViewGroup;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
+import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entities.list.EntitiesListFragment;
 import net.mercadosocial.moneda.ui.entities.map.EntitiesMapFragment;
 import net.mercadosocial.moneda.ui.main.MainActivity;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +46,6 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
         View layout = inflater.inflate(R.layout.fragment_entities, container, false);
 
         presenter.onCreate();
-
 
         setHasOptionsMenu(true);
 
@@ -109,6 +113,41 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
 
     @Override
+    public void updateEntities(List<Entity> entities) {
+        try {
+            EntitiesChild fragment = (EntitiesChild) getChildFragmentManager().findFragmentById(R.id.frame_entities);
+            if (fragment != null) {
+                fragment.updateEntities(entities);
+            }
+        } catch (IllegalStateException e) {
+        }
+    }
+
+    @Override
+    public void onError(boolean showEmptyView) {
+        try {
+            EntitiesChild fragment = (EntitiesChild) getChildFragmentManager().findFragmentById(R.id.frame_entities);
+            if (fragment != null) {
+                fragment.onError(showEmptyView);
+            }
+        } catch (IllegalStateException e) {
+        }
+    }
+
+    @Override
+    public void setRefreshing(boolean refreshing) {
+        super.setRefreshing(refreshing);
+
+        try {
+            EntitiesChild fragment = (EntitiesChild) getChildFragmentManager().findFragmentById(R.id.frame_entities);
+            if (fragment != null) {
+                fragment.setRefreshing(refreshing);
+            }
+        } catch (IllegalStateException e) {
+        }
+    }
+
+    @Override
     public void showScreenType(int currentScreen) {
         Fragment fragment = null;
         switch (currentScreen) {
@@ -122,11 +161,12 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
         }
 
+        getChildFragmentManager().beginTransaction().replace(R.id.frame_entities, fragment).commit();
+
         if (menuItemMapList != null) {
             menuItemMapList.setIcon(currentScreen == EntitiesPresenter.SCREEN_ENTITIES_TYPE_LIST ? R.mipmap.ic_map : R.mipmap.ic_list);
         }
 
-        getChildFragmentManager().beginTransaction().replace(R.id.frame_entities, fragment).commit();
     }
 
 

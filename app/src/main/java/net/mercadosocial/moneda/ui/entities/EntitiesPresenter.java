@@ -38,7 +38,6 @@ public class EntitiesPresenter extends BasePresenter {
     public static final int SCREEN_ENTITIES_TYPE_MAP = 1;
 
     private int currentScreen = SCREEN_ENTITIES_TYPE_LIST;
-    private EntitiesRefreshListener entitiesRefreshListener;
 
 
     public static EntitiesPresenter newInstance(EntitiesView view, Context context) {
@@ -59,6 +58,7 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void onCreate() {
         view.showScreenType(currentScreen);
+        refreshData();
     }
 
     public void onResume() {
@@ -66,9 +66,7 @@ public class EntitiesPresenter extends BasePresenter {
         if (entities != null && !entities.isEmpty()) {
             processFavs();
             processLocalFilter();
-            if (entitiesRefreshListener != null) {
-                entitiesRefreshListener.updateEntities(entities);
-            }
+            view.updateEntities(entities);
         }
     }
 
@@ -130,46 +128,51 @@ public class EntitiesPresenter extends BasePresenter {
 
     }
 
+    public void updateData() {
+        loadEntities(entityInteractor.getCachedEntities());
+    }
+
     public void refreshData() {
-
         refreshEntities();
-
     }
 
     private void refreshEntities() {
 
-        if (entitiesRefreshListener != null) {
-            entitiesRefreshListener.setRefreshing(true);
-        }
+        view.setRefreshing(true);
 
         entityInteractor.getEntities(filterEntities, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
 
-                entities.clear();
-                entities.addAll(entitiesApi);
-                Collections.shuffle(entities);
-                processFavs();
-                processLocalFilter();
-
-                if (entitiesRefreshListener != null) {
-                    entitiesRefreshListener.setRefreshing(false);
-                    entitiesRefreshListener.updateEntities(entities);
-                }
+                loadEntities(entitiesApi);
             }
 
             @Override
             public void onError(String error) {
 
-                if (entitiesRefreshListener != null) {
-                    entitiesRefreshListener.setRefreshing(false);
-                    boolean showEmptyView = entities.isEmpty();
-                    entitiesRefreshListener.onError(showEmptyView);
-                }
+                boolean showEmptyView = entities.isEmpty();
+                view.onError(showEmptyView);
+
                 view.toast(error);
+
             }
         });
+    }
+
+    private void loadEntities(List<Entity> entitiesUpdated) {
+
+        if (entitiesUpdated == null) {
+            return;
+        }
+
+        entities.clear();
+        entities.addAll(entitiesUpdated);
+        Collections.shuffle(entities);
+        processFavs();
+        processLocalFilter();
+
+        view.updateEntities(entities);
     }
 
     private void processLocalFilter() {
@@ -242,13 +245,4 @@ public class EntitiesPresenter extends BasePresenter {
         view.showScreenType(currentScreen);
     }
 
-    public void setEntitiesRefreshListener(EntitiesRefreshListener entitiesRefreshListener) {
-        this.entitiesRefreshListener = entitiesRefreshListener;
-    }
-
-    public void removeEntitiesRefreshListener(EntitiesRefreshListener entitiesRefreshListener) {
-        if (this.entitiesRefreshListener == entitiesRefreshListener) {
-            this.entitiesRefreshListener = null;
-        }
-    }
 }

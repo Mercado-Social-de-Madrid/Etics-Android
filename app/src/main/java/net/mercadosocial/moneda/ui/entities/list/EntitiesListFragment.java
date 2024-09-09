@@ -2,35 +2,33 @@ package net.mercadosocial.moneda.ui.entities.list;
 
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.malinskiy.superrecyclerview.OnMoreListener;
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseFragment;
 import net.mercadosocial.moneda.model.Entity;
+import net.mercadosocial.moneda.ui.entities.EntitiesChild;
 import net.mercadosocial.moneda.ui.entities.EntitiesFragment;
 import net.mercadosocial.moneda.ui.entities.EntitiesPresenter;
-import net.mercadosocial.moneda.ui.entities.EntitiesRefreshListener;
 import net.mercadosocial.moneda.ui.entities.EntityListener;
-import net.mercadosocial.moneda.views.RotativeImageView;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EntitiesListFragment extends BaseFragment implements EntitiesAdapter.OnItemClickListener, EntitiesRefreshListener {
+public class EntitiesListFragment extends BaseFragment implements EntitiesChild, EntitiesAdapter.OnItemClickListener {
 
 
     private static final int NUMBER_ITEM_ASK_MORE = 3;
@@ -64,9 +62,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
 
         setEntityListener((EntityListener) getParentFragment());
 
-        getEntitiesPresenter().setEntitiesRefreshListener(this);
-
-        getEntitiesPresenter().refreshData();
+        getEntitiesPresenter().updateData();
 
         return layout;
     }
@@ -74,17 +70,6 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
     private EntitiesPresenter getEntitiesPresenter() {
         return (EntitiesPresenter) ((EntitiesFragment) getParentFragment()).getBasePresenter();
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        getEntitiesPresenter().removeEntitiesRefreshListener(this);
-    }
-
-
-    // Presenter Callbacks
-
 
     @Override
     public void updateEntities(List<Entity> entities) {
@@ -113,22 +98,13 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesAdapte
         tvEmptyListEntities.setText(R.string.empty_state_text_entities);
     }
 
+
     @Override
     public void onError(boolean showEmptyView) {
         viewEmptyList.setVisibility(View.VISIBLE);
         tvEmptyListEntities.setText(R.string.error_retrieving_data);
     }
 
-    @Override
-    public void setRefreshing(boolean refreshing) {
-        super.setRefreshing(refreshing);
-
-        if (refreshing) {
-            viewEmptyList.setVisibility(View.GONE);
-        } else {
-            viewEmptyList.setVisibility(View.VISIBLE);
-        }
-    }
 
 
     @Override

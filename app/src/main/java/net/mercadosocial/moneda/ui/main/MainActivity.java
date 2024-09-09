@@ -2,11 +2,11 @@ package net.mercadosocial.moneda.ui.main;
 
 
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -351,18 +351,28 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         new AlertDialog.Builder(this)
                 .setSingleChoiceItems(R.array.language_names, selectedPosition, (dialog, which) -> {
+
+                    String[] languages = getResources().getStringArray(R.array.language_codes);
+                    String languageSelected = languages[which];
+
+                    dialog.dismiss();
+
+                    if (TextUtils.equals(currentLang, languageSelected)) {
+                        return;
+                    }
+
                     App app = getApp();
                     app.clearContentCache();
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content);
                     if (currentFragment instanceof EntitiesFragment) {
                         getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
                     }
-                    String[] languages = getResources().getStringArray(R.array.language_codes);
-                    String languageSelected = languages[which];
+
                     LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageSelected);
                     AppCompatDelegate.setApplicationLocales(appLocale);
 
                     app.updateFirebaseTopicsLang(currentLang, languageSelected);
+
                 }).show();
 
     }

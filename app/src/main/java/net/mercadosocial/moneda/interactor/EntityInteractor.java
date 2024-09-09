@@ -67,12 +67,7 @@ public class EntityInteractor extends BaseInteractor {
                 }
             }
 
-        } else {
-            if (hasCachedEntities()) {
-                callback.onResponse(getCachedEntities(), false);
-            }
         }
-
 
         getApi().getEntities(getNodeId(), text, categoriesIdsStr)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
@@ -97,11 +92,7 @@ public class EntityInteractor extends BaseInteractor {
                             return;
                         }
 
-                        // When adding entities shuffle, this causes a wierd behaviour changing order automatically
-                        // Better refresh entities next time cached data is retrieved
-                        if (!hasCachedEntities() || filterEntities != null) {
-                            callback.onResponse(response.body(), false);
-                        }
+                        callback.onResponse(response.body(), false);
 
                         if (filterEntities == null) {
                             cacheEntities(response.body());
@@ -118,7 +109,7 @@ public class EntityInteractor extends BaseInteractor {
         return entitiesSerialized != null && !entitiesSerialized.isEmpty();
     }
 
-    private List<Entity> getCachedEntities() {
+    public List<Entity> getCachedEntities() {
         String entitiesSerialized = App.getPrefs(context).getString(App.SHARED_ENTITIES_CACHE, null);
         Type listType = new TypeToken<ArrayList<Entity>>(){}.getType();
         List<Entity> entities = new Gson().fromJson(entitiesSerialized, listType);
