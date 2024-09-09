@@ -71,6 +71,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         configureSecondLevelActivity();
+        setToolbarTitle(R.string.account);
         findViews();
 
         easyImage = new EasyImage.Builder(this)

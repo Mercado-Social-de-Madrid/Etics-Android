@@ -40,6 +40,8 @@ public class BarcodeActivity extends BaseActivity {
 
         configureSecondLevelActivity();
 
+        setToolbarTitle(R.string.qr_code_scan);
+
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         // Use builder
         mCodeScanner = CodeScanner.builder()

@@ -19,7 +19,7 @@
     <string name="qr_code_scan">QR kodea eskaneatu</string>
     <string name="go_ahead">Aurrera</string>
     <string name="welcome">Ongietorri!</string>
-    <string name="entity_info">Entitatearen informazioa</string>
+    <string name="entity_information">Entitatearen informazioa</string>
     <string name="email">Emaila</string>
     <string name="invalid_email">Email baliogabea</string>
     <string name="not_account_yet_register">Ez duzu konturik?\nEman izena!</string>

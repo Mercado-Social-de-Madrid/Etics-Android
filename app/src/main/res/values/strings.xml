@@ -23,7 +23,7 @@
     <string name="qr_code_scan">Escanear código QR</string>
     <string name="go_ahead">Adelante</string>
     <string name="welcome">¡Bienvenid@!</string>
-    <string name="entity_info">Información de entidad</string>
+    <string name="entity_information">Información de entidad</string>
     <string name="email">Email</string>
     <string name="invalid_email">Email inválido</string>
     <string name="not_account_yet_register">¿No tienes cuenta?\n¡Regístrate!</string>

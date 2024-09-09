@@ -363,6 +363,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
                     App app = getApp();
                     app.clearContentCache();
+                    app.setNewLaunch(true);
+
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.content);
                     if (currentFragment instanceof EntitiesFragment) {
                         getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();

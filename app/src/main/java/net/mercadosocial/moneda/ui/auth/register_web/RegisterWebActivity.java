@@ -26,6 +26,8 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_web);
         configureSecondLevelActivity();
+
+        setToolbarTitle(R.string.new_register);
         findViews();
     }
 

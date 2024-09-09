@@ -34,6 +34,8 @@ public class InvitationsActivity extends BaseActivity implements InvitationsView
         findViews();
         configureSecondLevelActivity();
 
+        setToolbarTitle(R.string.invitations);
+
 
 
     }

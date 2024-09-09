@@ -64,6 +64,7 @@ public class App extends MultiDexApplication {
 
     public static final String URL_QR_ENTITY = "https://app.mercadosocial.net/qr/"; // {{uuid}}
     public static final String URL_QR_MEMBER_CARD = "https://app.mercadosocial.net/socia/"; // {{uuid}}
+    private boolean newLaunch = true;
 
     @Override
     public void onCreate() {
@@ -241,6 +242,14 @@ public class App extends MultiDexApplication {
                 .remove(App.SHARED_ENTITIES_CACHE)
                 .remove(App.SHARED_CATEGORIES_SAVED)
                 .apply();
+    }
+
+    public void setNewLaunch(boolean newLaunch) {
+        this.newLaunch = newLaunch;
+    }
+
+    public boolean isNewLaunch() {
+        return newLaunch;
     }
 
 

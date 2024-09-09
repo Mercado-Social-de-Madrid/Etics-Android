@@ -58,7 +58,11 @@ public class EntitiesPresenter extends BasePresenter {
 
     public void onCreate() {
         view.showScreenType(currentScreen);
-        refreshData();
+
+        if (getApp().isNewLaunch()) {
+            refreshData();
+            getApp().setNewLaunch(false);
+        }
     }
 
     public void onResume() {

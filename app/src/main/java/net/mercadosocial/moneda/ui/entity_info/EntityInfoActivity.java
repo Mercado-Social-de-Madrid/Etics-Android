@@ -37,6 +37,8 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
 
         configureSecondLevelActivity();
 
+        setToolbarTitle(R.string.entity_information);
+
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         binding.recyclerOffers.addItemDecoration(itemDecoration);
 

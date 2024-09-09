@@ -28,7 +28,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
     private EntitiesPresenter presenter;
     private MenuItem menuItemMapList;
-
+    private int currentScreen;
 
 
     public EntitiesFragment() {
@@ -77,6 +77,7 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_entities, menu);
         menuItemMapList = menu.findItem(R.id.menuItem_show_map_list);
+        menuItemMapList.setIcon(currentScreen == EntitiesPresenter.SCREEN_ENTITIES_TYPE_MAP ? R.mipmap.ic_list : R.mipmap.ic_map);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -149,6 +150,9 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
     @Override
     public void showScreenType(int currentScreen) {
+
+        this.currentScreen = currentScreen;
+
         Fragment fragment = null;
         switch (currentScreen) {
             case EntitiesPresenter.SCREEN_ENTITIES_TYPE_LIST:
