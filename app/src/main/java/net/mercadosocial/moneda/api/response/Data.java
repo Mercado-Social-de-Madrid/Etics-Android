@@ -54,15 +54,6 @@ public class Data {
         }
     }
 
-    public String getCityCode() {
-        if (entity != null) {
-            return entity.getCity();
-        } else {
-            return person.getCity();
-        }
-    }
-
-
     public String getApiKeyFull() {
         return "ApiKey " + getUsername() + ":" + getApi_key();
     }

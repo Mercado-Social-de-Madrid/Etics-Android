@@ -11,3 +11,4 @@
 /.idea/sonarlint/issuestore/
 /.idea/
 ApiConfig.java
+/app/release/app-release/

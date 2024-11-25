@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="app.mercadosocial.net" />
+                <data android:host="mercadosocial.app" />
                 <data android:pathPrefix="/qr" />
             </intent-filter>
 
@@ -53,7 +53,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="app.mercadosocial.net" />
+                <data android:host="mercadosocial.app" />
                 <data android:pathPrefix="/socia" />
 
             </intent-filter>
@@ -77,10 +77,6 @@
             android:label="@string/new_register"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".ui.barcode.BarcodeActivity"
-            android:label="@string/qr_code_scan"
-            android:screenOrientation="portrait" />
         <activity android:name=".ui.novelties.detail.NoveltyDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.info.WebViewActivity"

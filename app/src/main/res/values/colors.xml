@@ -41,5 +41,6 @@
     <color name="orange_corp">#f78154</color>
     <color name="grey_info">#f8f7f2</color>
 
+    <color name="transparent">#0000</color>
 
 </resources>
