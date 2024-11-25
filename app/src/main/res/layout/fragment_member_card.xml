@@ -113,7 +113,7 @@
                     android:id="@+id/tv_member_type"
                     style="@style/TextBase.White"
                     android:layout_marginTop="5dp"
-                    android:background="@color/orange_corp"
+                    android:background="@color/orange_mes"
                     android:padding="5dp"
                     tools:text="socia intercooperación"
                     android:textSize="@dimen/text_small_2"/>

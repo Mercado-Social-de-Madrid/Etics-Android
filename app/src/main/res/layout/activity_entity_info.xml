@@ -43,9 +43,9 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="20dp"
                         android:adjustViewBounds="true"
-                        android:src="@mipmap/img_entitiy_example"
                         android:background="@drawable/bg_circle_orange"
-                        android:padding="3dp"/>
+                        android:padding="3dp"
+                        android:src="@mipmap/img_entitiy_example" />
 
                 </RelativeLayout>
 
@@ -61,13 +61,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:id="@+id/btn_rrss_web"
-                        style="@style/BtnRRSS"
-                        android:src="@mipmap/ic_rrss_web" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <ImageView
+                            android:id="@+id/btn_rrss_web"
+                            style="@style/BtnEntityInfo"
+                            android:src="@mipmap/ic_rrss_web" />
+
+                        <ImageView
+                            android:id="@+id/btn_rrss_email"
+                            style="@style/BtnEntityInfo"
+                            android:src="@mipmap/ic_nav_email" />
+
+                        <ImageView
+                            android:id="@+id/btn_rrss_phone"
+                            style="@style/BtnEntityInfo"
+                            android:src="@drawable/ic_phone" />
+
+                        <ImageView
+                            android:id="@+id/btn_rrss_map"
+                            style="@style/BtnEntityInfo"
+                            android:src="@drawable/ic_locate" />
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_social_profiles"

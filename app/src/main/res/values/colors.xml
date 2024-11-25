@@ -17,6 +17,7 @@
     <color name="purple_dark">#4D2F5C</color>
 
     <color name="orange_mes">#f78154</color>
+    <color name="orange_mes_dark">#CF6942</color>
 
     <color name="black">#000</color>
 
@@ -38,7 +39,6 @@
     <color name="black_semitransp">#60000000</color>
 
     <color name="grey_toast">#912991</color>
-    <color name="orange_corp">#f78154</color>
     <color name="grey_info">#f8f7f2</color>
 
     <color name="transparent">#0000</color>

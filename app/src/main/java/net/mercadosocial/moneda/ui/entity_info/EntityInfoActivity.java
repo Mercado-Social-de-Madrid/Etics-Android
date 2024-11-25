@@ -1,5 +1,7 @@
 package net.mercadosocial.moneda.ui.entity_info;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,9 +17,12 @@ import net.mercadosocial.moneda.databinding.ActivityEntityInfoBinding;
 import net.mercadosocial.moneda.model.Benefit;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.ui.entity_info.gallery.GalleryPagerFragment;
+import net.mercadosocial.moneda.util.MatcherUtil;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
+
+import java.util.Locale;
 
 public class EntityInfoActivity extends BaseActivity implements EntityInfoView, EntitiyOffersAdapter.OnItemClickListener {
 
@@ -81,6 +86,7 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
         GalleryPagerFragment galleryPagerFragment = GalleryPagerFragment.newInstance(entity.getGalleryImages(), 0);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_gallery_pager, galleryPagerFragment).commit();
 
+        setupInfoButtons(entity);
         setupRRSSButtons(entity);
 
         binding.viewDistintivo.setVisibility(entity.getBalanceUrl() != null ? View.VISIBLE : View.GONE);
@@ -127,10 +133,28 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
 
     }
 
-    private void setupRRSSButtons(Entity entity) {
+    private void setupInfoButtons(Entity entity) {
 
         binding.btnRrssWeb.setVisibility(WebUtils.isValidLink(entity.getWebpage_link()) ? View.VISIBLE : View.GONE);
         binding.btnRrssWeb.setOnClickListener(v -> WebUtils.openLink(this, entity.getWebpage_link()));
+
+        binding.btnRrssEmail.setVisibility(MatcherUtil.isValidEmail(entity.getEmail()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssEmail.setOnClickListener(v ->
+                startActivity(new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", entity.getEmail(), null))));
+
+        binding.btnRrssPhone.setVisibility(MatcherUtil.isValidPhone(entity.getPhone_number()) ? View.VISIBLE : View.GONE);
+        binding.btnRrssPhone.setOnClickListener(v ->
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts(
+                        "tel", entity.getPhone_number(), null))));
+
+        binding.btnRrssMap.setVisibility(entity.getLatitude() != 0 && entity.getLongitude() != 0 ? View.VISIBLE : View.GONE);
+        binding.btnRrssMap.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(String.format(Locale.UK, "https://maps.google.com/?q=%f,%f", entity.getLatitude(), entity.getLongitude())))));
+
+    }
+
+    private void setupRRSSButtons(Entity entity) {
 
         if (entity.getSocialProfiles() != null) {
             ProviderSocialProfileAdapter socialProfileAdapter =

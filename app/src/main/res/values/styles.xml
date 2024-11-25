@@ -28,6 +28,12 @@
         <item name="android:background">@drawable/bg_rrss_icons</item>
         <item name="android:scaleType">center</item>
         <item name="android:layout_margin">5dp</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="BtnEntityInfo" parent="BtnRRSS">
+        <item name="android:background">@drawable/bg_entity_info_icons</item>
+        <item name="tint">@color/black</item>
     </style>
 
     <item name="progress_mes" type="id"/>
