@@ -73,7 +73,8 @@
                         <ImageView
                             android:id="@+id/btn_rrss_web"
                             style="@style/BtnEntityInfo"
-                            android:src="@mipmap/ic_rrss_web" />
+                            android:src="@mipmap/ic_web"
+                            android:padding="10dp"/>
 
                         <ImageView
                             android:id="@+id/btn_rrss_email"
@@ -88,7 +89,8 @@
                         <ImageView
                             android:id="@+id/btn_rrss_map"
                             style="@style/BtnEntityInfo"
-                            android:src="@drawable/ic_locate" />
+                            android:src="@mipmap/ic_map_marker2"
+                            android:padding="10dp"/>
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
