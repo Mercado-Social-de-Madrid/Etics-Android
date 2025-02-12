@@ -99,7 +99,7 @@
     <string name="change_image">Irudia aldatu</string>
     <string name="error_image">Errorea gertatu da irudia igotzerakoan</string>
     <string name="benefits_available_for_active_members">Abantailak soilik bazkide aktiboentzat</string>
-    <string name="no_benefit_currently">Erntitate honek une honetan ez du abantailarik eskaintzen</string>
+    <string name="no_benefit_currently">Entitate honek une honetan ez du abantailarik eskaintzen</string>
     <string name="benefit_in_person">Aurrez aurre</string>
     <string name="benefit_online">Online</string>
     <string name="benefits_not_for_intercoop">Abantail hau ez dago erabilgarri interkooperazio bazkideentzat</string>

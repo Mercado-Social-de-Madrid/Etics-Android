@@ -6,6 +6,7 @@ import android.view.View;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.model.Node;
+import net.mercadosocial.moneda.util.WebUtils;
 
 public class RegisterWebActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,6 +30,11 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
 
         setToolbarTitle(R.string.new_register);
         findViews();
+
+        Node node = getApp().getCurrentNode();
+
+        btnRegisterPerson.setVisibility(WebUtils.isValidLink(node.getRegisterConsumerURL()) ? View.VISIBLE : View.GONE);
+        btnRegisterEntity.setVisibility(WebUtils.isValidLink(node.getRegisterProviderURL()) ? View.VISIBLE : View.GONE);
     }
 
     @Override
