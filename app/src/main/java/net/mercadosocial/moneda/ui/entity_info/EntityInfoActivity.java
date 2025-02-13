@@ -56,9 +56,8 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
     public void showEntityInfo(Entity entity) {
 
         binding.tvEntityName.setText(entity.getName());
-        if (entity.getDescription() != null) {
-            Util.setHtmlLinkableText(binding.tvEntityDescription, entity.getDescription());
-        }
+        Util.setHtmlLinkableText(binding.tvEntityDescription, entity.getDescription());
+
 
         binding.tvNoOffers.setVisibility(
                 entity.getOffers() == null || entity.getOffers().isEmpty() ? View.VISIBLE : View.GONE);
@@ -95,6 +94,13 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
                 WebUtils.openLink(this, entity.getBalanceUrl());
             }
         });
+
+        binding.tvEntityShortDescription.setVisibility(TextUtils.isEmpty(entity.getShort_description()) ? View.GONE : View.VISIBLE);
+        binding.tvEntityShortDescription.setText(entity.getShort_description());
+
+        binding.tvTitleServices.setVisibility(TextUtils.isEmpty(entity.getServices()) ? View.GONE : View.VISIBLE);
+        binding.tvEntityServices.setVisibility(TextUtils.isEmpty(entity.getServices()) ? View.GONE : View.VISIBLE);
+        Util.setHtmlLinkableText(binding.tvEntityServices, entity.getServices());
 
     }
 

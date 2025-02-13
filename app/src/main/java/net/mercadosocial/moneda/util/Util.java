@@ -171,6 +171,10 @@ public final class Util {
 
     public static void setHtmlLinkableText(TextView textView, String htmlText) {
 
+        if (textView == null || htmlText == null) {
+            return;
+        }
+
         Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             result = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY);

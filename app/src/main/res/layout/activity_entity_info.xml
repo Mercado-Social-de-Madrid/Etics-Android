@@ -52,10 +52,34 @@
                 <View style="@style/SeparatorHorizontal.Grey" />
 
                 <TextView
-                    android:id="@+id/tv_entity_description"
+                    android:id="@+id/tv_entity_short_description"
                     style="@style/TextBase"
                     android:layout_marginTop="12dp"
+                    tools:text="Descripcón corta"
                     android:padding="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_entity_description"
+                    style="@style/TextBase"
+                    tools:text="Descripcón larga\nDescripcón larga\nDescripcón larga"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_title_services"
+                    style="@style/TextBase.Purple"
+                    android:text="@string/products_and_services"
+                    android:layout_marginStart="4dp"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:id="@+id/tv_entity_services"
+                    style="@style/TextBase"
+                    tools:text="Servicio 1\nServicio 2\nServicio 3"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

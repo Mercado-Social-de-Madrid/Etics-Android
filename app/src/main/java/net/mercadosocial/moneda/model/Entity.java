@@ -16,6 +16,7 @@ public class Entity extends Account {
     private String cif;
     private String description;
     private String short_description;
+    private String services;
 
     private String city;
 
@@ -279,5 +280,13 @@ public class Entity extends Account {
 
     public void setSocialProfiles(List<SocialProfile> social_profiles) {
         this.socialProfiles = social_profiles;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
     }
 }
