@@ -25,10 +25,11 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
                 android:adjustViewBounds="true"
                 android:layout_centerVertical="true"
-                android:alpha="1"/>
+                android:alpha="1"
+                android:contentDescription="@null"/>
 
             <TextView
                 android:id="@+id/tv_novelty_title"

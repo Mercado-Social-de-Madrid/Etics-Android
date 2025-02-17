@@ -15,7 +15,8 @@
         android:alpha="1"
         android:background="@color/white"
         android:scaleType="centerCrop"
-        android:src="@mipmap/img_entitiy_example"/>
+        android:src="@mipmap/img_entitiy_example"
+        android:contentDescription="@null"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,15 +53,16 @@
             android:id="@+id/img_starred"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:padding="10dp"
             android:src="@drawable/img_star_selectable"
-            android:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="@null"/>
 
         <TextView
             android:id="@+id/tv_address"
             style="@style/TextBase"
-            android:layout_alignLeft="@+id/tv_entity_name"
+            android:layout_alignStart="@+id/tv_entity_name"
             android:layout_below="@+id/tv_entity_category"
             android:ellipsize="end"
             android:gravity="bottom"

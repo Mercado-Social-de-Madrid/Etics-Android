@@ -21,12 +21,13 @@
             android:adjustViewBounds="true"
             android:maxWidth="100dp"
             android:src="@mipmap/ic_avatar_2"
-            app:tint="@color/white"/>
+            app:tint="@color/white"
+            android:contentDescription="@string/profile_image_in_menu"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
+            android:layout_marginStart="10dp">
 
             <LinearLayout
                 android:id="@+id/view_user_info"
@@ -92,7 +93,8 @@
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_arrow_gallery_right"/>
+                    android:src="@mipmap/ic_arrow_gallery_right"
+                    android:contentDescription="@null"/>
             </LinearLayout>
 
             <LinearLayout

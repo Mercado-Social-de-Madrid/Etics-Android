@@ -8,6 +8,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:clickable="true"
+    android:focusable="true"
     tools:context=".ui.entities.filter.FilterEntitiesFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -26,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/search_entities"
+                android:textSize="@dimen/text_large"
                 android:inputType="textFilter" />
 
             <View
@@ -95,10 +97,11 @@
             android:id="@+id/btn_remove_filter"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:adjustViewBounds="true"
             android:background="@drawable/background_pressed_common"
-            android:src="@mipmap/ic_remove_filters_thin" />
+            android:src="@mipmap/ic_remove_filters_thin"
+            android:contentDescription="@string/remove_filter"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
@@ -31,6 +32,7 @@ public class NonSwipeableViewPager extends ViewPager {
         // Never allow swiping to switch between pages
         return false;
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

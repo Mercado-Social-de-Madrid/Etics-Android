@@ -13,15 +13,17 @@
         android:id="@+id/img_arrow_left"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:contentDescription="@string/previous_image"
         android:src="@mipmap/ic_arrow_gallery_left"
         android:background="@drawable/bg_arrow_gallery"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"/>
 
     <ImageView
         android:id="@+id/img_arrow_right"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:contentDescription="@string/next_image"
         android:src="@mipmap/ic_arrow_gallery_right"
         android:background="@drawable/bg_arrow_gallery"
         android:layout_centerVertical="true"

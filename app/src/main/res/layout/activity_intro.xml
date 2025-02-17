@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/green_gradient">
 
@@ -12,6 +13,7 @@
         android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:contentDescription="@string/logo_mes"
         android:src="@mipmap/img_mes_header" />
 
     <androidx.viewpager.widget.ViewPager
@@ -24,9 +26,10 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/bg_button_green_circle"
+        android:contentDescription="@string/next_intro_screen"
         android:src="@mipmap/ic_arrow_right"
         android:padding="8dp"
-        android:tint="@color/purple"
+        app:tint="@color/purple"
         android:layout_margin="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>

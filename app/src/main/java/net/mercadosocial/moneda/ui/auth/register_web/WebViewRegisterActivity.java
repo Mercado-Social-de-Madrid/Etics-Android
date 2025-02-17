@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.ui.auth.register_web;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -88,6 +89,7 @@ public class WebViewRegisterActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
         finish();

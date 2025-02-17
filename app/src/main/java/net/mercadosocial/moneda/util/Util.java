@@ -176,6 +176,7 @@ public final class Util {
         }
 
         Spanned result;
+        htmlText = htmlText.replaceAll("(?i)(<p>(\\s|&nbsp;|<br>)*</p>\\s*)+$", "").trim();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             result = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY);
         } else {

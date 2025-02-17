@@ -1,5 +1,6 @@
 package net.mercadosocial.moneda.ui.intro;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -58,6 +59,7 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
 
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
 

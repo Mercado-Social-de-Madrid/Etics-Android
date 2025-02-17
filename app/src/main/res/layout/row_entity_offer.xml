@@ -11,7 +11,7 @@
         android:id="@+id/img_offer"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_centerVertical="true"
+        android:contentDescription="@null"
         android:adjustViewBounds="true"
         android:background="@color/white"
         android:scaleType="centerCrop"/>

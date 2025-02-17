@@ -34,14 +34,19 @@
                 android:background="@drawable/bg_frame_black_corners"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/consumer_register"
+                android:descendantFocusability="blocksDescendants">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/ic_persons"
-                    android:tint="@color/purple" />
+                    app:tint="@color/purple"
+                    android:contentDescription="@null"/>
 
                 <TextView
                     style="@style/TextBase"
@@ -69,14 +74,19 @@
                 android:background="@drawable/bg_frame_black_corners"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/provider_register"
+                android:descendantFocusability="blocksDescendants">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     android:src="@mipmap/ic_entities"
-                    android:tint="@color/purple" />
+                    app:tint="@color/purple" />
 
                 <TextView
                     style="@style/TextBase"

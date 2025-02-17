@@ -12,5 +12,6 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:contentDescription="@string/gallery_image"/>
 </LinearLayout>

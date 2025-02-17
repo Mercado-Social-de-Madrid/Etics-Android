@@ -64,6 +64,8 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
                     .into(holder.imgEntity);
         }
 
+        holder.imgStarred.setContentDescription(context.getString(R.string.set_entity_fav, entity.getName()));
+
         holder.tvAddress.setText(entity.getAddress());
 
         holder.imgStarred.setSelected(entity.isFavourite());
@@ -109,6 +111,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
             super(itemView);
 
+
             imgEntity = (ImageView) itemView.findViewById(R.id.img_logo_entity);
             tvEntityName = (TextView) itemView.findViewById(R.id.tv_entity_name);
             tvEntityCategory = (TextView) itemView.findViewById(R.id.tv_entity_category);
@@ -117,14 +120,12 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
             rootView = itemView;
 
-
             rootView.setOnClickListener(v -> {
                 Entity entity = getItemAtPosition(getAdapterPosition());
                 itemClickListener.onEntityClicked(entity.getId(), getAdapterPosition());
             });
 
             imgStarred.setOnClickListener(v -> {
-                Entity entity = getItemAtPosition(getAdapterPosition());
                 imgStarred.setSelected(!imgStarred.isSelected());
                 itemClickListener.onEntityFavouriteClicked(getAdapterPosition(), imgStarred.isSelected());
             });

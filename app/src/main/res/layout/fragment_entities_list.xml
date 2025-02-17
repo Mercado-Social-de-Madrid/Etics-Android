@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_entity_not_found"
-                app:tint="@color/grey" />
+                app:tint="@color/grey"
+                android:contentDescription="@null"/>
 
             <TextView
                 android:id="@+id/tv_empty_list_entities"

@@ -21,7 +21,8 @@
             android:id="@+id/logo"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
@@ -107,7 +108,8 @@
                     android:layout_rowWeight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"/>
 
                 <ImageView
                     android:id="@+id/image_preview_2"
@@ -117,7 +119,8 @@
                     android:layout_rowWeight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"/>
 
                 <ImageView
                     android:id="@+id/image_preview_3"
@@ -127,7 +130,8 @@
                     android:layout_rowWeight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"/>
 
                 <ImageView
                     android:id="@+id/image_preview_4"
@@ -137,7 +141,8 @@
                     android:layout_rowWeight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"/>
 
             </GridLayout>
 

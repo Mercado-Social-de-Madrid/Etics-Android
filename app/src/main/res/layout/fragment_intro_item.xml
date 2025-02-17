@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:adjustViewBounds="true"
+            android:contentDescription="@null"
             android:src="@mipmap/ic_coins"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/view_white_bg"

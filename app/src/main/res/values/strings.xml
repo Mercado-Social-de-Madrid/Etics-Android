@@ -32,7 +32,7 @@
     <string name="new_offer_by">Nueva oferta de %s</string>
     <string name="news_mes">Noticia del MES</string>
 
-    <string name="search_entities">Buscar entidades</string>
+    <string name="search_entities">Entidades, productos o servicios</string>
     <string name="mes_news">Noticia del MES</string>
     <string name="mes_news_message_format"><![CDATA[
             <b>%s</b><p>
@@ -157,5 +157,28 @@
     <string name="change_image_temporarily_disabled">La función de cambiar imagen desde el teléfono estará disponible pronto.\nDe momento puedes cambiarla desde la web. Pulsa el siguiente botón:</string>
     <string name="go_to_web">Ir a la web</string>
     <string name="change_language">Cambiar idioma</string>
+
     <string name="products_and_services">Productos y servicios</string>
+    <string name="next_image">Siguiente imagen</string>
+    <string name="previous_image">Imagen anterior</string>
+    <string name="entity_logo">Logotipo de entidad</string>
+    <string name="visit_website">Visitar página web</string>
+    <string name="send_email_to_entity">Enviar email a la entidad</string>
+    <string name="dial_phone_entity">Marcar número de teléfono de la entidad</string>
+    <string name="entity_map_location">Localización de la entidad en el mapa</string>
+    <string name="logo_mes">Logo del mercado social</string>
+    <string name="next_intro_screen">Siguiente pantalla de introducción</string>
+    <string name="novelty_image">Imagen de la oferta o noticia</string>
+    <string name="consumer_register">Registro de consumidora</string>
+    <string name="provider_register">Registro de entidad proveedora</string>
+    <string name="set_entity_fav">Marcar %s como entidad favorita</string>
+    <string name="gallery_image">Imagen de galería</string>
+    <string name="profile_image_in_menu">Imagen de perfil en menú</string>
+
+    <string name="loading_data">Cargando datos</string>
+    <string name="balance_badge">Distintivo de balance/auditoría social</string>
+    <string name="profile_image">Imagen de perfil</string>
+    <string name="remove_filter">Borrar filtro</string>
+    <string name="intro_first_item">Bienvenida al Mercado Social. Imagen de introducción.</string>
+    <string name="member_card_qr">Código QR de carné de socia</string>
 </resources>

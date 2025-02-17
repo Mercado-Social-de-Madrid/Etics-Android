@@ -27,7 +27,7 @@
     <string name="new_offer">Eskaintza berria</string>
     <string name="new_offer_by">Eskaintza berria %s(e)tik</string>
     <string name="news_mes">MESen albistea</string>
-    <string name="search_entities">Entitateak bilatu</string>
+    <string name="search_entities">Entitateak, produktuak edo zerbitzuak</string>
     <string name="mes_news">MESen albistea</string>
     <string name="mes_news_message_format"><![CDATA[
             <b>%s</b><p>
@@ -142,4 +142,28 @@
     <string name="change_image_temporarily_disabled">Telefonotik irudia aldatzeko funtzioa laster erabilgarri egongo da.\nOraingoz, webgunetik alda dezakezu. Sakatu hurrengo botoia:</string>
     <string name="go_to_web">Joan webgunera</string>
     <string name="change_language">Hizkuntza aldatu</string>
+
+    <string name="products_and_services">Produktuak eta zerbitzuak</string>
+    <string name="next_image">Hurrengo irudia</string>
+    <string name="previous_image">Aurreko irudia</string>
+    <string name="entity_logo">Erakundearen logotipoa</string>
+    <string name="visit_website">Webgunea bisitatu</string>
+    <string name="send_email_to_entity">Erakundeari mezu elektronikoa bidali</string>
+    <string name="dial_phone_entity">Erakundearen telefono zenbakia markatu</string>
+    <string name="entity_map_location">Erakundearen kokapena mapan</string>
+    <string name="logo_mes">Merkatu sozialaren logotipoa</string>
+    <string name="next_intro_screen">Hurrengo sarrerako pantaila</string>
+    <string name="novelty_image">Eskaintza edo berriaren irudia</string>
+    <string name="consumer_register">Kontsumitzailearen erregistroa</string>
+    <string name="provider_register">Hornitzaile erakundearen erregistroa</string>
+    <string name="set_entity_fav">%s erakundea gogoko gisa markatu</string>
+    <string name="gallery_image">Galeriako irudia</string>
+    <string name="profile_image_in_menu">Profilaren irudia menuan</string>
+
+    <string name="loading_data">Datuak kargatzen</string>
+    <string name="balance_badge">Auditoretza sozialaren ezaugarri bereizgarria</string>
+    <string name="profile_image">Profil irudia</string>
+    <string name="remove_filter">Iragazkia ezabatu</string>
+    <string name="intro_first_item">Ongi etorri Merkatu Soziala. Sarrerako irudia.</string>
+    <string name="member_card_qr">Bazkide txartelaren QR kodea</string>
 </resources>

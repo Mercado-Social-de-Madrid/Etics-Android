@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -30,8 +31,9 @@ public class ProviderSocialProfileAdapter extends RecyclerView.Adapter<ProviderS
         this.socialProfiles = socialProfiles;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View contactView = LayoutInflater.from(context).inflate(R.layout.item_provider_social_profile, parent, false);
         return new ViewHolder(contactView);
     }
@@ -48,6 +50,8 @@ public class ProviderSocialProfileAdapter extends RecyclerView.Adapter<ProviderS
                 .error(R.mipmap.ic_avatar_2)
 //                .transform(new CircleTransform())
                 .into(holder.binding.btnSocialProfile);
+
+        holder.binding.btnSocialProfile.setContentDescription(socialProfile.getName());
 
     }
 

@@ -41,14 +41,15 @@
                         android:layout_height="110dp"
                         android:layout_marginBottom="8dp"
                         android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/ic_avatar_2" />
+                        app:srcCompat="@mipmap/ic_avatar_2"
+                        android:contentDescription="@string/profile_image"/>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_change_image"
                         style="@style/ButtonMes"
                         android:layout_marginBottom="20dp"
                         android:text="@string/change_image"
-                        android:minWidth="0dp"/>
+                        android:minWidth="0dp" />
 
                 </LinearLayout>
 
