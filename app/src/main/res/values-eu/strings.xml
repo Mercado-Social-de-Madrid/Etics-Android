@@ -164,6 +164,6 @@
     <string name="balance_badge">Auditoretza sozialaren ezaugarri bereizgarria</string>
     <string name="profile_image">Profil irudia</string>
     <string name="remove_filter">Iragazkia ezabatu</string>
-    <string name="intro_first_item">Ongi etorri Merkatu Soziala. Sarrerako irudia.</string>
+    <string name="intro_first_item">Ongi etorri Merkatu Sozialera. Sarrerako irudia.</string>
     <string name="member_card_qr">Bazkide txartelaren QR kodea</string>
 </resources>
