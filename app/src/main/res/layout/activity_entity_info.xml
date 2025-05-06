@@ -52,6 +52,16 @@
 
                 <View style="@style/SeparatorHorizontal.Grey" />
 
+                <TextView
+                    android:id="@+id/tv_entity_short_description"
+                    style="@style/TextBase"
+                    android:layout_marginTop="12dp"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/text_medium"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    tools:text="Descripcón corta"
+                    android:padding="12dp" />
 
                 <TextView
                     android:id="@+id/tv_entity_description"

@@ -37,6 +37,8 @@ public class WebUtils {
         CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                 .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
                 .setDefaultColorSchemeParams(params)
+                .setUrlBarHidingEnabled(true)
+                .setShowTitle(false)
                 .build();
 
         String currentLang = LangUtils.getCurrentLang();

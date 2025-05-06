@@ -49,7 +49,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
             urlRegister = node.getRegisterProviderURL();
         }
 
-        WebViewRegisterActivity.startRemoteUrl(this, getString(R.string.new_register), urlRegister);
+        WebUtils.openLink(this, urlRegister);
         finish();
     }
 }

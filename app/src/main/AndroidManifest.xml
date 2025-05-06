@@ -81,8 +81,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.info.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.auth.register_web.WebViewRegisterActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
             android:configChanges="orientation|screenSize"

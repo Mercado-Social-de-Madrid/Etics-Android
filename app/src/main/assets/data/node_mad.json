@@ -36,8 +36,8 @@
   "longitude": -3.6968994140625,
   "contact_email": "hola@mercadosocial.madrid",
   "self_register_allowed": true,
-  "register_provider_url": "https://gestionmadrid.mercadosocial.net/accounts/signup/provider/?from_app=true",
-  "register_consumer_url": "https://gestionmadrid.mercadosocial.net/accounts/signup/consumer/?from_app=true",
+  "register_provider_url": "https://gestion.mercadosocial.madrid/accounts/signup/provider/?from_app=true",
+  "register_consumer_url": "https://gestion.mercadosocial.madrid/accounts/signup/consumer/?from_app=true",
   "preferred_locale": "es-ES",
   "webpage_link": "https://www.mercadosocial.madrid/",
   "takahe_server": null,
@@ -45,5 +45,5 @@
   "has_linked_crm": false,
   "linked_crm_url": null,
   "member_card_enabled": true,
-  "info_page_url": "https://appmes.triskelapps.com/2/info"
+  "info_page_url": "https://mercadosocial.app/2/info"
 }
