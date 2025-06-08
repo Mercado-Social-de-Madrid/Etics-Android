@@ -8,6 +8,7 @@ import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Entity extends Account {
 
@@ -27,6 +28,7 @@ public class Entity extends Account {
     private String legal_form;
     private String address;
     private List<String> categories;
+    private List<Category> categoriesFull = new ArrayList<>();
     private Double latitude;
     private Double longitude;
 
@@ -46,6 +48,12 @@ public class Entity extends Account {
 
     private transient boolean favourite;
 
+    // Semantic search fields. Only exist when performing a search
+    @SerializedName("exact_match")
+    private Boolean exactMatch;
+
+    private Float similarity;
+
 
 
     @Override
@@ -56,17 +64,10 @@ public class Entity extends Account {
 
     public String getCategoriesString() {
 
-        String categoriesStr = "";
-
-        // todo get names by map
-//        for (int i = 0; i < categories.size(); i++) {
-//            categoriesStr += categories.get(i);
-//            if (i < categories.size() - 1) {
-//                categoriesStr += ", ";
-//            }
-//        }
-
-        return categoriesStr;
+        List<String> categoriesNames =
+                categoriesFull.stream().map(Category::getName).collect(Collectors.toList());
+        String names = String.join(", ", categoriesNames);
+        return names;
     }
 
     public String getImageCover() {
@@ -288,5 +289,37 @@ public class Entity extends Account {
 
     public void setServices(String services) {
         this.services = services;
+    }
+
+    public Boolean getExactMatch() {
+        return exactMatch;
+    }
+
+    public void setExactMatch(Boolean exactMatch) {
+        this.exactMatch = exactMatch;
+    }
+
+    public Float getSimilarity() {
+        return similarity;
+    }
+
+    public void setSimilarity(Float similarity) {
+        this.similarity = similarity;
+    }
+
+    public List<Category> getCategoriesFull() {
+        return categoriesFull;
+    }
+
+    public void setCategoriesFull(List<Category> categoriesFull) {
+        this.categoriesFull = categoriesFull;
+    }
+
+    public void addCategoryFull(Category categoryFull) {
+        this.categoriesFull.add(categoryFull);
+    }
+
+    public boolean isSearchResult() {
+        return getExactMatch() != null & getSimilarity() != null;
     }
 }

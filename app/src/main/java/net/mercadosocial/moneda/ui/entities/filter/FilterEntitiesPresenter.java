@@ -85,12 +85,12 @@ public class FilterEntitiesPresenter extends BasePresenter {
         filterEntities.setWithBenefits(withBenefits);
         filterEntities.setWithBadge(withBadge);
 
-        ((MainActivity)context).setFilterEntities(filterEntities);
+        ((MainActivity)context).setFilterEntities(filterEntities, true);
     }
 
     public void onRemoveFilterClick() {
         resetFilter();
-        ((MainActivity)context).setFilterEntities(null);
+        ((MainActivity)context).setFilterEntities(null, false);
     }
 
     public void resetFilter() {

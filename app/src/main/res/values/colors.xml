@@ -26,7 +26,7 @@
 
     <color name="green_gradient_dark">@color/green_extra_light</color>
     <color name="green_gradient_light">@color/green_light</color>
-    <color name="transblack_entities">#77000000</color>
+    <color name="transblack_entities">#CC000000</color>
     <color name="white">#FFF</color>
     <color name="grey">#807f7f</color>
 

@@ -258,7 +258,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             filterFragment.onNodeChanged();
         }
 
-        setFilterEntities(null);
+        setFilterEntities(null, true);
     }
 
     private FilterEntitiesFragment getFilterEntitiesFragment() {
@@ -266,14 +266,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
 
-    public void setFilterEntities(FilterEntities filterEntities) {
+    public void setFilterEntities(FilterEntities filterEntities, boolean refreshData) {
         BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content);
         if (baseFragment instanceof EntitiesFragment) {
             EntitiesPresenter entitiesPresenter = ((EntitiesPresenter) baseFragment.getBasePresenter());
             entitiesPresenter.setFilterEntities(filterEntities);
-            entitiesPresenter.refreshData();
+
             if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.closeDrawer(GravityCompat.END);
+            }
+
+            if (refreshData) {
+                entitiesPresenter.refreshData();
             }
         }
     }

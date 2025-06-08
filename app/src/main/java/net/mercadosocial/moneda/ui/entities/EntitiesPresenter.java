@@ -7,8 +7,10 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseInteractor;
 import net.mercadosocial.moneda.base.BasePresenter;
+import net.mercadosocial.moneda.interactor.CategoriesInteractor;
 import net.mercadosocial.moneda.interactor.EntityInteractor;
 import net.mercadosocial.moneda.interactor.UserInteractor;
+import net.mercadosocial.moneda.model.Category;
 import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.FilterEntities;
 import net.mercadosocial.moneda.model.Person;
@@ -16,7 +18,9 @@ import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -30,6 +34,7 @@ public class EntitiesPresenter extends BasePresenter {
     private final EntitiesView view;
     private final EntityInteractor entityInteractor;
     private final UserInteractor userInteractor;
+    private final CategoriesInteractor categoriesInteractor;
     private List<Entity> entities = new ArrayList<>();
     private FilterEntities filterEntities;
     private boolean refreshFavouritesAtEnd;
@@ -53,6 +58,7 @@ public class EntitiesPresenter extends BasePresenter {
 
         entityInteractor = new EntityInteractor(context, view);
         userInteractor = new UserInteractor(context, view);
+        categoriesInteractor = new CategoriesInteractor(context, view);
 
     }
 
@@ -132,8 +138,22 @@ public class EntitiesPresenter extends BasePresenter {
 
     }
 
-    public void updateData() {
-        loadEntities(entityInteractor.getCachedEntities());
+    /**
+     * Objetivo: carga de datos rápida por caché, orden aleatorio de entidades en cada carga, integrar bien con filtro y vista de progreso al sincronizar.
+     * Casos:
+     * - Sin caché guardada -> mostrar progreso, sincronizar con api, cargar datos con orden aleatorio
+     * - Con cache guardado -> cargar datos cache con orden aleatorio, no mostrar progreso, sincronizar y guardar en caché sin recargar datos (se perdería el orden aleatorio anterior y haría un efecto no deseado para el usuario al aparecer de repente entidades nuevas en la lista)
+     * - Se realiza una búsqueda -> se hace petición al api mostrando progreso, los resultados no se cachean ni se hace aleatorio el orden ya que vienen el api por orden de relevancia por similitud semántica.
+     * - Se resetea la búsqueda -> se recargan los datos de caché con orden aleatorio
+     */
+
+    public void loadCacheData() {
+        List<Entity> entitiesCached = entityInteractor.getCachedEntities();
+
+        if (entitiesCached != null && !entitiesCached.isEmpty()) {
+            Collections.shuffle(entitiesCached);
+            loadEntities(entitiesCached);
+        }
     }
 
     public void refreshData() {
@@ -142,14 +162,24 @@ public class EntitiesPresenter extends BasePresenter {
 
     private void refreshEntities() {
 
-        view.setRefreshing(true);
+        List<Entity> entitiesCached = entityInteractor.getCachedEntities();
+
+        final boolean loadAfterSync = entitiesCached == null || entitiesCached.isEmpty() || filterEntities != null;
+        if (loadAfterSync) {
+            view.setRefreshing(true);
+        }
+
+        Log.i(TAG, ">> syncing");
 
         entityInteractor.getEntities(filterEntities, new EntityInteractor.Callback() {
 
             @Override
             public void onResponse(List<Entity> entitiesApi, boolean hasMore) {
-
-                loadEntities(entitiesApi);
+                Log.i(TAG, ">> sync finished");
+                if (loadAfterSync) {
+                    Log.i(TAG, ">> loading entities");
+                    loadEntities(entitiesApi);
+                }
             }
 
             @Override
@@ -172,11 +202,38 @@ public class EntitiesPresenter extends BasePresenter {
 
         entities.clear();
         entities.addAll(entitiesUpdated);
-        Collections.shuffle(entities);
+
         processFavs();
         processLocalFilter();
+        processCategories();
 
         view.updateEntities(entities);
+    }
+
+    private void processCategories() {
+        List<Category> categories = categoriesInteractor.getSavedCategories();
+        Map<String, Category> categoriesMap = new HashMap<>();
+
+        if (categories == null || categories.isEmpty()) {
+            return;
+        } else {
+            for (Category category : categories) {
+                categoriesMap.put(category.getId(), category);
+            }
+        }
+
+        for (Entity entity : entities) {
+            if (entity.getCategories() == null || entity.getCategories().isEmpty()) {
+                continue;
+            }
+
+            for (String categoryId : entity.getCategories()) {
+                Category category = categoriesMap.get(categoryId);
+                if (category != null) {
+                    entity.addCategoryFull(category);
+                }
+            }
+        }
     }
 
     private void processLocalFilter() {
@@ -241,7 +298,11 @@ public class EntitiesPresenter extends BasePresenter {
     }
 
     public void setFilterEntities(FilterEntities filterEntities) {
+        boolean clearingFilter = this.filterEntities != null && filterEntities == null;
         this.filterEntities = filterEntities;
+        if (clearingFilter) {
+            loadCacheData();
+        }
     }
 
     public void onMapListButtonClick() {

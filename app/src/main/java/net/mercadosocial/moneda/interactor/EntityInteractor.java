@@ -18,6 +18,7 @@ import net.mercadosocial.moneda.util.Util;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Response;
@@ -92,11 +93,17 @@ public class EntityInteractor extends BaseInteractor {
                             return;
                         }
 
-                        callback.onResponse(response.body(), false);
+                        List<Entity> entities = response.body();
+                        if (entities == null) {
+                            return;
+                        }
 
                         if (filterEntities == null) {
                             cacheEntities(response.body());
+                            Collections.shuffle(entities);
                         }
+
+                        callback.onResponse(entities, false);
 
                     }
                 });

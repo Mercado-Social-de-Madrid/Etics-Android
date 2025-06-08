@@ -22,13 +22,29 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <EditText
-                android:id="@+id/edit_search_entities"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_entities"
-                android:textSize="@dimen/text_large"
-                android:inputType="textFilter" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/edit_search_entities"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/semantic_search"
+                    android:textSize="@dimen/text_large"
+                    android:inputType="textFilter" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_semantic_search_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_info"
+                    android:padding="5dp"
+                    app:tint="@color/black"/>
+            </LinearLayout>
 
             <View
                 style="@style/SeparatorHorizontal.Grey"

@@ -82,7 +82,7 @@ public class CategoriesInteractor extends BaseInteractor {
 
     }
 
-    private List<Category> getSavedCategories() {
+    public List<Category> getSavedCategories() {
         String serialized = App.getPrefs(context).getString(App.SHARED_CATEGORIES_SAVED, null);
         if (serialized == null) {
             return new ArrayList<>();

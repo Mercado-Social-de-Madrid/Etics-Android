@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="230dp">
 
 
     <ImageView
@@ -14,62 +14,66 @@
         android:adjustViewBounds="true"
         android:alpha="1"
         android:background="@color/white"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:src="@mipmap/img_entitiy_example"
-        android:contentDescription="@null"/>
+        android:src="@mipmap/img_entitiy_example" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/view_entity_item_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/transblack_entities"
-        android:padding="15dp"
+        android:gravity="center_vertical"
         android:minHeight="78dp"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_entity_name"
-            style="@style/TextBase.White"
-            android:layout_marginRight="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/img_starred"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textSize="20sp"
-            tools:text="Fabricantes de sueños"
-            android:textStyle="bold"
-            android:fontFamily="@font/comfortaa_bold"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_entity_category"
-            style="@style/TextBase.White"
-            android:layout_alignLeft="@+id/tv_entity_name"
-            android:layout_alignRight="@+id/tv_entity_name"
-            android:layout_below="@+id/tv_entity_name"
-            android:ellipsize="end"
-            android:maxLines="1"
-            tools:text="Librería" />
+            <TextView
+                android:id="@+id/tv_entity_name"
+                style="@style/TextBase.White"
+                android:ellipsize="end"
+                android:fontFamily="@font/comfortaa_bold"
+                android:maxLines="2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Fabricantes de sueños" />
+
+            <TextView
+                android:id="@+id/tv_entity_category"
+                style="@style/TextBase.White"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Librería" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_semantic_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="5dp"
+            android:src="@mipmap/ic_similitud_semantica"
+            android:visibility="visible"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/img_starred"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:contentDescription="@null"
             android:padding="10dp"
             android:src="@drawable/img_star_selectable"
-            app:tint="@color/white"
-            android:contentDescription="@null"/>
+            app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/tv_address"
-            style="@style/TextBase"
-            android:layout_alignStart="@+id/tv_entity_name"
-            android:layout_below="@+id/tv_entity_category"
-            android:ellipsize="end"
-            android:gravity="bottom"
-            android:lines="2"
-            tools:text="Pza Palacio"
-            android:visibility="gone" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -2,7 +2,6 @@ package net.mercadosocial.moneda.ui.entities.list;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesChild,
 
         setEntityListener((EntityListener) getParentFragment());
 
-        getEntitiesPresenter().updateData();
+        getEntitiesPresenter().loadCacheData();
 
         return layout;
     }
@@ -115,6 +114,14 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesChild,
     @Override
     public void onEntityFavouriteClicked(int position, boolean isFavourite) {
         entityListener.onEntityFavouriteClick(position, isFavourite);
+    }
+
+    @Override
+    public void onEntitySearchResultClick(Entity entity) {
+        String message = entity.getExactMatch() != null && entity.getExactMatch() ?
+                getString(R.string.search_result_exact_match) :
+                getString(R.string.search_result_similarity, String.valueOf(entity.getSimilarity()));
+        alert(getString(R.string.search_result), message);
     }
 
 

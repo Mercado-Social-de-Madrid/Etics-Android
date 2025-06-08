@@ -108,7 +108,7 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesChild, 
             updateCamera();
         });
 
-        getEntitiesPresenter().updateData();
+        getEntitiesPresenter().loadCacheData();
     }
 
     private void updateCamera() {

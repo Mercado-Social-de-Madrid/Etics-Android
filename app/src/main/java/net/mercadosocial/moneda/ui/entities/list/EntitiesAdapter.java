@@ -1,6 +1,10 @@
 package net.mercadosocial.moneda.ui.entities.list;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.databinding.ItemProviderSocialProfileBinding;
+import net.mercadosocial.moneda.databinding.RowEntityBinding;
 import net.mercadosocial.moneda.model.Entity;
 
 import java.util.List;
@@ -26,23 +32,18 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     private Context context;
     private OnItemClickListener itemClickListener;
 
-    private Integer selectedNumber = -1;
-
-
     public EntitiesAdapter(Context context, List<Entity> entities, boolean showFavsStars) {
         this.context = context;
         this.entities = entities;
         this.showFavsStars = showFavsStars;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View contactView = LayoutInflater.from(context).inflate(R.layout.row_entity, parent, false);
-
-        // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(contactView);
     }
 
     @Override
@@ -50,9 +51,13 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
         final Entity entity = getItemAtPosition(position2);
 
-        holder.tvEntityName.setText(entity.getName());
-//        holder.tvEntityCategory.setText(entity.getCategoriesString());
-        holder.tvEntityCategory.setVisibility(View.GONE);
+        holder.binding.tvEntityName.setText(entity.getName());
+        if (entity.getCategories().isEmpty()) {
+            holder.binding.tvEntityCategory.setVisibility(View.GONE);
+        } else {
+            holder.binding.tvEntityCategory.setText(entity.getCategoriesString());
+            holder.binding.tvEntityCategory.setVisibility(View.VISIBLE);
+        }
 
         String urlImageCover = entity.getImageCover();
         if (urlImageCover != null && !urlImageCover.isEmpty()) {
@@ -61,22 +66,27 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
                     .placeholder(R.mipmap.img_mes_default_banner_2)
                     .error(R.mipmap.img_mes_default_banner_2)
 //                .resizeDimen(R.dimen.width_image_small, R.dimen.height_image_small)
-                    .into(holder.imgEntity);
+                    .into(holder.binding.imgLogoEntity);
         }
 
-        holder.imgStarred.setContentDescription(context.getString(R.string.set_entity_fav, entity.getName()));
+        holder.binding.imgStarred.setContentDescription(context.getString(R.string.set_entity_fav, entity.getName()));
 
-        holder.tvAddress.setText(entity.getAddress());
+        holder.binding.imgStarred.setSelected(entity.isFavourite());
+        holder.binding.imgStarred.setVisibility(showFavsStars ? View.VISIBLE : View.GONE);
 
-        holder.imgStarred.setSelected(entity.isFavourite());
-        holder.imgStarred.setVisibility(showFavsStars ? View.VISIBLE : View.INVISIBLE);
+        if (entity.isSearchResult()) {
+            holder.binding.imgSemanticResult.setVisibility(View.VISIBLE);
+            if (entity.getExactMatch() != null && entity.getExactMatch()) {
+                holder.binding.imgSemanticResult.setImageDrawable(
+                        ContextCompat.getDrawable(context, R.mipmap.ic_check));
+            } else {
+                holder.binding.imgSemanticResult.setImageDrawable(
+                        ContextCompat.getDrawable(context, R.mipmap.ic_similitud_semantica));
+            }
 
-//        holder.imgStarred.setSelected(entity.isStarred());
-
-//        int color = ContextCompat.getColor(context, entity.getImageLogoUrlFull() != null ? android.R.color.white : android.R.color.black);
-//        holder.tvEventName.setTextColor(color);
-//        holder.tvEventGenre.setTextColor(color);
-
+        } else {
+            holder.binding.imgSemanticResult.setVisibility(View.GONE);
+        }
 
     }
 
@@ -100,34 +110,28 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgEntity;
-        private TextView tvEntityName;
-        private TextView tvEntityCategory;
-        private ImageView imgStarred;
-        private TextView tvAddress;
-        public View rootView;
+        private final RowEntityBinding binding;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
+            binding = RowEntityBinding.bind(itemView);
 
-            imgEntity = (ImageView) itemView.findViewById(R.id.img_logo_entity);
-            tvEntityName = (TextView) itemView.findViewById(R.id.tv_entity_name);
-            tvEntityCategory = (TextView) itemView.findViewById(R.id.tv_entity_category);
-            imgStarred = (ImageView) itemView.findViewById(R.id.img_starred);
-            tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
 
-            rootView = itemView;
-
-            rootView.setOnClickListener(v -> {
+            binding.getRoot().setOnClickListener(v -> {
                 Entity entity = getItemAtPosition(getAdapterPosition());
                 itemClickListener.onEntityClicked(entity.getId(), getAdapterPosition());
             });
 
-            imgStarred.setOnClickListener(v -> {
-                imgStarred.setSelected(!imgStarred.isSelected());
-                itemClickListener.onEntityFavouriteClicked(getAdapterPosition(), imgStarred.isSelected());
+            binding.imgStarred.setOnClickListener(v -> {
+                binding.imgStarred.setSelected(!binding.imgStarred.isSelected());
+                itemClickListener.onEntityFavouriteClicked(getAdapterPosition(), binding.imgStarred.isSelected());
+            });
+
+            binding.imgSemanticResult.setOnClickListener(v -> {
+                Entity entity = getItemAtPosition(getAdapterPosition());
+                itemClickListener.onEntitySearchResultClick(entity);
             });
         }
     }
@@ -141,6 +145,10 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
         void onEntityClicked(String id, int position);
 
         void onEntityFavouriteClicked(int position, boolean isFavourite);
+
+        void onEntitySearchResultClick(Entity entity);
+
+
 
     }
 }
