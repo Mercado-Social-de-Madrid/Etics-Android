@@ -177,4 +177,12 @@
     <string name="similarity_level_medium">Ertaina</string>
     <string name="similarity_level_high">Altua</string>
 
+    <string name="about_app">Aplikazioari buruz</string>
+    <string name="user_guide">Erabilpen gida</string>
+    <string name="open_source_repo">Kode biltegi</string>
+    <string name="whats_new">Bertsioaren berriak</string>
+    <string name="version_x">Bertsioa: %s</string>
+    <string name="whats_new_last_versions">Azken bertsioetako berriak</string>
+    <string name="whats_new_current_version">Uneko bertsioaren berriak</string>
+
 </resources>

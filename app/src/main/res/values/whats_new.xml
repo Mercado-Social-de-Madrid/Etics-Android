@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changes_4_6_8">- Búsqueda semántica de entidades por productos o servicios (para más información abre el filtro en el icono de la lupa)\n- Añadida información de categorías de entidades\n- Mejorada la velocidad en la carga de entidades\n- Se añade esta misma ventana de información si hay novedades importantes en una nueva versión de la app</string>
+
+</resources>

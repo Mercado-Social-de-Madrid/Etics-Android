@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/semantic_search"
+                    android:hint="@string/search"
                     android:textSize="@dimen/text_large"
                     android:inputType="textFilter" />
 

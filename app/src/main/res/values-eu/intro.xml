@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_intro_0">Kaixo!</string>
+    <string name="text_intro_0">Ongi etorri Gizarte Merkatuaren aplikaziora</string>
+
+    <string name="title_intro_1">Gara</string>
+    <string name="text_intro_1">ekonomia soziala eta solidarioa sustatzen duen sarea</string>
+
+    <string name="title_intro_2">Hemen ahal izango duzu</string>
+    <string name="text_intro_2">Gizarte Merkatuaren erakundeak eta haien eskaintzak aurkitzea</string>
+
+    <string name="title_intro_3">Sarbidea izango duzu</string>
+    <string name="text_intro_3">Gizarte Merkatuaren azken berriak eta deialdietara</string>
+
+    <string name="title_intro_4">Izango duzu</string>
+    <string name="text_intro_4">zure bazkide txartel digitalera sarbidea</string>
+
+    <string name="title_intro_5">Baliatzeko</string>
+    <string name="text_intro_5">GEMeko erakundeen abantailak eta deskontuak</string>
+</resources>

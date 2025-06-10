@@ -1,0 +1,11 @@
+<!-- GENERIC -->
+<resources>
+    <string name="back">Atzera</string>
+    <string name="no_connection">Ez dago Interneteko konexiorik</string>
+    <string name="accept">Onartu</string>
+    <string name="attention">Arreta</string>
+    <string name="cancel">Ezeztatu</string>
+    <string name="error_retrieving_data">Errorea datuak eskuratzean</string>
+    <string name="loading">Kargatzen…</string>
+    <string name="close">Itxi</string>
+</resources>

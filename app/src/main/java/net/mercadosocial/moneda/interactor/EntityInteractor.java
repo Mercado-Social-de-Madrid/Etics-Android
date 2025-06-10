@@ -99,7 +99,7 @@ public class EntityInteractor extends BaseInteractor {
                         }
 
                         if (filterEntities == null) {
-                            cacheEntities(response.body());
+                            cacheEntities(entities);
                             Collections.shuffle(entities);
                         }
 
@@ -128,44 +128,6 @@ public class EntityInteractor extends BaseInteractor {
         App.getPrefs(context).edit().putString(App.SHARED_ENTITIES_CACHE, entitiesSerialized).apply();
     }
 
-//    public void getEntitiesFiltered(String query, final Callback callback) {
-//
-//        if (!Util.isConnected(context)) {
-//            baseView.toast(R.string.no_connection);
-//            return;
-//        }
-//
-//        getApi().getEntitiesFiltered(query)
-//                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).doOnTerminate(actionTerminate)
-//                .subscribe(new Observer<Response<EntitiesResponse>>() {
-//                    @Override
-//                    public void onCompleted() {
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                        callback.onError(e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onNext(Response<EntitiesResponse> response) {
-//
-//                        if (!response.isSuccessful()) {
-//                            ApiError apiError = ApiError.parse(response);
-//                            callback.onError(apiError.getMessage());
-//                            return;
-//                        }
-//
-//                        boolean hasMore = response.body().getMeta().getNext() != null;
-//                        callback.onResponse(response.body().getEntities(), hasMore);
-//
-//
-//                    }
-//                });
-//
-//
-//    }
 
     public void getEntityById(String id, final BaseApiCallback<Entity> callback) {
 

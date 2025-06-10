@@ -169,6 +169,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getApp().setNewLaunch(true);
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
 
 //        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
@@ -186,6 +192,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             case REQ_CODE_INTRO:
 //                showFragment(0);
                 updateMenuViewsByNode();
+                presenter.refreshData();
                 break;
 
             case REQ_CODE_PROFILE:

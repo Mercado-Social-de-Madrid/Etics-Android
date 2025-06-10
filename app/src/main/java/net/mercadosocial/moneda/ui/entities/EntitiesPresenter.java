@@ -65,13 +65,16 @@ public class EntitiesPresenter extends BasePresenter {
     public void onCreate() {
         view.showScreenType(currentScreen);
 
+    }
+
+    public void onResume() {
+
+        Log.i(TAG, "onResume: isNewLaunch:" + getApp().isNewLaunch());
+
         if (getApp().isNewLaunch()) {
             refreshData();
             getApp().setNewLaunch(false);
         }
-    }
-
-    public void onResume() {
 
         if (entities != null && !entities.isEmpty()) {
             processFavs();

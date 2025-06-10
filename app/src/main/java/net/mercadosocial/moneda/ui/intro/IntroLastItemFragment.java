@@ -49,6 +49,10 @@ public class IntroLastItemFragment extends BaseFragment implements View.OnClickL
 
         btnIntroEnter.setEnabled(true);
 
+        App app = ((App) getActivity().getApplicationContext());
+        app.clearContentCache();
+        app.setNewLaunch(true);
+
         return layout;
     }
 
