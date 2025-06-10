@@ -12,6 +12,7 @@ import net.mercadosocial.moneda.model.Entity;
 import net.mercadosocial.moneda.model.News;
 import net.mercadosocial.moneda.model.Novelty;
 import net.mercadosocial.moneda.model.Offer;
+import net.mercadosocial.moneda.ui.entity_info.EntityInfoPresenter;
 import net.mercadosocial.moneda.util.Util;
 import net.mercadosocial.moneda.util.WebUtils;
 
@@ -71,6 +72,9 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
                 if (entity != null) {
                     binding.tvNoveltyEntity.setText(entity.getName());
                     binding.tvNoveltyEntity.setVisibility(View.VISIBLE);
+                    binding.tvNoveltyEntity.setOnClickListener(v -> {
+                        EntityInfoPresenter.startEntityInfoActivity(NoveltyDetailActivity.this, entity.getId());
+                    });
                 }
 
                 binding.tvNoveltyDate.setText(getString(R.string.valid_until, novelty.getDate()));

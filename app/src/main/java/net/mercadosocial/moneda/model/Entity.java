@@ -3,6 +3,7 @@ package net.mercadosocial.moneda.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.model.gallery_entity.Gallery;
 import net.mercadosocial.moneda.model.gallery_entity.Photo;
 
@@ -51,6 +52,9 @@ public class Entity extends Account {
     // Semantic search fields. Only exist when performing a search
     @SerializedName("exact_match")
     private Boolean exactMatch;
+
+    @SerializedName("similarity_level")
+    private String similarityLevel;
 
     private Float similarity;
 
@@ -321,5 +325,22 @@ public class Entity extends Account {
 
     public boolean isSearchResult() {
         return getExactMatch() != null & getSimilarity() != null;
+    }
+
+    public String getSimilarityLevel() {
+        return similarityLevel;
+    }
+
+    public void setSimilarityLevel(String similarityLevel) {
+        this.similarityLevel = similarityLevel;
+    }
+
+    public int getSimilarityLevelStringId() {
+        switch (similarityLevel) {
+            case "low": return R.string.similarity_level_low;
+            case "medium": return R.string.similarity_level_medium;
+            case "high": return R.string.similarity_level_high;
+            default: return R.string.similarity_level_unknown;
+        }
     }
 }

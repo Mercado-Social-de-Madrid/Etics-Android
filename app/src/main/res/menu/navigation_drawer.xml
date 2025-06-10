@@ -38,4 +38,26 @@
 
         </menu>
     </item>
+
+    <item android:title="@string/about_app">
+        <menu>
+            <item
+                android:id="@+id/menuItem_user_guide"
+                android:icon="@drawable/ic_user_guide"
+                android:title="@string/user_guide"
+                android:visible="false"/>
+
+            <item
+                android:id="@+id/menuItem_open_source_repo"
+                android:icon="@drawable/ic_code"
+                android:title="@string/open_source_repo"
+                android:visible="false"/>
+
+            <item
+                android:id="@+id/menuItem_whats_new"
+                android:icon="@drawable/ic_whats_new"
+                android:title="@string/whats_new" />
+
+        </menu>
+    </item>
 </menu>

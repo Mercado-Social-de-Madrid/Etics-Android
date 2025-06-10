@@ -177,8 +177,8 @@ public class EntitiesFragment extends BaseFragment implements EntitiesView, Enti
 
     // CHILD ENTITIES CALLBACKS
     @Override
-    public void onEntityClick(int position, String id) {
-        presenter.onEntityClicked(position, id);
+    public void onEntityClick(Entity entity) {
+        presenter.onEntityClicked(entity);
     }
 
     @Override

@@ -60,7 +60,6 @@
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:padding="5dp"
-            android:src="@mipmap/ic_similitud_semantica"
             android:visibility="visible"
             app:tint="@color/white" />
 

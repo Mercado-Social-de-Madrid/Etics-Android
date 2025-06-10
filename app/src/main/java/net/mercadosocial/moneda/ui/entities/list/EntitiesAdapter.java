@@ -78,10 +78,10 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
             holder.binding.imgSemanticResult.setVisibility(View.VISIBLE);
             if (entity.getExactMatch() != null && entity.getExactMatch()) {
                 holder.binding.imgSemanticResult.setImageDrawable(
-                        ContextCompat.getDrawable(context, R.mipmap.ic_check));
+                        ContextCompat.getDrawable(context, R.drawable.ic_exact_result));
             } else {
                 holder.binding.imgSemanticResult.setImageDrawable(
-                        ContextCompat.getDrawable(context, R.mipmap.ic_similitud_semantica));
+                        ContextCompat.getDrawable(context, R.drawable.ic_semantic_result));
             }
 
         } else {
@@ -121,7 +121,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
 
             binding.getRoot().setOnClickListener(v -> {
                 Entity entity = getItemAtPosition(getAdapterPosition());
-                itemClickListener.onEntityClicked(entity.getId(), getAdapterPosition());
+                itemClickListener.onEntityClicked(entity);
             });
 
             binding.imgStarred.setOnClickListener(v -> {
@@ -142,7 +142,7 @@ public class EntitiesAdapter extends RecyclerView.Adapter<EntitiesAdapter.ViewHo
     }
 
     public interface OnItemClickListener {
-        void onEntityClicked(String id, int position);
+        void onEntityClicked(Entity entity);
 
         void onEntityFavouriteClicked(int position, boolean isFavourite);
 

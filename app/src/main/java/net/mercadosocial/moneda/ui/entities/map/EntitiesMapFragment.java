@@ -198,7 +198,7 @@ public class EntitiesMapFragment extends BaseFragment implements EntitiesChild, 
     public void onInfoWindowClick(Marker marker) {
         if (entityListener != null) {
             Entity entity = (Entity) marker.getTag();
-            entityListener.onEntityClick(-1, entity.getId());
+            entityListener.onEntityClick(entity);
         }
     }
 }

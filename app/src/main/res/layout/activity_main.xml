@@ -93,7 +93,8 @@
                 android:id="@+id/tv_app_version"
                 style="@style/TextBase"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"/>
         </RelativeLayout>
 
         <fragment

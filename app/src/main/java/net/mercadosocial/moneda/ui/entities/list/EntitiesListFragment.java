@@ -107,8 +107,8 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesChild,
 
 
     @Override
-    public void onEntityClicked(String id, int position) {
-        entityListener.onEntityClick(position, id);
+    public void onEntityClicked(Entity entity) {
+        entityListener.onEntityClick(entity);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class EntitiesListFragment extends BaseFragment implements EntitiesChild,
     public void onEntitySearchResultClick(Entity entity) {
         String message = entity.getExactMatch() != null && entity.getExactMatch() ?
                 getString(R.string.search_result_exact_match) :
-                getString(R.string.search_result_similarity, String.valueOf(entity.getSimilarity()));
+                getString(R.string.search_result_similarity, getString(entity.getSimilarityLevelStringId()));
         alert(getString(R.string.search_result), message);
     }
 

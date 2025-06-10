@@ -18,10 +18,7 @@ import net.mercadosocial.moneda.util.WindowUtils;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class FilterEntitiesFragment extends BaseFragment implements FilterEntitiesView, View.OnClickListener {
+public class FilterEntitiesFragment extends BaseFragment implements FilterEntitiesView {
 
 
     private FilterEntitiesPresenter presenter;
@@ -43,8 +40,7 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
 
         binding = FragmentFilterEntitiesBinding.inflate(inflater, container, false);
 
-        binding.btnApply.setOnClickListener(this);
-        binding.btnRemoveFilter.setOnClickListener(this);
+        configureButtons();
 
         boolean showFavsView = App.getUserData(getActivity()) != null;
         if (!showFavsView) {
@@ -54,6 +50,28 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
         presenter.onCreate();
 
         return binding.getRoot();
+    }
+
+    private void configureButtons() {
+
+        binding.btnApply.setOnClickListener(v -> {
+            String text = binding.editSearchEntities.getText().toString();
+            boolean onlyFavs = binding.switchOnlyFavs.isChecked();
+            boolean withBenefits = binding.switchWithBenefits.isChecked();
+            boolean withBadge = binding.switchWithBadge.isChecked();
+            presenter.applyFilter(text, onlyFavs, withBenefits, withBadge);
+            WindowUtils.hideSoftKeyboard(getActivity());
+        });
+
+        binding.btnRemoveFilter.setOnClickListener( v -> {
+            presenter.onRemoveFilterClick();
+            WindowUtils.hideSoftKeyboard(getActivity());
+        });
+
+        binding.icSemanticSearchInfo.setOnClickListener(v -> {
+            alert(getString(R.string.semantic_search), getString(R.string.semantic_search_info));
+        });
+
     }
 
     @Override
@@ -82,25 +100,6 @@ public class FilterEntitiesFragment extends BaseFragment implements FilterEntiti
         binding.switchWithBadge.setChecked(false);
         binding.switchWithBenefits.setChecked(false);
         binding.switchOnlyFavs.setChecked(false);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_apply:
-                String text = binding.editSearchEntities.getText().toString();
-                boolean onlyFavs = binding.switchOnlyFavs.isChecked();
-                boolean withBenefits = binding.switchWithBenefits.isChecked();
-                boolean withBadge = binding.switchWithBadge.isChecked();
-                presenter.applyFilter(text, onlyFavs, withBenefits, withBadge);
-                WindowUtils.hideSoftKeyboard(getActivity());
-                break;
-
-            case R.id.btn_remove_filter:
-                presenter.onRemoveFilterClick();
-                WindowUtils.hideSoftKeyboard(getActivity());
-                break;
-        }
     }
 
 

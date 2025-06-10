@@ -167,5 +167,14 @@
     <string name="intro_first_item">Ongi etorri Merkatu Sozialera. Sarrerako irudia.</string>
     <string name="member_card_qr">Bazkide txartelaren QR kodea</string>
 
+
     <string name="semantic_search">Bilaketa semantikoa…</string>
+    <string name="search_result">Bilaketaren emaitza</string>
+    <string name="search_result_exact_match">Bilatutako hitzaren izen, deskribapen edo erakundearen produktu/zerbitzuetan bat datorren emaitza</string>
+    <string name="search_result_similarity">Antzekotasun semantikoaren arabera lortutako emaitza. Hurbiltasun maila: %s</string>
+    <string name="semantic_search_info">Funtzio honek nabarmen hobetzen ditu bilaketaren emaitzak, ez baitu hitz zehatzak bakarrik bilatzen, baizik eta erakundeak haien produktu eta zerbitzuen esanahiaren hurbiltasunagatik aurkitzea ahalbidetzen du.\n\nTestu bilaketak egiterakoan, orain erakundeen emaitzak garrantziaren arabera agertuko dira eta adierazle ikono berriak. Haiek sakatuz emaitza horren azalpena ikus dezakezu.</string>
+    <string name="similarity_level_low">Baxua</string>
+    <string name="similarity_level_medium">Ertaina</string>
+    <string name="similarity_level_high">Altua</string>
+
 </resources>

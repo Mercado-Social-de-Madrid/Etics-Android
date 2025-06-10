@@ -26,28 +26,35 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp">
 
                     <FrameLayout
                         android:id="@+id/frame_gallery_pager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="50dp"
+                        android:layout_height="200dp"
                         android:background="@color/white" />
 
                     <ImageView
                         android:id="@+id/img_logo_entity"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_alignParentBottom="true"
+                        android:layout_below="@id/frame_gallery_pager"
                         android:layout_marginStart="20dp"
+                        android:layout_marginTop="-50dp"
                         android:adjustViewBounds="true"
                         android:background="@drawable/bg_circle_orange"
                         android:contentDescription="@string/entity_logo"
                         android:padding="3dp"
                         android:src="@mipmap/img_entitiy_example" />
 
+                    <TextView
+                        android:id="@+id/tv_categories"
+                        style="@style/TextBase"
+                        android:layout_below="@id/frame_gallery_pager"
+                        android:layout_toRightOf="@id/img_logo_entity"
+                        android:padding="10dp"
+                        tools:text="Cultura\nHistoria\nTecnología"/>
                 </RelativeLayout>
 
                 <View style="@style/SeparatorHorizontal.Grey" />

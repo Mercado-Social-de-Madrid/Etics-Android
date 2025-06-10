@@ -34,6 +34,7 @@ import net.mercadosocial.moneda.App;
 import net.mercadosocial.moneda.BuildConfig;
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
+import net.mercadosocial.moneda.api.common.ApiConfig;
 import net.mercadosocial.moneda.api.response.Data;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.base.BaseFragment;
@@ -54,6 +55,7 @@ import net.mercadosocial.moneda.ui.novelties.list.NoveltiesFragment;
 import net.mercadosocial.moneda.ui.profile.ProfileActivity;
 import net.mercadosocial.moneda.util.DateUtils;
 import net.mercadosocial.moneda.util.LangUtils;
+import net.mercadosocial.moneda.util.VersionChangesUtil;
 import net.mercadosocial.moneda.util.WebUtils;
 import net.mercadosocial.moneda.views.CircleTransform;
 import net.mercadosocial.moneda.views.DialogSelectMES;
@@ -338,6 +340,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
             } else if (itemId == R.id.menuItem_contact_web) {
                 WebUtils.openLink(this, node.getWebpageLink());
+            } else if (itemId == R.id.menuItem_user_guide) {
+                WebUtils.openLink(this, ApiConfig.USER_GUIDE_URL);
+            } else if (itemId == R.id.menuItem_whats_new) {
+                alert(getString(R.string.whats_new_last_versions),
+                        new VersionChangesUtil(this).getAllVersionChanges());
             }
         } catch (ActivityNotFoundException e) {
             // ignore

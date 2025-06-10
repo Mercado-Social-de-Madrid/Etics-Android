@@ -268,16 +268,9 @@ public class EntitiesPresenter extends BasePresenter {
     }
 
 
-    public void onEntityClicked(int position, String id) {
+    public void onEntityClicked(Entity entity) {
 
-        Entity entity = null;
-        if (position == -1) {
-            entity = findEntityById(id);
-        } else {
-            entity = entities.get(position);
-        }
-
-        EntityInfoPresenter.startEntityInfoActivity(context, entity);
+        EntityInfoPresenter.startEntityInfoActivity(context, entity.getId());
     }
 
     private Entity findEntityById(String id) {

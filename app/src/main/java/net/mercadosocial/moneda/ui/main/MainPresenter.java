@@ -20,6 +20,7 @@ import net.mercadosocial.moneda.model.Notification;
 import net.mercadosocial.moneda.model.Person;
 import net.mercadosocial.moneda.ui.member_card.MemberCheckHelper;
 import net.mercadosocial.moneda.util.LangUtils;
+import net.mercadosocial.moneda.util.VersionChangesUtil;
 import net.mercadosocial.moneda.util.WebUtils;
 
 import java.util.Locale;
@@ -66,6 +67,7 @@ import java.util.Objects;
          }
 
          checkIntentUriReceived(intent);
+         checkLastVersionChanges();
 
          updateProfileStatus();
 
@@ -74,6 +76,14 @@ import java.util.Objects;
          Log.i(TAG, "onCreate: CurrentLocale: " + LangUtils.getCurrentLang());
 
      }
+
+    private void checkLastVersionChanges() {
+        VersionChangesUtil versionChangesUtil = new VersionChangesUtil(context);
+        if (versionChangesUtil.mustShowLastVersionChanges()) {
+            view.alert(getString(R.string.whats_new_current_version), versionChangesUtil.getCurrentVersionChanges());
+            versionChangesUtil.setCurrentVersionChangesSeen();
+        }
+    }
 
 
     public void onResume() {

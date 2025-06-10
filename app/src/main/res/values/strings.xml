@@ -185,6 +185,21 @@
     <string name="semantic_search">Búsqueda semántica…</string>
     <string name="search_result">Resultado de la búsqueda</string>
     <string name="search_result_exact_match">Resultado por coincidencia exacta de la palabra buscada en el nombre, descripción o productos/servicios de la entidad</string>
-    <string name="search_result_similarity">Resultado por similitud semántica. Grado de aproximación %s</string>
+    <string name="search_result_similarity">Resultado por similitud semántica. Grado de aproximación: %s</string>
+    <string name="semantic_search_info">Esta función mejora notablemente los resultados de búsquedas ya que no solo realiza búsquedas por palabras exactas si no que permite encontrar entidades por aproximaciones en el significado de sus productos y servicios.\n\nAl hacer búsquedas de texto, ahora aparecerán los resultados de entidades por orden de relevancia y nuevos iconos indicadores. Pulsando en ellos podrás ver la explicación de ese resultado.</string>
+
+    <string name="similarity_level_low">Bajo</string>
+    <string name="similarity_level_medium">Medio</string>
+    <string name="similarity_level_high">Alto</string>
+    <string name="similarity_level_unknown" translatable="false">---</string>
+
+    <string name="about_app">Sobre la app</string>
+    <string name="user_guide">Guía de uso</string>
+    <string name="open_source_repo">Repositorio de cógido</string>
+    <string name="whats_new">Novedades de la versión</string>
+    <string name="changes_4_6_8">- Búsqueda semántica de entidades por productos o servicios (para más información abre el filtro en el icono de la lupa)\n- Añadida información de categorías de entidades\n- Mejorada la velocidad en la carga de entidades</string>
+    <string name="version_x">Versión: %s</string>
+    <string name="whats_new_last_versions">Novedades en las últimas versiones</string>
+    <string name="whats_new_current_version">Novedades en la versión actual</string>
 
 </resources>

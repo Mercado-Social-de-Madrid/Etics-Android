@@ -102,6 +102,9 @@ public class EntityInfoActivity extends BaseActivity implements EntityInfoView, 
         binding.tvEntityServices.setVisibility(TextUtils.isEmpty(entity.getServices()) ? View.GONE : View.VISIBLE);
         Util.setHtmlLinkableText(binding.tvEntityServices, entity.getServices());
 
+        String categoriesStr = entity.getCategoriesString();
+        binding.tvCategories.setText(categoriesStr);
+
     }
 
     @Override
