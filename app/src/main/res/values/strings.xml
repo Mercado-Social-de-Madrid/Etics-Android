@@ -186,7 +186,7 @@
     <string name="search_result">Resultado de la búsqueda</string>
     <string name="search_result_exact_match">Resultado por coincidencia exacta de la palabra buscada en el nombre, descripción o productos/servicios de la entidad</string>
     <string name="search_result_similarity">Resultado por similitud semántica. Grado de aproximación: %s</string>
-    <string name="semantic_search_info">Esta función mejora notablemente los resultados de búsquedas ya que no solo realiza búsquedas por palabras exactas si no que permite encontrar entidades por aproximaciones en el significado de sus productos y servicios.\n\nAl hacer búsquedas de texto, ahora aparecerán los resultados de entidades por orden de relevancia y nuevos iconos indicadores. Pulsando en ellos podrás ver la explicación de ese resultado.</string>
+    <string name="semantic_search_info">Esta función mejora notablemente los resultados de búsquedas ya que no solo busca por palabras exactas si no que permite encontrar entidades por aproximaciones en el significado de sus productos y servicios.\n\nAl hacer búsquedas de texto, ahora aparecerán los resultados de entidades por orden de relevancia y nuevos iconos indicadores. Pulsando en ellos podrás ver la explicación de ese resultado.</string>
 
     <string name="similarity_level_low">Bajo</string>
     <string name="similarity_level_medium">Medio</string>
