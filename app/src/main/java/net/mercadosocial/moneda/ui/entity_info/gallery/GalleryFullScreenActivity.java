@@ -2,7 +2,10 @@ package net.mercadosocial.moneda.ui.entity_info.gallery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -31,6 +34,11 @@ public class GalleryFullScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            EdgeToEdge.enable(this);
+        }
+
         setContentView(R.layout.activity_gallery_full_screen);
 
         if (savedInstanceState != null) {

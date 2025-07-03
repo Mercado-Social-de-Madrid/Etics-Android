@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey_info">
+    android:layout_height="match_parent">
 
-    <net.mercadosocial.moneda.views.WebViewCustom
-        android:id="@+id/webview_info_mes"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:background="@color/grey_info"
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_where_to_consume"
-        style="@style/ButtonMes"
-        android:text="@string/where_to_consume"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="15dp"/>
-</LinearLayout>
+        <net.mercadosocial.moneda.views.WebViewCustom
+            android:id="@+id/webview_info_mes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_where_to_consume"
+            style="@style/ButtonMes"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"
+            android:text="@string/where_to_consume" />
+    </LinearLayout>
+</FrameLayout>

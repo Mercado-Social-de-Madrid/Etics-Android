@@ -1,96 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/green_gradient">
+    android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@drawable/green_gradient">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/img_mes_header"
-            android:contentDescription="@null"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/bg_white_corners"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edit_username"
-                style="@style/EditTextAuth"
-                android:hint="@string/email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress|textAutoComplete" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:src="@mipmap/img_mes_header" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:passwordToggleEnabled="true"
-                app:hintEnabled="false">
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_white_corners"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edit_password"
+                <EditText
+                    android:id="@+id/edit_username"
                     style="@style/EditTextAuth"
-                    android:hint="@string/password"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword" />
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress|textAutoComplete" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:hintEnabled="false"
+                    app:passwordToggleEnabled="true">
 
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edit_password"
+                        style="@style/EditTextAuth"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                style="@style/ButtonMes"
+                android:layout_marginTop="20dp"
+                android:text="@string/enter" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/btn_remember_password"
+                    style="@style/TextBase"
+                    android:background="@drawable/background_pressed_common"
+                    android:gravity="center_horizontal"
+                    android:text="@string/remember_password" />
+
+                <View
+                    style="@style/XpansorHoriz"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:id="@+id/btn_register"
+                    style="@style/TextBase"
+                    android:background="@drawable/background_pressed_common"
+                    android:gravity="center_horizontal"
+                    android:text="@string/not_account_yet_register" />
+            </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            style="@style/ButtonMes"
-            android:layout_marginTop="20dp"
-            android:text="@string/enter" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/btn_remember_password"
-                style="@style/TextBase"
-                android:background="@drawable/background_pressed_common"
-                android:gravity="center_horizontal"
-                android:text="@string/remember_password" />
-
-            <View
-                style="@style/XpansorHoriz"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
-
-            <TextView
-                android:id="@+id/btn_register"
-                style="@style/TextBase"
-                android:background="@drawable/background_pressed_common"
-                android:gravity="center_horizontal"
-                android:text="@string/not_account_yet_register" />
-        </LinearLayout>
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

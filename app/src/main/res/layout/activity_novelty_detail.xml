@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_gradient"
     android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.entity_info.EntityInfoActivity">
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/tv_novelty_title"
-        style="@style/TextBase.White"
-        android:layout_width="match_parent"
-        android:background="@color/transblack_entities"
-        android:fontFamily="@font/comfortaa_bold"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:background="@drawable/green_gradient"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_novelty_title"
+            style="@style/TextBase.White"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:background="@color/transblack_entities"
+            android:fontFamily="@font/comfortaa_bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
-            <ImageView
-                android:id="@+id/img_novelty"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxHeight="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/novelty_image"/>
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/tv_novelty_date"
-                style="@style/TextBase"
-                android:layout_marginTop="15dp"
-                android:textSize="@dimen/text_medium" />
+                <ImageView
+                    android:id="@+id/img_novelty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/novelty_image"
+                    android:maxHeight="200dp"
+                    android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/tv_novelty_entity"
-                style="@style/TextBase"
-                android:layout_marginTop="15dp"
-                android:textSize="@dimen/text_large"
-                android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/tv_novelty_description"
-                style="@style/TextBase"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:padding="15dp"
-                android:textSize="@dimen/text_medium" />
+                <TextView
+                    android:id="@+id/tv_novelty_date"
+                    style="@style/TextBase"
+                    android:layout_marginTop="15dp"
+                    android:textSize="@dimen/text_medium" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_more_info"
-                style="@style/ButtonMes"
-                android:layout_margin="15dp"
-                android:visibility="gone" />
+                <TextView
+                    android:id="@+id/tv_novelty_entity"
+                    style="@style/TextBase"
+                    android:layout_marginTop="15dp"
+                    android:textSize="@dimen/text_large"
+                    android:visibility="gone" />
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/tv_novelty_description"
+                    style="@style/TextBase"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:textSize="@dimen/text_medium" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_more_info"
+                    style="@style/ButtonMes"
+                    android:layout_margin="15dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/container"
     android:background="@drawable/green_gradient">
 
     <ImageView
@@ -12,7 +13,7 @@
         android:layout_height="60dp"
         android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="60dp"
         android:contentDescription="@string/logo_mes"
         android:src="@mipmap/img_mes_header" />
 
@@ -30,7 +31,8 @@
         android:src="@mipmap/ic_arrow_right"
         android:padding="8dp"
         app:tint="@color/purple"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 

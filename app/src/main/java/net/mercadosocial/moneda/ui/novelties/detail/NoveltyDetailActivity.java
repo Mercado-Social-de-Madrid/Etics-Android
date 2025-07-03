@@ -1,7 +1,15 @@
 package net.mercadosocial.moneda.ui.novelties.detail;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +33,7 @@ public class NoveltyDetailActivity extends BaseActivity implements NoveltyDetail
     public void onCreate(Bundle savedInstanceState) {
         presenter = NoveltyDetailPresenter.newInstance(this, this);
         setBasePresenter(presenter);
+
         super.onCreate(savedInstanceState);
         binding = ActivityNoveltyDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

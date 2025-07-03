@@ -10,6 +10,7 @@
     <net.mercadosocial.moneda.views.WebViewCustom
         android:id="@+id/webview_custom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/grey_info" />
 
 </LinearLayout>

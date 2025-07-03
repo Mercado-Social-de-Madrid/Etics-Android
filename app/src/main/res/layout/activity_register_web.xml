@@ -2,101 +2,109 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity">
 
     <include layout="@layout/toolbar" />
 
-    <TextView
-        style="@style/TextBase"
-        android:layout_margin="10dp"
-        android:text="@string/select_profile" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@drawable/green_gradient">
 
-        <LinearLayout
+        <TextView
+            style="@style/TextBase"
+            android:layout_margin="10dp"
+            android:text="@string/select_profile" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/btn_register_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_frame_black_corners"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="@string/consumer_register"
-                android:descendantFocusability="blocksDescendants">
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="30dp"
+                <LinearLayout
+                    android:id="@+id/btn_register_person"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_persons"
-                    app:tint="@color/purple"
-                    android:contentDescription="@null"/>
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_frame_black_corners"
+                    android:clickable="true"
+                    android:contentDescription="@string/consumer_register"
+                    android:descendantFocusability="blocksDescendants"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/customer"
-                    android:textColor="@color/purple"
-                    android:textSize="@dimen/text_large" />
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/ic_persons"
+                        app:tint="@color/purple" />
 
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/invitation_code_text_short"
-                    android:textSize="@dimen/text_small_2"
-                    android:visibility="gone" />
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/customer"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_large" />
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/invitation_code_text_short"
+                        android:textSize="@dimen/text_small_2"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_register_entity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_frame_black_corners"
+                    android:clickable="true"
+                    android:contentDescription="@string/provider_register"
+                    android:descendantFocusability="blocksDescendants"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/ic_entities"
+                        app:tint="@color/purple" />
+
+                    <TextView
+                        style="@style/TextBase"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/entity"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_large" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/btn_register_entity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_frame_black_corners"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="@string/provider_register"
-                android:descendantFocusability="blocksDescendants">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@null"
-                    android:src="@mipmap/ic_entities"
-                    app:tint="@color/purple" />
-
-                <TextView
-                    style="@style/TextBase"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/entity"
-                    android:textColor="@color/purple"
-                    android:textSize="@dimen/text_large" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>

@@ -1,7 +1,15 @@
 package net.mercadosocial.moneda.ui.auth.register_web;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -25,6 +33,7 @@ public class RegisterWebActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_register_web);
         configureSecondLevelActivity();
 

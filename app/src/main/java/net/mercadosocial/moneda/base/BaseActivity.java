@@ -21,8 +21,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -58,6 +64,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        int colorBar = ContextCompat.getColor(this, R.color.colorAccent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            SystemBarStyle systemBarStyle = SystemBarStyle.dark(colorBar);
+            EdgeToEdge.enable(this, systemBarStyle);
+        }
+
         super.onCreate(savedInstanceState);
 
         if (getBasePresenter() != null) {
@@ -65,6 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
 
     }
+
 
     BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
         @Override
@@ -134,6 +148,27 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 })
                 .setNeutralButton(R.string.close, null)
                 .show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            int colorBar = ContextCompat.getColor(this, R.color.colorAccent);
+            View root = findViewById(R.id.container);
+            ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+                Insets bars = insets.getInsets(
+                        WindowInsetsCompat.Type.systemBars()
+                                | WindowInsetsCompat.Type.displayCutout()
+                );
+                v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+                v.setBackgroundColor(colorBar);
+
+                return WindowInsetsCompat.CONSUMED;
+            });
+        }
+
     }
 
     @Override

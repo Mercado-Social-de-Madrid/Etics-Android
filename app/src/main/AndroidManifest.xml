@@ -58,38 +58,48 @@
 
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.BlockActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.entity_info.EntityInfoActivity"
             android:label="@string/entity_information"
             android:screenOrientation="portrait" />
+
         <activity android:name=".ui.intro.IntroActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.auth.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".ui.auth.register_web.RegisterWebActivity"
             android:label="@string/new_register"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity android:name=".ui.novelties.detail.NoveltyDetailActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".ui.info.WebViewActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.entity_info.gallery.GalleryFullScreenActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/account"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" /> <!-- [START firebase_service] -->
+
         <activity
             android:name=".ui.invitations.InvitationsActivity"
             android:label="@string/invitations"

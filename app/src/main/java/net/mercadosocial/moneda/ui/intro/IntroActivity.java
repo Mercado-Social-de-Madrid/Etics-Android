@@ -1,13 +1,14 @@
 package net.mercadosocial.moneda.ui.intro;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
@@ -36,6 +37,11 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            EdgeToEdge.enable(this);
+        }
+
         setContentView(R.layout.activity_intro);
         findViews();
 
@@ -75,7 +81,8 @@ public class IntroActivity extends BaseActivity implements ViewPager.OnPageChang
         boolean visible = position < IntroPagerAdapter.NUM_INTRO_SCREENS - 1;
         btnIntroNext.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
 
-        imgLogoMES.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
+        imgLogoMES.setVisibility(position == 0 || position == IntroPagerAdapter.NUM_INTRO_SCREENS - 1
+                ? View.GONE : View.VISIBLE);
     }
 
     @Override

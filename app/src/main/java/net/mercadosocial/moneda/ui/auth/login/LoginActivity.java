@@ -1,14 +1,23 @@
 package net.mercadosocial.moneda.ui.auth.login;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.mercadosocial.moneda.DebugHelper;
 import net.mercadosocial.moneda.R;
 import net.mercadosocial.moneda.base.BaseActivity;
 import net.mercadosocial.moneda.ui.auth.register_web.RegisterWebActivity;
+import net.mercadosocial.moneda.ui.main.MainActivity;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginView {
 
@@ -40,6 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         setBasePresenter(presenter);
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         findViews();
 
