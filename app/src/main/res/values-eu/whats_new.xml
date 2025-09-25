@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="changes_4_6_8">- Erakundeen bilaketa semantikoa produktu edo zerbitzuen arabera (informazio gehiagorako ireki filtroa luparen ikonoan)\n- Erakundeen kategoria informazioa gehituta\n- Erakundeen karga abiadura hobetuta\n- Informazio leiho hau bera gehitzen da aplikazioaren bertsio berri batean berrikuntza garrantzitsuak badaude</string>
+    <string name="changes_4_7_4">- Erakundeen bilaketa semantikoa produktu edo zerbitzuen arabera (informazio gehiagorako ireki filtroa luparen ikonoan)
+        \n- Erakundeen kategoria informazioa gehituta
+        \n- Erakundeen karga abiadura hobetuta
+        \n- Informazio leiho hau bera gehitzen da aplikazioaren bertsio berri batean berrikuntza garrantzitsuak badaude
+        \n- Android-en azken bertsioak dituzten telefonoetarako ertzetik ertzerako diseinua egokitu da
+    </string>
+
 </resources>

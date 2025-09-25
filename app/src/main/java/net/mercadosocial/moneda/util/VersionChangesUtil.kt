@@ -22,7 +22,7 @@ class VersionChangesUtil(val context: Context) {
     )
 
     private val versionChanges = listOf(
-        VersionChanges(468, "4.6.8", R.string.changes_4_6_8),
+        VersionChanges(474, "4.7.4", R.string.changes_4_7_4),
     )
 
     fun mustShowLastVersionChanges() =
